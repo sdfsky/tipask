@@ -53,11 +53,11 @@
     </div>
 
     <div class="text-center col-md-12 login-link">
-        <a href="/user/login">用户登录</a>
+        <a href="{{ route('login') }}">用户登录</a>
         |
-        <a href="/">首页</a>
+        <a href="{{ route('url') }}">首页</a>
         |
-        <a href="/user/forgot">找回密码</a>
+        <a href="{{ route('forgetPassword') }}">找回密码</a>
     </div>
 @endsection
 

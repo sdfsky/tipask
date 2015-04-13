@@ -9,7 +9,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('/css/default/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/default/common.css')}}" rel="stylesheet">
-
+    @yield('css')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="logo"><a class="navbar-brand logo" href="index.html"></a></div>
+            <div class="logo"><a class="navbar-brand logo" href="{{ route('url') }}"></a></div>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,7 +41,7 @@
                 </div>
             </form>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{ route('url') }}">首页 <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">问答</a></li>
                 <li><a href="#">文章</a></li>
                 <li><a href="#">讨论</a></li>
@@ -60,9 +60,9 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">登录</a></li>
+                <li><a href="{{ route('login') }}">登录</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">注册 <span class="caret"></span></a>
+                    <a href="{{ route('register') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">注册 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Action</a></li>
                         <li><a href="#">Another action</a></li>

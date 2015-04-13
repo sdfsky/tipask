@@ -11,13 +11,20 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
 
-Route::get('login','AccountController@login');
-Route::get('register','AccountController@register');
-Route::get('forgetPassword','AccountController@forgetPassword');
+/*公共路由*/
+Route::get('/',['as'=>'url','uses'=>'HomeController@index']);
+Route::get('login',['as'=>'login','uses'=>'AccountController@login']);
+Route::get('register',['as'=>'register','uses'=>'AccountController@register']);
+Route::get('forgetPassword',['as'=>'forgetPassword','uses'=>'AccountController@forgetPassword']);
 
-//Route::get('home', 'HomeController@index');
+
+/*问题相关*/
+Route::get('question/{id}',['as'=>'questionDetail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
+
+
+
+
 
 
 
@@ -30,3 +37,5 @@ Route::controllers([
 Route::Group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('/','HomeController@index');
 });
+
+
