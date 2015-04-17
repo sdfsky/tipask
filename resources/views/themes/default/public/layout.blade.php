@@ -74,7 +74,7 @@
                 </ul>
             @else
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ route('login') }}">{{ Auth::user()->name }}</a></li>
+                    <li><a href="{{ url('/profile/index') }}">{{ Auth::user()->name }}</a></li>
                     <li><a href="{{ route('logout') }}">退出</a></li>
                 </ul>
             @endif

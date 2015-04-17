@@ -99,8 +99,14 @@ class AccountController extends Controller{
          return view("theme::account.register");
     }
 
-
+    /**
+     * 用户登出
+     */
     public function logout(){
+
+        $this->auth->logout();
+
+        return redirect()->intended(route('url'));
 
     }
 }

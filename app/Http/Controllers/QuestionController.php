@@ -9,7 +9,8 @@
 namespace App\Http\Controllers;
 
 
-class QuestionController extends Controller{
+class QuestionController extends Controller
+{
 
     public function __construct()
     {

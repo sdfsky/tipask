@@ -20,6 +20,10 @@ Route::get('logout',['as'=>'logout','uses'=>'AccountController@logout']);
 Route::get('forgetPassword',['as'=>'forgetPassword','uses'=>'AccountController@forgetPassword']);
 
 
+Route::controllers([
+    /*用户资料管理*/
+    'profile'=>'ProfileController',
+]);
 /*问题相关*/
 Route::get('question/{id}',['as'=>'questionDetail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
 
