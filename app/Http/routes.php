@@ -14,8 +14,9 @@
 
 /*公共路由*/
 Route::get('/',['as'=>'url','uses'=>'HomeController@index']);
-Route::get('login',['as'=>'login','uses'=>'AccountController@login']);
-Route::get('register',['as'=>'register','uses'=>'AccountController@register']);
+Route::match(['get','post'],'login',['as'=>'login','uses'=>'AccountController@login']);
+Route::match(['get','post'],'register',['as'=>'register','uses'=>'AccountController@register']);
+Route::get('logout',['as'=>'logout','uses'=>'AccountController@logout']);
 Route::get('forgetPassword',['as'=>'forgetPassword','uses'=>'AccountController@forgetPassword']);
 
 

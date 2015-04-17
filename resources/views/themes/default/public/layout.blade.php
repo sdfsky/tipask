@@ -58,20 +58,26 @@
                     </ul>
                 </li>
             </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('login') }}">登录</a></li>
-                <li class="dropdown">
-                    <a href="{{ route('register') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">注册 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
+            @if (Auth::guest())
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ route('login') }}">登录</a></li>
+                    <li class="dropdown">
+                        <a href="{{ route('register') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">注册 <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            @else
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ route('login') }}">{{ Auth::user()->name }}</a></li>
+                    <li><a href="{{ route('logout') }}">退出</a></li>
+                </ul>
+            @endif
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
