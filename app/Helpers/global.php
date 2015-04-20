@@ -4,22 +4,6 @@
  * 自定义函数处理
  */
 
-if ( ! function_exists('show_hello'))
-{
-    /**
-     * Get the available container instance.
-     *
-     * @param  string  $make
-     * @param  array   $parameters
-     * @return mixed|\Illuminate\Foundation\Application
-     */
-    function show_hello()
-    {
-        return app('request')->route()->getActionName();
-    }
-}
-
-
 if ( ! function_exists('app_var'))
 {
     /**

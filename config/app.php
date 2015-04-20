@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'App\Providers\ThemeServiceProvider',
 		'App\Providers\HelperServiceProvider',
+        'Bican\Roles\RolesServiceProvider'
 
 	],
 
