@@ -43,6 +43,8 @@ class AccountController extends Controller{
         /*登录表单处理*/
         if($request->isMethod('post'))
         {
+
+            $request->flashOnly('email');
             /*表单数据校验*/
             $this->validate($request, [
                 'email' => 'required|email', 'password' => 'required|min:6',
@@ -63,10 +65,11 @@ class AccountController extends Controller{
             return redirect(route('login'))
                 ->withInput($request->only('email', 'remember'))
                 ->withErrors([
-                    'email' => '用户名或密码错误，请核实！',
+                    'password' => '用户名或密码错误，请核实！',
                 ]);
 
         }
+
 
         return view("theme::account.login");
     }
