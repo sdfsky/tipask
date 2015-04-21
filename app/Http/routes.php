@@ -41,6 +41,7 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('/',['uses'=>'DashboardController@index']);
     Route::controllers([
         'dashboard'=>'DashboardController',
+        'user'=>'UserController',
     ]);
 });
 
