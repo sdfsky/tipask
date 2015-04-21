@@ -1,12 +1,13 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Reception;
 
-
+/**
+ * 用户账号管理操作相关
+ */
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class AccountController extends Controller{
+class AccountController extends ReceptionController {
 
     /**
      * The Guard implementation.
@@ -14,7 +15,6 @@ class AccountController extends Controller{
      * @var Guard
      */
     protected $auth;
-
 
     /**
      * The registrar implementation.
@@ -48,6 +48,7 @@ class AccountController extends Controller{
             /*表单数据校验*/
             $this->validate($request, [
                 'email' => 'required|email', 'password' => 'required|min:6',
+                'captcha' => 'required|captcha'
             ]);
 
             /*只接收email和password的值*/
@@ -70,7 +71,6 @@ class AccountController extends Controller{
 
         }
 
-
         return view("theme::account.login");
     }
 
@@ -85,8 +85,8 @@ class AccountController extends Controller{
         /*注册表单处理*/
         if($request->isMethod('post'))
         {
+            $request->flashExcept(['password','password_confirmation']);
             $validator = $this->registrar->validator($request->all());
-
             if ($validator->fails())
             {
                 $this->throwValidationException(
@@ -112,4 +112,11 @@ class AccountController extends Controller{
         return redirect()->intended(route('url'));
 
     }
+
+
+
+
+
+
+
 }

@@ -17,6 +17,15 @@ body {
     height: 24px;
 }
 
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+mt10, .mt-10 {
+    margin-top: 10px;
+}
 .mt30, .mt-30 {
     margin-top: 30px;
 }

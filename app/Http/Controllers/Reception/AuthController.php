@@ -6,7 +6,7 @@
  * Time: 下午5:47
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reception;
 
 
 use App\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class AuthController extends Controller {
+class AuthController extends ReceptionController {
 
     /*
     |--------------------------------------------------------------------------

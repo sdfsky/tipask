@@ -6,10 +6,10 @@
  * Time: 11:57
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reception;
 
 
-class QuestionController extends Controller
+class QuestionController extends ReceptionController
 {
 
     public function __construct()

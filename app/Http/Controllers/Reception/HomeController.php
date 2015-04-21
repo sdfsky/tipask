@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Reception;
 
-class HomeController extends Controller {
+class HomeController extends ReceptionController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -30,6 +30,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+
         return view('theme::home.index');
 
 	}

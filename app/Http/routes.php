@@ -11,36 +11,37 @@
 |
 */
 
+/*前台显示部分*/
+Route::Group(['namespace'=>'Reception'],function(){
+    /*首页*/
+    Route::get('/',['as'=>'url','uses'=>'HomeController@index']);
 
-/*公共路由*/
-Route::get('/',['as'=>'url','uses'=>'HomeController@index']);
-Route::match(['get','post'],'login',['as'=>'login','uses'=>'AccountController@login']);
-Route::match(['get','post'],'register',['as'=>'register','uses'=>'AccountController@register']);
-Route::get('logout',['as'=>'logout','uses'=>'AccountController@logout']);
-Route::get('forgetPassword',['as'=>'forgetPassword','uses'=>'AccountController@forgetPassword']);
+    /*用户账号管理，包含用户登录注册等操作*/
+    Route::match(['get','post'],'login',['as'=>'login','uses'=>'AccountController@login']);
+    Route::match(['get','post'],'register',['as'=>'register','uses'=>'AccountController@register']);
+    Route::get('logout',['as'=>'logout','uses'=>'AccountController@logout']);
+    Route::get('forgetPassword',['as'=>'forgetPassword','uses'=>'AccountController@forgetPassword']);
 
+    /*用户个人信息修改*/
+    Route::controllers([
+        'profile'=>'ProfileController',
+    ]);
 
-Route::controllers([
-    /*用户资料管理*/
-    'profile'=>'ProfileController',
-]);
-/*问题相关*/
-Route::get('question/{id}',['as'=>'questionDetail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
+    /*问题查看*/
+    Route::get('question/{id}',['as'=>'questionDetail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
 
-
-
+});
 
 
 
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-
+/*后台管理部分处理*/
 
 Route::Group(['prefix'=>'admin','namespace'=>'Admin'],function(){
-    Route::get('/','HomeController@index');
+    Route::get('/',['uses'=>'DashboardController@index']);
+    Route::controllers([
+        'dashboard'=>'DashboardController',
+    ]);
 });
 
 

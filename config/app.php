@@ -52,7 +52,7 @@ return [
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'cn',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -146,7 +146,8 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'App\Providers\ThemeServiceProvider',
 		'App\Providers\HelperServiceProvider',
-        'Bican\Roles\RolesServiceProvider'
+        'Bican\Roles\RolesServiceProvider',
+        'Mews\Captcha\CaptchaServiceProvider'
 
 	],
 
@@ -195,6 +196,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+        'Captcha' => 'Mews\Captcha\Facades\Captcha',
 
 	],
 

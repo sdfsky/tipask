@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Reception;
 
-class WelcomeController extends Controller {
+class WelcomeController extends ReceptionController {
 
 	/*
 	|--------------------------------------------------------------------------

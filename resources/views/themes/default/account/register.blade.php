@@ -1,4 +1,4 @@
-@extends('theme::account.layout');
+@extends('theme::account.layout')
 
 @section('seo')
     <title>用户注册</title>
@@ -12,29 +12,35 @@
             </a>
         </h1>
         <p class="description text-muted">欢迎加入最专业的中文开发者社区</p>
-        @foreach ($errors->all() as $error)
-            {{ $error }},
-        @endforeach
     </div>
     <div class="col-md-6 col-md-offset-3 bg-white login-wrap">
         <h1 class="h4 text-center text-muted login-title">创建新账号</h1>
         <form role="form" id="registerForm" action="{{ route('register') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="form-group">
+            <div class="form-group @if ($errors->first('name')) has-error @endif">
                 <label class="required">用户名</label>
-                <input type="text" class="form-control" name="name" required  placeholder="字母、数字等，用户名唯一">
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}" required  placeholder="字母、数字等，用户名唯一">
+                @if ($errors->first('name'))
+                 <span class="help-block">{{ $errors->first('name') }}</span>
+                @endif
             </div>
-            <div class="form-group">
+            <div class="form-group @if ($errors->first('email')) has-error @endif">
                 <label class="required">Email</label>
-                <input type="email" class="form-control" name="email" required placeholder="hello@tipask.com">
+                <input type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="hello@tipask.com">
+                @if ($errors->first('email'))
+                 <span class="help-block">{{ $errors->first('email') }}</span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="" class="required">密码</label>
                 <input type="password" class="form-control" name="password" required placeholder="不少于 6 位">
             </div>
-            <div class="form-group">
+            <div class="form-group @if ($errors->first('password')) has-error @endif">
                 <label for="" class="required">确认密码</label>
                 <input type="password" class="form-control" name="password_confirmation" required placeholder="不少于 6 位">
+                @if ($errors->first('password'))
+                 <span class="help-block">{{ $errors->first('password') }}</span>
+                @endif
             </div>
             <div class="form-group">
                 同意并接受<a href="javascript:;" target="_blank" data-toggle="modal" data-target=".bs-example-modal-lg">《服务条款》</a>

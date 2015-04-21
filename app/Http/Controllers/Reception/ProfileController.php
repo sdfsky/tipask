@@ -1,20 +1,20 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Reception;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller {
+
+class ProfileController extends ReceptionController {
 
 	/**
-	 * Display a listing of the resource.
+	 * 账号基本信息
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex(Request $request)
 	{
-		return view("admin.home.index");
+
+       return view('theme::profile.index');
 	}
 
 	/**
