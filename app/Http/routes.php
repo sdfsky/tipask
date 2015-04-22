@@ -38,7 +38,7 @@ Route::Group(['namespace'=>'Reception'],function(){
 /*后台管理部分处理*/
 
 Route::Group(['prefix'=>'admin','namespace'=>'Admin'],function(){
-    Route::get('/',['uses'=>'DashboardController@index']);
+    Route::get('/',['as'=>'admin','uses'=>'DashboardController@index']);
     Route::controllers([
         'dashboard'=>'DashboardController',
         'user'=>'UserController',

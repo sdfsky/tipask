@@ -69,7 +69,7 @@
                         <a href="/profile/index" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             @role('admin')
-                            <li><a href="{{ route('') }}">系统设置</a></li>
+                            <li><a href="{{ url('admin') }}">系统设置</a></li>
                             @endrole
                             <li><a href="{{ url('profile/index') }}">我的主页</a></li>
                             <li><a href="#">账号设置</a></li>

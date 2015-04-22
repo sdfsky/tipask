@@ -17,54 +17,60 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Responsive Hover Table</h3>
-                        <div class="box-tools">
-                            <div class="input-group">
-                                <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
+                      <div class="row">
+                        <div class="col-xs-6">
+                             <div class="btn-group">
+                                <a href="{{ url('admin/user/create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="添加"><i class="fa fa-plus"></i></a>
+                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中"><i class="fa fa-trash-o"></i></button>
+                              </div>
+                               <button class="btn btn-default btn-sm" data-toggle="tooltip" title="返回上一级"><i class="fa fa-reply"></i></button>
+
                         </div>
+                        <div class="col-xs-6">
+                        <div class="input-group">
+                             <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
+                             <div class="input-group-btn">
+                               <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                             </div>
+                             <div class="clearfix"></div>
+                              <div class="input-group-btn">
+                               <button class="btn btn-sm bg-olive btn-flat">高级搜索</button>
+                             </div>
+
+                           </div>
+                        </div>
+                      </div>
+
+
+
                     </div><!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
+                    <div class="box-body  no-padding">
+                        <table class="table table-striped">
                             <tr>
-                                <th>ID</th>
-                                <th>User</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Reason</th>
+                                <th><input type="checkbox" class="checkbox-toggle"/></th>
+                                <th>用户ID</th>
+                                <th>用户名</th>
+                                <th>邮箱</th>
+                                <th>注册时间</th>
+                                <th>更新时间</th>
+                                <th>操作</th>
                             </tr>
+                            @foreach($users as $user)
                             <tr>
-                                <td>183</td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-success">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                <td><input type="checkbox" value="{{ $user->id }}"/></td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->created_at }}</td>
+                                <td>{{ $user->updated_at }}</td>
+                                <td>
+                                    <div class="btn-group-xs">
+                                      <a class="btn btn-default" href="{{ url('admin/user/edit/'.$user->id) }}"><i class="fa fa-edit"></i></a>
+                                     </div>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-primary">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-danger">Denied</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                        </table>
+                            @endforeach
+                           </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div>
