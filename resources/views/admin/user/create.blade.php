@@ -1,4 +1,4 @@
-@extends('admin\public\layout')
+@extends('admin/public/layout')
 
 @section('content')
     <section class="content-header">
@@ -15,7 +15,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                @include('admin\public\error')
+                @include('admin/public/error')
                 <div class="box box-primary">
                     <div class="box-header">
                       <h3 class="box-title">基本信息</h3>

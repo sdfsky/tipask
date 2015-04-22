@@ -7,6 +7,7 @@
     <!-- Bootstrap 3.3.2 -->
     <link href="{{ asset('/css/admin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/admin/icheck/all.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/js/scojs/sco.message.css') }}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="{{ asset('/css/admin/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
@@ -304,9 +305,8 @@
                 </div>
             </form>
             <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
                   <!--引入菜单-->
-                    @include('admin\public\menu')
+                    @include('admin/public/menu')
         </section>
         <!-- /.sidebar -->
 
@@ -319,29 +319,13 @@
         @yield('content')
     </div><!-- /.content-wrapper -->
 
-    @include('admin\public\footer')
+    @include('admin/public/footer')
 
-    @include('admin\public\sliderbar')
+    @include('admin/public/sliderbar')
 </div><!-- ./wrapper -->
 
-<!-- jQuery 2.1.3 -->
-<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
-<!-- Bootstrap 3.3.2 JS -->
-<script type="text/javascript" src="{{ asset('/css/admin/bootstrap/js/bootstrap.min.js') }}"></script>
-<!-- Slimscroll -->
-<script src="{{ asset('/js/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='{{ asset('/js/fastclick.min.js') }}' type="text/javascript"></script>
-
-<!-- AdminLTE App -->
-<script src='{{ asset('/js/admin/admin.js') }}' type="text/javascript"></script>
-<!-- AdminLTE for demo purposes -->
-
-
-<script src='{{ asset('/js/admin/demo.js') }}' type="text/javascript"></script>
-<!-- icheck -->
-<script src="{{ asset('/css/admin/icheck/icheck.min.js') }}" type="text/javascript"></script>
-<script src='{{ asset('/js/admin/common.js') }}' type="text/javascript"></script>
+<!--scripts-->
+@include('admin/public/script')
 
 </body>
 </html>

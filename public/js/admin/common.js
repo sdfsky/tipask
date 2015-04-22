@@ -21,6 +21,4 @@ $(function () {
     $('.checkbox-toggle').on('ifUnchecked', function(event){
         $("input[type='checkbox'][class!='checkbox-toggle']").iCheck('uncheck');
     });
-
-
 });

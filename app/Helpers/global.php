@@ -30,5 +30,35 @@ if ( ! function_exists('app_var'))
     }
 }
 
+if ( ! function_exists('success'))
+{
+    /**
+     * 记录成功的消息内容
+     * @param  string  $var_name
+     * @return String var value
+     */
+    function success($message)
+    {
+        app('session')->flash('message',$message);
+        app('session')->flash('message_type',2);
+    }
+}
+
+if ( ! function_exists('error'))
+{
+    /**
+     * 记录成功的消息内容
+     * @param  string  $var_name
+     * @return String var value
+     */
+    function error($message)
+    {
+        app('session')->flash('message',$message);
+        app('session')->flash('message_type',1);
+    }
+}
+
+
+
 
 

@@ -15,7 +15,7 @@ class UserController extends AdminController {
 	 */
 	public function getIndex()
 	{
-        $users = User::all();
+        $users = User::paginate(2);
 		return view('admin.user.index')->with('users',$users);
 	}
 
@@ -41,7 +41,11 @@ class UserController extends AdminController {
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
         ]);
-        User::create($request->all());
+        $password = $request->input('password');
+        $data = $request->except(['password']);
+        $data['password'] = bcrypt($password);
+        User::create($data);
+        success('用户创建成功');
         return redirect(url('admin/user/index'));
     }
 
@@ -88,9 +92,17 @@ class UserController extends AdminController {
         $this->validate($request, [
             'name' => 'required|max:100|unique:users,name,'.$user->id,
             'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'required|min:6',
+            'password' => 'sometimes|min:6',
         ]);
-        $user->save($request->all());
+        $password = $request->input('password');
+        if($password)
+        {
+            $user->password = bcrypt($password);
+        }
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        success('用户修改成功');
         return redirect(url('admin/user/index'));
 
     }

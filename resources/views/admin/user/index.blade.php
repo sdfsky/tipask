@@ -37,10 +37,7 @@
                            </div>
                         </div>
                       </div>
-
-
-
-                    </div><!-- /.box-header -->
+                    </div>
                     <div class="box-body  no-padding">
                         <table class="table table-striped">
                             <tr>
@@ -68,8 +65,12 @@
                             </tr>
                             @endforeach
                            </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
+                    </div>
+                    <div class="box-footer clearfix">
+                        {!! $users->render() !!}
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
