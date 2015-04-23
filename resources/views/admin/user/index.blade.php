@@ -67,7 +67,7 @@
                            </table>
                     </div>
                     <div class="box-footer clearfix">
-                        {!! $users->render() !!}
+                        {!! str_replace('/?', '?', $users->render()) !!}
                     </div>
 
                 </div>
