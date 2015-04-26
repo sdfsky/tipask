@@ -35,6 +35,11 @@
                           <label>上级菜单</label>
                           <select name="pid" class="form-control ">
                             <option value="0">顶级菜单</option>
+                              @foreach($_menus as $_menu)
+                                  @if($_menu['pid']==0)
+                                      <option value="{{ $_menu['id'] }}" @if(old('pid',$info->pid)==$_menu['id']) selected @endif>{{ $_menu['name'] }}</option>
+                                  @endif
+                              @endforeach
                           </select>
                         </div>
                         <div class="form-group">

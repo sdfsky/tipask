@@ -4,6 +4,11 @@
     <section class="content-header">
         <h1>
             菜单列表
+            @if ( old('pid') == 0)
+                [根级菜单]
+                @else
+                [{{ $_menus[old('pid')]['name'] }}]
+                @endif
             <small>显示当前系统设置菜单信息</small>
         </h1>
         <p class="breadcrumb"><a href="{{ back() }}">返回上一级</a></p>
@@ -12,28 +17,15 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box-header">
+                    <form role="form" name="listForm" method="post" action="{{ url('/admin/menu/destroy') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="box-header">
                       <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12">
                              <div class="btn-group">
                                 <a href="{{ url('admin/menu/create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="添加新菜单"><i class="fa fa-plus"></i></a>
-                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中"><i class="fa fa-trash-o"></i></button>
+                                <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中"><i class="fa fa-trash-o"></i></button>
                               </div>
-                               <button class="btn btn-default btn-sm" data-toggle="tooltip" title="返回上一级"><i class="fa fa-reply"></i></button>
-
-                        </div>
-                        <div class="col-xs-6">
-                        <div class="input-group">
-                             <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
-                             <div class="input-group-btn">
-                               <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                             </div>
-                             <div class="clearfix"></div>
-                              <div class="input-group-btn">
-                               <button class="btn btn-sm bg-olive btn-flat">高级搜索</button>
-                             </div>
-
-                           </div>
                         </div>
                       </div>
                     </div>
@@ -50,9 +42,15 @@
                             </tr>
                             @foreach($menus as $menu)
                             <tr>
-                                <td><input type="checkbox" value="{{ $menu->id }}"/></td>
-                                <td>{{ $menu->name }}</td>
-                                <td>{{ $menu->pid }}</td>
+                                <td><input type="checkbox" value="{{ $menu->id }}" name="ids[]"/></td>
+                                <td><a href="{{ url('/admin/menu/index?pid='.$menu->id) }}" data-toggle="tooltip" title="点击查看子分类">{{ $menu->name }}</a></td>
+                                <td>
+                                    @if ($menu->pid==0)
+                                        无
+                                    @else
+                                        <a href="{{ url('/admin/menu/index?pid=0') }}">{{ $_menus[$menu->pid]['name'] }}</a>
+                                    @endif
+                                </td>
                                 <td>{{ $menu->url }}</td>
                                 <td>{{ $menu->sort }}</td>
                                 <td>{{ $menu->updated_at }}</td>
@@ -68,7 +66,7 @@
                     <div class="box-footer clearfix">
                         {!! str_replace('/?', '?', $menus->render()) !!}
                     </div>
-
+                    </form>
                 </div>
             </div>
         </div>

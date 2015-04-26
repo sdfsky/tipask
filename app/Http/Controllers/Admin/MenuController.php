@@ -19,12 +19,12 @@ class MenuController extends AdminController {
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
+	public function getIndex(Request $request)
 	{
-
-        $menu = new Menu();
-        $menuTrees = $menu->getAllTree();
-        $menus = Menu::orderby('updated_at','desc')->paginate(15);
+        $query = Menu::query();
+        $query->where('pid','=',$request->input('pid',0));
+        $menus = $query->orderby('sort','asc')->orderby('updated_at','asc')->paginate(15);
+        $request->flashOnly(['pid']);
         return view('admin.menu.index')->with('menus',$menus);
 	}
 
@@ -44,6 +44,8 @@ class MenuController extends AdminController {
         /*表单数据校验*/
         $this->validate($request, $this->validateRules);
 
+        print_r($request->all());
+        exit;
         Menu::create($request->all());
         success('菜单创建成功');
         return redirect(url('admin/menu/index'));
@@ -79,16 +81,6 @@ class MenuController extends AdminController {
         return redirect(url('admin/menu/index'));
     }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
 
 	/**
 	 * Remove the specified resource from storage.
@@ -96,9 +88,13 @@ class MenuController extends AdminController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function postDestroy(Request $request)
 	{
-		//
+		$ids = $request->input('ids');
+        Menu::where('pid','in',$ids)->delete();
+        Menu::destroy($ids);
+        success('菜单删除成功');
+        return redirect(url('admin/menu/index'));
 	}
 
 }
