@@ -4,6 +4,17 @@
 
 
 $(function () {
+
+    $("#sliderbar_control").click(function(){
+        var sidebar_collapse = 0;
+        if($('body').hasClass('sidebar-collapse')){
+            sidebar_collapse = 1;
+        }
+        $.get(site_url+'/admin/dashboard/sidebar?collapse='+sidebar_collapse,function(msg){
+            console.log(msg);
+        });
+    });
+
     //Enable iCheck plugin for checkboxes
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"]').iCheck({

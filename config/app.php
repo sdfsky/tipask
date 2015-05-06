@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'App\Providers\ThemeServiceProvider',
 		'App\Providers\HelperServiceProvider',
+		'App\Providers\BladeServiceProvider',
         'Bican\Roles\RolesServiceProvider',
         'Mews\Captcha\CaptchaServiceProvider',
 

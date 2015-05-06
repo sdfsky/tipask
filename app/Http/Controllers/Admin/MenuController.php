@@ -25,6 +25,10 @@ class MenuController extends AdminController {
         $query->where('pid','=',$request->input('pid',0));
         $menus = $query->orderby('sort','asc')->orderby('updated_at','asc')->paginate(15);
         $request->flashOnly(['pid']);
+
+
+
+
         return view('admin.menu.index')->with('menus',$menus);
 	}
 
@@ -43,9 +47,6 @@ class MenuController extends AdminController {
         $request->flash();
         /*表单数据校验*/
         $this->validate($request, $this->validateRules);
-
-        print_r($request->all());
-        exit;
         Menu::create($request->all());
         success('菜单创建成功');
         return redirect(url('admin/menu/index'));

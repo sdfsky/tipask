@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class DashboardController extends AdminController {
 
@@ -12,7 +13,7 @@ class DashboardController extends AdminController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex(Request $request)
 	{
 		return view("admin.dashboard.index");
 	}
@@ -80,5 +81,13 @@ class DashboardController extends AdminController {
 	{
 		//
 	}
+
+    public function getSidebar(Request $request){
+        Cookie::forget('sidebar_collapse');
+        $cookie = Cookie::forever('sidebar_collapse',$request->get('collapse'));
+        return response()->json('no')->withCookie($cookie);
+    }
+
+
 
 }
