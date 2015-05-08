@@ -12,5 +12,10 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('app.less');
+    mix.scripts(["admin.js","common.js","demo.js"],"public/js/app22.js");
 });
+
+elixir(function(mix) {
+    mix.version("public/js/app22.js");
+});
+
