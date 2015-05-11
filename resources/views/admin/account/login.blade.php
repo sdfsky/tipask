@@ -26,20 +26,32 @@
 </head>
 <body class="login-page">
 <div class="login-box">
-    <div class="login-logo">
-        <a href="../../index2.html"><b>Tipask</b>后台</a>
-    </div><!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-        <form action="../../index2.html" method="post">
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Email"/>
+        <p class="login-box-msg">Tipask 管理后台</p>
+        <form action="{{ url('admin/login') }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="form-group has-feedback @if ($errors->first('email')) has-error @endif">
+                <input type="text" name="email" class="form-control" placeholder="Email" />
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                @if ($errors->first('email'))
+                 <span class="help-block">{{ $errors->first('email') }}</span>
+                @endif
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password"/>
+            <div class="form-group has-feedback @if ($errors->first('password')) has-error @endif">
+                <input type="password" name="password" class="form-control" placeholder="Password"/>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                @if ($errors->first('password'))
+                 <span class="help-block">{{ $errors->first('password') }}</span>
+                @endif
             </div>
+
+            <div class="form-group has-feedback @if ($errors->first('captcha')) has-error @endif">
+                <input type="text" class="form-control" id="captcha" name="captcha" required="" placeholder="请输入下方的验证码">
+                @if ($errors->first('captcha'))
+                <span class="help-block">{{ $errors->first('captcha') }}</span>
+                @endif
+                <div style="margin-top: 10px;"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}" width="240" height="50"></a></div>
+           </div>
             <div class="form-group has-feedback">
                 <button class="btn bg-olive btn-block btn-flat">登录</button>
             </div>
@@ -51,5 +63,7 @@
 <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.2 JS -->
 <script type="text/javascript" src="{{ asset('/css/admin/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/global.js') }}"></script>
+
 </body>
 </html>

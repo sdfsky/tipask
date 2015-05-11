@@ -16,19 +16,10 @@ class AccountController extends AdminController {
      */
     protected $auth;
 
-    /**
-     * The registrar implementation.
-     *注册模块处理
-     * @var Registrar
-     */
-    protected $registrar;
 
-
-    public function __construct(Guard $auth,Registrar $registar){
+    public function __construct(Guard $auth){
 
         $this->auth = $auth;
-
-        $this->registrar = $registar;
 
     }
 
@@ -58,12 +49,12 @@ class AccountController extends AdminController {
             if ($this->auth->attempt($credentials, $request->has('remember')))
             {
                 /*认证成功后跳转到首页*/
-                return redirect()->intended(route('url'));
+                return redirect()->intended(route('admin'));
 
             }
 
             /*登录失败后跳转到首页，并提示错误信息*/
-            return redirect(route('login'))
+            return redirect(route('admin'))
                 ->withInput($request->only('email', 'remember'))
                 ->withErrors([
                     'password' => '用户名或密码错误，请核实！',

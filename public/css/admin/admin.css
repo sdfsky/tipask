@@ -13,6 +13,7 @@
 html,
 body {
     min-height: 100%;
+    font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
 }
 .layout-boxed html,
 .layout-boxed body {
@@ -3038,13 +3039,10 @@ table.text-center th {
     margin-bottom: 25px;
     font-weight: 300;
 }
-.login-logo a,
-.register-logo a {
-    color: #444;
-}
+
 .login-page,
 .register-page {
-    background: #d2d6de;
+    background: #336666;
 }
 .login-box,
 .register-box {
@@ -3070,11 +3068,14 @@ table.text-center th {
 .register-box-body .form-control-feedback {
     color: #777;
 }
+
 .login-box-msg,
 .register-box-msg {
     margin: 0;
     text-align: center;
+    font-size: 17px;
     padding: 0 20px 20px 20px;
+
 }
 .social-auth-links {
     margin: 10px 0;
