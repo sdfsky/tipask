@@ -26,4 +26,14 @@ class QuestionController extends ReceptionController
     }
 
 
+    /**
+     * 问题添加页面显示
+     */
+    public function create(){
+
+        return view("theme::question.add");
+
+    }
+
+
 } 

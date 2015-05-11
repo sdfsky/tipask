@@ -83,7 +83,7 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
+@yield('space_header')
 <div class="wrap">
     <div class="container">
         @yield('content')

@@ -29,6 +29,9 @@ Route::Group(['namespace'=>'Reception'],function(){
 
     /*问题查看*/
     Route::get('question/{id}',['as'=>'questionDetail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
+    Route::get('question/add',['as'=>'addQuestion','uses'=>'QuestionController@create']);
+    Route::post('question/add',['as'=>'StoreQuestion','uses'=>'QuestionController@store']);
+    Route::get('user/{id}',['as'=>'space','uses'=>'SpaceController@index'])->where(['id'=>'[0-9]+']);
 
 });
 

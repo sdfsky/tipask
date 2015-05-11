@@ -17,13 +17,22 @@ body {
     height: 24px;
 }
 
+.avatar-128 {
+    width: 128px;
+    height: 128px;
+}
+
 label {
     display: inline-block;
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: bold;
 }
-mt10, .mt-10 {
+.bg-gray {
+    background-color: #F3F3F3;
+}
+
+.mt10,.mt-10 {
     margin-top: 10px;
 }
 .mt30, .mt-30 {

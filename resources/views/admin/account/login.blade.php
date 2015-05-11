@@ -11,7 +11,7 @@
     <link href="{{ asset('/js/scojs/sco.message.css') }}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="{{ asset('/css/admin/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
+
     <!-- Theme style -->
     <link href="{{ asset('/css/admin/admin.css') }}" rel="stylesheet" type="text/css" />
 
