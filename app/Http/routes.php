@@ -46,6 +46,7 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::controllers([
         'dashboard'=>'DashboardController',
         'user'=>'UserController',
+        'role'=>'RoleController',
         'permission'=>'PermissionController',
         'menu'=>'MenuController',
     ]);
