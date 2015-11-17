@@ -50,16 +50,18 @@ class AnswerController extends Controller
         if(empty($question)){
             abort(404);
         }
-        $login_user = $request->user();
+        $loginUser = $request->user();
         $request->flash();
         $this->validate($request,$this->validateRules);
         $data = [
-            'user_id'      => $login_user->id,
+            'user_id'      => $loginUser->id,
             'question_id'      => $question_id,
             'question_title'        => $question->title,
             'content'  => $request->input('content'),
         ];
-        Answer::create($data);
+        if(Answer::create($data)){
+            $loginUser->userData()->increment('answers');
+        }
 
         return redirect(route('ask.question.detail',['id'=>$question_id]));
     }

@@ -17,7 +17,7 @@ class IndexController extends Controller
     public function index()
     {
 
-        $questions = Question::paginate(10);
+        $questions = Question::with('user')->orderBy('created_at','DESC')->paginate(10);
         return view('theme::home.index')->with('questions',$questions);
 
     }

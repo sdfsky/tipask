@@ -8,4 +8,9 @@ class Answer extends Model
 {
     protected $table = 'answers';
     protected $fillable = ['question_title','question_id','user_id', 'content'];
+
+
+    public function question(){
+        return $this->belongsTo('App\Models\Question');
+    }
 }

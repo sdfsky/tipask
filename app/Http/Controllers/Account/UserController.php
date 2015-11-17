@@ -75,8 +75,10 @@ class UserController extends Controller
                     $request, $validator
                 );
             }
+            $formData = $request->all();
+            $formData['visit_ip'] = $request->getClientIp();
 
-            $this->auth->login($this->registrar->create($request->all()));
+            $this->auth->login($this->registrar->create($formData));
 
             return redirect(route('website.index'));
 

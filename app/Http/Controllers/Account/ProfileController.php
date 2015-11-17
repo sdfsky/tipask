@@ -66,9 +66,9 @@ class ProfileController extends Controller
             $extension = $file->getClientOriginalExtension();
             File::cleanDirectory(storage_path('app/'.$avatarDir));
             Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($user_id,'origin').'.'.$extension,File::get($file));
-            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($user_id,'big')));
-            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
-            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($user_id,'small')));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($user_id,'big')));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($user_id,'small')));
             return response('ok');
         }
 

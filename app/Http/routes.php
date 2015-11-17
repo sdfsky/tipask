@@ -12,6 +12,14 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::get('logout',['as'=>'auth.user.logout','uses'=>'UserController@logout']);
     Route::get('forgetPassword',['as'=>'auth.user.forgetPassword','uses'=>'UserController@forgetPassword']);
 
+    /*用户空间首页*/
+    Route::get('people/{user_id}',['as'=>'auth.space.index','uses'=>'SpaceController@index'])->where(['user_id'=>'[0-9]+']);
+    /*我的提问*/
+    Route::get('people/{user_id}/questions',['as'=>'auth.space.questions','uses'=>'SpaceController@questions'])->where(['user_id'=>'[0-9]+']);
+    /*我的回答*/
+    Route::get('people/{user_id}/answers',['as'=>'auth.space.answers','uses'=>'SpaceController@answers'])->where(['user_id'=>'[0-9]+']);
+
+
     Route::Group(['middleware'=>'auth'],function(){
         /*用户个人信息修改*/
         Route::controller('profile','ProfileController', [
@@ -22,16 +30,7 @@ Route::Group(['namespace'=>'Account'],function(){
             'anyMobile'   =>'auth.profile.mobile',
             'anyOauth'    =>'auth.profile.oauth',
             'anyNotification' =>'auth.profile.notification',
-
         ]);
-
-        /*用户空间首页*/
-        Route::get('people/{user_id}',['as'=>'auth.space.index','uses'=>'SpaceController@index'])->where(['user_id'=>'[0-9]+']);
-        /*我的提问*/
-        Route::get('people/{user_id}/questions',['as'=>'auth.space.questions','uses'=>'SpaceController@questions'])->where(['user_id'=>'[0-9]+']);
-        /*我的回答*/
-        Route::get('people/{user_id}/answers',['as'=>'auth.space.answers','uses'=>'SpaceController@answers'])->where(['user_id'=>'[0-9]+']);
-
 
     });
 
@@ -49,7 +48,8 @@ Route::Group(['namespace'=>'Ask'],function(){
     Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
     Route::post('question/store',['as'=>'ask.question.store','uses'=>'QuestionController@store']);
     Route::post('answer/store',['as'=>'ask.answer.store','uses'=>'AnswerController@store']);
-    Route::get('user/{id}',['as'=>'space','uses'=>'SpaceController@index'])->where(['id'=>'[0-9]+']);
+    /*标签模块*/
+    Route::get('topic/{name}',['as'=>'ask.tag.index','uses'=>'TagController@index']);
 
 });
 

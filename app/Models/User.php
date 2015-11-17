@@ -9,7 +9,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
@@ -39,12 +40,11 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public static function getAvatarPath($userId,$size='big')
+    public static function getAvatarPath($userId,$size='big',$ext='jpg')
     {
         $avatarDir = self::getAvatarDir($userId);
         $avatarFileName = self::getAvatarFileName($userId,$size);
-        return $avatarDir.'/'.$avatarFileName.'.jpg';
-
+        return $avatarDir.'/'.$avatarFileName.'.'.$ext;
     }
 
     /**
@@ -77,14 +77,49 @@ class User extends Model implements AuthenticatableContract,
 
 
     /**
-     * 从cache中获取用户数据
+     * 从缓存中获取用户数据，主要用户问答文章等用户数据显示
+     * @param $userId
+     * @return mixed
+     */
+    public static function findFromCache($userId){
+
+        $data = Cache::remember('user_cache_'.$userId,Config::get('tipask.user_cache_time'),function() use($userId) {
+            return  self::select('name','title','gender')->find($userId);
+        });
+
+        return $data;
+    }
+
+
+    /**
+     *获取用户数据
      * @param $userId
      */
-    public function data(){
-
+    public function userData(){
         return $this->hasOne('App\Models\UserData');
-
     }
+
+    /**
+     * 获取用户问题
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function questions(){
+        return $this->hasMany('App\Models\Question');
+    }
+
+    /**
+     * 获取用户回答
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function answers(){
+        return $this->hasMany('App\Models\Answer');
+    }
+
+
+
+
+
+
 
 
 

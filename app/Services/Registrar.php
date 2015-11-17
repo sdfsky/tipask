@@ -1,6 +1,8 @@
 <?php namespace App\Services;
 
 use App\Models\User;
+use App\models\UserData;
+use Carbon\Carbon;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -29,11 +31,26 @@ class Registrar implements RegistrarContract {
      */
     public function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        if($user){
+            UserData::create([
+                'user_id' => $user->id,
+                'coins' => 0,
+                'credits' => 20,
+                'registered_at' => Carbon::now(),
+                'last_visit' => Carbon::now(),
+                'last_login_ip' => $data['visit_ip'],
+
+            ]);
+        }
+
+        return $user;
     }
+
 
 }
