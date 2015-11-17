@@ -49,9 +49,11 @@ class QuestionController extends Controller
         });
 
         /*相关问题*/
-        Tag::correlations($question->tags());
+        $relatedQuestions = Question::correlations(Tag::getIds($question->tags()));
 
-        return view("theme::question.detail")->with('question',$question)->with('answers',$answers);
+        return view("theme::question.detail")->with('question',$question)
+                                             ->with('answers',$answers)
+                                             ->with('relatedQuestions',$relatedQuestions);
     }
 
 
