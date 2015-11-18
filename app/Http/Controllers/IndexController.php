@@ -18,7 +18,9 @@ class IndexController extends Controller
     {
 
         $questions = Question::with('user')->orderBy('created_at','DESC')->paginate(10);
-        return view('theme::home.index')->with('questions',$questions);
+        $hotQuestions = Question::hots();
+        return view('theme::home.index')->with('questions',$questions)
+                                        ->with('hotQuestions',$hotQuestions);
 
     }
 

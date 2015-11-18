@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class Question extends Model
@@ -34,6 +35,16 @@ class Question extends Model
     public function tags()
     {
         return array_unique(explode(" ",$this->tags));
+    }
+
+
+    /*热门问题*/
+    public static function hots()
+    {
+        $data = Cache::remember('question_host_list',300,function() {
+            return  self::where('status','=',0)->orderBy('views','DESC')->orderBy('created_at','DESC')->take(10)->get();
+        });
+        return $data;
     }
 
 
