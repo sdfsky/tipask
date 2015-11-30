@@ -64,7 +64,11 @@ class ProfileController extends Controller
             $file = $request->file('user_avatar');
             $avatarDir = User::getAvatarDir($user_id);
             $extension = $file->getClientOriginalExtension();
-            File::cleanDirectory(storage_path('app/'.$avatarDir));
+
+            File::delete(storage_path('app/'.User::getAvatarPath($user_id,'big')));
+            File::delete(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
+            File::delete(storage_path('app/'.User::getAvatarPath($user_id,'small')));
+
             Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($user_id,'origin').'.'.$extension,File::get($file));
             Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($user_id,'big')));
             Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($user_id,'middle')));

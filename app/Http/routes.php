@@ -43,6 +43,7 @@ Route::Group(['namespace'=>'Account'],function(){
 /*前台显示部分*/
 Route::Group(['namespace'=>'Ask'],function(){
 
+
     /*问题查看*/
     Route::get('question/{id}',['as'=>'ask.question.detail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
     Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
@@ -77,6 +78,11 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['auth']],f
 
     /*用户管理*/
     Route::resource('user', 'UserController',['except' => ['show']]);
+
+    /*站点设置*/
+    Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);
+    /*时间设置*/
+    Route::any('setting/time',['as'=>'admin.setting.time','uses'=>'SettingController@time']);
 
 
 

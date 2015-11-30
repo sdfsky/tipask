@@ -32,7 +32,6 @@ class QuestionController extends Controller
 
         $question = Question::find($id);
 
-
         if(empty($question)){
             abort(404);
         }
@@ -50,7 +49,6 @@ class QuestionController extends Controller
 
         /*相关问题*/
         $relatedQuestions = Question::correlations(Tag::getIds($question->tags()));
-
         return view("theme::question.detail")->with('question',$question)
                                              ->with('answers',$answers)
                                              ->with('relatedQuestions',$relatedQuestions);

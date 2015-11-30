@@ -6,6 +6,7 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Config;
 
 class IndexController extends Controller
 {
@@ -17,6 +18,8 @@ class IndexController extends Controller
     public function index()
     {
 
+        $setting = Setting()->get('website.name');
+      //  print_r($setting);
         $questions = Question::with('user')->orderBy('created_at','DESC')->paginate(10);
         $hotQuestions = Question::hots();
         return view('theme::home.index')->with('questions',$questions)

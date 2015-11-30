@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 
 class SpaceController extends Controller
@@ -17,7 +18,9 @@ class SpaceController extends Controller
 
     public function __construct(Request $request){
         $userId =  $request->route()->parameter('user_id');
+
         $user  = User::with('userData')->find($userId);
+
         if(!$user){
             abort(404);
         }

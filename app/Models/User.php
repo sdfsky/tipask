@@ -116,6 +116,11 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
+    public function isAnswered($questionId){
+        return boolval($this->answers()->where('question_id','=',$questionId)->count());
+    }
+
+
 
 
 

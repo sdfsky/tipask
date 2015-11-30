@@ -60,7 +60,10 @@ class AnswerController extends Controller
             'content'  => $request->input('content'),
         ];
         if(Answer::create($data)){
+            /*用户回答数+1*/
             $loginUser->userData()->increment('answers');
+            /*问题回答数+1*/
+            $question->increment('answers');
         }
 
         return redirect(route('ask.question.detail',['id'=>$question_id]));
