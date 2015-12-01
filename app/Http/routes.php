@@ -83,6 +83,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['auth']],f
     Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);
     /*时间设置*/
     Route::any('setting/time',['as'=>'admin.setting.time','uses'=>'SettingController@time']);
+    /*积分设置*/
+    Route::any('setting/credit',['as'=>'admin.setting.credit','uses'=>'SettingController@credit']);
 
 
 

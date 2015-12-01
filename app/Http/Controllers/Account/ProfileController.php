@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Http\Controllers\BaseController;
 use App\models\Area;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
 
     /*个人基本资料*/

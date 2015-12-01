@@ -9,6 +9,7 @@ class UserData extends Model
     protected $table = 'user_data';
 
     public $timestamps = false;
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.

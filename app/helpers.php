@@ -15,3 +15,17 @@ function Setting(){
 
 
 }
+
+/**
+ * 将正整数转换为带+,例如 10 装换为 +10
+ * 用户积分显示
+ */
+if( ! function_exists('integer_string')){
+    function integer_string($value){
+        if($value>=0){
+            return '+'.$value;
+        }
+
+        return $value;
+    }
+}

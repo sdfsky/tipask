@@ -4,6 +4,7 @@
  */
 namespace App\Http\Controllers\Account;
 
+use App\Http\Controllers\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 
-class SpaceController extends Controller
+class SpaceController extends BaseController
 {
     protected $user;
 

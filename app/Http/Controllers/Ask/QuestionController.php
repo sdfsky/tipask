@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ask;
 
+use App\Http\Controllers\BaseController;
 use App\Models\Answer;
 use App\Models\Question;
 use App\models\QuestionTag;
@@ -11,10 +12,9 @@ use App\models\UserData;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Jenssegers\Date\Date;
 
-class QuestionController extends Controller
+class QuestionController extends BaseController
 {
 
     /*问题创建校验*/

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Ask;
 
+use App\Http\Controllers\BaseController;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AnswerController extends Controller
+class AnswerController extends BaseController
 {
 
     /*问题创建校验*/
