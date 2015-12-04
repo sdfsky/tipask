@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class IndexController extends BaseController
+class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,10 @@ class IndexController extends BaseController
      */
     public function index()
     {
+       // echo intval(str_shuffle('0123456789'));
         $setting = Setting()->get('website.name');
       //  print_r($setting);
+
         $questions = Question::with('user')->orderBy('created_at','DESC')->paginate(10);
         $hotQuestions = Question::hots();
         return view('theme::home.index')->with('questions',$questions)

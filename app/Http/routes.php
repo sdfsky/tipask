@@ -18,6 +18,10 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::get('people/{user_id}/questions',['as'=>'auth.space.questions','uses'=>'SpaceController@questions'])->where(['user_id'=>'[0-9]+']);
     /*我的回答*/
     Route::get('people/{user_id}/answers',['as'=>'auth.space.answers','uses'=>'SpaceController@answers'])->where(['user_id'=>'[0-9]+']);
+    /*我的金币*/
+    Route::get('people/{user_id}/coins',['as'=>'auth.space.coins','uses'=>'SpaceController@coins'])->where(['user_id'=>'[0-9]+']);
+    /*我的经验*/
+    Route::get('people/{user_id}/credits',['as'=>'auth.space.credits','uses'=>'SpaceController@credits'])->where(['user_id'=>'[0-9]+']);
 
 
     Route::Group(['middleware'=>'auth'],function(){
@@ -47,8 +51,8 @@ Route::Group(['namespace'=>'Ask'],function(){
     /*问题查看*/
     Route::get('question/{id}',['as'=>'ask.question.detail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
     Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
-    Route::post('question/store',['as'=>'ask.question.store','uses'=>'QuestionController@store']);
-    Route::post('answer/store',['as'=>'ask.answer.store','uses'=>'AnswerController@store']);
+    Route::post('question/store',['middleware' =>'auth','as'=>'ask.question.store','uses'=>'QuestionController@store']);
+    Route::post('answer/store',['middleware' =>'auth','as'=>'ask.answer.store','uses'=>'AnswerController@store']);
     /*标签模块*/
     Route::get('topic/{name}',['as'=>'ask.tag.index','uses'=>'TagController@index']);
 
@@ -56,7 +60,7 @@ Route::Group(['namespace'=>'Ask'],function(){
 
 
 /*后台管理部分处理*/
-Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['auth']],function(){
+Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],function(){
 
 
     /*用户登陆*/
@@ -84,7 +88,7 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' => ['auth']],f
     /*时间设置*/
     Route::any('setting/time',['as'=>'admin.setting.time','uses'=>'SettingController@time']);
     /*积分设置*/
-    Route::any('setting/credit',['as'=>'admin.setting.credit','uses'=>'SettingController@credit']);
+    Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
 
 
 

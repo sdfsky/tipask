@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\Ask;
 
-use App\Http\Controllers\BaseController;
-use App\Models\Answer;
+use App\Http\Controllers\Controller;
 use App\Models\Question;
-use App\models\QuestionTag;
 use App\models\Tag;
 use App\Models\User;
-use App\models\UserData;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Config;
 use Jenssegers\Date\Date;
 
-class QuestionController extends BaseController
+class QuestionController extends Controller
 {
 
     /*问题创建校验*/
@@ -31,6 +29,7 @@ class QuestionController extends BaseController
     {
 
         $question = Question::find($id);
+        timestamp_format($question->created_at);
 
         if(empty($question)){
             abort(404);
@@ -75,11 +74,12 @@ class QuestionController extends BaseController
             'title'        => trim($request->input('title')),
             'description'  => $request->input('description'),
             'tags'         => trim($request->input('tags')),
-            'hide'         => intval($request->input('hide'))
+            'hide'         => intval($request->input('hide')),
+            'status'       => 1,
         ];
 
-        $question = Question::create($data);
 
+        $question = Question::create($data);
         /*判断问题是否添加成功*/
         if($question){
 
@@ -88,8 +88,17 @@ class QuestionController extends BaseController
                 Tag::addAll($data['tags'],$question->id);
             }
 
+            //记录动态
+            $this->doing($question->user_id,'ask',$question->id,$question->title,$question->description);
+
             /*用户提问数+1*/
             $loginUser->userData()->increment('questions');
+            if($question->status ==1 && $this->credit($request->user()->id,'ask',Setting()->get('coins_ask'),Setting()->get('credits_ask'),$question->id,$question->title)){
+                $message = '发起提问成功! 经验 '.integer_string(Setting()->get('credits_ask')) .' , 金币 '.integer_string(Setting()->get('coins_ask'));
+                return $this->success(route('ask.question.detail',['question_id'=>$question->id]),$message);
+            }
+
+
 
         }
 

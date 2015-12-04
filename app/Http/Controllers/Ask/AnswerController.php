@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Ask;
 
-use App\Http\Controllers\BaseController;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 
-class AnswerController extends BaseController
+class AnswerController extends Controller
 {
 
     /*问题创建校验*/
@@ -59,12 +59,22 @@ class AnswerController extends BaseController
             'question_id'      => $question_id,
             'question_title'        => $question->title,
             'content'  => $request->input('content'),
+            'status'   => 1,
         ];
-        if(Answer::create($data)){
+        $answer = Answer::create($data);
+        if($answer){
             /*用户回答数+1*/
             $loginUser->userData()->increment('answers');
             /*问题回答数+1*/
             $question->increment('answers');
+            /*记录动态*/
+            $this->doing($answer->user_id,'answer',$question->id,$question->title,$answer->content);
+
+            /*记录积分*/
+            if($answer->status ==1 && $this->credit($request->user()->id,'answer',Setting()->get('coins_answer'),Setting()->get('credits_answer'),$question->id,$question->title)){
+                $message = '回答成功! 经验 '.integer_string(Setting()->get('credits_answer')) .' , 金币 '.integer_string(Setting()->get('coins_answer'));
+                return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),$message);
+            }
         }
 
         return redirect(route('ask.question.detail',['id'=>$question_id]));
@@ -81,37 +91,4 @@ class AnswerController extends BaseController
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

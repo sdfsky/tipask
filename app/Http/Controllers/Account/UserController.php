@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Config;
 
-class UserController extends BaseController
+class UserController extends Controller
 {
 
     protected $auth;
@@ -42,7 +42,7 @@ class UserController extends BaseController
             /*根据邮箱地址和密码进行认证*/
             if ($this->auth->attempt($credentials, $request->has('remember')))
             {
-                if(!$this->credit($request->user()->id,Config::get('tipask.credit_actions.login'),Setting()->get('coins_login'),Setting()->get('credits_login'))){
+                if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
                     $message = '登陆成功! 经验 '.integer_string(Setting()->get('credits_login')) .' , 金币 '.integer_string(Setting()->get('coins_login'));
                    return $this->success(route('website.index'),$message);
                 }
@@ -87,7 +87,7 @@ class UserController extends BaseController
 
             $this->auth->login($this->registrar->create($formData));
             $message = '注册成功!';
-            if($this->credit($request->user()->id,Config::get('tipask.credit_actions.login'),Setting()->get('coins_login'),Setting()->get('credits_login'))){
+            if($this->credit($request->user()->id,'register',Setting()->get('coins_register'),Setting()->get('credits_register'))){
                 $message .= ' 经验 '.integer_string(Setting()->get('credits_register')) .' , 金币 '.integer_string(Setting()->get('coins_register'));
             }
 

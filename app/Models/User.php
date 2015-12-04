@@ -115,6 +115,15 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Models\Answer');
     }
 
+    /**
+     * 获取用户动态
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function doings()
+    {
+        return $this->hasMany('App\Models\Doing');
+    }
+
 
     public function isAnswered($questionId){
         return boolval($this->answers()->where('question_id','=',$questionId)->count());

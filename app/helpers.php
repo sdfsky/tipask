@@ -29,3 +29,16 @@ if( ! function_exists('integer_string')){
         return $value;
     }
 }
+
+
+if(! function_exists('timestamp_format')){
+    function timestamp_format($date_time){
+        $timestamp = \Carbon\Carbon::instance(new DateTime($date_time));
+        $time_format_string = Setting()->get('date_format').' '.Setting()->get('time_format');
+        if(Setting()->get('time_friendly')==1){
+            return $timestamp->diffInWeeks(\Carbon\Carbon::now()) >= 1 ? $timestamp->format($time_format_string) : $timestamp->diffForHumans();
+        }
+        return $timestamp->format($time_format_string);
+
+    }
+}

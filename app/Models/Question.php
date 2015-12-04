@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Question extends Model
 {
     protected $table = 'questions';
-    protected $fillable = ['title', 'user_id', 'description','tags','price','hide'];
+    protected $fillable = ['title', 'user_id', 'description','tags','price','hide','status'];
 
    /*获取相关问题*/
     public static function correlations($tagIds,$size=5)

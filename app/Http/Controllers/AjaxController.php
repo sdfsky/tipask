@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Area;
 
-class AjaxController extends BaseController
+class AjaxController extends Controller
 {
 
     /**

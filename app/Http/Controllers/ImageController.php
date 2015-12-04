@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Http\Requests;
 use Intervention\Image\Facades\Image;
 
-class ImageController extends BaseController
+class ImageController extends Controller
 {
 
     /**

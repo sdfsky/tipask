@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     protected $table = 'answers';
-    protected $fillable = ['question_title','question_id','user_id', 'content'];
+    protected $fillable = ['question_title','question_id','user_id', 'content','status'];
 
 
     public function question(){
