@@ -1,4 +1,4 @@
-@extends('theme::public.layout')
+@extends('theme::layout.public')
 
 @section('css')
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container mt-30">
+    <div class="row mt-10">
         <form id="questionForm" method="POST" role="form" action="{{ route('ask.question.store') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
@@ -28,23 +28,34 @@
                 <textarea name="description" id="description" placeholder="您可以在这里继续补充问题细节" style="height:100px;width: 1000px;"></textarea>
             </div>
 
-            <div class="operations mt20">
-                <div class="pull-right">
+            <div class="form-group">
+                <label for="tags">添加话题</label>
+                <input type="text" class="form-control" placeholder="话题越精准，越容易让相关领域专业人士看到你的问题" name="tags" />
+            </div>
 
-                    <span class="text-muted hidden" id="editorStatus">已保存</span>
-                    <a id="dropIt" href="javascript:void(0);" class="mr10 hidden">
-                        [舍弃]
-                    </a>
-
-                    <button type="submit" class="btn btn-success">发布问题</button>
+            <div class="row mt-20">
+                <div class="col-md-8">
+                    <div class="checkbox pull-left">
+                        悬赏
+                        <select name="price">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select> 金币
+                        <span class="span-line">|</span>
+                        <label>
+                            <input type="checkbox" name="hide" value="1" /> 匿名
+                        </label>
+                    </div>
                 </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary pull-right">发布问题</button>
+                </div>
+
             </div>
         </form>
-        <div class="clearfix">
-            <div class="shareToWeibo checkbox pull-left mr10">
-                <label for="shareToWeibo"><input type="checkbox" id="shareToWeibo" checked="checked"> 同步到新浪微博</label>
-            </div>
-        </div>
 
     </div>
 

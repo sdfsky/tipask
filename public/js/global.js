@@ -14,6 +14,12 @@ $(function(){
         var new_src = $(this).find("img").attr("src")+'&'+Math.random();
         $(this).find("img").attr("src",new_src);
     });
+
+    $(".navbar-form span").click(function(){
+        $("#top-search-form").submit();
+    });
+
+    $("#alert_message").delay(3000).hide(0);
 });
 
 

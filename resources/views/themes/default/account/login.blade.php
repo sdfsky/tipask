@@ -1,4 +1,4 @@
-@extends('theme::account.layout')
+@extends('theme::layout.account')
 
 @section('seo')
     <title>用户登陆</title>
@@ -8,7 +8,7 @@
     <div class="header text-center">
         <h1>
             <a href="/" class="logo">
-                <img src="//sf-static.b0.upaiyun.com/global/img/logo-b.f7391d73.svg" alt="SegmentFault">
+                <img src="{{ asset('/css/default/login-logo.png') }}" alt="SegmentFault">
             </a>
         </h1>
         <p class="description text-muted">欢迎加入最专业的中文开发者社区</p>
@@ -39,7 +39,7 @@
                     @if ($errors->first('captcha'))
                     <span class="help-block">{{ $errors->first('captcha') }}</span>
                     @endif
-                    <div class="mt10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
+                    <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
                </div>
 
             <div class="form-group clearfix">

@@ -14,23 +14,25 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
 
-            $table->increments('id');                             //回答ID
+            $table->increments('id')->unsigned();                             //回答ID
 
             $table->string('question_title',255);                 //问题标题
 
-            $table->integer('question_id')->index();              //问题ID
+            $table->integer('question_id')->unsigned()->index();              //问题ID
 
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 
-            $table->integer('user_id')->index();                  //回答发起人UID
+            $table->integer('user_id')->unsigned()->index();                 //回答发起人UID
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
 
             $table->text('content');                              //回答内容
 
-            $table->integer('supports')->default(0);              //支持数
+            $table->integer('supports')->unsigned()->default(0);              //支持数
 
-            $table->integer('oppositions')->default(0);           //反对数
+            $table->integer('oppositions')->unsigned()->default(0);           //反对数
 
-            $table->integer('comments')->default(0);              //评论数
+            $table->integer('comments')->unsigned()->default(0);              //评论数
 
             $table->tinyInteger('device')->default(1);            //回答设备类型1pc,2安卓,3IOS,4wap
 

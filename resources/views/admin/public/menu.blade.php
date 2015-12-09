@@ -22,8 +22,10 @@
             <i class="fa fa-wrench"></i> <span>全局</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
-        <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 站点设置</a></li>
+        <ul class="treeview-menu" id="global">
+            <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-circle-o"></i> 站点设置</a></li>
+            <li><a href="{{ route('admin.setting.time') }}"><i class="fa fa-circle-o"></i> 时间设置</a></li>
+            <li><a href="{{ route('admin.setting.credits') }}"><i class="fa fa-circle-o"></i> 积分设置</a></li>
             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 验证码</a></li>
             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 禁止访问</a></li>
         </ul>

@@ -14,9 +14,9 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
 
-            $table->increments('id');                             //问题ID
+            $table->increments('id')->unsigned();                             //问题ID
 
-            $table->integer('user_id')->index();                  //问题发起人UID
+            $table->integer('user_id')->unsigned()->index();                  //问题发起人UID
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
@@ -30,11 +30,11 @@ class CreateQuestionsTable extends Migration
 
             $table->tinyInteger('hide')->default(0);              //匿名提问
 
-            $table->integer('answers')->default(0);               //回答数
+            $table->integer('answers')->unsigned()->default(0);               //回答数
 
-            $table->integer('views')->default(0);                 //查看数
+            $table->integer('views')->unsigned()->default(0);                 //查看数
 
-            $table->integer('collections')->default(0);           //收藏数
+            $table->integer('collections')->unsigned()->default(0);           //收藏数
 
             $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4wap
 

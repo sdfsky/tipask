@@ -1,13 +1,8 @@
-@extends('theme::public.layout')
+@extends('theme::layout.public')
 
 @section('content')
-    <div class="row">
+    <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
-            <p class="main-title hidden-xs">
-                今天，你在开发时遇到了什么问题呢？
-                <a id="goAsk" href="{{ route('ask.question.create') }}" class="btn btn-primary">我要提问</a>
-            </p>
-
             <ul class="nav nav-tabs nav-tabs-zen mb10">
                 <li class="active"><a href="/questions/newest">最新的</a></li>
                 <li><a href="/questions/hottest">热门的</a></li>
@@ -18,9 +13,6 @@
                 @foreach($questions as $question)
                 <section class="stream-list__item">
                     <div class="qa-rank">
-                        <div class="votes hidden-xs">
-                            0<small>投票</small>
-                        </div>
                         <div class="answers">
                             {{ $question->answers }}<small>回答</small>
                         </div>
@@ -31,14 +23,19 @@
                     <div class="summary">
                         <ul class="author list-inline">
                             <li>
-                                <a href="/u/yepman">YepMan</a>
+                                <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}">{{ $question->user->name }}</a>
                                 <span class="split"></span>
-                                <span class="askDate">{{ $question->created_at }}</span>
+                                <span class="askDate">{{ timestamp_format($question->created_at) }}</span>
                             </li>
                         </ul>
                         <h2 class="title"><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></h2>
+                        @if($question->tags)
                         <ul class="taglist--inline ib">
-                            <li class="tagPopup"><a class="tag tag-sm" href="/t/java" data-toggle="popover" data-original-title="java" data-id="1040000000089449">java</a></li>            </ul>
+                            @foreach($question->tags() as $tag_name)
+                                <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag_name]) }}">{{ $tag_name }}</a></li>
+                            @endforeach
+                        </ul>
+                        @endif
                     </div>
                 </section>
                 @endforeach
@@ -49,7 +46,7 @@
                 {!! str_replace('/?', '?', $questions->render()) !!}
             </div>
         </div><!-- /.main -->
-        <div class="col-xs-12 col-md-3 side mt30">
+        <div class="col-xs-12 col-md-3 side">
             <aside class="widget-welcome">
                 <h2 class="h4 title">最专业的开发者社区</h2>
                 <p>最前沿的技术问答，最纯粹的技术切磋。让你不知不觉中开拓眼界，提高技能，认识更多朋友。</p>
@@ -58,14 +55,6 @@
                     <li><a href="/user/oauth/weibo" class="3rdLogin btn btn-default btn-block btn-sn-weibo"><span class="icon-sn-weibo"></span> 微博账号登录</a></li>
                 </ul>
             </aside>
-
-
-
-
-
-
-
-
 
             <div class="widget-box">
                 <h2 class="h4 widget-box__title">热议标签 <a href="/tags" title="更多">»</a></h2>
@@ -88,58 +77,14 @@
             <div class="widget-box">
                 <h2 class="h4 widget-box__title">最近热门的</h2>
                 <ul class="widget-links list-unstyled">
+                    @foreach($hotQuestions as $hotQuestion)
                     <li class="widget-links__item">
-                        <a href="/q/1010000002580638">为什么完整的移动端项目比较少？</a>
-                        <small class="text-muted">
-                            5 回答                            </small>
+                        <a href="{{ route('ask.question.detail',['question_id'=>$hotQuestion->id]) }}">{{ $hotQuestion->title }}</a>
+                        <small class="text-muted">{{ $hotQuestion->answers }} 回答</small>
                     </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002545549">微信支付 不允许跨号支付问题</a>
-                        <small class="text-muted">
-                            3 回答                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002589542">一个没有理解面试题</a>
-                        <small class="text-muted">
-                            8 回答                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002577584">Linux 内核双链表的实现太精妙了</a>
-                        <small class="text-muted">
-                            7 回答                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002602574">《高性能javascript》和《javascript设计模式》这两本书怎么样？后者好像评价不好</a>
-                        <small class="text-muted">
-                            5 回答                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002462719">Docker离成熟是否还很遥远?把Docker用在现实系统中的公司还很少吧?</a>
-                        <small class="text-muted">
-                            10 回答                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002604023">路过的前端大大进来看看这个Jquery界面</a>
-                        <small class="text-muted">
-                            3 回答                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002404545">GitHub上整理的一些工具，求补充</a>
-                        <small class="text-muted">
-                            7 回答                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000002593740">为了防注入，对sql查询语句加转义addslashes后，语句语法出现问题</a>
-                        <small class="text-muted">
-                            8 回答 | 已解决                            </small>
-                    </li>
-                    <li class="widget-links__item">
-                        <a href="/q/1010000000250746">Android客户端如何获取php客户端验证码图片</a>
-                        <small class="text-muted">
-                            0 回答                            </small>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
-        </div><!-- /.side -->
+        </div>
     </div>
 @endsection

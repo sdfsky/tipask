@@ -46,11 +46,12 @@
 .tab-pane .table td{border:none;font-size:14px}
 .tab-pane .media:first-child{margin-top:15px}
 .tab-pane .list-group li{margin-bottom:10px}
-.record-list{border-top:1px solid #EEE}
 .record-list li{overflow:hidden;margin-top:10px;border-bottom:1px solid #EEE}
 .record-list li .pull-left{width:37px;text-align:right;margin-right:15px}
-.record-list li .badge{background-color:#FFF;border:1px solid}
 .record-list li p{margin-left:52px}
+.coins .badge{background-color:#FF8100;}
+.credits .badge{background-color:#449d44;}
+
 .board-title span{font-weight:400}
 .board{border-color:#EEE}
 .blog-list{margin-bottom:20px}

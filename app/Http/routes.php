@@ -47,6 +47,8 @@ Route::Group(['namespace'=>'Account'],function(){
 /*前台显示部分*/
 Route::Group(['namespace'=>'Ask'],function(){
 
+    /*全局搜索*/
+    Route::get('search',['as'=>'ask.search.index','uses'=>'SearchController@index']);
 
     /*问题查看*/
     Route::get('question/{id}',['as'=>'ask.question.detail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);

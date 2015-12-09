@@ -52,6 +52,9 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 .mr-30,.mr30{margin-right:30px}
 
 
+.pt-30{padding-top: 30px;}
+
+
 /*边框border*/
 .border-top {
     border-top: 1px solid #DDD;
@@ -89,7 +92,7 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 
 /*网站logo*/
 .logo{float:left;margin:0;display:inline-block;width:125px;}
-.logo a{display:block;height:50px;width:120px; background-image:url("logo.png");background-size: 120px 50px;background-repeat: no-repeat;background-position: 0 0;}
+.logo a{display:block;height:50px;width:120px; background-image:url("logo.png");background-size: 120px 50px;background-repeat: no-repeat;}
 
 /*用户头像*/
 .avatar-16{width:16px;height:16px}
@@ -268,8 +271,25 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 .sn-inline li{display:inline-block;margin-right:5px}
 .sn-inline li a{text-indent:110%;white-space:nowrap;overflow:hidden;text-transform:capitalize}
 
+
 /*表单相关*/
 .required:after{content:" *";color:#ED1C24}
+
+
+
+
+/*搜索页面*/
+.best-tag,.search-category{margin-bottom:10px}
+.search-category>li>a{padding:2px 10px;color:#666}
+.side .list-unstyled{line-height:30px}
+.best-tag{border:1px solid #DDD;border-radius:2px;padding:15px 15px 5px}
+section{margin:0 -8px;padding:5px 8px}
+section .label-success{font-size:12px}
+section .h4{margin-bottom:2px;font-size:16px}
+section:hover{background-color:#fcf8e3}
+.search-result .excerpt{font-size:13px;color:#666;line-height:1.5;word-wrap:break-word}
+.key{color:#D0021B}
+.related-object{border:1px solid #ddd;border-radius:2px;padding:10px 15px;margin-bottom:20px}
 
 
 /*页面底部footer*/

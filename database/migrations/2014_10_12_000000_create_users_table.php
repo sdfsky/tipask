@@ -13,10 +13,10 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');                           //用户UID
+            $table->increments('id')->unsigned();                           //用户UID
             $table->string('name');                             //姓名
-            $table->string('email',128)->unique()->nullable();  //登录邮箱
-            $table->string('mobile',24)->unique()->unllable();  //登录手机
+            $table->string('email',128)->unique();  //登录邮箱
+            $table->string('mobile',24)->index()->nullable();  //登录手机
             $table->string('password', 64);                     //登录密码
             $table->tinyInteger('gender')->nullable();          //性别: 1-男，2-女，0-保密
             $table->date('birthday')->nullable();               //出生日期

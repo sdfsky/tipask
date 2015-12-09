@@ -26,14 +26,13 @@
 </head>
 <body class="skin-blue sidebar-mini @if($sidebar_collapse) sidebar-collapse @endif">
 <div class="wrapper">
-
     <header class="main-header">
         <!-- Logo -->
         <a href="{{ route('admin.index.index') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>sk</span>
+            <span class="logo-mini"><b>T</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Tip</b>ASK</span>
+            <span class="logo-lg"><b>Tipask Admin</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -96,10 +95,10 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ asset('/css/admin/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image" />
+                                <img src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_big']) }}" class="img-circle" alt="User Image" />
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    {{ Auth()->user()->name }}
+                                    <small>{{ Auth()->user()->title }}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -117,10 +116,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="#" class="btn btn-default btn-flat">修改密码</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">退出登录</a>
                                 </div>
                             </li>
                         </ul>
@@ -152,6 +151,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
         @yield('content')
     </div><!-- /.content-wrapper -->
 

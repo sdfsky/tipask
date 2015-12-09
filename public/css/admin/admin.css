@@ -2326,9 +2326,7 @@ a:focus {
 .alert-warning {
     border-color: #e08e0b;
 }
-.alert-info {
-    border-color: #00acd6;
-}
+
 /*
  * Component: Nav
  * --------------
@@ -3960,9 +3958,7 @@ fieldset[disabled] .btn-vk.active {
 .alert-danger,
 .alert-error,
 .alert-warning,
-.alert-info,
 .label-danger,
-.label-info,
 .label-waring,
 .label-primary,
 .label-success,
@@ -4007,7 +4003,6 @@ fieldset[disabled] .btn-vk.active {
 }
 .bg-aqua,
 .callout.callout-info,
-.alert-info,
 .label-info,
 .modal-info .modal-body {
     background-color: #00c0ef !important;
