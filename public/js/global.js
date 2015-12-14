@@ -20,6 +20,15 @@ $(function(){
     });
 
     $("#alert_message").delay(3000).hide(0);
+
+
+    /*评论提交*/
+    $(".comment-btn").click(function(){
+        var answer_id = $(this).data('answer_id');
+        var token = $(this).data('token');
+        var content = $("#comment-content-"+answer_id+"").val();
+        console.log(content+'--------'+token+'----'+answer_id)
+    });
 });
 
 

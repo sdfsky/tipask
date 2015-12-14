@@ -95,11 +95,10 @@
                             {!! $answer->content !!}
                         </div>
 
-
                         <div class="post-opt">
                             <ul class="list-inline mt-10">
 
-                                <li><a class="comments" data-toggle="collapse" href="#comment-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
+                                <li><a class="comments" data-toggle="collapse" href="#comments-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
                                 <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-edit"></i> 编辑</a></li>
                                 <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-remove"></i> 删除</a></li>
                                 <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"> 举报</a></li>
@@ -110,12 +109,12 @@
                             </ul>
                         </div>
 
-                        <div class="collapse widget-comments mt-15" id="comment-{{ $answer->id }}">
-                            <div class="widget-comments__item hover-show " id="1050000004020243">
+                        <div class="collapse widget-comments mt-15" id="comments-{{ $answer->id }}">
+                            @if(Auth()->check())
+                            <div class="widget-comments__item hover-show">
                                 <div class="comment-content">
                                     <div class="content fmt"><p>其实这种问答等于没有回答....最好还是给题主一点思路吧。</p> </div>
                                     <p class="comment-meta">
-                                        <a href="/c/1050000004020243" class="text-muted">#1</a>&nbsp;
                                         <a href="/u/manager" class="commentUser" data-userid="1030000000654149" data-username="洪旭" data-userslug="manager" data-useravatar="http://sfault-avatar.b0.upaiyun.com/122/455/1224550765-1030000000654149_medium40"><strong>洪旭</strong></a> · <span class="createdDate">1 小时前</span> · <a href="#" class="commentReply" data-userid="1030000000654149" data-id="1050000004020243" data-username="洪旭">回复</a>
                                         <span class="pull-right commentTools hover-show-obj">
                                             <a href="#911" class="ml10" data-toggle="modal" data-target="#911" data-type="comment" data-id="1050000004020243" data-typetext="评论" data-placement="top" title="举报">举报</a>
@@ -132,28 +131,29 @@
                                     </p>
                                 </div>
                                 <div class="widget-comments__form row">
-                                <form class="col-md-12">
-                                    <div class="form-group mb0">
-                                        <input type="text" name="text" class="form-control" />
+                                <form class="col-md-12" >
+                                    <div class="form-group">
+                                        <textarea name="content" class="form-control" id="comment-content-{{ $answer->id }}"></textarea>
                                     </div>
                                 </form>
                                 <div class="col-md-12 text-right">
                                     <a href="#" class="text-muted">取消</a>
-                                    <button type="submit" class="btn btn-primary btn-sm" data-id="1020000004013045">提交评论</button>
+                                    <button type="submit" class="btn btn-primary btn-sm ml-10 comment-btn" data-answer_id="{{ $answer->id }}" data-token="{{ csrf_token() }}">提交评论</button>
                                 </div>
 
-                            </div>
+                                </div>
                         </div>
-
-                        <div class="widget-comments hidden" id="comment-1020000003746344" data-id="1020000003746344">
-                            <div class="widget-comments__form row">
-                                <div class="col-md-12">
-                                    请先 <a class="commentLogin" href="javascript:void(0);">登录</a> 后评论
+                            @else
+                            <div class="widget-comments">
+                                <div class="widget-comments__form row">
+                                    <div class="col-md-12">
+                                        请先 <a  href="{{ route('auth.user.login') }}">登录</a> 后评论
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            @endif
+                         </div>
 
-                    </div>
                 </article>
                 @endforeach
 
@@ -174,8 +174,7 @@
                         <strong>9</strong> 关注
                     </li>
                     <li>
-                        <button type="button" id="sideBookmark" class="btn btn-default btn-sm" data-id="1010000003726585" data-type="question">收藏
-                        </button>
+                        <button type="button" id="sideBookmark" class="btn btn-default btn-sm" data-id="1010000003726585" data-type="question">收藏</button>
                         <strong id="sideBookmarked">{{ $question->collections }}</strong> 收藏，<strong class="no-stress">{{ $question->views }}</strong> 浏览
                     </li>
                 </ul>

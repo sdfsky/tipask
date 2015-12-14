@@ -36,6 +36,12 @@ Route::Group(['namespace'=>'Account'],function(){
             'anyNotification' =>'auth.profile.notification',
         ]);
 
+        /*我的通知*/
+
+        Route::controller('notification','NotificationController',[
+            'getIndex' => 'auth.notification.index',
+        ]);
+
     });
 
 
@@ -46,6 +52,9 @@ Route::Group(['namespace'=>'Account'],function(){
 
 /*前台显示部分*/
 Route::Group(['namespace'=>'Ask'],function(){
+
+    /*动态*/
+    Route::get('doings/{name?}',['as'=>'ask.doing.index','uses'=>'DoingsController@index'])->where(['name'=>'[all]?']);
 
     /*全局搜索*/
     Route::get('search',['as'=>'ask.search.index','uses'=>'SearchController@index']);
