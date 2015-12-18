@@ -53,6 +53,7 @@ Route::Group(['namespace'=>'Account'],function(){
 /*前台显示部分*/
 Route::Group(['namespace'=>'Ask'],function(){
 
+
     /*动态*/
     Route::get('doings/{name?}',['as'=>'ask.doing.index','uses'=>'DoingsController@index'])->where(['name'=>'[all]?']);
 
@@ -66,6 +67,13 @@ Route::Group(['namespace'=>'Ask'],function(){
     Route::post('answer/store',['middleware' =>'auth','as'=>'ask.answer.store','uses'=>'AnswerController@store']);
     /*标签模块*/
     Route::get('topic/{name}',['as'=>'ask.tag.index','uses'=>'TagController@index']);
+
+
+
+    /*评论模块*/
+    Route::post('comment/store',['middleware' =>'auth','as'=>'ask.comment.store','uses'=>'CommentController@store']);
+    Route::get('{source_type}/{source_id}/comments',['as'=>'ask.comment.show','uses'=>'CommentController@show'])->where(['source_type'=>'(question|answer|article)','source_id'=>'[0-9]+']);
+
 
 });
 

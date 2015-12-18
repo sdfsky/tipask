@@ -51,7 +51,7 @@ abstract class Controller extends BaseController
         DB::beginTransaction();
         try{
             /*用户登陆只添加一次积分*/
-            if($action == Config::get('tipask.credit_actions.login') && Credit::where('user_id','=',$user_id)->where('action','=',$action)->where('created_at','>',Carbon::today())->count()>0){
+            if($action == 'login' && Credit::where('user_id','=',$user_id)->where('action','=',$action)->where('created_at','>',Carbon::today())->count()>0){
                 return false;
             }
             /*记录详情数据*/

@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Relations\BelongsToUserTrait;
+use App\Models\Relations\MorphManyCommentsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class Question extends Model
 {
+    use BelongsToUserTrait,MorphManyCommentsTrait;
     protected $table = 'questions';
     protected $fillable = ['title', 'user_id', 'description','tags','price','hide','status'];
 
@@ -24,11 +27,6 @@ class Question extends Model
     }
 
 
-    /*用户*/
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User','user_id');
-    }
 
 
     /*问题标签*/

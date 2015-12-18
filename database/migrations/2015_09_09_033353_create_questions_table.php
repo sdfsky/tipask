@@ -36,6 +36,8 @@ class CreateQuestionsTable extends Migration
 
             $table->integer('collections')->unsigned()->default(0);           //收藏数
 
+            $table->integer('comments')->unsigned()->default(0);              //评论数
+
             $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4wap
 
             $table->tinyInteger('status')->default(0);            //提问状态0待审核,1已审核

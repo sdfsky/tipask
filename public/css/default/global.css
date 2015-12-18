@@ -78,7 +78,6 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 }
 
 
-
 /*内容隐藏*/
 .hidden{display:none !important;visibility:hidden !important}
 /*文字format*/
@@ -96,7 +95,7 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 
 /*用户头像*/
 .avatar-16{width:16px;height:16px}
-.avatar-20{width:20px;height:20px}
+.avatar-24{width:20px;height:20px;border-radius:2px;}
 .avatar-27{width:27px;height:27px;border-radius: 2px;}
 .avatar-32{width:32px;height:32px;border-radius:2px;}
 .avatar-40{width:40px;height:40px;border-radius:3px;}
@@ -311,21 +310,9 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 
 
 /*评论样式*/
-.widget-comments {
-    list-style: none;
-    font-size: 13px;
-    color: #666;
-    padding: 15px;
-    background-color: #F6F6F6;
-    border-radius: 2px;
-    resize: none;
-    min-height: 56px
-}
-.widget-comments .comment-content{margin-bottom:10px;border-bottom:1px solid #eee;}
-
-.widget-comments .fmt {
-    font-size: 13px
-}
+.widget-comments {list-style: none;font-size: 13px;color: #444;padding:10px;border: 1px solid #ddd;border-radius: 2px;resize: none;min-height:32px}
+.widget-comments .media{border-bottom:1px solid #eee;font-size: 13px;}
+.media-footer{margin-bottom: 10px;}
 
 .sn-inline{list-style:none;display:inline;margin:0;padding:0;vertical-align:text-bottom}
 .sn-inline li{display:inline-block;margin-right:5px}

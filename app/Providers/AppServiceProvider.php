@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //设置时间
         Carbon::setLocale(Config::get('app.locale'));
+
     }
 
     /**
