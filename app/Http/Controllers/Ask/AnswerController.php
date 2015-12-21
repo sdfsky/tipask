@@ -63,12 +63,18 @@ class AnswerController extends Controller
         ];
         $answer = Answer::create($data);
         if($answer){
+
             /*用户回答数+1*/
             $loginUser->userData()->increment('answers');
+
             /*问题回答数+1*/
             $question->increment('answers');
+
             /*记录动态*/
             $this->doing($answer->user_id,'answer',$question->id,$question->title,$answer->content);
+
+            /*记录通知*/
+            $this->notify($answer->user_id,$question->user_id,'answer',$question->title,$question->id,$answer->content);
 
             /*记录积分*/
             if($answer->status ==1 && $this->credit($request->user()->id,'answer',Setting()->get('coins_answer'),Setting()->get('credits_answer'),$question->id,$question->title)){

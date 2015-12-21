@@ -11,7 +11,7 @@
 
             <div class="stream-list question-stream">
                 @foreach($questions as $question)
-                <section class="stream-list__item">
+                <section class="stream-list-item">
                     <div class="qa-rank">
                         <div class="answers">
                             {{ $question->answers }}<small>回答</small>
@@ -28,7 +28,12 @@
                                 <span class="askDate">{{ timestamp_format($question->created_at) }}</span>
                             </li>
                         </ul>
-                        <h2 class="title"><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></h2>
+                        <h2 class="title">
+                            @if($question->price>0)
+                                <span class="text-gold mr-10"><i class="fa fa-jpy"></i> {{ $question->price }}</span>
+                            @endif
+                            <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a>
+                        </h2>
                         @if($question->tags)
                         <ul class="taglist--inline ib">
                             @foreach($question->tags() as $tag_name)

@@ -7,27 +7,26 @@
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
-            <div class="widget-question-item">
-                <h3 class="title">{{ $question->title }}</h3>
-                <div class="author">
-                    <a href="{{ route('auth.space.index',['user_id'=>$question->user_id]) }}" target="_blank" class="mr5"><img class="avatar-24 mr10" src="{{ route('website.image.avatar',['avatar_name'=>$question->user_id.'_small']) }}" alt="xumenger"><strong>{{ $question->user['name'] }}</strong></a>
-                    {{ timestamp_format($question->created_at) }}
-                </div>
-                <div class="description mt-10">
-                    <div class="question fmt">
-                        {!! $question->description !!}
-                    </div>
-                    @if($question->tags)
-                    <ul class="taglist--inline mt-10">
+            <div class="widget-question">
+                @if($question->tags)
+                    <ul class="taglist--inline">
                         @foreach($question->tags() as $tag_name)
-                        <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag_name]) }}">{{ $tag_name }}</a></li>
+                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag_name]) }}">{{ $tag_name }}</a></li>
                         @endforeach
                     </ul>
+                @endif
+                <h4 class="title">
+                    {{ $question->title }}
+                    @if($question->price>0)
+                        <span class="label label-warning">悬赏 <i class="fa fa-jpy"></i> {{ $question->price }}</span>
                     @endif
-
-                    <div class="post-opt">
-                        <ul class="list-inline mb0">
-                            <li><a href="/q/1010000003746261">链接</a></li>
+                </h4>
+                <div class="description mt-10">
+                    <div class="text-fmt ">
+                        {!! $question->description !!}
+                    </div>
+                    <div class="post-opt mt-10">
+                        <ul class="list-inline">
                             <li><a class="comments"  data-toggle="collapse"  href="#comments-question-{{ $question->id }}" aria-expanded="false" aria-controls="comment-{{ $question->id }}"><i class="fa fa-comment-o"></i> {{ $question->comments }} 条评论</a></li>
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">更多<b class="caret"></b></a>
@@ -45,7 +44,53 @@
                 </div>
 
             </div>
-            <div class="answer-box">
+
+            <div class="widget-answers mt-15">
+                <div class="btn-group pull-right" role="group">
+                    <a href="{{ route('ask.question.detail',['question_id'=>$question->id]) }}" class="btn btn-default btn-xs @if(request()->input('sort','default')=='default') active @endif">默认排序</a>
+                    <a href="{{ route('ask.question.detail',['question_id'=>$question->id,'sort'=>'created_at']) }}" id="sortby-created" class="btn btn-default btn-xs @if(request()->input('sort','default')=='created_at') active @endif">时间排序</a>
+                </div>
+
+                <h2 class="h4 post-title">{{ $answers->total() }} 个回答</h2>
+
+                @foreach( $answers as $answer )
+                <div class="media">
+                    <div class="media-left">
+                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}">
+                            <img class="avatar-40"  src="{{ route('website.image.avatar',['avatar_name'=>$answer->user_id.'_middle']) }}" alt="{{ $answer->user['name'] }}"></a>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="media-heading">
+                            <strong><a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr5">{{ $answer->user['name'] }}</a></strong>
+                            <span class="text-muted"> - {{ $answer->user['title'] }}</span>
+                            <span class="answer-time text-muted">{{ timestamp_format($answer->created_at) }}</span>
+                        </div>
+                        <div class="content"><p>{!! $answer->content !!}</p></div>
+                        <div class="media-footer">
+                            <ul class="list-inline mb-20">
+
+                                <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
+                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-edit"></i> 编辑</a></li>
+                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-remove"></i> 删除</a></li>
+                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"> 举报</a></li>
+                                <li class="pull-right">
+                                    <button class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> 10000</button>
+                                    <button class="btn btn-success btn-sm"><i class="fa fa-thumbs-o-up"></i> 已赞</button>
+                                </li>
+                            </ul>
+                        </div>
+                        @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$answer->id])
+
+                    </div>
+                </div>
+                @endforeach
+                <div class="text-center">
+                    {!! str_replace('/?', '?', $answers->render()) !!}
+                </div>
+
+            </div>
+            <div class="widget-answer-form mt-15">
                 @if(!Auth()->check() || ($question->user_id !== Auth()->user()->id && !Auth()->user()->isAnswered($question->id)) )
                     <h4>我来回答</h4>
                     <form action="{{ route('ask.answer.store') }}" method="post" class="editor-wrap">
@@ -71,58 +116,6 @@
                         </div>
                     </form>
                 @endif
-            </div>
-
-            <div class="widget-answers">
-                <div class="btn-group pull-right" role="group">
-                    <a href="/q/1010000003746261#answers-title" id="sortby-rank" class="btn btn-default btn-xs active">默认排序</a>
-                    <a href="?sort=created#answers-title" id="sortby-created" class="btn btn-default btn-xs">时间排序</a>
-                </div>
-
-                <h2 class="title h4 mt30 mb20 post-title" id="answers-title">{{ $answers->total() }} 个回答</h2>
-
-
-
-                @foreach( $answers as $answer )
-                <article class="clearfix widget-answers__item">
-                    <div class="post-col">
-                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}"><img class="avatar-40"  src="{{ route('website.image.avatar',['avatar_name'=>$answer->user_id.'_middle']) }}" alt="{{ $answer->user['name'] }}"></a>
-                    </div>
-                    <div class="post-offset">
-
-                        <strong><a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr5">{{ $answer->user['name'] }}</a></strong>
-                        <span class="text-muted"> - {{ $answer->user['title'] }}</span>
-                        <span class="answer-time text-muted">{{ timestamp_format($answer->created_at) }}</span>
-
-                        <div class="fmt mt10">
-                            {!! $answer->content !!}
-                        </div>
-
-                        <div class="post-opt">
-                            <ul class="list-inline mt-10">
-
-                                <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
-                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-edit"></i> 编辑</a></li>
-                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-remove"></i> 删除</a></li>
-                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"> 举报</a></li>
-                                <li class="pull-right">
-                                    <button class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> 10000</button>
-                                    <button class="btn btn-success btn-sm"><i class="fa fa-thumbs-o-up"></i> 已赞</button>
-                                </li>
-                            </ul>
-                        </div>
-
-                        @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$answer->id])
-
-
-
-                </article>
-                @endforeach
-
-                <div class="text-center">
-                    {!! str_replace('/?', '?', $answers->render()) !!}
-                </div>
-
             </div>
 
         </div>

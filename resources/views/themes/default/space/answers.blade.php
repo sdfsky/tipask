@@ -4,7 +4,7 @@
     <h2 class="h4">{{ $answers->total() }} 个回答</h2>
     <div class="stream-list board border-top">
         @foreach($answers as $answer)
-        <section class="stream-list__item">
+        <section class="stream-list-item">
             <div class="qa-rank">
                 <div class="votes">
                     {{ $answer->supports }}<small>赞同</small>

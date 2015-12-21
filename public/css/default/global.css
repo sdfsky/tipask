@@ -63,6 +63,8 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 /*字体颜色设置*/
 .black,.text-black{color:#333}
 
+.gold,.text-gold{color:#ff8a00;}
+
 .black:hover,.text-black:hover{color:#333}
 
 .bg-gray {
@@ -81,7 +83,7 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 /*内容隐藏*/
 .hidden{display:none !important;visibility:hidden !important}
 /*文字format*/
-.fmt {
+.text-fmt {
     overflow: hidden;
     font-size: 14px;
     line-height: 1.6;
@@ -116,24 +118,20 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 /*列表样式*/
 .stream-list{margin-bottom:10px}
 .stream-list.top-indent{margin-top:-10px}
-.stream-list__item{margin:0;border-bottom:1px solid #eee;padding:10px 0}
-.stream-list__item .author{margin-bottom:5px;color:#999;font-size:13px}
-.stream-list__item .author a{color:#999}
-.stream-list__item .author small{color:#ddd}
-.stream-list__item .title{display:inline;margin:0 5px 0 0;font-size:16px}
-.stream-list__item .title a{color:#333}
-.stream-list__item .title a:hover{color:#017e66}
-.stream-list__item .title a:visited{font-weight:400}
-.stream-list__item .small-title{margin:0 0 5px;font-size:16px}
-.stream-list__item .split:before{content:"·";color:#ddd}
-.stream-list__item .summary{overflow:auto;overflow-x:hidden}
-.stream-list__item .excerpt{margin:5px 0 0;height:42px;color:#777;font-size:13px;line-height:1.6;overflow:hidden}
-/*.blog-stream .stream-list__item{padding:12px 0}*/
-/*.blog-stream .stream-list__item .author{margin-top:5px}*/
-/*.blog-stream .stream-list__item .author a{color:#009a61}*/
-/*.blog-stream .stream-list__item .blog-title{font-size:16px;margin-top:0;margin-bottom:5px}*/
-/*.blog-stream .stream-list__item .article-list{border-left:5px solid #EEE;padding:10px 20px;margin-top:10px;margin-bottom:0}*/
-.stream-list__item.highlight{background:#FFF9EB}
+.stream-list-item{margin:0;border-bottom:1px solid #eee;padding:10px 0}
+.stream-list-item .author{margin-bottom:5px;color:#999;font-size:13px}
+.stream-list-item .author a{color:#999}
+.stream-list-item .author small{color:#ddd}
+.stream-list-item .title{display:inline;margin:0 5px 0 0;font-size:16px}
+.stream-list-item .title a{color:#333}
+.stream-list-item .title a:hover{color:#017e66}
+.stream-list-item .title a:visited{font-weight:400}
+.stream-list-item .small-title{margin:0 0 5px;font-size:16px}
+.stream-list-item .split:before{content:"·";color:#ddd}
+.stream-list-item .summary{overflow:auto;overflow-x:hidden}
+.stream-list-item .excerpt{margin:5px 0 0;height:42px;color:#777;font-size:13px;line-height:1.6;overflow:hidden}
+.stream-list-item.highlight{background:#FFF9EB}
+
 .bookmark-rank,.qa-rank{float:left;margin-right:5px;font-size:16px;text-align:center;line-height:1.2;color:#666}
 .bookmark-rank small,.qa-rank small{display:block;font-size:12px}
 .bookmark-rank .answers,.bookmark-rank .views,.bookmark-rank .votes,.qa-rank .answers,.qa-rank .views,.qa-rank .votes{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px}
@@ -146,13 +144,7 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 .bookmark-rank{margin-right:10px}
 .bookmark-rank .favs,.bookmark-rank .followers{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px;background:#F0F5F3;color:#017E66}
 .bookmark-rank .followers{background:#5cb85c;color:#fff}
-/*.blog-rank{float:left;margin-right:12px;padding-right:12px;border-right:1px solid #f3f3f3;font-size:16px;text-align:center;line-height:1.2;color:#666}*/
-/*.blog-rank small{display:block;font-size:12px}*/
-/*.blog-rank .views,.blog-rank .votes{display:block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px}*/
-/*.blog-rank .votes{margin-bottom:8px;background:#f0f0f0}*/
-/*.blog-rank .plus{background:#009a61;color:#fff}*/
-/*.blog-rank .minus{background:0 0;color:#D0021B}*/
-/*.blog-rank .views{color:#999}*/
+
 
 
 /*tag样式定义*/
@@ -222,11 +214,10 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 
 
 /*详情页面头部*/
-
-.widget-question-item .title{margin: 0 0 10px;}
+.widget-question{border-bottom:1px solid #eee;}
+.widget-question .title{margin: 0 0 10px;}
 .post-opt a{color:#999}
-.post-title{padding-bottom:15px;border-bottom:1px solid #ccc;}
-.answer-box{border-top:1px solid #eee;}
+.post-title{padding-bottom:15px;border-bottom:1px solid #eee;}
 
 
 .widget-action--ver{color:#999}
@@ -258,12 +249,11 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 .widget-vote .hate:hover{background-position:-36px bottom}
 .widget-vote .hate.active{background-position:-72px bottom}
 
-.widget-answers__item{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #ddd}
-.widget-answers__item .post-offset{-moz-transition:all 1s ease;-o-transition:all 1s ease;-webkit-transition:all 1s ease;transition:all 1s ease}
-.widget-answers__item .highlight{background:#FFF9EB}
 
 
-
+/*我的通知*/
+.widget-notify blockquote{margin:10px;font-size: 13px;}
+.widget-notify  .not_read{background:#FFF9EA;}
 
 /*动态样式*/
 .widget-active section{padding:10px 0;border-top:1px solid #EEE}
@@ -308,6 +298,11 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 .packup{width:8px;left:-18px;display:none;background-color:#ccc}
 .packup:hover{background-color:gray}
 
+/*回答模块*/
+.widget-answers .media{border-bottom:1px solid #eee;}
+.widget-answers .answer-time{float:right;}
+.widget-answers .media-footer a{color:#999;}
+
 
 /*评论样式*/
 .widget-comments {list-style: none;font-size: 13px;color: #444;padding:10px;border: 1px solid #ddd;border-radius: 2px;resize: none;min-height:32px}
@@ -333,7 +328,6 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 section{margin:0 -8px;padding:5px 8px}
 section .label-success{font-size:12px}
 section .h4{margin-bottom:2px;font-size:16px}
-section:hover{background-color:#fcf8e3}
 .search-result .excerpt{font-size:13px;color:#666;line-height:1.5;word-wrap:break-word}
 .key{color:#D0021B}
 .related-object{border:1px solid #ddd;border-radius:2px;padding:10px 15px;margin-bottom:20px}

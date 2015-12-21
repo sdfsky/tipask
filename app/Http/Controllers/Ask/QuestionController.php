@@ -25,7 +25,7 @@ class QuestionController extends Controller
     /**
      * 问题详情查看
      */
-    public function detail($id)
+    public function detail($id,Request $request)
     {
 
         $question = Question::find($id);
@@ -41,10 +41,21 @@ class QuestionController extends Controller
 
 
 
-        $answers = $question->answers()->orderBy('created_at','ASC')->paginate(10);
+        if($request->input('sort','default') == 'created_at'){
+            $answers = $question->answers()->orderBy('created_at','DESC')->paginate(5);
+        }else{
+            $answers = $question->answers()->orderBy('supports','DESC')->orderBy('created_at','ASC')->paginate(5);
+        }
+
+
+
+
         $answers->map(function($answer){
             $answer->user = User::findFromCache($answer['user_id']);
         });
+
+        /*设置通知为已读*/
+        $this->readNotifications($question->id,'question');
 
         /*相关问题*/
         $relatedQuestions = Question::correlations(Tag::getIds($question->tags()));

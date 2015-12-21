@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Credit;
 use App\Models\Doing;
+use App\Models\Notification;
 use App\models\UserData;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -24,13 +25,15 @@ abstract class Controller extends BaseController
      * @param $message 消息内容
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function success($url,$message){
+    protected function success($url,$message)
+    {
         Session::flash('message',$message);
         Session::flash('message_type',2);
         return redirect($url);
     }
 
-    protected function error($url,$message){
+    protected function error($url,$message)
+    {
         Session::flash('message',$message);
         Session::flash('message_type',1);
         return redirect($url);
@@ -47,7 +50,8 @@ abstract class Controller extends BaseController
      * @param int $credits    经验值
      * @return bool           操作成功返回true 否则  false
      */
-    protected function credit($user_id,$action,$coins = 0,$credits = 0,$source_id = 0 ,$source_subject = null){
+    protected function credit($user_id,$action,$coins = 0,$credits = 0,$source_id = 0 ,$source_subject = null)
+    {
         DB::beginTransaction();
         try{
             /*用户登陆只添加一次积分*/
@@ -92,7 +96,8 @@ abstract class Controller extends BaseController
      * @param null $refer_content 引用内容
      * @return static
      */
-    protected function doing($user_id,$action,$source_id,$subject,$content='',$refer_id=0,$refer_user_id=0,$refer_content=null){
+    protected function doing($user_id,$action,$source_id,$subject,$content='',$refer_id=0,$refer_user_id=0,$refer_content=null)
+    {
         try{
             return Doing::create([
                 'user_id' => $user_id,
@@ -109,6 +114,50 @@ abstract class Controller extends BaseController
             exit($e->getMessage());
         }
 
+    }
+
+
+    /**
+     * 发送用户通知
+     * @param $from_user_id
+     * @param $to_user_id
+     * @param $type
+     * @param $subject
+     * @param $source_id
+     * @return static
+     */
+    protected function notify($from_user_id,$to_user_id,$type,$subject='',$source_id=0,$refer_content='')
+    {
+        /*不能自己给自己发通知*/
+       if($from_user_id == $to_user_id){
+           return false;
+       }
+
+       return Notification::create([
+            'user_id'    => $from_user_id,
+            'to_user_id' => $to_user_id,
+            'type'       => $type,
+            'subject'    => $subject,
+            'source_id'  => $source_id,
+            'refer_content'  => $refer_content,
+            'is_read'    => 0
+        ]);
+    }
+
+
+    /**
+     * 将通知设置为已读
+     * @param $source_id
+     * @param string $refer_type
+     * @return mixed
+     */
+    protected function readNotifications($source_id,$refer_type='question')
+    {
+        $types = ['answer','comment_user','comment_question','comment_answer'];
+        if($refer_type=='article'){
+            $types = [];
+        }
+        return Notification::where('to_user_id','=',Auth()->user()->id)->where('source_id','=',$source_id)->whereIn('type',$types)->where('is_read','=',0)->update(['is_read'=>1]);
     }
 
 

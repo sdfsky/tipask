@@ -17,5 +17,12 @@ return [
         'ask'      => '发起提问',
         'answer'   => '回答问题',
     ],
+    'notification_types' =>[
+        'answer'  => '回答了问题',
+        'comment_user' => '回复了',
+        'comment_question' => '评论了问题',
+        'comment_answer' => '评论了',
+        'comment_article' => '评论了文章',
+    ],
 
 ];

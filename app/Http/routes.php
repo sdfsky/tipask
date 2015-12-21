@@ -38,8 +38,9 @@ Route::Group(['namespace'=>'Account'],function(){
 
         /*我的通知*/
 
-        Route::controller('notification','NotificationController',[
+        Route::controller('notifications','NotificationController',[
             'getIndex' => 'auth.notification.index',
+            'getReadAll' => 'auth.notification.readAll',
         ]);
 
     });

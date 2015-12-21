@@ -4,7 +4,7 @@
             最新动态
         </a>
         <a class="widget-messages__item @if(request()->route()->getName() == 'auth.notification.index') active @endif" href="{{ route('auth.notification.index') }}">
-            我的通知
+            我的通知 <span class="badge">4</span>
         </a>
         <a class="widget-messages__item" href="/user/bookmarks">
             我的私信

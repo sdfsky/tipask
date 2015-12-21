@@ -27,7 +27,7 @@
 
                             @if(in_array($doing->action,['answer']))
                                 <div class="full-text fmt">
-                                    {{ $doing->content }}
+                                    {{ str_limit(strip_tags($doing->content),300) }}
                                     <a class="read-more-btn" href="/q/1010000004126068/a-1020000004126210" target="_blank">查看原文</a>
                                 </div>
                             @endif
