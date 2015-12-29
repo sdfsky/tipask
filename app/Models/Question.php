@@ -14,10 +14,10 @@ class Question extends Model
     protected $table = 'questions';
     protected $fillable = ['title', 'user_id', 'description','tags','price','hide','status'];
 
-   /*获取相关问题*/
+    /*获取相关问题*/
     public static function correlations($tagIds,$size=5)
     {
-        return DB::table('questions')->leftJoin('question_tag','questions.id','=','question_tag.question_id')->whereIn('question_tag.tag_id',$tagIds)->select('questions.*')->distinct()->take($size)->get();
+        return self::leftJoin('question_tag','questions.id','=','question_tag.question_id')->whereIn('question_tag.tag_id',$tagIds)->select('questions.*')->distinct()->take($size)->get();
     }
 
     /*问题所有回答*/

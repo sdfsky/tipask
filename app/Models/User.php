@@ -81,7 +81,8 @@ class User extends Model implements AuthenticatableContract,
      * @param $userId
      * @return mixed
      */
-    public static function findFromCache($userId){
+    public static function findFromCache($userId)
+    {
 
         $data = Cache::remember('user_cache_'.$userId,Config::get('tipask.user_cache_time'),function() use($userId) {
             return  self::select('name','title','gender')->find($userId);
@@ -95,7 +96,8 @@ class User extends Model implements AuthenticatableContract,
      *获取用户数据
      * @param $userId
      */
-    public function userData(){
+    public function userData()
+    {
         return $this->hasOne('App\Models\UserData');
     }
 
@@ -103,7 +105,8 @@ class User extends Model implements AuthenticatableContract,
      * 获取用户问题
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function questions(){
+    public function questions()
+    {
         return $this->hasMany('App\Models\Question');
     }
 
@@ -111,7 +114,8 @@ class User extends Model implements AuthenticatableContract,
      * 获取用户回答
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function answers(){
+    public function answers()
+    {
         return $this->hasMany('App\Models\Answer');
     }
 
@@ -125,8 +129,38 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
-    public function isAnswered($questionId){
+    /*获取用户收藏*/
+    public function collections()
+    {
+        return $this->hasMany('App\Models\Collection');
+    }
+
+
+    public function attentions()
+    {
+        return $this->hasMany('App\Models\Attention');
+    }
+
+
+
+
+    /*是否回答过问题*/
+    public function isAnswered($questionId)
+    {
         return boolval($this->answers()->where('question_id','=',$questionId)->count());
+    }
+
+
+    /*是否已经收藏过问题或文章*/
+    public function isCollected($source_type,$source_id)
+    {
+        return boolval($this->collections()->where('source_type','=',$source_type)->where('source_id','=',$source_id)->count());
+    }
+
+    /*是否已关注问题、用户*/
+    public function isFollowed($source_type,$source_id)
+    {
+        return boolval($this->attentions()->where('source_type','=',$source_type)->where('source_id','=',$source_id)->count());
     }
 
 

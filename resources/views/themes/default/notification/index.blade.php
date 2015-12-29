@@ -11,7 +11,7 @@
                 @foreach($notifications as $notification)
                 <section class="stream-list-item @if($notification->is_read==0) not_read @endif">
                     <a href="{{ route('auth.space.index',['user_id'=>$notification->user_id]) }}">{{ $notification->user->name }}</a> {{ $notification->type_text }}
-                    @if(in_array($notification->type,['answer','comment_question','comment_answer','comment_user']))
+                    @if(in_array($notification->type,['answer','follow_question','comment_question','comment_answer','comment_user']))
                     <a href="{{ route('ask.question.detail',['question_id'=>$notification->source_id]) }}" target="_blank">{{ $notification->subject }}</a>
                         @if($notification->type == 'comment_answer')
                             中你的回答

@@ -69,7 +69,7 @@
                                 @endpermission
 
                                 <li><a href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}">我的主页</a></li>
-                                <li><a href="{{ route('auth.notification.index') }}">我的通知</a></li>
+                                <li><a href="{{ route('auth.notification.index') }}">我的通知 <span class="badge badge">4</span></a></li>
                                 <li><a href="{{ route('auth.notification.index') }}">我的私信</a></li>
                                 <li><a href="{{ route('auth.profile.base') }}">账号设置</a></li>
                                 <li class="divider"></li>

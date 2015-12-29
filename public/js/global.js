@@ -3,6 +3,13 @@
  * 全局公用js
  */
 $(function(){
+
+    /*禁用bootstrap全局过度效果*/
+    $.support.transition = false;
+
+    /*全局启用bootstrap tooltip*/
+    $('[data-toggle="tooltip"]').tooltip();
+
     /*用户表单输入时删除错误提示*/
     $("body").delegate("form input","keydown",function(){
         $(this).parents(".form-group").removeClass("has-error");
@@ -38,7 +45,6 @@ $(function(){
 
     $(document).on("click",".comment-reply",function(){
 
-        console.log('asdfasfdasf');
         var message = $(this).data('message');
         var source_type = $(this).data('source_type');
         var source_id = $(this).data('source_id');

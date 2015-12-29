@@ -74,6 +74,7 @@ class SpaceController extends Controller
         return view('theme::space.coins')->with('coins',$coins);
     }
 
+
     public function credits()
     {
         $credits = Credit::where('user_id','=',$this->user->id)->where('credits','<>',0)->orderBy('created_at','DESC')->paginate(10);

@@ -25,7 +25,7 @@
                             </p>
                             <h2 class="h4 title"><a href="{{ route('ask.question.detail',['question_id'=>$doing->source_id]) }}" target="_blank">{{ $doing->subject }}</a></h2>
 
-                            @if(in_array($doing->action,['answer']))
+                            @if(in_array($doing->action,['answer','follow_question']))
                                 <div class="full-text fmt">
                                     {{ str_limit(strip_tags($doing->content),300) }}
                                     <a class="read-more-btn" href="/q/1010000004126068/a-1020000004126210" target="_blank">查看原文</a>

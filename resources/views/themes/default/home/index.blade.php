@@ -29,10 +29,11 @@
                             </li>
                         </ul>
                         <h2 class="title">
+
+                            <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a>
                             @if($question->price>0)
                                 <span class="text-gold mr-10"><i class="fa fa-jpy"></i> {{ $question->price }}</span>
                             @endif
-                            <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a>
                         </h2>
                         @if($question->tags)
                         <ul class="taglist--inline ib">

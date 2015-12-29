@@ -187,7 +187,7 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
     margin-bottom: 15px
 }
 
-.widget-messages__item {
+.widget-message-item {
     display: block;
     color: #666;
     margin-left: -10px;
@@ -196,19 +196,19 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
     text-decoration: none
 }
 
-.widget-messages__item .badge {
+.widget-message-item .badge {
     margin-left: 5px;
     padding: 2px 6px;
     font-weight: 400
 }
 
-.widget-messages__item.active, .widget-messages__item:hover {
+.widget-message-item.active, .widget-messages-item:hover {
     text-decoration: none;
     color: #008E59;
     background-color: #F6F6F6
 }
 
-.widget-messages__item.active .badge, .widget-messages__item:hover .badge {
+.widget-message-item.active .badge, .widget-message-item:hover .badge {
     background-color: #008E59
 }
 
@@ -220,12 +220,12 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 .post-title{padding-bottom:15px;border-bottom:1px solid #eee;}
 
 
-.widget-action--ver{color:#999}
-.widget-action--ver li{margin-top:10px}
-.widget-action--ver li:first-child{margin-top:0}
-.widget-action--ver button{margin-right:8px;min-width:58px}
-.widget-action--ver strong{color:#333}
-.widget-action--ver .no-stress{font-weight:400}
+.widget-action{color:#999}
+.widget-action li{margin-top:10px}
+.widget-action li:first-child{margin-top:0}
+.widget-action button{margin-right:8px;min-width:58px}
+.widget-action strong{color:#333}
+.widget-action .no-stress{font-weight:400}
 /*问题回答*/
 .post-col{float:left;width:36px;position:relative}
 .post-col .unlike-alert{position:absolute;z-index:100;top:60px}

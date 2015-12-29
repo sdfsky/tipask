@@ -34,6 +34,8 @@ class CreateQuestionsTable extends Migration
 
             $table->integer('views')->unsigned()->default(0);                 //查看数
 
+            $table->integer('followers')->unsigned()->default(0);           //关注数
+
             $table->integer('collections')->unsigned()->default(0);           //收藏数
 
             $table->integer('comments')->unsigned()->default(0);              //评论数

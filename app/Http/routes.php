@@ -43,6 +43,17 @@ Route::Group(['namespace'=>'Account'],function(){
             'getReadAll' => 'auth.notification.readAll',
         ]);
 
+
+        /*收藏问题、文章*/
+
+        Route::get('collect/{source_type}/{source_id}',['as'=>'auth.collection.store','uses'=>'CollectionController@store'])->where(['source_type'=>'(question|article)','source_id'=>'[0-9]+']);
+        Route::get('collection/{source_type}',['as'=>'auth.collection.sources','uses'=>'CollectionController@sources'])->where(['source_type'=>'(questions|articles)']);
+
+        /*关注问题、人、标签*/
+        Route::get('follow/{source_type}/{source_id}',['as'=>'auth.attention.store','uses'=>'AttentionController@store'])->where(['source_type'=>'(question|tag|article)','source_id'=>'[0-9]+']);
+        Route::get('attention/{source_type}',['as'=>'auth.attention.sources','uses'=>'AttentionController@sources'])->where(['source_type'=>'(questions|tags|articles)']);
+
+
     });
 
 
@@ -66,6 +77,7 @@ Route::Group(['namespace'=>'Ask'],function(){
     Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
     Route::post('question/store',['middleware' =>'auth','as'=>'ask.question.store','uses'=>'QuestionController@store']);
     Route::post('answer/store',['middleware' =>'auth','as'=>'ask.answer.store','uses'=>'AnswerController@store']);
+
     /*标签模块*/
     Route::get('topic/{name}',['as'=>'ask.tag.index','uses'=>'TagController@index']);
 

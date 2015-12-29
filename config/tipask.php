@@ -16,6 +16,8 @@ return [
         'register' => '注册',
         'ask'      => '发起提问',
         'answer'   => '回答问题',
+        'follow_question' => '关注了问题',
+
     ],
     'notification_types' =>[
         'answer'  => '回答了问题',
@@ -23,6 +25,7 @@ return [
         'comment_question' => '评论了问题',
         'comment_answer' => '评论了',
         'comment_article' => '评论了文章',
+        'follow_question' => '关注了问题',
     ],
 
 ];

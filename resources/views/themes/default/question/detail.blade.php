@@ -122,15 +122,22 @@
 
         <div class="col-xs-12 col-md-3 side">
             <div class="widget-box">
-                <ul class="widget-action--ver list-unstyled">
+                <ul class="widget-action list-unstyled">
                     <li>
-                        <button type="button" id="sideFollow" class="btn btn-success btn-sm" data-id="1010000003726585" data-do="follow" data-type="question" data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">关注
-                        </button>
-                        <strong>9</strong> 关注
+                        @if(Auth()->check() && Auth()->user()->isFollowed(get_class($question),$question->id))
+                            <button type="button" id="follow-button" class="btn btn-success btn-sm active" data-source_type = "question" data-source_id = "{{ $question->id }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">已关注</button>
+                        @else
+                            <button type="button" id="follow-button" class="btn btn-success btn-sm" data-source_type = "question" data-source_id = "{{ $question->id }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">关注</button>
+                        @endif
+                        <strong id="follower-num">{{ $question->followers }}</strong> 关注
                     </li>
                     <li>
-                        <button type="button" id="sideBookmark" class="btn btn-default btn-sm" data-id="1010000003726585" data-type="question">收藏</button>
-                        <strong id="sideBookmarked">{{ $question->collections }}</strong> 收藏，<strong class="no-stress">{{ $question->views }}</strong> 浏览
+                        @if(Auth()->check() && Auth()->user()->isCollected(get_class($question),$question->id))
+                            <button id="collect-button" class="btn btn-default btn-sm disabled" data-loading-text="加载中..." data-source_type = "question" data-source_id = "{{ $question->id }}" > 已收藏</button>
+                        @else
+                            <button id="collect-button" class="btn btn-default btn-sm" data-source_type = "question" data-source_id = "{{ $question->id }}" > 收藏</button>
+                        @endif
+                        <strong id="collection-num">{{ $question->collections }}</strong> 收藏，<strong class="no-stress">{{ $question->views }}</strong> 浏览
                     </li>
                 </ul>
             </div>
@@ -186,6 +193,48 @@
 
             $(".widget-comments").on('hide.bs.collapse', function () {
                 clear_comments($(this).data('source_type'),$(this).data('source_id'));
+            });
+
+
+            /*收藏问题或文章*/
+            $("#collect-button").click(function(){
+                $("#collect-button").button('loading');
+                var source_type = $(this).data('source_type');
+                var source_id = $(this).data('source_id');
+                var collection_num = $("#collection-num").html();
+                $.get('/collect/'+source_type+'/'+source_id,function(msg){
+                    if(msg=='ok'){
+                        $("#collect-button").html('已收藏');
+                        $("#collect-button").addClass('disabled');
+                        $("#collection-num").html(parseInt(collection_num)+1);
+
+                    }
+                });
+
+            });
+
+
+            $("#follow-button").click(function(){
+                $(this).button('loading');
+                var source_type = $(this).data('source_type');
+                var source_id = $(this).data('source_id');
+                var follower_num = $("#follower-num").html();
+                $.get('/follow/'+source_type+'/'+source_id,function(msg){
+                    $("#follow-button").removeClass('disabled');
+                    $("#follow-button").removeAttr('disabled');
+                    if(msg =='followed'){
+                        $("#follow-button").html('已关注');
+                        $("#follow-button").addClass('active');
+                        $("#follower-num").html(parseInt(follower_num)+1);
+                    }else{
+                        $("#follow-button").html('关注');
+                        $("#follow-button").removeClass('active');
+                        $("#follower-num").html(parseInt(follower_num)-1);
+                    }
+
+
+                });
+
             });
 
 
