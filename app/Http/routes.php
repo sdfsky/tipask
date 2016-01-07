@@ -76,6 +76,11 @@ Route::Group(['namespace'=>'Ask'],function(){
     Route::get('question/{id}',['as'=>'ask.question.detail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
     Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
     Route::post('question/store',['middleware' =>'auth','as'=>'ask.question.store','uses'=>'QuestionController@store']);
+
+    /*问题修改*/
+    Route::get('question/edit/{id}',['as'=>'ask.question.edit','uses'=>'QuestionController@edit'])->where(['id'=>'[0-9]+']);
+    Route::post('question/update',['as'=>'ask.question.update','uses'=>'QuestionController@update']);
+
     Route::post('answer/store',['middleware' =>'auth','as'=>'ask.answer.store','uses'=>'AnswerController@store']);
 
     /*标签模块*/
@@ -144,5 +149,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
 /*公共ajax异步加载*/
 Route::get('ajax/loadCities/{province_id}',['as'=>'website.ajax.loadCities','uses'=>'AjaxController@loadCities'])->where(['province_id'=>'[0-9]+']);
 Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|big|middle)']);
+Route::get('image/show/{image_name}',['as'=>'website.image.show','uses'=>'ImageController@show']);
 
-
+Route::Group(['middleware'=>'auth'],function(){
+    Route::post('image/upload',['as'=>'website.image.upload','uses'=>'ImageController@upload']);
+});

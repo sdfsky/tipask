@@ -4,20 +4,24 @@ namespace App\Models;
 
 use App\Models\Relations\BelongsToUserTrait;
 use App\Models\Relations\MorphManyCommentsTrait;
+use App\Models\Relations\MorphManyTagsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class Question extends Model
 {
-    use BelongsToUserTrait,MorphManyCommentsTrait;
+    use BelongsToUserTrait,MorphManyCommentsTrait,MorphManyTagsTrait;
     protected $table = 'questions';
     protected $fillable = ['title', 'user_id', 'description','tags','price','hide','status'];
 
     /*获取相关问题*/
-    public static function correlations($tagIds,$size=5)
+    public static function correlations($tagIds,$size=6)
     {
-        return self::leftJoin('question_tag','questions.id','=','question_tag.question_id')->whereIn('question_tag.tag_id',$tagIds)->select('questions.*')->distinct()->take($size)->get();
+        $questions = self::whereHas('tags', function($query) use ($tagIds) {
+            $query->whereIn('tag_id', $tagIds);
+        })->orderBy('created_at','DESC')->take($size)->get();
+        return $questions;
     }
 
     /*问题所有回答*/
@@ -27,13 +31,6 @@ class Question extends Model
     }
 
 
-
-
-    /*问题标签*/
-    public function tags()
-    {
-        return array_unique(explode(" ",$this->tags));
-    }
 
 
     /*热门问题*/

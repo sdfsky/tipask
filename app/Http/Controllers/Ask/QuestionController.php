@@ -29,11 +29,11 @@ class QuestionController extends Controller
     {
 
         $question = Question::find($id);
-        timestamp_format($question->created_at);
 
         if(empty($question)){
             abort(404);
         }
+
         $question->user = User::findFromCache($question['user_id']);
 
         /*问题查看数+1*/
@@ -58,7 +58,7 @@ class QuestionController extends Controller
         $this->readNotifications($question->id,'question');
 
         /*相关问题*/
-        $relatedQuestions = Question::correlations(Tag::getIds($question->tags()));
+        $relatedQuestions = Question::correlations($question->tags()->lists('tag_id'));
         return view("theme::question.detail")->with('question',$question)
                                              ->with('answers',$answers)
                                              ->with('relatedQuestions',$relatedQuestions);
@@ -84,7 +84,6 @@ class QuestionController extends Controller
             'user_id'      => $loginUser->id,
             'title'        => trim($request->input('title')),
             'description'  => $request->input('description'),
-            'tags'         => trim($request->input('tags')),
             'hide'         => intval($request->input('hide')),
             'status'       => 1,
         ];
@@ -95,9 +94,8 @@ class QuestionController extends Controller
         if($question){
 
             /*添加标签*/
-            if($data['tags']){
-                Tag::addAll($data['tags'],$question->id);
-            }
+            $tagString = trim($request->input('tags'));
+            Tag::multiSave($tagString,$question);
 
             //记录动态
             $this->doing($question->user_id,'ask',$question->id,$question->title,$question->description);
@@ -110,10 +108,50 @@ class QuestionController extends Controller
             }
 
 
-
         }
 
-        return redirect(route('website.index'));
+       return  $this->error("问题创建失败，请稍后再试",route('website.index'));
+
+    }
+
+
+    /*显示问题编辑页面*/
+    public function edit($id)
+    {
+        $question = Question::find($id);
+
+        if(!$question){
+            abort(404);
+        }
+
+        return view("theme::question.edit")->with('question',$question);
+    }
+
+
+    /*问题内容编辑*/
+    public function update(Request $request)
+    {
+        $question_id = $request->input('id');
+        $question = Question::find($question_id);
+        if(!$question){
+            abort(404);
+        }
+
+        $request->flash();
+        $this->validate($request,$this->validateRules);
+
+        $question->title = trim($request->input('title'));
+        $question->description = $request->input('description');
+        $question->hide = intval($request->input('hide'));
+
+        $question->save();
+        $tagString = trim($request->input('tags'));
+
+        /*更新标签*/
+        Tag::multiSave($tagString,$question);
+
+        return $this->success(route('ask.question.detail',['question_id'=>$question->id]),"问题编辑成功");
+
 
     }
 

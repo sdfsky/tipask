@@ -24,8 +24,6 @@ class CreateQuestionsTable extends Migration
 
             $table->text('description')->nullable();              //问题详情
 
-            $table->string('tags',128);                           //问题标签
-
             $table->smallInteger('price')->default(0);            //问题价格
 
             $table->tinyInteger('hide')->default(0);              //匿名提问

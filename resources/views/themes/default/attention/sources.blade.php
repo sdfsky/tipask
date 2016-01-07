@@ -3,10 +3,10 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
-            <ul class="nav nav-tabs" roles="tablist">
+            <ul class="nav nav-tabs mt-30" roles="tablist">
                 <li role="presentation" class="active"><a href="{{ route('auth.attention.sources',['source_type'=>'questions']) }}">我关注的问题</a></li>
             </ul>
-            <div class="stream-list question-stream">
+            <div class="stream-list question-stream mt-10">
                 @foreach($questions as $question)
 
                     <section class="stream-list-item">

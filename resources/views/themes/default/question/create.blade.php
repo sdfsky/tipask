@@ -8,7 +8,7 @@
 
     <div class="row mt-10">
         <form id="questionForm" method="POST" role="form" action="{{ route('ask.question.store') }}">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="title">请将您的问题告诉我们:</label>
                 <input id="title" type="text" name="title"  class="form-control input-lg" placeholder="请在这里概述您的问题" value="" />
@@ -65,13 +65,22 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#description').summernote({
-                height: 120,
+                height: 180,
                 placeholder:true,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'hr']],
+                    ['view', ['fullscreen', 'codeview']]
+                ],
                 codemirror: {
                     mode: 'text/html',
                     htmlMode: true,
                     lineNumbers: true,
                     theme: 'monokai'
+                },
+                onImageUpload: function(files, editor, welEditable) {
+                    upload_editor_image(files[0],"description",$("#editor_token").val());
                 }
             });
         });

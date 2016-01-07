@@ -8,19 +8,21 @@
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
             <div class="widget-question">
+                <h4 class="title">
+                    @if($question->price>0)
+                        <span class="text-gold">
+                            <i class="fa fa-database"></i> {{ $question->price }}
+                        </span>
+                    @endif
+                    {{ $question->title }}
+                </h4>
                 @if($question->tags)
                     <ul class="taglist--inline">
-                        @foreach($question->tags() as $tag_name)
-                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag_name]) }}">{{ $tag_name }}</a></li>
+                        @foreach($question->tags as $tag)
+                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
                         @endforeach
                     </ul>
                 @endif
-                <h4 class="title">
-                    {{ $question->title }}
-                    @if($question->price>0)
-                        <span class="label label-warning">悬赏 <i class="fa fa-jpy"></i> {{ $question->price }}</span>
-                    @endif
-                </h4>
                 <div class="description mt-10">
                     <div class="text-fmt ">
                         {!! $question->description !!}
@@ -28,7 +30,12 @@
                     <div class="post-opt mt-10">
                         <ul class="list-inline">
                             <li><a class="comments"  data-toggle="collapse"  href="#comments-question-{{ $question->id }}" aria-expanded="false" aria-controls="comment-{{ $question->id }}"><i class="fa fa-comment-o"></i> {{ $question->comments }} 条评论</a></li>
+                            @if( Auth()->check() && (Auth()->user()->id === $question->user_id) )
+                            <li><a href="{{ route('ask.question.edit',['id'=>$question->id]) }}" class="edit" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-edit"></i> 编辑</a></li>
+                            <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-database"></i> 追加悬赏</a></li>
+                            @endif
                             <li class="dropdown">
+
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">更多<b class="caret"></b></a>
                                 <ul class="dropdown-menu dropdown-menu-left">
                                     <li><a href="#911" data-id="1010000003746261" data-toggle="modal" data-target="#911" data-type="question" data-typetext="问题">举报</a>
@@ -56,7 +63,7 @@
                 @foreach( $answers as $answer )
                 <div class="media">
                     <div class="media-left">
-                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}">
+                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" target="_blank">
                             <img class="avatar-40"  src="{{ route('website.image.avatar',['avatar_name'=>$answer->user_id.'_middle']) }}" alt="{{ $answer->user['name'] }}"></a>
                         </a>
                     </div>
@@ -72,6 +79,7 @@
 
                                 <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
                                 <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-edit"></i> 编辑</a></li>
+                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-check-square-o"></i> 采纳为最佳答案</a></li>
                                 <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-remove"></i> 删除</a></li>
                                 <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"> 举报</a></li>
                                 <li class="pull-right">
@@ -94,7 +102,7 @@
                 @if(!Auth()->check() || ($question->user_id !== Auth()->user()->id && !Auth()->user()->isAnswered($question->id)) )
                     <h4>我来回答</h4>
                     <form action="{{ route('ask.answer.store') }}" method="post" class="editor-wrap">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" id="answer_token" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" value="{{ $question->id }}" id="question_id" name="question_id" />
                         <div class="editor" id="questionText">
                             <textarea id="answerEditor" name="content" class="form-control" rows="4" placeholder="撰写答案..."></textarea>
@@ -139,6 +147,11 @@
                         @endif
                         <strong id="collection-num">{{ $question->collections }}</strong> 收藏，<strong class="no-stress">{{ $question->views }}</strong> 浏览
                     </li>
+                    <li>
+                        @if($question->hide==0)
+                        <a href="{{ route('auth.space.index',['user_id'=>$question->user_id]) }}" target="_blank">{{ $question->user->name }}</a>
+                        @endif
+                        提出于 {{ timestamp_format($question->created_at) }}</li>
                 </ul>
             </div>
             <div class="widget-box">
@@ -172,6 +185,9 @@
                     htmlMode: true,
                     lineNumbers: true,
                     theme: 'monokai'
+                },
+                onImageUpload: function(files, editor, welEditable) {
+                    upload_editor_image(files[0],"answerEditor",$("#answer_token").val());
                 }
             });
 
@@ -207,10 +223,8 @@
                         $("#collect-button").html('已收藏');
                         $("#collect-button").addClass('disabled');
                         $("#collection-num").html(parseInt(collection_num)+1);
-
                     }
                 });
-
             });
 
 
@@ -231,13 +245,9 @@
                         $("#follow-button").removeClass('active');
                         $("#follower-num").html(parseInt(follower_num)-1);
                     }
-
-
                 });
 
             });
-
-
 
         });
     </script>

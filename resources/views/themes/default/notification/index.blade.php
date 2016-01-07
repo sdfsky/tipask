@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
-            <h2 class="h4 mt0 mb20">
+            <h2 class="h4  mt-30">
                 我的通知
                 <a href="{{ route('auth.notification.readAll') }}" class="btn btn-default btn-xs  ml-10">全部标记为已读</a>
             </h2>

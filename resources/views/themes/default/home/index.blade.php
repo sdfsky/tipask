@@ -29,16 +29,15 @@
                             </li>
                         </ul>
                         <h2 class="title">
-
-                            <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a>
                             @if($question->price>0)
-                                <span class="text-gold mr-10"><i class="fa fa-jpy"></i> {{ $question->price }}</span>
+                                <span class="text-gold"><i class="fa fa-database"></i> {{ $question->price }}</span>
                             @endif
+                            <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a>
                         </h2>
                         @if($question->tags)
                         <ul class="taglist--inline ib">
-                            @foreach($question->tags() as $tag_name)
-                                <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag_name]) }}">{{ $tag_name }}</a></li>
+                            @foreach($question->tags as $tag)
+                                <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
                             @endforeach
                         </ul>
                         @endif
