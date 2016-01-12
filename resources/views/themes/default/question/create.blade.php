@@ -7,6 +7,10 @@
 @section('content')
 
     <div class="row mt-10">
+        <ol class="breadcrumb">
+            <li><a href="#">问答</a></li>
+            <li class="active">发起提问</li>
+        </ol>
         <form id="questionForm" method="POST" role="form" action="{{ route('ask.question.store') }}">
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
@@ -38,11 +42,7 @@
                     <div class="checkbox pull-left">
                         悬赏
                         <select name="price">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option selected="selected" value="0">0</option><option value="3">3</option><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="30">30</option><option value="50">50</option><option value="80">80</option><option value="100">100</option>
                         </select> 金币
                         <span class="span-line">|</span>
                         <label>
@@ -67,18 +67,8 @@
             $('#description').summernote({
                 height: 180,
                 placeholder:true,
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link', 'picture', 'hr']],
-                    ['view', ['fullscreen', 'codeview']]
-                ],
-                codemirror: {
-                    mode: 'text/html',
-                    htmlMode: true,
-                    lineNumbers: true,
-                    theme: 'monokai'
-                },
+                toolbar:ask_editor_options.toolbar,
+                codemirror:ask_editor_options.codemirror,
                 onImageUpload: function(files, editor, welEditable) {
                     upload_editor_image(files[0],"description",$("#editor_token").val());
                 }

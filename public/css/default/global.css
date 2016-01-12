@@ -16,23 +16,31 @@
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
     background-color: #008151;
 }
-a{color:#2b7a5c;}
+
+blockquote{font-size: 13px;}
+
 
 /*全局公告样式*/
 html{font-size:10px;-webkit-tap-highlight-color:transparent}
 body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft Yahei","SimSun",sans-serif;font-size:14px;line-height:1.5;color:#333;background-color:#fff}
+
+a{color:#2b7a5c;}
+
+
 .wrap {
     padding-bottom: 30px;
     position: relative;
 }
 
 
+
+
 /*margin-bottom*/
 .mb-10 {margin-bottom: 10px;}
-.mb-20{margin-bottom:20px}
-.mb-30{margin-bottom:30px}
-.mb-40{margin-bottom:40px}
-.mb-50{margin-bottom:50px}
+.mb-20{margin-bottom:20px;}
+.mb-30{margin-bottom:30px;}
+.mb-40{margin-bottom:40px;}
+.mb-50{margin-bottom:50px;}
 
 
 .mt-10 {margin-top: 10px;}
@@ -43,17 +51,15 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 .mt-50 {margin-top: 50px;}
 .mt-60 {margin-top: 60px;}
 
-.ml10,.ml-10{margin-left:10px}
-.ml15,.ml-15{margin-left:15px}
+.ml10,.ml-10{margin-left:10px;}
+.ml15,.ml-15{margin-left:15px;}
 
-.mr-5{margin-right: 5px;}
-.mr-10,.mr10{margin-right:10px}
-.mr-20,.mr20{margin-right:20px}
-.mr-30,.mr30{margin-right:30px}
-
+.mr-5{margin-right:5px;}
+.mr-10,.mr10{margin-right:10px;}
+.mr-20,.mr20{margin-right:20px;}
+.mr-30,.mr30{margin-right:30px;}
 
 .pt-30{padding-top: 30px;}
-
 
 /*边框border*/
 .border-top {
@@ -217,6 +223,11 @@ body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft
 /*详情页面头部*/
 .widget-question{border-bottom:1px solid #eee;}
 .widget-question .title{margin: 0 0 10px;}
+.widget-question .best-answer{background-color:#f6f6f6;border: 1px solid #EBEBEB;padding: 10px 20px 20px;border-bottom: none;}
+.widget-question .trophy-title{color:#ad3a37;}
+.widget-question .adopt_time{font-size: 14px;font-weight: normal;}
+.widget-question .user-info{padding:20px 0px 0px;}
+.best-answer .options a{color:#666;}
 .post-opt a{color:#999}
 .post-title{padding-bottom:15px;border-bottom:1px solid #eee;}
 

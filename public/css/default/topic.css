@@ -1,0 +1,36 @@
+.widget-topic {
+    position: relative;
+    height: 170px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin-bottom: 14px;
+}
+
+.widget-topic h2 {
+    margin: 12px;
+    font-size: 16px;
+}
+.widget-topic p {
+    margin: 12px;
+    height: 75px;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+.topic-list {
+    margin-left: -7px;
+    margin-right: -7px;
+}
+
+
+.widget-topic-action {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #f6f6f6;
+}
+
+
+
+

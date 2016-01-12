@@ -5,7 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="row mt-10">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">问答</a></li>
+            <li><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></li>
+            <li class="active">编辑问题</li>
+        </ol>
         <form id="questionForm" method="POST" role="form" action="{{ route('ask.question.update') }}">
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ $question->id }}" />
@@ -31,7 +37,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary pull-right">发布问题</button>
+                    <button type="submit" class="btn btn-primary pull-right">确认修改</button>
                 </div>
 
             </div>
@@ -46,19 +52,9 @@
         $(document).ready(function() {
             $('#description').summernote({
                 height: 180,
-                placeholder:true,
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link', 'picture', 'hr']],
-                    ['view', ['fullscreen', 'codeview']]
-                ],
-                codemirror: {
-                    mode: 'text/html',
-                    htmlMode: true,
-                    lineNumbers: true,
-                    theme: 'monokai'
-                },
+                placeholder: true,
+                toolbar:ask_editor_options.toolbar,
+                codemirror:ask_editor_options.codemirror,
                 onImageUpload: function(files, editor, welEditable) {
                     upload_editor_image(files[0],"description",$("#editor_token").val());
                 }

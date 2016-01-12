@@ -2,6 +2,24 @@
  * Created by simon on 2015/4/20.
  * 全局公用js
  */
+
+/*编辑器toolbar全局配置*/
+
+var ask_editor_options = {
+    toolbar: [
+        ['style', ['bold', 'clear']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link', 'picture', 'hr']],
+        ['view', ['fullscreen', 'codeview']]
+    ],
+    codemirror: {
+        mode: 'text/html',
+        htmlMode: true,
+        lineNumbers: true,
+        theme: 'monokai'
+    }
+};
+
 $(function(){
 
     /*禁用bootstrap全局过度效果*/
@@ -10,6 +28,14 @@ $(function(){
     /*全局启用bootstrap tooltip*/
     $('[data-toggle="tooltip"]').tooltip();
 
+    /**/
+    $('.user-card').popover({
+        delay:500,
+        placement:'right',
+        html:true,
+        trigger:'hover',
+        content:'测试'
+    });
     /*用户表单输入时删除错误提示*/
     $("body").delegate("form input","keydown",function(){
         $(this).parents(".form-group").removeClass("has-error");
@@ -61,6 +87,46 @@ $(function(){
         var collapse_id = $(this).data("collapse_id");
         $("#"+collapse_id).collapse('hide');
         return false;
+    });
+
+
+
+    /*赞同模块公共处理*/
+    $(".btn-support").hover(function(){
+        var btn_support = $(this);
+        var source_type = btn_support.data('source_type');
+        var source_id = btn_support.data('source_id');
+        $.get('/support/check/'+source_type+'/'+source_id,function(msg){
+            btn_support.removeClass('btn-default');
+            if(msg =='failed'){
+                btn_support.addClass('btn-warning');
+                btn_support.html('<i class="fa fa-thumbs-o-up"></i> 已赞');
+            }else{
+                btn_support.addClass('btn-success');
+                btn_support.html('<i class="fa fa-thumbs-o-up"></i> 赞同');
+            }
+        });
+    }, function(){
+        var btn_support = $(this);
+        var support_num = $(this).data('support_num');
+        btn_support.attr('class','btn btn-default btn-sm btn-support');
+        btn_support.html('<i class="fa fa-thumbs-o-up"></i> '+support_num);
+    });
+
+    $(".btn-support").click(function(){
+        var btn_support = $(this);
+        var source_type = btn_support.data('source_type');
+        var source_id = btn_support.data('source_id');
+        var support_num = parseInt(btn_support.data('support_num'));
+        $.get('/support/'+source_type+'/'+source_id,function(msg){
+            if(msg =='success'){
+                support_num++
+                btn_support.html('<i class="fa fa-thumbs-o-up"></i> '+support_num);
+                btn_support.data('support_num',support_num);
+            }
+        });
+
+
     });
 
 

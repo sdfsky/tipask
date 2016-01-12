@@ -45,10 +45,10 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('website.index') }}">首页 <span class="sr-only">(current)</span></a></li>
-                    <li class="active"><a href="#">问答</a></li>
-                    <li><a href="#">文章</a></li>
-                    <li><a href="#">讨论</a></li>
+                    <li @if(request()->route()->getName() == 'website.index') class="active" @endif><a href="{{ route('website.index') }}">首页 <span class="sr-only">(current)</span></a></li>
+                    <li @if(request()->route()->getName() == 'website.ask') class="active" @endif><a href="{{ route('website.ask') }}">问答</a></li>
+                    <li @if(request()->route()->getName() == 'website.blog') class="active" @endif><a href="{{ route('website.blog') }}">文章</a></li>
+                    <li @if(request()->route()->getName() == 'website.topic') class="active" @endif><a href="{{ route('website.topic') }}">话题</a></li>
                 </ul>
                 @if (Auth::guest())
                     <ul class="nav navbar-nav navbar-right">
@@ -91,7 +91,7 @@
     @yield('container')
     <div class="container">
         @if ( session('message') )
-        <div class="alert alert-success alert-dismissible" role="alert" id="alert_message">
+        <div class="alert @if(session('message_type')==1) alert-danger @else alert-error @endif alert-dismissible" role="alert" id="alert_message">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
              {{ session('message') }}
         </div>

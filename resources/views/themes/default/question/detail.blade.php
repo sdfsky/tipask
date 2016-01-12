@@ -27,22 +27,14 @@
                     <div class="text-fmt ">
                         {!! $question->description !!}
                     </div>
+
                     <div class="post-opt mt-10">
                         <ul class="list-inline">
                             <li><a class="comments"  data-toggle="collapse"  href="#comments-question-{{ $question->id }}" aria-expanded="false" aria-controls="comment-{{ $question->id }}"><i class="fa fa-comment-o"></i> {{ $question->comments }} 条评论</a></li>
-                            @if( Auth()->check() && (Auth()->user()->id === $question->user_id) )
-                            <li><a href="{{ route('ask.question.edit',['id'=>$question->id]) }}" class="edit" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-edit"></i> 编辑</a></li>
-                            <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-database"></i> 追加悬赏</a></li>
+                            @if($question->status!==2 && Auth()->check() && (Auth()->user()->id === $question->user_id) )
+                            <li><a href="{{ route('ask.question.edit',['id'=>$question->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="补充细节，以得到更准确的答案"><i class="fa fa-edit"></i> 编辑</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#appendReward"  ><i class="fa fa-database"></i> 追加悬赏</a></li>
                             @endif
-                            <li class="dropdown">
-
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">更多<b class="caret"></b></a>
-                                <ul class="dropdown-menu dropdown-menu-left">
-                                    <li><a href="#911" data-id="1010000003746261" data-toggle="modal" data-target="#911" data-type="question" data-typetext="问题">举报</a>
-                                    </li>
-
-                                </ul>
-                            </li>
                         </ul>
                     </div>
 
@@ -50,6 +42,52 @@
 
                 </div>
 
+
+                {{--最佳答案--}}
+                @if($question->status===2)
+                <div class="best-answer mt-10">
+                    <div class="trophy-title">
+                        <h3>
+                            <i class="fa fa-trophy"></i> 最佳答案
+                            <span class="pull-right text-muted adopt_time">{{ timestamp_format($bestAnswer->created_at) }}</span>
+                        </h3>
+                    </div>
+                    <div class="text-fmt">
+                        {!! $bestAnswer->content !!}
+                    </div>
+                    <div class="options clearfix mt-10">
+                        <ul class="list-inline pull-right">
+                            <li class="pull-right">
+                                <a class="comments mr-10" data-toggle="collapse" href="#comments-answer-{{ $bestAnswer->id }}" aria-expanded="false" aria-controls="comment-{{ $bestAnswer->id }}"><i class="fa fa-comment-o"></i> {{ $bestAnswer->comments }} 条评论</a>
+                                <button class="btn btn-default btn-sm btn-support" data-source_id="{{ $bestAnswer->id }}" data-source_type="answer" data-support_num="{{ $bestAnswer->supports }}"><i class="fa fa-thumbs-o-up"></i> {{ $bestAnswer->supports }}</button>
+                            </li>
+                        </ul>
+                    </div>
+                    @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$bestAnswer->id])
+
+                    <div class="media user-info border-top">
+                        <div class="media-left">
+                            <a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" target="_blank">
+                                <img class="avatar-40"  src="{{ route('website.image.avatar',['avatar_name'=>$bestAnswer->user_id.'_middle']) }}" alt="{{ $bestAnswer->user->name }}"></a>
+                            </a>
+                        </div>
+                        <div class="media-body">
+
+                            <div class="media-heading">
+                                <strong><a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" class="mr5">{{ $bestAnswer->user->name }}</a></strong>
+                                @if($bestAnswer->user->title)
+                                    <span class="text-muted"> - {{ $bestAnswer->user->title }}</span>
+                                @endif
+                            </div>
+
+                            <div class="content">
+                                <span class="answer-time text-muted hidden-xs">采纳率 {{ $bestAnswer->user->userData->adoptPercent() }}% | 回答于 {{ timestamp_format($bestAnswer->created_at) }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @endif
             </div>
 
             <div class="widget-answers mt-15">
@@ -58,33 +96,37 @@
                     <a href="{{ route('ask.question.detail',['question_id'=>$question->id,'sort'=>'created_at']) }}" id="sortby-created" class="btn btn-default btn-xs @if(request()->input('sort','default')=='created_at') active @endif">时间排序</a>
                 </div>
 
-                <h2 class="h4 post-title">{{ $answers->total() }} 个回答</h2>
+                <h2 class="h4 post-title">@if($question->status===2) 其它 @endif {{ $answers->total() }} 个回答</h2>
 
                 @foreach( $answers as $answer )
                 <div class="media">
                     <div class="media-left">
-                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" target="_blank">
+                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="user-card" target="_blank">
                             <img class="avatar-40"  src="{{ route('website.image.avatar',['avatar_name'=>$answer->user_id.'_middle']) }}" alt="{{ $answer->user['name'] }}"></a>
                         </a>
                     </div>
                     <div class="media-body">
                         <div class="media-heading">
                             <strong><a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr5">{{ $answer->user['name'] }}</a></strong>
-                            <span class="text-muted"> - {{ $answer->user['title'] }}</span>
-                            <span class="answer-time text-muted">{{ timestamp_format($answer->created_at) }}</span>
+                            @if($answer->user->title)
+                            <span class="text-muted"> - {{ $answer->user->title }}</span>
+                            @endif
+                            <span class="answer-time text-muted hidden-xs">{{ timestamp_format($answer->created_at) }}</span>
                         </div>
                         <div class="content"><p>{!! $answer->content !!}</p></div>
                         <div class="media-footer">
                             <ul class="list-inline mb-20">
-
                                 <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
-                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-edit"></i> 编辑</a></li>
-                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-check-square-o"></i> 采纳为最佳答案</a></li>
-                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"><i class="fa fa-remove"></i> 删除</a></li>
-                                <li><a href="javascript:void(0);" class="comments" data-id="1020000003746344" data-target="#comment-1020000003746344"> 举报</a></li>
+                                @if(Auth()->check())
+                                    @if($question->status!==2 &&  Auth()->user()->id === $answer->user_id)
+                                    <li><a href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="继续完善回答内容"><i class="fa fa-edit"></i> 编辑</a></li>
+                                    @endif
+                                    @if($question->status!==2 &&  Auth()->user()->id === $question->user_id)
+                                    <li><a href="#" class="adopt-answer" data-toggle="modal" data-target="#adoptAnswer" data-answer_id="{{ $answer->id }}" data-answer_content="{{ str_limit($answer->content,200) }}"><i class="fa fa-check-square-o"></i> 采纳为最佳答案</a></li>
+                                    @endif
+                                @endif
                                 <li class="pull-right">
-                                    <button class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> 10000</button>
-                                    <button class="btn btn-success btn-sm"><i class="fa fa-thumbs-o-up"></i> 已赞</button>
+                                    <button class="btn btn-default btn-sm btn-support" data-source_id="{{ $answer->id }}" data-source_type="answer"  data-support_num="{{ $answer->supports }}"><i class="fa fa-thumbs-o-up"></i> {{ $answer->supports }}</button>
                                 </li>
                             </ul>
                         </div>
@@ -98,6 +140,7 @@
                 </div>
 
             </div>
+            @if($question->status!==2)
             <div class="widget-answer-form mt-15">
                 @if(!Auth()->check() || ($question->user_id !== Auth()->user()->id && !Auth()->user()->isAnswered($question->id)) )
                     <h4>我来回答</h4>
@@ -107,24 +150,18 @@
                         <div class="editor" id="questionText">
                             <textarea id="answerEditor" name="content" class="form-control" rows="4" placeholder="撰写答案..."></textarea>
                         </div>
-                        <div id="answerSubmit" class=" mt15 clearfix">
+                        <div id="answerSubmit" class="mt-15 clearfix">
                             <div class="checkbox pull-left">
-                                <label><input type="checkbox" class="" id="shareToWeibo">
-                                    同步到新浪微博</label>
+                                <label><input type="checkbox" id="attendTo" name="followed" value="1" checked />关注该问题</label>
                             </div>
                             <div class="pull-right">
-                    <span id="editorStatus" class="hidden text-muted">
-
-                    </span>
-                                <a id="dropIt" href="javascript:void(0);" class="mr10 hidden">
-                                    [舍弃]
-                                </a>
-                                <button type="submit" id="answerIt" data-id="1010000003746261" class="btn btn-primary ml20">提交回答</button>
+                                <button type="submit" id="answerSubmit" class="btn btn-primary ml20">提交回答</button>
                             </div>
                         </div>
                     </form>
                 @endif
             </div>
+            @endif
 
         </div>
 
@@ -141,13 +178,14 @@
                     </li>
                     <li>
                         @if(Auth()->check() && Auth()->user()->isCollected(get_class($question),$question->id))
-                            <button id="collect-button" class="btn btn-default btn-sm disabled" data-loading-text="加载中..." data-source_type = "question" data-source_id = "{{ $question->id }}" > 已收藏</button>
+                            <button id="collect-button" class="btn btn-default btn-sm" data-loading-text="加载中..." data-source_type = "question" data-source_id = "{{ $question->id }}" > 已收藏</button>
                         @else
                             <button id="collect-button" class="btn btn-default btn-sm" data-source_type = "question" data-source_id = "{{ $question->id }}" > 收藏</button>
                         @endif
                         <strong id="collection-num">{{ $question->collections }}</strong> 收藏，<strong class="no-stress">{{ $question->views }}</strong> 浏览
                     </li>
                     <li>
+                        <i class="fa fa-clock-o"></i>
                         @if($question->hide==0)
                         <a href="{{ route('auth.space.index',['user_id'=>$question->user_id]) }}" target="_blank">{{ $question->user->name }}</a>
                         @endif
@@ -168,28 +206,99 @@
                 </ul>
             </div>
         </div>
-
     </div>
 
+    @if(Auth()->check())
+    <div class="modal" id="appendReward" tabindex="-1" role="dialog" aria-labelledby="appendRewardLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="appendModalLabel">追加悬赏</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert" id="rewardAlert">
+                        <i class="fa fa-exclamation-circle"></i> 提高悬赏，以提高问题的关注度！
+                    </div>
+
+                    <form class="form-inline" id="rewardForm" action="{{ route('ask.question.appendReward',['id'=>$question->id]) }}" method="post">
+                        <input type="hidden"  name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="reward">追加</label>
+                            <select class="form-control" name="coins" id="question_coins">
+                                <option value="3" selected>3</option><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="30">30</option><option value="50">50</option><option value="80">80</option><option value="100">100</option>
+                            </select> 个金币
+                        </div>
+                        <div class="form-group">
+                             （您目前共有 <span class="text-gold">{{ Auth()->user()->userData->coins }}</span> 个金币）
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="appendRewardSubmit">确认追加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="adoptAnswer" tabindex="-1" role="dialog" aria-labelledby="adoptAnswerLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="adoptModalLabel">采纳回答</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning" role="alert" id="adoptAnswerAlert">
+                        <i class="fa fa-exclamation-circle"></i> 确认采纳该回答为最佳答案？
+                    </div>
+                    <blockquote id="answer_quote"></blockquote>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="adoptAnswerSubmit">采纳该回答</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 @endsection
 
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            @if(Auth()->check())
+            /*问题悬赏*/
+            $("#appendRewardSubmit").click(function(){
+                var user_total_conis = '{{ Auth()->user()->userData->coins }}';
+                var reward = $("#question_coins").val();
+
+                if(reward>parseInt(user_total_conis)){
+                    $("#rewardAlert").attr('class','alert alert-warning');
+                    $("#rewardAlert").html('金币数不能大于'+user_total_conis);
+                }else{
+                    $("#rewardAlert").empty();
+                    $("#rewardAlert").attr('class','');
+                    $("#rewardForm").submit();
+                }
+            });
+           @endif
+
+            /*回答编辑器初始化*/
             $('#answerEditor').summernote({
-                height: 120,
-                placeholder:true,
-                codemirror: {
-                    mode: 'text/html',
-                    htmlMode: true,
-                    lineNumbers: true,
-                    theme: 'monokai'
-                },
+                height: 180,
+                placeholder: true,
+                toolbar:ask_editor_options.toolbar,
+                codemirror:ask_editor_options.codemirror,
                 onImageUpload: function(files, editor, welEditable) {
                     upload_editor_image(files[0],"answerEditor",$("#answer_token").val());
                 }
             });
+
+
+
 
             /*评论提交*/
             $(".comment-btn").click(function(){
@@ -219,15 +328,19 @@
                 var source_id = $(this).data('source_id');
                 var collection_num = $("#collection-num").html();
                 $.get('/collect/'+source_type+'/'+source_id,function(msg){
-                    if(msg=='ok'){
+                    $("#collect-button").removeClass('disabled');
+                    $("#collect-button").removeAttr('disabled');
+                    if(msg=='collected'){
                         $("#collect-button").html('已收藏');
-                        $("#collect-button").addClass('disabled');
                         $("#collection-num").html(parseInt(collection_num)+1);
+                    }else{
+                        $("#collect-button").html('收藏');
+                        $("#collection-num").html(parseInt(collection_num)-1);
                     }
                 });
             });
 
-
+            /*关注问题*/
             $("#follow-button").click(function(){
                 $(this).button('loading');
                 var source_type = $(this).data('source_type');
@@ -248,6 +361,19 @@
                 });
 
             });
+
+
+            /*采纳回答为最佳答案*/
+            $(".adopt-answer").click(function(){
+                var answer_id = $(this).data('answer_id');
+                $("#adoptAnswerSubmit").attr('data-answer_id',answer_id);
+                $("#answer_quote").html($(this).data('answer_content'));
+            });
+
+            $("#adoptAnswerSubmit").click(function(){
+                document.location = "/answer/adopt/"+$(this).data('answer_id');
+            });
+
 
         });
     </script>

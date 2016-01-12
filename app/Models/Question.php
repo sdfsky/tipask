@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Relations\BelongsToUserTrait;
 use App\Models\Relations\MorphManyCommentsTrait;
 use App\Models\Relations\MorphManyTagsTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -24,31 +25,57 @@ class Question extends Model
         return $questions;
     }
 
+
+
+
+    /*热门问题*/
+    public static function hottest()
+    {
+        $list = self::with('user')->where('status','>',0)->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->paginate(20);
+        return $list;
+
+    }
+
+    /*最新问题*/
+    public static function newest()
+    {
+        $list = self::with('user')->where('status','>',0)->orderBy('created_at','DESC')->paginate(20);
+        return $list;
+    }
+
+    /*未回答的*/
+    public static function unAnswered()
+    {
+        $list = self::with('user')->where('status','>',0)->where('answers','=',0)->orderBy('created_at','DESC')->paginate(20);
+        return $list;
+    }
+
+    /*悬赏问题*/
+    public static function reward()
+    {
+        $list = self::with('user')->where('status','>',0)->where('price','>',0)->orderBy('created_at','DESC')->paginate(20);
+        return $list;
+    }
+
+    /*最近热门问题*/
+    public static function recent()
+    {
+        $list = Cache::remember('recent_questions',300, function() {
+            return self::where('status','>',0)->where('created_at','>',Carbon::today()->subWeek())->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->take(8)->get();
+        });
+
+        return $list;
+    }
+
+
+
+
+
     /*问题所有回答*/
     public function answers()
     {
         return $this->hasMany('App\Models\Answer','question_id');
     }
-
-
-
-
-    /*热门问题*/
-    public static function hots()
-    {
-        $data = Cache::remember('question_host_list',300,function() {
-            return  self::where('status','=',0)->orderBy('views','DESC')->orderBy('created_at','DESC')->take(10)->get();
-        });
-        return $data;
-    }
-
-
-
-
-
-
-
-
 
 
 }

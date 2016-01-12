@@ -1,8 +1,16 @@
 <?php
 
-
 /*首页*/
 Route::get('/',['as'=>'website.index','uses'=>'IndexController@index']);
+
+/*问答*/
+Route::get('/questions/{filter?}',['as'=>'website.ask','uses'=>'IndexController@ask'])->where(['filter'=>'(newest|hottest|reward|unAnswered)']);
+
+/*标签*/
+Route::get('/topics',['as'=>'website.topic','uses'=>'IndexController@topic']);
+
+/*文章*/
+Route::get('/articles/{filter?}',['as'=>'website.blog','uses'=>'IndexController@blog'])->where(['filter'=>'(newest|hottest|reward|unAnswered)']);
 
 
 /*用户账号管理，包含用户登录注册等操作*/
@@ -56,6 +64,12 @@ Route::Group(['namespace'=>'Account'],function(){
 
     });
 
+    /*点赞*/
+    Route::get('support/{source_type}/{source_id}',['as'=>'auth.support.store','uses'=>'SupportController@store'])->where(['source_type'=>'(answer|article)','source_id'=>'[0-9]+']);
+    Route::get('support/check/{source_type}/{source_id}',['as'=>'auth.support.check','uses'=>'SupportController@check'])->where(['source_type'=>'(answer|article)','source_id'=>'[0-9]+']);
+
+
+
 
 
 
@@ -65,33 +79,52 @@ Route::Group(['namespace'=>'Account'],function(){
 /*前台显示部分*/
 Route::Group(['namespace'=>'Ask'],function(){
 
-
-    /*动态*/
-    Route::get('doings/{name?}',['as'=>'ask.doing.index','uses'=>'DoingsController@index'])->where(['name'=>'[all]?']);
-
     /*全局搜索*/
     Route::get('search',['as'=>'ask.search.index','uses'=>'SearchController@index']);
 
     /*问题查看*/
     Route::get('question/{id}',['as'=>'ask.question.detail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
-    Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
-    Route::post('question/store',['middleware' =>'auth','as'=>'ask.question.store','uses'=>'QuestionController@store']);
 
-    /*问题修改*/
-    Route::get('question/edit/{id}',['as'=>'ask.question.edit','uses'=>'QuestionController@edit'])->where(['id'=>'[0-9]+']);
-    Route::post('question/update',['as'=>'ask.question.update','uses'=>'QuestionController@update']);
 
-    Route::post('answer/store',['middleware' =>'auth','as'=>'ask.answer.store','uses'=>'AnswerController@store']);
+    /*需要登录的模块*/
+    Route::Group(['middleware'=>'auth'],function(){
 
-    /*标签模块*/
+        /*动态*/
+        Route::get('doings',['as'=>'ask.doing.index','uses'=>'DoingsController@index']);
+
+        /*问题创建*/
+        Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
+        Route::post('question/store',['middleware' =>'auth','as'=>'ask.question.store','uses'=>'QuestionController@store']);
+
+
+        /*问题修改*/
+        Route::get('question/edit/{id}',['as'=>'ask.question.edit','uses'=>'QuestionController@edit'])->where(['id'=>'[0-9]+']);
+        Route::post('question/update',['as'=>'ask.question.update','uses'=>'QuestionController@update']);
+
+        /*追加悬赏*/
+        Route::post('question/{id}/appendReward',['as'=>'ask.question.appendReward','uses'=>'QuestionController@appendReward'])->where(['id'=>'[0-9]+']);
+
+        /*采纳回答*/
+        Route::get('answer/adopt/{id}',['as'=>'ask.answer.adopt','uses'=>'AnswerController@adopt'])->where(['id'=>'[0-9]+']);
+
+        /*回答保存*/
+        Route::post('answer/store',['as'=>'ask.answer.store','uses'=>'AnswerController@store']);
+        /*回答编辑页面显示*/
+        Route::get('answer/edit/{id}',['as'=>'ask.answer.edit','uses'=>'AnswerController@edit'])->where(['id'=>'[0-9]+']);
+        /*回答保存*/
+        Route::post('answer/update/{id}',['as'=>'ask.answer.update','uses'=>'AnswerController@update'])->where(['id'=>'[0-9]+']);
+
+        /*评论添加*/
+        Route::post('comment/store',['as'=>'ask.comment.store','uses'=>'CommentController@store']);
+
+    });
+
+
+    /*标签首页*/
     Route::get('topic/{name}',['as'=>'ask.tag.index','uses'=>'TagController@index']);
 
-
-
-    /*评论模块*/
-    Route::post('comment/store',['middleware' =>'auth','as'=>'ask.comment.store','uses'=>'CommentController@store']);
+    /*加载评论*/
     Route::get('{source_type}/{source_id}/comments',['as'=>'ask.comment.show','uses'=>'CommentController@show'])->where(['source_type'=>'(question|answer|article)','source_id'=>'[0-9]+']);
-
 
 });
 

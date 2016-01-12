@@ -154,7 +154,7 @@ class User extends Model implements AuthenticatableContract,
     /*是否已经收藏过问题或文章*/
     public function isCollected($source_type,$source_id)
     {
-        return boolval($this->collections()->where('source_type','=',$source_type)->where('source_id','=',$source_id)->count());
+        return $this->collections()->where('source_type','=',$source_type)->where('source_id','=',$source_id)->first();
     }
 
     /*是否已关注问题、用户*/

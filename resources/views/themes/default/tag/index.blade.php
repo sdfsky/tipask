@@ -32,7 +32,7 @@
                     </div>
 
                     @foreach($questions as $question)
-                        <section class="stream-list__item">
+                        <section class="stream-list-item">
                             <div class="qa-rank">
                                 <div class="answers">
                                     {{ $question->answers }}<small>回答</small>
@@ -52,8 +52,8 @@
                                 <h2 class="title"><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></h2>
                                 @if($question->tags)
                                     <ul class="taglist--inline ib">
-                                        @foreach($question->tags() as $tag_name)
-                                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag_name]) }}">{{ $tag_name }}</a></li>
+                                        @foreach($question->tags as $tag)
+                                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif

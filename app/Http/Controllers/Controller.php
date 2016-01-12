@@ -76,8 +76,6 @@ abstract class Controller extends BaseController
             return true;
 
         }catch (\Exception $e) {
-            echo $e->getMessage();
-            exit;
             DB::rollBack();
             return false;
         }
@@ -96,13 +94,14 @@ abstract class Controller extends BaseController
      * @param null $refer_content 引用内容
      * @return static
      */
-    protected function doing($user_id,$action,$source_id,$subject,$content='',$refer_id=0,$refer_user_id=0,$refer_content=null)
+    protected function doing($user_id,$action,$source_type,$source_id,$subject,$content='',$refer_id=0,$refer_user_id=0,$refer_content=null)
     {
         try{
             return Doing::create([
                 'user_id' => $user_id,
                 'action' => $action,
                 'source_id' => $source_id,
+                'source_type' => $source_type,
                 'subject' => $subject,
                 'content' => strip_tags($content),
                 'refer_id' => $refer_id,
@@ -139,6 +138,7 @@ abstract class Controller extends BaseController
             'type'       => $type,
             'subject'    => $subject,
             'source_id'  => $source_id,
+            'source_id'  => $source_id,
             'refer_content'  => $refer_content,
             'is_read'    => 0
         ]);
@@ -153,7 +153,7 @@ abstract class Controller extends BaseController
      */
     protected function readNotifications($source_id,$refer_type='question')
     {
-        $types = ['answer','comment_user','comment_question','comment_answer'];
+        $types = array_keys(Config::get('tipask.notification_types'));
         if($refer_type=='article'){
             $types = [];
         }

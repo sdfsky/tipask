@@ -38,6 +38,8 @@ class CreateAnswersTable extends Migration
 
             $table->tinyInteger('status')->default(0);            //回答状态0待审核,1已审核
 
+            $table->timestamp('adopted_at')->nullable()->index();             //回答采纳时间
+
             $table->timestamps();                                 //创建和更新时间
 
             $table->index('created_at');

@@ -1,7 +1,7 @@
 <div class="collapse widget-comments mb-20" id="comments-{{ $comment_source_type }}-{{ $comment_source_id }}" data-source_type="{{ $comment_source_type }}" data-source_id="{{ $comment_source_id }}">
+    <div class="widget-comment-list"></div>
     @if(Auth()->check())
-        <div class="widget-comment-list"></div>
-        <div class="widget-comment-form row">
+    <div class="widget-comment-form row">
             <form class="col-md-12" >
                 <div class="form-group">
                     <textarea name="content" placeholder="写下你的评论" class="form-control" id="comment-{{ $comment_source_type }}-content-{{ $comment_source_id }}"></textarea>

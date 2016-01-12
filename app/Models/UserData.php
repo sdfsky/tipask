@@ -25,4 +25,11 @@ class UserData extends Model
      */
     protected $hidden = [];
 
+
+    /*用户采纳率*/
+    public function adoptPercent()
+    {
+        return round($this->adoptions / $this->answers, 2) * 100;
+    }
+
 }

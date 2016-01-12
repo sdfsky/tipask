@@ -17,6 +17,8 @@ return [
         'ask'      => '发起提问',
         'answer'   => '回答问题',
         'follow_question' => '关注了问题',
+        'append_reward' => '对问题追加悬赏',
+        'answer_adopted' => '回答被采纳',
 
     ],
     'notification_types' =>[
