@@ -25,6 +25,7 @@ class CreateUserDataTable extends Migration
             $table->string('last_login_ip')->nullable();        //上次登录IP
 
             $table->integer('questions')->unsigned()->default(0);           //提问数
+            $table->integer('articles')->unsigned()->default(0);            //文章数
             $table->integer('answers')->unsigned()->default(0);             //回答数
             $table->integer('adoptions')->unsigned()->default(0);           //被采纳个数
             $table->integer('supports')->unsigned()->default(0);            //赞同数

@@ -129,6 +129,29 @@ Route::Group(['namespace'=>'Ask'],function(){
 });
 
 
+/*文章模块*/
+Route::Group(['namespace'=>'Blog'],function(){
+
+    /*文章查看*/
+    Route::get('article/{id}',['as'=>'blog.article.detail','uses'=>'ArticleController@show'])->where(['id'=>'[0-9]+']);
+
+
+    /*需要登录的模块*/
+    Route::Group(['middleware'=>'auth'],function(){
+
+        /*文章创建*/
+        Route::get('article/create',['as'=>'blog.article.create','uses'=>'ArticleController@create']);
+        Route::post('article/store',['as'=>'blog.article.store','uses'=>'ArticleController@store']);
+
+
+
+
+    });
+
+});
+
+
+
 /*后台管理部分处理*/
 Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],function(){
 

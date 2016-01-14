@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Question;
 use App\models\Tag;
@@ -44,6 +45,14 @@ class IndexController extends Controller
         return view('theme::home.ask')->with('questions',$questions)
             ->with('hotQuestions',$hotQuestions)
             ->with('filter',$filter);
+    }
+
+
+    public function blog()
+    {
+        $articles = Article::where('status','>',0)->orderBy('supports','DESC')->paginate(1);
+
+        return view('theme::home.blog')->with('articles',$articles);
     }
 
     public function topic()

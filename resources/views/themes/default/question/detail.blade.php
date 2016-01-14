@@ -38,7 +38,7 @@
                         </ul>
                     </div>
 
-                    @include('theme::comment.collapse',['comment_source_type'=>'question','comment_source_id'=>$question->id])
+                    @include('theme::comment.collapse',['comment_source_type'=>'question','comment_source_id'=>$question->id,'hide_cancel'=>false])
 
                 </div>
 
@@ -63,7 +63,7 @@
                             </li>
                         </ul>
                     </div>
-                    @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$bestAnswer->id])
+                    @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$bestAnswer->id,'hide_cancel'=>false])
 
                     <div class="media user-info border-top">
                         <div class="media-left">
@@ -130,8 +130,7 @@
                                 </li>
                             </ul>
                         </div>
-                        @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$answer->id])
-
+                        @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$answer->id,'hide_cancel'=>false])
                     </div>
                 </div>
                 @endforeach

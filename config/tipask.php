@@ -19,6 +19,7 @@ return [
         'follow_question' => '关注了问题',
         'append_reward' => '对问题追加悬赏',
         'answer_adopted' => '回答被采纳',
+        'create_article' => '发表了文章',
 
     ],
     'notification_types' =>[
@@ -28,6 +29,8 @@ return [
         'comment_answer' => '评论了',
         'comment_article' => '评论了文章',
         'follow_question' => '关注了问题',
+        'create_article' => '发表了文章',
+
     ],
 
 ];
