@@ -91,6 +91,13 @@ class User extends Model implements AuthenticatableContract,
         return $data;
     }
 
+    /*搜索*/
+    public static function search($word,$size=16)
+    {
+        $list = self::where('name','like',"$word%")->paginate($size);
+        return $list;
+    }
+
 
     /**
      *获取用户数据

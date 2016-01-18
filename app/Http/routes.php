@@ -10,7 +10,7 @@ Route::get('/questions/{filter?}',['as'=>'website.ask','uses'=>'IndexController@
 Route::get('/topics',['as'=>'website.topic','uses'=>'IndexController@topic']);
 
 /*文章*/
-Route::get('/articles/{filter?}',['as'=>'website.blog','uses'=>'IndexController@blog'])->where(['filter'=>'(newest|hottest|reward|unAnswered)']);
+Route::get('/articles/{filter?}',['as'=>'website.blog','uses'=>'IndexController@blog'])->where(['filter'=>'(recommended|newest|hottest)']);
 
 
 /*用户账号管理，包含用户登录注册等操作*/
@@ -30,6 +30,10 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::get('people/{user_id}/coins',['as'=>'auth.space.coins','uses'=>'SpaceController@coins'])->where(['user_id'=>'[0-9]+']);
     /*我的经验*/
     Route::get('people/{user_id}/credits',['as'=>'auth.space.credits','uses'=>'SpaceController@credits'])->where(['user_id'=>'[0-9]+']);
+
+    /*全局搜索*/
+    Route::any('search/{filter?}',['as'=>'auth.search.index','uses'=>'SearchController@index'])->where(['filter'=>'(articles|tags|users)']);
+
 
 
     Route::Group(['middleware'=>'auth'],function(){
@@ -79,8 +83,6 @@ Route::Group(['namespace'=>'Account'],function(){
 /*前台显示部分*/
 Route::Group(['namespace'=>'Ask'],function(){
 
-    /*全局搜索*/
-    Route::get('search',['as'=>'ask.search.index','uses'=>'SearchController@index']);
 
     /*问题查看*/
     Route::get('question/{id}',['as'=>'ask.question.detail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);

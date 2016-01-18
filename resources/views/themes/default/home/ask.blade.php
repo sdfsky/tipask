@@ -63,7 +63,7 @@
             </aside>
 
             <div class="widget-box">
-                <h2 class="h4 widget-box__title">热议标签 <a href="/tags" title="更多">»</a></h2>
+                <h2 class="h4 widget-box-title">热议标签 <a href="/tags" title="更多">»</a></h2>
                 <ul class="taglist--inline multi">
                     <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089436" data-original-title="javascript" href="/t/javascript">javascript</a></li>
                     <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089387" data-original-title="php" href="/t/php">php</a></li>
@@ -81,7 +81,7 @@
             </div>
 
             <div class="widget-box">
-                <h2 class="h4 widget-box__title">最近热门的</h2>
+                <h2 class="h4 widget-box-title">最近热门的</h2>
                 <ul class="widget-links list-unstyled">
                     @foreach($hotQuestions as $hotQuestion)
                     <li class="widget-links__item">

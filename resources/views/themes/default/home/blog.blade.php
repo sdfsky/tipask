@@ -4,9 +4,9 @@
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
             <ul class="nav nav-tabs nav-tabs-zen mb-10">
-                <li class="active"><a href="/blogs">推荐的</a></li>
-                <li><a href="/blogs/newest">全部的</a></li>
-                <li><a href="/blogs/hottest">热门的</a></li>
+                <li @if($filter==='recommended') class="active" @endif><a href="{{ route('website.blog') }}">推荐的</a></li>
+                <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.blog',['filter'=>'hottest']) }}">热门的</a></li>
+                <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.blog',['filter'=>'newest']) }}">最新的</a></li>
             </ul>
             <div class="stream-list blog-stream">
                 @foreach($articles as $article)
@@ -41,7 +41,6 @@
 
             <div class="text-center">
                 {!! str_replace('/?', '?', $articles->render()) !!}
-
             </div>
         </div><!-- /.main -->
         <div class="col-xs-12 col-md-3 side">
@@ -54,13 +53,56 @@
             </div>
 
             <div class="widget-box">
-                <h2 class="h4 widget-box__title">热门作者</h2>
-                <ul class="widget-links list-unstyled">
+                <h2 class="h4 widget-box-title">热门作者</h2>
+                <ul class="list-unstyled">
+                    <li class="media  widget-user-item ">
+                        <a class="pull-left" href="/blog/dongoer">
+                            <img class="media-object avatar-40" src="http://sfault-avatar.b0.upaiyun.com/718/754/718754797-567b59f967165_big64">
+                        </a>
+                        <div class="media-object">
+                            <strong><a href="/blog/dongoer">Noodles</a></strong>
+
+                            <p class="text-muted">最近获得 34 推荐</p>
+                        </div>
+                    </li>
+                    <li class="media widget-user-item">
+                        <a class="pull-left" href="/blog/neu">
+                            <img class="media-object avatar-40" src="http://sfault-avatar.b0.upaiyun.com/149/315/1493158663-564dbafdc6f0f_big64">
+                        </a>
+
+                        <div class="media-object">
+                            <strong><a href="/blog/neu">neu</a></strong>
+
+                            <p class="text-muted">最近获得 16 推荐</p>
+                        </div>
+                    </li>
+                    <li class="media widget-user-item">
+                        <a class="pull-left" href="/blog/jimmy_thr">
+                            <img class="media-object avatar-40" src="http://sfault-avatar.b0.upaiyun.com/222/265/2222651558-5688d54d4891c_big64">
+                        </a>
+
+                        <div class="media-object">
+                            <strong><a href="/blog/jimmy_thr">jimmy_thr</a></strong>
+
+                            <p class="text-muted">最近获得 4 推荐</p>
+                        </div>
+                    </li>
+                    <li class="widget-user-item media">
+                        <a class="pull-left" href="/blog/ryanli">
+                            <img class="media-object avatar-40" src="http://static.segmentfault.com/v-56935546/global/img/user-64.png">
+                        </a>
+
+                        <div class="media-object">
+                            <strong><a href="/blog/ryanli">lpy1990</a></strong>
+
+                            <p class="text-muted">最近获得 1 推荐</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
             <div class="widget-box">
-                <h2 class="h4 widget-box__title">热议标签 <a href="/tags" title="更多">»</a></h2>
+                <h2 class="h4 widget-box-title">热议标签 <a href="/tags" title="更多">»</a></h2>
                 <ul class="taglist--inline multi">
                     <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089436" data-original-title="javascript" href="/t/javascript">javascript</a></li>
                     <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089387" data-original-title="php" href="/t/php">php</a></li>

@@ -63,7 +63,11 @@ a{color:#2b7a5c;}
 
 /*边框border*/
 .border-top {
-    border-top: 1px solid #DDD;
+    border-top: 1px solid #eee;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #eee;
 }
 
 /*字体颜色设置*/
@@ -107,8 +111,8 @@ a{color:#2b7a5c;}
 .avatar-24{width:20px;height:20px;border-radius:2px;}
 .avatar-27{width:27px;height:27px;border-radius: 2px;}
 .avatar-32{width:32px;height:32px;border-radius:2px;}
-.avatar-40{width:40px;height:40px;border-radius:3px;}
-.avatar-64{width:64px;height:64px}
+.avatar-40{width:40px;height:40px;border-radius:50%;}
+.avatar-64{width:64px;height:64px;border-radius:50%;}
 .avatar-128{width:128px;height:128px}
 .avatar-256{width:256px;height:256px}
 
@@ -211,6 +215,8 @@ a{color:#2b7a5c;}
 .taglist--inline.multi>li{margin-bottom:5px}
 .taglist--block>li{margin-bottom:8px}
 
+
+
 /*wget-box*/
 .widget-welcome .title{margin:0 0 10px;color:#D0021B}
 .widget-welcome ul{margin:15px 0 0}
@@ -219,16 +225,35 @@ a{color:#2b7a5c;}
 .widget-welcome.widget-welcome-question{background:#fcf8e3}
 
 .widget-box{margin:15px 0;padding-top:15px;border-top:1px solid #eee}
-.widget-box .widget-box__title{margin:0 0 15px;font-size:16px}
+.widget-box .widget-box-title{margin:0 0 15px;font-size:16px}
 .widget-box.no-border,.widget-box:first-child{margin-top:0;padding-top:0;border:none}
 .widget-top10{padding-left:30px}
 .widget-top10 li{margin-bottom:8px}
 .widget-top10 img{margin-right:10px}
 
-.widget-links__item a{margin-right:6px;}
-.widget-links__item small{display:inline-block;font-size:13px}
-.widget-links__item .ranks{float:left;padding:0;margin-right:5px;width:26px;background:#f3f3f3;color:#444;text-align:center;font-size:13px}
+
+.widget-user{border:1px solid #eee;padding: 15px;}
+.widget-user .media-heading{font-size: 16px;font-weight: 700;}
+.widget-user p{padding: 0;margin: 0;}
+
+.widget-user-item {
+    border: none;
+    /* border-radius: 0; */
+    /* box-shadow: none; */
+    margin-top: 0;
+}
+
+.widget-relation{padding:10px;border-top:1px solid #ddd;border-bottom:1px solid #eee; }
+
+.widget-links-item {
+    margin-bottom: 8px;
+}
+.widget-links-item a{margin-right:6px;}
+.widget-links-item small{display:inline-block;font-size:13px}
+.widget-links-item .ranks{float:left;padding:0;margin-right:5px;width:26px;background:#f3f3f3;color:#444;text-align:center;font-size:13px}
 .widget-bookmark-author .links li{padding:5px 0;border-top:1px dotted #ddd}
+
+
 
 /*消息菜单*/
 
@@ -264,7 +289,6 @@ a{color:#2b7a5c;}
 
 /*详情页面头部*/
 
-.widget-question{border-bottom:1px solid #eee;}
 .widget-question .title{margin: 0 0 10px;}
 .widget-question .best-answer{background-color:#f6f6f6;border: 1px solid #EBEBEB;padding: 10px 20px 20px;border-bottom: none;}
 .widget-question .trophy-title{color:#ad3a37;}

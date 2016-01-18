@@ -48,11 +48,17 @@ class IndexController extends Controller
     }
 
 
-    public function blog()
+    public function blog($filter='recommended')
     {
-        $articles = Article::where('status','>',0)->orderBy('supports','DESC')->paginate(1);
+        $article = new Article();
+        if(!method_exists($article,$filter)){
+            abort(404);
+        }
 
-        return view('theme::home.blog')->with('articles',$articles);
+        $articles = call_user_func([$article,$filter]);
+
+        return view('theme::home.blog')->with('articles',$articles)
+                                       ->with('filter',$filter);
     }
 
     public function topic()

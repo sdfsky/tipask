@@ -38,9 +38,9 @@
             </div>
 
             <div class="collapse navbar-collapse" id="global-navbar">
-                <form class="navbar-form navbar-left" role="search" id="top-search-form" action="{{ route('ask.search.index') }}" method="GET">
+                <form class="navbar-form navbar-left" role="search" id="top-search-form" action="{{ route('auth.search.index') }}" method="GET">
                     <div class="input-group">
-                        <input type="text" id="searchBox" class="form-control" placeholder="请输入关键词搜索" />
+                        <input type="text" name="word" id="searchBox" class="form-control" placeholder="请输入关键词搜索" />
                         <span class="input-group-addon btn" ><span id="search-button" class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
                     </div>
                 </form>

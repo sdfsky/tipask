@@ -11,7 +11,7 @@
             <li><a href="{{ route('website.blog') }}">文章</a></li>
             <li class="active">撰写文章</li>
         </ol>
-        <form id="questionForm" method="POST" role="form" action="{{ route('blog.article.store') }}">
+        <form id="articleForm" method="POST" role="form" action="{{ route('blog.article.store') }}">
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="title">文章标题:</label>
