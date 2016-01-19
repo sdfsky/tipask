@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Question;
 use App\models\Tag;
+use App\models\UserData;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -57,7 +58,10 @@ class IndexController extends Controller
 
         $articles = call_user_func([$article,$filter]);
 
+        $hotUsers = UserData::activeInArticles();
+
         return view('theme::home.blog')->with('articles',$articles)
+                                       ->with('hotUsers',$hotUsers)
                                        ->with('filter',$filter);
     }
 

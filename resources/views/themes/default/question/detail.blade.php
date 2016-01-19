@@ -193,7 +193,7 @@
             </div>
             <div class="widget-box">
                 <h2 class="h4 widget-box__title">相似问题</h2>
-                <ul class="widget-links list-unstyled">
+                <ul class="widget-links list-unstyled list-text">
                     @foreach($relatedQuestions as $relatedQuestion)
                         @if($relatedQuestion->id != $question->id)
                         <li class="widget-links__item">

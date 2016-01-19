@@ -44,6 +44,27 @@
                         <p class="excerpt">{{ str_limit(strip_tags($article->summary),200) }}</p>
                     </section>
                     @endforeach
+                @elseif($filter==='users')
+                    @foreach($list as $user)
+                        <section class="widget-member">
+                            <h2 class="h4">
+                                <a href="{{ route('auth.space.index',['user_id'=>$user->id]) }}" target="_blank">{{ $user->name }}</a>
+                                @if($user->title) <span class="text-muted"> - {{ $user->title }}</span> @endif
+
+                            </h2>
+                            <p class="excerpt">{{ str_limit(strip_tags($user->description),200) }}</p>
+                        </section>
+                    @endforeach
+                @elseif($filter==='tags')
+                    @foreach($list as $tag)
+                        <section class="widget-tag">
+                            <h2 class="h4">
+                                <a href="{{ route('ask.tag.index',['name'=>$tag->name]) }}" target="_blank">{{ $tag->name }}</a>
+                            </h2>
+                            <p class="excerpt">{{ str_limit(strip_tags($tag->description),200) }}</p>
+                        </section>
+                    @endforeach
+
                 @endif
                 <div class="text-center">
                     {!! str_replace('/?', '?', $list->render()) !!}

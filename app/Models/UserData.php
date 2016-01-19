@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class UserData extends Model
 {
@@ -26,10 +27,30 @@ class UserData extends Model
     protected $hidden = [];
 
 
+    /*文章活跃用户*/
+    public static function activeInArticles($size=8)
+    {
+
+        $list = Cache::remember('active_in_articles',10,function() use($size) {
+            return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
+                          ->where('users.status','>',0)->where('user_data.articles','>',0)
+                          ->orderBy('user_data.articles','DESC')
+                          ->orderBy('users.created_at','DESC')
+                          ->select('users.id','users.name','users.title','user_data.articles','user_data.supports')
+                          ->take($size)->get();
+        });
+
+        return  $list;
+    }
+
+
     /*用户采纳率*/
     public function adoptPercent()
     {
         return round($this->adoptions / $this->answers, 2) * 100;
     }
+
+
+
 
 }

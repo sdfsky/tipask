@@ -55,49 +55,18 @@
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热门作者</h2>
                 <ul class="list-unstyled">
+                    @foreach($hotUsers as $hotUser)
                     <li class="media  widget-user-item ">
-                        <a class="pull-left" href="/blog/dongoer">
-                            <img class="media-object avatar-40" src="http://sfault-avatar.b0.upaiyun.com/718/754/718754797-567b59f967165_big64">
+                        <a href="{{ route('auth.space.index',['user_id'=>$hotUser->id]) }}" class="user-card pull-left" target="_blank">
+                            <img class="avatar-50"  src="{{ route('website.image.avatar',['avatar_name'=>$hotUser->id.'_middle']) }}" alt="{{ $hotUser->name }}"></a>
                         </a>
                         <div class="media-object">
-                            <strong><a href="/blog/dongoer">Noodles</a></strong>
+                            <strong><a href="/blog/dongoer">{{ $hotUser->name }}</a></strong>
 
-                            <p class="text-muted">最近获得 34 推荐</p>
+                            <p class="text-muted"> {{ $hotUser->articles }} 篇文章，{{ $hotUser->supports }} 赞同</p>
                         </div>
                     </li>
-                    <li class="media widget-user-item">
-                        <a class="pull-left" href="/blog/neu">
-                            <img class="media-object avatar-40" src="http://sfault-avatar.b0.upaiyun.com/149/315/1493158663-564dbafdc6f0f_big64">
-                        </a>
-
-                        <div class="media-object">
-                            <strong><a href="/blog/neu">neu</a></strong>
-
-                            <p class="text-muted">最近获得 16 推荐</p>
-                        </div>
-                    </li>
-                    <li class="media widget-user-item">
-                        <a class="pull-left" href="/blog/jimmy_thr">
-                            <img class="media-object avatar-40" src="http://sfault-avatar.b0.upaiyun.com/222/265/2222651558-5688d54d4891c_big64">
-                        </a>
-
-                        <div class="media-object">
-                            <strong><a href="/blog/jimmy_thr">jimmy_thr</a></strong>
-
-                            <p class="text-muted">最近获得 4 推荐</p>
-                        </div>
-                    </li>
-                    <li class="widget-user-item media">
-                        <a class="pull-left" href="/blog/ryanli">
-                            <img class="media-object avatar-40" src="http://static.segmentfault.com/v-56935546/global/img/user-64.png">
-                        </a>
-
-                        <div class="media-object">
-                            <strong><a href="/blog/ryanli">lpy1990</a></strong>
-
-                            <p class="text-muted">最近获得 1 推荐</p>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
 

@@ -15,7 +15,7 @@
         <div class="content"><p>{{ $comment->content }}</p></div>
         <div class="media-footer">
             <span class="text-muted">{{ timestamp_format($comment->created_at) }}</span>
-            @if($comment->user_id != Auth()->user()->id)
+            @if(Auth()->check() && $comment->user_id != Auth()->user()->id)
                 <a href="#" class="ml-10 comment-reply" data-source_id="{{ $source_id }}" data-to_user_id="{{ $comment->user->id }}" data-source_type="{{ $source_type }}" data-message="回复 {{ $comment->user->name }}"><i class="fa fa-reply"></i> 回复</a>
             @endif
         </div>
