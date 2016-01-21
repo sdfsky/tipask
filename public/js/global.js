@@ -52,7 +52,18 @@ $(function(){
         $("#top-search-form").submit();
     });
 
-    $("#alert_message").delay(3000).hide(0);
+    $("#alert_message").delay(5000).hide(0);
+
+
+    /*激活邮件发送*/
+    $(".send-email-token").click(function(){
+        $.get('/email/sendToken',function(msg){
+            if( msg === 'tooFast'){
+                alert('发送太频繁，请一分钟后再试.');
+            }
+        });
+        $(".send-email-tips").show();
+    });
 
 
     /*加载更多分页*/

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailToken;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -42,6 +44,8 @@ class UserController extends Controller
             /*根据邮箱地址和密码进行认证*/
             if ($this->auth->attempt($credentials, $request->has('remember')))
             {
+
+
                 if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
                     $message = '登陆成功! 经验 '.integer_string(Setting()->get('credits_login')) .' , 金币 '.integer_string(Setting()->get('coins_login'));
                    return $this->success(route('website.index'),$message);
@@ -71,6 +75,7 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
+
         /*注册表单处理*/
         if($request->isMethod('post'))
         {
@@ -91,10 +96,94 @@ class UserController extends Controller
                 $message .= ' 经验 '.integer_string(Setting()->get('credits_register')) .' , 金币 '.integer_string(Setting()->get('coins_register'));
             }
 
+            /*发送邮箱验证邮件*/
+            EmailToken::createAndSend([
+                'email' => $formData['email'],
+                'name' => $formData['name'],
+                'action' => 'register',
+                'subject' => '欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',
+                'token' => EmailToken::createToken(),
+            ]);
+
+
             return $this->success(route('website.index'),$message);
         }
         return view("theme::account.register");
     }
+
+
+    /*忘记密码*/
+    public function forgetPassword(Request $request)
+    {
+
+        if($request->isMethod('post'))
+        {
+            $request->flashOnly('email');
+            /*表单数据校验*/
+            $this->validate($request, [
+                'email' => 'required|email|exists:users',
+                'captcha' => 'required|captcha'
+            ]);
+
+            $emailToken = EmailToken::createAndSend([
+                'email' => $request->input('email'),
+                'action' => 'findPassword',
+                'name'=>Setting()->get('website_name').'用户',
+                'subject' => Setting()->get('website_name').'找回密码',
+                'token' => EmailToken::createToken(),
+            ]);
+
+            return view("theme::account.forgetPassword")->with('success','ok')->with('email',$request->input('email'));
+
+        }
+
+
+        return view("theme::account.forgetPassword");
+
+    }
+
+
+    public function findPassword($token,Request $request)
+    {
+        if($request->isMethod('post')){
+
+            $this->validate($request, [
+                'password' => 'required|min:6',
+                'captcha' => 'required|captcha'
+            ]);
+
+            $emailToken = EmailToken::where('action','=','findPassword')->where('token','=',$token)->first();
+            if(!$emailToken){
+                return $this->error(route('website.ask'),'token信息不存在，请重新找回');
+            }
+
+            if($emailToken->created_at->diffInMinutes() > 60){
+
+                return $this->error(route('website.ask'),'token信息已失效，请重新找回');
+            }
+
+            $user = User::where('email','=',$emailToken->email)->first();
+
+            if(!$user){
+                return $this->error(route('website.ask'),'用户不存在或已被删除');
+            }
+
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+
+            EmailToken::clear($user->email,'findPassword');
+
+            return $this->success(route('auth.user.login'),'密码修改成功,请重新登录');
+
+        }
+
+        return view("theme::account.findPassword")->with('token',$token);
+
+    }
+
+
+
+
 
     /**
      * 用户登出

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\models\Area;
+use App\Models\EmailToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -117,10 +118,26 @@ class ProfileController extends Controller
         if($request->isMethod('POST'))
         {
             $validateRules = [
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users,email,'.$request->user()->id,
                 'captcha' => 'required|captcha',
             ];
             $this->validate($request,$validateRules);
+
+            if($request->input('email') !== $request->user()->email){
+                $request->user()->email = $request->input('email');
+                $request->user()->status = 0;
+                $request->user()->save();
+                EmailToken::createAndSend([
+                    'email' => $request->user()->email,
+                    'name' => $request->user()->name,
+                    'action' => 'verify',
+                    'subject' => '您好，请激活您在'.Setting()->get('website_name').'注册的邮箱！',
+                    'token' => EmailToken::createToken(),
+                ]);
+
+                return $this->success(route('auth.profile.email'),'邮箱修改成功！一封验证邮件已经发到您的邮箱'.$request->user()->email.',请登陆邮箱进行验证！');
+            }
+
         }
         return view('theme::profile.email');
     }

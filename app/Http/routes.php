@@ -18,7 +18,10 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::match(['get','post'],'login',['as'=>'auth.user.login','uses'=>'UserController@login']);
     Route::match(['get','post'],'register',['as'=>'auth.user.register','uses'=>'UserController@register']);
     Route::get('logout',['as'=>'auth.user.logout','uses'=>'UserController@logout']);
-    Route::get('forgetPassword',['as'=>'auth.user.forgetPassword','uses'=>'UserController@forgetPassword']);
+    /*密码找回*/
+    Route::match(['get','post'],'forgetPassword',['as'=>'auth.user.forgetPassword','uses'=>'UserController@forgetPassword']);
+    Route::match(['get','post'],'findPassword/{token}',['as'=>'auth.user.findPassword','uses'=>'UserController@findPassword']);
+
 
     /*用户空间首页*/
     Route::get('people/{user_id}',['as'=>'auth.space.index','uses'=>'SpaceController@index'])->where(['user_id'=>'[0-9]+']);
@@ -34,9 +37,14 @@ Route::Group(['namespace'=>'Account'],function(){
     /*全局搜索*/
     Route::any('search/{filter?}',['as'=>'auth.search.index','uses'=>'SearchController@index'])->where(['filter'=>'(articles|tags|users)']);
 
+    /*邮箱token验证*/
+    Route::get('email/{action}/{token}',['as'=>'auth.email.verifyToken','uses'=>'EmailController@verifyToken'])->where(['action'=>'(register|verify)']);
 
 
     Route::Group(['middleware'=>'auth'],function(){
+
+        Route::get('email/sendToken',['as'=>'auth.email.sendToken','uses'=>'EmailController@sendToken']);
+
         /*用户个人信息修改*/
         Route::controller('profile','ProfileController', [
             'anyBase'     => 'auth.profile.base',

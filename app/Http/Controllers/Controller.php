@@ -32,6 +32,7 @@ abstract class Controller extends BaseController
         return redirect($url);
     }
 
+
     protected function error($url,$message)
     {
         Session::flash('message',$message);
@@ -159,13 +160,6 @@ abstract class Controller extends BaseController
         }
         return Notification::where('to_user_id','=',Auth()->user()->id)->where('source_id','=',$source_id)->whereIn('type',$types)->where('is_read','=',0)->update(['is_read'=>1]);
     }
-
-
-
-
-
-
-
 
 
 

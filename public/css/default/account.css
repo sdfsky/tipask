@@ -4,7 +4,7 @@ body{background-color:#eff2f5}
 .header h1{margin-bottom:5px}
 .header .description{font-size:16px;color:#999}
 .logo img{height:50px}
-.login-wrap{padding:50px 30px}
+.login-wrap{padding:30px 30px}
 .login-link{margin:30px 0 80px;color:#ddd}
 .login-link a{margin:0 10px;color:#999}
 .btn-sn-more{height:30px}

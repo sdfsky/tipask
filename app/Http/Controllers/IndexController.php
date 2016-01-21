@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
@@ -24,6 +25,12 @@ class IndexController extends Controller
        // echo intval(str_shuffle('0123456789'));
         $setting = Setting()->get('website.name');
       //  print_r($setting);
+//        $data = ['email'=>'sky_php@qq.com', 'name'=>'sky_php', 'uid'=>3, 'activationcode'=>'asdfassssssss'];
+//
+//        Mail::queue('emails.validate', $data, function($message) use ($data)
+//        {
+//            $message->to($data['email'], $data['name'])->subject('请验证您在Tipask问答网注册的邮箱！');
+//        });
 
 
         return redirect(route('website.ask'));

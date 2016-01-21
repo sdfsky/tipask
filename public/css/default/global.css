@@ -19,6 +19,10 @@
 
 blockquote{font-size: 13px;}
 
+.alert {
+    padding: 10px;
+}
+
 
 /*全局公告样式*/
 html{font-size:10px;-webkit-tap-highlight-color:transparent}
@@ -51,6 +55,7 @@ a{color:#2b7a5c;}
 .mt-50 {margin-top: 50px;}
 .mt-60 {margin-top: 60px;}
 
+.ml5,.ml-5{margin-left:5px;}
 .ml10,.ml-10{margin-left:10px;}
 .ml15,.ml-15{margin-left:15px;}
 

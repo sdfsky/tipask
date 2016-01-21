@@ -14,6 +14,12 @@
         <p class="description text-muted">欢迎加入最专业的中文开发者社区</p>
     </div>
     <div class="col-md-6 col-md-offset-3 bg-white login-wrap">
+        @if ( session('message') )
+            <div class="alert @if(session('message_type')===1) alert-danger @else alert-success @endif alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ session('message') }}
+            </div>
+        @endif
         <h1 class="h4 text-center text-muted login-title">用户登录</h1>
         <form role="form" name="loginForm" action="{{ route('auth.user.login') }}"  method="POST" >
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
