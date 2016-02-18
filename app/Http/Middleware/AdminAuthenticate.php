@@ -15,9 +15,13 @@ class AdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
+
+      //  echo $request->route()->getName();
+
         if(!$request->user()->can('admin.account.login')){
             abort(404);
         }
+
         if(!$request->session()->get('admin.login')){
             return redirect(route('admin.account.login'));
         }

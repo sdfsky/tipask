@@ -20,6 +20,7 @@ class QuestionController extends Controller
     protected $validateRules = [
         'title' => 'required|max:255',
         'description' => 'sometimes|max:65535',
+        'price'=> 'digits_between:0,1000',
         'tags' => 'sometimes|max:128',
     ];
 
@@ -85,6 +86,7 @@ class QuestionController extends Controller
             'user_id'      => $loginUser->id,
             'title'        => trim($request->input('title')),
             'description'  => $request->input('description'),
+            'price'        => $request->input('price'),
             'hide'         => intval($request->input('hide')),
             'status'       => 1,
         ];

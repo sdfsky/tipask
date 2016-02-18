@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
@@ -32,8 +33,15 @@ class IndexController extends Controller
 //            $message->to($data['email'], $data['name'])->subject('请验证您在Tipask问答网注册的邮箱！');
 //        });
 
+        /*活跃用户*/
+        $activeUsers = Cache::remember('active_users',10,function() {
+               return  UserData::activities(8);
+        });
 
-        return redirect(route('website.ask'));
+
+
+        return view('theme::home.index')->with('activeUsers',$activeUsers);
+
     }
 
 

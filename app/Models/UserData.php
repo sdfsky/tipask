@@ -44,11 +44,33 @@ class UserData extends Model
     }
 
 
+
+    public static function activities($size)
+    {
+        return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
+            ->where('users.status','>',0)->where('user_data.articles','>',0)
+            ->orderBy('user_data.answers','DESC')
+            ->orderBy('user_data.articles','DESC')
+            ->orderBy('users.updated_at','DESC')
+            ->select('users.id','users.name','users.title')
+            ->take($size)->get();
+    }
+
+
+
+
     /*用户采纳率*/
     public function adoptPercent()
     {
         return round($this->adoptions / $this->answers, 2) * 100;
     }
+
+
+
+
+
+
+
 
 
 

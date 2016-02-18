@@ -16,7 +16,7 @@ class AdminController extends Controller {
 
 
         /*管理员登陆检测*/
-        $this->middleware('auth.admin');
+      //  $this->middleware('auth.admin');
 
        // $this->middleware('permission:'.$this->getRouter()->currentRouteName());
 

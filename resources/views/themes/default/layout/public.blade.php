@@ -84,7 +84,7 @@
 <div class="clearfix"></div>
 @yield('space_header')
 <div class="wrap mt-60">
-
+    @yield('jumbotron')
     @yield('container')
     <div class="container">
         <!--[if lt IE 9]>

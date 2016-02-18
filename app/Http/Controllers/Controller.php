@@ -139,7 +139,6 @@ abstract class Controller extends BaseController
             'type'       => $type,
             'subject'    => $subject,
             'source_id'  => $source_id,
-            'source_id'  => $source_id,
             'refer_content'  => $refer_content,
             'is_read'    => 0
         ]);

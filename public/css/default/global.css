@@ -23,6 +23,8 @@ blockquote{font-size: 13px;}
     padding: 10px;
 }
 
+.jumbotron{margin-bottom: 10px;}
+
 
 /*全局公告样式*/
 html{font-size:10px;-webkit-tap-highlight-color:transparent}
@@ -122,6 +124,7 @@ a{color:#2b7a5c;}
 .avatar-128{width:128px;height:128px}
 .avatar-256{width:256px;height:256px}
 
+.avatar-link{display:block;}
 
 /*导航部分用户头像*/
 .user-menu >.user-avatar > a{padding:9px 15px;}
@@ -296,7 +299,7 @@ a{color:#2b7a5c;}
 /*详情页面头部*/
 
 .widget-question .title{margin: 0 0 10px;}
-.widget-question .best-answer{background-color:#f6f6f6;border: 1px solid #EBEBEB;padding: 10px 20px 20px;border-bottom: none;}
+.widget-question .best-answer{border: 1px solid #EBEBEB;padding: 10px 20px 20px;}
 .widget-question .trophy-title{color:#ad3a37;}
 .widget-question .adopt_time{font-size: 14px;font-weight: normal;}
 .widget-question .user-info{padding:20px 0px 0px;}

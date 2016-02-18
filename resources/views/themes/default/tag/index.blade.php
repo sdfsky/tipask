@@ -11,63 +11,90 @@
                 </ul>
 
                 <div class="mb20">
-                    <p>{{ $tag->description }}</p>
+                    <p>{{ $tag->summary }} <a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'details']) }}">[百科]</a></p>
                 </div>
             </section>
 
-            <ul class="nav nav-tabs nav-tabs-zen mb20">
-                <li class="active"><a href="/t/javascript">问答</a></li>
-                <li><a href="/t/javascript/blogs">文章</a></li>
-                <li><a href="/t/javascript/jobs">职位</a></li>
-                <li><a href="/t/javascript/info">百科</a></li>
+            <ul class="nav nav-tabs nav-tabs-zen">
+                <li @if($source_type==='questions') class="active" @endif ><a href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">问答</a></li>
+                <li @if($source_type==='articles') class="active" @endif ><a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'articles']) }}">文章</a></li>
+                <li @if($source_type==='details') class="active" @endif ><a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'details']) }}">百科</a></li>
             </ul>
             <div class="tab-content">
-                <div id="qa" class="stream-list question-stream">
-                    <div class="text-muted mb10 hidden-xs">排序：
-                        <div class="btn-group btn-group-xs">
-                            <a class="btn btn-default active" href="/t/javascript?type=newest" role="button">时间</a>
-                            <a class="btn btn-default" href="/t/javascript?type=votes" role="button">投票数</a>
-                            <a class="btn btn-default" href="/t/javascript?type=unanswered" role="button">未回答</a>
-                        </div>
-                    </div>
-
-                    @foreach($questions as $question)
-                        <section class="stream-list-item">
-                            <div class="qa-rank">
-                                <div class="answers">
-                                    {{ $question->answers }}<small>回答</small>
+                <div class="stream-list">
+                    @if($source_type==='questions')
+                        @foreach($sources as $question)
+                            <section class="stream-list-item">
+                                <div class="qa-rank">
+                                    <div class="answers">
+                                        {{ $question->answers }}<small>回答</small>
+                                    </div>
+                                    <div class="views hidden-xs">
+                                        {{ $question->views }}<small>浏览</small>
+                                    </div>
                                 </div>
-                                <div class="views hidden-xs">
-                                    {{ $question->views }}<small>浏览</small>
-                                </div>
-                            </div>
-                            <div class="summary">
-                                <ul class="author list-inline">
-                                    <li>
-                                        <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}">{{ $question->user->name }}</a>
-                                        <span class="split"></span>
-                                        <span class="askDate">{{ $question->created_at }}</span>
-                                    </li>
-                                </ul>
-                                <h2 class="title"><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></h2>
-                                @if($question->tags)
-                                    <ul class="taglist--inline ib">
-                                        @foreach($question->tags as $tag)
-                                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
-                                        @endforeach
+                                <div class="summary">
+                                    <ul class="author list-inline">
+                                        <li>
+                                            <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}">{{ $question->user->name }}</a>
+                                            <span class="split"></span>
+                                            <span class="askDate">{{ $question->created_at }}</span>
+                                        </li>
                                     </ul>
-                                @endif
-                            </div>
-                        </section>
-                    @endforeach
+                                    <h2 class="title"><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></h2>
+                                    @if($question->tags)
+                                        <ul class="taglist--inline ib">
+                                            @foreach($question->tags as $tag)
+                                                <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </div>
+                            </section>
+                        @endforeach
+                    @elseif($source_type==='articles')
+                        @foreach($sources as $article)
+                            <section class="stream-list-item">
+                                <div class="blog-rank">
+                                    <div class="votes @if($article->supports>0) plus @endif">
+                                        {{ $article->supports }}<small>推荐</small>
+                                    </div>
+                                    <div class="views hidden-xs">
+                                        {{ $article->views }}<small>浏览</small>
+                                    </div>
+                                </div>
+                                <div class="summary">
+                                    <h2 class="title"><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a></h2>
+                                    <p class="excerpt wordbreak hidden-xs">{{ $article->summary }}</p>
+                                    <ul class="author list-inline">
+                                        <li class="pull-right" title="{{ $article->collections }} 收藏">
+                                            <small class="glyphicon glyphicon-bookmark"></small> {{ $article->collections }}
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}">
+                                                <img class="avatar-20 mr-10 hidden-xs" src="{{ route('website.image.avatar',['avatar_name'=>$article->user_id.'_small']) }}" alt="{{ $article->user->name }}"> {{ $article->user->name }}
+                                            </a>
+                                            发布于 {{ timestamp_format($article->created_at) }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        @endforeach
+                    @else
+                        <div class="text-fmt">{!! $tag->description  !!}</div>
+                    @endif
+
+
 
                 </div>
 
+                @if($source_type!=='details')
                 <div class="text-center">
-                    {!! str_replace('/?', '?', $questions->render()) !!}
+                    {!! str_replace('/?', '?', $sources->render()) !!}
                 </div>
-            </div><!-- /.tab-content -->
-        </div><!-- /.main -->
+                @endif
+            </div>
+        </div>
 
         <div class="col-xs-12 col-md-3 side">
 

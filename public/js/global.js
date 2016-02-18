@@ -20,6 +20,15 @@ var ask_editor_options = {
     }
 };
 
+var showPopover = function () {
+        $(this).popover('show');
+    }
+    , hidePopover = function () {
+        $(this).popover('hide');
+    };
+
+
+
 $(function(){
 
     /*禁用bootstrap全局过度效果*/
@@ -28,14 +37,29 @@ $(function(){
     /*全局启用bootstrap tooltip*/
     $('[data-toggle="tooltip"]').tooltip();
 
-    /**/
+    /*用户信息卡片*/
     $('.user-card').popover({
-        delay:500,
-        placement:'right',
+        placement:'top',
         html:true,
-        trigger:'hover',
-        content:'测试'
+        trigger:'manual',
+        viewport: {selector: '.wrap',padding:5},
+        content:'<p>React (sometimes styled React.js or ReactJS) is an open-source JavaScript library for creating user interfaces that aims to address challenges encountered in developing single-page applications. It...</p> <div class="operation"> <a href="/t/react.js">查看</a> <span class="text-muted">·</span> <a href="/t/react.js/edit">编辑</a> <span class="text-muted">·</span> <a href="/feeds/tag/react.js">订阅</a> <div class="pull-right"> <span class="text-muted followers">130 人</span> <button class="btn btn-default btn-xs tagfollow " data-id="1040000002893277">加关注</button> </div>'
+    }).on("mouseenter", function () {
+        var _this = this;
+        $(this).popover("show");
+        $('.user-card').not(_this).popover('hide');
+        $(this).siblings(".popover").on("mouseleave", function () {
+            $(_this).popover('hide');
+        });
+    }).on("mouseleave", function () {
+        var _this = this;
+        setTimeout(function () {
+            if (!$(".popover:hover").length) {
+                $(_this).popover("hide")
+            }
+        },200);
     });
+
     /*用户表单输入时删除错误提示*/
     $("body").delegate("form input","keydown",function(){
         $(this).parents(".form-group").removeClass("has-error");
@@ -52,6 +76,7 @@ $(function(){
         $("#top-search-form").submit();
     });
 
+    /*消息提示框自动隐藏*/
     $("#alert_message").delay(5000).hide(0);
 
 

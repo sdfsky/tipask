@@ -131,7 +131,7 @@ Route::Group(['namespace'=>'Ask'],function(){
 
 
     /*标签首页*/
-    Route::get('topic/{name}',['as'=>'ask.tag.index','uses'=>'TagController@index'])->where(['name'=>'\w+']);
+    Route::get('topic/{name}/{source_type?}',['as'=>'ask.tag.index','uses'=>'TagController@index'])->where(['source_type'=>'(questions|articles|details)']);
 
     /*加载评论*/
     Route::get('{source_type}/{source_id}/comments',['as'=>'ask.comment.show','uses'=>'CommentController@show'])->where(['source_type'=>'(question|answer|article)','source_id'=>'[0-9]+']);

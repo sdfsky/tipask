@@ -101,13 +101,13 @@
                 @foreach( $answers as $answer )
                 <div class="media">
                     <div class="media-left">
-                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="user-card" target="_blank">
+                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="avatar-link user-card" target="_blank">
                             <img class="avatar-40"  src="{{ route('website.image.avatar',['avatar_name'=>$answer->user_id.'_middle']) }}" alt="{{ $answer->user['name'] }}"></a>
                         </a>
                     </div>
                     <div class="media-body">
                         <div class="media-heading">
-                            <strong><a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr5">{{ $answer->user['name'] }}</a></strong>
+                            <strong><a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr-5 user-card">{{ $answer->user['name'] }}</a></strong>
                             @if($answer->user->title)
                             <span class="text-muted"> - {{ $answer->user->title }}</span>
                             @endif

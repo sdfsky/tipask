@@ -171,6 +171,8 @@ class UserController extends Controller
             $user->password = Hash::make($request->input('password'));
             $user->save();
 
+            $user->attachRole(2); //默认注册为普通用户角色
+
             EmailToken::clear($user->email,'findPassword');
 
             return $this->success(route('auth.user.login'),'密码修改成功,请重新登录');
@@ -180,8 +182,6 @@ class UserController extends Controller
         return view("theme::account.findPassword")->with('token',$token);
 
     }
-
-
 
 
 
