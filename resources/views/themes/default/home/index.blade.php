@@ -27,31 +27,23 @@
                                 <div class="item">
                                     <a href="http://www.juqingku.net/plot/63829/1.html" target="_blank"><img src="http://2.im.guokr.com/S-iNTKhNmwt5f_Gsmr6Divh09iHyEH_XFoB0rtvdWE2AAgAAyAEAAEpQ.jpg?imageView2/1/w/330/h/235" alt="刘诗诗演绎一代女医 霍建华黄轩争权夺爱"></a>
                                     <div class="carousel-caption">
-                                        <h3>刘诗诗演绎一代女医 霍建华黄轩争权夺爱</h3>
+                                        <h4>刘诗诗演绎一代女医 霍建华黄轩争权夺爱</h4>
                                         <p></p>
                                     </div>
                                 </div><div class="item active">
                                     <a href="http://www.juqingku.net/plot/63833/1.html" target="_blank"><img src="http://1.im.guokr.com/dH3agcf_PusFxKVtgTR7uP98ggSyBxANsV6Gz31k4UL6AQAAaAEAAEpQ.jpg?imageView2/1/w/330/h/235" alt="刘恺威郑爽剜心虐恋"></a>
                                     <div class="carousel-caption">
-                                        <h3>刘恺威郑爽剜心虐恋</h3>
+                                        <h4>刘恺威郑爽剜心虐恋</h4>
                                         <p></p>
                                     </div>
                                 </div><div class="item ">
                                     <a href="http://www.juqingku.net/plot/63817/1.html" target="_blank"><img src="http://3.im.guokr.com/9FbjrviSIOJDttg0caNbOgwokdDOTGdd4rmmi2TmwkMtAQAA1gAAAEpQ.jpg" alt="童瑶李晨共谱办公室恋曲"></a>
                                     <div class="carousel-caption">
-                                        <h3>童瑶李晨共谱办公室恋曲</h3>
+                                        <h4>童瑶李晨共谱办公室恋曲</h4>
                                         <p></p>
                                     </div>
-                                </div>                    </div>
-                            <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 job-list-item-block">
@@ -113,52 +105,23 @@
                     <div class="col-md-6 job-list-item-block">
                         <h4 class="widget-box-title">热门问答</h4>
                         <ul class="widget-links list-unstyled">
+                            @foreach($hotQuestions as $hotQuestion)
                             <li class="widget-links-item">
-                                <a title="如何找到靠谱的医院？" href="http://www.tipaskx.com/article/6">如何找到靠谱的医院？</a>
-                                <small class="text-muted">6 浏览</small>
+                                <a title="{{ $hotQuestion->title }}"  href="{{ route('ask.question.detail',['id'=>$hotQuestion->id]) }}">{{ $hotQuestion->title }}</a>
+                                <small class="text-muted">{{ $hotQuestion->answers }} 回答</small>
                             </li>
-                            <li class="widget-links-item">
-                                <a title="融资为什么要先找投资经理" href="http://www.tipaskx.com/article/5">融资为什么要先找投资经理</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="你也是产品设计师" href="http://www.tipaskx.com/article/4">你也是产品设计师</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个程序员的怒吼" href="http://www.tipaskx.com/article/3">一个程序员的怒吼</a>
-                                <small class="text-muted">1 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个产品是什么，首先必须不是什么" href="http://www.tipaskx.com/article/2">一个产品是什么，首先必须不是什么</a>
-                                <small class="text-muted">2 浏览</small>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-md-6 job-list-item-block">
                         <h4 class="widget-box-title">悬赏问答</h4>
 
                         <ul class="widget-links list-unstyled">
-                            <li class="widget-links-item">
-                                <a title="如何找到靠谱的医院？" href="http://www.tipaskx.com/article/6">如何找到靠谱的医院？</a>
-                                <small class="text-muted">6 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="融资为什么要先找投资经理" href="http://www.tipaskx.com/article/5">融资为什么要先找投资经理</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="你也是产品设计师" href="http://www.tipaskx.com/article/4">你也是产品设计师</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个程序员的怒吼" href="http://www.tipaskx.com/article/3">一个程序员的怒吼</a>
-                                <small class="text-muted">1 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个产品是什么，首先必须不是什么" href="http://www.tipaskx.com/article/2">一个产品是什么，首先必须不是什么</a>
-                                <small class="text-muted">2 浏览</small>
-                            </li>
+                            @foreach($rewardQuestions as $rewardQuestion)
+                                <li class="widget-links-item">
+                                    <span class="text-gold"><i class="fa fa-database"></i> {{ $rewardQuestion->price }}</span>
+                                     <a title="{{ $rewardQuestion->title }}" href="{{ route('ask.question.detail',['id'=>$rewardQuestion->id]) }}">{{ $rewardQuestion->title }}</a>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -168,51 +131,24 @@
                     <div class="col-md-6 job-list-item-block">
                         <h4 class="widget-box-title">热门文章</h4>
                         <ul class="widget-links list-unstyled">
-                            <li class="widget-links-item">
-                                <a title="如何找到靠谱的医院？" href="http://www.tipaskx.com/article/6">如何找到靠谱的医院？</a>
-                                <small class="text-muted">6 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="融资为什么要先找投资经理" href="http://www.tipaskx.com/article/5">融资为什么要先找投资经理</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="你也是产品设计师" href="http://www.tipaskx.com/article/4">你也是产品设计师</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个程序员的怒吼" href="http://www.tipaskx.com/article/3">一个程序员的怒吼</a>
-                                <small class="text-muted">1 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个产品是什么，首先必须不是什么" href="http://www.tipaskx.com/article/2">一个产品是什么，首先必须不是什么</a>
-                                <small class="text-muted">2 浏览</small>
-                            </li>
+                            @foreach($hotArticles as $hotArticle)
+                                <li class="widget-links-item">
+                                    <a title="{{ $hotArticle->title }}"  href="{{ route('blog.article.detail',['id'=>$hotArticle->id]) }}">{{ $hotArticle->title }}</a>
+                                    <small class="text-muted">{{ $hotArticle->views }} 浏览</small>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-md-6 job-list-item-block">
                         <h4 class="widget-box-title">最新文章</h4>
                         <ul class="widget-links list-unstyled">
-                            <li class="widget-links-item">
-                                <a title="如何找到靠谱的医院？" href="http://www.tipaskx.com/article/6">如何找到靠谱的医院？</a>
-                                <small class="text-muted">6 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="融资为什么要先找投资经理" href="http://www.tipaskx.com/article/5">融资为什么要先找投资经理</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="你也是产品设计师" href="http://www.tipaskx.com/article/4">你也是产品设计师</a>
-                                <small class="text-muted">3 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个程序员的怒吼" href="http://www.tipaskx.com/article/3">一个程序员的怒吼</a>
-                                <small class="text-muted">1 浏览</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a title="一个产品是什么，首先必须不是什么" href="http://www.tipaskx.com/article/2">一个产品是什么，首先必须不是什么</a>
-                                <small class="text-muted">2 浏览</small>
-                            </li>
+                            @foreach($newestArticles as $newestArticle)
+                                <li class="widget-links-item">
+                                    <a title="{{ $newestArticle->title }}"  href="{{ route('blog.article.detail',['id'=>$newestArticle->id]) }}">{{ $newestArticle->title }}</a>
+                                    <small class="text-muted">{{ $newestArticle->views }} 浏览</small>
+                                </li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
@@ -224,21 +160,11 @@
             <div class="widget-box">
                 <h4 class="widget-box-title">最新公告</h4>
                 <ul class="widget-links list-unstyled">
+                    @foreach($newestNotices as $newestNotice)
                     <li class="widget-links-item">
-                        <a title="如何找到靠谱的医院？" href="http://www.tipaskx.com/article/6">如何找到靠谱的医院？</a>
+                        <a title="{{ $newestNotice->subject }}" href="{{ $newestNotice->url }}" target="_blank">{{ $newestNotice->subject }}</a>
                     </li>
-                    <li class="widget-links-item">
-                        <a title="融资为什么要先找投资经理" href="http://www.tipaskx.com/article/5">融资为什么要先找投资经理</a>
-                    </li>
-                    <li class="widget-links-item">
-                        <a title="你也是产品设计师" href="http://www.tipaskx.com/article/4">你也是产品设计师</a>
-                    </li>
-                    <li class="widget-links-item">
-                        <a title="一个程序员的怒吼" href="http://www.tipaskx.com/article/3">一个程序员的怒吼</a>
-                    </li>
-                    <li class="widget-links-item">
-                        <a title="一个产品是什么，首先必须不是什么" href="http://www.tipaskx.com/article/2">一个产品是什么，首先必须不是什么</a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
 
@@ -264,77 +190,15 @@
                 <h2 class="widget-box-title">
                     财富榜
                 </h2>
-                <ol id="usersDaily" class="widget-top10">
+                <ol class="widget-top10">
+                    @foreach($topCoinUsers as $topCoinUser)
                     <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/305/423/3054230534-561d20a868d2e_big64">
-                        <a href="/u/universe_of_code" class="ellipsis">
-                            代码宇宙
-                        </a>
-                        <span class="text-muted pull-right">+222</span>
+                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser->id.'_middle'])}}">
+                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser->id]) }}" class="ellipsis">{{ $topCoinUser->name }}</a>
+                        <span class="text-muted pull-right">{{ $topCoinUser->coins }}</span>
                     </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/304/698/3046988269-5644b84c17ed3_big64">
-                        <a href="/u/youmingdot" class="ellipsis">
-                            有明
-                        </a>
-                        <span class="text-muted pull-right">+79</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/275/720/275720874-553ae32cd2b02_big64">
-                        <a href="/u/jamesfancy" class="ellipsis">
-                            边城
-                        </a>
-                        <span class="text-muted pull-right">+67</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://dfnjy7g2qaazm.cloudfront.net/v-56b1c937/global/img/user-64.png">
-                        <a href="/u/luca1986" class="ellipsis">
-                            luca1986
-                        </a>
-                        <span class="text-muted pull-right">+56</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/891/710/891710192-1030000000445043_big64">
-                        <a href="/u/yellowlemon" class="ellipsis">
-                            yellowlemon
-                        </a>
-                        <span class="text-muted pull-right">+54</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/151/837/1518375183-54f135ef0d731_big64">
-                        <a href="/u/akong" class="ellipsis">
-                            kikong
-                        </a>
-                        <span class="text-muted pull-right">+52</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/305/322/3053223291-564c4e7d37faa_big64">
-                        <a href="/u/cuixiaozhuai" class="ellipsis">
-                            崔小拽
-                        </a>
-                        <span class="text-muted pull-right">+46</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/381/879/3818797108-5485c6dc7d677_big64">
-                        <a href="/u/lwxyfer" class="ellipsis">
-                            LWXYFER
-                        </a>
-                        <span class="text-muted pull-right">+36</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://sfault-avatar.b0.upaiyun.com/147/700/1477005669-55f23e2566f36_big64">
-                        <a href="/u/liuchao_55d0a0a7c90f3" class="ellipsis">
-                            刘懿超
-                        </a>
-                        <span class="text-muted pull-right">+35</span>
-                    </li>
-                    <li class="text-muted">
-                        <img class="avatar-24" src="https://dfnjy7g2qaazm.cloudfront.net/v-56b1c937/global/img/user-64.png">
-                        <a href="/u/105310" class="ellipsis">
-                            mlyknown
-                        </a>
-                        <span class="text-muted pull-right">+33</span>
-                    </li>
+                    @endforeach
+
                 </ol>
             </div>
 

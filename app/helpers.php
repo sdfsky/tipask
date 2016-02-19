@@ -7,14 +7,37 @@
  */
 
 
+
+/*公告状态文字定义*/
+if (! function_exists('trans_common_status')) {
+
+    function trans_common_status($status){
+        $map = [
+            0 => '待审核',
+            1 => '已审核',
+        ];
+
+        if(isset($map[$status])){
+            return $map[$status];
+        }
+
+        return '';
+
+    }
+
+}
+
+
+/*数据库setting表操作*/
 if (! function_exists('Setting')) {
 
-function Setting(){
-    return app('App\Models\Setting');
+    function Setting(){
+        return app('App\Models\Setting');
+    }
+
 }
 
 
-}
 
 /**
  * 将正整数转换为带+,例如 10 装换为 +10

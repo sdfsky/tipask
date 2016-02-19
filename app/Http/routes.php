@@ -194,20 +194,12 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
 
 
+    /*公告管理*/
+    Route::resource('notice', 'NoticeController',['except' => ['show']]);
 
+    /*首页推荐*/
+    Route::resource('recommendation', 'RecommendationController',['except' => ['show']]);
 
-
-
-//
-//    Route::controllers([
-//        'dashboard'=>'DashboardController',
-//        'user'=>'UserController',
-//        'role'=>'RoleController',
-//        'permission'=>'PermissionController',
-//        'menu'=>'MenuController',
-//    ]);
-
-   // Route::get('dashboard',['as'=>'admin.dashboard.index','uses'=>'DashboardController@getIndex']);
 
 });
 

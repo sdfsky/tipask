@@ -29,9 +29,9 @@ class Question extends Model
 
 
     /*热门问题*/
-    public static function hottest()
+    public static function hottest($pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->paginate(20);
+        $list = self::with('user')->where('status','>',0)->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
 
     }
@@ -51,9 +51,9 @@ class Question extends Model
     }
 
     /*悬赏问题*/
-    public static function reward()
+    public static function reward($pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->where('price','>',0)->orderBy('created_at','DESC')->paginate(20);
+        $list = self::with('user')->where('status','>',0)->where('price','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
     }
 

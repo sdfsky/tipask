@@ -61,6 +61,21 @@
             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 回答管理</a></li>
         </ul>
     </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-cutlery"></i> <span>运营</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu" id="operations">
+            <li><a href="{{ route('admin.notice.index') }}"><i class="fa fa-circle-o"></i> 公告管理</a></li>
+            <li><a href="{{ route('admin.recommendation.index') }}"><i class="fa fa-circle-o"></i> 首页推荐</a></li>
+            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 友情链接</a></li>
+        </ul>
+    </li>
+
+
+
     <li class="header">常用菜单</li>
     <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
     <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

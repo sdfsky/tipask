@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Notice;
 use App\Models\Question;
 use App\models\Tag;
 use App\models\UserData;
@@ -33,14 +34,56 @@ class IndexController extends Controller
 //            $message->to($data['email'], $data['name'])->subject('请验证您在Tipask问答网注册的邮箱！');
 //        });
 
+
+
+
         /*活跃用户*/
         $activeUsers = Cache::remember('active_users',10,function() {
                return  UserData::activities(8);
         });
 
+        /*热门问题*/
+        $hotQuestions = Cache::remember('hot_questions',10,function() {
+            return  Question::hottest(8);
+        });
+
+        /*悬赏问题*/
+        $rewardQuestions = Cache::remember('reward_questions',10,function() {
+            return  Question::reward(8);
+        });
+
+        /*热门文章*/
+        $hotArticles = Cache::remember('hot_articles',10,function() {
+            return  Article::hottest(8);
+        });
+
+        /*最新文章*/
+        $newestArticles = Cache::remember('newest_articles',10,function() {
+            return  Article::newest(8);
+        });
 
 
-        return view('theme::home.index')->with('activeUsers',$activeUsers);
+        /*最新公告*/
+        $newestNotices = Cache::remember('newest_notices',10,function() {
+            return  Notice::where('status','>','0')->orderBy('updated_at','DESC')->take(8)->get();
+        });
+
+
+
+        /*财富榜*/
+        $topCoinUsers = Cache::remember('top_coin_users',10,function() {
+            return  UserData::topCoins(8);
+        });
+
+
+
+        return view('theme::home.index')->with('activeUsers',$activeUsers)
+                                        ->with('hotQuestions',$hotQuestions)
+                                        ->with('rewardQuestions',$rewardQuestions)
+                                        ->with('hotArticles',$hotArticles)
+                                        ->with('newestArticles',$newestArticles)
+                                        ->with('newestNotices',$newestNotices)
+                                        ->with('topCoinUsers',$topCoinUsers);
 
     }
 

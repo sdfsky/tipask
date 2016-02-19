@@ -45,6 +45,7 @@ class UserData extends Model
 
 
 
+    /*活跃用户*/
     public static function activities($size)
     {
         return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
@@ -55,6 +56,25 @@ class UserData extends Model
             ->select('users.id','users.name','users.title')
             ->take($size)->get();
     }
+
+
+
+    /*财富榜*/
+
+    public static function topCoins($size)
+    {
+        return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
+            ->where('users.status','>',0)->where('user_data.articles','>',0)
+            ->orderBy('user_data.coins','DESC')
+            ->select('users.id','users.name','user_data.coins')
+            ->take($size)->get();
+    }
+
+
+
+
+
+
 
 
 
