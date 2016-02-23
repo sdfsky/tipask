@@ -6,7 +6,9 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Notice;
 use App\Models\Question;
+use App\Models\Recommendation;
 use App\models\Tag;
+use App\Models\Taggable;
 use App\models\UserData;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,6 +37,22 @@ class IndexController extends Controller
 //        });
 
 
+        /*热门话题*/
+        $hotTags = Cache::remember('hot_tags',10,function(){
+            $tags = Taggable::hottest(25);
+            $tags->map(function($tag){
+                $tagInfo = Tag::find($tag->tag_id);
+                $tag->name = $tagInfo->name;
+            });
+            return $tags;
+        });
+
+
+        /*推荐内容*/
+
+        $recommendItems= Cache::remember('recommend_items',10,function() {
+            return Recommendation::where('status','>',0)->orderBy('sort','asc')->orderBy('updated_at','desc')->take(11)->get();
+        });
 
 
         /*活跃用户*/
@@ -77,12 +95,14 @@ class IndexController extends Controller
 
 
 
-        return view('theme::home.index')->with('activeUsers',$activeUsers)
+        return view('theme::home.index')->with('recommendItems',$recommendItems)
+                                        ->with('activeUsers',$activeUsers)
                                         ->with('hotQuestions',$hotQuestions)
                                         ->with('rewardQuestions',$rewardQuestions)
                                         ->with('hotArticles',$hotArticles)
                                         ->with('newestArticles',$newestArticles)
                                         ->with('newestNotices',$newestNotices)
+                                        ->with('hotTags',$hotTags)
                                         ->with('topCoinUsers',$topCoinUsers);
 
     }

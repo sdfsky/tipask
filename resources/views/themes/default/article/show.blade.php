@@ -14,20 +14,20 @@
                 @endif
 
                 <div class="content mt-10">
-                    <div class="quote">
+                    <div class="quote mb-20">
                          {{ $article->summary }}
                     </div>
-                    <div class="text-fmt ">
+                    <div class="text-fmt">
                         {!! $article->content !!}
                     </div>
-                    <div class="post-opt mt-10">
+                    <div class="post-opt mt-30">
                         <ul class="list-inline">
                             <li class="text-muted">
                                 <i class="fa fa-clock-o"></i>
                                 发表于 {{ timestamp_format($article->created_at) }}
                             </li>
                             @if($article->status!==2 && Auth()->check() && (Auth()->user()->id === $article->user_id) )
-                            <li><a href="{{ route('ask.question.edit',['id'=>$article->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="进一步完善文章内容"><i class="fa fa-edit"></i> 编辑</a></li>
+                            <li><a href="{{ route('blog.article.edit',['id'=>$article->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="进一步完善文章内容"><i class="fa fa-edit"></i> 编辑</a></li>
                             @endif
                         </ul>
                     </div>

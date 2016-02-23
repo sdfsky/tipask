@@ -15,72 +15,37 @@
                 <h4 class="widget-box-title">最新推荐</h4>
                 <div class="job-list-item row">
                     <div class="col-md-6 job-list-item-block">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <div id="carousel-recommendation" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li data-target="#carousel-recommendation" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-recommendation" data-slide-to="1"></li>
+                                <li data-target="#carousel-recommendation" data-slide-to="2"></li>
                             </ol>
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="leftmodbox">
-                                <div class="item">
-                                    <a href="http://www.juqingku.net/plot/63829/1.html" target="_blank"><img src="http://2.im.guokr.com/S-iNTKhNmwt5f_Gsmr6Divh09iHyEH_XFoB0rtvdWE2AAgAAyAEAAEpQ.jpg?imageView2/1/w/330/h/235" alt="刘诗诗演绎一代女医 霍建华黄轩争权夺爱"></a>
+                                @foreach($recommendItems as $key=> $recommendItem)
+                                @if($key<3)
+                                <div @if($key===0) class="item active" @else class="item" @endif>
+                                    <a href="{{ $recommendItem->url }}" target="_blank"><img src="{{ route('website.image.show',['image_name'=>$recommendItem->logo]) }}" alt="{{ $recommendItem->subject }}"></a>
                                     <div class="carousel-caption">
-                                        <h4>刘诗诗演绎一代女医 霍建华黄轩争权夺爱</h4>
-                                        <p></p>
-                                    </div>
-                                </div><div class="item active">
-                                    <a href="http://www.juqingku.net/plot/63833/1.html" target="_blank"><img src="http://1.im.guokr.com/dH3agcf_PusFxKVtgTR7uP98ggSyBxANsV6Gz31k4UL6AQAAaAEAAEpQ.jpg?imageView2/1/w/330/h/235" alt="刘恺威郑爽剜心虐恋"></a>
-                                    <div class="carousel-caption">
-                                        <h4>刘恺威郑爽剜心虐恋</h4>
-                                        <p></p>
-                                    </div>
-                                </div><div class="item ">
-                                    <a href="http://www.juqingku.net/plot/63817/1.html" target="_blank"><img src="http://3.im.guokr.com/9FbjrviSIOJDttg0caNbOgwokdDOTGdd4rmmi2TmwkMtAQAA1gAAAEpQ.jpg" alt="童瑶李晨共谱办公室恋曲"></a>
-                                    <div class="carousel-caption">
-                                        <h4>童瑶李晨共谱办公室恋曲</h4>
-                                        <p></p>
+                                        <h4>{{ $recommendItem->subject }}</h4>
                                     </div>
                                 </div>
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 job-list-item-block">
                         <ul class="widget-links list-unstyled">
+                            @foreach($recommendItems as $key=> $recommendItem)
+                            @if($key>2)
                             <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/8">你们家装修是什么样子的，总共花费是多少？</a>
-                                <small class="text-muted">1 回答</small>
+                                <a href="{{ $recommendItem->url }}" target="_blank" >{{ $recommendItem->subject }}</a>
                             </li>
-                            <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/1">如何看待微信将对提现收取手续费？</a>
-                                <small class="text-muted">2 回答</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/6">如何评价豆瓣广告《我们的精神角落》？</a>
-                                <small class="text-muted">2 回答</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/5">大学毕业是去大城市好还是回小城市好?</a>
-                                <small class="text-muted">2 回答</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/7">网络上有哪些免费的教育资源？</a>
-                                <small class="text-muted">1 回答</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/8">你们家装修是什么样子的，总共花费是多少？</a>
-                                <small class="text-muted">1 回答</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/1">如何看待微信将对提现收取手续费？</a>
-                                <small class="text-muted">2 回答</small>
-                            </li>
-                            <li class="widget-links-item">
-                                <a href="http://www.tipaskx.com/question/6">如何评价豆瓣广告《我们的精神角落》？</a>
-                                <small class="text-muted">2 回答</small>
-                            </li>
-
+                            @endif
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -171,18 +136,9 @@
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热议话题 <a href="{{ route('website.topic') }}" title="更多">»</a></h2>
                 <ul class="taglist--inline multi">
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089436" data-original-title="javascript" href="/t/javascript">javascript</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089387" data-original-title="php" href="/t/php">php</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089534" data-original-title="python" href="/t/python">python</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089434" data-original-title="css" href="/t/css">css</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089442" data-original-title="ios" href="/t/ios">ios</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089658" data-original-title="android" href="/t/android">android</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089918" data-original-title="node.js" href="/t/node.js">node.js</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089409" data-original-title="html5" href="/t/html5">html5</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000090203" data-original-title="go" href="/t/go">go</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089488" data-original-title="mongodb" href="/t/mongodb">mongodb</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089431" data-original-title="redis" href="/t/redis">redis</a></li>
-                    <li class="tagPopup"><a class="tag" data-toggle="popover" data-id="1040000000089556" data-original-title="程序员" href="/t/程序员">程序员</a></li>
+                    @foreach($hotTags as $hotTag)
+                    <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$hotTag->name]) }}">{{ $hotTag->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
 

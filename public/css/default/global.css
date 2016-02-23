@@ -30,7 +30,11 @@ blockquote{font-size: 13px;}
 html{font-size:10px;-webkit-tap-highlight-color:transparent}
 body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft Yahei","SimSun",sans-serif;font-size:14px;line-height:1.5;color:#333;background-color:#fff}
 
-a{color:#2b7a5c;}
+a{color:#444;}
+a:focus, a:hover {
+    color: #017e66;
+    text-decoration: underline;
+}
 
 
 .wrap {

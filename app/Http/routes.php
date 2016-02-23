@@ -152,6 +152,8 @@ Route::Group(['namespace'=>'Blog'],function(){
         /*文章创建*/
         Route::get('article/create',['as'=>'blog.article.create','uses'=>'ArticleController@create']);
         Route::post('article/store',['as'=>'blog.article.store','uses'=>'ArticleController@store']);
+        Route::get('article/edit/{id}',['as'=>'blog.article.edit','uses'=>'ArticleController@edit'])->where(['id'=>'[0-9]+']);
+        Route::post('article/update',['as'=>'blog.article.update','uses'=>'ArticleController@update']);
 
 
 

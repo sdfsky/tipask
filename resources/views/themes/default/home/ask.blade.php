@@ -53,14 +53,10 @@
             </div>
         </div><!-- /.main -->
         <div class="col-xs-12 col-md-3 side">
-            <aside class="widget-welcome">
-                <h2 class="h4 title">最专业的开发者社区</h2>
-                <p>最前沿的技术问答，最纯粹的技术切磋。让你不知不觉中开拓眼界，提高技能，认识更多朋友。</p>
-                <ul class="list-unstyled">
-                    <li><a href="/user/oauth/google" class="3rdLogin btn btn-default btn-block btn-sn-google"><span class="icon-sn-google"></span> Google 账号登录</a></li>
-                    <li><a href="/user/oauth/weibo" class="3rdLogin btn btn-default btn-block btn-sn-weibo"><span class="icon-sn-weibo"></span> 微博账号登录</a></li>
-                </ul>
-            </aside>
+            <div class="side-ask alert alert-warning">
+                <p>今天，你的网站遇到什么问题呢？</p>
+                <a href="{{ route('ask.question.create') }}" class="btn btn-primary btn-block mt-10">提问</a>
+            </div>
 
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热议标签 <a href="/tags" title="更多">»</a></h2>

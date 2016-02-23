@@ -45,11 +45,8 @@
         </div><!-- /.main -->
         <div class="col-xs-12 col-md-3 side">
             <div class="side-ask alert alert-warning">
-                <p>今天，有什么开发相关的分享呢？</p>
+                <p>今天，有什么经验需要分享呢？</p>
                 <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block mt-10">撰写</a>
-                <div class="mt-10 side-system-notice">
-                    <i class="fa fa-bullhorn pull-left"></i><a class="side-system-notice--title" href="http://segmentfault.com/a/1190000004292681">年度内容精选：SegmentFault 2015 Top Rank</a>
-                </div>
             </div>
 
             <div class="widget-box">
