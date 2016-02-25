@@ -139,6 +139,9 @@ a:focus, a:hover {
     vertical-align: middle;
 }
 
+
+.side-alert{border: 1px solid #fbeed5;padding: 15px;}
+
 /*列表样式*/
 .stream-list{margin-bottom:10px}
 .stream-list.top-indent{margin-top:-10px}
@@ -157,11 +160,7 @@ a:focus, a:hover {
 .stream-list-item.highlight{background:#FFF9EB}
 
 /*文章列表样式*/
-.blog-stream .stream-list-item {
-    padding: 12px 0;
-}
-
-
+.blog-stream .stream-list-item {padding: 12px 0;}
 .bookmark-rank,.qa-rank{float:left;margin-right:5px;font-size:16px;text-align:center;line-height:1.2;color:#666}
 .bookmark-rank small,.qa-rank small{display:block;font-size:12px}
 .bookmark-rank .answers,.bookmark-rank .views,.bookmark-rank .votes,.qa-rank .answers,.qa-rank .views,.qa-rank .votes{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px}
@@ -174,8 +173,6 @@ a:focus, a:hover {
 .bookmark-rank{margin-right:10px}
 .bookmark-rank .favs,.bookmark-rank .followers{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px;background:#F0F5F3;color:#017E66}
 .bookmark-rank .followers{background:#5cb85c;color:#fff}
-
-
 
 .blog-rank {
     float: left;
@@ -327,9 +324,7 @@ a:focus, a:hover {
 .post-col .unlike-alert .close{right:auto}
 
 
-.post-offset {
-    margin-left: 50px;
-}
+.post-offset {margin-left: 50px;}
 .post-offset .answer-time{float:right;}
 
 
@@ -428,5 +423,6 @@ section .h4{margin-bottom:2px;font-size:16px}
     text-align: center;
     font-size: 13px;
 }
+#footer .copyright a{color:#888;}
 
 

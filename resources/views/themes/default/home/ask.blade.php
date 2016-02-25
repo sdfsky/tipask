@@ -53,7 +53,7 @@
             </div>
         </div><!-- /.main -->
         <div class="col-xs-12 col-md-3 side">
-            <div class="side-ask alert alert-warning">
+            <div class="side-alert alert alert-warning">
                 <p>今天，你的网站遇到什么问题呢？</p>
                 <a href="{{ route('ask.question.create') }}" class="btn btn-primary btn-block mt-10">提问</a>
             </div>

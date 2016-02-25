@@ -44,7 +44,7 @@
             </div>
         </div><!-- /.main -->
         <div class="col-xs-12 col-md-3 side">
-            <div class="side-ask alert alert-warning">
+            <div class="side-alert alert alert-warning">
                 <p>今天，有什么经验需要分享呢？</p>
                 <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block mt-10">撰写</a>
             </div>

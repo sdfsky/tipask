@@ -122,10 +122,14 @@
 
 <footer id="footer">
     <div class="container">
-        <div class="copyright">
-            Copyright © 2011-2015 SegmentFault. 当前呈现版本 <a href="http://status.segmentfault.com/">14.11.22</a><br><a href="http://www.miibeian.gov.cn/" rel="nofollow">{{ Setting()->get('website_icp') }}</a>
-            <p class="text-muted small">Powered by Tipask v2.5 ©2009-2014 tipask.com，Processed in 0.010798 second(s), 1 queries.</p>
-
+        <div class="text-center">
+            <a href="http://help.tipask.com/" target="_blank">Tipask问答网</a><span class="span-line">|</span>
+            <a href="mailto:tipask@qq.com" target="_blank">联系我们</a><span class="span-line">|</span>
+            <a href="http://help.tipask.com/index/help.html" target="_blank">使用帮助</a>
+            <span class="span-line">|</span><a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
+        </div>
+        <div class="copyright mt-10">
+            Powered By Tipask3.0开发版 ©2009-2016 tipask.com 最后更新日期 <a href="http://status.segmentfault.com/">2016-2-16</a>
         </div>
     </div>
 </footer>
