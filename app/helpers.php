@@ -38,6 +38,15 @@ if (! function_exists('Setting')) {
 }
 
 
+/*数据库area地区表操作*/
+if (! function_exists('Area')) {
+
+    function Area(){
+        return app('App\Models\Area');
+    }
+
+}
+
 
 /**
  * 将正整数转换为带+,例如 10 装换为 +10

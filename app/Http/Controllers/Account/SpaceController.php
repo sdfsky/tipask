@@ -41,6 +41,7 @@ class SpaceController extends Controller
         $doings->map(function($doing){
             $doing->action_text = Config::get('tipask.user_actions.'.$doing->action);
         });
+        $this->user->userData->increment('views');
         return view('theme::space.index')->with('doings',$doings);
     }
 
@@ -62,6 +63,12 @@ class SpaceController extends Controller
     {
         $answers = $this->user->answers()->with('question')->orderBy('created_at','DESC')->paginate(10);
         return view('theme::space.answers')->with('answers',$answers);
+    }
+
+    public function articles()
+    {
+        $articles = $this->user->articles()->orderBy('created_at','DESC')->paginate(10);
+        return view('theme::space.articles')->with('articles',$articles);
     }
 
 

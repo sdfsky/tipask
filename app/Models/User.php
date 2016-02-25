@@ -126,6 +126,16 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Models\Answer');
     }
 
+
+    /**
+     * 获取用户文章
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Models\Article');
+    }
+
     /**
      * 获取用户动态
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

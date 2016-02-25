@@ -29,6 +29,7 @@ class CreateUserDataTable extends Migration
             $table->integer('answers')->unsigned()->default(0);             //回答数
             $table->integer('adoptions')->unsigned()->default(0);           //被采纳个数
             $table->integer('supports')->unsigned()->default(0);            //赞同数
+            $table->integer('followers')->unsigned()->default(0);           //关注数
             $table->integer('views')->unsigned()->default(0);               //空间访问数
 
         });

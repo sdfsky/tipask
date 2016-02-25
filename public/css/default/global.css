@@ -125,7 +125,7 @@ a:focus, a:hover {
 .avatar-40{width:40px;height:40px;border-radius:4px;}
 .avatar-50{width:40px;height:40px;border-radius:4px;}
 .avatar-64{width:64px;height:64px;border-radius:8px;}
-.avatar-128{width:128px;height:128px}
+.avatar-128{width:128px;height:128px;border-radius:50%;}
 .avatar-256{width:256px;height:256px}
 
 .avatar-link{display:block;}
@@ -349,19 +349,6 @@ a:focus, a:hover {
 /*我的通知*/
 .widget-notify blockquote{margin:10px;font-size: 13px;}
 .widget-notify  .not_read{background:#FFF9EA;}
-
-/*动态样式*/
-.widget-active section{padding:10px 0;border-top:1px solid #EEE}
-.widget-active--left{float:left;color:#CCC;font-size:16px}
-.widget-active--right{margin-left:30px}
-.widget-active--right .wordbreak{color:#888}
-.widget-active--right__info{color:#999;margin-bottom:5px}
-.widget-active--right__info small{color:#CCC}
-.widget-active--right__info .badge{background-color:#FFF;border:1px solid}
-.widget-active--right__title h4{display:inline;margin:0 5px 0 0;font-size:15px}
-.widget-active--right__title h4 a{color:#333}
-.widget-active--right__title h4 a:hover{color:#017e66}
-.widget-active--right__quote{border-left:5px solid #EEE;padding-left:10px;margin-top:5px;margin-bottom:0;color:#888;word-break:break-all}
 
 
 #showNew,.streams__item .excerpt:hover{cursor:pointer}

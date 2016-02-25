@@ -1,0 +1,38 @@
+@extends('theme::layout.space')
+
+@section('space_content')
+    <h4 class="space-steam-heading">{{ $articles->total() }} 篇文章</h4>
+    <ul class="space-steam-list">
+        <li>
+            <div class="row">
+                <div class="col-md-8 space-steam-item-title-warp">
+                    <strong>标题</strong>
+                </div>
+                <div class="col-md-2">
+                    <strong>推荐/浏览</strong>
+                </div>
+                <div class="col-md-2">
+                    <strong>发布日期</strong>
+                </div>
+            </div>
+        </li>
+        @foreach($articles as $article)
+        <li>
+            <div class="row">
+                <div class="col-md-8 space-steam-item-title-warp">
+                    <a class="space-steam-item-title" href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a>
+                </div>
+                <div class="col-md-2"><span class="text-muted">{{ $article->supports }}/{{ $article->views }}</span></div>
+                <div class="col-md-2">
+                    <span class="space-steam-item-date">{{ timestamp_format($article->created_at) }}</span>
+                </div>
+            </div>
+        </li>
+        @endforeach
+    </ul>
+    <div class="text-center">
+        {!! str_replace('/?', '?', $articles->render()) !!}
+    </div>
+@endsection
+
+

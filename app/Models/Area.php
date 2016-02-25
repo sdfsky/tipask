@@ -55,5 +55,16 @@ class Area extends Model
     }
 
 
+    public static function getName($id)
+    {
+        foreach(self::loadFromCache() as $area){
+            if($area->id == $id){
+               return $area->name;
+            }
+        }
+        return '';
+    }
+
+
 
 }

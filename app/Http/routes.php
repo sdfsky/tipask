@@ -29,6 +29,8 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::get('people/{user_id}/questions',['as'=>'auth.space.questions','uses'=>'SpaceController@questions'])->where(['user_id'=>'[0-9]+']);
     /*我的回答*/
     Route::get('people/{user_id}/answers',['as'=>'auth.space.answers','uses'=>'SpaceController@answers'])->where(['user_id'=>'[0-9]+']);
+    /*我的文章*/
+    Route::get('people/{user_id}/articles',['as'=>'auth.space.articles','uses'=>'SpaceController@articles'])->where(['user_id'=>'[0-9]+']);
     /*我的金币*/
     Route::get('people/{user_id}/coins',['as'=>'auth.space.coins','uses'=>'SpaceController@coins'])->where(['user_id'=>'[0-9]+']);
     /*我的经验*/

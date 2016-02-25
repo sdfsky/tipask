@@ -6,14 +6,17 @@
         @foreach($answers as $answer)
         <section class="stream-list-item">
             <div class="qa-rank">
-                <div class="votes">
-                    {{ $answer->supports }}<small>赞同</small>
+                <div class="answers answered ">
+                    {{ $answer->supports }} <small> 赞同 </small>
                 </div>
             </div>
             <div class="summary">
-                <h2 class="title"><a href="{{ route('ask.question.detail',['question_id'=>$answer->question_id]) }}" title="{{ $answer->question_title }}">{{ str_limit($answer->question_title,60) }}</a></h2>
-                <p class="text-muted mb0">{{ str_limit(strip_tags($answer->content),300) }}</p>
-                <p class="text-muted mb0">回答于 {{ timestamp_format($answer->created_at) }}</p>
+                <h2 class="title">
+                    <a href="{{ route('ask.question.detail',['question_id'=>$answer->question_id]) }}" title="{{ $answer->question_title }}">{{ str_limit($answer->question_title,60) }}</a>
+                    @if($answer->adopted_at>0) <label class="label label-warning ml-5">已采纳</label> @endif
+                </h2>
+                <p class="text-muted mt-10">{{ str_limit(strip_tags($answer->content),300) }}</p>
+                <p class="text-muted">回答于 {{ timestamp_format($answer->created_at) }}</p>
 
             </div>
         </section>
