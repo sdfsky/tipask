@@ -72,8 +72,8 @@ Route::Group(['namespace'=>'Account'],function(){
         Route::get('collection/{source_type}',['as'=>'auth.collection.sources','uses'=>'CollectionController@sources'])->where(['source_type'=>'(questions|articles)']);
 
         /*关注问题、人、标签*/
-        Route::get('follow/{source_type}/{source_id}',['as'=>'auth.attention.store','uses'=>'AttentionController@store'])->where(['source_type'=>'(question|tag|article)','source_id'=>'[0-9]+']);
-        Route::get('attention/{source_type}',['as'=>'auth.attention.sources','uses'=>'AttentionController@sources'])->where(['source_type'=>'(questions|tags|articles)']);
+        Route::get('follow/{source_type}/{source_id}',['as'=>'auth.attention.store','uses'=>'AttentionController@store'])->where(['source_type'=>'(question|tag|user)','source_id'=>'[0-9]+']);
+        Route::get('attention/{source_type}',['as'=>'auth.attention.sources','uses'=>'AttentionController@sources'])->where(['source_type'=>'(questions|tags|users)']);
 
 
     });

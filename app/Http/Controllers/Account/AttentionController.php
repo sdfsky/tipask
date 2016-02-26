@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\Attention;
 use App\Models\Question;
+use App\models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,20 +25,27 @@ class AttentionController extends Controller
         if($source_type === 'question'){
             $source  = Question::find($source_id);
             $subject = $source->title;
-        }else if($source_type === 'article'){
-
+        }else if($source_type === 'user'){
+            $source  = User::find($source_id);
+            $subject = $source->name;
+        }else if($source_type==='tag'){
+            $source  = Tag::find($source_id);
+            $subject = $source->name;
         }
 
         if(!$source){
             abort(404);
         }
 
-
         /*再次关注相当于是取消关注*/
         $attention = Attention::where("user_id",'=',$request->user()->id)->where('source_type','=',get_class($source))->where('source_id','=',$source_id)->first();
         if($attention){
             $attention->delete();
-            $source->decrement('followers');
+            if($source_type==='user'){
+                $source->userData->decrement('followers');
+            }else{
+                $source->decrement('followers');
+            }
             return response('unfollowed');
         }
 
@@ -54,11 +63,15 @@ class AttentionController extends Controller
                 case 'question' :
                     $this->notify($request->user()->id,$source->user_id,'follow_question',$subject,$source->id);
                     $this->doing($request->user()->id,'follow_question',get_class($source),$source_id,$subject);
+                    $source->increment('followers');
                     break;
                 case 'user':
+                    $source->userData->increment('followers');
+                    break;
+                case 'tag':
+                    $source->increment('followers');
                     break;
             }
-            $source->increment('followers');
         }
 
         return response('followed');

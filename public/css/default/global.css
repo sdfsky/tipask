@@ -211,6 +211,12 @@ a:focus, a:hover {
 
 
 /*tag样式定义*/
+
+.tag-header{background:#f6f6f6;box-shadow:0 1px 2px 0 rgba(0,0,0,.24);padding:15px;margin-bottom:20px}
+.tag-header-title{margin-top:0;margin-right:15px;vertical-align:middle}
+.tag-header-follow{display:inline-block}
+.tag-header-summary{color:#666;margin-top:15px;margin-bottom:0}
+
 .tag{display:inline-block;padding:0 8px;color:#017e66;background-color:#E7F2ED;height:24px;line-height:24px;font-weight:400;font-size:13px;text-align:center}
 .tag[href]:focus,.tag[href]:hover{background-color:#017e66;color:#fff;text-decoration:none}
 .tag-sm{padding:0 4px;height:18px;line-height:18px;font-size:12px}
@@ -234,7 +240,7 @@ a:focus, a:hover {
 .widget-welcome .join-wide{padding-top:10px;padding-bottom:10px;padding-left:20px;border-left:1px solid #eee}
 .widget-welcome.widget-welcome-question{background:#fcf8e3}
 
-.widget-box{margin:15px 0;padding-top:15px;border-top:1px solid #eee}
+.widget-box{padding-top:15px;border-top:1px solid #eee}
 .widget-box .widget-box-title{margin:0 0 15px;font-size:16px}
 .widget-box.no-border,.widget-box:first-child{margin-top:0;padding-top:0;border:none}
 .widget-top10{padding-left:30px}

@@ -62,4 +62,25 @@ class Tag extends Model
     }
 
 
+
+    public function followers()
+    {
+        return $this->morphToMany('App\Models\UserData', 'source','attentions','source_id','user_id');
+    }
+
+
+
+
+
+    /*相关标签检索*/
+    public function relations($pageSize=25)
+    {
+        return self::where(function($query){
+                        $query->where('parent_id','=',$this->parent_id)
+                              ->where('id','<>',$this->id);
+                      })->orWhere('parent_id','=',$this->parent_id)
+                        ->orderBy('followers','desc')->take($pageSize)->get();
+    }
+
+
 }

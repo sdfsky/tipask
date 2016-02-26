@@ -25,8 +25,12 @@
                         @if(Auth()->check() && Auth()->user()->id === $userInfo->id)
                             <a href="{{ route('auth.profile.base') }}" class="btn mr-10 btn-primary">编辑个人资料</a>
                         @else
-                        <a class="btn mr-10 btn-success">加关注</a>
-                        <a class="btn mr-10 btn-primary">写私信</a>
+                        @if(Auth()->check() && Auth()->user()->isFollowed(get_class($userInfo),$userInfo->id))
+                            <button type="button" id="follow-button" class="btn mr-10 btn-success active" data-source_type = "user" data-source_id = "{{ $userInfo->id }}"  data-show_num="true"  data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">已关注</button>
+                        @else
+                            <button type="button" id="follow-button" class="btn mr-10 btn-success" data-source_type = "user" data-source_id = "{{ $userInfo->id }}"  data-show_num="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">关注</button>
+                        @endif
+                        <a class="btn mr-10 btn-primary">私信</a>
                         {{--<a class="btn mr-10 btn-default">举报</a>--}}
                         @endif
                     </div>
@@ -39,7 +43,7 @@
                             <span>经验值</span>
                         </div>
                         <div class="col-md-4">
-                            <span class="h3">{{ $userInfo->userData->followers }}</span><span>个粉丝</span>
+                            <span class="h3" id="follower-num">{{ $userInfo->userData->followers }}</span><span>个粉丝</span>
                         </div>
                     </div>
                     <div class="mt-10 border-top" style="color:#999;padding-top:10px; ">

@@ -27,8 +27,11 @@ class TagController extends Controller
         }else if($source_type=='articles'){
             $sources = $tag->articles()->paginate(10);
         }
-
-        return view('theme::tag.index')->with('tag',$tag)->with('sources',$sources)->with('source_type',$source_type);
+        $followers = $tag->followers()->orderBy('user_data.credits','desc')->orderBy('user_data.supports','desc')->take(10)->get();
+        return view('theme::tag.index')->with('tag',$tag)
+                                       ->with('sources',$sources)
+                                       ->with('followers',$followers)
+                                       ->with('source_type',$source_type);
     }
 
 }

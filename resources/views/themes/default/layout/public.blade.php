@@ -168,6 +168,9 @@
 <script src="{{ asset('/static/js/jquery.min.js') }}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ asset('/static/css/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript">
+    var is_login = Boolean("{{ Auth()->check() }}");
+</script>
 <script src="{{ asset('js/global.js') }}"></script>
 @yield('script')
 

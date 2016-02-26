@@ -18,6 +18,7 @@ class CreateTagsTable extends Migration
             $table->string('logo','128');                    //标签图标
             $table->string('summary',255);                   //导读、摘要
             $table->text('description')->nullable();         //标签介绍
+            $table->integer('parent_id')->unsigned()->index()->default(0); //父级ID
             $table->integer('followers')->unsigned()->index()->default(0); //关注数
             $table->timestamps();
 

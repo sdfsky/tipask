@@ -2,11 +2,13 @@
 
 namespace App\models;
 
+use App\Models\Relations\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class UserData extends Model
 {
+    use BelongsToUserTrait;
     protected $table = 'user_data';
 
     public $timestamps = false;

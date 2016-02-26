@@ -127,6 +127,42 @@ $(function(){
 
 
 
+    /*关注模块处理，关注问题，用户等*/
+    $("#follow-button").click(function(){
+        if(!check_login()){
+            return ;
+        }
+        $(this).button('loading');
+        var source_type = $(this).data('source_type');
+        var source_id = $(this).data('source_id');
+        var show_num = $(this).data('show_num');
+
+        $.get('/follow/'+source_type+'/'+source_id,function(msg){
+            $("#follow-button").removeClass('disabled');
+            $("#follow-button").removeAttr('disabled');
+            if(msg =='followed'){
+                $("#follow-button").html('已关注');
+                $("#follow-button").addClass('active');
+            }else{
+                $("#follow-button").html('关注');
+                $("#follow-button").removeClass('active');
+            }
+
+            /*是否操作关注数*/
+            if(Boolean(show_num)){
+                var follower_num = $("#follower-num").html();
+                if(msg==='followed'){
+                    $("#follower-num").html(parseInt(follower_num)+1);
+                }else{
+                    $("#follower-num").html(parseInt(follower_num)-1);
+                }
+            }
+        });
+
+    });
+
+
+
     /*赞同模块公共处理*/
     $(".btn-support").hover(function(){
         var btn_support = $(this);
@@ -150,6 +186,9 @@ $(function(){
     });
 
     $(".btn-support").click(function(){
+        if(!check_login()){
+            return ;
+        }
         var btn_support = $(this);
         var source_type = btn_support.data('source_type');
         var source_id = btn_support.data('source_id');
@@ -220,6 +259,17 @@ function upload_editor_image(file,editorId,token){
             $('#'+editorId).summernote('editor.insertImage', url);
         }
     });
+}
+
+
+/*检查用户登录情况*/
+function check_login(){
+    if(!is_login){
+        document.location = '/login';
+        return false;
+    }
+
+    return true;
 }
 
 
