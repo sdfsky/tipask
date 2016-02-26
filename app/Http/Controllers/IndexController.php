@@ -38,14 +38,7 @@ class IndexController extends Controller
 
 
         /*热门话题*/
-        $hotTags = Cache::remember('hot_tags',10,function(){
-            $tags = Taggable::hottest(25);
-            $tags->map(function($tag){
-                $tagInfo = Tag::find($tag->tag_id);
-                $tag->name = $tagInfo->name;
-            });
-            return $tags;
-        });
+        $hotTags =  Taggable::globalHotTags();
 
 
         /*推荐内容*/
@@ -120,9 +113,14 @@ class IndexController extends Controller
 
         $questions =  call_user_func([$question,$filter]);
 
+        /*热门话题*/
+        $hotTags =  Taggable::globalHotTags();
+
+
         $hotQuestions = Question::recent();
         return view('theme::home.ask')->with('questions',$questions)
             ->with('hotQuestions',$hotQuestions)
+            ->with('hotTags',$hotTags)
             ->with('filter',$filter);
     }
 
@@ -137,9 +135,14 @@ class IndexController extends Controller
         $articles = call_user_func([$article,$filter]);
 
         $hotUsers = UserData::activeInArticles();
+        /*热门话题*/
+        $hotTags =  Taggable::globalHotTags();
+
+
 
         return view('theme::home.blog')->with('articles',$articles)
                                        ->with('hotUsers',$hotUsers)
+                                       ->with('hotTags',$hotTags)
                                        ->with('filter',$filter);
     }
 

@@ -128,24 +128,25 @@ $(function(){
 
 
     /*关注模块处理，关注问题，用户等*/
-    $("#follow-button").click(function(){
+    $("#follow-button,.followTopic").click(function(){
         if(!check_login()){
             return ;
         }
         $(this).button('loading');
+        var follow_btn = $(this);
         var source_type = $(this).data('source_type');
         var source_id = $(this).data('source_id');
         var show_num = $(this).data('show_num');
 
         $.get('/follow/'+source_type+'/'+source_id,function(msg){
-            $("#follow-button").removeClass('disabled');
-            $("#follow-button").removeAttr('disabled');
+            follow_btn.removeClass('disabled');
+            follow_btn.removeAttr('disabled');
             if(msg =='followed'){
-                $("#follow-button").html('已关注');
-                $("#follow-button").addClass('active');
+                follow_btn.html('已关注');
+                follow_btn.addClass('active');
             }else{
-                $("#follow-button").html('关注');
-                $("#follow-button").removeClass('active');
+                follow_btn.html('关注');
+                follow_btn.removeClass('active');
             }
 
             /*是否操作关注数*/

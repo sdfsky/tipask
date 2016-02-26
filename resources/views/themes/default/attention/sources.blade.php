@@ -35,7 +35,7 @@
                                 <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a>
                             </h2>
                             @if($question->tags)
-                                <ul class="taglist--inline ib">
+                                <ul class="taglist-inline ib">
                                     @foreach($question->tags() as $tag_name)
                                         <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag_name]) }}">{{ $tag_name }}</a></li>
                                     @endforeach

@@ -6,7 +6,7 @@
             <div class="widget-question widget-article">
                 <h3 class="title">{{ $article->title }}</h3>
                 @if($article->tags)
-                    <ul class="taglist--inline">
+                    <ul class="taglist-inline">
                         @foreach($article->tags as $tag)
                             <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
                         @endforeach

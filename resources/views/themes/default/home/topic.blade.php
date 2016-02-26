@@ -11,17 +11,21 @@
             <section class="topic-list-item col-md-3">
                 <div class="widget-topic">
                     <h2 class="h4">
-                        <a href="{{ route('ask.tag.index',['name'=>$topic->name]) }}" class="tag-img" style="background-image: url(http://sfault-avatar.b0.upaiyun.com/365/152/3651522545-5541ff4b6206e_icon);">{{ $topic->name }}</a>
+                        <a href="{{ route('ask.tag.index',['name'=>$topic->name]) }}" @if($topic->logo) class="tag-logo" style="background-image: url(http://sfault-avatar.b0.upaiyun.com/365/152/3651522545-5541ff4b6206e_icon);" @endif>{{ $topic->name }}</a>
                     </h2>
                     <p>
                         @if($topic->description)
-                            {{ str_limit($topic->description,200) }}
+                            {{ str_limit($topic->summary,200) }}
                         @else
                             暂无介绍
                         @endif
                     </p>
                     <div class="widget-topic-action">
-                        <button class="btn btn-success btn-xs mr-5 tagfollow" data-id="1040000000089436">加关注</button>
+                        @if(Auth()->check() && Auth()->user()->isFollowed(get_class($topic),$topic->id))
+                            <button type="button"  class="btn btn-default btn-xs active followTopic mr-5" data-source_type = "tag" data-source_id = "{{ $topic->id }}"  data-show_num="false"  data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">已关注</button>
+                        @else
+                            <button type="button"  class="btn btn-default btn-xs followTopic mr-5" data-source_type = "tag" data-source_id = "{{ $topic->id }}"  data-show_num="false" data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">关注</button>
+                        @endif
                         <strong class="follows">{{ $topic->followers }}</strong> <span class="text-muted">关注</span>
                     </div>
                 </div>

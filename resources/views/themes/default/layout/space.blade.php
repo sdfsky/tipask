@@ -13,7 +13,7 @@
                 <div class="col-md-7">
                     <h2 class="space-header-name">{{ $userInfo->name }}</h2>
                     <div class="space-header-role"><i class="fa fa-user-secret"></i> {{ $userInfo->title }} , @if($userInfo->gender===1) <i class="fa fa-mars"></i> @elseif($userInfo->gender===2) <i class="fa fa-venus"></i> @else <i class="fa fa-genderless"></i> @endif </div>
-                    <div class="space-header-desc mt-10"><p>{{ $userInfo->description }}asdfasfasfas</p>
+                    <div class="space-header-desc mt-10"><p>{{ $userInfo->description }}</p>
                     </div>
                     <div class="space-header-social">
                         <span class="space-header-social-item"><i class="fa fa-map-marker"></i> {{ Area()->getName($userInfo->province) }} @if(Area()->getName($userInfo->province)!=Area()->getName($userInfo->city)) - {{ Area()->getName($userInfo->city) }} @endif</span>

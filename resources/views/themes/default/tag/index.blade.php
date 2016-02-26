@@ -54,7 +54,7 @@
                                     </ul>
                                     <h2 class="title"><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></h2>
                                     @if($question->tags)
-                                        <ul class="taglist--inline ib">
+                                        <ul class="taglist-inline ib">
                                             @foreach($question->tags as $tag)
                                                 <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
                                             @endforeach
@@ -110,7 +110,7 @@
         <div class="col-xs-12 col-md-3 side">
             <div class="widget-box">
                 <h2 class="h4 widget-box__title">相关标签</h2>
-                <ul class="taglist--inline multi">
+                <ul class="taglist-inline multi">
                     @foreach($tag->relations() as $relationTag)
                     <li class="tagPopup"><a class="tag" href="/t/jquery" data-toggle="popover" data-id="1040000000089733" data-original-title="jquery">{{ $relationTag->name }}</a></li>
                     @endforeach

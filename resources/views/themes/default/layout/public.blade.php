@@ -53,6 +53,9 @@
                     </ul>
                 @else
                     <ul class="nav navbar-nav user-menu navbar-right">
+                        <li>
+                            <a href="{{ route('auth.notification.index') }}" class="active"><span class="fa fa-bell fa-lg"></span></a>
+                        </li>
                         <li class="dropdown user-avatar">
                             <a href="{{ route('auth.profile.base') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <img class="avatar-32 mr-5" alt="{{ Auth()->user()->name }}" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_middle'])}}" >
@@ -65,7 +68,6 @@
                                 @endpermission
 
                                 <li><a href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}">我的主页</a></li>
-                                <li><a href="{{ route('auth.notification.index') }}">我的通知 <span class="badge badge">4</span></a></li>
                                 <li><a href="{{ route('auth.notification.index') }}">我的私信</a></li>
                                 <li><a href="{{ route('auth.profile.base') }}">账号设置</a></li>
                                 <li class="divider"></li>
@@ -74,9 +76,6 @@
                         </li>
                     </ul>
                 @endif
-                <div class="pull-right mr-10">
-                    <a class="btn navbar-btn btn-primary " href="{{ route('ask.question.create') }}">我要提问</a>
-                </div>
             </div>
         </div>
     </nav>
