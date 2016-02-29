@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\Recommendation;
 use App\models\Tag;
 use App\Models\Taggable;
+use App\Models\User;
 use App\models\UserData;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -150,6 +151,14 @@ class IndexController extends Controller
     {
         $topics = Tag::orderBy('followers','DESC')->paginate(20);
         return view('theme::home.topic')->with('topics',$topics);
+    }
+
+
+    public function member()
+    {
+        $members = User::orderBy('credits','desc')->orderBy('coins','desc')->orderBy('answers','desc')->paginate(20);
+        return view('theme::home.user')->with('members',$members);
+
     }
 
 }

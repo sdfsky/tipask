@@ -172,7 +172,7 @@ a:focus, a:hover {
 .bookmark-rank .plus,.qa-rank .plus{color:#009a61}
 .bookmark-rank .minus,.qa-rank .minus{color:#AD3A37}
 .bookmark-rank{margin-right:10px}
-.bookmark-rank .favs,.bookmark-rank .followers{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px;background:#F0F5F3;color:#017E66}
+.bookmark-rank .collections,.bookmark-rank .followers{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px;background:#F0F5F3;color:#017E66}
 .bookmark-rank .followers{background:#5cb85c;color:#fff}
 
 .blog-rank {
@@ -243,6 +243,7 @@ a:focus, a:hover {
 
 .widget-box{padding-top:15px;border-top:1px solid #eee}
 .widget-box .widget-box-title{margin:0 0 15px;font-size:16px}
+.widget-box .media{margin:0;}
 .widget-box.no-border,.widget-box:first-child{margin-top:0;padding-top:0;border:none}
 .widget-top10{padding-left:30px}
 .widget-top10 li{margin-bottom:8px}

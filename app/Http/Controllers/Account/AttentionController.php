@@ -81,19 +81,5 @@ class AttentionController extends Controller
 
 
 
-    /*关注的问题*/
-    public function sources($source_type,Request $request)
-    {
-
-        $attentions = Question::join('attentions',function($join) use ($request) {
-            $join->on('questions.id','=','attentions.source_id')
-                 ->where('attentions.source_type','=','App\Models\Question')
-                 ->where('attentions.user_id','=',$request->user()->id);
-        })->select("questions.*")->paginate(10);
-        return view('theme::attention.sources')->with($source_type,$attentions)->with('source_type',$source_type);
-
-    }
-
-
 
 }

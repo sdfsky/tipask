@@ -42,6 +42,8 @@
                 </form>
                 <ul class="nav navbar-nav">
                     <li @if(request()->route()->getName() == 'website.index') class="active" @endif><a href="{{ route('website.index') }}">首页 <span class="sr-only">(current)</span></a></li>
+
+                    <li @if(request()->route()->getName() == 'ask.doing.index') class="active" @endif><a href="{{ route('ask.doing.index') }}">发现</a></li>
                     <li @if(request()->route()->getName() == 'website.ask') class="active" @endif><a href="{{ route('website.ask') }}">问答</a></li>
                     <li @if(request()->route()->getName() == 'website.blog') class="active" @endif><a href="{{ route('website.blog') }}">文章</a></li>
                     <li @if(request()->route()->getName() == 'website.topic') class="active" @endif><a href="{{ route('website.topic') }}">话题</a></li>

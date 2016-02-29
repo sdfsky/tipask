@@ -22,12 +22,12 @@
 /*动态*/
 
 /*动态样式*/
-.steam-doing section{padding:10px 0;border-top:1px solid #EEE}
-.steam-doing-item-info{color:#999;margin-bottom:5px}
-.steam-doing-item-title h4{display:inline;margin:0 5px 0 0;font-size:15px}
-.steam-doing-item-title h4 a{color:#333}
-.steam-doing-item-title h4 a:hover{color:#017e66}
-.steam-doing-item-quote{border-left:5px solid #EEE;padding-left:10px;margin-top:5px;margin-bottom:0;color:#888;word-break:break-all}
+.stream-doing section{padding:10px 0;border-top:1px solid #EEE}
+.stream-doing-item-info{color:#999;margin-bottom:5px}
+.stream-doing-item-title h4{display:inline;margin:0 5px 0 0;font-size:15px}
+.stream-doing-item-title h4 a{color:#333}
+.stream-doing-item-title h4 a:hover{color:#017e66}
+.stream-doing-item-quote{border-left:5px solid #EEE;padding-left:10px;margin-top:5px;margin-bottom:0;color:#888;word-break:break-all}
 
 
 
@@ -38,12 +38,18 @@
 .coins .badge{background-color:#FF8100;}
 .credits .badge{background-color:#449d44;}
 
-/*公告列表*/
-.space-steam-heading{margin: 0;padding-bottom: 20px;border-bottom: 1px solid #eee;}
-.space-steam-list{list-style:none;padding:0;border-top:none}
-.space-steam-list li{padding:10px 0;border-bottom:1px solid #eee;margin-top:0}
-.space-steam-list li .badge{background-color:#fff;border:1px solid;text-align:center;margin-right:10px;width:30px;height:18px;font-weight:400;padding:0;line-height:18px}
-.space-steam-item-text{color:#666}
-.space-steam-item-date{font-size:14px;color:#999;line-height:19px}
-.space-steam-item-title{font-size:14px;color:#333;line-height:26px}
-.space-steam-item-title-warp{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/*公共表单列表*/
+.space-stream-heading{margin: 0;padding-bottom: 20px;border-bottom: 1px solid #eee;}
+.space-stream-list{list-style:none;padding:0;border-top:none}
+.space-stream-list li{padding:10px 0;border-bottom:1px solid #eee;margin-top:0}
+.space-stream-list li .badge{background-color:#fff;border:1px solid;text-align:center;margin-right:10px;width:30px;height:18px;font-weight:400;padding:0;line-height:18px}
+.space-stream-item-text{color:#666}
+.space-stream-item-date{font-size:14px;color:#999;line-height:19px}
+.space-stream-item-title{font-size:14px;color:#333;line-height:26px}
+.space-stream-item-title-warp{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/*关注列表*/
+.stream-following .avatar-32{float:left;margin-right:10px}
+.stream-following-list >li{padding:12px 0;border-bottom:1px solid #eee}
+.stream-following-followed{color:#999;line-height:20px}
+.stream-following-desc {font-size: 13px;color: #666;line-height: 21px;}

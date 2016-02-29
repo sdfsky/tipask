@@ -61,12 +61,4 @@ class CollectionController extends Controller
     }
 
 
-
-    public function sources($source_type,Request $request)
-    {
-        $collections = $request->user()->collections()->where('source_type','=','App\Models\Question')->orderBy('created_at','DESC')->paginate(10);
-        return view('theme::collection.sources')->with($source_type,$collections)->with('source_type',$source_type);
-
-    }
-
 }

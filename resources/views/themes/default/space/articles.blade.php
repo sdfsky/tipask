@@ -1,11 +1,11 @@
 @extends('theme::layout.space')
 
 @section('space_content')
-    <h4 class="space-steam-heading">{{ $articles->total() }} 篇文章</h4>
-    <ul class="space-steam-list">
+    <h4 class="space-stream-heading">{{ $articles->total() }} 篇文章</h4>
+    <ul class="space-stream-list">
         <li>
             <div class="row">
-                <div class="col-md-8 space-steam-item-title-warp">
+                <div class="col-md-8 space-stream-item-title-warp">
                     <strong>标题</strong>
                 </div>
                 <div class="col-md-2">
@@ -19,12 +19,12 @@
         @foreach($articles as $article)
         <li>
             <div class="row">
-                <div class="col-md-8 space-steam-item-title-warp">
-                    <a class="space-steam-item-title" href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a>
+                <div class="col-md-8 space-stream-item-title-warp">
+                    <a class="space-stream-item-title" href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a>
                 </div>
                 <div class="col-md-2"><span class="text-muted">{{ $article->supports }}/{{ $article->views }}</span></div>
                 <div class="col-md-2">
-                    <span class="space-steam-item-date">{{ timestamp_format($article->created_at) }}</span>
+                    <span class="space-stream-item-date">{{ timestamp_format($article->created_at) }}</span>
                 </div>
             </div>
         </li>

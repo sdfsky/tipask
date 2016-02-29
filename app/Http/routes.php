@@ -31,10 +31,19 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::get('people/{user_id}/answers',['as'=>'auth.space.answers','uses'=>'SpaceController@answers'])->where(['user_id'=>'[0-9]+']);
     /*我的文章*/
     Route::get('people/{user_id}/articles',['as'=>'auth.space.articles','uses'=>'SpaceController@articles'])->where(['user_id'=>'[0-9]+']);
+
+    /*我的粉丝*/
+    Route::get('people/{user_id}/followers',['as'=>'auth.space.followers','uses'=>'SpaceController@followers'])->where(['user_id'=>'[0-9]+']);
+    /*我的关注*/
+    Route::get('people/{user_id}/followed/{source_type}',['as'=>'auth.space.attentions','uses'=>'SpaceController@attentions'])->where(['user_id'=>'[0-9]+','source_type'=>'(questions|tags|users)']);
+    /*我的收藏*/
+    Route::get('people/{user_id}/collected/{source_type}',['as'=>'auth.space.collections','uses'=>'SpaceController@collections'])->where(['user_id'=>'[0-9]+','source_type'=>'(questions|articles)']);
+
     /*我的金币*/
     Route::get('people/{user_id}/coins',['as'=>'auth.space.coins','uses'=>'SpaceController@coins'])->where(['user_id'=>'[0-9]+']);
     /*我的经验*/
     Route::get('people/{user_id}/credits',['as'=>'auth.space.credits','uses'=>'SpaceController@credits'])->where(['user_id'=>'[0-9]+']);
+
 
     /*全局搜索*/
     Route::any('search/{filter?}',['as'=>'auth.search.index','uses'=>'SearchController@index'])->where(['filter'=>'(articles|tags|users)']);
@@ -69,11 +78,9 @@ Route::Group(['namespace'=>'Account'],function(){
         /*收藏问题、文章*/
 
         Route::get('collect/{source_type}/{source_id}',['as'=>'auth.collection.store','uses'=>'CollectionController@store'])->where(['source_type'=>'(question|article)','source_id'=>'[0-9]+']);
-        Route::get('collection/{source_type}',['as'=>'auth.collection.sources','uses'=>'CollectionController@sources'])->where(['source_type'=>'(questions|articles)']);
 
         /*关注问题、人、标签*/
         Route::get('follow/{source_type}/{source_id}',['as'=>'auth.attention.store','uses'=>'AttentionController@store'])->where(['source_type'=>'(question|tag|user)','source_id'=>'[0-9]+']);
-        Route::get('attention/{source_type}',['as'=>'auth.attention.sources','uses'=>'AttentionController@sources'])->where(['source_type'=>'(questions|tags|users)']);
 
 
     });

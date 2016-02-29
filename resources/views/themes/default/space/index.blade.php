@@ -2,15 +2,19 @@
 
 @section('space_content')
     <h2 class="h4">最近动态</h2>
-    <div class="steam-doing clearfix">
+    <div class="stream-doing clearfix">
         @foreach($doings as $doing)
-        <section class="steam-doing-item">
-            <p class="steam-doing-item-info">{{ timestamp_format($doing->created_at) }} {{ $doing->action_text }}</p>
-            <div class="steam-doing-item-title">
-                <h4><a href="{{ route('ask.question.detail',['question_id'=>$doing->source_id]) }}">{{ $doing->subject }}</a></h4>
+        <section class="stream-doing-item">
+            <p class="stream-doing-item-info">{{ timestamp_format($doing->created_at) }} {{ $doing->action_text }}</p>
+            <div class="stream-doing-item-title">
+                @if(in_array($doing->action,['follow_question','answer','ask','append_reward','answer_adopted']))
+                <h4><a href="{{ route('ask.question.detail',['id'=>$doing->source_id]) }}">{{ $doing->subject }}</a></h4>
+                @elseif(in_array($doing->action,['create_article']))
+                <h4><a href="{{ route('blog.article.detail',['id'=>$doing->source_id]) }}">{{ $doing->subject }}</a></h4>
+                @endif
             </div>
             @if(in_array($doing->action,['answer']))
-            <p class="steam-doing-item-quote">
+            <p class="stream-doing-item-quote">
                 {{ $doing->content }}
             </p>
             @endif

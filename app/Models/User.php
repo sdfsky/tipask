@@ -153,11 +153,17 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
+    /*用户关注*/
     public function attentions()
     {
         return $this->hasMany('App\Models\Attention');
     }
 
+    /*用户粉丝*/
+    public function followers()
+    {
+        return $this->morphToMany('App\Models\UserData', 'source','attentions','source_id','user_id');
+    }
 
 
 

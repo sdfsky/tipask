@@ -128,7 +128,7 @@ $(function(){
 
 
     /*关注模块处理，关注问题，用户等*/
-    $("#follow-button,.followTopic").click(function(){
+    $("#follow-button,.followTopic,.followerUser").click(function(){
         if(!check_login()){
             return ;
         }

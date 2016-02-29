@@ -16,7 +16,7 @@
                     <div class="space-header-desc mt-10"><p>{{ $userInfo->description }}</p>
                     </div>
                     <div class="space-header-social">
-                        <span class="space-header-social-item"><i class="fa fa-map-marker"></i> {{ Area()->getName($userInfo->province) }} @if(Area()->getName($userInfo->province)!=Area()->getName($userInfo->city)) - {{ Area()->getName($userInfo->city) }} @endif</span>
+                        <span class="space-header-social-item"><i class="fa fa-map-marker"></i> {{ Area()->getName($userInfo->province) }} @if($userInfo->city>0 &&  Area()->getName($userInfo->province)!=Area()->getName($userInfo->city)) - {{ Area()->getName($userInfo->city) }} @endif</span>
                         <span class="space-header-social-item"><i class="fa fa-calendar"></i> 注册于 {{ $userInfo->created_at->toDateString() }}</span>
                     </div>
                 </div>
@@ -36,14 +36,14 @@
                     </div>
                     <div class="space-header-info row mt-30">
                         <div class="col-md-4">
-                            <a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}"><span class="h3">{{ $userInfo->userData->coins }}</span><span>金币数</span></a>
+                            <span class="h3"><a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}">{{ $userInfo->userData->coins }}</a></span><span>金币数</span>
                         </div>
                         <div class="col-md-4">
-                            <a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}"><span class="h3">{{ $userInfo->userData->credits }}</span></a>
+                            <span class="h3"><a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}">{{ $userInfo->userData->credits }}</a></span>
                             <span>经验值</span>
                         </div>
                         <div class="col-md-4">
-                            <span class="h3" id="follower-num">{{ $userInfo->userData->followers }}</span><span>个粉丝</span>
+                            <span class="h3"><a id="follower-num" href="{{ route('auth.space.followers',['user_id'=>$userInfo->id]) }}" >{{ $userInfo->userData->followers }}</a></span><span>个粉丝</span>
                         </div>
                     </div>
                     <div class="mt-10 border-top" style="color:#999;padding-top:10px; ">
@@ -68,6 +68,9 @@
                     <li role="separator" class="divider"><a></a></li>
                     <li @if(request()->route()->getName() == 'auth.space.coins') class="active" @endif ><a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}">我的金币</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.credits') class="active" @endif ><a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}">我的经验</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.followers') class="active" @endif ><a href="{{ route('auth.space.followers',['user_id'=>$userInfo->id]) }}">我的粉丝</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.attentions') class="active" @endif ><a href="{{ route('auth.space.attentions',['user_id'=>$userInfo->id,'source_type'=>'questions']) }}">我的的关注</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.collections') class="active" @endif ><a href="{{ route('auth.space.collections',['user_id'=>$userInfo->id,'source_type'=>'questions']) }}">我的的收藏</a></li>
                 @else
                     <li @if(request()->route()->getName() == 'auth.space.index') class="active" @endif ><a href="{{ route('auth.space.index',['user_id'=>$userInfo->id]) }}">他的主页</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.answers') class="active" @endif ><a href="{{ route('auth.space.answers',['user_id'=>$userInfo->id]) }}">他的回答</a></li>
@@ -76,6 +79,7 @@
                     <li role="separator" class="divider"><a></a></li>
                     <li @if(request()->route()->getName() == 'auth.space.coins') class="active" @endif ><a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}">他的金币</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.credits') class="active" @endif ><a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}">他的经验</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.followers') class="active" @endif ><a href="{{ route('auth.space.followers',['user_id'=>$userInfo->id]) }}">他的粉丝</a></li>
                 @endif
             </ul>
         </div>

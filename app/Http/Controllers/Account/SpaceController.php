@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
@@ -72,6 +73,7 @@ class SpaceController extends Controller
     }
 
 
+    /*我的金币*/
     public function coins()
     {
         $coins = Credit::where('user_id','=',$this->user->id)->where('coins','<>',0)->orderBy('created_at','DESC')->paginate(10);
@@ -82,6 +84,7 @@ class SpaceController extends Controller
     }
 
 
+    /*我的经验*/
     public function credits()
     {
         $credits = Credit::where('user_id','=',$this->user->id)->where('credits','<>',0)->orderBy('created_at','DESC')->paginate(10);
@@ -89,6 +92,64 @@ class SpaceController extends Controller
             $credit->action = Config::get('tipask.user_actions.'.$credit->action);
         });
         return view('theme::space.credits')->with('credits',$credits);
+    }
+
+
+    /*我的粉丝*/
+    public function followers()
+    {
+        $followers = $this->user->followers()->orderBy('attentions.created_at','asc')->paginate(10);
+        return view('theme::space.followers')->with('followers',$followers);
+    }
+
+
+    /*我的关注*/
+    public function attentions(Request $request)
+    {
+        $source_type = $request->route()->getParameter('source_type');
+        $sourceClassMap = [
+            'questions' => 'App\Models\Question',
+            'users' => 'App\Models\User',
+            'tags' => 'App\Models\Tag',
+        ];
+
+        if(!isset($sourceClassMap[$source_type])){
+          abort(404);
+        }
+
+        $model = App::make($sourceClassMap[$source_type]);
+
+        $attentions = $this->user->attentions()->where('source_type','=',$sourceClassMap[$source_type])->orderBy('attentions.created_at','desc')->paginate(10);
+        $attentions->map(function($attention) use ($model) {
+            $attention['info'] = $model::find($attention->source_id);
+        });
+        return view('theme::space.attentions')->with('attentions',$attentions)->with('source_type',$source_type);
+
+    }
+
+    public function collections(Request $request)
+    {
+        $source_type = $request->route()->getParameter('source_type');
+
+        $sourceClassMap = [
+            'questions' => 'App\Models\Question',
+            'articles' => 'App\Models\Article',
+        ];
+
+        if(!isset($sourceClassMap[$source_type])){
+            abort(404);
+        }
+
+        $model = App::make($sourceClassMap[$source_type]);
+
+        $collections = $this->user->collections()->where('source_type','=',$sourceClassMap[$source_type])->orderBy('collections.created_at','desc')->paginate(10);
+        $collections->map(function($collection) use ($model) {
+            $collection['info'] = $model::find($collection->source_id);
+        });
+
+        return view('theme::space.collections')->with('collections',$collections)->with('source_type',$source_type);
+
+
     }
 
 
