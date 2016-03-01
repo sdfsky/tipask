@@ -21,3 +21,10 @@ body{background-color:#eff2f5}
 .bg-white {
     background-color: #FFF;
 }
+
+.btn-primary{border-color:#008151;background-color:#009a61;color:#fff;}
+.btn-primary.active,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.btn-primary.dropdown-toggle{border-color:#00432a;background-color:#006741;color:#fff;}
+.btn-primary.active,.btn-primary:active,.open>.btn-primary.dropdown-toggle{background-image:none;}
+.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary,fieldset[disabled] .btn-primary.active,fieldset[disabled] .btn-primary:active,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover{border-color:#008151;background-color:#009a61;}
+.btn-primary .badge{background-color:#fff;color:#009a61;}
+.btn-success{border-color:#4cae4c;background-color:#5cb85c;color:#fff;}
