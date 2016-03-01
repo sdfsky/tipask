@@ -17,24 +17,31 @@
     background-color: #008151;
 }
 
+.navbar-inverse .nav>li>a>.label {
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    text-align: center;
+    font-size: 9px;
+    padding: 2px 4px;
+    line-height: 0.9;
+}
+
 blockquote{font-size: 13px;}
 
-.alert {
-    padding: 10px;
-}
 
 .jumbotron{margin-bottom: 10px;}
 
 
 /*全局公告样式*/
 html{font-size:10px;-webkit-tap-highlight-color:transparent}
-body{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft Yahei","SimSun",sans-serif;font-size:14px;line-height:1.5;color:#333;background-color:#fff}
+body{font-family:Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;font-size:14px;line-height:1.5;color:#333;background-color:#fff}
 
-a{color:#444;}
-a:focus, a:hover {
-    color: #017e66;
-    text-decoration: underline;
-}
+button,input,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit}
+a{color:#009a61;text-decoration:none}
+a:focus,a:hover{color:#004e31;text-decoration:underline}
+a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
+
 
 
 .wrap {
@@ -354,34 +361,17 @@ a:focus, a:hover {
 .widget-notify  .not_read{background:#FFF9EA;}
 
 
-#showNew,.streams__item .excerpt:hover{cursor:pointer}
-.main--title{height:70px;padding-top:30px;vertical-align:middle;line-height:30px;overflow:hidden;padding-bottom:10px;border-bottom:1px solid #DDD}
-.main--title .title--top{margin-top:6px}
-.main--title .btn{margin-left:10px;padding:1px 8px}
-.streams{margin-bottom:20px}
-.noBorderTop,.streams__item:not(.hid):first-child{border-top:none}
-.streams__item{position:relative;border-top:1px solid #EEE;padding-top:15px;padding-bottom:10px;margin-top:0}
-.packup,.streams__item .close-blur{height:100%;position:absolute;top:0}
-.streams__item .blurred{-webkit-opacity:.25;-webkit-filter:blur(3px)}
-.streams__item .avatar-40{margin-top:3px}
-.streams__item .close-blur{width:100%;padding-top:15px}
-.streams__item .title{display:inline;font-size:14px;margin-right:5px}
-.streams__item .stream-left{float:left;margin-right:15px}
-.streams__item .stream-right{float:left}
-.streams__item .text-muted{margin-bottom:4px}
-.streams__item .text-muted a{color:#666}
-.streams__item .info--voted{color:#009a61}
-.streams__item .info--voted.red{color:#D0021B}
-.streams__item .info--split{color:#EEE;margin:0 8px}
-.streams__item .info--answered{color:#666}
-.streams__item .label{color:#666;background-color:#F6F6F6;font-weight:400}
-.streams__item .excerpt,.streams__item .full-text{color:#777;font-size:13px;line-height:1.7;overflow:hidden;margin-bottom:5px;margin-top:4px}
-.streams__item .excerpt .read-more-btn{margin-left:.5rem}
-.streams__item .packup{float:right}
-.hover-show-obj{-moz-transition-delay:0s;-o-transition-delay:0s;-webkit-transition-delay:0s}
-.hover-show-obj span{display:inline-block}
-.packup{width:8px;left:-18px;display:none;background-color:#ccc}
-.packup:hover{background-color:gray}
+
+.widget-streams{margin-bottom:20px}
+.streams-item{position:relative;border-top:1px solid #EEE;padding-top:15px;padding-bottom:10px;margin-top:0}
+.streams-item .avatar-40{margin-top:3px}
+.streams-item .title{display:inline;font-size:14px;margin-right:5px}
+.streams-item .stream-left{float:left;margin-right:15px}
+.streams-item .stream-right{float:left}
+.streams-item .text-muted{margin-bottom:4px}
+.streams-item .text-muted a{color:#666}
+.streams-item .full-text{color:#777;font-size:13px;line-height:1.7;overflow:hidden;margin-bottom:5px;margin-top:4px}
+.messages .meta{font-size:13px;}
 
 /*回答模块*/
 .widget-answers .media{border-bottom:1px solid #eee;}

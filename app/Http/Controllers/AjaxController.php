@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Area;
+use App\Models\Notification;
 
 class AjaxController extends Controller
 {
@@ -22,6 +23,23 @@ class AjaxController extends Controller
 
         return response($city_options);
 
+    }
+
+
+
+    /*未读通知数目*/
+    public function unreadNotifications()
+    {
+        $total = Notification::where('to_user_id','=',Auth()->user()->id)->where('is_read','=',0)->count();
+        $response = '<span class="fa fa-bell-o fa-lg"></span>';
+        if( $total > 0 ){
+            if($total > 99){
+                $total = '99+' ;
+            }
+            $response =  '<span class="fa fa-bell-o fa-lg"></span><span class="label label-danger">'.$total.'</span>';
+        }
+
+        return response($response);
     }
 
 

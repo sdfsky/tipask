@@ -9,10 +9,4 @@ class Notice extends Model
     protected $table = 'notices';
     protected $fillable = ['subject', 'url','status'];
 
-
-    public static function newest()
-    {
-
-    }
-
 }

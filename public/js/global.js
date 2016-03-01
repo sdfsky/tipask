@@ -206,6 +206,10 @@ $(function(){
     });
 
 
+    /*通知异步加载*/
+    $("#notifications").load("ajax/unreadNotifications");
+
+
 
 
 

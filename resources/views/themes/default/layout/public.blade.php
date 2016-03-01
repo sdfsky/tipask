@@ -55,9 +55,8 @@
                     </ul>
                 @else
                     <ul class="nav navbar-nav user-menu navbar-right">
-                        <li>
-                            <a href="{{ route('auth.notification.index') }}" class="active"><span class="fa fa-bell fa-lg"></span></a>
-                        </li>
+                        <li><a href="{{ route('auth.notification.index') }}" class="active" id="notifications"><span class="fa fa-bell-o fa-lg"></span></a></li>
+                        <li><a href="{{ route('auth.notification.index') }}" class="active"><i class="fa fa-envelope-o fa-lg"></i><span class="label label-success">4</span></a></li>
                         <li class="dropdown user-avatar">
                             <a href="{{ route('auth.profile.base') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <img class="avatar-32 mr-5" alt="{{ Auth()->user()->name }}" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_middle'])}}" >

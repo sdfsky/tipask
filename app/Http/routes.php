@@ -74,6 +74,14 @@ Route::Group(['namespace'=>'Account'],function(){
             'getReadAll' => 'auth.notification.readAll',
         ]);
 
+        /*我的通知*/
+
+        Route::controller('messages','MessageController',[
+            'getIndex' => 'auth.message.index',
+            'getReadAll' => 'auth.message.readAll',
+        ]);
+
+
 
         /*收藏问题、文章*/
 
@@ -216,7 +224,14 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
 
 
 /*公共ajax异步加载*/
+
+/*加载省份城市信息*/
 Route::get('ajax/loadCities/{province_id}',['as'=>'website.ajax.loadCities','uses'=>'AjaxController@loadCities'])->where(['province_id'=>'[0-9]+']);
+/*加载未读通知数目*/
+Route::get('ajax/unreadNotifications',['as'=>'website.ajax.unreadNotifications','uses'=>'AjaxController@unreadNotifications'])->where(['province_id'=>'[0-9]+']);
+
+/*加载未读私信数目*/
+
 Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|big|middle)']);
 Route::get('image/show/{image_name}',['as'=>'website.image.show','uses'=>'ImageController@show']);
 
