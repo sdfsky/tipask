@@ -74,12 +74,10 @@ Route::Group(['namespace'=>'Account'],function(){
             'getReadAll' => 'auth.notification.readAll',
         ]);
 
-        /*我的通知*/
-
-        Route::controller('messages','MessageController',[
-            'getIndex' => 'auth.message.index',
-            'getReadAll' => 'auth.message.readAll',
-        ]);
+        /*我的私信*/
+        Route::get('messages',['as'=>'auth.message.index','uses'=>'MessageController@index']);
+        Route::get('message/{user_id}',['as'=>'auth.message.show','uses'=>'MessageController@show'])->where(['user_id'=>'[0-9]+']);
+        Route::post('message/store',['as'=>'auth.message.store','uses'=>'MessageController@store']);
 
 
 

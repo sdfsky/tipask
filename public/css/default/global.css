@@ -380,7 +380,7 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 
 /*我的通知*/
 .widget-notify blockquote{margin:10px;font-size: 13px;}
-.widget-notify  .not_read{background:#FFF9EA;}
+.widget-notify .not_read,.widget-streams .not_read{background:#FFF9EA;}
 
 
 
