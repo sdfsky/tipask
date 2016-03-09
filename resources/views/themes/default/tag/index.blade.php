@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>{{ $tag->name }} - 话题 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="{{ $tag->summary }}" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">

@@ -51,7 +51,7 @@ class UserData extends Model
     public static function activities($size)
     {
         return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
-            ->where('users.status','>',0)->where('user_data.articles','>',0)
+            ->where('users.status','>',0)
             ->orderBy('user_data.answers','DESC')
             ->orderBy('user_data.articles','DESC')
             ->orderBy('users.updated_at','DESC')
@@ -70,6 +70,15 @@ class UserData extends Model
             ->orderBy('user_data.coins','DESC')
             ->select('users.id','users.name','user_data.coins')
             ->take($size)->get();
+    }
+
+
+
+    public static function  top($type,$size)
+    {
+
+        return self::orderBy($type,'desc')->orderBy('last_visit','desc')->take($size)->get();
+
     }
 
 

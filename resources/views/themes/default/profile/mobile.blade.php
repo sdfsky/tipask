@@ -1,12 +1,18 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>修改手机 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('content')
     <div class="row">
         <!--左侧菜单-->
         @include('theme::layout.profile_menu')
 
         <div id="main" class="settings col-md-10 form-horizontal">
-            <h2 class="h3 post-title">修改邮箱</h2>
+            <h2 class="h3 post-title">修改手机</h2>
             <div class="row mt30">
                 <div class="col-md-8">
                     <form name="baseForm" id="base_form" action="{{ route('auth.profile.mobile')}}" method="POST">

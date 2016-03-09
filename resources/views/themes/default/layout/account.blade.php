@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @section('seo')
+        @section('seo')
         <title>用户登陆</title>
         @show
-                <!-- Bootstrap -->
+        <!-- Bootstrap -->
         <link href="{{ asset('static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/default/account.css')}}" rel="stylesheet">
 

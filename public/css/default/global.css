@@ -49,6 +49,15 @@
 .pagination-sm>li:last-child>a,.pagination-sm>li:last-child>span{border-top-right-radius:3px;border-bottom-right-radius:3px;}
 
 
+.list-group{margin-bottom:20px;padding-left:0}
+.list-group-item{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}
+.list-group-item:first-child{border-top-right-radius:3px;border-top-left-radius:3px}
+.list-group-item:last-child{margin-bottom:0;border-bottom-right-radius:3px;border-bottom-left-radius:3px}
+.list-group-item.active,.list-group-item.active:focus,.list-group-item.active:hover{z-index:2;color:#fff;background-color:#009a61;border-color:#009a61}
+.list-group-item.active .list-group-item-text,.list-group-item.active:focus .list-group-item-text,.list-group-item.active:hover .list-group-item-text{color:#67ffc7}
+
+
+
 blockquote{font-size: 13px;}
 
 
@@ -154,7 +163,7 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .avatar-32{width:32px;height:32px;border-radius:2px;}
 .avatar-40{width:40px;height:40px;border-radius:4px;}
 .avatar-50{width:40px;height:40px;border-radius:4px;}
-.avatar-64{width:64px;height:64px;border-radius:8px;}
+.avatar-64{width:64px;height:64px;border-radius:3px;}
 .avatar-128{width:128px;height:128px;border-radius:50%;}
 .avatar-256{width:256px;height:256px}
 
@@ -375,6 +384,18 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .widget-vote .hate{bottom:0;height:18px;background-position:0 bottom}
 .widget-vote .hate:hover{background-position:-36px bottom}
 .widget-vote .hate.active{background-position:-72px bottom}
+
+
+/*活跃用户*/
+
+.users .action-list li {
+    padding: .35rem 0;
+}
+
+.users .top-num .label{display: block;}
+
+
+
 
 
 

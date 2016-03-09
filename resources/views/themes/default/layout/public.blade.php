@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ Setting()->get('website_name') }}</title>
+    @yield('seo')
+
+    <meta name="author" content="Tipask Team" />
+    <meta name="copyright" content="2016 tipask.com" />
     <!-- Bootstrap -->
     <link href="{{ asset('/static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/static/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
@@ -44,7 +47,7 @@
                     <li @if(request()->route()->getName() == 'website.index') class="active" @endif><a href="{{ route('website.index') }}">首页 <span class="sr-only">(current)</span></a></li>
 
                     @if(Auth()->check())
-                    <li @if(request()->route()->getName() == 'ask.doing.index') class="active" @endif><a href="{{ route('ask.doing.index') }}">发现</a></li>
+                    <li @if(request()->route()->getName() == 'auth.doing.index') class="active" @endif><a href="{{ route('auth.doing.index') }}">发现</a></li>
                     @endif
                     <li @if(request()->route()->getName() == 'website.ask') class="active" @endif><a href="{{ route('website.ask') }}">问答</a></li>
                     <li @if(request()->route()->getName() == 'website.blog') class="active" @endif><a href="{{ route('website.blog') }}">文章</a></li>
@@ -57,8 +60,8 @@
                     </ul>
                 @else
                     <ul class="nav navbar-nav user-menu navbar-right">
-                        <li><a href="{{ route('auth.notification.index') }}" class="active" id="notifications"><span class="fa fa-bell-o fa-lg"></span></a></li>
-                        <li><a href="{{ route('auth.message.index') }}" class="active"><i class="fa fa-envelope-o fa-lg"></i><span class="label label-success">4</span></a></li>
+                        <li><a href="{{ route('auth.notification.index') }}" class="active" id="unread_notifications"><span class="fa fa-bell-o fa-lg"></span></a></li>
+                        <li><a href="{{ route('auth.message.index') }}" class="active" id="unread_messages"><i class="fa fa-envelope-o fa-lg"></i></a></li>
                         <li class="dropdown user-avatar">
                             <a href="{{ route('auth.profile.base') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <img class="avatar-32 mr-5" alt="{{ Auth()->user()->name }}" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_middle'])}}" >
@@ -166,6 +169,38 @@
         </div>
     </div>
     @endif
+
+
+<div class="modal fade" id="sendTo_message_model" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">发送私信</h4>
+            </div>
+            <div class="modal-body">
+                <form name="messageForm" id="sendTo_message_form">
+                    <input type="hidden"  name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" id="to_user_id" name="to_user_id" value="0" />
+                    <div class="form-group">
+                        <label for="to_user_name" class="control-label">发给:</label>
+                        <span id="to_user_name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">内容:</label>
+                        <textarea class="form-control" id="message-text" name="content"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="sendTo_submit">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{ asset('/static/js/jquery.min.js') }}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>发私信给{{ $toUser->name }} - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
@@ -22,9 +28,9 @@
             </div>
 
             <div class="widget-streams messages mt-15">
-                <section class="hover-show streams-item">
                     @foreach($messages as $message)
-                        @if($message->from_user_id == Auth()->user()->id)
+                    <section class="hover-show streams-item" id="message_{{ $message->id }}">
+                    @if($message->from_user_id == Auth()->user()->id)
                         <div class="stream-wrap media">
                             <div class="pull-left">
                                 <a href="{{ route('auth.space.index',['id'=>$message->from_user_id]) }}" target="_blank">
@@ -37,7 +43,7 @@
                                 <div class="meta mt-10">
                                     <span class="text-muted">{{ timestamp_format($message->created_at) }} </span>
                                     <span class="pull-right">
-                                        <a href="javascript:;" class="text-muted" onclick="#">删除</a>
+                                        <a href="javascript:void(0)" class="text-muted" onclick="delete_message({{ $message->id }})">删除</a>
                                     </span>
                                 </div>
                             </div>
@@ -55,17 +61,37 @@
                                 <div class="meta mt-10">
                                     <span class="text-muted">{{ timestamp_format($message->created_at) }} </span>
                                 <span class="pull-right">
-                                    <a href="javascript:;" class="text-muted" onclick="#">删除</a>
+                                    <a href="javascript:void(0)" class="text-muted" onclick="delete_message({{ $message->id }})">删除</a>
                                 </span>
                                 </div>
                             </div>
                         </div>
                        @endif
-                    @endforeach
-                </section>
+                    </section>
+                @endforeach
             </div>
             <div class="text-center">
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    function delete_message(message_id)
+    {
+        if(!confirm('确认删除该信息？')){
+            return false;
+        }
+
+        $.get('/message/destroy/'+message_id,function(msg){
+            if(msg === 'ok'){
+                $("#message_"+message_id).remove();
+            }else{
+                alert('操作失败，请稍后再试！');
+            }
+        });
+
+    }
+</script>
 @endsection

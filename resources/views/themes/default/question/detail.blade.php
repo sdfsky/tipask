@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>{{ $question->title }} - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="{{ strip_tags($question->description) }}" />
+    <meta name="keywords" content="{{ $question->tags->implode('name',',') }}" />
+@endsection
+
 @section('css')
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
 @endsection

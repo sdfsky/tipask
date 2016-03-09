@@ -12,6 +12,9 @@ Route::get('/topics',['as'=>'website.topic','uses'=>'IndexController@topic']);
 /*文章*/
 Route::get('/articles/{filter?}',['as'=>'website.blog','uses'=>'IndexController@blog'])->where(['filter'=>'(recommended|newest|hottest)']);
 
+/*用户*/
+Route::get('/users',['as'=>'website.user','uses'=>'IndexController@user']);
+
 
 /*用户账号管理，包含用户登录注册等操作*/
 Route::Group(['namespace'=>'Account'],function(){
@@ -45,11 +48,27 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::get('people/{user_id}/credits',['as'=>'auth.space.credits','uses'=>'SpaceController@credits'])->where(['user_id'=>'[0-9]+']);
 
 
+    /*动态*/
+    Route::get('doings',['as'=>'auth.doing.index','uses'=>'DoingsController@index']);
+
+
     /*全局搜索*/
     Route::any('search/{filter?}',['as'=>'auth.search.index','uses'=>'SearchController@index'])->where(['filter'=>'(articles|tags|users)']);
 
     /*邮箱token验证*/
     Route::get('email/{action}/{token}',['as'=>'auth.email.verifyToken','uses'=>'EmailController@verifyToken'])->where(['action'=>'(register|verify)']);
+
+
+    /*用户排行榜*/
+
+    /*财富榜*/
+    Route::get('top/coins',['as'=>'auth.top.coins','uses'=>'TopController@coins']);
+
+    /*回答榜*/
+    Route::get('top/answers',['as'=>'auth.top.answers','uses'=>'TopController@answers']);
+
+    /*文章榜*/
+    Route::get('top/articles',['as'=>'auth.top.articles','uses'=>'TopController@articles']);
 
 
     Route::Group(['middleware'=>'auth'],function(){
@@ -77,7 +96,13 @@ Route::Group(['namespace'=>'Account'],function(){
         /*我的私信*/
         Route::get('messages',['as'=>'auth.message.index','uses'=>'MessageController@index']);
         Route::get('message/{user_id}',['as'=>'auth.message.show','uses'=>'MessageController@show'])->where(['user_id'=>'[0-9]+']);
+        Route::get('message/destroy/{id}',['as'=>'auth.message.destroy','uses'=>'MessageController@destroy'])->where(['id'=>'[0-9]+']);
+        Route::get('message/destroySession/{id}',['as'=>'auth.message.destroySession','uses'=>'MessageController@destroySession'])->where(['from_user_id'=>'[0-9]+']);
         Route::post('message/store',['as'=>'auth.message.store','uses'=>'MessageController@store']);
+
+
+        /*邀请我回答的问题*/
+        Route::get('questionInvitation',['as'=>'auth.questionInvitation.index','uses'=>'questionInvitationController@index']);
 
 
 
@@ -114,8 +139,6 @@ Route::Group(['namespace'=>'Ask'],function(){
     /*需要登录的模块*/
     Route::Group(['middleware'=>'auth'],function(){
 
-        /*动态*/
-        Route::get('doings',['as'=>'ask.doing.index','uses'=>'DoingsController@index']);
 
         /*问题创建*/
         Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
@@ -184,10 +207,10 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
 
 
     /*用户登陆*/
-    Route::match(['get','post'],'login',['as'=>'admin.account.login','uses'=>'AccountController@login']);
+    Route::match(['get','post'],'login',['as'=>'admin.account.login','uses'=>'UserController@login']);
 
     /*用户退出*/
-    Route::get('logout',['as'=>'admin.account.logout','uses'=>'AccountController@logout']);
+    Route::get('logout',['as'=>'admin.account.logout','uses'=>'UserController@logout']);
 
     /*首页*/
     Route::resource('index', 'IndexController', ['only' => ['index']]);
@@ -226,9 +249,14 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
 /*加载省份城市信息*/
 Route::get('ajax/loadCities/{province_id}',['as'=>'website.ajax.loadCities','uses'=>'AjaxController@loadCities'])->where(['province_id'=>'[0-9]+']);
 /*加载未读通知数目*/
-Route::get('ajax/unreadNotifications',['as'=>'website.ajax.unreadNotifications','uses'=>'AjaxController@unreadNotifications'])->where(['province_id'=>'[0-9]+']);
+Route::get('ajax/unreadNotifications',['as'=>'website.ajax.unreadNotifications','uses'=>'AjaxController@unreadNotifications']);
+Route::get('ajax/loadTags',['as'=>'website.ajax.loadTags','uses'=>'AjaxController@loadTags']);
+
+Route::get('ajax/loadUsers',['middleware' =>'auth','as'=>'website.ajax.loadUsers','uses'=>'AjaxController@loadUsers']);
 
 /*加载未读私信数目*/
+Route::get('ajax/unreadMessages',['as'=>'website.ajax.unreadMessages','uses'=>'AjaxController@unreadMessages']);
+
 
 Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|big|middle)']);
 Route::get('image/show/{image_name}',['as'=>'website.image.show','uses'=>'ImageController@show']);

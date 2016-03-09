@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>编辑回答 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('css')
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
 @endsection
@@ -8,7 +14,7 @@
 
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="#">问答</a></li>
+            <li><a href="{{ route('website.ask') }}">问答</a></li>
             <li><a href="{{ route('ask.question.detail',['id'=>$answer->question_id]) }}">{{ $answer->question->title }}</a></li>
             <li class="active">编辑回答</li>
         </ol>

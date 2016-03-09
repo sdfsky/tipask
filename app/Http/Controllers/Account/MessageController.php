@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
@@ -26,14 +27,19 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = DB::table('messages')
-                        ->whereExists(function($query){
-                            $query->where('to_user_id','=',Auth()->user()->id)
-                                  ->where('to_deleted','=',0)
-                                  ->orderBy('created_at','desc');
-                        })
-                        ->groupBy('from_user_id')
-                        ->paginate(10);
+        $loginUser = Auth()->user();
+
+        $databasePrefix = Config::get('database.connections.mysql.prefix');
+
+
+        /*子查询进行分组*/
+        $subQuery = Message::select(DB::raw("max(created_at) as max_created_at"),'from_user_id')->whereRaw('to_user_id = '.$loginUser->id.' AND to_deleted=0 ')->groupBy('from_user_id');
+
+        /*联查子查询再进行排序*/
+        $messages = DB::table(DB::raw("({$subQuery->toSql()}) as ".$databasePrefix."sub"))
+            ->join('messages','messages.from_user_id','=','sub.from_user_id')
+            ->whereRaw($databasePrefix.'messages.created_at = '.$databasePrefix.'sub.max_created_at')
+            ->select('messages.*')->paginate(10);
 
         $messages->map(function($message) {
             $message->fromUser = User::find($message->from_user_id);
@@ -96,17 +102,17 @@ class MessageController extends Controller
             abort(404);
         }
 
-        /*设置该对话全部已读*/
-        Message::where('to_user_id','=',Auth()->user()->id)->update(['is_read'=>1]);
-
-
+        /*设置该对话全部未读为已读*/
+        Message::where('to_user_id','=',Auth()->user()->id)->where('is_read','=',0)->update(['is_read'=>1]);
 
         $messages = Message::where(function($query) use ($toUser) {
                                 $query->where('to_user_id','=',Auth()->user()->id)
-                                      ->where('from_user_id','=',$toUser->id);
+                                      ->where('from_user_id','=',$toUser->id)
+                                      ->where('to_deleted','=',0);
                     })->orWhere(function($query) use ($toUser) {
                                 $query->where('to_user_id','=',$toUser->id)
-                                      ->where('from_user_id','=',Auth()->user()->id);
+                                      ->where('from_user_id','=',Auth()->user()->id)
+                                      ->where('from_deleted','=',0);
                    })->orderBy('created_at','desc')->paginate(10);
 
 
@@ -142,8 +148,62 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $loginUser = $request->user();
+        $message = Message::find($id);
+
+        if(!$message){
+            abort(404);
+        }
+
+
+        /*收件人删除*/
+        if( $message->to_user_id === $loginUser->id )
+        {
+            $message->to_deleted = 1;
+            $message->save();
+        }else if( $message->from_user_id === $loginUser->id ){
+            $message->from_deleted = 1;
+            $message->save();
+        }else{
+            return response('error');
+        }
+
+        /*删除双方都删除过的信息*/
+        if( $message->to_deleted === 1 && $message->from_deleted === 1 ){
+            $message->delete();
+        }
+
+        return response('ok');
+
     }
+
+    public function destroySession(Request $request,$from_user_id)
+    {
+
+        $loginUser = $request->user();
+
+        /*删除给我的消息*/
+
+        Message::where('to_user_id','=',$loginUser->id)
+               ->where('from_user_id','=',$from_user_id)
+               ->update(['to_deleted'=>1]);
+
+        /*删除我发的消息*/
+        Message::where('to_user_id','=',$from_user_id)
+            ->where('from_user_id','=',$loginUser->id)
+            ->update(['from_deleted'=>1]);
+
+
+        /*删除双方都删除的所有消息*/
+
+        Message::where('to_deleted','=',1)->where('from_deleted','=',1)->delete();
+
+        return response('ok');
+
+
+    }
+
+
 }

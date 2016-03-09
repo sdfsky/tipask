@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>通知提醒 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('content')
     <div class="row">
         <!--左侧菜单-->
@@ -37,16 +43,6 @@
                                     <input name="invite" id="invite" type="checkbox" checked=""> 当有人邀请我回答问题时
                                 </label>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="weekly" id="weekly" type="checkbox" checked=""> 精选内容周报
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="feature_news" id="feature_news" type="checkbox" checked=""> 当有新功能或其它相关新闻时
-                                </label>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,12 +59,7 @@
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input name="weekly" id="weekly" type="checkbox" checked=""> 精选内容周报
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="feature_news" id="feature_news" type="checkbox" checked=""> 当有新功能或其它相关新闻时
+                                    <input name="invite" id="invite" type="checkbox" checked=""> 当我的回答被采纳时
                                 </label>
                             </div>
                             <button class="btn btn-xl btn-primary notify-sub mt-20">提交</button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ask;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\QuestionInvitation;
 use App\models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Jenssegers\Date\Date;
 
 class QuestionController extends Controller
@@ -70,9 +72,12 @@ class QuestionController extends Controller
     /**
      * 问题添加页面显示
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view("theme::question.create");
+        $to_user_id =  $request->query('to_user_id',0);
+
+        $toUser = User::find($to_user_id);
+        return view("theme::question.create")->with('toUser',$toUser)->with('to_user_id',$to_user_id);
     }
 
 
@@ -91,7 +96,6 @@ class QuestionController extends Controller
             'status'       => 1,
         ];
 
-
         $question = Question::create($data);
         /*判断问题是否添加成功*/
         if($question){
@@ -109,12 +113,35 @@ class QuestionController extends Controller
             //记录动态
             $this->doing($question->user_id,'ask',get_class($question),$question->id,$question->title,$question->description);
 
+
+            /*邀请作答逻辑处理*/
+            $to_user_id = $request->input('to_user_id',0);
+            $toUser = User::find($to_user_id);
+            if($toUser){
+                if(QuestionInvitation::create(['question_id'=>$question->id,'user_id'=>$to_user_id])){
+                    $emailData = [
+                            'email' => $toUser['email'],
+                            'name' => Setting()->get('website_name'),
+                            'action' => 'inviteToAnswer',
+                            'question_id' => $question->id,
+                            'subject' => '问题求助：'.$question->title
+                        ];
+                    Mail::queue('emails.'.$emailData['action'], $emailData, function($message) use ($emailData)
+                    {
+                        $message->to($emailData['email'],$emailData['name'])->subject($emailData['subject']);
+                    });
+
+                }
+            }
+
+
             /*用户提问数+1*/
             $loginUser->userData()->increment('questions');
             if($question->status ==1 && $this->credit($request->user()->id,'ask',Setting()->get('coins_ask'),Setting()->get('credits_ask'),$question->id,$question->title)){
                 $message = '发起提问成功! 经验 '.integer_string(Setting()->get('credits_ask')) .' , 金币 '.integer_string(Setting()->get('coins_ask'));
                 return $this->success(route('ask.question.detail',['question_id'=>$question->id]),$message);
             }
+
 
 
         }
@@ -153,7 +180,6 @@ class QuestionController extends Controller
         if($question->user_id !== $request->user()->id){
             abort(401);
         }
-
         $request->flash();
         $this->validate($request,$this->validateRules);
 

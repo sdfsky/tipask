@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>文章 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
@@ -59,7 +65,7 @@
             </div>
 
             <div class="widget-box">
-                <h2 class="h4 widget-box-title">热门作者</h2>
+                <h2 class="h4 widget-box-title">热门作者 <a href="{{ route('auth.top.articles') }}">»</a></h2>
                 <ul class="list-unstyled">
                     @foreach($hotUsers as $hotUser)
                     <li class="media  widget-user-item ">

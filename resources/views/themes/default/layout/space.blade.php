@@ -30,7 +30,8 @@
                         @else
                             <button type="button" id="follow-button" class="btn mr-10 btn-success" data-source_type = "user" data-source_id = "{{ $userInfo->id }}"  data-show_num="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="关注后将获得更新提醒">关注</button>
                         @endif
-                        <a class="btn mr-10 btn-primary">私信</a>
+                        <a class="btn btn-warning mr-10" href="{{ route('ask.question.create') }}?to_user_id={{ $userInfo->id }}">向TA求助</a>
+                        <button class="btn btn-default btnMessageTo" data-toggle="modal" data-target="#sendTo_message_model"   data-to_user_id = "{{ $userInfo->id }}" data-to_user_name="{{ $userInfo->name }}" >发私信</button>
                         {{--<a class="btn mr-10 btn-default">举报</a>--}}
                         @endif
                     </div>

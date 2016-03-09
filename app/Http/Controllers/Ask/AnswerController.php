@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ask;
 use App\Models\Answer;
 use App\Models\Attention;
 use App\Models\Question;
+use App\Models\QuestionInvitation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -74,6 +75,12 @@ class AnswerController extends Controller
                     $question->increment('followers');
                 }
             }
+
+
+            /*修改问题邀请表的回答状态*/
+            QuestionInvitation::where('question_id','=',$question->id)->where('user_id','=',$request->user()->id)->update(['status'=>1]);
+
+
 
 
             /*记录积分*/

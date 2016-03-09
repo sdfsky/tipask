@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>{{ Setting()->get('website_name') }} - 做最好的中文问答系统</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('jumbotron')
     @if(Auth()->guest())
     <div class="jumbotron text-center">
@@ -52,7 +58,7 @@
                 </div>
             </div>
             <div class="widget-box clearfix">
-                <h4 class="widget-box-title">活跃用户</h4>
+                <h4 class="widget-box-title">活跃用户 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
                 @foreach($activeUsers as $activeUser)
                 <div class="media col-md-3">
                     <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}"><img class="media-object avatar-50" src="{{ route('website.image.avatar',['avatar_name'=>$activeUser->id.'_middle'])}}" alt="{{ $activeUser->name }}"></a>
@@ -148,13 +154,14 @@
             <div class="widget-box mt30">
                 <h2 class="widget-box-title">
                     财富榜
+                    <a href="{{ route('auth.top.coins') }}" title="更多">»</a>
                 </h2>
                 <ol class="widget-top10">
-                    @foreach($topCoinUsers as $topCoinUser)
+                    @foreach($topCoinUsers as $index => $topCoinUser)
                     <li class="text-muted">
-                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser->id.'_middle'])}}">
-                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser->id]) }}" class="ellipsis">{{ $topCoinUser->name }}</a>
-                        <span class="text-muted pull-right">{{ $topCoinUser->coins }}</span>
+                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser->user_id.'_middle'])}}">
+                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser->user_id]) }}" class="ellipsis">{{ $topCoinUser->user->name }}</a>
+                        <span class="text-muted pull-right">{{ $topCoinUser->coins }} 金币</span>
                     </li>
                     @endforeach
 

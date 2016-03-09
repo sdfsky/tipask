@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Ask;
+namespace App\Http\Controllers\Account;
 
 use App\Models\Doing;
 use Illuminate\Http\Request;

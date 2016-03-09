@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Blog;
 use App\Models\Article;
 use App\Models\Question;
 use App\models\Tag;
+use App\models\UserData;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
 {
@@ -92,6 +94,10 @@ class ArticleController extends Controller
         /*问题查看数+1*/
         $article->increment('views');
 
+        $topUsers = Cache::remember('top_article_users',10,function() {
+            return  UserData::top('articles',8);
+        });
+
         /*相关问题*/
         $relatedQuestions = Question::correlations($article->tags()->lists('tag_id'));
 
@@ -99,6 +105,7 @@ class ArticleController extends Controller
         $relatedArticles = Article::correlations($article->tags()->lists('tag_id'));
 
         return view("theme::article.show")->with('article',$article)
+                                          ->with('topUsers',$topUsers)
                                           ->with('relatedQuestions',$relatedQuestions)
                                           ->with('relatedArticles',$relatedArticles);
         ;

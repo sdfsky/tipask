@@ -16,7 +16,7 @@ class Tag extends Model
      */
     public static function multiSave($tagString,$taggable)
     {
-        $tags = array_unique(explode(" ",$tagString));
+        $tags = array_unique(explode(",",$tagString));
 
         /*删除所有标签关联*/
         if($tags){

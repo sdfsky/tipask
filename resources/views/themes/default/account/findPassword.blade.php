@@ -1,7 +1,11 @@
 @extends('theme::layout.account')
 
 @section('seo')
-    <title>设置新密码</title>
+    <title>设置新密码 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @stop
 
 @section('content')
@@ -11,7 +15,7 @@
                 <img src="{{ asset('/css/default/login-logo.png') }}" alt="SegmentFault">
             </a>
         </h1>
-        <p class="description text-muted">欢迎加入最专业的中文开发者社区</p>
+        <p class="description text-muted">欢迎加入最专业站长问答社区</p>
     </div>
 
 

@@ -127,6 +127,35 @@ $(function(){
 
 
 
+    /*私信模块处理*/
+
+    $('#sendTo_message_model').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget);
+        var to_user_id = button.data('to_user_id');
+        var to_user_name = button.data('to_user_name');
+        var modal = $(this);
+        modal.find('#to_user_id').val(to_user_id);
+        modal.find('#to_user_name').text(to_user_name);
+    });
+
+
+    $("#sendTo_submit").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/message/store",
+            data: $('#sendTo_message_form').serialize(),
+            success: function(msg){
+                alert('消息发送成功');
+                $("#sendTo_message_model").modal('hide');
+            },
+            error: function(){
+                alert("发送失败！");
+            }
+        });
+    });
+
+
     /*关注模块处理，关注问题，用户等*/
     $("#follow-button,.followTopic,.followerUser").click(function(){
         if(!check_login()){
@@ -207,7 +236,11 @@ $(function(){
 
 
     /*通知异步加载*/
-    $("#notifications").load("ajax/unreadNotifications");
+    $("#unread_notifications").load("/ajax/unreadNotifications");
+
+    /*异步加载私信*/
+    $("#unread_messages").load("/ajax/unreadMessages");
+
 
 
 

@@ -1,5 +1,11 @@
 @extends('theme::layout.space')
 
+@section('seo')
+    <title>@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else他的@endif提问 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('space_content')
 
     <h4 class="space-stream-heading">{{ $questions->total() }} 个问题</h4>

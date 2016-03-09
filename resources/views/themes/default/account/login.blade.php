@@ -1,8 +1,10 @@
 @extends('theme::layout.account')
 
 @section('seo')
-    <title>用户登陆</title>
-@stop
+    <title>用户登录 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
 
 @section('content')
     <div class="header text-center">
@@ -11,7 +13,7 @@
                 <img src="{{ asset('/css/default/login-logo.png') }}" alt="SegmentFault">
             </a>
         </h1>
-        <p class="description text-muted">欢迎加入最专业的中文开发者社区</p>
+        <p class="description text-muted">欢迎加入最专业站长问答社区</p>
     </div>
     <div class="col-md-6 col-md-offset-3 bg-white login-wrap">
         @if ( session('message') )

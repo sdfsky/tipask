@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>{{ $article->title }} - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="{{ $article->summary }}" />
+    <meta name="keywords" content="{{ $article->tags->implode('name',',') }}" />
+@endsection
+
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
@@ -94,19 +100,23 @@
                     </div>
                 </div>
             </div>
-            <div class="widget-box">
-                <h2 class="h4 widget-box-title">相关问题</h2>
-                <ul class="widget-links list-unstyled">
-                    @foreach($relatedQuestions as $relatedQuestion)
-                        @if($relatedQuestion->id != $article->id)
-                        <li class="widget-links-item">
-                            <a title="{{ $relatedQuestion->title }}" href="{{ route('ask.question.detail',['question_id'=>$relatedQuestion->id]) }}">{{ $relatedQuestion->title }}</a>
-                            <small class="text-muted">{{ $relatedQuestion->answers }} 回答</small>
+            <div class="widget-box mt-30">
+                <h2 class="widget-box-title">
+                    作家榜
+                    <a href="{{ route('auth.top.articles') }}" title="更多">»</a>
+                </h2>
+                <ol class="widget-top10">
+                    @foreach($topUsers as $index => $topUser)
+                        <li class="text-muted">
+                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topUser->user_id.'_middle'])}}">
+                            <a href="{{ route('auth.space.index',['user_id'=>$topUser->user_id]) }}" class="ellipsis">{{ $topUser->user->name }}</a>
+                            <span class="text-muted pull-right">{{ $topUser->articles }} 文章</span>
                         </li>
-                        @endif
                     @endforeach
-                </ul>
+
+                </ol>
             </div>
+
         </div>
     </div>
 @endsection

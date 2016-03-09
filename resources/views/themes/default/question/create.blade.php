@@ -1,20 +1,31 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>发起提问 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('css')
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
+    <link href="{{ asset('/static/js/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/static/js/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet">
+
 @endsection
 
 @section('content')
 
     <div class="row mt-10">
         <ol class="breadcrumb">
-            <li><a href="#">问答</a></li>
+            <li><a href="{{ route('website.ask') }}">问答</a></li>
             <li class="active">发起提问</li>
         </ol>
         <form id="questionForm" method="POST" role="form" action="{{ route('ask.question.store') }}">
-            <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}" />
+            <input type="hidden" id="tags" name="tags" value="" />
+            <input type="hidden" name="to_user_id" value="{{ $to_user_id }}" />
             <div class="form-group">
-                <label for="title">请将您的问题告诉我们:</label>
+                <label for="title">@if($toUser) 正在向 <a href="{{ route('auth.space.index',['id'=>$toUser->id]) }}">{{ $toUser->name }}</a> 提问 @else 请将您的问题告诉我们 @endif :</label>
                 <input id="title" type="text" name="title"  class="form-control input-lg" placeholder="请在这里概述您的问题" value="" />
             </div>
 
@@ -33,9 +44,10 @@
             </div>
 
             <div class="form-group">
-                <label for="tags">添加话题</label>
-                <input type="text" class="form-control" placeholder="话题越精准，越容易让相关领域专业人士看到你的问题" name="tags" />
+                <label for="select_tags">添加话题</label>
+                <select id="select_tags" name="select_tags" class="form-control" multiple="multiple" ></select>
             </div>
+
 
             <div class="row mt-20">
                 <div class="col-md-8">
@@ -62,6 +74,7 @@
 @endsection
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/select2/js/select2.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#description').summernote({
@@ -73,6 +86,34 @@
                     upload_editor_image(files[0],"description",$("#editor_token").val());
                 }
             });
+
+            $("#select_tags").select2({
+                theme:'bootstrap',
+                placeholder: "话题越精准，越容易让相关领域专业人士看到你的问题",
+                ajax: {
+                    url: '/ajax/loadTags',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            word: params.term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength:1,
+                tags:true
+            });
+
+            $("#select_tags").change(function(){
+                $("#tags").val($("#select_tags").val());
+            });
+
         });
     </script>
 @endsection

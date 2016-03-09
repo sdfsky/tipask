@@ -54,6 +54,7 @@ class IndexController extends Controller
                return  UserData::activities(8);
         });
 
+
         /*热门问题*/
         $hotQuestions = Cache::remember('hot_questions',10,function() {
             return  Question::hottest(8);
@@ -81,10 +82,10 @@ class IndexController extends Controller
         });
 
 
-
         /*财富榜*/
+
         $topCoinUsers = Cache::remember('top_coin_users',10,function() {
-            return  UserData::topCoins(8);
+            return  UserData::top('coins',8);
         });
 
 
@@ -118,9 +119,10 @@ class IndexController extends Controller
         $hotTags =  Taggable::globalHotTags();
 
 
-        $hotQuestions = Question::recent();
+
+        $topAnswerUsers = UserData::top('answers',8);
         return view('theme::home.ask')->with('questions',$questions)
-            ->with('hotQuestions',$hotQuestions)
+            ->with('topAnswerUsers',$topAnswerUsers)
             ->with('hotTags',$hotTags)
             ->with('filter',$filter);
     }
@@ -154,10 +156,10 @@ class IndexController extends Controller
     }
 
 
-    public function member()
+    public function user()
     {
-        $members = User::orderBy('credits','desc')->orderBy('coins','desc')->orderBy('answers','desc')->paginate(20);
-        return view('theme::home.user')->with('members',$members);
+        $users = UserData::orderBy('credits','desc')->orderBy('coins','desc')->orderBy('answers','desc')->paginate(20);
+        return view('theme::home.user')->with('users',$users);
 
     }
 

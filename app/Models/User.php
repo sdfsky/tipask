@@ -165,6 +165,11 @@ class User extends Model implements AuthenticatableContract,
         return $this->morphToMany('App\Models\UserData', 'source','attentions','source_id','user_id');
     }
 
+    /*邀请的回答*/
+    public function questionInvitations()
+    {
+        return $this->hasMany('App\Models\questionInvitation');
+    }
 
 
     /*是否回答过问题*/

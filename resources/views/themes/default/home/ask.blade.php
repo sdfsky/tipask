@@ -1,5 +1,11 @@
 @extends('theme::layout.public')
 
+@section('seo')
+    <title>问答 - {{ Setting()->get('website_name') }}</title>
+    <meta name="description" content="tipask问答系统交流平台" />
+    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
+@endsection
+
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
@@ -67,17 +73,23 @@
                 </ul>
             </div>
 
-            <div class="widget-box">
-                <h2 class="h4 widget-box-title">最近热门的</h2>
-                <ul class="widget-links list-unstyled">
-                    @foreach($hotQuestions as $hotQuestion)
-                    <li class="widget-links__item">
-                        <a href="{{ route('ask.question.detail',['question_id'=>$hotQuestion->id]) }}">{{ $hotQuestion->title }}</a>
-                        <small class="text-muted">{{ $hotQuestion->answers }} 回答</small>
-                    </li>
+            <div class="widget-box mt30">
+                <h2 class="widget-box-title">
+                    回答榜
+                    <a href="{{ route('auth.top.coins') }}" title="更多">»</a>
+                </h2>
+                <ol class="widget-top10">
+                    @foreach($topAnswerUsers as $index => $topAnswerUser)
+                        <li class="text-muted">
+                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topAnswerUser->user_id.'_middle'])}}">
+                            <a href="{{ route('auth.space.index',['user_id'=>$topAnswerUser->user_id]) }}" class="ellipsis">{{ $topAnswerUser->user->name }}</a>
+                            <span class="text-muted pull-right">{{ $topAnswerUser->answers }} 回答</span>
+                        </li>
                     @endforeach
-                </ul>
+
+                </ol>
             </div>
+
         </div>
     </div>
 @endsection
