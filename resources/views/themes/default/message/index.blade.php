@@ -77,7 +77,7 @@
                         <input type="hidden"  name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="to_user_id" class="control-label">发给:</label>
-                            <select  id="to_user_id" name="to_user_id"></select>
+                            <select  id="select_message_user" name="to_user_id"></select>
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="control-label">内容:</label>
@@ -128,7 +128,7 @@
 
         $(function(){
 
-            $("#to_user_id").select2({
+            $("#select_message_user").select2({
                 theme:'bootstrap',
                 placeholder: "搜索用户",
                 ajax: {
