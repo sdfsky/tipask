@@ -38,7 +38,7 @@ $(function(){
     $('[data-toggle="tooltip"]').tooltip();
 
     /*用户信息卡片*/
-    $('.user-card').popover({
+    $('.user-card___').popover({
         placement:'top',
         html:true,
         trigger:'manual',

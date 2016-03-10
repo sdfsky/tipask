@@ -38,11 +38,12 @@ class AnswerController extends Controller
         $loginUser = $request->user();
         $request->flash();
         $this->validate($request,$this->validateRules);
+        $answerContent = clean($request->input('content'));
         $data = [
             'user_id'      => $loginUser->id,
             'question_id'      => $question_id,
             'question_title'        => $question->title,
-            'content'  => $request->input('content'),
+            'content'  => $answerContent,
             'status'   => 1,
         ];
         $answer = Answer::create($data);
@@ -125,7 +126,7 @@ class AnswerController extends Controller
         $request->flash();
         $this->validate($request,$this->validateRules);
 
-        $answer->content = $request->input('content');
+        $answer->content = clean($request->input('content'));
         $answer->status = 1;
 
         $answer->save();

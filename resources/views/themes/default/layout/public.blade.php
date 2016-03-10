@@ -134,7 +134,7 @@
             <span class="span-line">|</span><a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
         </div>
         <div class="copyright mt-10">
-            Powered By Tipask3.0开发版 ©2009-2016 tipask.com 最后更新日期 <a href="http://status.segmentfault.com/">2016-2-16</a>
+            Powered By Tipask3.0开发版 ©2009-2016 tipask.com 最后更新日期 <a href="http://status.segmentfault.com/">2016-3-10</a>
         </div>
     </div>
 </footer>

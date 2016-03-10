@@ -52,7 +52,7 @@ class CommentController extends Controller
 
         $data = [
             'user_id'     => $request->user()->id,
-            'content'     => $request->input('content'),
+            'content'     => clean($request->input('content')),
             'source_id'   => $source_id,
             'source_type' => get_class($source),
             'to_user_id'  => $request->input('to_user_id'),

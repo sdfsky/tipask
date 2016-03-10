@@ -89,8 +89,8 @@ class QuestionController extends Controller
         $this->validate($request,$this->validateRules);
         $data = [
             'user_id'      => $loginUser->id,
-            'title'        => trim($request->input('title')),
-            'description'  => $request->input('description'),
+            'title'        => clean(trim($request->input('title'))),
+            'description'  => clean($request->input('description')),
             'price'        => $request->input('price'),
             'hide'         => intval($request->input('hide')),
             'status'       => 1,
@@ -183,12 +183,12 @@ class QuestionController extends Controller
         $request->flash();
         $this->validate($request,$this->validateRules);
 
-        $question->title = trim($request->input('title'));
-        $question->description = $request->input('description');
+        $question->title = clean(trim($request->input('title')));
+        $question->description = clean($request->input('description'));
         $question->hide = intval($request->input('hide'));
 
         $question->save();
-        $tagString = trim($request->input('tags'));
+        $tagString = clean(trim($request->input('tags')));
 
         /*更新标签*/
         Tag::multiSave($tagString,$question);

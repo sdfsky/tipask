@@ -50,9 +50,9 @@ class ArticleController extends Controller
         $this->validate($request,$this->validateRules);
         $data = [
             'user_id'      => $loginUser->id,
-            'title'        => trim($request->input('title')),
-            'content'  => $request->input('content'),
-            'summary'  => $request->input('summary'),
+            'title'        => clean(trim($request->input('title'))),
+            'content'  => clean($request->input('content')),
+            'summary'  => clean($request->input('summary')),
             'status'       => 1,
         ];
 
@@ -62,7 +62,7 @@ class ArticleController extends Controller
         if($article){
 
             /*添加标签*/
-            $tagString = trim($request->input('tags'));
+            $tagString = clean(trim($request->input('tags')));
             Tag::multiSave($tagString,$article);
 
             //记录动态
@@ -153,12 +153,12 @@ class ArticleController extends Controller
         $request->flash();
         $this->validate($request,$this->validateRules);
 
-        $article->title = trim($request->input('title'));
-        $article->content = $request->input('content');
-        $article->summary = $request->input('summary');
+        $article->title = clean(trim($request->input('title')));
+        $article->content = clean($request->input('content'));
+        $article->summary = clean($request->input('summary'));
 
         $article->save();
-        $tagString = trim($request->input('tags'));
+        $tagString = clean(trim($request->input('tags')));
 
         /*更新标签*/
         Tag::multiSave($tagString,$article);

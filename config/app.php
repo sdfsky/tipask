@@ -146,6 +146,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ThemeServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
@@ -199,6 +200,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Captcha'   => Mews\Captcha\Facades\Captcha::class,
         'Image'     => Intervention\Image\Facades\Image::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
 
     ],
 

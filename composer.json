@@ -8,6 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "mews/captcha": "~2.0",
+        "mews/purifier": "~2.0",
         "bican/roles": "2.1.*",
         "intervention/image": "^2.3"
     },
