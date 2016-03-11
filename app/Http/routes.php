@@ -102,7 +102,7 @@ Route::Group(['namespace'=>'Account'],function(){
 
 
         /*邀请我回答的问题*/
-        Route::get('questionInvitation',['as'=>'auth.questionInvitation.index','uses'=>'questionInvitationController@index']);
+        Route::get('questionInvitation',['as'=>'auth.questionInvitation.index','uses'=>'QuestionInvitationController@index']);
 
 
 

@@ -168,7 +168,7 @@ class User extends Model implements AuthenticatableContract,
     /*邀请的回答*/
     public function questionInvitations()
     {
-        return $this->hasMany('App\Models\questionInvitation');
+        return $this->hasMany('App\Models\QuestionInvitation');
     }
 
 

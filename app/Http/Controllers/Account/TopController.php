@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\models\UserData;
+use App\Models\UserData;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

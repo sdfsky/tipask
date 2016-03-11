@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Ask;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\QuestionInvitation;
-use App\models\Tag;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -44,7 +44,7 @@ class QuestionController extends Controller
 
         /*已解决问题*/
         $bestAnswer = [];
-        if($question->status===2){
+        if($question->status === 2 ){
             $bestAnswer = $question->answers()->where('adopted_at','>',0)->first();
         }
 
@@ -89,7 +89,7 @@ class QuestionController extends Controller
         $this->validate($request,$this->validateRules);
         $data = [
             'user_id'      => $loginUser->id,
-            'title'        => clean(trim($request->input('title'))),
+            'title'        => trim($request->input('title')),
             'description'  => clean($request->input('description')),
             'price'        => $request->input('price'),
             'hide'         => intval($request->input('hide')),
@@ -183,12 +183,12 @@ class QuestionController extends Controller
         $request->flash();
         $this->validate($request,$this->validateRules);
 
-        $question->title = clean(trim($request->input('title')));
+        $question->title = trim($request->input('title'));
         $question->description = clean($request->input('description'));
         $question->hide = intval($request->input('hide'));
 
         $question->save();
-        $tagString = clean(trim($request->input('tags')));
+        $tagString = trim($request->input('tags'));
 
         /*更新标签*/
         Tag::multiSave($tagString,$question);

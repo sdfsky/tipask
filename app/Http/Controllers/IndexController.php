@@ -7,10 +7,10 @@ use App\Models\Comment;
 use App\Models\Notice;
 use App\Models\Question;
 use App\Models\Recommendation;
-use App\models\Tag;
+use App\Models\Tag;
 use App\Models\Taggable;
 use App\Models\User;
-use App\models\UserData;
+use App\Models\UserData;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Area;
+use App\Models\Area;
 use App\Models\Message;
 use App\Models\Notification;
-use App\models\Tag;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +20,7 @@ class AjaxController extends Controller
      */
     public function loadCities($province_id)
     {
+
 
         $cities = Area::cities($province_id);
         $city_options = '';

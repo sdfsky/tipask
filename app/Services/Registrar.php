@@ -32,7 +32,7 @@ class Registrar implements RegistrarContract {
     public function create(array $data)
     {
         $user =  User::create([
-            'name' => clean($data['name']),
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'status' => 0

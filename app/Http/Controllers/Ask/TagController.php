@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Ask;
 
-use App\models\Tag;
+use App\Models\Tag;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\models\Area;
+use App\Models\Area;
 use App\Models\EmailToken;
 use App\Models\User;
 use Illuminate\Http\Request;

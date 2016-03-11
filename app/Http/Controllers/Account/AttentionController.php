@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\Attention;
 use App\Models\Question;
-use App\models\Tag;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 

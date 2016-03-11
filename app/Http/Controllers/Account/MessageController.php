@@ -171,7 +171,7 @@ class MessageController extends Controller
         }
 
         /*删除双方都删除过的信息*/
-        if( $message->to_deleted === 1 && $message->from_deleted === 1 ){
+        if( $message->to_deleted == 1 && $message->from_deleted == 1 ){
             $message->delete();
         }
 

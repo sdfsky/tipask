@@ -44,7 +44,7 @@ class EmailController extends Controller
 
         if(in_array($action,['register','verify'])){
 
-            if($user->status===0){
+            if($user->status==0){
                 $user->status=1;
                 $user->save();
             }

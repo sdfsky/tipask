@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Credit;
 use App\Models\Doing;
 use App\Models\Notification;
-use App\models\UserData;
+use App\Models\UserData;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
