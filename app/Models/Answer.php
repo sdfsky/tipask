@@ -12,6 +12,31 @@ class Answer extends Model
     protected $table = 'answers';
     protected $fillable = ['question_title','question_id','user_id', 'content','status'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        /*监听删除事件*/
+        static::deleting(function($answer){
+
+            /*问题回答数 -1 */
+            $answer->question->decrement('answers');
+
+            /*用户回答数 -1 */
+            $answer->user->userData->decrement('answers');
+
+            /*删除回答评论*/
+            Comment::where('source_type','=',get_class($answer))->where('source_id','=',$answer->id)->delete();
+
+            /*删除回答支持记录*/
+            $answer->user->userData->decrement('supports');
+            Support::where('supportable_type','=',get_class($answer))->where('supportable_id','=',$answer->id)->delete();
+
+
+        });
+    }
+
+
 
     public function question(){
         return $this->belongsTo('App\Models\Question');

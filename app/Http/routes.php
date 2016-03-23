@@ -193,9 +193,6 @@ Route::Group(['namespace'=>'Blog'],function(){
         Route::get('article/edit/{id}',['as'=>'blog.article.edit','uses'=>'ArticleController@edit'])->where(['id'=>'[0-9]+']);
         Route::post('article/update',['as'=>'blog.article.update','uses'=>'ArticleController@update']);
 
-
-
-
     });
 
 });
@@ -232,6 +229,28 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::any('setting/time',['as'=>'admin.setting.time','uses'=>'SettingController@time']);
     /*积分设置*/
     Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
+
+
+
+    /*内容审核*/
+
+
+
+
+    /*问题管理*/
+    Route::resource('question', 'QuestionController',['except' => ['show']]);
+
+    /*回答管理*/
+    Route::resource('answer', 'AnswerController',['except' => ['show']]);
+
+    /*文章管理*/
+    Route::resource('article', 'ArticleController',['except' => ['show']]);
+
+    /*评论管理*/
+    Route::resource('comment', 'CommentController',['except' => ['show']]);
+
+
+
 
 
     /*公告管理*/

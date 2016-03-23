@@ -26,11 +26,13 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
+
         /*登录表单处理*/
         if($request->isMethod('post'))
         {
 
             $request->flashOnly('email');
+
             /*表单数据校验*/
             $this->validate($request, [
                 'email' => 'required|email',
@@ -40,11 +42,10 @@ class UserController extends Controller
 
             /*只接收email和password的值*/
             $credentials = $request->only('email', 'password');
-
+            
             /*根据邮箱地址和密码进行认证*/
             if ($this->auth->attempt($credentials, $request->has('remember')))
             {
-
 
                 if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
                     $message = '登陆成功! 经验 '.integer_string(Setting()->get('credits_login')) .' , 金币 '.integer_string(Setting()->get('coins_login'));

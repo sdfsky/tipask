@@ -16,6 +16,34 @@ class Question extends Model
     protected $table = 'questions';
     protected $fillable = ['title', 'user_id', 'description','tags','price','hide','status'];
 
+
+    public static function boot()
+    {
+        parent::boot();
+
+        /*监听删除事件*/
+        static::deleting(function($question){
+            /*用户提问数 -1 */
+            $question->user->userData->decrement('questions');
+
+            /*删除问题评论*/
+            Comment::where('source_type','=',get_class($question))->where('source_id','=',$question->id)->delete();
+
+            /*删除动态*/
+            Doing::where('source_type','=',get_class($question))->where('source_id','=',$question->id)->delete();
+
+            /*删除问题关注*/
+            Attention::where('source_type','=',get_class($question))->where('source_id','=',$question->id)->delete();
+
+            /*删除标签关联*/
+            Taggable::where('taggable_type','=',get_class($question))->where('taggable_id','=',$question->id)->delete();
+
+            /*删除问题邀请*/
+            QuestionInvitation::where('question_id','=',$question->id)->delete();
+
+        });
+    }
+
     /*获取相关问题*/
     public static function correlations($tagIds,$size=6)
     {

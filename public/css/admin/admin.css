@@ -156,20 +156,21 @@ h6,
 }
 /* General Links */
 a {
-    color: #3c8dbc;
+    color: #555;
 }
 a:hover,
 a:active,
 a:focus {
-    outline: none;
-    text-decoration: none;
-    color: #72afd2;
+    text-decoration: underline;
+    color: #555;
 }
+
 /* Page Header */
 .page-header {
     margin: 10px 0 20px 0;
     font-size: 22px;
 }
+
 .page-header > small {
     color: #666;
     display: block;
@@ -4319,6 +4320,16 @@ fieldset[disabled] .btn-vk.active {
 .chart canvas {
     width: 100%!important;
 }
+
+/*tipask后台样式调整*/
+
+.gold, .text-gold {
+    color: #ff8a00;
+}
+
+
+
+
 /*
  * Misc: print
  * -----------

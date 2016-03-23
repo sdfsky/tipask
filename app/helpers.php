@@ -28,6 +28,27 @@ if (! function_exists('trans_common_status')) {
 }
 
 
+/*问题状态文本描述定义*/
+if (! function_exists('trans_question_status')) {
+
+    function trans_question_status($status){
+        $map = [
+            0 => '待审核',
+            1 => '待解决',
+            2 => '已解决',
+        ];
+
+        if(isset($map[$status])){
+            return $map[$status];
+        }
+
+        return '';
+    }
+
+}
+
+
+
 /*数据库setting表操作*/
 if (! function_exists('Setting')) {
 

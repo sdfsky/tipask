@@ -157,6 +157,7 @@ class AnswerController extends Controller
             $answer->question->save();
 
             $request->user()->userData()->increment('adoptions');
+
             /*悬赏处理*/
             if($answer->question->price > 0){
                 $this->credit($answer->user_id,'answer_adopted',$answer->question->coins,$answer->question->id,$answer->question->title);

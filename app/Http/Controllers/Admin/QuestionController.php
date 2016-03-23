@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Question;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+class QuestionController extends AdminController
+{
+    /**
+     * 问题列表
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $questions = Question::orderBy('created_at','desc')->paginate(20);
+        return view("admin.question.index")->with('questions',$questions)->with('word','');
+    }
+
+
+    /**
+     * 显示问题编辑页面
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * 删除问题
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $questionIds = $request->input('id');
+        Question::destroy($questionIds);
+        return $this->success(route('admin.question.index'),'问题删除成功');
+
+
+
+    }
+}
