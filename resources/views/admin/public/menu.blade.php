@@ -30,37 +30,17 @@
         </ul>
     </li>
 
-    @permission('admin.user.index|admin.user.create')
     <li class="treeview">
         <a href="#">
             <i class="fa fa-users"></i> <span>用户</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu" id="manage_user">
-            @permission('admin.user.create')
             <li><a href="{{ route('admin.user.create') }}"><i class="fa fa-circle-o"></i> 新建用户</a></li>
-            @endpermission
-            @permission('admin.user.index')
             <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-circle-o"></i> 用户管理</a></li>
-            @endpermission
             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 新用户审核</a></li>
         </ul>
     </li>
-    @endpermission
-
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-check"></i> <span>审核</span>
-            <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 问题审核</a></li>
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 回答审核</a></li>
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 文章审核</a></li>
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 评论审核</a></li>
-        </ul>
-    </li>
-
 
     <li class="treeview">
         <a href="#">

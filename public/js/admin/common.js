@@ -32,6 +32,25 @@ $(function () {
     $('.checkbox-toggle').on('ifUnchecked', function(event){
         $("input[type='checkbox'][class!='checkbox-toggle']").iCheck('uncheck');
     });
+
+
+    /*daterange控件*/
+    $('#date_range').daterangepicker({
+        format: 'YYYY-MM-DD',
+        locale: {
+            applyLabel: '确认',
+            cancelLabel: '取消',
+            fromLabel: '从',
+            toLabel: '到',
+            weekLabel: '星期',
+            customRangeLabel: '自定义范围',
+            daysOfWeek: moment.weekdaysMin(),
+            monthNames: moment.monthsShort(),
+            firstDay: moment.localeData()._week.dow
+        }
+    });
+
+
 });
 
 
@@ -41,6 +60,16 @@ function confirm_delete(message){
         return false;
     }
     $("#item_form").submit();
+}
+
+
+/*确认提交表单*/
+function confirm_submit(form_id,action_url,message){
+    if(!confirm(message)){
+        return false;
+    }
+    $("#"+form_id).attr("action",action_url);
+    $("#"+form_id).submit();
 }
 
 /**

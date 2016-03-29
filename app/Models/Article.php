@@ -14,6 +14,22 @@ class Article extends Model
     protected $fillable = ['title', 'user_id', 'content','tags','summary','status'];
 
 
+    public static function boot()
+    {
+        parent::boot();
+
+        /*监听删除事件*/
+        static::deleting(function($article){
+
+            /*用户文章数 -1 */
+            $article->user->userData->decrement('articles');
+
+            /*删除回答评论*/
+            Comment::where('source_type','=',get_class($article))->where('source_id','=',$article->id)->delete();
+
+        });
+    }
+
     /*获取相关文章*/
     public static function correlations($tagIds,$size=6)
     {

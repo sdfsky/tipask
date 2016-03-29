@@ -135,6 +135,10 @@ Route::Group(['namespace'=>'Ask'],function(){
     /*问题查看*/
     Route::get('question/{id}',['as'=>'ask.question.detail','uses'=>'QuestionController@detail'])->where(['id'=>'[0-9]+']);
 
+    /*回答详情查看*/
+    Route::get('question/{question_id}/answer/{id}',['as'=>'ask.answer.detail','uses'=>'AnswerController@detail'])->where(['id'=>'[0-9]+','question_id'=>'[0-9]+']);
+
+
 
     /*需要登录的模块*/
     Route::Group(['middleware'=>'auth'],function(){
@@ -232,22 +236,35 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
 
 
 
-    /*内容审核*/
-
-
-
-
+    /*问题删除*/
+    Route::post('question/destroy',['as'=>'admin.question.destroy','uses'=>'QuestionController@destroy']);
+    /*问题审核*/
+    Route::post('question/verify',['as'=>'admin.question.verify','uses'=>'QuestionController@verify']);
     /*问题管理*/
-    Route::resource('question', 'QuestionController',['except' => ['show']]);
+    Route::resource('question', 'QuestionController',['only' => ['index','edit','update']]);
 
+
+    /*回答删除*/
+    Route::post('answer/destroy',['as'=>'admin.answer.destroy','uses'=>'AnswerController@destroy']);
+    /*回答审核*/
+    Route::post('answer/verify',['as'=>'admin.answer.verify','uses'=>'AnswerController@verify']);
     /*回答管理*/
-    Route::resource('answer', 'AnswerController',['except' => ['show']]);
+    Route::resource('answer', 'AnswerController',['only' => ['index','edit','update']]);
 
+    /*文章删除*/
+    Route::post('article/destroy',['as'=>'admin.article.destroy','uses'=>'ArticleController@destroy']);
+    /*文章审核*/
+    Route::post('article/verify',['as'=>'admin.article.verify','uses'=>'ArticleController@verify']);
     /*文章管理*/
-    Route::resource('article', 'ArticleController',['except' => ['show']]);
+    Route::resource('article', 'ArticleController',['only' => ['index','edit','update']]);
 
+
+    /*评论删除*/
+    Route::post('comment/destroy',['as'=>'admin.comment.destroy','uses'=>'CommentController@destroy']);
+    /*评论审核*/
+    Route::post('comment/verify',['as'=>'admin.comment.verify','uses'=>'CommentController@verify']);
     /*评论管理*/
-    Route::resource('comment', 'CommentController',['except' => ['show']]);
+    Route::resource('comment', 'CommentController',['only' => ['index','edit','update']]);
 
 
 

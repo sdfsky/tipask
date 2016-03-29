@@ -11,6 +11,21 @@ class Comment extends Model
     protected $table = 'comments';
     protected $fillable = ['user_id', 'content','source_id','source_type','to_user_id','status'];
 
+
+    public static function boot()
+    {
+        parent::boot();
+
+        /*监听删除事件*/
+        static::deleting(function($comment){
+
+            /*问题、回答、文章评论数 -1*/
+            $comment->source()->decrement('comments');
+
+        });
+    }
+
+
     public function source()
     {
         return $this->morphTo();

@@ -17,6 +17,11 @@ if (! function_exists('trans_common_status')) {
             1 => '已审核',
         ];
 
+        if($status==='all'){
+            return $map;
+        }
+
+
         if(isset($map[$status])){
             return $map[$status];
         }
@@ -37,6 +42,10 @@ if (! function_exists('trans_question_status')) {
             1 => '待解决',
             2 => '已解决',
         ];
+
+        if($status==='all'){
+            return $map;
+        }
 
         if(isset($map[$status])){
             return $map[$status];

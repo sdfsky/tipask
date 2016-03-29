@@ -15,43 +15,38 @@ class ArticleController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::orderBy('created_at','desc')->paginate(20);
-        return view("admin.article.index")->with('articles',$articles)->with('word','');
+        $filter =  $request->all();
+
+        $query = Article::query();
+
+        /*提问人过滤*/
+        if( isset($filter['user_id']) &&  $filter['user_id'] > 0 ){
+            $query->where('user_id','=',$filter['user_id']);
+        }
+
+        /*问题标题过滤*/
+        if( isset($filter['word']) && $filter['word'] ){
+            $query->where('title','like', '%'.$filter['word'].'%');
+        }
+
+        /*提问时间过滤*/
+        if( isset($filter['date_range']) && $filter['date_range'] ){
+            $query->whereBetween('created_at',explode(" - ",$filter['date_range']));
+        }
+
+        /*问题状态过滤*/
+        if( isset($filter['status']) && $filter['status'] > -1 ){
+            $query->where('status','=',$filter['status']);
+        }
+
+
+        $articles = $query->orderBy('created_at','desc')->paginate(2);
+        return view("admin.article.index")->with('articles',$articles)->with('filter',$filter);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -76,14 +71,24 @@ class ArticleController extends AdminController
         //
     }
 
+
+    /*文章审核*/
+    public function verify(Request $request)
+    {
+        $articleIds = $request->input('id');
+        Article::whereIn('id',$articleIds)->update(['status'=>1]);
+        return $this->success(route('admin.article.index').'?status=0','文章审核成功');
+
+    }
+
     /**
-     * Remove the specified resource from storage.
-     *
+     * 删除文章
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Article::destroy($request->input('id'));
+        return $this->success(route('admin.article.index'),'文章删除成功');
     }
 }

@@ -28,11 +28,6 @@ class Answer extends Model
             /*删除回答评论*/
             Comment::where('source_type','=',get_class($answer))->where('source_id','=',$answer->id)->delete();
 
-            /*删除回答支持记录*/
-            $answer->user->userData->decrement('supports');
-            Support::where('supportable_type','=',get_class($answer))->where('supportable_id','=',$answer->id)->delete();
-
-
         });
     }
 

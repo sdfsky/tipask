@@ -8,9 +8,10 @@
     <link href="{{ asset('/static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/static/css/icheck/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/static/js/scojs/sco.message.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/static/js/daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="{{ asset('/static/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
+
     <!-- Theme style -->
     <link href="{{ asset('/css/admin/admin.css') }}" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins

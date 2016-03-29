@@ -177,4 +177,36 @@ class AnswerController extends Controller
     }
 
 
+    /**
+     * 回答详情查看
+     */
+    public function detail($question_id,$id,Request $request)
+    {
+
+        $question = Question::find($question_id);
+
+        if(empty($question)){
+            abort(404);
+        }
+
+
+        /*问题查看数+1*/
+        $question->increment('views');
+
+        $answer = $question->answers()->find($id);
+
+        /*设置通知为已读*/
+        if($request->user()){
+            $this->readNotifications($question->id,'question');
+        }
+
+        /*相关问题*/
+        $relatedQuestions = Question::correlations($question->tags()->lists('tag_id'));
+        return view("theme::answer.detail")->with('question',$question)
+            ->with('answer',$answer)
+            ->with('relatedQuestions',$relatedQuestions);
+    }
+
+
+
 }

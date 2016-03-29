@@ -16,6 +16,11 @@
 <script src="{{ asset('/static/css/icheck/icheck.min.js') }}" type="text/javascript"></script>
 <!--sco.js-->
 <script src="{{ asset('/static/js/scojs/sco.message.js') }}" type="text/javascript"></script>
+<!--daterangepicker.js-->
+<script src="{{ asset('/static/js/daterangepicker/moment.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/static/js/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+
+
 
 <!-- AdminLTE App -->
 <script src='{{ asset('/js/admin/admin.js') }}' type="text/javascript"></script>

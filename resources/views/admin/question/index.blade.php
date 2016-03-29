@@ -13,17 +13,33 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="row">
-                            <div class="col-xs-2">
+                            <div class="col-xs-3">
                                 <div class="btn-group">
-                                    <a href="{{ route('ask.question.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="创建新问题"><i class="fa fa-plus"></i></a>
-                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_delete('确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                    <a href="{{ route('ask.question.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="发起提问"><i class="fa fa-plus"></i></a>
+                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.question.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
+                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.question.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
                                 </div>
                             </div>
-                            <div class="col-xs-10">
+                            <div class="col-xs-9">
                                 <div class="row">
-                                    <form name="searchForm" action="{{ route('admin.question.index') }}" method="GET">
+                                    <form name="searchForm" action="{{ route('admin.question.index') }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <div class="col-xs-2">
+                                            <input type="text" class="form-control" name="user_id" placeholder="提问人UID" value="{{ $filter['user_id'] or '' }}"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input type="text" class="form-control" name="word" placeholder="关键词" value="{{ $filter['word'] or '' }}"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <select class="form-control" name="status">
+                                                <option value="-1">不选择</option>
+                                                @foreach(trans_question_status('all') as $key => $status)
+                                                <option value="{{ $key }}" @if( isset($filter['status']) && $filter['status']==$key) selected @endif >{{ $status }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="col-xs-3">
-                                            <input type="text" class="form-control" name="word" placeholder="角色名称" value="{{ $word }}"/>
+                                            <input type="text" name="date_range" id="date_range" class="form-control" placeholder="时间范围" value="{{ $filter['date_range'] or '' }}" />
                                         </div>
                                         <div class="col-xs-1">
                                             <button type="submit" class="btn btn-primary">搜索</button>
@@ -34,12 +50,12 @@
                         </div>
                     </div>
                     <div class="box-body  no-padding">
-                        <form name="itemForm" id="item_form" method="POST" action="{{ route('admin.question.destroy') }}">
-                            <input name="_method" type="hidden" value="DELETE">
+                        <form name="itemForm" id="item_form" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <table class="table table-striped">
                                 <tr>
                                     <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                    <th>ID</th>
                                     <th>悬赏</th>
                                     <th>标题</th>
                                     <th>提问人</th>
@@ -51,9 +67,10 @@
                                 @foreach($questions as $question)
                                     <tr>
                                         <td><input type="checkbox" name="id[]" value="{{ $question->id }}"/></td>
+                                        <td>{{ $question->id }}</td>
                                         <td><span class="text-gold"><i class="fa fa-database"></i> {{ $question->price }}</span></td>
                                         <td><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}" target="_blank">{{ $question->title }}</a></td>
-                                        <td>{{ $question->user->name }}</td>
+                                        <td>{{ $question->user->name }}<span class="text-muted">[UID:{{ $question->user_id }}]</span></td>
                                         <td>{{ $question->answers }} / {{ $question->views }}</td>
                                         <td>{{ timestamp_format($question->created_at) }}</td>
                                         <td><span class="label @if($question->status===0) label-danger @elseif($question->status===1) label-warning @else label-success @endif">{{ trans_question_status($question->status) }}</span> </td>
@@ -67,8 +84,23 @@
                             </table>
                         </form>
                     </div>
-                    <div class="box-footer clearfix text-right">
-                        {!! str_replace('/?', '?', $questions->render()) !!}
+                    <div class="box-footer clearfix">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="btn-group">
+                                    <a href="{{ route('ask.question.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="发起提问"><i class="fa fa-plus"></i></a>
+                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.question.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
+                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.question.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="text-right">
+                                    <span class="total-num">共 {{ $questions->total() }} 条数据</span>
+                                    {!! str_replace('/?', '?', $questions->render()) !!}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>

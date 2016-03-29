@@ -14,10 +14,33 @@ class AnswerController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $answers = Answer::orderBy('created_at','desc')->paginate(20);
-        return view("admin.answer.index")->with('answers',$answers)->with('word','');
+        $filter =  $request->all();
+
+        $query = Answer::query();
+
+        /*提问人过滤*/
+        if( isset($filter['user_id']) &&  $filter['user_id'] > 0 ){
+            $query->where('user_id','=',$filter['user_id']);
+        }
+
+        /*问题过滤*/
+        if( isset($filter['question_id']) &&  $filter['question_id'] > 0 ){
+            $query->where('question_id','=',$filter['question_id']);
+        }
+
+        /*提问时间过滤*/
+        if( isset($filter['date_range']) && $filter['date_range'] ){
+            $query->whereBetween('created_at',explode(" - ",$filter['date_range']));
+        }
+
+        /*问题状态过滤*/
+        if( isset($filter['status']) && $filter['status'] > -1 ){
+            $query->where('status','=',$filter['status']);
+        }
+        $answers = $query->orderBy('updated_at','desc')->paginate(20);
+        return view("admin.answer.index")->with('answers',$answers)->with('filter',$filter);
     }
 
     /**
@@ -30,27 +53,6 @@ class AnswerController extends AdminController
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -75,9 +77,17 @@ class AnswerController extends AdminController
         //
     }
 
+    /*回答审核*/
+    public function verify(Request $request)
+    {
+        $answerIds = $request->input('id');
+        Answer::whereIn('id',$answerIds)->update(['status'=>1]);
+        return $this->success(route('admin.answer.index').'?status=0','回答审核成功');
+
+    }
+
     /**
-     * Remove the specified resource from storage.
-     *
+     *删除回答
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
