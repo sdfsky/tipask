@@ -22,9 +22,31 @@ class UserController extends AdminController
      */
     public function index(Request $request)
     {
-        $word = $request->input("word",'');
-        $users = User::where('name','like',"%$word%")->paginate(Config::get('tipask.admin.page_size'));
-        return view('admin.user.index')->with('users',$users)->with('word',$word);
+        $filter =  $request->all();
+
+        $query = User::query();
+
+        /*关键词过滤*/
+        if( isset($filter['word']) && $filter['word'] ){
+            $query->where(function($subQuery) use ($filter) {
+                return $subQuery->where('name','like',$filter['word'].'%')
+                         ->orWhere('email','like',$filter['word'].'%')
+                         ->orWhere('mobile','like',$filter['word'].'%');
+            });
+        }
+
+        /*注册时间过滤*/
+        if( isset($filter['date_range']) && $filter['date_range'] ){
+            $query->whereBetween('created_at',explode(" - ",$filter['date_range']));
+        }
+
+        /*状态过滤*/
+        if( isset($filter['status']) && $filter['status'] > -1 ){
+            $query->where('status','=',$filter['status']);
+        }
+
+        $users = $query->orderBy('updated_at','desc')->paginate(Config::get('tipask.admin.page_size'));
+        return view('admin.user.index')->with('users',$users)->with('filter',$filter);
     }
 
     /**
@@ -40,6 +62,7 @@ class UserController extends AdminController
      */
     public function store(Request $request)
     {
+
 
     }
 
@@ -62,7 +85,7 @@ class UserController extends AdminController
         $request->flash();
         $user = User::find($id);
         if(!$user){
-            return $this->error(route('admin.user.index'),'权限不存在，请核实');
+            abort(404);
         }
         $this->validateRules['name'] = 'required|email|max:255|unique:users,name,'.$user->id;
         $this->validateRules['email'] = 'required|email|max:255|unique:users,email,'.$user->id;
@@ -80,11 +103,23 @@ class UserController extends AdminController
         return $this->success(route('admin.user.index'),'用户修改成功');
     }
 
+    /*用户审核*/
+    public function verify(Request $request)
+    {
+        $userIds = $request->input('id');
+        User::whereIn('id',$userIds)->update(['status'=>1]);
+        return $this->success(route('admin.user.index').'?status=0','用户审核成功');
+
+    }
+
     /**
      * 删除用户
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $userIds = $request->input('id');
+        User::destroy($userIds);
+        return $this->success(route('admin.user.index'),'用户删除成功');
 
     }
 }

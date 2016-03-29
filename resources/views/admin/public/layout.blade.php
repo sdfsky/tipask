@@ -50,42 +50,47 @@
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
+                            @if(array_sum($notVerifiedData)>0)
+                            <span class="label label-warning">@if(array_sum($notVerifiedData)>99)99+@else{{ array_sum($notVerifiedData) }}@endif</span>
+                            @endif
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
+                            <li class="header">共有 {{ array_sum($notVerifiedData) }} 个待处理事项</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
+                                @if(array_sum($notVerifiedData)>0)
                                 <ul class="menu">
+                                    @if( $notVerifiedData['questions'] > 0 )
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        <a href="{{ route('admin.question.index') }}?status=0">
+                                            <i class="fa fa-question-circle text-yellow"></i> {{ $notVerifiedData['questions'] }} 个问题需要审核
                                         </a>
                                     </li>
+                                    @endif
+                                   @if( $notVerifiedData['answers'] > 0  )
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
+                                        <a href="{{ route('admin.answer.index') }}?status=0">
+                                            <i class="fa fa-comment-o text-yellow"></i> {{ $notVerifiedData['answers'] }} 个回答需要审核
                                         </a>
                                     </li>
+                                   @endif
+                                   @if( $notVerifiedData['articles'] > 0  )
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-red"></i> 5 new members joined
+                                        <a href="{{ route('admin.article.index') }}?status=0">
+                                            <i class="fa fa-book text-yellow"></i> {{ $notVerifiedData['articles'] }} 篇文章需要审核
                                         </a>
                                     </li>
-
+                                    @endif
+                                    @if( $notVerifiedData['comments'] > 0  )
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                        <a href="{{ route('admin.comment.index') }}?status=0">
+                                            <i class="fa fa-comments-o text-yellow"></i> {{ $notVerifiedData['comments'] }} 个评论需要审核
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-red"></i> You changed your username
-                                        </a>
-                                    </li>
+                                    @endif
                                 </ul>
+                                @endif
                             </li>
-                            <li class="footer"><a href="#">View all</a></li>
                         </ul>
                     </li>
                     <!-- User Account: style can be found in dropdown.less -->

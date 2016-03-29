@@ -224,8 +224,12 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::resource('role', 'RoleController',['except' => ['show']]);
     Route::post('role/permission',['as'=>'admin.role.permission','uses'=>'RoleController@permission']);
 
+    /*用户删除*/
+    Route::post('user/destroy',['as'=>'admin.user.destroy','uses'=>'UserController@destroy']);
+    /*用户审核*/
+    Route::post('user/verify',['as'=>'admin.user.verify','uses'=>'UserController@verify']);
     /*用户管理*/
-    Route::resource('user', 'UserController',['except' => ['show']]);
+    Route::resource('user', 'UserController',['except' => ['show','destroy']]);
 
     /*站点设置*/
     Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);

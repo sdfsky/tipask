@@ -42,7 +42,7 @@ class ArticleController extends AdminController
         }
 
 
-        $articles = $query->orderBy('created_at','desc')->paginate(2);
+        $articles = $query->orderBy('created_at','desc')->paginate(20);
         return view("admin.article.index")->with('articles',$articles)->with('filter',$filter);
     }
 

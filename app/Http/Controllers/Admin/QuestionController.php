@@ -88,8 +88,5 @@ class QuestionController extends AdminController
         $questionIds = $request->input('id');
         Question::destroy($questionIds);
         return $this->success(route('admin.question.index'),'问题删除成功');
-
-
-
     }
 }

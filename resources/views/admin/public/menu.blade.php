@@ -36,9 +36,7 @@
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu" id="manage_user">
-            <li><a href="{{ route('admin.user.create') }}"><i class="fa fa-circle-o"></i> 新建用户</a></li>
             <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-circle-o"></i> 用户管理</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 新用户审核</a></li>
         </ul>
     </li>
 

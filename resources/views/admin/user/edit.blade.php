@@ -1,5 +1,9 @@
 @extends('admin/public/layout')
 
+@section('title')
+    编辑用户
+@endsection
+
 @section('content')
     <section class="content-header">
         <h1>

@@ -1,5 +1,9 @@
 @extends('admin/public/layout')
 
+@section('title')
+    新建用户
+@endsection
+
 @section('content')
     <section class="content-header">
         <h1>
@@ -16,10 +20,7 @@
         <div class="row">
             <div class="col-xs-12">
                 @include('admin/public/error')
-                <div class="box box-primary">
-                    <div class="box-header">
-                      <h3 class="box-title">基本信息</h3>
-                    </div>
+                <div class="box box-default">
                     <form role="form" name="userForm" method="POST" action="{{ url('admin/user/create') }}">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       <div class="box-body">
