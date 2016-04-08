@@ -21,8 +21,16 @@ class Question extends Model
     {
         parent::boot();
 
+        /*监听问题创建*/
+        static::saving(function($question){
+            /*开启问题审核状态检查*/
+            if(Setting()->get('verify_question')==1){
+                $question->status = 0;
+            }
+
+        });
         /*监听删除事件*/
-        static::deleting(function($question){
+        static::deleted(function($question){
             /*用户提问数 -1 */
             $question->user->userData->decrement('questions');
 

@@ -1,5 +1,6 @@
 @extends('admin/public/layout')
 
+
 @section('content')
     <section class="content-header">
         <h1>

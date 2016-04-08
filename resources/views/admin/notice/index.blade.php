@@ -1,5 +1,7 @@
 @extends('admin/public/layout')
 
+@section('title')公告管理@endsection
+
 @section('content')
     <section class="content-header">
         <h1>公告管理</h1>

@@ -87,7 +87,6 @@ Route::Group(['namespace'=>'Account'],function(){
         ]);
 
         /*我的通知*/
-
         Route::controller('notifications','NotificationController',[
             'getIndex' => 'auth.notification.index',
             'getReadAll' => 'auth.notification.readAll',
@@ -208,10 +207,10 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
 
 
     /*用户登陆*/
-    Route::match(['get','post'],'login',['as'=>'admin.account.login','uses'=>'UserController@login']);
+    Route::match(['get','post'],'login',['as'=>'admin.account.login','uses'=>'AccountController@login']);
 
     /*用户退出*/
-    Route::get('logout',['as'=>'admin.account.logout','uses'=>'UserController@logout']);
+    Route::get('logout',['as'=>'admin.account.logout','uses'=>'AccountController@logout']);
 
     /*首页*/
     Route::resource('index', 'IndexController', ['only' => ['index']]);
@@ -235,6 +234,10 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);
     /*时间设置*/
     Route::any('setting/time',['as'=>'admin.setting.time','uses'=>'SettingController@time']);
+
+    /*防灌水*/
+    Route::any('setting/irrigation',['as'=>'admin.setting.irrigation','uses'=>'SettingController@irrigation']);
+
     /*积分设置*/
     Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
 
@@ -269,8 +272,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::post('comment/verify',['as'=>'admin.comment.verify','uses'=>'CommentController@verify']);
     /*评论管理*/
     Route::resource('comment', 'CommentController',['only' => ['index','edit','update']]);
-
-
 
 
 

@@ -1,5 +1,7 @@
 @extends('admin/public/layout')
 
+@section('title')推荐管理@endsection
+
 @section('content')
     <section class="content-header">
         <h1>推荐管理</h1>

@@ -25,6 +25,7 @@
         <ul class="treeview-menu" id="global">
             <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-circle-o"></i> 站点设置</a></li>
             <li><a href="{{ route('admin.setting.time') }}"><i class="fa fa-circle-o"></i> 时间设置</a></li>
+            <li><a href="{{ route('admin.setting.irrigation') }}"><i class="fa fa-circle-o"></i> 防灌水设置</a></li>
             <li><a href="{{ route('admin.setting.credits') }}"><i class="fa fa-circle-o"></i> 积分设置</a></li>
             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 禁止访问</a></li>
         </ul>

@@ -4326,6 +4326,8 @@ fieldset[disabled] .btn-vk.active {
     color: #ff8a00;
 }
 
+.ml-20{margin-left:20px;}
+
 .total-num{
     position: relative;
     float: right;

@@ -47,6 +47,15 @@
                             @if ($errors->has('website_icp')) <p class="help-block">{{ $errors->first('website_icp') }}</p> @endif
                         </div>
 
+                        <div class="form-group">
+                            <label for="website_theme">网站默认模板</label>
+                            <span class="text-muted">(网站的前台默认显示的模板)</span>
+                            <select name="website_theme" class="form-control">
+                                @foreach($themes as $theme)
+                                    <option value="{{ $theme }}" @if(Setting()->get('website_theme')===$theme) selected @endif >{{ $theme }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="form-group @if ($errors->has('website_header')) has-error @endif">
                             <label for="website_footer">页面头部扩展</label>
@@ -61,7 +70,6 @@
                             <textarea class="form-control" style="height: 100px;" name="website_footer">{{ old('website_footer',Setting()->get('website_footer')) }}</textarea>
                             @if ($errors->has('website_footer')) <p class="help-block">{{ $errors->first('website_footer') }}</p> @endif
                         </div>
-
 
                     </div>
                     <div class="box-footer">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
 class SettingController extends AdminController
 {
 
@@ -19,6 +20,19 @@ class SettingController extends AdminController
             'website_admin_email' => 'required|email',
         ];
 
+
+        $themes = [];
+        /*获取模板主题目录下主题列表*/
+        $themePath = base_path()."/resources/views/themes";
+        if ($dh = opendir($themePath)) {
+            while (($file = readdir($dh)) !== false) {
+                if( is_dir($themePath.'/'.$file) && $file{0} !== '.' ){
+                    $themes[] = $file;
+                }
+            }
+            closedir($dh);
+        }
+
         if($request->isMethod('post')){
             $this->validate($request,$validateRules);
             $data = $request->except('_token');
@@ -30,7 +44,8 @@ class SettingController extends AdminController
             return $this->success(route('admin.setting.website'),'站点设置保存成功');
 
         }
-        return view('admin.setting.website');
+
+        return view('admin.setting.website')->with('themes',$themes);
     }
 
     /*时间格式设置*/
@@ -86,6 +101,22 @@ class SettingController extends AdminController
         }
 
         return view('admin.setting.time')->with('timeOffsets',$timeOffsets);
+    }
+
+    public function irrigation(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->except('_token');
+            foreach($data as $name => $value ){
+                Setting()->set($name,$value);
+            }
+            Setting()->clearAll();
+            return $this->success(route('admin.setting.irrigation'),'防灌水策略设置成功');
+
+        }
+
+        return view('admin.setting.irrigation');
+
     }
 
     /*积分策略设置*/

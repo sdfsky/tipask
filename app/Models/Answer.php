@@ -16,6 +16,14 @@ class Answer extends Model
     {
         parent::boot();
 
+        /*监听创建*/
+        static::saving(function($answer){
+            /*开启状态检查*/
+            if(Setting()->get('verify_answer')==1){
+                $answer->status = 0;
+            }
+
+        });
         /*监听删除事件*/
         static::deleting(function($answer){
 

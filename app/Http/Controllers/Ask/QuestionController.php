@@ -139,14 +139,16 @@ class QuestionController extends Controller
             $loginUser->userData()->increment('questions');
             if($question->status ==1 && $this->credit($request->user()->id,'ask',Setting()->get('coins_ask'),Setting()->get('credits_ask'),$question->id,$question->title)){
                 $message = '发起提问成功! 经验 '.integer_string(Setting()->get('credits_ask')) .' , 金币 '.integer_string(Setting()->get('coins_ask'));
-                return $this->success(route('ask.question.detail',['question_id'=>$question->id]),$message);
+            }else{
+                $message = '问题发布成功！为了确保问答的质量，我们会对您的提问内容进行审核。请耐心等待......';
             }
 
+            return $this->success(route('ask.question.detail',['question_id'=>$question->id]),$message);
 
 
         }
 
-       return  $this->error("问题创建失败，请稍后再试",route('website.index'));
+       return  $this->error(route('website.index'),"问题创建失败，请稍后再试");
 
     }
 
