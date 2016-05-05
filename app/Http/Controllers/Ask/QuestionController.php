@@ -26,6 +26,8 @@ class QuestionController extends Controller
         'tags' => 'sometimes|max:128',
     ];
 
+
+
     /**
      * 问题详情查看
      */

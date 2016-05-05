@@ -52,6 +52,7 @@
                     <li @if(request()->route()->getName() == 'website.ask') class="active" @endif><a href="{{ route('website.ask') }}">问答</a></li>
                     <li @if(request()->route()->getName() == 'website.blog') class="active" @endif><a href="{{ route('website.blog') }}">文章</a></li>
                     <li @if(request()->route()->getName() == 'website.topic') class="active" @endif><a href="{{ route('website.topic') }}">话题</a></li>
+                    <li @if(request()->route()->getName() == 'website.shop') class="active" @endif><a href="{{ route('website.shop') }}">商城</a></li>
                 </ul>
                 @if (Auth::guest())
                     <ul class="nav navbar-nav navbar-right">

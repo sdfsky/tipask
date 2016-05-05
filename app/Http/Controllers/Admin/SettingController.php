@@ -103,6 +103,7 @@ class SettingController extends AdminController
         return view('admin.setting.time')->with('timeOffsets',$timeOffsets);
     }
 
+    /*防灌水设置*/
     public function irrigation(Request $request)
     {
         if($request->isMethod('post')){
@@ -118,6 +119,15 @@ class SettingController extends AdminController
         return view('admin.setting.irrigation');
 
     }
+
+
+    /*注册策略设置*/
+    public function register(Request $request)
+    {
+        return view('admin.setting.register');
+
+    }
+
 
     /*积分策略设置*/
     public function credits(Request $request)

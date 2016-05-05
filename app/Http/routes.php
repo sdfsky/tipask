@@ -16,6 +16,11 @@ Route::get('/articles/{filter?}',['as'=>'website.blog','uses'=>'IndexController@
 Route::get('/users',['as'=>'website.user','uses'=>'IndexController@user']);
 
 
+/*积分商城*/
+Route::get('/shop',['as'=>'website.shop','uses'=>'IndexController@shop']);
+
+
+
 /*用户账号管理，包含用户登录注册等操作*/
 Route::Group(['namespace'=>'Account'],function(){
     Route::match(['get','post'],'login',['as'=>'auth.user.login','uses'=>'UserController@login']);
@@ -234,10 +239,10 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);
     /*时间设置*/
     Route::any('setting/time',['as'=>'admin.setting.time','uses'=>'SettingController@time']);
-
+    /*注册设置*/
+    Route::any('setting/register',['as'=>'admin.setting.register','uses'=>'SettingController@register']);
     /*防灌水*/
     Route::any('setting/irrigation',['as'=>'admin.setting.irrigation','uses'=>'SettingController@irrigation']);
-
     /*积分设置*/
     Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
 
@@ -273,6 +278,13 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     /*评论管理*/
     Route::resource('comment', 'CommentController',['only' => ['index','edit','update']]);
 
+    /*标签删除*/
+    Route::post('tag/destroy',['as'=>'admin.tag.destroy','uses'=>'TagController@destroy']);
+    /*标签审核*/
+    Route::post('tag/verify',['as'=>'admin.tag.verify','uses'=>'TagController@verify']);
+    /*标签管理*/
+    Route::resource('tag', 'TagController',['only' => ['index','edit','update']]);
+
 
 
     /*公告管理*/
@@ -280,6 +292,12 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
 
     /*首页推荐*/
     Route::resource('recommendation', 'RecommendationController',['except' => ['show']]);
+
+    /*商品管理*/
+    Route::resource('goods', 'GoodsController',['except' => ['show']]);
+    /*商品兑换*/
+    Route::resource('exchange', 'ExchangeController',['except' => ['show']]);
+
 
 
 });

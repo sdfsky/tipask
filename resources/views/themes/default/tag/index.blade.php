@@ -13,7 +13,7 @@
             <section class="tag-header mt-20">
                 <div>
                     @if($tag->logo)
-                    <img class="pull-left avatar-27 mr-10" src="https://sfault-avatar.b0.upaiyun.com/195/823/1958237468-1040000000089436_small">
+                    <img class="pull-left avatar-27 mr-10" src="{{ route('website.image.show',['image_name'=>$tag->logo]) }}">
                     @endif
                     <span class="h4 tag-header-title">{{ $tag->name }}</span>
 

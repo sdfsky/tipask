@@ -10,6 +10,19 @@ class Tag extends Model
     protected $fillable = ['name', 'logo', 'description'];
 
 
+    public static function boot()
+    {
+        parent::boot();
+
+        /*监听删除事件*/
+        static::deleted(function($tag){
+
+            /*删除关注*/
+            Attention::where('source_type','=',get_class($tag))->where('source_id','=',$tag->id)->delete();
+
+        });
+    }
+
     /**通过字符串添加标签
      * @param $tagString
      * @param $question_id

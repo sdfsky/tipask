@@ -15,6 +15,7 @@ class CreateTaggablesTable extends Migration
         Schema::create('taggables', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tag_id')->unsigned()->index();  //标签ID
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade'); //删除标签时删除该记录
             $table->morphs('taggable');
             $table->timestamps();
         });

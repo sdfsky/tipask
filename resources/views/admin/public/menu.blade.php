@@ -24,6 +24,7 @@
         </a>
         <ul class="treeview-menu" id="global">
             <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-circle-o"></i> 站点设置</a></li>
+            <li><a href="{{ route('admin.setting.register') }}"><i class="fa fa-circle-o"></i> 注册设置</a></li>
             <li><a href="{{ route('admin.setting.time') }}"><i class="fa fa-circle-o"></i> 时间设置</a></li>
             <li><a href="{{ route('admin.setting.irrigation') }}"><i class="fa fa-circle-o"></i> 防灌水设置</a></li>
             <li><a href="{{ route('admin.setting.credits') }}"><i class="fa fa-circle-o"></i> 积分设置</a></li>
@@ -51,6 +52,7 @@
             <li><a href="{{ route('admin.answer.index') }}"><i class="fa fa-circle-o"></i> 回答管理</a></li>
             <li><a href="{{ route('admin.article.index') }}"><i class="fa fa-circle-o"></i> 文章管理</a></li>
             <li><a href="{{ route('admin.comment.index') }}"><i class="fa fa-circle-o"></i> 评论管理</a></li>
+            <li><a href="{{ route('admin.tag.index') }}"><i class="fa fa-circle-o"></i> 标签管理</a></li>
         </ul>
     </li>
 
@@ -62,6 +64,8 @@
         <ul class="treeview-menu" id="operations">
             <li><a href="{{ route('admin.notice.index') }}"><i class="fa fa-circle-o"></i> 公告管理</a></li>
             <li><a href="{{ route('admin.recommendation.index') }}"><i class="fa fa-circle-o"></i> 首页推荐</a></li>
+            <li><a href="{{ route('admin.goods.index') }}"><i class="fa fa-circle-o"></i> 积分商城</a></li>
+            <li><a href="{{ route('admin.exchange.index') }}"><i class="fa fa-circle-o"></i> 兑换记录</a></li>
             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 友情链接</a></li>
         </ul>
     </li>

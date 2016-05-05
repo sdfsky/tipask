@@ -17,7 +17,7 @@
             <section class="topic-list-item col-md-3">
                 <div class="widget-topic">
                     <h2 class="h4">
-                        <a href="{{ route('ask.tag.index',['name'=>$topic->name]) }}" @if($topic->logo) class="tag-logo" style="background-image: url(http://sfault-avatar.b0.upaiyun.com/365/152/3651522545-5541ff4b6206e_icon);" @endif>{{ $topic->name }}</a>
+                        <a href="{{ route('ask.tag.index',['name'=>$topic->name]) }}" @if($topic->logo) class="tag-logo" style="background-image: url({{ route('website.image.show',['image_name'=>$topic->logo]) }});" @endif>{{ $topic->name }}</a>
                     </h2>
                     <p>
                         @if($topic->description)

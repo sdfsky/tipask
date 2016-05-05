@@ -163,4 +163,10 @@ class IndexController extends Controller
 
     }
 
+
+    public function shop()
+    {
+        return view('theme::home.shop');
+    }
+
 }
