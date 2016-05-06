@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Goods;
 use App\Models\Notice;
 use App\Models\Question;
 use App\Models\Recommendation;
@@ -166,7 +167,8 @@ class IndexController extends Controller
 
     public function shop()
     {
-        return view('theme::home.shop');
+        $goods = Goods::where('status','>',0)->orderBy('coins','asc')->paginate(16);
+        return view('theme::home.shop')->with('goods',$goods);
     }
 
 }

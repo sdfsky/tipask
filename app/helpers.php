@@ -6,6 +6,29 @@
  * Time: 下午7:11
  */
 
+/*商品类型字段定义*/
+if (! function_exists('trans_goods_post_type')) {
+
+    function trans_goods_post_type($post_type){
+        $map = [
+            0 => '不需要',
+            1 => '需要',
+        ];
+
+        if($post_type==='all'){
+            return $map;
+        }
+
+
+        if(isset($map[$post_type])){
+            return $map[$post_type];
+        }
+
+        return '';
+
+    }
+
+}
 
 
 /*公告状态文字定义*/

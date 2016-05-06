@@ -11,15 +11,15 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <form role="form" name="listForm" method="post" action="{{ route('admin.notice.destroy') }}">
+                    <form role="form" name="item_form" id="item_form" method="post">
                         <input name="_method" type="hidden" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-header">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.goods.create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="添加新公告"><i class="fa fa-plus"></i></a>
-                                        <button type="submit" class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中"><i class="fa fa-trash-o"></i></button>
+                                        <a href="{{ route('admin.goods.create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="添加商品"><i class="fa fa-plus"></i></a>
+                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.goods.destroy') }}','确认审核通过选中项？')"><i class="fa fa-trash-o"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -30,9 +30,10 @@
                                     <th><input type="checkbox" class="checkbox-toggle"/></th>
                                     <th>logo</th>
                                     <th>名称</th>
+                                    <th>是否需要邮寄</th>
                                     <th>金币</th>
                                     <th>剩余数量</th>
-                                    <th>添加时间</th>
+                                    <th>创建时间</th>
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
@@ -45,10 +46,11 @@
                                             @endif
                                         </td>
                                         <td>{{ $good->name }}</td>
+                                        <td>{{ trans_goods_post_type($good->post_type) }}</td>
                                         <td>{{ $good->coins }}</td>
+                                        <td>{{ $good->remnants }}</td>
                                         <td>{{ $good->created_at }}</td>
-                                        <td>{{ $good->updated_at }}</td>
-                                        <td>{{ trans_common_status($good->status) }}</td>
+                                        <td><span class="label @if($good->status===0) label-danger  @else label-success @endif">{{ trans_common_status($good->status) }}</span> </td>
                                         <td>
                                             <div class="btn-group-xs" >
                                                 <a class="btn btn-default" href="{{ route('admin.goods.edit',['id'=>$good->id]) }}" data-toggle="tooltip" title="编辑公告信息"><i class="fa fa-edit"></i></a>

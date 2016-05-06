@@ -205,6 +205,15 @@ Route::Group(['namespace'=>'Blog'],function(){
 
 });
 
+/*商城模块*/
+Route::Group(['namespace'=>'Shop'],function(){
+
+    /*商品详情查看*/
+    Route::get('goods/{id}',['as'=>'shop.goods.detail','uses'=>'GoodsController@show'])->where(['id'=>'[0-9]+']);
+
+
+});
+
 
 
 /*后台管理部分处理*/

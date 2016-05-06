@@ -67,16 +67,6 @@ class GoodsController extends AdminController
         return $this->success(route('admin.goods.index'),'商品添加成功');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -86,7 +76,11 @@ class GoodsController extends AdminController
      */
     public function edit($id)
     {
-        //
+        $goods = Goods::find($id);
+        if(!$goods){
+            return $this->error(route('admin.goods.index'),'商品不存在，请核实');
+        }
+        return view('admin.goods.edit')->with('goods',$goods);
     }
 
     /**
@@ -98,17 +92,39 @@ class GoodsController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        $goods = Goods::find($id);
+        if(!$goods){
+            return $this->error(route('admin.goods.index'),'商品不存在，请核实');
+        }
+
+        $this->validate($request,$this->validateRules);
+        $goods->name = $request->input('name');
+        $goods->post_type = $request->input('post_type');
+        $goods->remnants = $request->input('remnants');
+        $goods->coins = $request->input('coins');
+        $goods->description = $request->input('description');
+        $goods->status = $request->input('status');
+        if($request->hasFile('logo')){
+            $savePath = storage_path('app/goods/'.gmdate('ym'));
+            $file = $request->file('logo');
+            $fileName = uniqid(str_random(8)).'.'.$file->getClientOriginalExtension();
+            $target = $file->move($savePath,$fileName);
+            if($target){
+                $goods->logo = 'goods-'.gmdate('ym').'-'.$fileName;
+            }
+        }
+        $goods->save();
+        return $this->success(route('admin.goods.index'),'商品修改成功');
+
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * 删除商品
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Goods::destroy($request->input('ids'));
+        return $this->success(route('admin.goods.index'),'商品删除成功');
     }
 }
