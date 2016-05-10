@@ -12,6 +12,9 @@
         <a class="widget-message-item @if(request()->route()->getName() == 'auth.questionInvitation.index') active @endif" href="{{ route('auth.questionInvitation.index') }}">
             邀请我回答的
         </a>
+        <a class="widget-message-item @if(request()->route()->getName() == 'shop.exchange.index') active @endif" href="{{ route('shop.exchange.index') }}">
+            我的兑换
+        </a>
     </div>
 
 </div>

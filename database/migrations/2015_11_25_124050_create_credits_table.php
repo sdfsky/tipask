@@ -19,8 +19,8 @@ class CreateCreditsTable extends Migration
             $table->char('action',16);
             $table->integer('source_id')->unsigned()->index();   //问题、回答或文字ID
             $table->string('source_subject',128)->nullable();    //问题标题或文字标题等
-            $table->integer('coins')->unsigned()->default(0);
-            $table->integer('credits')->unsigned()->default(0);
+            $table->integer('coins')->default(0);
+            $table->integer('credits')->default(0);
             $table->timestamp('created_at');
 
         });

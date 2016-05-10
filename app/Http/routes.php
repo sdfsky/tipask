@@ -118,6 +118,7 @@ Route::Group(['namespace'=>'Account'],function(){
         Route::get('follow/{source_type}/{source_id}',['as'=>'auth.attention.store','uses'=>'AttentionController@store'])->where(['source_type'=>'(question|tag|user)','source_id'=>'[0-9]+']);
 
 
+
     });
 
     /*点赞*/
@@ -210,6 +211,16 @@ Route::Group(['namespace'=>'Shop'],function(){
 
     /*商品详情查看*/
     Route::get('goods/{id}',['as'=>'shop.goods.detail','uses'=>'GoodsController@show'])->where(['id'=>'[0-9]+']);
+
+    Route::Group(['middleware'=>'auth'],function(){
+        /*兑换礼品*/
+        Route::POST('goods/exchange',['as'=>'shop.goods.exchange','uses'=>'GoodsController@exchange']);
+
+        /*我的商城兑换记录*/
+        Route::get('exchanges',['as'=>'shop.exchange.index','uses'=>'ExchangeController@index']);
+    });
+
+
 
 
 });
@@ -306,6 +317,7 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::resource('goods', 'GoodsController',['except' => ['show']]);
     /*商品兑换*/
     Route::resource('exchange', 'ExchangeController',['except' => ['show']]);
+    Route::get('exchange/{id}/{status}',['as'=>'admin.exchange.changeStatus','uses'=>'ExchangeController@changeStatus'])->where(['id'=>'[0-9]+','status'=>'(success|failed)']);
 
 
 

@@ -8,4 +8,9 @@ class Goods extends Model
 {
     protected $table = 'goods';
     protected $fillable = ['name', 'logo','post_type','description','coins','remnants','status'];
+
+
+
+
+
 }

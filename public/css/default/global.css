@@ -283,9 +283,11 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .widget-box .widget-box-title{margin:0 0 15px;font-size:16px}
 .widget-box .media{margin:0;}
 .widget-box.no-border,.widget-box:first-child{margin-top:0;padding-top:0;border:none}
+.widget-box .panel-title{font-size: 14px;}
 .widget-top10{padding-left:30px}
 .widget-top10 li{margin-bottom:8px}
 .widget-top10 img{margin-right:10px}
+
 
 
 .widget-user{border:1px solid #eee;padding: 15px;}
@@ -434,6 +436,11 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 
 /*表单相关*/
 .required:after{content:" *";color:#ED1C24}
+
+/*商城模块*/
+.exchange-doings{border:1px solid #eee;padding: 10px;}
+.exchange-doings ul{font-size:12px;}
+.exchange-doings ul li{padding-bottom: 10px;}
 
 
 

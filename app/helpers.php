@@ -32,6 +32,31 @@ if (! function_exists('trans_goods_post_type')) {
 
 
 /*公告状态文字定义*/
+if (! function_exists('trans_exchange_status')) {
+
+    function trans_exchange_status($status){
+        $map = [
+            0 => '未处理',
+            1 => '已处理',
+            4 => '兑换失败',
+        ];
+
+        if($status==='all'){
+            return $map;
+        }
+
+
+        if(isset($map[$status])){
+            return $map[$status];
+        }
+
+        return '';
+
+    }
+
+}
+
+/*公告状态文字定义*/
 if (! function_exists('trans_common_status')) {
 
     function trans_common_status($status){

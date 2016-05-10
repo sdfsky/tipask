@@ -18,6 +18,7 @@ class CreateExchangesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('goods_id')->index();
             $table->foreign('goods_id')->references('id')->on('goods')->onDelete('cascade');
+            $table->unsignedInteger('coins')->default(0);
             $table->string('real_name',64);
             $table->string('phone',24);
             $table->string('email',128);

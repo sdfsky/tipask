@@ -171,6 +171,12 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Models\QuestionInvitation');
     }
 
+    /*我的商品兑换*/
+    public function exchanges()
+    {
+        return $this->hasMany('App\Models\Exchange');
+    }
+
 
     /*是否回答过问题*/
     public function isAnswered($questionId)

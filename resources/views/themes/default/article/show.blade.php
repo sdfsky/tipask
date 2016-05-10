@@ -90,7 +90,7 @@
         <div class="col-xs-12 col-md-3 side">
             <div class="widget-user">
                 <div class="media">
-                    <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}"><img class="media-object avatar-64" src="http://www.tipaskx.com/image/avatar/11_big" alt="不写代码的码农"></a>
+                    <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}"><img class="media-object avatar-64" src="{{ route('website.image.avatar',['avatar_name'=>$article->user_id.'_middle'])}}" alt="不写代码的码农"></a>
                     <div class="media-body ">
                         <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}" class="media-heading">{{ $article->user->name }}</a>
                         @if($article->user->title)

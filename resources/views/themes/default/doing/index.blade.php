@@ -14,7 +14,6 @@
                 最新动态
             </h2>
             <div class="widget-streams">
-
                 @foreach($doings as $doing)
                 <section class="hover-show streams-item">
                     <div class="stream-wrap media">

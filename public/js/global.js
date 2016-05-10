@@ -3,6 +3,16 @@
  * 全局公用js
  */
 
+
+/*ajax设置项*/
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+
 /*编辑器toolbar全局配置*/
 
 var ask_editor_options = {
@@ -19,6 +29,7 @@ var ask_editor_options = {
         theme: 'monokai'
     }
 };
+
 
 var showPopover = function () {
         $(this).popover('show');

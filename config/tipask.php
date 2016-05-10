@@ -20,6 +20,7 @@ return [
         'append_reward' => '对问题追加悬赏',
         'answer_adopted' => '回答被采纳',
         'create_article' => '发表了文章',
+        'exchange' => '兑换商品',
 
     ],
     'notification_types' =>[
