@@ -66,7 +66,7 @@
             <li><a href="{{ route('admin.recommendation.index') }}"><i class="fa fa-circle-o"></i> 首页推荐</a></li>
             <li><a href="{{ route('admin.goods.index') }}"><i class="fa fa-circle-o"></i> 积分商城</a></li>
             <li><a href="{{ route('admin.exchange.index') }}"><i class="fa fa-circle-o"></i> 兑换记录</a></li>
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 友情链接</a></li>
+            <li><a href="{{ route('admin.friendshipLink.index') }}"><i class="fa fa-circle-o"></i> 友情链接</a></li>
         </ul>
     </li>
 

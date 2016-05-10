@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Exchange;
+use App\Models\FriendshipLink;
 use App\Models\Goods;
 use App\Models\Notice;
 use App\Models\Question;
@@ -90,17 +91,13 @@ class IndexController extends Controller
             return  UserData::top('coins',8);
         });
 
+        /*友情链接*/
 
+        $friendshipLinks = Cache::remember('friendship_links',10,function() {
+            return  FriendshipLink::where('status','=',1)->orderBy('sort','asc')->orderBy('created_at','asc')->take(50)->get();
+        });
 
-        return view('theme::home.index')->with('recommendItems',$recommendItems)
-                                        ->with('activeUsers',$activeUsers)
-                                        ->with('hotQuestions',$hotQuestions)
-                                        ->with('rewardQuestions',$rewardQuestions)
-                                        ->with('hotArticles',$hotArticles)
-                                        ->with('newestArticles',$newestArticles)
-                                        ->with('newestNotices',$newestNotices)
-                                        ->with('hotTags',$hotTags)
-                                        ->with('topCoinUsers',$topCoinUsers);
+        return view('theme::home.index')->with(compact('recommendItems','activeUsers','hotQuestions','rewardQuestions','hotArticles','newestArticles','newestNotices','hotTags','topCoinUsers','friendshipLinks'));
 
     }
 

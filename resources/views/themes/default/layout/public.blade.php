@@ -129,6 +129,16 @@
 
 <footer id="footer">
     <div class="container">
+        @if(request()->route()->getName() == 'website.index')
+        <div class="row">
+                <ul class="list-unstyled list-inline text-link">
+                    <li>友情链接</li>
+                    @foreach($friendshipLinks as $link)
+                    <li><a target="_blank" href="{{ $link->url }}" title="{{ $link->slogan }}">{{ $link->name }}</a></li>
+                    @endforeach
+                </ul>
+        </div>
+        @endif
         <div class="text-center">
             <a href="http://help.tipask.com/" target="_blank">Tipask问答网</a><span class="span-line">|</span>
             <a href="mailto:tipask@qq.com" target="_blank">联系我们</a><span class="span-line">|</span>

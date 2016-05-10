@@ -92,6 +92,6 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        set_active_menu('admin',"{{ route('admin.permission.index') }}");
+        set_active_menu('operations',"{{ route('admin.notice.index') }}");
     </script>
 @endsection

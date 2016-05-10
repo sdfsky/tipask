@@ -69,8 +69,8 @@ html{font-size:10px;-webkit-tap-highlight-color:transparent}
 body{font-family:Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;font-size:14px;line-height:1.5;color:#333;background-color:#fff}
 
 button,input,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit}
-a{color:#009a61;text-decoration:none}
-a:focus,a:hover{color:#004e31;text-decoration:underline}
+a{color:#333;text-decoration:none}
+a:focus,a:hover{color:#017e66;text-decoration:underline}
 a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
 
 
@@ -439,7 +439,7 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 
 /*商城模块*/
 .exchange-doings{border:1px solid #eee;padding: 10px;}
-.exchange-doings ul{font-size:12px;}
+.exchange-doings ul{font-size:13px;}
 .exchange-doings ul li{padding-bottom: 10px;}
 
 
@@ -471,6 +471,6 @@ section .h4{margin-bottom:2px;font-size:16px}
     text-align: center;
     font-size: 13px;
 }
-#footer .copyright a{color:#888;}
-
-
+#footer a {
+    color: #888;
+}

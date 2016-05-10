@@ -41,7 +41,7 @@
                 </div>
             </div>
             @endif
-            <div class="widget-box exchange-doings">
+            <div class="widget-box exchange-doings mt-20">
                 <h4 class="widget-box-title">兑换动态</h4>
                 <ul class="list-unstyled">
                     @foreach( $exchanges as $exchange )

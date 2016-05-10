@@ -319,6 +319,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::resource('exchange', 'ExchangeController',['except' => ['show']]);
     Route::get('exchange/{id}/{status}',['as'=>'admin.exchange.changeStatus','uses'=>'ExchangeController@changeStatus'])->where(['id'=>'[0-9]+','status'=>'(success|failed)']);
 
+    /*友情链接*/
+    Route::resource('friendshipLink', 'FriendshipLinkController',['except' => ['show']]);
+
 
 
 });
