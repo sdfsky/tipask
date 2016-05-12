@@ -48,6 +48,11 @@
                         <button id="collect-button" class="btn btn-default btn-lg" data-loading-text="加载中..." data-source_type = "article" data-source_id = "{{ $article->id }}" > 收藏</button>
                     @endif
                 </div>
+                @if(Setting()->get('website_share_code')!='')
+                <div class="mb-10">
+                    {!! Setting()->get('website_share_code')  !!}
+                </div>
+                @endif
             </div>
             <div class="widget-relation">
                 <div class="row">

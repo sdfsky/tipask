@@ -39,6 +39,7 @@
         </a>
         <ul class="treeview-menu" id="manage_user">
             <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-circle-o"></i> 用户管理</a></li>
+            <li><a href="{{ route('admin.authentication.index') }}"><i class="fa fa-circle-o"></i> 行家管理</a></li>
         </ul>
     </li>
 

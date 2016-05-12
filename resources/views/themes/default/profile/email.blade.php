@@ -27,9 +27,9 @@
                             </div>
                         </div>
                         <div class="form-group @if ($errors->first('captcha')) has-error @endif">
-                            <label for="old_password" class="required control-label col-sm-3">验证码</label>
+                            <label for="captcha" class="required control-label col-sm-3">验证码</label>
                             <div class="col-sm-4">
-                                <input name="captcha" type="text" maxlength="32" placeholder="请输入下方验证码" class="form-control" value="{{ old('captcha') }}" />
+                                <input id="captcha" name="captcha" type="text" maxlength="32" placeholder="请输入下方验证码" class="form-control" value="{{ old('captcha') }}" />
                                 @if ($errors->first('captcha'))
                                     <span class="help-block">{{ $errors->first('captcha') }}</span>
                                 @endif

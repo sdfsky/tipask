@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Models\Area;
+use App\Models\Authentication;
 use App\Models\EmailToken;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -142,14 +143,12 @@ class ProfileController extends Controller
         return view('theme::profile.email');
     }
 
-    public function anyMobile()
-    {
-        return view('theme::profile.mobile');
-    }
+
 
     /*第三方系统账号绑定*/
     public function anyOauth()
     {
+
         return view('theme::profile.oauth');
     }
 

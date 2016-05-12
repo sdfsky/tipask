@@ -46,6 +46,11 @@
 
                     @include('theme::comment.collapse',['comment_source_type'=>'question','comment_source_id'=>$question->id,'hide_cancel'=>false])
 
+                    @if(Setting()->get('website_share_code')!='')
+                        <div class="mb-10">
+                            {!! Setting()->get('website_share_code')  !!}
+                        </div>
+                    @endif
                 </div>
 
 

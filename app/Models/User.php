@@ -108,6 +108,13 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasOne('App\Models\UserData');
     }
 
+
+    /*用户认证信息*/
+    public function authentication()
+    {
+        return $this->hasOne('App\Models\Authentication');
+    }
+
     /**
      * 获取用户问题
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -30,6 +30,31 @@ if (! function_exists('trans_goods_post_type')) {
 
 }
 
+/*行家认证状态文字定义*/
+if (! function_exists('trans_authentication_status')) {
+
+    function trans_authentication_status($status){
+        $map = [
+            0 => '待审核',
+            1 => '审核通过',
+            4 => '审核失败',
+        ];
+
+        if($status==='all'){
+            return $map;
+        }
+
+
+        if(isset($map[$status])){
+            return $map[$status];
+        }
+
+        return '';
+
+    }
+
+}
+
 
 /*公告状态文字定义*/
 if (! function_exists('trans_exchange_status')) {

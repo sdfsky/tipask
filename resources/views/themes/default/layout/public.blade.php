@@ -130,23 +130,21 @@
 <footer id="footer">
     <div class="container">
         @if(request()->route()->getName() == 'website.index')
-        <div class="row">
-                <ul class="list-unstyled list-inline text-link">
-                    <li>友情链接</li>
-                    @foreach($friendshipLinks as $link)
-                    <li><a target="_blank" href="{{ $link->url }}" title="{{ $link->slogan }}">{{ $link->name }}</a></li>
-                    @endforeach
-                </ul>
-        </div>
+        <ul class="list-unstyled list-inline">
+            <li>友情链接</li>
+            @foreach($friendshipLinks as $link)
+            <li><a target="_blank" href="{{ $link->url }}" title="{{ $link->slogan }}">{{ $link->name }}</a></li>
+            @endforeach
+        </ul>
         @endif
         <div class="text-center">
-            <a href="http://help.tipask.com/" target="_blank">Tipask问答网</a><span class="span-line">|</span>
+            <a href="{{ route('website.index') }}">{{ Setting()->get('website_name') }}</a><span class="span-line">|</span>
             <a href="mailto:tipask@qq.com" target="_blank">联系我们</a><span class="span-line">|</span>
-            <a href="http://help.tipask.com/index/help.html" target="_blank">使用帮助</a>
-            <span class="span-line">|</span><a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
+            <a href="http://help.tipask.com/index/help.html" target="_blank">使用帮助</a><span class="span-line">|</span>
+            <a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
         </div>
         <div class="copyright mt-10">
-            Powered By Tipask3.0开发版 ©2009-2016 tipask.com 最后更新日期 <a href="http://status.segmentfault.com/">2016-3-10</a>
+            Powered By <a href="http://www.tipask.com" target="_blank">Tipask</a> V3.0 Dev ©2009-{{ gmdate('Y') }} tipask.com
         </div>
     </div>
 </footer>

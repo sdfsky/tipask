@@ -19,6 +19,11 @@
                         <div class="mt-20">价格：<span class="text-gold"><i class="fa fa-database"></i> {{ $goods->coins }} 金币</span></div>
                         <div class="mt-20">产品数量：<span class="text-muted">剩余 {{ $goods->remnants }} 个</span></div>
                         <p class="mt-20"><button class="btn btn-primary btn_exchange" data-goods_id = "{{ $goods->id }}" data-goods_coins="{{ $goods->coins }}" data-goods_name="{{ $goods->name }}"  role="button">立即兑换</button></p>
+                        @if(Setting()->get('website_share_code')!='')
+                            <div class="mb-10">
+                                {!! Setting()->get('website_share_code')  !!}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -86,9 +86,15 @@ Route::Group(['namespace'=>'Account'],function(){
             'postAvatar'  => 'auth.profile.avatar',
             'anyPassword' =>'auth.profile.password',
             'anyEmail'    =>'auth.profile.email',
-            'anyMobile'   =>'auth.profile.mobile',
             'anyOauth'    =>'auth.profile.oauth',
             'anyNotification' =>'auth.profile.notification',
+        ]);
+
+        /*行家认证*/
+        Route::controller('authentication','AuthenticationController', [
+            'getIndex'     => 'auth.authentication.index',
+            'anyEdit' =>'auth.authentication.edit',
+            'postStore'    =>'auth.authentication.store'
         ]);
 
         /*我的通知*/
@@ -254,6 +260,12 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::post('user/verify',['as'=>'admin.user.verify','uses'=>'UserController@verify']);
     /*用户管理*/
     Route::resource('user', 'UserController',['except' => ['show','destroy']]);
+
+    /*认证管理*/
+    Route::post('authentication/destroy',['as'=>'admin.authentication.destroy','uses'=>'AuthenticationController@destroy']);
+    Route::post('authentication/verify',['as'=>'admin.authentication.verify','uses'=>'AuthenticationController@verify']);
+    Route::resource('authentication', 'AuthenticationController',['except' => ['show','create','store','destroy']]);
+
 
     /*站点设置*/
     Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);

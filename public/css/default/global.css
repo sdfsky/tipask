@@ -56,6 +56,7 @@
 .list-group-item.active,.list-group-item.active:focus,.list-group-item.active:hover{z-index:2;color:#fff;background-color:#009a61;border-color:#009a61}
 .list-group-item.active .list-group-item-text,.list-group-item.active:focus .list-group-item-text,.list-group-item.active:hover .list-group-item-text{color:#67ffc7}
 
+.box dl>dd,dl>dt{line-height: 50px;}
 
 
 blockquote{font-size: 13px;}

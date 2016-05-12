@@ -71,6 +71,13 @@
                             @if ($errors->has('website_footer')) <p class="help-block">{{ $errors->first('website_footer') }}</p> @endif
                         </div>
 
+                        <div class="form-group @if ($errors->has('website_share_code')) has-error @endif">
+                            <label for="website_share_code">第三方分享代码</label>
+                            <span class="text-muted">(百度分享或者jiathis等第三方分享代码)</span>
+                            <textarea class="form-control" style="height: 100px;" name="website_share_code">{{ old('website_share_code',Setting()->get('website_share_code')) }}</textarea>
+                            @if ($errors->has('website_share_code')) <p class="help-block">{{ $errors->first('website_share_code') }}</p> @endif
+                        </div>
+
                     </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">保存</button>
