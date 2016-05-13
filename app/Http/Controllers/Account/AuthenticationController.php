@@ -73,7 +73,7 @@ class AuthenticationController extends Controller
     {
 
         if($request->isMethod('post')) {
-            $this->validateRules['id_card'] = 'required|max:64|unique:authentications,'.$request->user()->authentication->user_id;
+            $this->validateRules['id_card'] = 'required|max:64|unique:authentications,id_card,'.$request->user()->id.',user_id';
             $this->validate($request, $this->validateRules);
             $data = $request->all();
             $data['status'] = 0;

@@ -11,14 +11,25 @@
                     <a class="text-left" href="{{ route('auth.space.index',['user_id'=>$userInfo->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$userInfo->id.'_big'])}}" alt="{{ $userInfo->name }}"></a>
                 </div>
                 <div class="col-md-7">
-                    <h2 class="space-header-name">{{ $userInfo->name }}</h2>
-                    <div class="space-header-role"><i class="fa fa-user-secret"></i> {{ $userInfo->title }} , @if($userInfo->gender===1) <i class="fa fa-mars"></i> @elseif($userInfo->gender===2) <i class="fa fa-venus"></i> @else <i class="fa fa-genderless"></i> @endif </div>
-                    <div class="space-header-desc mt-10"><p>{{ $userInfo->description }}</p>
+                    <div class="space-header-name h3">
+                        {{ $userInfo->name }}  @if($userInfo->title)<small> - {{ $userInfo->title }}</small>  @endif
+                        @if($userInfo->userData->authentication_status === 1)
+                        <div class="space-header-authentication pull-right">
+                            <span class="space-header-item"><i class="fa fa-user fa-border text-blue" aria-hidden="true"></i> 实名认证</span>
+                            <span class="space-header-item"><i class="fa fa-graduation-cap fa-border" aria-hidden="true"></i> 专业认证</span>
+                        </div>
+                        @endif
                     </div>
+                    <hr />
                     <div class="space-header-social">
-                        <span class="space-header-social-item"><i class="fa fa-map-marker"></i> {{ Area()->getName($userInfo->province) }} @if($userInfo->city>0 &&  Area()->getName($userInfo->province)!=Area()->getName($userInfo->city)) - {{ Area()->getName($userInfo->city) }} @endif</span>
-                        <span class="space-header-social-item"><i class="fa fa-calendar"></i> 注册于 {{ $userInfo->created_at->toDateString() }}</span>
+                        <span class="space-header-item">性别： @if($userInfo->gender===1) <i class="fa fa-mars"></i> @elseif($userInfo->gender===2) <i class="fa fa-venus"></i> @else <i class="fa fa-genderless"></i> @endif</span>
+                        <span class="space-header-item"><i class="fa fa-map-marker"></i> {{ Area()->getName($userInfo->province) }} @if($userInfo->city>0 &&  Area()->getName($userInfo->province)!=Area()->getName($userInfo->city)) - {{ Area()->getName($userInfo->city) }} @endif</span>
+                        <span class="space-header-item"><i class="fa fa-calendar"></i> 注册于 {{ $userInfo->created_at->toDateString() }}</span>
                     </div>
+                    @if($userInfo->userData->authentication_status === 1)
+                    <div class="space-authentication-skill mt-15"><p>擅长：{{ $userInfo->authentication->skill }}</p></div>
+                    @endif
+                    <div class="space-header-desc mt-15"><p>{{ $userInfo->description }}</p></div>
                 </div>
                 <div class="col-md-3">
                     <div class="mt-10">

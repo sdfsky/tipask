@@ -85,14 +85,14 @@
                         <div class="media-body">
 
                             <div class="media-heading">
-                                <strong><a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" class="mr5">{{ $bestAnswer->user->name }}</a></strong>
+                                <strong><a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" class="mr5">{{ $bestAnswer->user->name }}</a> <span class="text-gold">@if($bestAnswer->user->authentication && $bestAnswer->user->authentication->status === 1)<i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i>@endif</span></strong>
                                 @if($bestAnswer->user->title)
                                     <span class="text-muted"> - {{ $bestAnswer->user->title }}</span>
                                 @endif
                             </div>
 
                             <div class="content">
-                                <span class="answer-time text-muted hidden-xs">采纳率 {{ $bestAnswer->user->userData->adoptPercent() }}% | 回答于 {{ timestamp_format($bestAnswer->created_at) }}</span>
+                                <span class="answer-time text-muted hidden-xs">@if($bestAnswer->user->authentication && $bestAnswer->user->authentication->status === 1)擅长：{{ $bestAnswer->user->authentication->skill }} | @endif采纳率 {{ $bestAnswer->user->userData->adoptPercent() }}% | 回答于 {{ timestamp_format($bestAnswer->created_at) }}</span>
                             </div>
                         </div>
 
@@ -118,13 +118,21 @@
                     </div>
                     <div class="media-body">
                         <div class="media-heading">
-                            <strong><a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr-5 user-card">{{ $answer->user['name'] }}</a></strong>
+                            <strong>
+                                <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr-5 user-card">{{ $answer->user['name'] }}</a><span class="text-gold">@if($answer->user->authentication && $answer->user->authentication->status === 1)<i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i>@endif
+                                </span>
+                            </strong>
                             @if($answer->user->title)
                             <span class="text-muted"> - {{ $answer->user->title }}</span>
                             @endif
                             <span class="answer-time text-muted hidden-xs">{{ timestamp_format($answer->created_at) }}</span>
                         </div>
-                        <div class="content"><p>{!! $answer->content !!}</p></div>
+                        <div class="content">
+                            @if($answer->user->authentication && $answer->user->authentication->status === 1)
+                                <span class="text-muted">擅长：{{ $answer->user->authentication->skill }}</span>
+                            @endif
+                            <p>{!! $answer->content !!}</p>
+                        </div>
                         <div class="media-footer">
                             <ul class="list-inline mb-20">
                                 <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>

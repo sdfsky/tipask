@@ -9,7 +9,7 @@
 @section('jumbotron')
     @if(Auth()->guest())
     <div class="jumbotron text-center">
-        <h4>现在加入Tipask问答网，一起记录站长的世界 <a class="btn btn-primary ml-10" href="{{ route('auth.user.register') }}" role="button">立即注册</a> <a class="btn btn-success ml-5" href="{{ route('auth.user.login') }}" role="button">用户登陆</a></h4>
+        <h4>现在加入Tipask问答网，一起记录站长的世界 <a class="btn btn-primary ml-10" href="{{ route('auth.user.register') }}" role="button">立即注册</a> <a class="btn btn-default ml-5" href="{{ route('auth.user.login') }}" role="button">用户登陆</a></h4>
     </div>
     @endif
 @endsection
@@ -57,18 +57,6 @@
                     </div>
                 </div>
             </div>
-            <div class="widget-box clearfix">
-                <h4 class="widget-box-title">活跃用户 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
-                @foreach($activeUsers as $activeUser)
-                <div class="media col-md-3">
-                    <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}"><img class="media-object avatar-50" src="{{ route('website.image.avatar',['avatar_name'=>$activeUser->id.'_middle'])}}" alt="{{ $activeUser->name }}"></a>
-                    <div class="media-body ">
-                        <a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}" class="media-heading">{{ $activeUser->name }}</a>
-                        <p class="text-muted">{{ $activeUser->title }}</p>
-                    </div>
-                </div>
-                @endforeach
-            </div>
 
             <div class="widget-box">
                 <div class="job-list-item row">
@@ -96,6 +84,23 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div class="widget-box clearfix">
+                <h4 class="widget-box-title">推荐行家 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
+                    @foreach($activeUsers as $activeUser)
+                        <section class="col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$activeUser->id.'_big'])}}" alt="{{ $activeUser->name }}"></a>
+
+                                <div class="caption">
+                                    <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}">{{ $activeUser->name }}</a></h4>
+                                    <p class="text-muted text-center">{{ $activeUser->title }}</p>
+                                    <p class="text-center"><a class="btn btn-primary btn-sm" href="{{ route('ask.question.create') }}?to_user_id={{ $activeUser->id }}">向TA提问</a></p>
+                                </div>
+                            </div>
+                        </section>
+                    @endforeach
             </div>
             <div class="widget-box">
                 <div class="job-list-item row">

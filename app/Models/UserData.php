@@ -19,7 +19,7 @@ class UserData extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'coins','credits','last_login_ip','registered_at','last_visit'];
+    protected $fillable = ['user_id', 'coins','credits','authentication_status','last_login_ip','registered_at','last_visit'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -73,20 +73,13 @@ class UserData extends Model
     }
 
 
-
+    /*排行榜*/
     public static function  top($type,$size)
     {
 
         return self::orderBy($type,'desc')->orderBy('last_visit','desc')->take($size)->get();
 
     }
-
-
-
-
-
-
-
 
 
 

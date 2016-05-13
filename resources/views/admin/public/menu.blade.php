@@ -71,10 +71,23 @@
         </ul>
     </li>
 
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-cutlery"></i> <span>第三方</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu" id="operations">
+            <li><a href="{{ route('admin.notice.index') }}"><i class="fa fa-circle-o"></i> 公告管理</a></li>
+            <li><a href="{{ route('admin.recommendation.index') }}"><i class="fa fa-circle-o"></i> 首页推荐</a></li>
+            <li><a href="{{ route('admin.goods.index') }}"><i class="fa fa-circle-o"></i> 积分商城</a></li>
+            <li><a href="{{ route('admin.exchange.index') }}"><i class="fa fa-circle-o"></i> 兑换记录</a></li>
+            <li><a href="{{ route('admin.friendshipLink.index') }}"><i class="fa fa-circle-o"></i> 友情链接</a></li>
+        </ul>
+    </li>
 
 
     <li class="header">常用菜单</li>
-    <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+    <li><a href="{{ route('website.index') }}" target="_blank"><i class="fa fa-circle-o text-success"></i> <span>网站首页</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-info"></i> <span>清空缓存</span></a></li>
+    <li><a href="http://www.tipask.com" target="_blank"><i class="fa fa-circle-o text-yellow"></i> <span>官方求助</span></a></li>
 </ul>

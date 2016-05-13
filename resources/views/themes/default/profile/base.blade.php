@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-8 col-md-pull-3">
                     <form name="baseForm" id="base_form" action="{{ route('auth.profile.base')}}" method="POST">
-                        <input type="hidden" name="_token"  value="{{ csrf_token() }}">
+                        {{ csrf_field() }}
                         <div class="form-group @if ($errors->first('name')) has-error @endif">
                             <label for="name" class="required control-label col-sm-3">姓名</label>
                             <div class="col-sm-9">

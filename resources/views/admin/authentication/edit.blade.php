@@ -61,13 +61,13 @@
                                 <span class="text-muted">(禁用后前台不会显示)</span>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" value="1" @if($authentication->status === 0) checked @endif /> 待审核
+                                        <input type="radio" name="status" value="0" @if($authentication->status === 0) checked @endif /> 待审核
                                     </label>&nbsp;&nbsp;
                                     <label>
                                         <input type="radio" name="status" value="1" @if($authentication->status === 1) checked @endif /> 通过审核
                                     </label>&nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" name="status" value="0" @if($authentication->status === 4 ) checked @endif /> 审核失败
+                                        <input type="radio" name="status" value="4" @if($authentication->status === 4 ) checked @endif /> 审核失败
                                     </label>
                                 </div>
                             </div>
