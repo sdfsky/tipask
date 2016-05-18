@@ -9,6 +9,7 @@
 
     <meta name="author" content="Tipask Team" />
     <meta name="copyright" content="2016 tipask.com" />
+    {!! Setting()->get('website_header') !!}
     <!-- Bootstrap -->
     <link href="{{ asset('/static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/static/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
@@ -220,6 +221,8 @@
 </script>
 <script src="{{ asset('js/global.js') }}"></script>
 @yield('script')
+
+{!! Setting()->get('website_footer') !!}
 
 </body>
 </html>

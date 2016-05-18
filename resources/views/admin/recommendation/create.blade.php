@@ -25,7 +25,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label>推荐标题</label>
-                                <input type="text" name="subject" class="form-control "  placeholder="推荐标题" value="{{ old('subject',$) }}">
+                                <input type="text" name="subject" class="form-control "  placeholder="推荐标题" value="{{ old('subject','') }}">
                             </div>
                             <div class="form-group">
                                 <label>推荐链接地址</label>

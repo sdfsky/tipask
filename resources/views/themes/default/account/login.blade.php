@@ -56,6 +56,13 @@
                 </div>
                 <button type="submit" class="btn btn-primary pull-right pl20 pr20">登录</button>
             </div>
+
+            <div class="widget-login mt30">
+                <p class="text-muted mt5 mr10 pull-left hidden-xs">快速登录</p>
+                <a href="/user/oauth/google" class="btn btn-default btn-sm" onclick="#"><span class="icon-sn-bg-google"></span> <strong class="visible-xs-inline">Google 账号</strong></a>
+                <a href="/user/oauth/github" class="btn btn-default btn-sm" onclick="#"><span class="icon-sn-bg-github"></span> <strong class="visible-xs-inline">Github 账号</strong></a>
+
+            </div>
         </form>
     </div>
 
