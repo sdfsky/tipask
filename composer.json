@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "tipask/tipask",
+    "description": "PHP社区问答系统",
+    "keywords": ["问答系统", "tipask","laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
