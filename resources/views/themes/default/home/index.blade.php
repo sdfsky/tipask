@@ -134,7 +134,7 @@
         <div class="col-xs-12 col-md-3 side">
             <div class="side-alert alert alert-link">
                 <a href="{{ route('ask.question.create') }}" class="btn btn-warning btn-block">我要提问</a>
-                <a href="{{ route('ask.article.create') }}" class="btn btn-primary btn-block">分享经验</a>
+                <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block">分享经验</a>
             </div>
             <div class="widget-box">
                 <h4 class="widget-box-title">最新公告</h4>
