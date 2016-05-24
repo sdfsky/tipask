@@ -92,7 +92,9 @@ class UserController extends Controller
             $formData['status'] = 0;
             $formData['visit_ip'] = $request->getClientIp();
 
-            $this->auth->login($this->registrar->create($formData));
+            $user = $this->registrar->create($formData);
+            $user->attachRole(2); //默认注册为普通用户角色
+            $this->auth->login($user);
             $message = '注册成功!';
             if($this->credit($request->user()->id,'register',Setting()->get('coins_register'),Setting()->get('credits_register'))){
                 $message .= ' 经验 '.integer_string(Setting()->get('credits_register')) .' , 金币 '.integer_string(Setting()->get('coins_register'));
@@ -172,8 +174,6 @@ class UserController extends Controller
 
             $user->password = Hash::make($request->input('password'));
             $user->save();
-
-            $user->attachRole(2); //默认注册为普通用户角色
 
             EmailToken::clear($user->email,'findPassword');
 
