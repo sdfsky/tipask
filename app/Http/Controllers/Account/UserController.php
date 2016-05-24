@@ -89,6 +89,7 @@ class UserController extends Controller
                 );
             }
             $formData = $request->all();
+            $formData['status'] = 0;
             $formData['visit_ip'] = $request->getClientIp();
 
             $this->auth->login($this->registrar->create($formData));

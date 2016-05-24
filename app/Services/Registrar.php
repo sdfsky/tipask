@@ -35,7 +35,7 @@ class Registrar implements RegistrarContract {
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'status' => 0
+            'status' => $data['status']
         ]);
 
         if($user){
@@ -46,7 +46,6 @@ class Registrar implements RegistrarContract {
                 'registered_at' => Carbon::now(),
                 'last_visit' => Carbon::now(),
                 'last_login_ip' => $data['visit_ip'],
-
             ]);
         }
 
