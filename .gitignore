@@ -2,6 +2,4 @@
 vendor/
 bootstrap/cache/
 storage/
-.env.*.php
-.env.php
 .env
