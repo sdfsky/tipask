@@ -1,7 +1,7 @@
 <?php namespace App\Services;
 
 use App\Models\User;
-use App\models\UserData;
+use App\Models\UserData;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;

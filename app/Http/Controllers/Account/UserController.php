@@ -85,18 +85,11 @@ class UserController extends Controller
             $validateRules = [
                 'name' => 'required|max:100',
                 'email' => 'required|email|max:255|unique:users',
-                'password' => 'required|confirmed|min:6',
+                'password' => 'required|confirmed|min:6|max:16',
             ];
 
             $this->validate($request,$validateRules);
 
-            $validator = $this->registrar->validator($request->all());
-            if ($validator->fails())
-            {
-                $this->throwValidationException(
-                    $request, $validator
-                );
-            }
             $formData = $request->all();
             $formData['status'] = 0;
             $formData['visit_ip'] = $request->getClientIp();
