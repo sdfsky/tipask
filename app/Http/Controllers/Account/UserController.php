@@ -81,6 +81,15 @@ class UserController extends Controller
         if($request->isMethod('post'))
         {
             $request->flashExcept(['password','password_confirmation']);
+            /*表单数据校验*/
+            $validateRules = [
+                'name' => 'required|max:100',
+                'email' => 'required|email|max:255|unique:users',
+                'password' => 'required|confirmed|min:6',
+            ];
+
+            $this->validate($request,$validateRules);
+
             $validator = $this->registrar->validator($request->all());
             if ($validator->fails())
             {
