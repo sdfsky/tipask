@@ -36,6 +36,10 @@ class DatabaseSeeder extends Seeder
             array('id' => '1','name' => 'admin','email' => 'admin@tipask.com','password' => '$2y$10$.HnDHoHChoedAnpx6dyaleTEv/YS9yFyyt8np.EnkYoGtnNRrOlPm','status' => '1','created_at' => '2016-02-16 17:53:37','updated_at' => '2016-05-22 22:29:45')
         ]);
 
+        DB::table('user_data')->insert([
+            ['user_id' => '1','coins' => '0','credits' => '1000','registered_at' => '2016-02-16 17:53:37','questions' => '0','articles' => '0','answers' => '0','adoptions' => '0','supports' => '0','followers' => '0','views' => '0','authentication_status' => '0'],
+        ]);
+
 
         DB::table('role_user')->insert([
             array('id' => '1','role_id' => '1','user_id' => '1','created_at' => '2016-03-29 15:33:02','updated_at' => '2016-03-29 15:33:02')
