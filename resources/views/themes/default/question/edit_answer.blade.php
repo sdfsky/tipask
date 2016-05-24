@@ -45,7 +45,7 @@
                 toolbar:ask_editor_options.toolbar,
                 codemirror:ask_editor_options.codemirror,
                 onImageUpload: function(files, editor, welEditable) {
-                    upload_editor_image(files[0],"description",$("#editor_token").val());
+                    upload_editor_image(files[0],"answer_content",$("#editor_token").val());
                 }
             });
         });
