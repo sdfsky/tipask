@@ -15,7 +15,7 @@
             <h2 class="h3 post-title">修改密码</h2>
             <div class="row mt-30">
                 <div class="col-md-8">
-                    <form name="baseForm" id="base_form" action="{{ route('auth.profile.email')}}" method="POST">
+                    <form name="baseForm" id="base_form" action="{{ route('auth.profile.password')}}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group @if ($errors->first('old_password')) has-error @endif">
                             <label for="old_password" class="required control-label col-sm-3">当前密码</label>
