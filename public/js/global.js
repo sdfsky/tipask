@@ -305,6 +305,7 @@ function upload_editor_image(file,editorId,token){
         contentType: false,
         processData: false,
         success: function(url) {
+            console.log(url);
             $('#'+editorId).summernote('editor.insertImage', url);
         }
     });
