@@ -68,7 +68,7 @@
                                     <strong>一周用户趋势数据</strong>
                                 </p>
                                 <div class="chart">
-                                    <canvas id="user_chart" height="120"></canvas>
+                                    <canvas id="user_chart" height="100"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                     <strong>问题、文章、回答统计</strong>
                                 </p>
                                 <div class="chart">
-                                    <canvas id="myChart" height="120"></canvas>
+                                    <canvas id="question_chart" height="100"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -148,14 +148,14 @@
                 }
             }
         });
-        var myChart = new Chart($("#myChart"), {
+        var questionChart = new Chart($("#question_chart"), {
             type: 'bar',
             data: {
                 labels: [{!! implode(",",$questionChart['labels']) !!}],
                 datasets: [
                     {
                     label: '提问',
-                        backgroundColor: "rgba(221,75,57,0.9)",
+                        backgroundColor: "rgba(204,102,51,0.9)",
                         data: [{{ implode(",",$questionChart['questionRange']) }}]
                     },
                     {
