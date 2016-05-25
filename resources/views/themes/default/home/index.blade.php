@@ -95,7 +95,7 @@
 
                                 <div class="caption">
                                     <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}">{{ $activeUser->name }}</a></h4>
-                                    <p class="text-muted text-center">{{ $activeUser->title }}</p>
+                                    <p class="text-muted text-center">{{ $activeUser->title }}&nbsp;</p>
                                     <p class="text-center"><a class="btn btn-primary btn-sm" href="{{ route('ask.question.create') }}?to_user_id={{ $activeUser->id }}">向TA提问</a></p>
                                 </div>
                             </div>

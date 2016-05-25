@@ -97,6 +97,49 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">运行环境</h3>
+                    </div>
+                    <div class="box-body table-responsive">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td>程序版本：Tipask3.0Dev</td>
+                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>程序版本：Tipask3.0Dev</td>
+                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>程序版本：Tipask3.0Dev</td>
+                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>程序版本：Tipask3.0Dev</td>
+                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>程序版本：Tipask3.0Dev</td>
+                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>程序版本：Tipask3.0Dev</td>
+                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     @endsection
 
