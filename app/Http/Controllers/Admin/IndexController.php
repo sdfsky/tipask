@@ -22,7 +22,8 @@ class IndexController extends AdminController
         $totalArticleNum = Article::count();
         $totalAnswerNum = Answer::count();
         $userChart = $this->drawUserChart();
-        return view("admin.index.index")->with(compact('totalUserNum','totalQuestionNum','totalArticleNum','totalAnswerNum','userChart'));
+        $questionChart = $this->drawQuestionChart();
+        return view("admin.index.index")->with(compact('totalUserNum','totalQuestionNum','totalArticleNum','totalAnswerNum','userChart','questionChart'));
     }
 
 
@@ -37,142 +38,112 @@ class IndexController extends AdminController
     private function drawUserChart()
     {
 
+        /*生成Labels*/
+        $labelTimes = $chartLabels = [];
 
-        $label1Time =   Carbon::createFromTimestamp( Carbon::now()->timestamp - 7 * 24 * 3600 );
-        $labels[] = '"'.$label1Time->month.'月-'.$label1Time->day.'日'.'"';
-
-        $label2Time = Carbon::createFromTimestamp( Carbon::now()->timestamp - 6 * 24 * 3600 );
-        $labels[] = '"'.$label2Time->month.'月-'.$label2Time->day.'日'.'"';
-
-        $label3Time = Carbon::createFromTimestamp( Carbon::now()->timestamp - 5 * 24 * 3600 );
-        $labels[] = '"'.$label3Time->month.'月-'.$label3Time->day.'日'.'"';
-
-        $label4Time = Carbon::createFromTimestamp( Carbon::now()->timestamp - 4 * 24 * 3600 );
-        $labels[] = '"'.$label4Time->month.'月-'.$label4Time->day.'日'.'"';
-
-        $label5Time = Carbon::createFromTimestamp( Carbon::now()->timestamp - 3 * 24 * 3600 );
-        $labels[] = '"'.$label5Time->month.'月-'.$label5Time->day.'日'.'"';
-
-        $label6Time = Carbon::createFromTimestamp( Carbon::now()->timestamp - 2 * 24 * 3600 );
-        $labels[] = '"'.$label6Time->month.'月-'.$label6Time->day.'日'.'"';
-
-        $label7Time = Carbon::createFromTimestamp( Carbon::now()->timestamp - 1 * 24 * 3600 );
-        $labels[] = '"'.$label7Time->month.'月-'.$label7Time->day.'日'.'"';
-
-        $users = User::where('created_at','>=',$label1Time)->get();
+        for( $i=0 ; $i < 7 ; $i++ ){
+            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::now()->timestamp - (7-$i) * 24 * 3600 );
+            $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
+        }
 
 
+        $users = User::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
 
-        $registerNum1 = $registerNum2 = $registerNum3 = $registerNum4 = $registerNum5 = $registerNum6 = $registerNum7 = 0;
-        $verifyNum1 = $verifyNum2 = $verifyNum3 = $verifyNum4 = $verifyNum5 = $verifyNum6 = $verifyNum7 = 0;
-        $authNum1 = $authNum2 = $authNum3 = $authNum4 = $authNum5 = $authNum6 = $authNum7 = 0;
-        foreach($users as $user){
+        $registerRange = $verifyRange = $authRange = [0,0,0,0,0,0,0];
 
-            if( $user->created_at->timestamp > $label1Time->timestamp && $user->created_at->timestamp < $label2Time->timestamp ){
+        for( $i=0 ; $i < 7 ; $i++ ){
 
-                $registerNum1++;
+            foreach($users as $user){
+                if( $i === 6 &&  $user->created_at->timestamp > $labelTimes[$i]->timestamp ){
 
-                if( $user->status > 0 ){
-                    $verifyNum1++;
+                    $registerRange[$i]++;
+
+                    if( $user->status > 0 ){
+                        $verifyRange[$i]++;
+                    }
+
+                    if($user->userData->authentication_status === 1){
+                        $authRange[$i]++;
+                    }
+                    break;
                 }
+                if( $user->created_at->timestamp > $labelTimes[$i]->timestamp && $user->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                    $registerRange[$i]++;
+                    if( $user->status > 0 ){
+                        $verifyRange[$i]++;
+                    }
 
-                if($user->userData->authentication_status === 1){
-                    $authNum1++;
+                    if($user->userData->authentication_status === 1){
+                        $authRange[$i]++;
+                    }
                 }
-
             }
-
-            if( $user->created_at->timestamp > $label2Time->timestamp && $user->created_at->timestamp < $label3Time->timestamp ){
-
-                $registerNum2++;
-
-                if( $user->status > 0 ){
-                    $verifyNum2++;
-                }
-
-                if($user->userData->authentication_status === 1){
-                    $authNum2++;
-                }
-
-            }
-
-            if( $user->created_at->timestamp > $label3Time->timestamp && $user->created_at->timestamp < $label4Time->timestamp ){
-
-                $registerNum3++;
-
-                if( $user->status > 0 ){
-                    $verifyNum3++;
-                }
-
-                if($user->userData->authentication_status === 1){
-                    $authNum3++;
-                }
-
-            }
-
-            if( $user->created_at->timestamp > $label4Time->timestamp && $user->created_at->timestamp < $label5Time->timestamp ){
-
-                $registerNum4++;
-
-                if( $user->status > 0 ){
-                    $verifyNum4++;
-                }
-
-                if($user->userData->authentication_status === 1){
-                    $authNum4++;
-                }
-
-            }
-
-            if( $user->created_at->timestamp > $label5Time->timestamp && $user->created_at->timestamp < $label6Time->timestamp ){
-
-                $registerNum5++;
-
-                if( $user->status > 0 ){
-                    $verifyNum5++;
-                }
-
-                if($user->userData->authentication_status === 1){
-                    $authNum5++;
-                }
-
-            }
-
-            if( $user->created_at->timestamp > $label6Time->timestamp && $user->created_at->timestamp < $label7Time->timestamp ){
-
-                $registerNum6++;
-
-                if( $user->status > 0 ){
-                    $verifyNum6++;
-                }
-
-                if($user->userData->authentication_status === 1){
-                    $authNum6++;
-                }
-
-            }
-
-            if( $user->created_at->timestamp > $label7Time->timestamp){
-
-                $registerNum7++;
-
-                if( $user->status > 0 ){
-                    $verifyNum7++;
-                }
-
-                if($user->userData->authentication_status === 1){
-                    $authNum7++;
-                }
-
-            }
-
 
         }
 
-        $registerUsers= [$registerNum1,$registerNum2,$registerNum3,$registerNum4,$registerNum5,$registerNum6,$registerNum7];
-        $verifyUsers = [$verifyNum1,$verifyNum2,$verifyNum3,$verifyNum4,$verifyNum5,$verifyNum6,$verifyNum7];
-        $authentications = [$authNum1,$authNum2,$authNum3,$authNum4,$authNum5,$authNum6,$authNum7];
-        return ['labels'=>$labels,'registerUsers'=>$registerUsers,'verifyUsers'=>$verifyUsers,'authUsers'=>$authentications];
+        return ['labels'=>$chartLabels,'registerUsers'=>$registerRange,'verifyUsers'=>$verifyRange,'authUsers'=>$authRange];
+    }
+
+    private function drawQuestionChart()
+    {
+
+        /*生成Labels*/
+        $labelTimes = $chartLabels = [];
+        for( $i=0 ; $i < 7 ; $i++ ){
+            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::now()->timestamp - (7-$i) * 24 * 3600 );
+            $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
+        }
+
+        $questions = Question::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
+        $answers = Answer::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
+        $articles = Article::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
+
+        $questionRange = $answerRange = $articleRange = [0,0,0,0,0,0,0];
+
+        for( $i=0 ; $i < 7 ; $i++ ){
+            /*问题统计*/
+            foreach($questions as $question){
+                if( $i === 6 &&  $question->created_at->timestamp > $labelTimes[$i]->timestamp ){
+                    $questionRange[$i]++;
+                    break;
+                }
+                if( $question->created_at->timestamp > $labelTimes[$i]->timestamp && $question->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                    $questionRange[$i]++;
+                }
+            }
+            /*回答统计*/
+            foreach($answers as $answer){
+                if( $i === 6 &&  $answer->created_at->timestamp > $labelTimes[$i]->timestamp ){
+                    $answerRange[$i]++;
+                    break;
+                }
+                if( $answer->created_at->timestamp > $labelTimes[$i]->timestamp && $answer->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                    $answerRange[$i]++;
+                }
+            }
+            /*文章统计*/
+            foreach($articles as $article){
+                if( $i === 6 &&  $article->created_at->timestamp > $labelTimes[$i]->timestamp ){
+                    $articleRange[$i]++;
+                    break;
+                }
+                if( $article->created_at->timestamp > $labelTimes[$i]->timestamp && $article->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                    $articleRange[$i]++;
+                }
+            }
+
+        }
+
+        return [
+            'labels'  => $chartLabels,
+            'questionRange' => $questionRange,
+            'answerRange' => $answerRange,
+            'articleRange' => $articleRange,
+        ];
+
+
+
+
 
     }
 

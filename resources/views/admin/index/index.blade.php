@@ -80,13 +80,13 @@
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title">一周数据报告</h3>
+                        <h3 class="box-title">问答数据报告</h3>
                     </div>
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="text-center">
-                                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                                    <strong>问题、文章、回答统计</strong>
                                 </p>
                                 <div class="chart">
                                     <canvas id="myChart" height="120"></canvas>
@@ -151,17 +151,22 @@
         var myChart = new Chart($("#myChart"), {
             type: 'bar',
             data: {
-                labels: ["用户", "问题", "文章", "回答", "行家"],
+                labels: [{!! implode(",",$questionChart['labels']) !!}],
                 datasets: [
                     {
-                    label: '# of Votes',
-                        backgroundColor: "rgba(75,192,192,0.4)",
-
-                        data: [12, 19, 3, 5, 2]
+                    label: '提问',
+                        backgroundColor: "rgba(221,75,57,0.9)",
+                        data: [{{ implode(",",$questionChart['questionRange']) }}]
                     },
                     {
-                        label: '# of asdfasf',
-                        data: [2, 10, 4, 5, 11]
+                        label: '回答',
+                        backgroundColor: "rgba(243,156,18,0.9)",
+                        data: [{{ implode(",",$questionChart['answerRange']) }}]
+                    },
+                    {
+                        label: '文章',
+                        backgroundColor: "rgba(0,166,90,0.9)",
+                        data: [{{ implode(",",$questionChart['articleRange']) }}]
                     },
                 ]
             },
