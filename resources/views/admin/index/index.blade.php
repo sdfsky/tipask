@@ -160,7 +160,7 @@
                     },
                     {
                         label: '回答',
-                        backgroundColor: "rgba(243,156,18,0.9)",
+                        backgroundColor: "rgba(51,102,153,0.9)",
                         data: [{{ implode(",",$questionChart['answerRange']) }}]
                     },
                     {
