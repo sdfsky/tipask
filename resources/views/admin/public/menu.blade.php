@@ -1,6 +1,6 @@
 <ul class="sidebar-menu" id="root_menu">
     <li class="header">管理菜单</li>
-    <li><a href="{{ route('admin.index.index') }}"><i class="fa fa-dashboard"></i> 首页 </a></li>
+    <li><a href="{{ route('admin.index.index') }}"><i class="fa fa-dashboard"></i> <span>首页</span> </a></li>
     @permission('admin.role.index|admin.permission.index')
     <li class="treeview">
         <a href="#">
