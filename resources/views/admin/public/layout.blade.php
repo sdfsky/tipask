@@ -29,12 +29,17 @@
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('admin.index.index') }}" class="logo">
+
+        <div class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>T</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Tipask 管理后台</b></span>
-        </a>
+            <span class="logo-lg text-center">
+                <a class="navbar-brand admin_logo" href="http://wenda.tipask.com"></a>
+            </span>
+
+        </div>
+
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->

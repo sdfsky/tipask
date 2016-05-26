@@ -101,7 +101,7 @@
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title">运行环境</h3>
+                        <h3 class="box-title">系统信息</h3>
                     </div>
                     <div class="box-body table-responsive">
                         <div class="row">
@@ -109,28 +109,45 @@
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                     <tr>
-                                        <td>程序版本：Tipask3.0Dev</td>
-                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                        <td>软件版本：Tipask3.0Dev Release 20160525 [<a href="http://www.tipask.com/download.html">查看最新版本</a>]</td>
                                     </tr>
                                     <tr>
-                                        <td>程序版本：Tipask3.0Dev</td>
-                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                        <td>服务器域名： {{ $systemInfo['hostName'] }}</td>
                                     </tr>
                                     <tr>
-                                        <td>程序版本：Tipask3.0Dev</td>
-                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                        <td>PHP版本： {{ $systemInfo['phpVersion'] }}</td>
                                     </tr>
                                     <tr>
-                                        <td>程序版本：Tipask3.0Dev</td>
-                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                        <td>服务器端信息：{{ $systemInfo['runOS'] }}/{{ $systemInfo['serverInfo'] }}</td>
                                     </tr>
                                     <tr>
-                                        <td>程序版本：Tipask3.0Dev</td>
-                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                        <td>最大上传限制：{{ $systemInfo['maxUploadSize'] }}</td>
                                     </tr>
                                     <tr>
-                                        <td>程序版本：Tipask3.0Dev</td>
-                                        <td>主机名：help.tipask.com (121.199.0.186:80)</td>
+                                        <td>最大执行时间：{{ $systemInfo['maxExecutionTime'] }} seconds</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">版权申明</h3>
+                    </div>
+                    <div class="box-body table-responsive">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td>版权所有：www.tipask.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>用户协议：<a href="http://www.tipask.com/license.html" target="_blank">查看用户协议</a></td>
                                     </tr>
                                     </tbody>
                                 </table>

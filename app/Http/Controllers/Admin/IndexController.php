@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends AdminController
 {
@@ -23,7 +24,8 @@ class IndexController extends AdminController
         $totalAnswerNum = Answer::count();
         $userChart = $this->drawUserChart();
         $questionChart = $this->drawQuestionChart();
-        return view("admin.index.index")->with(compact('totalUserNum','totalQuestionNum','totalArticleNum','totalAnswerNum','userChart','questionChart'));
+        $systemInfo = $this->getSystemInfo();
+        return view("admin.index.index")->with(compact('totalUserNum','totalQuestionNum','totalArticleNum','totalAnswerNum','userChart','questionChart','systemInfo'));
     }
 
 
@@ -141,10 +143,18 @@ class IndexController extends AdminController
             'articleRange' => $articleRange,
         ];
 
+    }
 
 
-
-
+    private function getSystemInfo()
+    {
+        $systemInfo['phpVersion'] = PHP_VERSION;
+        $systemInfo['runOS'] = PHP_OS;
+        $systemInfo['maxUploadSize'] = ini_get('upload_max_filesize');
+        $systemInfo['maxExecutionTime'] = ini_get('max_execution_time');
+        $systemInfo['hostName'] = $_SERVER['SERVER_NAME'] .' / '. $_SERVER['SERVER_ADDR'].':'.$_SERVER['SERVER_PORT'];
+        $systemInfo['serverInfo'] = $_SERVER['SERVER_SOFTWARE'];
+        return $systemInfo;
     }
 
 
