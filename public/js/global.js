@@ -14,7 +14,6 @@ $.ajaxSetup({
 
 
 /*编辑器toolbar全局配置*/
-
 var ask_editor_options = {
     toolbar: [
         ['style', ['bold', 'clear']],
