@@ -20,7 +20,7 @@ var ask_editor_options = {
         ['style', ['bold', 'clear']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['insert', ['link', 'picture', 'hr']],
-        ['view', ['fullscreen', 'codeview']]
+        ['view', ['fullscreen']]
     ],
     codemirror: {
         mode: 'text/html',
