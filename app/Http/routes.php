@@ -334,6 +334,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     /*友情链接*/
     Route::resource('friendshipLink', 'FriendshipLinkController',['except' => ['show']]);
 
+    /*工具管理*/
+    Route::match(['get','post'],'clearCache',['as'=>'admin.tool.clearCache','uses'=>'ToolController@clearCache']);
 
 
 });
