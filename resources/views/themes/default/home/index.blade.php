@@ -58,6 +58,24 @@
                 </div>
             </div>
 
+            <div class="widget-box clearfix">
+                <h4 class="widget-box-title">推荐行家 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
+                @foreach($hotExperts as $expert)
+                    <section class="col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$expert->id.'_big'])}}" alt="{{ $expert->name }}"></a>
+
+                            <div class="caption">
+                                <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}">{{ $expert->name }}</a></h4>
+                                <p class="text-muted text-center">{{ $expert->title }}&nbsp;</p>
+                                <p class="text-center"><a class="btn btn-primary btn-sm" href="{{ route('ask.question.create') }}?to_user_id={{ $expert->id }}">向TA提问</a></p>
+                            </div>
+                        </div>
+                    </section>
+                @endforeach
+            </div>
+
+
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
@@ -86,22 +104,6 @@
                 </div>
             </div>
 
-            <div class="widget-box clearfix">
-                <h4 class="widget-box-title">推荐行家 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
-                    @foreach($activeUsers as $activeUser)
-                        <section class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$activeUser->id.'_big'])}}" alt="{{ $activeUser->name }}"></a>
-
-                                <div class="caption">
-                                    <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}">{{ $activeUser->name }}</a></h4>
-                                    <p class="text-muted text-center">{{ $activeUser->title }}&nbsp;</p>
-                                    <p class="text-center"><a class="btn btn-primary btn-sm" href="{{ route('ask.question.create') }}?to_user_id={{ $activeUser->id }}">向TA提问</a></p>
-                                </div>
-                            </div>
-                        </section>
-                    @endforeach
-            </div>
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">

@@ -38,10 +38,9 @@ class IndexController extends Controller
             return Recommendation::where('status','>',0)->orderBy('sort','asc')->orderBy('updated_at','desc')->take(11)->get();
         });
 
-
-        /*活跃用户*/
-        $activeUsers = Cache::remember('active_users',10,function() {
-               return  UserData::activities(8);
+        /*热门专家*/
+        $hotExperts = Cache::remember('hot_experts',10,function(){
+            return  UserData::hotExperts(8);
         });
 
 
@@ -84,7 +83,7 @@ class IndexController extends Controller
             return  FriendshipLink::where('status','=',1)->orderBy('sort','asc')->orderBy('created_at','asc')->take(50)->get();
         });
 
-        return view('theme::home.index')->with(compact('recommendItems','activeUsers','hotQuestions','rewardQuestions','hotArticles','newestArticles','newestNotices','hotTags','topCoinUsers','friendshipLinks'));
+        return view('theme::home.index')->with(compact('recommendItems','hotExperts','hotQuestions','rewardQuestions','hotArticles','newestArticles','newestNotices','hotTags','topCoinUsers','friendshipLinks'));
 
     }
 
