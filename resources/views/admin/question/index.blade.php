@@ -76,7 +76,7 @@
                                         <td><span class="label @if($question->status===0) label-danger @elseif($question->status===1) label-warning @else label-success @endif">{{ trans_question_status($question->status) }}</span> </td>
                                         <td>
                                             <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.question.edit',['id'=>$question->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-default" target="_blank" href="{{ route('ask.question.edit',['id'=>$question->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
                                             </div>
                                         </td>
                                     </tr>

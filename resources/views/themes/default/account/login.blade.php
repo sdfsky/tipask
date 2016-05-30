@@ -41,27 +41,11 @@
                     @endif
                 </div>
 
-                <div class="form-group @if ($errors->first('captcha')) has-error @endif">
-                    <label for="captcha" class="required">验证码</label>
-                    <input type="text" class="form-control" id="captcha" name="captcha" required="" placeholder="请输入下方的验证码">
-                    @if ($errors->first('captcha'))
-                    <span class="help-block">{{ $errors->first('captcha') }}</span>
-                    @endif
-                    <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
-               </div>
-
             <div class="form-group clearfix">
                 <div class="checkbox pull-left">
                     <label><input name="remember" type="checkbox" value="1" checked> 记住登录状态</label>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right pl20 pr20">登录</button>
-            </div>
-
-            <div class="widget-login mt30">
-                <p class="text-muted mt5 mr10 pull-left hidden-xs">快速登录</p>
-                <a href="/user/oauth/google" class="btn btn-default btn-sm" onclick="#"><span class="icon-sn-bg-google"></span> <strong class="visible-xs-inline">Google 账号</strong></a>
-                <a href="/user/oauth/github" class="btn btn-default btn-sm" onclick="#"><span class="icon-sn-bg-github"></span> <strong class="visible-xs-inline">Github 账号</strong></a>
-
             </div>
         </form>
     </div>

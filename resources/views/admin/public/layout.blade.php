@@ -35,7 +35,7 @@
             <span class="logo-mini"><b>T</b></span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg text-center">
-                <a class="navbar-brand admin_logo" href="http://wenda.tipask.com"></a>
+                <a class="navbar-brand admin_logo" href="{{ route('admin.index.index') }}"></a>
             </span>
 
         </div>

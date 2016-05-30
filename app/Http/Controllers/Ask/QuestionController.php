@@ -50,7 +50,6 @@ class QuestionController extends Controller
             $bestAnswer = $question->answers()->where('adopted_at','>',0)->first();
         }
 
-
         if($request->input('sort','default') === 'created_at'){
             $answers = $question->answers()->whereNull('adopted_at')->orderBy('created_at','DESC')->paginate(5);
         }else{
@@ -87,6 +86,9 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $loginUser = $request->user();
+        if($request->user()->status === 0){
+            return $this->error(route('website.index'),'操作失败！您的邮箱还未验证，验证后才能进行该操作！');
+        }
         $request->flash();
         $this->validate($request,$this->validateRules);
         $data = [
@@ -139,8 +141,9 @@ class QuestionController extends Controller
 
             /*用户提问数+1*/
             $loginUser->userData()->increment('questions');
-            if($question->status ==1 && $this->credit($request->user()->id,'ask',Setting()->get('coins_ask'),Setting()->get('credits_ask'),$question->id,$question->title)){
-                $message = '发起提问成功! 经验 '.integer_string(Setting()->get('credits_ask')) .' , 金币 '.integer_string(Setting()->get('coins_ask'));
+            $this->credit($request->user()->id,'ask',Setting()->get('coins_ask'),Setting()->get('credits_ask'),$question->id,$question->title);
+            if($question->status == 1 ){
+                $message = '发起提问成功! '.get_credit_message(Setting()->get('credits_ask'),Setting()->get('coins_ask'));
             }else{
                 $message = '问题发布成功！为了确保问答的质量，我们会对您的提问内容进行审核。请耐心等待......';
             }
@@ -164,8 +167,8 @@ class QuestionController extends Controller
             abort(404);
         }
 
-        if($question->user_id !== $request->user()->id){
-            abort(401);
+        if($question->user_id !== $request->user()->id && !$request->user()->is('admin')){
+            abort(403);
         }
 
         return view("theme::question.edit")->with('question',$question);
@@ -181,9 +184,10 @@ class QuestionController extends Controller
             abort(404);
         }
 
-        if($question->user_id !== $request->user()->id){
-            abort(401);
+        if($question->user_id !== $request->user()->id && !$request->user()->is('admin')){
+            abort(403);
         }
+
         $request->flash();
         $this->validate($request,$this->validateRules);
 

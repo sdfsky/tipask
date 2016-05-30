@@ -37,7 +37,7 @@ class UserController extends Controller
             $this->validate($request, [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
-                'captcha' => 'required|captcha'
+//                'captcha' => 'required|captcha'
             ]);
 
             /*只接收email和password的值*/
@@ -48,7 +48,7 @@ class UserController extends Controller
             {
 
                 if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
-                    $message = '登陆成功! 经验 '.integer_string(Setting()->get('credits_login')) .' , 金币 '.integer_string(Setting()->get('coins_login'));
+                    $message = '登陆成功! '.get_credit_message(Setting()->get('credits_login'),Setting()->get('coins_login'));
                    return $this->success(route('website.index'),$message);
                 }
 
@@ -99,7 +99,7 @@ class UserController extends Controller
             $this->auth->login($user);
             $message = '注册成功!';
             if($this->credit($request->user()->id,'register',Setting()->get('coins_register'),Setting()->get('credits_register'))){
-                $message .= ' 经验 '.integer_string(Setting()->get('credits_register')) .' , 金币 '.integer_string(Setting()->get('coins_register'));
+                $message .= get_credit_message(Setting()->get('credits_register'),Setting()->get('coins_register'));
             }
 
             /*发送邮箱验证邮件*/

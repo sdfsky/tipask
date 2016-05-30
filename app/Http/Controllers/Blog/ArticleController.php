@@ -46,6 +46,10 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $loginUser = $request->user();
+        if($request->user()->status === 0){
+            return $this->error(route('website.index'),'操作失败！您的邮箱还未验证，验证后才能进行该操作！');
+        }
+
         $request->flash();
         $this->validate($request,$this->validateRules);
         $data = [
@@ -71,7 +75,15 @@ class ArticleController extends Controller
             /*用户提问数+1*/
             $loginUser->userData()->increment('articles');
 
-            return $this->success(route('blog.article.detail',['id'=>$article->id]),'文章发布成功');
+            $this->credit($request->user()->id,'writeArticle',Setting()->get('coins_write_article'),Setting()->get('credits_write_article'),$article->id,$article->title);
+
+            if($article->status === 1 ){
+                $message = '文章发布成功! '.get_credit_message(Setting()->get('credits_write_article'),Setting()->get('coins_write_article'));
+            }else{
+                $message = '文章发布成功！为了确保文章的质量，我们会对您发布的文章进行审核。请耐心等待......';
+            }
+
+            return $this->success(route('blog.article.detail',['id'=>$article->id]),$message);
 
 
         }
@@ -124,11 +136,12 @@ class ArticleController extends Controller
             abort(404);
         }
 
-        if($article->user_id !== $request->user()->id){
-            abort(401);
+        if($article->user_id !== $request->user()->id && !$request->user()->is('admin')){
+            abort(403);
         }
 
         return view("theme::article.edit")->with('article',$article);
+
     }
 
     /**
@@ -146,8 +159,8 @@ class ArticleController extends Controller
             abort(404);
         }
 
-        if($article->user_id !== $request->user()->id){
-            abort(401);
+        if($article->user_id !== $request->user()->id && !$request->user()->is('admin')){
+            abort(403);
         }
 
         $request->flash();

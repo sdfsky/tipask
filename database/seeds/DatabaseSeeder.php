@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 
         /*添加默认权限组*/
         DB::table('roles')->insert([
-            ['id' => '1','name' => '超级管理员','slug' => 'admin','description' => '超级管理员，具有最高权限','level'=>1,'created_at'=>'2016-02-16 09:52:13','updated_at'=>'2016-02-16 09:52:13'],
+            ['id' => '1','name' => '后台管理员','slug' => 'admin','description' => '后台管理员，具有最高权限','level'=>1,'created_at'=>'2016-02-16 09:52:13','updated_at'=>'2016-02-16 09:52:13'],
             ['id' => '2','name' => '普通会员','slug' => 'member','description' => '普通会员，不可管理后台','level'=>1,'created_at'=>'2016-02-16 09:52:13','updated_at'=>'2016-02-16 09:52:13'],
         ]);
 

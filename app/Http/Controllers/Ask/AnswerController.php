@@ -29,6 +29,10 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->user()->status === 0){
+            return $this->error(route('website.index'),'操作失败！您的邮箱还未验证，验证后才能进行该操作！');
+        }
+        
         $question_id = $request->input('question_id');
         $question = Question::findOrNew($question_id);
 
@@ -103,8 +107,8 @@ class AnswerController extends Controller
             abort(404);
         }
 
-        if($answer->user_id !== $request->user()->id){
-            abort(401);
+        if($answer->user_id !== $request->user()->id && !$request->user()->is('admin')){
+            abort(403);
         }
 
         return view("theme::question.edit_answer")->with('answer',$answer);
@@ -119,8 +123,8 @@ class AnswerController extends Controller
             abort(404);
         }
 
-        if($answer->user_id !== $request->user()->id){
-            abort(401);
+        if($answer->user_id !== $request->user()->id && !$request->user()->is('admin')){
+            abort(403);
         }
 
         $request->flash();
@@ -131,7 +135,7 @@ class AnswerController extends Controller
 
         $answer->save();
 
-        return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答编辑成功");
+        return $this->success(route('ask.answer.detail',['question_id'=>$answer->question_id,'id'=>$answer->id]),"回答编辑成功");
 
     }
 
@@ -144,7 +148,7 @@ class AnswerController extends Controller
         }
 
         if($request->user()->id !== $answer->question->user_id){
-            abort(401);
+            abort(403);
         }
 
         DB::beginTransaction();

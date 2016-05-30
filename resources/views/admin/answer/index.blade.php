@@ -74,7 +74,7 @@
                                         <td><span class="label @if($answer->status===0) label-danger @elseif($answer->status===1) label-warning @else label-success @endif">{{ trans_common_status($answer->status) }}</span> </td>
                                         <td>
                                             <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-default" target="_blank" href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
                                             </div>
                                         </td>
                                     </tr>

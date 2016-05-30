@@ -37,7 +37,7 @@
                     <div class="post-opt mt-10">
                         <ul class="list-inline">
                             <li><a class="comments"  data-toggle="collapse"  href="#comments-question-{{ $question->id }}" aria-expanded="false" aria-controls="comment-{{ $question->id }}"><i class="fa fa-comment-o"></i> {{ $question->comments }} 条评论</a></li>
-                            @if($question->status!==2 && Auth()->check() && (Auth()->user()->id === $question->user_id) )
+                            @if($question->status !== 2 && Auth()->check() && (Auth()->user()->id === $question->user_id  || Auth()->user()->is('admin')) )
                             <li><a href="{{ route('ask.question.edit',['id'=>$question->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="补充细节，以得到更准确的答案"><i class="fa fa-edit"></i> 编辑</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#appendReward"  ><i class="fa fa-database"></i> 追加悬赏</a></li>
                             @endif
@@ -137,10 +137,10 @@
                             <ul class="list-inline mb-20">
                                 <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
                                 @if(Auth()->check())
-                                    @if($question->status!==2 &&  Auth()->user()->id === $answer->user_id)
+                                    @if($question->status!==2 &&  (Auth()->user()->id === $answer->user_id  || Auth()->user()->is('admin')) )
                                     <li><a href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="继续完善回答内容"><i class="fa fa-edit"></i> 编辑</a></li>
                                     @endif
-                                    @if($question->status!==2 &&  Auth()->user()->id === $question->user_id)
+                                    @if($question->status!==2 &&  ( Auth()->user()->id === $question->user_id || Auth()->user()->is('admin') ))
                                     <li><a href="#" class="adopt-answer" data-toggle="modal" data-target="#adoptAnswer" data-answer_id="{{ $answer->id }}" data-answer_content="{{ str_limit($answer->content,200) }}"><i class="fa fa-check-square-o"></i> 采纳为最佳答案</a></li>
                                     @endif
                                 @endif

@@ -30,23 +30,10 @@ class IndexController extends Controller
      */
     public function index()
     {
-       // echo intval(str_shuffle('0123456789'));
-        $setting = Setting()->get('website.name');
-      //  print_r($setting);
-//        $data = ['email'=>'sky_php@qq.com', 'name'=>'sky_php', 'uid'=>3, 'activationcode'=>'asdfassssssss'];
-//
-//        Mail::queue('emails.validate', $data, function($message) use ($data)
-//        {
-//            $message->to($data['email'], $data['name'])->subject('请验证您在Tipask问答网注册的邮箱！');
-//        });
-
-
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();
 
-
         /*推荐内容*/
-
         $recommendItems= Cache::remember('recommend_items',10,function() {
             return Recommendation::where('status','>',0)->orderBy('sort','asc')->orderBy('updated_at','desc')->take(11)->get();
         });

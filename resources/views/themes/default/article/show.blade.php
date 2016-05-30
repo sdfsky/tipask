@@ -32,7 +32,7 @@
                                 <i class="fa fa-clock-o"></i>
                                 发表于 {{ timestamp_format($article->created_at) }}
                             </li>
-                            @if($article->status!==2 && Auth()->check() && (Auth()->user()->id === $article->user_id) )
+                            @if($article->status !== 2 && Auth()->check() && (Auth()->user()->id === $article->user_id || Auth()->user()->is('admin') ) )
                             <li><a href="{{ route('blog.article.edit',['id'=>$article->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="进一步完善文章内容"><i class="fa fa-edit"></i> 编辑</a></li>
                             @endif
                         </ul>

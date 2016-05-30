@@ -234,11 +234,12 @@ Route::Group(['namespace'=>'Shop'],function(){
 
 
 /*后台管理部分处理*/
-Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],function(){
+Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','auth.admin']],function(){
 
 
     /*用户登陆*/
     Route::match(['get','post'],'login',['as'=>'admin.account.login','uses'=>'AccountController@login']);
+
 
     /*用户退出*/
     Route::get('logout',['as'=>'admin.account.logout','uses'=>'AccountController@logout']);
