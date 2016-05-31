@@ -47,26 +47,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="" class="control-label col-sm-2">短信通知</label>
-                        <div class="col-sm-8">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="invite" id="invite" type="checkbox" checked=""> 当我的提问有了新回答时
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="invite" id="invite" type="checkbox" checked=""> 当我的回答被采纳时
-                                </label>
-                            </div>
-                            <button class="btn btn-xl btn-primary notify-sub mt-20">提交</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
