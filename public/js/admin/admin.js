@@ -703,4 +703,4 @@ function _init() {
     };
 }(jQuery));
 
-var push_site_url = "http://www.newtipask.com/sync?";
+var push_site_url = "http://www.tipask.com/sync?";
