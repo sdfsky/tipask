@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         /*添加管理员账号*/
 
         DB::table('users')->insert([
-            array('id' => '1','name' => 'admin','email' => 'admin@tipask.com','password' => '$2y$10$.HnDHoHChoedAnpx6dyaleTEv/YS9yFyyt8np.EnkYoGtnNRrOlPm','status' => '1','created_at' => '2016-02-16 17:53:37','updated_at' => '2016-05-22 22:29:45')
+            ['id' => '1','name' => 'admin','email' => 'admin@tipask.com','password' => '$2y$10$.HnDHoHChoedAnpx6dyaleTEv/YS9yFyyt8np.EnkYoGtnNRrOlPm','status' => '1','created_at' => '2016-02-16 17:53:37','updated_at' => '2016-05-22 22:29:45']
         ]);
 
         DB::table('user_data')->insert([
@@ -42,9 +42,14 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('role_user')->insert([
-            array('id' => '1','role_id' => '1','user_id' => '1','created_at' => '2016-03-29 15:33:02','updated_at' => '2016-03-29 15:33:02')
+            ['id' => '1','role_id' => '1','user_id' => '1','created_at' => '2016-03-29 15:33:02','updated_at' => '2016-03-29 15:33:02'],
         ]);
 
+
+        /*友情连接*/
+        DB::table('friendship_links')->insert([
+            ['id' => '1','name' => 'tipask问答网','slogan' => '国内最好PHP开源的问答系统','url' => 'http://wenda.tipask.com','sort' => '1','status' => '1','created_at' => '2016-05-10 18:25:54','updated_at' => '2016-05-10 18:28:05'],
+        ]);
 
 
         /*系统默认配置*/
