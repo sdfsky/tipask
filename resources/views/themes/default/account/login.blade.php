@@ -13,7 +13,7 @@
                 <img src="{{ asset('/css/default/login-logo.png') }}" alt="SegmentFault">
             </a>
         </h1>
-        <p class="description text-muted">欢迎加入最专业站长问答社区</p>
+        <p class="description text-muted">{{ Setting()->get('register_title','欢迎加入Tipask问答社区') }}</p>
     </div>
     <div class="col-md-6 col-md-offset-3 bg-white login-wrap">
         @if ( session('message') )
@@ -39,6 +39,15 @@
                     @if ($errors->first('password'))
                     <span class="help-block">{{ $errors->first('password') }}</span>
                     @endif
+                </div>
+
+                <div class="form-group @if ($errors->first('captcha')) has-error @endif">
+                    <label for="captcha" class="required">验证码</label>
+                    <input type="text" class="form-control" id="captcha" name="captcha" required="" placeholder="请输入下方的验证码">
+                    @if ($errors->first('captcha'))
+                        <span class="help-block">{{ $errors->first('captcha') }}</span>
+                    @endif
+                    <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
                 </div>
 
             <div class="form-group clearfix">

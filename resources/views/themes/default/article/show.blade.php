@@ -113,9 +113,9 @@
                 <ol class="widget-top10">
                     @foreach($topUsers as $index => $topUser)
                         <li class="text-muted">
-                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topUser->user_id.'_middle'])}}">
-                            <a href="{{ route('auth.space.index',['user_id'=>$topUser->user_id]) }}" class="ellipsis">{{ $topUser->user->name }}</a>
-                            <span class="text-muted pull-right">{{ $topUser->articles }} 文章</span>
+                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topUser['id'].'_middle'])}}">
+                            <a href="{{ route('auth.space.index',['user_id'=>$topUser['id']]) }}" class="ellipsis">{{ $topUser['name'] }}</a>
+                            <span class="text-muted pull-right">{{ $topUser['articles'] }} 文章</span>
                         </li>
                     @endforeach
 

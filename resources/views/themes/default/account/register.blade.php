@@ -13,7 +13,7 @@
                 <img src="{{ asset('/css/default/login-logo.png') }}" alt="Tipask">
             </a>
         </h1>
-        <p class="description text-muted">欢迎加入最专业站长问答社区</p>
+        <p class="description text-muted">{{ Setting()->get('register_title','欢迎加入Tipask问答社区') }}</p>
     </div>
     <div class="col-md-6 col-md-offset-3 bg-white login-wrap">
         <h1 class="h4 text-center text-muted login-title">创建新账号</h1>
@@ -45,7 +45,7 @@
                 @endif
             </div>
             <div class="form-group">
-                同意并接受<a href="javascript:;" target="_blank" data-toggle="modal" data-target=".bs-example-modal-lg">《服务条款》</a>
+                同意并接受 <a href="#" target="_blank" data-toggle="modal" data-target="#register_license_modal">《服务条款》</a>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block btn-lg">注册</button>
@@ -61,29 +61,23 @@
         |
         <a href="{{ route('auth.user.forgetPassword') }}">找回密码</a>
     </div>
-    <div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade " id="register_license_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <h2>使用规则</h2>
-                <ol>
-                    <li>用户注册成功后，Tipask 将给予每个用户一个用户帐号及相应的密码，该用户帐号和密码由用户负责保管；用户应当对以其用户帐号进行的所有活动和事件负法律责任。</li>
-                    <li>用户须对在 Tipask 的注册信息的真实性、合法性、有效性承担全部责任，用户不得冒充他人；不得利用他人的名义发布任何信息；不得恶意使用注册帐户导致其他用户误认；否则 Tipask 有权立即停止提供服务，收回其帐号并由用户独自承担由此而产生的一切法律责任。</li>
-                    <li>用户不得使用 Tipask 服务发送或传播敏感信息和违反国家法律制度的信息，包括但不限于下列信息:
-                        <ul>
-                            <li>反对宪法所确定的基本原则的；</li>
-                            <li>危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；</li>
-                            <li>损害国家荣誉和利益的；</li>
-                            <li>煽动民族仇恨、民族歧视，破坏民族团结的；</li>
-                            <li>破坏国家宗教政策，宣扬邪教和封建迷信的；</li>
-                            <li>散布谣言，扰乱社会秩序，破坏社会稳定的；</li>
-                            <li>散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；</li>
-                            <li>侮辱或者诽谤他人，侵害他人合法权益的；</li>
-                            <li>含有法律、行政法规禁止的其他内容的。</li>
-                        </ul>
-                    </li>
-                    <li>Tipask 有权对用户使用 Tipask 的情况进行审查和监督，如用户在使用 Tipask 时违反任何上述规定，Tipask 或其授权的人有权要求用户改正或直接采取一切必要的措施（包括但不限于删除用户张贴的内容、暂停或终止用户使用 Tipask 的权利）以减轻用户不当行为造成的影响。</li>
-                    <li>盗取他人用户帐号或利用网络通讯骚扰他人，均属于非法行为。用户不得采用测试、欺骗等任何非法手段，盗取其他用户的帐号和对他人进行骚扰。 </li>
-                </ol>
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center">{{ Setting()->get('website_name') }}服务条款</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="height: 450px;overflow:scroll;">
+                        {!! Setting()->get('register_license','') !!}
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
             </div>
         </div>
     </div>

@@ -90,7 +90,7 @@ class AnswerController extends Controller
 
             /*记录积分*/
             if($answer->status ==1 && $this->credit($request->user()->id,'answer',Setting()->get('coins_answer'),Setting()->get('credits_answer'),$question->id,$question->title)){
-                $message = '回答成功! 经验 '.integer_string(Setting()->get('credits_answer')) .' , 金币 '.integer_string(Setting()->get('coins_answer'));
+                $message = '回答成功! '.get_credit_message(Setting()->get('credits_answer'),Setting()->get('coins_answer'));
                 return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),$message);
             }
         }
@@ -169,7 +169,7 @@ class AnswerController extends Controller
 
             DB::commit();
 
-            return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答采纳成功!");
+            return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答采纳成功!".get_credit_message(Setting()->get('credits_adopted'),Setting()->get('coins_adopted')));
 
         }catch (\Exception $e) {
             DB::rollBack();

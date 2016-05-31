@@ -10,6 +10,7 @@ use App\Models\Goods;
 use App\Models\Notice;
 use App\Models\Question;
 use App\Models\Recommendation;
+use App\Models\Setting;
 use App\Models\Tag;
 use App\Models\Taggable;
 use App\Models\User;
@@ -34,52 +35,52 @@ class IndexController extends Controller
         $hotTags =  Taggable::globalHotTags();
 
         /*推荐内容*/
-        $recommendItems= Cache::remember('recommend_items',10,function() {
+        $recommendItems= Cache::remember('recommend_items',Setting()->get('website_cache_time',1),function() {
             return Recommendation::where('status','>',0)->orderBy('sort','asc')->orderBy('updated_at','desc')->take(11)->get();
         });
 
         /*热门专家*/
-        $hotExperts = Cache::remember('hot_experts',10,function(){
+        $hotExperts = Cache::remember('hot_experts',Setting()->get('website_cache_time',1),function(){
             return  UserData::hotExperts(8);
         });
 
 
         /*热门问题*/
-        $hotQuestions = Cache::remember('hot_questions',10,function() {
+        $hotQuestions = Cache::remember('hot_questions',Setting()->get('website_cache_time',1),function() {
             return  Question::hottest(8);
         });
 
         /*悬赏问题*/
-        $rewardQuestions = Cache::remember('reward_questions',10,function() {
+        $rewardQuestions = Cache::remember('reward_questions',Setting()->get('website_cache_time',1),function() {
             return  Question::reward(8);
         });
 
         /*热门文章*/
-        $hotArticles = Cache::remember('hot_articles',10,function() {
+        $hotArticles = Cache::remember('hot_articles',Setting()->get('website_cache_time',1),function() {
             return  Article::hottest(8);
         });
 
         /*最新文章*/
-        $newestArticles = Cache::remember('newest_articles',10,function() {
+        $newestArticles = Cache::remember('newest_articles',Setting()->get('website_cache_time',1),function() {
             return  Article::newest(8);
         });
 
 
         /*最新公告*/
-        $newestNotices = Cache::remember('newest_notices',10,function() {
+        $newestNotices = Cache::remember('newest_notices',Setting()->get('website_cache_time',1),function() {
             return  Notice::where('status','>','0')->orderBy('updated_at','DESC')->take(8)->get();
         });
 
 
         /*财富榜*/
 
-        $topCoinUsers = Cache::remember('top_coin_users',10,function() {
+        $topCoinUsers = Cache::remember('top_coin_users',Setting()->get('website_cache_time',1),function() {
             return  UserData::top('coins',8);
         });
 
         /*友情链接*/
 
-        $friendshipLinks = Cache::remember('friendship_links',10,function() {
+        $friendshipLinks = Cache::remember('friendship_links',Setting()->get('website_cache_time',1),function() {
             return  FriendshipLink::where('status','=',1)->orderBy('sort','asc')->orderBy('created_at','asc')->take(50)->get();
         });
 

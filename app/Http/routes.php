@@ -279,8 +279,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*积分设置*/
     Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
 
-
-
     /*问题删除*/
     Route::post('question/destroy',['as'=>'admin.question.destroy','uses'=>'QuestionController@destroy']);
     /*问题审核*/

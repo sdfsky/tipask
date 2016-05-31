@@ -55,7 +55,7 @@
 
 
                 {{--最佳答案--}}
-                @if($question->status===2)
+                @if($question->status===2 && $bestAnswer)
                 <div class="best-answer mt-10">
                     <div class="trophy-title">
                         <h3>

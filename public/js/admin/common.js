@@ -54,6 +54,48 @@ $(function () {
 });
 
 
+/*编辑器toolbar全局配置*/
+var ask_editor_options = {
+    toolbar: [
+        ['style', ['bold', 'clear']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link', 'picture', 'hr']],
+        ['view', ['fullscreen']]
+    ],
+    codemirror: {
+        mode: 'text/html',
+        htmlMode: true,
+        lineNumbers: true,
+        theme: 'monokai'
+    }
+};
+
+/**
+ * 编辑器图片图片文件方式上传
+ * @param file
+ * @param editor
+ * @param welEditable
+ */
+function upload_editor_image(file,editorId,token){
+    data = new FormData();
+    data.append("_token",token);
+    data.append("file", file);
+    $.ajax({
+        data: data,
+        type: "POST",
+        dataType : 'text',
+        url: site_url+"/image/upload",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(url) {
+            console.log(url);
+            $('#'+editorId).summernote('editor.insertImage', url);
+        }
+    });
+}
+
+
 /*删除确认*/
 function confirm_delete(message){
     if(!confirm(message)){

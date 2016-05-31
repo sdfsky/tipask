@@ -69,13 +69,13 @@
                 <ul class="list-unstyled">
                     @foreach($hotUsers as $hotUser)
                     <li class="media  widget-user-item ">
-                        <a href="{{ route('auth.space.index',['user_id'=>$hotUser->id]) }}" class="user-card pull-left" target="_blank">
-                            <img class="avatar-50"  src="{{ route('website.image.avatar',['avatar_name'=>$hotUser->id.'_middle']) }}" alt="{{ $hotUser->name }}"></a>
+                        <a href="{{ route('auth.space.index',['user_id'=>$hotUser['id']]) }}" class="user-card pull-left" target="_blank">
+                            <img class="avatar-50"  src="{{ route('website.image.avatar',['avatar_name'=>$hotUser['id'].'_middle']) }}" alt="{{ $hotUser->name }}"></a>
                         </a>
                         <div class="media-object">
-                            <strong><a href="/blog/dongoer">{{ $hotUser->name }}</a></strong>
+                            <strong><a href="{{ route('auth.space.index',['user_id'=>$hotUser['id']]) }}">{{ $hotUser['name'] }}</a></strong>
 
-                            <p class="text-muted"> {{ $hotUser->articles }} 篇文章，{{ $hotUser->supports }} 赞同</p>
+                            <p class="text-muted"> {{ $hotUser['articles'] }} 篇文章，{{ $hotUser['supports'] }} 赞同</p>
                         </div>
                     </li>
                     @endforeach

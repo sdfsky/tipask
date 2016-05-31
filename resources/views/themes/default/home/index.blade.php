@@ -166,9 +166,9 @@
                 <ol class="widget-top10">
                     @foreach($topCoinUsers as $index => $topCoinUser)
                     <li class="text-muted">
-                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser->user_id.'_middle'])}}">
-                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser->user_id]) }}" class="ellipsis">{{ $topCoinUser->user->name }}</a>
-                        <span class="text-muted pull-right">{{ $topCoinUser->coins }} 金币</span>
+                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser['id'].'_middle'])}}">
+                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser['id']]) }}" class="ellipsis">{{ $topCoinUser['name'] }}</a>
+                        <span class="text-muted pull-right">{{ $topCoinUser['coins'] }} 金币</span>
                     </li>
                     @endforeach
 

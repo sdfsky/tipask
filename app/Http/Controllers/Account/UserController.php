@@ -37,7 +37,7 @@ class UserController extends Controller
             $this->validate($request, [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
-//                'captcha' => 'required|captcha'
+                'captcha' => 'required|captcha'
             ]);
 
             /*只接收email和password的值*/
@@ -76,6 +76,11 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
+
+        /*注册是否开启*/
+        if(!Setting()->get('register_open',1)){
+            return $this->showErrorMsg(route('website.index'),'管理员已关闭了网站的注册功能！');
+        }
 
         /*注册表单处理*/
         if($request->isMethod('post'))

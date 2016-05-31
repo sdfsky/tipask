@@ -57,6 +57,13 @@
                             </select>
                         </div>
 
+                        <div class="form-group @if ($errors->has('website_admin_email')) has-error @endif">
+                            <label for="website_admin_email">系统缓存时间（分钟）</label>
+                            <span class="text-muted">(设置范围是1-8640，缓存相关数据，包括首页缓存、积分排行榜等)</span>
+                            <input type="text" name="website_cache_time" class="form-control " placeholder="系统缓存时间" value="{{ old('website_cache_time',Setting()->get('website_cache_time')) }}">
+                            @if ($errors->has('website_cache_time')) <p class="help-block">{{ $errors->first('website_cache_time') }}</p> @endif
+                        </div>
+
                         <div class="form-group @if ($errors->has('website_header')) has-error @endif">
                             <label for="website_footer">页面头部扩展</label>
                             <span class="text-muted">(扩展头部信息，例如meta标签等)</span>
