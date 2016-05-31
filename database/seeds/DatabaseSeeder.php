@@ -54,11 +54,13 @@ class DatabaseSeeder extends Seeder
 
         /*系统默认配置*/
         DB::table('settings')->insert([
+            ['name' => 'coins_write_article','value' => '0'],
             ['name' => 'coins_adopted','value' => '0'],
             ['name' => 'coins_answer','value' => '0'],
             ['name' => 'coins_ask','value' => '0'],
             ['name' => 'coins_login','value' => '0'],
             ['name' => 'coins_register','value' => '20'],
+            ['name' => 'credits_write_article','value' => '0'],
             ['name' => 'credits_adopted','value' => '20'],
             ['name' => 'credits_answer','value' => '10'],
             ['name' => 'credits_ask','value' => '0'],
@@ -73,6 +75,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'website_footer','value' => ''],
             ['name' => 'website_header','value' => ''],
             ['name' => 'website_icp','value' => ''],
+            ['name' => 'website_cache_time','value' => '1'],
             ['name' => 'website_name','value' => 'Tipask问答网'],
             ['name' => 'website_url','value' => '']
         ]);
