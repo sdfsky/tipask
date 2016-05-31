@@ -141,11 +141,10 @@
         <div class="text-center">
             <a href="{{ route('website.index') }}">{{ Setting()->get('website_name') }}</a><span class="span-line">|</span>
             <a href="mailto:tipask@qq.com" target="_blank">联系我们</a><span class="span-line">|</span>
-            <a href="http://help.tipask.com/index/help.html" target="_blank">使用帮助</a><span class="span-line">|</span>
             <a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
         </div>
         <div class="copyright mt-10">
-            Powered By <a href="http://www.tipask.com" target="_blank">Tipask</a> V3.0 Dev ©2009-{{ gmdate('Y') }} tipask.com
+            Powered By <a href="http://www.tipask.com" target="_blank">{{ Config('tipask.version') }}</a> Release {{ config('tipask.release') }} ©2009-{{ gmdate('Y') }} tipask.com
         </div>
     </div>
 </footer>

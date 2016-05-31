@@ -109,7 +109,7 @@
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                     <tr>
-                                        <td>软件版本：Tipask3.0Dev Release 20160525 [<a href="http://www.tipask.com/download.html">查看最新版本</a>]</td>
+                                        <td>软件版本：{{ config('tipask.version') }} Release {{ config('tipask.release') }} [<a href="http://www.tipask.com/download.html">查看最新版本</a>]</td>
                                     </tr>
                                     <tr>
                                         <td>服务器域名： {{ $systemInfo['hostName'] }}</td>
