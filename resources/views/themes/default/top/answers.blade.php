@@ -32,7 +32,7 @@
                             <div class="media-body">
                                 <h4 class="media-heading">
                                     <a href="{{ route('auth.space.index',['id'=>$user['id']]) }}">{{ $user['name'] }}</a>
-                                    @if($user['authentication_status'])<span class="text-gold"><i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i></span> @endif
+                                    @if($user['authentication_status']===1)<span class="text-gold"><i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i></span> @endif
 
                                 </h4>
                                 <p class="text-muted">{{ $user['title'] }}</p>
