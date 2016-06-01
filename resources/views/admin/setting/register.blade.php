@@ -24,8 +24,8 @@
                                 <label for="website_url">允许新用户注册</label>
                                 <span class="text-muted">(若不需要新用户注册，可以到用户管理里面手动添加用户	)</span>
                                 <div class="radio">
-                                    <label><input type="radio" name="register_open" value="1" @if(Setting()->get('register_open') == 1) checked @endif > 允许 </label>
-                                    <label class="ml-20"><input type="radio" name="register_open" value="0" @if(Setting()->get('register_open') != 1) checked @endif > 拒绝 </label>
+                                    <label><input type="radio" name="register_open" value="1" @if(Setting()->get('register_open','q') == 1) checked @endif > 允许 </label>
+                                    <label class="ml-20"><input type="radio" name="register_open" value="0" @if(Setting()->get('register_open','1') != 1) checked @endif > 拒绝 </label>
                                 </div>
                             </div>
 

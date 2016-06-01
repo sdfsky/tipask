@@ -16,18 +16,18 @@ class Setting extends Model
     public static function loadAll()
     {
         $settings = self::all();
-        print_r($settings);
+      //  print_r($settings);
     }
 
 
     /*查询某个配置信息*/
-    public static function get($name)
+    public static function get($name,$default='')
     {
         $setting =  self::where('name','=',$name)->first();
         if($setting){
             return $setting->value;
         }
-        return '';
+        return $default;
     }
 
 
