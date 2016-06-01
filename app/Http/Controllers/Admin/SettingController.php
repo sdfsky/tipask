@@ -16,10 +16,10 @@ class SettingController extends AdminController
         $validateRules = [
             'website_name' => 'required|max:128',
             'website_url' => 'required|active_url',
-            'website_icp' => 'max:128',
+            'website_icp' => 'sometimes|max:128',
+            'website_cache_time' => 'sometimes|digits_between:0,8640',
             'website_admin_email' => 'required|email',
         ];
-
 
         $themes = [];
         /*获取模板主题目录下主题列表*/
@@ -124,6 +124,19 @@ class SettingController extends AdminController
     /*注册策略设置*/
     public function register(Request $request)
     {
+        $validateRules = [];
+        if($request->isMethod('post')){
+            $this->validate($request,$validateRules);
+            $data = $request->except('_token');
+            foreach($data as $name=>$value){
+                Setting()->set($name,$value);
+            }
+            Setting()->clearAll();
+
+            return $this->success(route('admin.setting.register'),'注册设置成功');
+
+        }
+
         return view('admin.setting.register');
 
     }
@@ -158,8 +171,5 @@ class SettingController extends AdminController
 
         return view('admin.setting.credits');
     }
-
-
-
 
 }

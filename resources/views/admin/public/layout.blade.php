@@ -18,6 +18,8 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="{{ asset('/css/admin/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" />
 
+    @yield('css')
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,12 +31,17 @@
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('admin.index.index') }}" class="logo">
+
+        <div class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>T</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Tipask 管理后台</b></span>
-        </a>
+            <span class="logo-lg text-center">
+                <a class="navbar-brand admin_logo" href="{{ route('admin.index.index') }}"></a>
+            </span>
+
+        </div>
+
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->

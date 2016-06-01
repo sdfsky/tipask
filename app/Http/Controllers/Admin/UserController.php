@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Services\Registrar;
 use Bican\Roles\Models\Role;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,10 @@ class UserController extends AdminController
 {
     /*权限验证规则*/
     protected $validateRules = [
-        'name' => 'required|max:100|unique:users',
+        'name' => 'required|max:100',
+        'email' => 'required|email|max:255|unique:users',
         'password' => 'required|min:6|max:20',
     ];
-
     /**
      * 用户管理首页
      */
@@ -54,15 +55,27 @@ class UserController extends AdminController
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = Role::orderby('name','asc')->get();
+
+        return view('admin.user.create')->with(compact('roles'));
     }
 
     /**
      * 保存创建用户信息
      */
-    public function store(Request $request)
+    public function store(Request $request,Registrar $registrar)
     {
 
+        $request->flash();
+        $this->validate($request,$this->validateRules);
+
+        $formData = $request->all();
+        $formData['status'] = 1;
+        $formData['visit_ip'] = $request->getClientIp();
+
+        $user = $registrar->create($formData);
+        $user->attachRole($request->input('role_id'));
+        return $this->success(route('admin.user.index'),'用户添加成功！');
 
     }
 

@@ -55,29 +55,29 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="website_url">是否允许发站外URL</label>
-                                <span class="text-muted">(是否允许内容包含URL，合理的设置可以有效的减少广告帖的量)</span>
-                                <div class="radio">
-                                    <label><input type="radio" name="allow_outer_url" value="3" @if(Setting()->get('allow_outer_url') == 3) checked @endif > 禁止发表 </label>
-                                    <label class="ml-20"><input type="radio" name="allow_outer_url" value="2" @if(Setting()->get('allow_outer_url') == 2) checked @endif> 允许发表，但发布的内容进入审核 </label>
-                                    <label class="ml-20"><input type="radio" name="allow_outer_url" value="1" @if(Setting()->get('allow_outer_url') == 1) checked @endif> 允许发表，但不解析 </label>
-                                    <label class="ml-20"><input type="radio" name="allow_outer_url" value="0" @if(Setting()->get('allow_outer_url') == 0) checked @endif> 允许发表，并正常解析 </label>
-                                </div>
-                            </div>
-                            <hr />
-                            <h4>验证码策略</h4>
-                            <div class="form-group">
-                                <label for="website_url">启用验证码</label>
-                                <span class="text-muted">(验证码可以避免恶意注册及恶意灌水，请选择需要打开验证码的操作)</span>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" name="code_register" value="1" @if(Setting()->get('code_register') == 1) checked @endif > 注册 </label>
-                                    <label><input type="checkbox" name="code_login" value="1" @if(Setting()->get('code_login') == 1) checked @endif > 登录 </label>
-                                    <label><input type="checkbox" name="code_question" value="1" @if(Setting()->get('code_question') == 1) checked @endif > 提问 </label>
-                                    <label><input type="checkbox" name="code_answer" value="1" @if(Setting()->get('code_answer') == 1) checked @endif > 回答 </label>
-                                    <label><input type="checkbox" name="code_article" value="1" @if(Setting()->get('code_article') == 1) checked @endif > 撰写文章 </label>
-                                </div>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="website_url">是否允许发站外URL</label>--}}
+                                {{--<span class="text-muted">(是否允许内容包含URL，合理的设置可以有效的减少广告帖的量)</span>--}}
+                                {{--<div class="radio">--}}
+                                    {{--<label><input type="radio" name="allow_outer_url" value="3" @if(Setting()->get('allow_outer_url') == 3) checked @endif > 禁止发表 </label>--}}
+                                    {{--<label class="ml-20"><input type="radio" name="allow_outer_url" value="2" @if(Setting()->get('allow_outer_url') == 2) checked @endif> 允许发表，但发布的内容进入审核 </label>--}}
+                                    {{--<label class="ml-20"><input type="radio" name="allow_outer_url" value="1" @if(Setting()->get('allow_outer_url') == 1) checked @endif> 允许发表，但不解析 </label>--}}
+                                    {{--<label class="ml-20"><input type="radio" name="allow_outer_url" value="0" @if(Setting()->get('allow_outer_url') == 0) checked @endif> 允许发表，并正常解析 </label>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<hr />--}}
+                            {{--<h4>验证码策略</h4>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="website_url">启用验证码</label>--}}
+                                {{--<span class="text-muted">(验证码可以避免恶意注册及恶意灌水，请选择需要打开验证码的操作)</span>--}}
+                                {{--<div class="checkbox">--}}
+                                    {{--<label><input type="checkbox" name="code_register" value="1" @if(Setting()->get('code_register') == 1) checked @endif > 注册 </label>--}}
+                                    {{--<label><input type="checkbox" name="code_login" value="1" @if(Setting()->get('code_login') == 1) checked @endif > 登录 </label>--}}
+                                    {{--<label><input type="checkbox" name="code_question" value="1" @if(Setting()->get('code_question') == 1) checked @endif > 提问 </label>--}}
+                                    {{--<label><input type="checkbox" name="code_answer" value="1" @if(Setting()->get('code_answer') == 1) checked @endif > 回答 </label>--}}
+                                    {{--<label><input type="checkbox" name="code_article" value="1" @if(Setting()->get('code_article') == 1) checked @endif > 撰写文章 </label>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                         </div>
                         <div class="box-footer">

@@ -1978,7 +1978,7 @@ a:focus {
     background: rgba(0, 0, 0, 0.2);
 }
 .info-box-content {
-    padding: 5px 10px;
+    padding: 20px 10px;
     margin-left: 90px;
 }
 .info-box-number {
@@ -4337,6 +4337,16 @@ fieldset[disabled] .btn-vk.active {
     text-decoration: none;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+.admin_logo {
+    display: block;
+    height: 50px;
+    width: 120px;
+    margin-left: 30px;
+    background-image: url("./img/logo.png");
+    background-size: 120px 50px;
+    background-repeat: no-repeat;
 }
 
 

@@ -32,7 +32,7 @@
                                 <i class="fa fa-clock-o"></i>
                                 发表于 {{ timestamp_format($article->created_at) }}
                             </li>
-                            @if($article->status!==2 && Auth()->check() && (Auth()->user()->id === $article->user_id) )
+                            @if($article->status !== 2 && Auth()->check() && (Auth()->user()->id === $article->user_id || Auth()->user()->is('admin') ) )
                             <li><a href="{{ route('blog.article.edit',['id'=>$article->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="进一步完善文章内容"><i class="fa fa-edit"></i> 编辑</a></li>
                             @endif
                         </ul>
@@ -113,9 +113,9 @@
                 <ol class="widget-top10">
                     @foreach($topUsers as $index => $topUser)
                         <li class="text-muted">
-                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topUser->user_id.'_middle'])}}">
-                            <a href="{{ route('auth.space.index',['user_id'=>$topUser->user_id]) }}" class="ellipsis">{{ $topUser->user->name }}</a>
-                            <span class="text-muted pull-right">{{ $topUser->articles }} 文章</span>
+                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topUser['id'].'_middle'])}}">
+                            <a href="{{ route('auth.space.index',['user_id'=>$topUser['id']]) }}" class="ellipsis">{{ $topUser['name'] }}</a>
+                            <span class="text-muted pull-right">{{ $topUser['articles'] }} 文章</span>
                         </li>
                     @endforeach
 

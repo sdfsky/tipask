@@ -38,7 +38,7 @@ class UserData extends Model
                           ->where('users.status','>',0)->where('user_data.articles','>',0)
                           ->orderBy('user_data.articles','DESC')
                           ->orderBy('users.created_at','DESC')
-                          ->select('users.id','users.name','users.title','user_data.articles','user_data.supports')
+                          ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
                           ->take($size)->get();
         });
 
@@ -55,9 +55,25 @@ class UserData extends Model
             ->orderBy('user_data.answers','DESC')
             ->orderBy('user_data.articles','DESC')
             ->orderBy('users.updated_at','DESC')
-            ->select('users.id','users.name','users.title')
+            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
             ->take($size)->get();
     }
+
+
+    /*推荐行家*/
+    public static function hotExperts($size)
+    {
+        return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
+            ->where('users.status','>',0)
+            ->where('user_data.authentication_status','=',1)
+            ->orderBy('user_data.answers','DESC')
+            ->orderBy('user_data.articles','DESC')
+            ->orderBy('users.updated_at','DESC')
+            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
+            ->take($size)->get();
+    }
+
+
 
 
 
@@ -68,7 +84,7 @@ class UserData extends Model
         return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
             ->where('users.status','>',0)->where('user_data.articles','>',0)
             ->orderBy('user_data.coins','DESC')
-            ->select('users.id','users.name','user_data.coins')
+            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
             ->take($size)->get();
     }
 
@@ -76,9 +92,12 @@ class UserData extends Model
     /*排行榜*/
     public static function  top($type,$size)
     {
-
-        return self::orderBy($type,'desc')->orderBy('last_visit','desc')->take($size)->get();
-
+        return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
+            ->where('users.status','>',0)
+            ->orderBy('user_data.'.$type,'DESC')
+            ->orderBy('user_data.last_visit','DESC')
+            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
+            ->take($size)->get();
     }
 
 

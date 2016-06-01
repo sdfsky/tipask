@@ -14,13 +14,12 @@ $.ajaxSetup({
 
 
 /*编辑器toolbar全局配置*/
-
 var ask_editor_options = {
     toolbar: [
         ['style', ['bold', 'clear']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['insert', ['link', 'picture', 'hr']],
-        ['view', ['fullscreen', 'codeview']]
+        ['view', ['fullscreen']]
     ],
     codemirror: {
         mode: 'text/html',
@@ -305,6 +304,7 @@ function upload_editor_image(file,editorId,token){
         contentType: false,
         processData: false,
         success: function(url) {
+            console.log(url);
             $('#'+editorId).summernote('editor.insertImage', url);
         }
     });

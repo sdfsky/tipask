@@ -29,7 +29,10 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="{{ route('auth.space.index',['id'=>$user->user_id]) }}">{{ $user->user->name }}</a></h4>
+                                <h4 class="media-heading">
+                                    <a href="{{ route('auth.space.index',['id'=>$user->user_id]) }}">{{ $user->user->name }}</a>
+                                    @if($user->authentication_status)<span class="text-gold"><i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i></span> @endif
+                                </h4>
                                 <p class="text-muted">{{ $user->user->title }}</p>
                                 <p class="text-muted">{{ $user->coins }}金币 / {{ $user->supports }}赞同 / {{ $user->followers }}关注 / {{ $user->answers }}回答</p>
                             </div>

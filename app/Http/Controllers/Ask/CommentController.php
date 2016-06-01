@@ -95,7 +95,7 @@ class CommentController extends Controller
         if(!$source){
             abort(404);
         }
-        $comments = $source->comments()->simplePaginate(3);
+        $comments = $source->comments()->simplePaginate(15);
 
        return view('theme::comment.paginate')->with('comments',$comments)
                                          ->with('source_type',$source_type)

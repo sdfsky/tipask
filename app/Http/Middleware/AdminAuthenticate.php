@@ -18,11 +18,11 @@ class AdminAuthenticate
 
       //  echo $request->route()->getName();
 
-        if(!$request->user()->can('admin.account.login')){
-            abort(404);
+        if(!$request->user()->is('admin')){
+            abort(403);
         }
 
-        if(!$request->session()->get('admin.login')){
+        if(!$request->session()->get('admin.login') && $request->route()->getName() !== 'admin.account.login'){
             return redirect(route('admin.account.login'));
         }
         return $next($request);

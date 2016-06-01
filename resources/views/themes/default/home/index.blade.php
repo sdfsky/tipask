@@ -58,6 +58,24 @@
                 </div>
             </div>
 
+            <div class="widget-box clearfix">
+                <h4 class="widget-box-title">推荐行家 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
+                @foreach($hotExperts as $expert)
+                    <section class="col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$expert->id.'_big'])}}" alt="{{ $expert->name }}"></a>
+
+                            <div class="caption">
+                                <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}">{{ $expert->name }}</a></h4>
+                                <p class="text-muted text-center">{{ $expert->title }}&nbsp;</p>
+                                <p class="text-center"><a class="btn btn-primary btn-sm" href="{{ route('ask.question.create') }}?to_user_id={{ $expert->id }}">向TA提问</a></p>
+                            </div>
+                        </div>
+                    </section>
+                @endforeach
+            </div>
+
+
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
@@ -86,22 +104,6 @@
                 </div>
             </div>
 
-            <div class="widget-box clearfix">
-                <h4 class="widget-box-title">推荐行家 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
-                    @foreach($activeUsers as $activeUser)
-                        <section class="col-sm-6 col-md-3">
-                            <div class="thumbnail">
-                                <a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$activeUser->id.'_big'])}}" alt="{{ $activeUser->name }}"></a>
-
-                                <div class="caption">
-                                    <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$activeUser->id]) }}">{{ $activeUser->name }}</a></h4>
-                                    <p class="text-muted text-center">{{ $activeUser->title }}</p>
-                                    <p class="text-center"><a class="btn btn-primary btn-sm" href="{{ route('ask.question.create') }}?to_user_id={{ $activeUser->id }}">向TA提问</a></p>
-                                </div>
-                            </div>
-                        </section>
-                    @endforeach
-            </div>
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
@@ -134,7 +136,7 @@
         <div class="col-xs-12 col-md-3 side">
             <div class="side-alert alert alert-link">
                 <a href="{{ route('ask.question.create') }}" class="btn btn-warning btn-block">我要提问</a>
-                <a href="{{ route('ask.question.create') }}" class="btn btn-primary btn-block">分享经验</a>
+                <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block">分享经验</a>
             </div>
             <div class="widget-box">
                 <h4 class="widget-box-title">最新公告</h4>
@@ -164,9 +166,9 @@
                 <ol class="widget-top10">
                     @foreach($topCoinUsers as $index => $topCoinUser)
                     <li class="text-muted">
-                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser->user_id.'_middle'])}}">
-                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser->user_id]) }}" class="ellipsis">{{ $topCoinUser->user->name }}</a>
-                        <span class="text-muted pull-right">{{ $topCoinUser->coins }} 金币</span>
+                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser['id'].'_middle'])}}">
+                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser['id']]) }}" class="ellipsis">{{ $topCoinUser['name'] }}</a>
+                        <span class="text-muted pull-right">{{ $topCoinUser['coins'] }} 金币</span>
                     </li>
                     @endforeach
 

@@ -18,13 +18,6 @@ class AdminController extends Controller {
     public function __construct(Request $request){
 
 
-
-        /*管理员登陆检测*/
-      //  $this->middleware('auth.admin');
-
-       // $this->middleware('permission:'.$this->getRouter()->currentRouteName());
-
-
         /*未审核问题数*/
         $notVerifiedData['questions'] = Question::where('status','=',0)->count();
         /*未审核回答数*/
@@ -38,8 +31,6 @@ class AdminController extends Controller {
         //当前是否开启小菜单
         View::share('sidebar_collapse',Cookie::get('sidebar_collapse'));
         View::share('notVerifiedData',$notVerifiedData);
-
-
 
 
     }

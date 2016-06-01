@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 
         /*添加默认权限组*/
         DB::table('roles')->insert([
-            ['id' => '1','name' => '超级管理员','slug' => 'admin','description' => '超级管理员，具有最高权限','level'=>1,'created_at'=>'2016-02-16 09:52:13','updated_at'=>'2016-02-16 09:52:13'],
+            ['id' => '1','name' => '后台管理员','slug' => 'admin','description' => '后台管理员，具有最高权限','level'=>1,'created_at'=>'2016-02-16 09:52:13','updated_at'=>'2016-02-16 09:52:13'],
             ['id' => '2','name' => '普通会员','slug' => 'member','description' => '普通会员，不可管理后台','level'=>1,'created_at'=>'2016-02-16 09:52:13','updated_at'=>'2016-02-16 09:52:13'],
         ]);
 
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         /*添加管理员账号*/
 
         DB::table('users')->insert([
-            array('id' => '1','name' => 'admin','email' => 'admin@tipask.com','password' => '$2y$10$.HnDHoHChoedAnpx6dyaleTEv/YS9yFyyt8np.EnkYoGtnNRrOlPm','status' => '1','created_at' => '2016-02-16 17:53:37','updated_at' => '2016-05-22 22:29:45')
+            ['id' => '1','name' => 'admin','email' => 'admin@tipask.com','password' => '$2y$10$.HnDHoHChoedAnpx6dyaleTEv/YS9yFyyt8np.EnkYoGtnNRrOlPm','status' => '1','created_at' => '2016-02-16 17:53:37','updated_at' => '2016-05-22 22:29:45']
         ]);
 
         DB::table('user_data')->insert([
@@ -42,18 +42,25 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('role_user')->insert([
-            array('id' => '1','role_id' => '1','user_id' => '1','created_at' => '2016-03-29 15:33:02','updated_at' => '2016-03-29 15:33:02')
+            ['id' => '1','role_id' => '1','user_id' => '1','created_at' => '2016-03-29 15:33:02','updated_at' => '2016-03-29 15:33:02'],
         ]);
 
+
+        /*友情连接*/
+        DB::table('friendship_links')->insert([
+            ['id' => '1','name' => 'tipask问答网','slogan' => '国内最好PHP开源的问答系统','url' => 'http://wenda.tipask.com','sort' => '1','status' => '1','created_at' => '2016-05-10 18:25:54','updated_at' => '2016-05-10 18:28:05'],
+        ]);
 
 
         /*系统默认配置*/
         DB::table('settings')->insert([
+            ['name' => 'coins_write_article','value' => '0'],
             ['name' => 'coins_adopted','value' => '0'],
             ['name' => 'coins_answer','value' => '0'],
             ['name' => 'coins_ask','value' => '0'],
             ['name' => 'coins_login','value' => '0'],
             ['name' => 'coins_register','value' => '20'],
+            ['name' => 'credits_write_article','value' => '0'],
             ['name' => 'credits_adopted','value' => '20'],
             ['name' => 'credits_answer','value' => '10'],
             ['name' => 'credits_ask','value' => '0'],
@@ -68,6 +75,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'website_footer','value' => ''],
             ['name' => 'website_header','value' => ''],
             ['name' => 'website_icp','value' => ''],
+            ['name' => 'website_cache_time','value' => '1'],
             ['name' => 'website_name','value' => 'Tipask问答网'],
             ['name' => 'website_url','value' => '']
         ]);

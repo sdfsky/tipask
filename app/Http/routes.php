@@ -234,11 +234,12 @@ Route::Group(['namespace'=>'Shop'],function(){
 
 
 /*后台管理部分处理*/
-Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],function(){
+Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','auth.admin']],function(){
 
 
     /*用户登陆*/
     Route::match(['get','post'],'login',['as'=>'admin.account.login','uses'=>'AccountController@login']);
+
 
     /*用户退出*/
     Route::get('logout',['as'=>'admin.account.logout','uses'=>'AccountController@logout']);
@@ -277,8 +278,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     Route::any('setting/irrigation',['as'=>'admin.setting.irrigation','uses'=>'SettingController@irrigation']);
     /*积分设置*/
     Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
-
-
 
     /*问题删除*/
     Route::post('question/destroy',['as'=>'admin.question.destroy','uses'=>'QuestionController@destroy']);
@@ -334,6 +333,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>'auth'],func
     /*友情链接*/
     Route::resource('friendshipLink', 'FriendshipLinkController',['except' => ['show']]);
 
+    /*工具管理*/
+    Route::match(['get','post'],'clearCache',['as'=>'admin.tool.clearCache','uses'=>'ToolController@clearCache']);
 
 
 });

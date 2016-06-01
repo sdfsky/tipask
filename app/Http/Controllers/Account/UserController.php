@@ -48,7 +48,7 @@ class UserController extends Controller
             {
 
                 if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
-                    $message = '登陆成功! 经验 '.integer_string(Setting()->get('credits_login')) .' , 金币 '.integer_string(Setting()->get('coins_login'));
+                    $message = '登陆成功! '.get_credit_message(Setting()->get('credits_login'),Setting()->get('coins_login'));
                    return $this->success(route('website.index'),$message);
                 }
 
@@ -77,25 +77,34 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
+        /*注册是否开启*/
+        if(!Setting()->get('register_open',1)){
+            return $this->showErrorMsg(route('website.index'),'管理员已关闭了网站的注册功能！');
+        }
+
         /*注册表单处理*/
         if($request->isMethod('post'))
         {
             $request->flashExcept(['password','password_confirmation']);
-            $validator = $this->registrar->validator($request->all());
-            if ($validator->fails())
-            {
-                $this->throwValidationException(
-                    $request, $validator
-                );
-            }
+            /*表单数据校验*/
+            $validateRules = [
+                'name' => 'required|max:100',
+                'email' => 'required|email|max:255|unique:users',
+                'password' => 'required|confirmed|min:6|max:16',
+            ];
+
+            $this->validate($request,$validateRules);
+
             $formData = $request->all();
             $formData['status'] = 0;
             $formData['visit_ip'] = $request->getClientIp();
 
-            $this->auth->login($this->registrar->create($formData));
+            $user = $this->registrar->create($formData);
+            $user->attachRole(2); //默认注册为普通用户角色
+            $this->auth->login($user);
             $message = '注册成功!';
             if($this->credit($request->user()->id,'register',Setting()->get('coins_register'),Setting()->get('credits_register'))){
-                $message .= ' 经验 '.integer_string(Setting()->get('credits_register')) .' , 金币 '.integer_string(Setting()->get('coins_register'));
+                $message .= get_credit_message(Setting()->get('credits_register'),Setting()->get('coins_register'));
             }
 
             /*发送邮箱验证邮件*/
@@ -172,8 +181,6 @@ class UserController extends Controller
 
             $user->password = Hash::make($request->input('password'));
             $user->save();
-
-            $user->attachRole(2); //默认注册为普通用户角色
 
             EmailToken::clear($user->email,'findPassword');
 

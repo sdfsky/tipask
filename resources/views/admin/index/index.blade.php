@@ -1,322 +1,247 @@
 @extends('admin.public.layout')
 
+@section('title') 首页 @endsection
+
+
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Simple Tables
-            <small>preview of simple tables</small>
+            网站总览
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Simple</li>
-        </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-6">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Bordered Table</h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Task</th>
-                                <th>Progress</th>
-                                <th style="width: 40px">Label</th>
-                            </tr>
-                            <tr>
-                                <td>1.</td>
-                                <td>Update software</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-red">55%</span></td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Clean database</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-yellow">70%</span></td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Cron job running</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-light-blue">30%</span></td>
-                            </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>Fix and squish bugs</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-green">90%</span></td>
-                            </tr>
-                        </table>
-                    </div><!-- /.box-body -->
-                    <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>
-                </div><!-- /.box -->
-
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Condensed Full Width Table</h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <table class="table table-condensed">
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Task</th>
-                                <th>Progress</th>
-                                <th style="width: 40px">Label</th>
-                            </tr>
-                            <tr>
-                                <td>1.</td>
-                                <td>Update software</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-red">55%</span></td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Clean database</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-yellow">70%</span></td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Cron job running</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-light-blue">30%</span></td>
-                            </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>Fix and squish bugs</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-green">90%</span></td>
-                            </tr>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">注册用户数</span>
+                        <span class="info-box-number">{{ $totalUserNum }}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
             </div><!-- /.col -->
-            <div class="col-md-6">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Simple Full Width Table</h3>
-                        <div class="box-tools">
-                            <ul class="pagination pagination-sm no-margin pull-right">
-                                <li><a href="#">&laquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">&raquo;</a></li>
-                            </ul>
-                        </div>
-                    </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <table class="table">
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Task</th>
-                                <th>Progress</th>
-                                <th style="width: 40px">Label</th>
-                            </tr>
-                            <tr>
-                                <td>1.</td>
-                                <td>Update software</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-red">55%</span></td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Clean database</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-yellow">70%</span></td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Cron job running</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-light-blue">30%</span></td>
-                            </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>Fix and squish bugs</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-green">90%</span></td>
-                            </tr>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Striped Full Width Table</h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <table class="table table-striped">
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Task</th>
-                                <th>Progress</th>
-                                <th style="width: 40px">Label</th>
-                            </tr>
-                            <tr>
-                                <td>1.</td>
-                                <td>Update software</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-red">55%</span></td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Clean database</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-yellow">70%</span></td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Cron job running</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-light-blue">30%</span></td>
-                            </tr>
-                            <tr>
-                                <td>4.</td>
-                                <td>Fix and squish bugs</td>
-                                <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge bg-green">90%</span></td>
-                            </tr>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-question-circle"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">问题总数</span>
+                        <span class="info-box-number">{{ $totalQuestionNum }}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
             </div><!-- /.col -->
-        </div><!-- /.row -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-edit"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">文章总数</span>
+                        <span class="info-box-number">{{ $totalArticleNum }}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-yellow"><i class="fa fa-comment-o" aria-hidden="true"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">回答总数</span>
+                        <span class="info-box-number">{{ $totalAnswerNum }}</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+        </div>
         <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Responsive Hover Table</h3>
-                        <div class="box-tools">
-                            <div class="input-group">
-                                <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">一周用户数据报告</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-center">
+                                    <strong>一周用户趋势数据</strong>
+                                </p>
+                                <div class="chart">
+                                    <canvas id="user_chart" height="100"></canvas>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tr>
-                                <th>ID</th>
-                                <th>User</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Reason</th>
-                            </tr>
-                            <tr>
-                                <td>183</td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-success">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-primary">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-danger">Denied</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
+                    </div>
+                </div>
             </div>
         </div>
-    </section><!-- /.content -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">问答数据报告</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-center">
+                                    <strong>问题、文章、回答统计</strong>
+                                </p>
+                                <div class="chart">
+                                    <canvas id="question_chart" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">系统信息</h3>
+                    </div>
+                    <div class="box-body table-responsive">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td>软件版本：{{ config('tipask.version') }} Release {{ config('tipask.release') }} [<a href="http://www.tipask.com/download.html">查看最新版本</a>]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>服务器域名： {{ $systemInfo['hostName'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PHP版本： {{ $systemInfo['phpVersion'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>服务器端信息：{{ $systemInfo['runOS'] }}/{{ $systemInfo['serverInfo'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>最大上传限制：{{ $systemInfo['maxUploadSize'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>最大执行时间：{{ $systemInfo['maxExecutionTime'] }} seconds</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">版权申明</h3>
+                    </div>
+                    <div class="box-body table-responsive">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td>版权所有：www.tipask.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>用户协议：<a href="http://www.tipask.com/license.html" target="_blank">查看用户协议</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     @endsection
+
+@section('script')
+<script type="text/javascript" src="{{ asset('/static/js/chartjs/chartjs.js') }}"></script>
+<script type="text/javascript">
+    $(function(){
+        set_active_menu('root_menu',"{{ route('admin.index.index') }}");
+        var userChart = new Chart($("#user_chart"), {
+            type: 'line',
+            data: {
+                labels: [{!! implode(",",$userChart['labels']) !!}],
+                datasets: [
+                    {
+                    label: '注册数',
+                        backgroundColor: "rgba(51,102,102,0.8)",
+                        borderColor: "rgba(51,102,102,0.8)",
+                        fill: false,
+
+                        data: [{{ implode(",",$userChart['registerUsers']) }}]
+                    },
+                    {
+                        fill: false,
+
+                        backgroundColor: "rgba(153,51,51,0.8)",
+                        borderColor: "rgba(153,51,51,0.8)",
+
+                        label: '已审核',
+                        data: [{{ implode(",",$userChart['verifyUsers']) }}]
+                    },
+                    {
+                        fill: false,
+
+                        backgroundColor: "rgba(153,102,0,0.8)",
+                        borderColor: "rgba(153,102,0,0.8)",
+
+                        label: '行家认证',
+                        data: [{{ implode(",",$userChart['authUsers']) }}]
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+        var questionChart = new Chart($("#question_chart"), {
+            type: 'bar',
+            data: {
+                labels: [{!! implode(",",$questionChart['labels']) !!}],
+                datasets: [
+                    {
+                    label: '提问',
+                        backgroundColor: "rgba(204,102,51,0.9)",
+                        data: [{{ implode(",",$questionChart['questionRange']) }}]
+                    },
+                    {
+                        label: '回答',
+                        backgroundColor: "rgba(51,102,153,0.9)",
+                        data: [{{ implode(",",$questionChart['answerRange']) }}]
+                    },
+                    {
+                        label: '文章',
+                        backgroundColor: "rgba(0,166,90,0.9)",
+                        data: [{{ implode(",",$questionChart['articleRange']) }}]
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+    });
+</script>
+@endsection

@@ -42,7 +42,6 @@ class CommentController extends AdminController
 
         $comments = $query->orderBy('created_at','desc')->paginate(20);
 
-
         return view("admin.comment.index")->with('comments',$comments)->with('filter',$filter);
 
     }

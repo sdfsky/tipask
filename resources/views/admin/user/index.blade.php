@@ -60,6 +60,8 @@
                                 <th>用户ID</th>
                                 <th>用户名</th>
                                 <th>邮箱</th>
+                                <th>身份介绍</th>
+                                <th>地区</th>
                                 <th>注册时间</th>
                                 <th>更新时间</th>
                                 <th>状态</th>
@@ -71,6 +73,8 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->title }}</td>
+                                <td>{{ Area()->getName($user->province) }} @if($user->city>0 &&  Area()->getName($user->province)!=Area()->getName($user->city)) - {{ Area()->getName($user->city) }} @endif</td>
                                 <td>{{ $user->created_at }}</td>
                                 <td>{{ $user->updated_at }}</td>
                                 <td><span class="label @if($user->status===0) label-danger @elseif($user->status===1) label-success @endif">{{ trans_common_status($user->status) }}</span> </td>

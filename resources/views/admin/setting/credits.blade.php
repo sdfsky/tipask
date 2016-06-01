@@ -78,6 +78,16 @@
                                 </td>
                             </tr>
 
+                            <tr>
+                                <td>撰写文章获得</td>
+                                <td>
+                                    <div class="col-md-4 col-md-offset-4 @if ($errors->has('credits_write_article')) has-error @endif "><input type="text" class="form-control" name="credits_write_article" value="{{ old('credits_adopted',Setting()->get('credits_write_article')) }}" /></div>
+                                </td>
+                                <td>
+                                    <div class="col-md-4 col-md-offset-4 @if ($errors->has('coins_write_article')) has-error @endif "><input type="text" class="form-control" name="coins_write_article" value="{{ old('coins_write_article',Setting()->get('coins_write_article')) }}" /></div>
+                                </td>
+                            </tr>
+
                             </tbody>
                         </table>
 
@@ -96,6 +106,6 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    set_active_menu('global',"{{ route('admin.setting.time') }}");
+    set_active_menu('global',"{{ route('admin.setting.credits') }}");
 </script>
 @endsection

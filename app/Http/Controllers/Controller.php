@@ -41,6 +41,13 @@ abstract class Controller extends BaseController
     }
 
 
+    protected function showErrorMsg($url , $message){
+        return view('errors.error')->with(compact('url','message'));
+    }
+
+
+
+
     /**
      * 修改用户积分
      * @param $user_id 用户id

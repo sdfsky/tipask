@@ -1,27 +1,31 @@
-## Laravel PHP Framework
+Tipask 问答系统
+=============
+Tipask是一款开放源码的PHP问答系统，基于Laravel框架开发，容易扩展，具有强大的负载能力和稳定性。
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Bootstrap
+-----------------------------------
+Tipask前端全部基于Bootstrap框架，极易扩展和定制化，一套模板可以同时良好的运行在PC、平板、手机等设备上。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+第三方整合
+-----------------------------------  
+支持Redis、Memcache缓存处理，支持SendCloud邮件发送，支持Xunsearch全文检索,支持队列处理。
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+模板引擎
+-----------------------------------  
+Tipask支持多主题，基于Blade模板引擎，方便模板定制和开发。
 
-## Official Documentation
+授权协议概要
+-----------------------------------
+1、您可以在完全遵守Tipask授权许可协议的基础上，将Tipask应用于非商业用途，而不必支付费用；
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+2、未获商业授权之前，您不得将本软件用于商业用途(包括但不限于企业网站、经营性网站、以营利为目的或实现盈利的网站)；
 
-## Contributing
+3、无论您对Tipask程序代码如何修改，都必须在明显和恰当的位置宣告版权声明(网站页面页脚处的Powered by Tipask 名称和链接必须保留，而不能清除或修改)。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+官方网站
+------------------------------------
+官方地址：[www.tipask.com](http://www.tipask.com)
 
-## Security Vulnerabilities
+在线求助：[wenda.tipask.com](http://wenda.tipask.com)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+授权协议：[www.tipask.com/license.html](www.tipask.com/license.html)

@@ -108,7 +108,7 @@
         @endif
 
 
-        @if(Auth()->check() && Auth()->user()->status===0)
+        @if(Auth()->check() && Auth()->user()->status === 0)
             @if(Auth()->user()->created_at->diffInMinutes() < 5)
                 <div class="alert alert-success" role="alert">
                     一封注册验证邮件已经发到您的邮箱 {{ Auth()->user()->email }} ，请前往邮箱完成注册.<a href="javascript:void(0);" class="send-mail btn btn-default btn-xs ml-5" onclick="$('#email_validate').modal('show');">遇到问题 <i class="fa fa-question"></i></a>
@@ -141,11 +141,10 @@
         <div class="text-center">
             <a href="{{ route('website.index') }}">{{ Setting()->get('website_name') }}</a><span class="span-line">|</span>
             <a href="mailto:tipask@qq.com" target="_blank">联系我们</a><span class="span-line">|</span>
-            <a href="http://help.tipask.com/index/help.html" target="_blank">使用帮助</a><span class="span-line">|</span>
             <a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
         </div>
         <div class="copyright mt-10">
-            Powered By <a href="http://www.tipask.com" target="_blank">Tipask</a> V3.0 Dev ©2009-{{ gmdate('Y') }} tipask.com
+            Powered By <a href="http://www.tipask.com" target="_blank">{{ Config('tipask.version') }}</a> Release {{ config('tipask.release') }} ©2009-{{ gmdate('Y') }} tipask.com
         </div>
     </div>
 </footer>
@@ -159,7 +158,7 @@
                 </div>
                 <div class="modal-body clearfix">
                     <div class="alert alert-warning">
-                        为了正常使用投票、评论、关注等功能，请验证你的邮箱、激活账号
+                        为了正常使用提问、回答、撰写文章等功能，请验证你的邮箱、激活账号
                     </div>
                     <div class="mt-30 mb-30">
                         <span class="text-muted activate-label pull-left">你的注册邮箱：</span>

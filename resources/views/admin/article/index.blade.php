@@ -72,7 +72,7 @@
                                         <td><span class="label @if($article->status===0) label-danger  @else label-success @endif">{{ trans_common_status($article->status) }}</span> </td>
                                         <td>
                                             <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.article.edit',['id'=>$article->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-default" target="_blank" href="{{ route('blog.article.edit',['id'=>$article->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
                                             </div>
                                         </td>
                                     </tr>

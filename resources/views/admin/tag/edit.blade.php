@@ -1,5 +1,9 @@
 @extends('admin/public/layout')
 
+@section('css')
+    <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
+@endsection
+
 @section('title')
     编辑话题
 @endsection
@@ -20,7 +24,7 @@
                 <div class="box box-default">
                     <form role="form" name="tagForm" method="POST" enctype="multipart/form-data" action="{{ route('admin.tag.update',['id'=>$tag->id]) }}">
                         <input name="_method" type="hidden" value="PUT">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_token" id="editor_token" value="{{ csrf_token() }}">
                         <div class="box-body">
                             <div class="form-group @if ($errors->has('name')) has-error @endif">
                                 <label for="name">话题名称</label>
@@ -46,7 +50,7 @@
 
                             <div class="form-group @if ($errors->has('description')) has-error @endif">
                                 <label for="name">话题详细介绍</label>
-                                <textarea name="description" class="form-control" placeholder="话题详细介绍">{{ old('description',$tag->description) }}</textarea>
+                                <textarea name="description" id="description" class="form-control" placeholder="话题详细介绍">{{ old('description',$tag->description) }}</textarea>
                                 @if ($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif
                             </div>
 
@@ -61,8 +65,22 @@
         </div>
     </section>
 @endsection
+
 @section('script')
+    <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
-        set_active_menu('manage_content',"{{ route('admin.tag.index') }}");
+        $(function(){
+            set_active_menu('global',"{{ route('admin.tag.index') }}");
+            $('#description').summernote({
+                height: 300,
+                placeholder:true,
+                toolbar:ask_editor_options.toolbar,
+                codemirror:ask_editor_options.codemirror,
+                onImageUpload: function(files, editor, welEditable) {
+                    upload_editor_image(files[0],"description",$("#editor_token").val());
+                }
+            });
+
+        });
     </script>
 @endsection

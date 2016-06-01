@@ -17,7 +17,7 @@ class Comment extends Model
         parent::boot();
 
         /*监听创建*/
-        static::saving(function($comment){
+        static::creating(function($comment){
             /*开启状态检查*/
             if(Setting()->get('verify_comment')==1){
                 $comment->status = 0;

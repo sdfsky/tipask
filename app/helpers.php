@@ -165,6 +165,22 @@ if( ! function_exists('integer_string')){
     }
 }
 
+if( ! function_exists('get_credit_message')){
+    function get_credit_message($credits,$coins){
+        $messages = [];
+        if( $credits != 0 ){
+            $messages[] = '经验 '.integer_string($credits);
+        }
+        if( $coins != 0 ){
+            $messages[] = '金币 '.integer_string($credits);
+        }
+        return implode("，",$messages);
+    }
+}
+
+
+
+
 
 if(! function_exists('timestamp_format')){
     function timestamp_format($date_time){
