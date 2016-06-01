@@ -24,6 +24,11 @@
                         @elseif($notification->type == 'comment_user')
                             中你的评论
                         @endif
+                    @elseif(in_array($notification->type,['comment_article','comment_user']))
+                        <a href="{{ route('blog.article.detail',['id'=>$notification->source_id]) }}" target="_blank">{{ $notification->subject }}</a>
+                        @if($notification->type == 'comment_user')
+                        中你的评论
+                        @endif
                     @endif
                     <span class="text-muted ml-10">{{ timestamp_format($notification->created_at) }}</span>
 
