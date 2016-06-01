@@ -22,6 +22,10 @@ Tipask支持多主题，基于Blade模板引擎，方便模板定制和开发。
 
 3、无论您对Tipask程序代码如何修改，都必须在明显和恰当的位置宣告版权声明(网站页面页脚处的Powered by Tipask 名称和链接必须保留，而不能清除或修改)。
 
+官方网站
+------------------------------------
 官方地址：[www.tipask.com](http://www.tipask.com)
+
 在线求助：[wenda.tipask.com](http://wenda.tipask.com)
+
 授权协议：[www.tipask.com/license.html](www.tipask.com/license.html)
