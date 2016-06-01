@@ -65,9 +65,11 @@
                                         <td><input type="checkbox" name="id[]" value="{{ $comment->id }}"/></td>
                                         <td width="60%" style="height:100px;">
                                             <div style= "OVERFLOW-Y:auto;height:60px">{!! $comment->content !!}</div>
+                                            @if($comment->source()->first())
                                             来源于@if(str_contains($comment->source_type,'Question'))问题[<a href="{{ route('ask.question.detail',['id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->title }}</a>]
-                                            @elseif(str_contains($comment->source_type,'Answer'))回答[<a href="{{ route('ask.answer.detail',['question_id'=>$comment->source()->first()->question_id,'id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->question_title }}</a>]
-                                            @elseif(str_contains($comment->source_type,'Article'))文章[<a href="{{ route('blog.article.detail',['id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->title }}</a>]
+                                                    @elseif(str_contains($comment->source_type,'Answer'))回答[<a href="{{ route('ask.answer.detail',['question_id'=>$comment->source()->first()->question_id,'id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->question_title }}</a>]
+                                                    @elseif(str_contains($comment->source_type,'Article'))文章[<a href="{{ route('blog.article.detail',['id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->title }}</a>]
+                                                    @endif
                                             @endif
 
                                         </td>

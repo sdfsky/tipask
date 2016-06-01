@@ -1,10 +1,9 @@
 /**
  * Created by simon on 2015/4/22.
  */
-
+/*ajax设置项*/
 
 $(function () {
-
     $("#sliderbar_control").click(function(){
         var sidebar_collapse = 0;
         if($('body').hasClass('sidebar-collapse')){
