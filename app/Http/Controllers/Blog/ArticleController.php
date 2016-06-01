@@ -98,7 +98,7 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
 
         $article = Article::find($id);
@@ -115,6 +115,12 @@ class ArticleController extends Controller
 
         /*相关文章*/
         $relatedArticles = Article::correlations($article->tags()->lists('tag_id'));
+
+        /*设置通知为已读*/
+        if($request->user()){
+            $this->readNotifications($article->id,'article');
+        }
+
 
         return view("theme::article.show")->with('article',$article)
                                           ->with('topUsers',$topUsers)

@@ -162,7 +162,7 @@ abstract class Controller extends BaseController
     {
         $types = array_keys(Config::get('tipask.notification_types'));
         if($refer_type=='article'){
-            $types = [];
+            $types = ['comment_article'];
         }
         return Notification::where('to_user_id','=',Auth()->user()->id)->where('source_id','=',$source_id)->whereIn('type',$types)->where('is_read','=',0)->update(['is_read'=>1]);
     }
