@@ -128,13 +128,13 @@ class ProfileController extends Controller
                 $request->user()->email = $request->input('email');
                 $request->user()->status = 0;
                 $request->user()->save();
-                EmailToken::createAndSend([
-                    'email' => $request->user()->email,
-                    'name' => $request->user()->name,
+                $emailToken = EmailToken::create([
+                    'email' =>$request->input('email'),
                     'action' => 'verify',
-                    'subject' => '您好，请激活您在'.Setting()->get('website_name').'注册的邮箱！',
                     'token' => EmailToken::createToken(),
                 ]);
+
+                $this->sendEmail($request->user()->id,'verify','您好，请激活您在'.Setting()->get('website_name').'注册的邮箱！',$emailToken,true);
 
                 return $this->success(route('auth.profile.email'),'邮箱修改成功！一封验证邮件已经发到您的邮箱'.$request->user()->email.',请登陆邮箱进行验证！');
             }
@@ -153,9 +153,27 @@ class ProfileController extends Controller
     }
 
     /*消息通知设置*/
-    public function anyNotification()
+    public function anyNotification(Request $request)
     {
-        return view('theme::profile.notification');
+        if($request->isMethod('post')){
+            $siteNotifications = $request->input('site_notifications');
+            $emailNotifications = $request->input('email_notifications');
+            if($siteNotifications){
+                $request->user()->site_notifications = implode(",",$siteNotifications);
+            }
+            if($emailNotifications){
+                $request->user()->email_notifications = implode(",",$emailNotifications);
+            }
+
+            if($siteNotifications || $emailNotifications){
+                $request->user()->save();
+            }
+            return $this->success(route('auth.profile.notification'),'通知提醒策略设置成功');
+
+        }
+        $siteNotifications = explode(",",$request->user()->site_notifications);
+        $emailNotifications = explode(",",$request->user()->email_notifications);
+        return view('theme::profile.notification')->with(compact('siteNotifications','emailNotifications'));
 
     }
 

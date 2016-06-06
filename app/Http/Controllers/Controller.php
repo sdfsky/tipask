@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Credit;
 use App\Models\Doing;
 use App\Models\Notification;
+use App\Models\User;
 use App\Models\UserData;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -13,6 +14,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 abstract class Controller extends BaseController
@@ -133,20 +135,32 @@ abstract class Controller extends BaseController
      * @param $source_id
      * @return static
      */
-    protected function notify($from_user_id,$to_user_id,$type,$subject='',$source_id=0,$refer_content='')
+    protected function notify($from_user_id,$to_user_id,$type,$subject='',$source_id=0,$content='',$refer_type='',$refer_id=0)
     {
         /*不能自己给自己发通知*/
-       if($from_user_id == $to_user_id){
+       if( $from_user_id == $to_user_id ){
            return false;
        }
+
+       $toUser = User::find($to_user_id);
+
+        if( !$toUser ){
+            return false;
+        }
+        /*站内消息策略*/
+        if(!in_array($type,explode(",",$toUser->site_notifications))){
+            return false;
+        }
 
        return Notification::create([
             'user_id'    => $from_user_id,
             'to_user_id' => $to_user_id,
             'type'       => $type,
-            'subject'    => $subject,
-            'source_id'  => $source_id,
-            'refer_content'  => $refer_content,
+            'subject'    => strip_tags($subject),
+            'source_id'    => $source_id,
+            'content'  => $content,
+            'refer_type'  => $refer_type,
+            'refer_id'  => $refer_id,
             'is_read'    => 0
         ]);
     }
@@ -160,11 +174,48 @@ abstract class Controller extends BaseController
      */
     protected function readNotifications($source_id,$refer_type='question')
     {
-        $types = array_keys(Config::get('tipask.notification_types'));
+        $types = [];
         if($refer_type=='article'){
             $types = ['comment_article'];
+        }else if($refer_type=='question'){
+            $types = ['answer','follow_question','comment_question','invite_answer','adopt_answer'];
+        }else if($refer_type=='answer'){
+            $types = ['comment_answer'];
+        }else if($refer_type == 'user'){
+            $types = ['follow_user'];
         }
+        $types[] = 'reply_comment';
         return Notification::where('to_user_id','=',Auth()->user()->id)->where('source_id','=',$source_id)->whereIn('type',$types)->where('is_read','=',0)->update(['is_read'=>1]);
+    }
+
+
+    /*邮件发送*/
+    protected function sendEmail($to_user_id,$type,$subject,$extData,$force=false){
+
+        $toUser = User::find($to_user_id);
+        if(!$toUser){
+            return false;
+        }
+
+        /*站内消息策略*/
+        if(!in_array($type,explode(",",$toUser->email_notifications)) && !$force){
+            return false;
+        }
+
+
+        $emailData = [
+            'email' => $toUser['email'],
+            'name' => $toUser['name'],
+            'type' => $type,
+            'subject' => $subject,
+            'data' => $extData,
+        ];
+
+        Mail::queue('emails.'.$emailData['type'], $emailData, function($message) use ($emailData)
+        {
+            $message->to($emailData['email'],$emailData['name'])->subject($emailData['subject']);
+        });
+
     }
 
 

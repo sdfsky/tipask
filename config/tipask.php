@@ -27,12 +27,15 @@ return [
     ],
     'notification_types' =>[
         'answer'  => '回答了问题',
-        'comment_user' => '回复了',
+        'reply_comment'  => '回复了',
         'comment_question' => '评论了问题',
-        'comment_answer' => '评论了',
+        'comment_answer' => '评论了回答',
         'comment_article' => '评论了文章',
         'follow_question' => '关注了问题',
+        'invite_answer' => '邀请您回答问题',
+        'adopt_answer' => '采纳了您的回答',
         'create_article' => '发表了文章',
+        'follow_user' => '关注了你',
 
     ],
 

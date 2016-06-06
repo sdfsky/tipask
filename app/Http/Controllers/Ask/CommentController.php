@@ -35,15 +35,21 @@ class CommentController extends Controller
             $source  = Question::find($source_id);
             $notify_subject = $source->title;
             $notify_type = 'comment_question';
+            $notify_refer_type = 'question';
+            $notify_refer_id = 0;
         }else if($source_type === 'answer'){
             $source = Answer::find($source_id);
-            $notify_subject = $source->question_title;
+            $notify_subject = $source->content;
             $notify_type = 'comment_answer';
+            $notify_refer_type = 'answer';
+            $notify_refer_id = $source->question_id;
 
         }else if($source_type === 'article'){
             $source = Article::find($source_id);
             $notify_subject = $source->title;
             $notify_type = 'comment_article';
+            $notify_refer_type = 'article';
+            $notify_refer_id = 0;
         }
         if(!$source){
             abort(404);
@@ -64,11 +70,13 @@ class CommentController extends Controller
         /*问题、回答、文章评论数+1*/
         $comment->source()->increment('comments');
 
-        if($comment->to_user_id>0){
-            $this->notify($request->user()->id,$comment->to_user_id,'comment_user',$notify_subject,$source_id,$comment->content);
+        if( $comment->to_user_id > 0 ){
+            $this->notify($request->user()->id,$comment->to_user_id,'reply_comment',$notify_subject,$source_id,$comment->content,$notify_refer_type,$notify_refer_id);
+
         }else{
-            $this->notify($request->user()->id,$source->user_id,$notify_type,$notify_subject,$source_id,$comment->content);
+            $this->notify($request->user()->id,$source->user_id,$notify_type,$notify_subject,$source_id,$comment->content,$notify_refer_type,$notify_refer_id);
         }
+
 
         return view('theme::comment.item')->with('comment',$comment)
                                             ->with('source_type',$source_type)

@@ -34,7 +34,7 @@ class AnswerController extends Controller
         }
         
         $question_id = $request->input('question_id');
-        $question = Question::findOrNew($question_id);
+        $question = Question::find($question_id);
 
         if(empty($question)){
             abort(404);
@@ -169,6 +169,8 @@ class AnswerController extends Controller
 
             DB::commit();
 
+            $this->notify($request->user()->id,$answer->user_id,'adopt_answer',$answer->question_title,$answer->question_id);
+            $this->sendEmail($answer->user_id,' ','恭喜！你对于问题['.$answer->question_title.']的回答被采纳了！',$answer);
             return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答采纳成功!".get_credit_message(Setting()->get('credits_adopted'),Setting()->get('coins_adopted')));
 
         }catch (\Exception $e) {
@@ -201,7 +203,7 @@ class AnswerController extends Controller
 
         /*设置通知为已读*/
         if($request->user()){
-            $this->readNotifications($question->id,'question');
+            $this->readNotifications($answer->id,'answer');
         }
 
         /*相关问题*/

@@ -13,6 +13,7 @@ class CreateEmailTokensTable extends Migration
     public function up()
     {
         Schema::create('email_tokens', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
             $table->string('email')->index();
             $table->string('action',32);
             $table->string('token')->index();

@@ -67,6 +67,7 @@ class AttentionController extends Controller
                     break;
                 case 'user':
                     $source->userData->increment('followers');
+                    $this->notify($request->user()->id,$source->id,'follow_user');
                     break;
                 case 'tag':
                     $source->increment('followers');

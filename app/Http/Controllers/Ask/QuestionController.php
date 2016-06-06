@@ -120,23 +120,13 @@ class QuestionController extends Controller
 
             /*邀请作答逻辑处理*/
             $to_user_id = $request->input('to_user_id',0);
-            $toUser = User::find($to_user_id);
-            if($toUser){
-                if(QuestionInvitation::create(['question_id'=>$question->id,'user_id'=>$to_user_id])){
-                    $emailData = [
-                            'email' => $toUser['email'],
-                            'name' => Setting()->get('website_name'),
-                            'action' => 'inviteToAnswer',
-                            'question_id' => $question->id,
-                            'subject' => '问题求助：'.$question->title
-                        ];
-                    Mail::queue('emails.'.$emailData['action'], $emailData, function($message) use ($emailData)
-                    {
-                        $message->to($emailData['email'],$emailData['name'])->subject($emailData['subject']);
-                    });
+            $this->notify($question->user_id,$to_user_id,'invite_answer',$question->title,$question->id);
 
-                }
+            if(QuestionInvitation::create(['question_id'=>$question->id,'user_id'=>$to_user_id])){
+                /*发送邮件*/
+                $this->sendEmail($to_user_id,'invite_answer','问题求助：'.$question->title,$question);
             }
+
 
 
             /*用户提问数+1*/

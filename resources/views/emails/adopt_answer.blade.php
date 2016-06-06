@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>用户注册激活</title>
+    <title>回答被采纳</title>
     <style>
         * {
             margin: 0;
@@ -195,10 +195,10 @@
         <td></td>
         <td class="container" width="800">
             <div class="content">
-                <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+                <table class="main" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td class="content-wrap">
-                            <meta itemprop="name" content="问题求助"/>
+                            <meta itemprop="name" content="回答被采纳"/>
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-block">
@@ -207,12 +207,12 @@
                                 </tr>
                                 <tr>
                                     <td class="content-block">
-                                        点击下方链接查看问题详情并解答：
+                                        点击下方链接查看问题详情：
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="content-block">
-                                        {{ route('ask.question.detail',['id'=>$question_id]) }}
+                                        {{ route('ask.question.detail',['id'=>$data->id]) }}
                                     </td>
                                 </tr>
                                 <tr>

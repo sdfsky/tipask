@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>找回密码</title>
+    <title>邀请回答问题</title>
     <style>
         * {
             margin: 0;
@@ -195,19 +195,24 @@
         <td></td>
         <td class="container" width="800">
             <div class="content">
-                <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action">
+                <table class="main" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td class="content-wrap">
-                            <meta itemprop="name" content="密码找回"/>
+                            <meta itemprop="name" content="问题求助"/>
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-block">
-                                        如果您在{{ Setting()->get('website_name') }}的密码丢失，请点击下方链接找回:
+                                        {{ $name }}正在向你发问题求助：{{ $data->title }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="content-block">
-                                        {{ route('auth.user.findPassword',['token'=>$token]) }}
+                                        点击下方链接查看问题详情并解答：
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block">
+                                        <a href="{{ route('ask.question.detail',['id'=>$data->id]) }}">{{ route('ask.question.detail',['id'=>$data->id]) }}</a>
                                     </td>
                                 </tr>
                                 <tr>

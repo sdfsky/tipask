@@ -101,6 +101,9 @@ class ArticleController extends Controller
     public function show($id,Request $request)
     {
 
+
+
+
         $article = Article::find($id);
 
         /*问题查看数+1*/
@@ -120,7 +123,6 @@ class ArticleController extends Controller
         if($request->user()){
             $this->readNotifications($article->id,'article');
         }
-
 
         return view("theme::article.show")->with('article',$article)
                                           ->with('topUsers',$topUsers)

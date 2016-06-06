@@ -74,13 +74,13 @@ class EmailController extends Controller
             return response('tooFast');
         }
 
-        $emailToken = EmailToken::createAndSend([
+        $emailToken = EmailToken::create([
             'email' => $request->user()->email,
-            'name' => $request->user()->name,
             'action' => 'verify',
-            'subject' => '您好，请激活您在'.Setting()->get('website_name').'注册的邮箱！',
             'token' => EmailToken::createToken(),
         ]);
+
+        $this->sendEmail($request->user()->id,'verify','您好，请激活您在'.Setting()->get('website_name').'注册的邮箱！',$emailToken,true);
 
         if($emailToken){
             return response('success');

@@ -9,7 +9,7 @@ class Notification extends Model
 {
     use BelongsToUserTrait;
     protected $table = 'notifications';
-    protected $fillable = ['user_id', 'to_user_id','type','subject','source_id','refer_content','to_user_id'];
+    protected $fillable = ['user_id', 'to_user_id','type','subject','source_id','content','refer_type','refer_id'];
 
 
     public function toUser()

@@ -195,7 +195,7 @@
         <td></td>
         <td class="container" width="800">
             <div class="content">
-                <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+                <table class="main" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td class="content-wrap">
                             <meta itemprop="name" content="邮箱验证"/>
@@ -212,7 +212,7 @@
                                 </tr>
                                 <tr>
                                     <td class="content-block">
-                                        {{ route('auth.email.verifyToken',['action'=>$action,'token'=>$token]) }}
+                                        {{ route('auth.email.verifyToken',['action'=>$data->action,'token'=>$data->token]) }}
                                     </td>
                                 </tr>
                                 <tr>

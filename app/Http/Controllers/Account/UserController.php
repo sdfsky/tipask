@@ -108,13 +108,14 @@ class UserController extends Controller
             }
 
             /*发送邮箱验证邮件*/
-            EmailToken::createAndSend([
-                'email' => $formData['email'],
-                'name' => $formData['name'],
-                'action' => 'register',
-                'subject' => '欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',
+
+            $emailToken = EmailToken::create([
+                'email' => $user->email,
                 'token' => EmailToken::createToken(),
+                'action'=> 'register'
             ]);
+
+            $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
 
 
             return $this->success(route('website.index'),$message);
@@ -143,6 +144,7 @@ class UserController extends Controller
                 'subject' => Setting()->get('website_name').'找回密码',
                 'token' => EmailToken::createToken(),
             ]);
+
 
             return view("theme::account.forgetPassword")->with('success','ok')->with('email',$request->input('email'));
 

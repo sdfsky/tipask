@@ -14,38 +14,73 @@
         <div id="main" class="settings col-md-10 form-horizontal">
             <h2 class="h3 post-title">通知提醒</h2>
             <div class="row mt-30">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="" class="control-label col-sm-2">邮件提醒</label>
-                        <div class="col-sm-8">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="answer" id="answer" type="checkbox" checked=""> 当有其他人回答我关注的问题时
-                                </label>
+                <form name="notify_form" method="post" action="{{ route('auth.profile.notification') }}">
+                    {{ csrf_field() }}
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-2">站内通知</label>
+                            <div class="col-sm-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="site_notifications[]" type="checkbox" value="follow_user" @if(in_array('follow_user',$siteNotifications))) checked @endif /> 当有人关注我时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="site_notifications[]" type="checkbox" value="invite_answer" @if(in_array('invite_answer',$siteNotifications))) checked @endif /> 当有人邀请我回答问题时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="site_notifications[]"  type="checkbox" value="comment_question" @if(in_array('comment_question',$siteNotifications))) checked @endif> 当有人评论我的问题时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="site_notifications[]" type="checkbox" value="comment_article" @if(in_array('comment_article',$siteNotifications))) checked @endif> 当有人评论我的文章时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="site_notifications[]" type="checkbox" value="adopt_answer" @if(in_array('adopt_answer',$siteNotifications))) checked @endif> 当有人采纳我的回答时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="site_notifications[]"  type="checkbox" value="comment_answer" @if(in_array('invite_answer',$siteNotifications))) checked @endif > 当有人评论我的回答时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="site_notifications[]"  type="checkbox" value="reply_comment" @if(in_array('reply_comment',$siteNotifications))) checked @endif > 当有人回复我的评论时
+                                    </label>
+                                </div>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="comment" id="comment" type="checkbox" checked=""> 当有人对我发布的内容评论时
-                                </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-sm-2">邮件通知</label>
+                            <div class="col-sm-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="email_notifications[]" type="checkbox" value="adopt_answer" @if(in_array('adopt_answer',$emailNotifications))) checked @endif  > 当有人采纳我的回答时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="email_notifications[]" type="checkbox" value="invite_answer" @if(in_array('invite_answer',$emailNotifications))) checked @endif  > 当有人邀请我回答问题时
+                                    </label>
+                                </div>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="content_handled" id="content_handled" type="checkbox" checked=""> 当我的内容被删除/关闭/忽略/采纳时
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="comment_reply" id="comment_reply" type="checkbox" checked=""> 当有人回复我的评论时
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="invite" id="invite" type="checkbox" checked=""> 当有人邀请我回答问题时
-                                </label>
+                        </div>
+                        <div class="form-action row">
+                            <label for="" class="control-label col-sm-2"></label>
+
+                            <div class="col-sm-8">
+                                <button class="btn btn-xl btn-primary" type="submit">提交</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
