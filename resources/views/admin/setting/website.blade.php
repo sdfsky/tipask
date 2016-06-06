@@ -87,7 +87,7 @@
 
                     </div>
                     <div class="box-footer">
-                        <button type="submit" id="saveBtn" class="btn btn-primary">保存</button>
+                        <button type="button" id="saveBtn" class="btn btn-primary" name="submitBtn">保存</button>
                         <button type="reset" class="btn btn-success">重置</button>
                     </div>
                 </form>
@@ -107,6 +107,7 @@
                 url: push_site_url+$("#website_form input").serialize(),
                 callbackParameter: "callback",
             });
+            $("#website_form").submit();
         });
 
     });
