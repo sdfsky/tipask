@@ -46,7 +46,7 @@ class UserController extends AdminController
             $query->where('status','=',$filter['status']);
         }
 
-        $users = $query->orderBy('updated_at','desc')->paginate(Config::get('tipask.admin.page_size'));
+        $users = $query->orderBy('created_at','desc')->paginate(Config::get('tipask.admin.page_size'));
         return view('admin.user.index')->with('users',$users)->with('filter',$filter);
     }
 

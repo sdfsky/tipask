@@ -40,7 +40,7 @@ class QuestionController extends AdminController
             $query->where('status','=',$filter['status']);
         }
 
-        $questions = $query->orderBy('updated_at','desc')->paginate(20);
+        $questions = $query->orderBy('created_at','desc')->paginate(20);
         return view("admin.question.index")->with('questions',$questions)->with('filter',$filter);
     }
 

@@ -39,7 +39,7 @@ class AnswerController extends AdminController
         if( isset($filter['status']) && $filter['status'] > -1 ){
             $query->where('status','=',$filter['status']);
         }
-        $answers = $query->orderBy('updated_at','desc')->paginate(20);
+        $answers = $query->orderBy('created_at','desc')->paginate(20);
         return view("admin.answer.index")->with('answers',$answers)->with('filter',$filter);
     }
 
