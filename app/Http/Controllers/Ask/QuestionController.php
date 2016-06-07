@@ -122,7 +122,7 @@ class QuestionController extends Controller
             $to_user_id = $request->input('to_user_id',0);
             $this->notify($question->user_id,$to_user_id,'invite_answer',$question->title,$question->id);
 
-            if(QuestionInvitation::create(['question_id'=>$question->id,'user_id'=>$to_user_id])){
+            if($to_user_id && QuestionInvitation::create(['question_id'=>$question->id,'user_id'=>$to_user_id])){
                 /*发送邮件*/
                 $this->sendEmail($to_user_id,'invite_answer','问题求助：'.$question->title,$question);
             }
