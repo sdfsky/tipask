@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'zh',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => env('APP_KEY', 'FDkjS04y9Y0EWIJZTfFrxsy5iUfuBhgh'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -149,7 +149,6 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
     ],
 
     /*

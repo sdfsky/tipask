@@ -18,11 +18,7 @@ class CreateQuestionInvitationsTable extends Migration
 
             $table->integer('user_id')->unsigned()->index();                  //问题发起人UID
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->integer('question_id')->unsigned()->index();              //问题ID
-
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 
             $table->tinyInteger('status')->default(0);            //回答状态0待审核,1已审核
 

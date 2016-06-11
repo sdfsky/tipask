@@ -51,7 +51,7 @@ class QuestionController extends Controller
         }
 
         if($request->input('sort','default') === 'created_at'){
-            $answers = $question->answers()->whereNull('adopted_at')->orderBy('created_at','DESC')->paginate(5);
+            $answers = $question->answers()->whereNull('adopted_at')->orderBy('created_at','DESC')->paginate(10);
         }else{
             $answers = $question->answers()->whereNull('adopted_at')->orderBy('supports','DESC')->orderBy('created_at','ASC')->paginate(5);
         }

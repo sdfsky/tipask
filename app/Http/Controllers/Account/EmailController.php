@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\EmailToken;
 use App\Models\User;
-use App\Models\UserVerification;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
@@ -47,13 +46,10 @@ class EmailController extends Controller
             if($user->status==0){
                 $user->status=1;
                 $user->save();
-            }
+                $user->userData->email_status = 1;
+                $user->userData->save();
 
-            UserVerification::firstOrCreate([
-                'user_id' => $user->id,
-                'name' => 'email',
-                'status' => 1,
-            ]);
+            }
 
             $this->auth->login($user);
             EmailToken::clear($user->email,$action);

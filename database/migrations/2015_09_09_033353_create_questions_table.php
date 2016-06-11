@@ -16,11 +16,9 @@ class CreateQuestionsTable extends Migration
 
             $table->increments('id')->unsigned();                             //问题ID
 
-            $table->integer('user_id')->unsigned()->index();                  //问题发起人UID
+            $table->integer('user_id')->unsigned()->default(0)->index();                  //问题发起人UID
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->string('title',255);                          //问题标题
+            $table->string('title',255)->index();                          //问题标题
 
             $table->text('description')->nullable();              //问题详情
 
@@ -38,7 +36,7 @@ class CreateQuestionsTable extends Migration
 
             $table->integer('comments')->unsigned()->default(0);              //评论数
 
-            $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4wap
+            $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4weixin
 
             $table->tinyInteger('status')->default(0);            //提问状态0待审核,1已审核
 

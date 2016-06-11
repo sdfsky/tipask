@@ -40,6 +40,49 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($user){
+
+        });
+        static::deleted(function($user){
+            /*删除角色管理*/
+            $user->roles()->delete();
+            /*删除用户扩展信息*/
+            $user->userData()->delete();
+            $user->authentication()->delete();
+            /*删除用户提问*/
+            $user->questions()->delete();
+            /*删除用户回答*/
+            $user->answers()->delete();
+
+            /*删除用户文章*/
+            $user->articles()->delete();
+
+            /*删除粉丝*/
+            $user->followers()->delete();
+
+            /*删除收藏*/
+            $user->collections()->delete();
+
+            /*删除积分设置*/
+            $user->credits()->delete();
+            /*删除动态*/
+            $user->doings()->delete();
+
+            /*删除积分兑换*/
+            $user->exchanges()->delete();
+
+            /*删除问题邀请*/
+            $user->questionInvitations()->delete();
+            /*删除评论*/
+            $user->comments()->delete();
+
+        });
+    }
+
     public static function getAvatarPath($userId,$size='big',$ext='jpg')
     {
         $avatarDir = self::getAvatarDir($userId);
@@ -153,6 +196,21 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
+    /*我的评论*/
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+
+    }
+
+
+    /*我的积分操作*/
+    public function credits(){
+        return $this->hasMany('App\Models\Credit');
+
+    }
+
+
     /*获取用户收藏*/
     public function collections()
     {
@@ -185,6 +243,8 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
+
+
     /*是否回答过问题*/
     public function isAnswered($questionId)
     {
@@ -197,6 +257,8 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->collections()->where('source_type','=',$source_type)->where('source_id','=',$source_id)->first();
     }
+
+
 
     /*是否已关注问题、用户*/
     public function isFollowed($source_type,$source_id)

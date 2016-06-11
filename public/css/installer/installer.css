@@ -1,0 +1,75 @@
+html{font-size:10px;-webkit-tap-highlight-color:transparent}
+body{font-family:Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;font-size:14px;line-height:1.5;color:#333;background-color:#ecf0f5;}
+.mt-10{margin-top:10px;}
+.mt-30{margin-top:30px;}
+
+.header{
+    padding: 2em 0;
+    background-color: #292D33;
+    color: #FFF;
+    text-align: center;
+}
+.header h1{margin-bottom:5px}
+.header .step {
+    list-style: none;
+    margin: 1em 0 1em;
+    padding: 0;
+    color: #999;
+}
+
+li {
+    display: inline-block;
+    margin: 0 .8em;
+}
+
+li.current {
+    color: #FFF;
+    font-weight: bold;
+}
+
+.step span {
+    display: inline-block;
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+    line-height: 20px;
+    border: 2px solid #999;
+    text-align: center;
+    border-radius: 2em;
+}
+
+.step li.current span {
+    border-color: #FFF;
+}
+
+
+.box {
+    position: relative;
+    border-top: 1px solid #d2d6de;
+    margin-bottom: 15px;
+    background: #ffffff;
+    width: 100%;
+}
+
+.box-header {
+    color: #444;
+    display: block;
+    padding: 5px;
+    position: relative;
+}
+
+.box-body {
+    padding: 10px;
+}
+
+.license{padding: 15px;}
+
+.main-footer{
+    margin: 20px;
+    padding: 15px;
+    color: #444;
+    border-top: 1px solid #d2d6de;
+}
+
+.main-footer a{color:#444;}
+

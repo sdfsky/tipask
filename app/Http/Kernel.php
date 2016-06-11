@@ -31,5 +31,6 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'permission' => \Bican\Roles\Middleware\VerifyPermission::class,
+        'installer' => \App\Http\Middleware\InstallerCheck::class
     ];
 }

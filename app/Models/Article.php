@@ -33,6 +33,9 @@ class Article extends Model
             /*用户文章数 -1 */
             $article->user->userData->decrement('articles');
 
+            Collection::where('source_type','=',get_class($article))->where('source_id','=',$article->id)->delete();
+
+
             /*删除回答评论*/
             Comment::where('source_type','=',get_class($article))->where('source_id','=',$article->id)->delete();
 

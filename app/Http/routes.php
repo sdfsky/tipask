@@ -1,5 +1,16 @@
 <?php
 
+/*installer*/
+Route::Group(['namespace'=>'Installer','middleware'=>'installer'],function(){
+    Route::get('/install',['as'=>'website.installer.welcome','uses'=>'InstallerController@welcome']);
+    Route::get('/install/requirement',['as'=>'website.installer.requirement','uses'=>'InstallerController@requirement']);
+    Route::any('/install/config',['as'=>'website.installer.config','uses'=>'InstallerController@config']);
+    Route::get('/install/initDB',['as'=>'website.installer.initDB','uses'=>'InstallerController@initDB']);
+    Route::any('/install/website',['as'=>'website.installer.website','uses'=>'InstallerController@website']);
+    Route::get('/install/finished',['as'=>'website.installer.finished','uses'=>'InstallerController@finished']);
+});
+
+
 /*首页*/
 Route::get('/',['as'=>'website.index','uses'=>'IndexController@index']);
 

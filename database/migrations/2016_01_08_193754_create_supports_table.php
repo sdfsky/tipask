@@ -16,7 +16,6 @@ class CreateSupportsTable extends Migration
             $table->increments('id');
             $table->string('session_id',64)->index();
             $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->morphs('supportable');
             $table->timestamps();
         });

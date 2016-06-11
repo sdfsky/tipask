@@ -15,12 +15,11 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned()->index();      //评论人
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('content');
             $table->morphs('source');
             $table->integer('to_user_id')->unsigned()->nullable();
-            $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4weixin
             $table->timestamps();
         });
     }

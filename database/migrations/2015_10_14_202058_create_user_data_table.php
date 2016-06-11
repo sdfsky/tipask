@@ -15,8 +15,6 @@ class CreateUserDataTable extends Migration
         Schema::create('user_data', function (Blueprint $table) {
 
             $table->integer('user_id')->unsigned()->primary();              //用户UID
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->integer('coins')->unsigned()->default(0);               //金币数
             $table->integer('credits')->unsigned()->default(0);             //经验值
 
@@ -30,8 +28,11 @@ class CreateUserDataTable extends Migration
             $table->integer('adoptions')->unsigned()->default(0);           //被采纳个数
             $table->integer('supports')->unsigned()->default(0);            //赞同数
             $table->integer('followers')->unsigned()->default(0);           //关注数
-            $table->integer('views')->unsigned()->default(0);               //空间访问数
+            $table->integer('views')->unsigned()->default(0);
+            $table->unsignedTinyInteger('email_status')->default(0);
+            $table->unsignedTinyInteger('mobile_status')->default(0);
             $table->unsignedTinyInteger('authentication_status')->default(0); //行家认证状态
+
 
         });
 

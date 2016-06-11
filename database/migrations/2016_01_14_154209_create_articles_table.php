@@ -18,7 +18,6 @@ class CreateArticlesTable extends Migration
 
             $table->integer('user_id')->unsigned()->index();                  //文章发起人
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('title',255);                          //文章标题
 
@@ -34,7 +33,10 @@ class CreateArticlesTable extends Migration
 
             $table->integer('supports')->unsigned()->default(0);              //支持数、推荐数目
 
+
             $table->tinyInteger('status')->default(0);                        //状态0待审核,1已审核
+
+            $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4weixin
 
             $table->timestamps();
 
