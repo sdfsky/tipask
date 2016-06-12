@@ -19,7 +19,7 @@ class DoingsController extends Controller
      */
     public function index(Request $request)
     {
-        $doings = Doing::correlation($request->user())->paginate(50);
+        $doings = Doing::correlation($request->user())->paginate(20);
         $doings->map(function($doing){
             $doing->action_text = Config::get('tipask.user_actions.'.$doing->action);
         });
