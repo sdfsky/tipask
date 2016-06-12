@@ -40,6 +40,7 @@
             </div>
 
             <div class="text-center">
+                {!! str_replace('/?', '?', $doings->render()) !!}
 
             </div>
         </div>
