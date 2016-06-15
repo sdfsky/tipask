@@ -6,7 +6,6 @@
     <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
 @endsection
 
-@stop
 
 @section('content')
     <div class="header text-center">
