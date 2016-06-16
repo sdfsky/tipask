@@ -32,7 +32,7 @@ class EmailToken extends Model
 
         if($emailToken){
 
-            Mail::queue('emails.'.$data['action'], $data, function($message) use ($data)
+            Mail::queue('emails.findPassword', $data, function($message) use ($data)
             {
                 $message->to($data['email'],$data['name'])->subject($data['subject']);
             });

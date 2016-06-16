@@ -211,6 +211,7 @@ abstract class Controller extends BaseController
             'data' => $extData,
         ];
 
+
         Mail::queue('emails.'.$emailData['type'], $emailData, function($message) use ($emailData)
         {
             $message->to($emailData['email'],$emailData['name'])->subject($emailData['subject']);

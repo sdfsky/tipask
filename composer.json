@@ -10,7 +10,9 @@
         "mews/captcha": "~2.0",
         "mews/purifier": "^2.0",
         "bican/roles": "2.1.*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "socialiteproviders/qq": "^2.0",
+        "davin-bao/laravel-xun-search": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -115,7 +115,7 @@ class UserController extends Controller
                 'action'=> 'register'
             ]);
 
-            $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
+          $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
 
 
             return $this->success(route('website.index'),$message);
