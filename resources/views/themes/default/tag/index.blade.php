@@ -118,7 +118,7 @@
                 <h2 class="h4 widget-box__title">相关标签</h2>
                 <ul class="taglist-inline multi">
                     @foreach($tag->relations() as $relationTag)
-                    <li class="tagPopup"><a class="tag" href="/t/jquery" data-toggle="popover" data-id="1040000000089733" data-original-title="jquery">{{ $relationTag->name }}</a></li>
+                    <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$relationTag->name]) }}">{{ $relationTag->name }}</a></li>
                     @endforeach
                 </ul>
             </div>
