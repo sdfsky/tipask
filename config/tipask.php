@@ -8,7 +8,7 @@
 
 return [
     'version' => 'Tipask3.0Beta',
-    'release' => '20160611',
+    'release' => '20160627',
     'user_cache_time' => 1, //用户数据缓存时间单位分钟
     'admin' => [
         'page_size' => 15,  //后台分页列表显示数目
