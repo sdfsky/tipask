@@ -149,7 +149,8 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Sdfsky\TipaskXunSearch\ServiceProvider::class
+        Sdfsky\TipaskXunSearch\ServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class
     ],
 
     /*

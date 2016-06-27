@@ -9,7 +9,13 @@
 namespace App\Http\Controllers\Account;
 
 
-class OauthController
+use App\Http\Controllers\Controller;
+use Laravel\Socialite\Facades\Socialite;
+
+class OauthController extends Controller
 {
+    public function auth($type){
+        return Socialite::with($type)->redirect();
+    }
 
 }

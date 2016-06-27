@@ -2,7 +2,7 @@
     "name": "tipask/tipask",
     "description": "PHP社区问答系统",
     "keywords": ["问答系统", "tipask","laravel"],
-    "license": "MIT",
+    "license": "MPL",
     "type": "project",
     "require": {
         "php": ">=5.5.9",

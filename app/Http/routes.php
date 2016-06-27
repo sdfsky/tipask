@@ -91,6 +91,7 @@ Route::Group(['namespace'=>'Account'],function(){
 
         Route::get('email/sendToken',['as'=>'auth.email.sendToken','uses'=>'EmailController@sendToken']);
 
+        Route::get('oauth/{type}',['as'=>'auth.oauth.auth','uses'=>'OauthController@auth']);
         /*用户个人信息修改*/
         Route::controller('profile','ProfileController', [
             'anyBase'     => 'auth.profile.base',
