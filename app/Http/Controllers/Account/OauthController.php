@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Account;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\UserOauth;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class OauthController extends Controller
@@ -18,10 +20,33 @@ class OauthController extends Controller
         return Socialite::with($type)->redirect();
     }
 
-    public function callback(){
-        $user = Socialite::driver('qq')->user();
-        $accessTokenResponseBody = $user->accessTokenResponseBody;
-        print_r($user);
+    public function callback($type,Request $request){
+
+        $oauthUser = Socialite::driver($type)->user();
+        if(Auth()->guest()){//游客登录
+
+        }else{
+
+            $oauthData = [
+                'access_token' => $oauthUser->accessTokenResponseBody['access_token'],
+                'refresh_token' => $oauthUser->accessTokenResponseBody['refresh_token'],
+                'expires_in' => $oauthUser->accessTokenResponseBody['expires_in'],
+                'user_id' => $request->user()->id
+            ];
+
+            UserOauth::create($oauthData);
+
+            return $this->success( route('auth.profile.oauth') , $type .'绑定成功！');
+        }
+
+
+
+
+
+
+
+
+
     }
 
 }

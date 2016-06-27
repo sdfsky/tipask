@@ -154,6 +154,11 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
+    public function userOauth(){
+        return $this->hasOne('App\Models\UserOauth');
+    }
+
+
     /*用户认证信息*/
     public function authentication()
     {
