@@ -18,4 +18,10 @@ class OauthController extends Controller
         return Socialite::with($type)->redirect();
     }
 
+    public function callback(){
+        $user = Socialite::driver('qq')->user();
+        $accessTokenResponseBody = $user->accessTokenResponseBody;
+        print_r($user);
+    }
+
 }
