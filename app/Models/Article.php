@@ -6,6 +6,7 @@ use App\Models\Relations\BelongsToUserTrait;
 use App\Models\Relations\MorphManyCommentsTrait;
 use App\Models\Relations\MorphManyTagsTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Article extends Model
 {
@@ -26,7 +27,9 @@ class Article extends Model
             }
 
         });
-
+        static::saved(function($article){
+            App::offsetGet('search')->update($article);
+        });
         /*监听删除事件*/
         static::deleting(function($article){
 
@@ -39,6 +42,10 @@ class Article extends Model
             /*删除回答评论*/
             Comment::where('source_type','=',get_class($article))->where('source_id','=',$article->id)->delete();
 
+        });
+
+        static::deleted(function($article){
+            App::offsetGet('search')->delete($article);
         });
     }
 

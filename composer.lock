@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4d92daa0b783286fcf355a5b7b4ad417",
-    "content-hash": "cf1721947c3d0c8935469080f7ff4b24",
+    "hash": "5d0fbca543a1d89c9ea1cdab06218468",
+    "content-hash": "af4045f8a8a7d589f5dcc5a98aa446c6",
     "packages": [
         {
             "name": "bican/roles",
@@ -161,54 +161,6 @@
                 "utils"
             ],
             "time": "2015-07-23 00:54:12"
-        },
-        {
-            "name": "davin-bao/laravel-xun-search",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/davin-bao/laravel-xun-search.git",
-                "reference": "0ee06db4c7392ab1b3a482dbfe0f2eb48d666e43"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/davin-bao/laravel-xun-search/zipball/0ee06db4c7392ab1b3a482dbfe0f2eb48d666e43",
-                "reference": "0ee06db4c7392ab1b3a482dbfe0f2eb48d666e43",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.1.*",
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "App\\": "app/",
-                    "DavinBao\\LaravelXunSearch\\": "src"
-                },
-                "files": [
-                    "xunsearch-sdk/lib/XS.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "davin bao",
-                    "email": "davin.bao@gmail.com"
-                }
-            ],
-            "description": "Laravel 5 package for full-text search over Eloquent models based on XunSearch.",
-            "keywords": [
-                "eloquent",
-                "fulltext",
-                "laravel",
-                "search",
-                "xunsearch"
-            ],
-            "time": "2016-01-08 00:54:04"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1701,6 +1653,52 @@
                 "shell"
             ],
             "time": "2016-03-09 05:03:14"
+        },
+        {
+            "name": "sdfsky/tipask-xunsearch",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sdfsky/tipask-xunsearch.git",
+                "reference": "f95ce448a812b522b3082a1983f79d9cb54a852b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sdfsky/tipask-xunsearch/zipball/f95ce448a812b522b3082a1983f79d9cb54a852b",
+                "reference": "f95ce448a812b522b3082a1983f79d9cb54a852b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.1.*|5.2.*",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "App\\": "app/",
+                    "Sdfsky\\TipaskXunSearch\\": "src"
+                },
+                "files": [
+                    "xunsearch-sdk/lib/XS.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sdf_sky",
+                    "email": "sky_php@qq.com"
+                }
+            ],
+            "description": "Laravel 5 package for full-text search over Eloquent models based on XunSearch.",
+            "keywords": [
+                "laravel",
+                "tipask",
+                "xunsearch"
+            ],
+            "time": "2016-06-26 15:26:53"
         },
         {
             "name": "socialiteproviders/manager",
@@ -4141,7 +4139,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "davin-bao/laravel-xun-search": 20
+        "sdfsky/tipask-xunsearch": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

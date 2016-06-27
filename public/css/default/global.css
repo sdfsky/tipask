@@ -65,7 +65,7 @@
 .list-group-item:last-child{margin-bottom:0;border-bottom-right-radius:3px;border-bottom-left-radius:3px}
 .list-group-item.active,.list-group-item.active:focus,.list-group-item.active:hover{z-index:2;color:#fff;background-color:#009a61;border-color:#009a61}
 .list-group-item.active .list-group-item-text,.list-group-item.active:focus .list-group-item-text,.list-group-item.active:hover .list-group-item-text{color:#67ffc7}
-
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{background-color:#017e66;}
 .box dl>dd,dl>dt{line-height: 50px;}
 
 
@@ -461,11 +461,13 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .search-category>li>a{padding:2px 10px;color:#666}
 .side .list-text{line-height:30px}
 .best-tag{border:1px solid #DDD;border-radius:2px;padding:15px 15px 5px}
-section{margin:0 -8px;padding:5px 8px}
-section .label-success{font-size:12px}
-section .h4{margin-bottom:2px;font-size:16px}
 .search-result .excerpt{font-size:13px;color:#666;line-height:1.5;word-wrap:break-word}
-.key{color:#D0021B}
+.search-result em{color:#D0021B;font-style: normal;}
+
+.search-result section:hover { background-color: #fcf8e3;}
+.search-result section {margin: 0 -8px;padding: 5px 8px;}
+.search-result .h4{margin-bottom:2px;font-size:16px}
+.search-result a{color:#017e66;}
 .related-object{border:1px solid #ddd;border-radius:2px;padding:10px 15px;margin-bottom:20px}
 
 

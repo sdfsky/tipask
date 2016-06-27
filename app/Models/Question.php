@@ -7,8 +7,8 @@ use App\Models\Relations\MorphManyCommentsTrait;
 use App\Models\Relations\MorphManyTagsTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class Question extends Model
 {
@@ -28,7 +28,13 @@ class Question extends Model
                 $question->status = 0;
             }
 
+
         });
+
+        static::saved(function($question){
+            App::offsetGet('search')->update($question);
+        });
+
         /*监听删除事件*/
         static::deleting(function($question){
             /*删除回答*/
@@ -55,6 +61,8 @@ class Question extends Model
 
             /*删除问题收藏*/
             Collection::where('source_type','=',get_class($question))->where('source_id','=',$question->id)->delete();
+
+            App::offsetGet('search')->delete($question);
 
         });
     }

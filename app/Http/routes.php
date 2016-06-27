@@ -69,7 +69,7 @@ Route::Group(['namespace'=>'Account'],function(){
 
 
     /*全局搜索*/
-    Route::any('search/{filter?}',['as'=>'auth.search.index','uses'=>'SearchController@index'])->where(['filter'=>'(articles|tags|users)']);
+    Route::any('search/{filter?}',['as'=>'auth.search.index','uses'=>'SearchController@index'])->where(['filter'=>'(all|questions|articles|tags|users)']);
 
     /*邮箱token验证*/
     Route::get('email/{action}/{token}',['as'=>'auth.email.verifyToken','uses'=>'EmailController@verifyToken'])->where(['action'=>'(register|verify)']);
@@ -290,6 +290,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*积分设置*/
     Route::any('setting/credits',['as'=>'admin.setting.credits','uses'=>'SettingController@credits']);
 
+    /*xunsearch整合*/
+    Route::any('setting/xunSearch',['as'=>'admin.setting.xunSearch','uses'=>'SettingController@xunSearch']);
+
     /*问题删除*/
     Route::post('question/destroy',['as'=>'admin.question.destroy','uses'=>'QuestionController@destroy']);
     /*问题审核*/
@@ -347,6 +350,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*工具管理*/
     Route::match(['get','post'],'clearCache',['as'=>'admin.tool.clearCache','uses'=>'ToolController@clearCache']);
 
+    /*XunSearch索引管理*/
+    Route::get("xunSearch/clear",['as'=>'admin.xunSearch.clear','uses'=>'XunSearchController@clear']);
+    Route::get("xunSearch/rebuild",['as'=>'admin.xunSearch.rebuild','uses'=>'XunSearchController@rebuild']);
 
 });
 

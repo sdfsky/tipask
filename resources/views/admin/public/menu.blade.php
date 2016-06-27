@@ -1,6 +1,7 @@
 <ul class="sidebar-menu" id="root_menu">
     <li class="header">管理菜单</li>
     <li><a href="{{ route('admin.index.index') }}"><i class="fa fa-dashboard"></i> <span>首页</span> </a></li>
+
     <li class="treeview">
         <a href="#">
             <i class="fa fa-wrench"></i> <span>全局</span>
@@ -54,19 +55,15 @@
         </ul>
     </li>
 
-    {{--<li class="treeview">--}}
-        {{--<a href="#">--}}
-            {{--<i class="fa fa-recycle"></i> <span>第三方</span>--}}
-            {{--<i class="fa fa-angle-left pull-right"></i>--}}
-        {{--</a>--}}
-        {{--<ul class="treeview-menu" id="operations">--}}
-            {{--<li><a href="{{ route('admin.notice.index') }}"><i class="fa fa-circle-o"></i> 公告管理</a></li>--}}
-            {{--<li><a href="{{ route('admin.recommendation.index') }}"><i class="fa fa-circle-o"></i> 首页推荐</a></li>--}}
-            {{--<li><a href="{{ route('admin.goods.index') }}"><i class="fa fa-circle-o"></i> 积分商城</a></li>--}}
-            {{--<li><a href="{{ route('admin.exchange.index') }}"><i class="fa fa-circle-o"></i> 兑换记录</a></li>--}}
-            {{--<li><a href="{{ route('admin.friendshipLink.index') }}"><i class="fa fa-circle-o"></i> 友情链接</a></li>--}}
-        {{--</ul>--}}
-    {{--</li>--}}
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-recycle"></i> <span>第三方</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu" id="third_part">
+            <li><a href="{{ route('admin.setting.xunSearch') }}"><i class="fa fa-circle-o"></i> XunSearch</a></li>
+        </ul>
+    </li>
 
 
     <li class="header">常用菜单</li>

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 
@@ -43,9 +44,8 @@ class User extends Model implements AuthenticatableContract,
     public static function boot()
     {
         parent::boot();
-
-        static::deleting(function($user){
-
+        static::saved(function($user){
+            App::offsetGet('search')->update($user);
         });
         static::deleted(function($user){
             /*删除角色管理*/
@@ -79,6 +79,8 @@ class User extends Model implements AuthenticatableContract,
             $user->questionInvitations()->delete();
             /*删除评论*/
             $user->comments()->delete();
+
+            App::offsetGet('search')->delete($user);
 
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Tag extends Model
 {
@@ -14,12 +15,16 @@ class Tag extends Model
     {
         parent::boot();
 
+        static::saved(function($tag){
+            App::offsetGet('search')->update($tag);
+        });
+
+
         /*监听删除事件*/
         static::deleted(function($tag){
-
             /*删除关注*/
             Attention::where('source_type','=',get_class($tag))->where('source_id','=',$tag->id)->delete();
-
+            App::offsetGet('search')->delete($tag);
         });
     }
 
