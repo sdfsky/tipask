@@ -16,7 +16,7 @@ class QuestionInvitationController extends Controller
      */
     public function index(Request $request)
     {
-        $invitations = $request->user()->questionInvitations()->paginate(10);
+        $invitations = $request->user()->questionInvitations()->orderBy('created_at','desc')->paginate(20);
         return view('theme::notification.invitation')->with('invitations',$invitations);
 
     }
