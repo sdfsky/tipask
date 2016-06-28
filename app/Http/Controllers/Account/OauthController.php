@@ -56,7 +56,7 @@ class OauthController extends Controller
                 return redirect()->to(route('website.index'));
             }
 
-            return redirect(route('auth.oauth.profile',['auth_id'=>$userOauth->id]));
+            return redirect(route('auth.oauth.profile',['auth_id'=>$oauthUser->id]));
         }
 
         $userOauth->user_id =  $request->user()->id;
