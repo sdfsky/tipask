@@ -35,10 +35,10 @@
                         @if( Auth()->user()->userOauth )
 
                             @if(!Auth()->user()->userOauth->isBind('qq'))
-                            <li class="mb-10"><a href="{{ route('auth.oauth.auth',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
+                            <li class="mb-10"><a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
                             @endif
                         @else
-                            <li class="mb-10"><a href="{{ route('auth.oauth.auth',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
+                            <li class="mb-10"><a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
                             <li class="mb-10"><a href="/user/oauth/twitter" class="btn btn-default">新浪微博</a></li>
                         @endif
                     </ul>

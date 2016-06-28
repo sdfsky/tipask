@@ -88,7 +88,7 @@ class UserController extends Controller
             $request->flashExcept(['password','password_confirmation']);
             /*表单数据校验*/
             $validateRules = [
-                'name' => 'required|max:100',
+                'name' => 'required|min:2|max:100',
                 'email' => 'required|email|max:255|unique:users',
                 'password' => 'required|confirmed|min:6|max:16',
             ];

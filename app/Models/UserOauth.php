@@ -10,14 +10,14 @@ class UserOauth extends Model
 {
     use BelongsToUserTrait;
     protected $table = 'user_oauth';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'access_token','refresh_token','expires_in','auth_type'];
+    protected $fillable = ['id','user_id', 'access_token','refresh_token','expires_in','auth_type'];
 
     /**
      * The attributes excluded from the model's JSON form.

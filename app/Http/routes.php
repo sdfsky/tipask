@@ -41,6 +41,10 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::match(['get','post'],'forgetPassword',['as'=>'auth.user.forgetPassword','uses'=>'UserController@forgetPassword']);
     Route::match(['get','post'],'findPassword/{token}',['as'=>'auth.user.findPassword','uses'=>'UserController@findPassword']);
 
+    /*用户auth2.0*/
+    Route::get('oauth/{type}/login',['as'=>'auth.oauth.login','uses'=>'OauthController@login']);
+    Route::get('oauth/{type}/callback',['as'=>'auth.oauth.callback','uses'=>'OauthController@callback']);
+    Route::post('oauth/register',['as'=>'auth.oauth.register','uses'=>'OauthController@register']);
 
     /*用户空间首页*/
     Route::get('people/{user_id}',['as'=>'auth.space.index','uses'=>'SpaceController@index'])->where(['user_id'=>'[0-9]+']);
@@ -87,12 +91,11 @@ Route::Group(['namespace'=>'Account'],function(){
     Route::get('top/articles',['as'=>'auth.top.articles','uses'=>'TopController@articles']);
 
 
+
     Route::Group(['middleware'=>'auth'],function(){
 
         Route::get('email/sendToken',['as'=>'auth.email.sendToken','uses'=>'EmailController@sendToken']);
 
-        Route::get('oauth/{type}',['as'=>'auth.oauth.auth','uses'=>'OauthController@auth']);
-        Route::get('oauth/{type}/callback',['as'=>'auth.oauth.callback','uses'=>'OauthController@callback']);
         Route::get('oauth/{type}/unbind',['as'=>'auth.oauth.unbind','uses'=>'OauthController@unbind']);
         /*用户个人信息修改*/
         Route::controller('profile','ProfileController', [
