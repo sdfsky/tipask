@@ -65,6 +65,8 @@ class OauthController extends Controller
             return redirect()->to(route('website.index'));
         }
 
+        UserOauth::where('id','=',$oauthUser->id)->delete();
+
         $oauthData = UserOauth::create([
             'id'=>$oauthUser->id,
             'auth_type'=>$type,
@@ -75,6 +77,7 @@ class OauthController extends Controller
             'refresh_token'=>$oauthUser->accessTokenResponseBody['refresh_token'],
             'expires_in'=>$oauthUser->accessTokenResponseBody['expires_in'],
         ]);
+
 
         if($oauthData){
             return redirect(route('auth.oauth.profile',['auth_id'=>$oauthUser->id]));
