@@ -31,40 +31,44 @@ class OauthController extends Controller
             abort(500);
         }
 
+        if( Auth()->check() ){ //用户登录时处理绑定请求
+            $request->user()->userOauth()->where("auth_type",'=',$type)->delete();
+            $userOauth = UserOauth::firstOrCreate(['id'=>$oauthUser->id]);
+            $userOauth->auth_type = $type;
+            $userOauth->user_id = $request->user()->id;
+            $userOauth->nickname = $oauthUser->nickname;
+            $userOauth->avatar = $oauthUser->avatar;
+            $userOauth->access_token = $oauthUser->accessTokenResponseBody['access_token'];
+            $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
+            $userOauth->expires_in = $oauthUser->accessTokenResponseBody['expires_in'];
+            $userOauth->save();
+            return $this->success( route('auth.profile.oauth') , $type .'绑定成功！');
+        }
+
+        //游客登录处理注册流程
+         $userOauth = UserOauth::find($oauthUser->id);
+
+        if( $userOauth && $userOauth->user_id > 0 ){
+            $auth->loginUsingId($userOauth->user_id);
+            if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
+                $message = '登陆成功! '.get_credit_message(Setting()->get('credits_login'),Setting()->get('coins_login'));
+                return $this->success(route('website.index'),$message);
+            }
+            /*认证成功后跳转到首页*/
+            return redirect()->to(route('website.index'));
+        }
+
         $userOauth = UserOauth::firstOrCreate(['id'=>$oauthUser->id]);
         $userOauth->auth_type = $type;
+        $userOauth->user_id = 0;
         $userOauth->nickname = $oauthUser->nickname;
         $userOauth->avatar = $oauthUser->avatar;
         $userOauth->access_token = $oauthUser->accessTokenResponseBody['access_token'];
         $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
         $userOauth->expires_in = $oauthUser->accessTokenResponseBody['expires_in'];
-
-        if( Auth()->guest() ){//游客登录
-
-            $userOauth->save();
-
-            $oauthData = UserOauth::find($oauthUser->id);
-
-            if( $oauthData->user_id > 0 ){
-
-                $auth->loginUsingId($oauthData->user_id);
-
-                if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
-                    $message = '登陆成功! '.get_credit_message(Setting()->get('credits_login'),Setting()->get('coins_login'));
-                    return $this->success(route('website.index'),$message);
-                }
-
-                /*认证成功后跳转到首页*/
-                return redirect()->to(route('website.index'));
-            }
-
-            return redirect(route('auth.oauth.profile',['auth_id'=>$oauthUser->id]));
-        }
-
-        $userOauth->user_id =  $request->user()->id;
         $userOauth->save();
-        return $this->success( route('auth.profile.oauth') , $type .'绑定成功！');
 
+        return redirect(route('auth.oauth.profile',['auth_id'=>$oauthUser->id]));
 
     }
 

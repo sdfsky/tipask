@@ -52,6 +52,7 @@ class User extends Model implements AuthenticatableContract,
             $user->roles()->delete();
             /*删除用户扩展信息*/
             $user->userData()->delete();
+            $user->userOauth()->delete();
             $user->authentication()->delete();
             /*删除用户提问*/
             $user->questions()->delete();
