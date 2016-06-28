@@ -18,14 +18,11 @@
                 <div class="col-sm-8">
                     <ul class="list-inline">
                         @if( Auth()->user()->userOauth )
-                            @if(Auth()->user()->userOauth->isBind('qq'))))
+                            @if(Auth()->user()->userOauth()->isBind('qq'))))
                             <li class="mb-10">
                                 <a class="btn btn-success">腾讯 QQ</a> <a href="{{ route('auth.oauth.unbind',['type'=>'qq']) }}" class="bind-delete btn btn-link btn-xs"><span class="glyphicon glyphicon-minus-sign text-muted"></span></a>
                             </li>
                             @endif
-                            <li class="mb-10">
-                                <a class="btn btn-success">腾讯 QQ</a> <button type="button" class="bind-delete btn btn-link btn-xs" data-type="qq" data-name="腾讯 QQ" title="解除绑定"><span class="glyphicon glyphicon-minus-sign text-muted"></span></button>
-                            </li>
                        @endif
                     </ul>
                 </div>
@@ -37,10 +34,9 @@
 
                         @if( Auth()->user()->userOauth )
 
-                            @if(!Auth()->user()->userOauth->isBind('qq'))))
+                            @if(!Auth()->user()->userOauth()->isBind('qq'))))
                             <li class="mb-10"><a href="{{ route('auth.oauth.auth',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
                             @endif
-                            <li class="mb-10"><a href="/user/oauth/twitter" class="btn btn-default">新浪微博</a></li>
                         @else
                             <li class="mb-10"><a href="{{ route('auth.oauth.auth',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
                             <li class="mb-10"><a href="/user/oauth/twitter" class="btn btn-default">新浪微博</a></li>
