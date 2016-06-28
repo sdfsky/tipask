@@ -117,12 +117,10 @@ class OauthController extends Controller
         if(is_file($avatarFile)){
             return true;
         }
-        $extension = '.jpg';
-        $avatarDir = User::getAvatarDir($userId);
-        Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($userId,'origin').$extension,File::get($avatarUrl));
-        Image::make(storage_path('app/'.User::getAvatarPath($userId,'origin',$extension)))->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($userId,'big')));
-        Image::make(storage_path('app/'.User::getAvatarPath($userId,'origin',$extension)))->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($userId,'middle')));
-        Image::make(storage_path('app/'.User::getAvatarPath($userId,'origin',$extension)))->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($userId,'small')));
+        Image::make($avatarUrl)->save(storage_path('app/'.User::getAvatarPath($userId,'origin')));
+        Image::make($avatarUrl)->save(storage_path('app/'.User::getAvatarPath($userId,'big')));
+        Image::make($avatarUrl)->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($userId,'middle')));
+        Image::make($avatarUrl)->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($userId,'small')));
         return response('ok');
     }
 
