@@ -155,7 +155,7 @@ class User extends Model implements AuthenticatableContract,
 
 
     public function userOauth(){
-        return $this->hasOne('App\Models\UserOauth');
+        return $this->hasMany('App\Models\UserOauth');
     }
 
 
@@ -272,6 +272,20 @@ class User extends Model implements AuthenticatableContract,
     {
         return boolval($this->attentions()->where('source_type','=',$source_type)->where('source_id','=',$source_id)->count());
     }
+
+
+    /**
+     * 第三方账号是否绑定
+     * @param $auth_type
+     * @return bool
+     */
+    public function isOauthBind($auth_type){
+        if($this->userOauth()->where("auth_type",'=',$auth_type)->count()){
+            return true;
+        }
+        return false;
+    }
+
 
 
 

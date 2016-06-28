@@ -21,7 +21,7 @@
             <h1 class="h4 text-center text-muted login-title">完善资料</h1>
             <form role="form" name="loginForm" action="{{ route('auth.oauth.register') }}"  method="POST" >
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="auth_id" value="{{ $oauthUser->id }}">
+                <input type="hidden" name="auth_id" value="{{ old('auth_id' , $oauthUser->id) }}">
 
                 <div class="form-group @if ($errors->first('email')) has-error @endif">
                     <label class="required">邮箱</label>
@@ -36,6 +36,9 @@
                     @if ($errors->first('name'))
                         <span class="help-block">{{ $errors->first('name') }}</span>
                     @endif
+                </div>
+                <div class="form-group">
+                    同意并接受 <a href="#" target="_blank" data-toggle="modal" data-target="#register_license_modal">《服务条款》</a>
                 </div>
 
                 <div class="form-group">

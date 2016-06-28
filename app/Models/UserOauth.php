@@ -28,13 +28,6 @@ class UserOauth extends Model
 
 
 
-    public function isBind($type){
-
-        if( $this->auth_type === $type ){
-            return true;
-        }
-        return false;
-    }
 
 
 

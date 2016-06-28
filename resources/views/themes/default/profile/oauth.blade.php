@@ -17,13 +17,11 @@
                 <label class="control-label col-sm-2">已绑定账号</label>
                 <div class="col-sm-8">
                     <ul class="list-inline">
-                        @if( Auth()->user()->userOauth )
-                            @if(Auth()->user()->userOauth->isBind('qq'))
-                            <li class="mb-10">
-                                <a class="btn btn-success">腾讯 QQ</a> <a href="{{ route('auth.oauth.unbind',['type'=>'qq']) }}" class="bind-delete btn btn-link btn-xs"><span class="glyphicon glyphicon-minus-sign text-muted"></span></a>
-                            </li>
-                            @endif
-                       @endif
+                        @if(Auth()->user()->isOauthBind('qq'))
+                        <li class="mb-10">
+                            <a class="btn btn-success">腾讯 QQ</a> <a href="{{ route('auth.oauth.unbind',['type'=>'qq']) }}" class="bind-delete btn btn-link btn-xs"><span class="glyphicon glyphicon-minus-sign text-muted"></span></a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -31,19 +29,34 @@
                 <label class="control-label col-sm-2">未绑定</label>
                 <div class="col-sm-10">
                     <ul class="list-inline">
-
-                        @if( Auth()->user()->userOauth )
-
-                            @if(!Auth()->user()->userOauth->isBind('qq'))
-                            <li class="mb-10"><a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
-                            @endif
-                        @else
-                            <li class="mb-10"><a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
-                            <li class="mb-10"><a href="/user/oauth/twitter" class="btn btn-default">新浪微博</a></li>
+                        @if(!Auth()->user()->isOauthBind('qq'))
+                        <li class="mb-10"><a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
                         @endif
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade " id="register_license_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center">{{ Setting()->get('website_name') }}服务条款</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="height: 450px;overflow:scroll;">
+                        {!! Setting()->get('register_license','') !!}
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
