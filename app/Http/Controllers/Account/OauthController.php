@@ -16,9 +16,6 @@ use App\Models\UserOauth;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use Laravel\Socialite\Facades\Socialite;
 
 class OauthController extends Controller
@@ -27,9 +24,11 @@ class OauthController extends Controller
         return Socialite::with($type)->redirect();
     }
 
-    public function callback($type,Request $request){
+    public function callback($type,Request $request,Guard $auth){
 
         $oauthUser = Socialite::driver($type)->user();
+
+
 
         $userOauth = UserOauth::firstOrCreate(['id'=>$oauthUser->id]);
         $userOauth->auth_type = $type;
@@ -39,8 +38,25 @@ class OauthController extends Controller
         $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
         $userOauth->expires_in = $oauthUser->accessTokenResponseBody['expires_in'];
 
-        if(Auth()->guest()){//游客登录
+        if( Auth()->guest() ){//游客登录
+
             $userOauth->save();
+
+            $oauthData = UserOauth::find($oauthUser->id);
+
+            if( $oauthData->user_id > 0 ){
+
+                $auth->loginUsingId($oauthData->user_id);
+
+                if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
+                    $message = '登陆成功! '.get_credit_message(Setting()->get('credits_login'),Setting()->get('coins_login'));
+                    return $this->success(route('website.index'),$message);
+                }
+
+                /*认证成功后跳转到首页*/
+                return redirect()->to(route('website.index'));
+            }
+
             return redirect(route('auth.oauth.profile',['auth_id'=>$userOauth->id]));
         }
 
@@ -87,8 +103,6 @@ class OauthController extends Controller
             $userOauth = UserOauth::find($formData['auth_id']);
             $userOauth->user_id = $user->id;
             $userOauth->save();
-            //同步用户头像
-            $this->syncAvatar($userOauth->user_id,$userOauth->avatar);
         }
         $user->attachRole(2); //默认注册为普通用户角色
         $auth->login($user);
@@ -110,18 +124,5 @@ class OauthController extends Controller
         return $this->success(route('website.index'),$message);
     }
 
-    /*同步用户头像*/
-    private function syncAvatar($userId,$avatarUrl){
-
-        $avatarFile = storage_path('app/'.User::getAvatarPath($userId,'small'));
-        if(is_file($avatarFile)){
-            return true;
-        }
-        Image::make($avatarUrl)->save(storage_path('app/'.User::getAvatarPath($userId,'origin')));
-        Image::make($avatarUrl)->save(storage_path('app/'.User::getAvatarPath($userId,'big')));
-        Image::make($avatarUrl)->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($userId,'middle')));
-        Image::make($avatarUrl)->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($userId,'small')));
-        return response('ok');
-    }
 
 }
