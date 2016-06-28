@@ -27,7 +27,7 @@ class OauthController extends Controller
         $oauthUser = Socialite::driver($type)->user();
 
         $oauthData = [
-            'id' => $oauthUser['id'] ,
+            'id' => $oauthUser->id ,
             'auth_type' => $type ,
             'access_token' => $oauthUser->accessTokenResponseBody['access_token'],
             'refresh_token' => $oauthUser->accessTokenResponseBody['refresh_token'],
@@ -71,6 +71,12 @@ class OauthController extends Controller
         $formData['visit_ip'] = $request->getClientIp();
 
         $user = $registrar->create($formData);
+
+        if($user){//绑定用户信息
+            $userOauth = UserOauth::find($formData['auth_id']);
+            $userOauth->user_id = $user->id;
+            $userOauth->save();
+        }
         $user->attachRole(2); //默认注册为普通用户角色
         $this->auth->login($user);
         $message = '登录成功!';

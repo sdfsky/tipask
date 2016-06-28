@@ -21,7 +21,7 @@
             <h1 class="h4 text-center text-muted login-title">完善资料</h1>
             <form role="form" name="loginForm" action="{{ route('auth.oauth.register') }}"  method="POST" >
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="auth_id" value="{{ $oauthUser['auth_id'] }}">
+                <input type="hidden" name="auth_id" value="{{ $oauthUser['id'] }}">
 
                 <div class="form-group @if ($errors->first('email')) has-error @endif">
                     <label class="required">邮箱</label>
