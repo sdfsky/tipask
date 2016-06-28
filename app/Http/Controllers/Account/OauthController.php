@@ -28,6 +28,7 @@ class OauthController extends Controller
         }else{
 
             $oauthData = [
+                'auth_type' => $type ,
                 'access_token' => $oauthUser->accessTokenResponseBody['access_token'],
                 'refresh_token' => $oauthUser->accessTokenResponseBody['refresh_token'],
                 'expires_in' => $oauthUser->accessTokenResponseBody['expires_in'],
@@ -39,14 +40,11 @@ class OauthController extends Controller
             return $this->success( route('auth.profile.oauth') , $type .'绑定成功！');
         }
 
+    }
 
-
-
-
-
-
-
-
+    public function unbind( $type , Request $request){
+        $request->user()->userOauth()->where('auth_type','=',$type)->delete();
+        return $this->success( route('auth.profile.oauth') , $type .'已解除绑定！');
     }
 
 }

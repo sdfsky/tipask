@@ -17,11 +17,13 @@
                 <label class="control-label col-sm-2">已绑定账号</label>
                 <div class="col-sm-8">
                     <ul class="list-inline">
+                        @if(Auth()->user()->userOauth()->isBind('qq'))))
                         <li class="mb-10">
-                            <a class="btn btn-success">腾讯 QQ</a><button type="button" class="bind-delete btn btn-link btn-xs" data-type="qq" data-bid="647F35C9D42FA92545610AC5416C8288" data-name="腾讯 QQ" title="解除绑定"><span class="glyphicon glyphicon-minus-sign text-muted"></span></button>
+                            <a class="btn btn-success">腾讯 QQ</a> <a href="{{ route('auth.oauth.unbind',['type'=>'qq']) }}" class="bind-delete btn btn-link btn-xs"><span class="glyphicon glyphicon-minus-sign text-muted"></span></a>
                         </li>
+                        @endif
                         <li class="mb-10">
-                            <a class="btn btn-success">腾讯 QQ</a><button type="button" class="bind-delete btn btn-link btn-xs" data-type="qq" data-bid="647F35C9D42FA92545610AC5416C8288" data-name="腾讯 QQ" title="解除绑定"><span class="glyphicon glyphicon-minus-sign text-muted"></span></button>
+                            <a class="btn btn-success">腾讯 QQ</a> <button type="button" class="bind-delete btn btn-link btn-xs" data-type="qq" data-name="腾讯 QQ" title="解除绑定"><span class="glyphicon glyphicon-minus-sign text-muted"></span></button>
                         </li>
                     </ul>
                 </div>
@@ -30,7 +32,9 @@
                 <label class="control-label col-sm-2">未绑定</label>
                 <div class="col-sm-10">
                     <ul class="list-inline">
+                        @if(!Auth()->user()->userOauth()->isBind('qq'))))
                         <li class="mb10"><a href="{{ route('auth.oauth.auth',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
+                        @endif
                         <li class="mb10"><a href="/user/oauth/twitter" class="btn btn-default">新浪微博</a></li>
                     </ul>
                 </div>

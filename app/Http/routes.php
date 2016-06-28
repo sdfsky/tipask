@@ -93,6 +93,7 @@ Route::Group(['namespace'=>'Account'],function(){
 
         Route::get('oauth/{type}',['as'=>'auth.oauth.auth','uses'=>'OauthController@auth']);
         Route::get('oauth/{type}/callback',['as'=>'auth.oauth.callback','uses'=>'OauthController@callback']);
+        Route::get('oauth/{type}/unbind',['as'=>'auth.oauth.unbind','uses'=>'OauthController@unbind']);
         /*用户个人信息修改*/
         Route::controller('profile','ProfileController', [
             'anyBase'     => 'auth.profile.base',
