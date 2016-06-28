@@ -26,25 +26,19 @@ class OauthController extends Controller
 
         $oauthUser = Socialite::driver($type)->user();
 
-        $oauthData = [
-            'id' => $oauthUser->id ,
-            'auth_type' => $type ,
-            'access_token' => $oauthUser->accessTokenResponseBody['access_token'],
-            'refresh_token' => $oauthUser->accessTokenResponseBody['refresh_token'],
-            'expires_in' => $oauthUser->accessTokenResponseBody['expires_in'],
-        ];
-
+        $userOauth = UserOauth::findOrCreate($oauthUser->id);
+        $userOauth->auth_type = $type;
+        $userOauth->access_token = $oauthUser->accessTokenResponseBody['access_token'];
+        $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
+        $userOauth->expires_in = $oauthUser->accessTokenResponseBody['expires_in'];
 
         if(Auth()->guest()){//游客登录
-            UserOauth::create($oauthData);
+            $userOauth->save();
             return view("theme::account.oauth")->with(compact('oauthUser'));
         }
 
-
-        $oauthData['user_id'] = $request->user()->id;
-
-        UserOauth::create($oauthData);
-
+        $userOauth->user_id =  $request->user()->id;
+        $userOauth->save();
         return $this->success( route('auth.profile.oauth') , $type .'绑定成功！');
 
 
