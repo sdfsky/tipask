@@ -33,16 +33,23 @@ class OauthController extends Controller
 
         if( Auth()->check() ){ //用户登录时处理绑定请求
             $request->user()->userOauth()->where("auth_type",'=',$type)->delete();
-            $userOauth = UserOauth::firstOrCreate(['id'=>$oauthUser->id]);
-            $userOauth->auth_type = $type;
-            $userOauth->user_id = $request->user()->id;
-            $userOauth->nickname = $oauthUser->nickname;
-            $userOauth->avatar = $oauthUser->avatar;
-            $userOauth->access_token = $oauthUser->accessTokenResponseBody['access_token'];
-            $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
-            $userOauth->expires_in = $oauthUser->accessTokenResponseBody['expires_in'];
-            $userOauth->save();
-            return $this->success( route('auth.profile.oauth') , $type .'绑定成功！');
+            $userOauth = UserOauth::create([
+                'id'=>$oauthUser->id,
+                'auth_type'=>$type,
+                'user_id'=> $request->user()->id,
+                'nickname'=>$oauthUser->id,
+                'avatar'=>$oauthUser->id,
+                'access_token'=>$oauthUser->accessTokenResponseBody['access_token'],
+                'refresh_token'=>$oauthUser->accessTokenResponseBody['refresh_token'],
+                'expires_in'=>$oauthUser->accessTokenResponseBody['expires_in'],
+            ]);
+
+            if($userOauth){
+                return $this->success( route('auth.profile.oauth') , $type .'绑定成功！');
+            }
+
+            return $this->error(route('auth.profile.oauth'),'绑定失败请稍后重试！');
+
         }
 
         //游客登录处理注册流程
@@ -58,17 +65,22 @@ class OauthController extends Controller
             return redirect()->to(route('website.index'));
         }
 
-        $userOauth = UserOauth::firstOrCreate(['id'=>$oauthUser->id]);
-        $userOauth->auth_type = $type;
-        $userOauth->user_id = 0;
-        $userOauth->nickname = $oauthUser->nickname;
-        $userOauth->avatar = $oauthUser->avatar;
-        $userOauth->access_token = $oauthUser->accessTokenResponseBody['access_token'];
-        $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
-        $userOauth->expires_in = $oauthUser->accessTokenResponseBody['expires_in'];
-        $userOauth->save();
+        $oauthData = UserOauth::create([
+            'id'=>$oauthUser->id,
+            'auth_type'=>$type,
+            'user_id'=> 0,
+            'nickname'=>$oauthUser->id,
+            'avatar'=>$oauthUser->id,
+            'access_token'=>$oauthUser->accessTokenResponseBody['access_token'],
+            'refresh_token'=>$oauthUser->accessTokenResponseBody['refresh_token'],
+            'expires_in'=>$oauthUser->accessTokenResponseBody['expires_in'],
+        ]);
 
-        return redirect(route('auth.oauth.profile',['auth_id'=>$oauthUser->id]));
+        if($oauthData){
+            return redirect(route('auth.oauth.profile',['auth_id'=>$oauthUser->id]));
+        }
+
+        return $this->error(route('auth.profile.oauth'),$type.'登录错误，请稍后再试！');
 
     }
 
