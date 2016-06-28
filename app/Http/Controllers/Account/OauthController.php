@@ -27,7 +27,9 @@ class OauthController extends Controller
 
         $oauthUser = Socialite::driver($type)->user();
 
-
+        if(!$oauthUser){
+            abort(500);
+        }
 
         $userOauth = UserOauth::firstOrCreate(['id'=>$oauthUser->id]);
         $userOauth->auth_type = $type;
