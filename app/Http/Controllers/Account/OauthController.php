@@ -11,10 +11,9 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmailToken;
-use App\Models\User;
 use App\Models\UserOauth;
-use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -46,7 +45,7 @@ class OauthController extends Controller
 
             if( $oauthData->user_id > 0 ){
 
-                $auth->loginUsingId($oauthData->user());
+                $auth->loginUsingId($oauthData->user_id);
 
                 if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
                     $message = '登陆成功! '.get_credit_message(Setting()->get('credits_login'),Setting()->get('coins_login'));
