@@ -46,7 +46,7 @@ class OauthController extends Controller
 
             if( $oauthData->user_id > 0 ){
 
-                $auth->loginUsingId($oauthData->user_id);
+                $auth->loginUsingId($oauthData->user());
 
                 if($this->credit($request->user()->id,'login',Setting()->get('coins_login'),Setting()->get('credits_login'))){
                     $message = '登陆成功! '.get_credit_message(Setting()->get('credits_login'),Setting()->get('coins_login'));
