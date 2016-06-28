@@ -17,7 +17,7 @@ class UserOauth extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'access_token','refresh_token','expires_in'];
+    protected $fillable = ['user_id', 'access_token','refresh_token','expires_in','auth_type'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -30,7 +30,7 @@ class UserOauth extends Model
 
     public function isBind($type){
 
-        if($this->auth_type === $type ){
+        if( $this->auth_type === $type ){
             return true;
         }
         return false;
