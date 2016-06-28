@@ -29,13 +29,15 @@ class OauthController extends Controller
 
         $userOauth = UserOauth::firstOrCreate(['id'=>$oauthUser->id]);
         $userOauth->auth_type = $type;
+        $userOauth->nickname = $oauthUser->nickname;
+        $userOauth->avatar = $oauthUser->avatar;
         $userOauth->access_token = $oauthUser->accessTokenResponseBody['access_token'];
         $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
         $userOauth->expires_in = $oauthUser->accessTokenResponseBody['expires_in'];
 
         if(Auth()->guest()){//游客登录
             $userOauth->save();
-            return view("theme::account.oauth")->with(compact('oauthUser'));
+            return redirect(route('auth.oauth.profile',['auth_id'=>$userOauth->id]));
         }
 
         $userOauth->user_id =  $request->user()->id;
@@ -51,8 +53,18 @@ class OauthController extends Controller
     }
 
 
-    public function register(Request $request,Registrar $registrar,Guard $auth){
+    public function profile($auth_id)
+    {
+        $userOauth = UserOauth::find($auth_id);
+        if(!$userOauth){
+            abort(404);
+        }
+        return view('theme::account.oauth')->with(compact('userOauth'));
+    }
 
+
+    public function register(Request $request,Registrar $registrar,Guard $auth)
+    {
         $request->flash();
         /*表单数据校验*/
         $this->validate($request, [
@@ -90,7 +102,6 @@ class OauthController extends Controller
         $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
 
         return $this->success(route('website.index'),$message);
-
     }
 
 }

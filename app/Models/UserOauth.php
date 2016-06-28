@@ -17,7 +17,7 @@ class UserOauth extends Model
      *
      * @var array
      */
-    protected $fillable = ['id','user_id', 'access_token','refresh_token','expires_in','auth_type'];
+    protected $fillable = ['id','user_id', 'access_token','refresh_token','expires_in','auth_type','nickname','avatar'];
 
     /**
      * The attributes excluded from the model's JSON form.

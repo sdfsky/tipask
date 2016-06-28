@@ -21,7 +21,7 @@
             <h1 class="h4 text-center text-muted login-title">完善资料</h1>
             <form role="form" name="loginForm" action="{{ route('auth.oauth.register') }}"  method="POST" >
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="auth_id" value="{{ old('auth_id' , $oauthUser->id) }}">
+                <input type="hidden" name="auth_id" value="{{ old('auth_id' , $userOauth->id) }}">
 
                 <div class="form-group @if ($errors->first('email')) has-error @endif">
                     <label class="required">邮箱</label>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group @if ($errors->first('name')) has-error @endif">
                     <label class="required">用户名</label>
-                    <input type="text" class="form-control" name="name" required placeholder="用户名" value="{{ old('name',$oauthUser->nickname) }}">
+                    <input type="text" class="form-control" name="name" required placeholder="用户名" value="{{ old('name',$userOauth->nickname) }}">
                     @if ($errors->first('name'))
                         <span class="help-block">{{ $errors->first('name') }}</span>
                     @endif

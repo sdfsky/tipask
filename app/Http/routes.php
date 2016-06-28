@@ -44,6 +44,7 @@ Route::Group(['namespace'=>'Account'],function(){
     /*用户auth2.0*/
     Route::get('oauth/{type}/login',['as'=>'auth.oauth.login','uses'=>'OauthController@login']);
     Route::get('oauth/{type}/callback',['as'=>'auth.oauth.callback','uses'=>'OauthController@callback']);
+    Route::get('oauth/register/{auth_id}',['as'=>'auth.oauth.profile','uses'=>'OauthController@profile']);
     Route::post('oauth/register',['as'=>'auth.oauth.register','uses'=>'OauthController@register']);
 
     /*用户空间首页*/
