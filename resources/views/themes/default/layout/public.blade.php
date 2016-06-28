@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<div class="top-common-nav">
+<div class="top-common-nav  mb-50">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -89,39 +89,40 @@
         </div>
     </nav>
 </div>
-<div class="clearfix"></div>
-<div class="wrap mt-60">
+<div class="top-alert mt-60 clearfix">
+    <!--[if lt IE 9]>
+    <div class="alert alert-danger topframe" role="alert">你的浏览器实在<strong>太太太太太太旧了</strong>，放学别走，升级完浏览器再说
+        <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a>
+    </div>
+    <![endif]-->
+
+    @if ( session('message') )
+        <div class="alert @if(session('message_type')===1) alert-danger @else alert-success @endif alert-dismissible" role="alert" id="alert_message">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ session('message') }}
+        </div>
+    @endif
+
+
+    @if(Auth()->check() && Auth()->user()->status === 0)
+        @if(Auth()->user()->created_at->diffInMinutes() < 5)
+            <div class="alert alert-success" role="alert">
+                一封注册验证邮件已经发到您的邮箱 {{ Auth()->user()->email }} ，请前往邮箱完成注册.<a href="javascript:void(0);" class="send-mail btn btn-default btn-xs ml-5" onclick="$('#email_validate').modal('show');">遇到问题 <i class="fa fa-question"></i></a>
+                <button type="button" class="close"></button>
+            </div>
+        @else
+            <div class="alert alert-warning topframe" role="alert">
+                你的邮箱 {{ Auth()->user()->email }} 尚未验证，部分功能将无法使用 <a href="javascript:void(0);" class="send-mail btn btn-default btn-xs ml-5" onclick="$('#email_validate').modal('show');">遇到问题 <i class="fa fa-question"></i></a>
+                <button type="button" class="close"></button>
+            </div>
+        @endif
+    @endif
+</div>
+
+<div class="wrap">
     @yield('jumbotron')
     @yield('container')
     <div class="container">
-        <!--[if lt IE 9]>
-        <div class="alert alert-danger topframe" role="alert">你的浏览器实在<strong>太太太太太太旧了</strong>，放学别走，升级完浏览器再说
-            <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a>
-        </div>
-        <![endif]-->
-
-        @if ( session('message') )
-            <div class="alert @if(session('message_type')===1) alert-danger @else alert-success @endif alert-dismissible" role="alert" id="alert_message">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{ session('message') }}
-            </div>
-        @endif
-
-
-        @if(Auth()->check() && Auth()->user()->status === 0)
-            @if(Auth()->user()->created_at->diffInMinutes() < 5)
-                <div class="alert alert-success" role="alert">
-                    一封注册验证邮件已经发到您的邮箱 {{ Auth()->user()->email }} ，请前往邮箱完成注册.<a href="javascript:void(0);" class="send-mail btn btn-default btn-xs ml-5" onclick="$('#email_validate').modal('show');">遇到问题 <i class="fa fa-question"></i></a>
-                    <button type="button" class="close"></button>
-                </div>
-            @else
-                <div class="alert alert-warning topframe" role="alert">
-                    你的邮箱 {{ Auth()->user()->email }} 尚未验证，部分功能将无法使用 <a href="javascript:void(0);" class="send-mail btn btn-default btn-xs ml-5" onclick="$('#email_validate').modal('show');">遇到问题 <i class="fa fa-question"></i></a>
-                    <button type="button" class="close"></button>
-                </div>
-            @endif
-        @endif
-
         @yield('content')
     </div>
 </div>

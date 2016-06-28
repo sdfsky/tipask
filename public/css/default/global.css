@@ -190,6 +190,10 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 }
 
 
+/*公告alert*/
+.top-alert .alert{margin-bottom: 10px;border-radius:2px;}
+
+
 .side-alert{border: 1px solid #fbeed5;padding: 15px;}
 
 /*列表样式*/
