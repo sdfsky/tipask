@@ -15,6 +15,9 @@ use App\Models\UserOauth;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Laravel\Socialite\Facades\Socialite;
 
 class OauthController extends Controller
@@ -83,6 +86,8 @@ class OauthController extends Controller
             $userOauth = UserOauth::find($formData['auth_id']);
             $userOauth->user_id = $user->id;
             $userOauth->save();
+            //同步用户头像
+            $this->syncAvatar($userOauth->user_id,$userOauth->avatar);
         }
         $user->attachRole(2); //默认注册为普通用户角色
         $auth->login($user);
@@ -102,6 +107,22 @@ class OauthController extends Controller
         $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
 
         return $this->success(route('website.index'),$message);
+    }
+
+    /*同步用户头像*/
+    private function syncAvatar($userId,$avatarUrl){
+
+        $avatarFile = storage_path('app/'.User::getAvatarPath($userId,'small'));
+        if(is_file($avatarFile)){
+            return true;
+        }
+        $extension = '.jpg';
+        $avatarDir = User::getAvatarDir($userId);
+        Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($userId,'origin').$extension,File::get($avatarUrl));
+        Image::make(storage_path('app/'.User::getAvatarPath($userId,'origin',$extension)))->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($userId,'big')));
+        Image::make(storage_path('app/'.User::getAvatarPath($userId,'origin',$extension)))->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($userId,'middle')));
+        Image::make(storage_path('app/'.User::getAvatarPath($userId,'origin',$extension)))->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($userId,'small')));
+        return response('ok');
     }
 
 }
