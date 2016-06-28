@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmailToken;
+use App\Models\User;
 use App\Models\UserOauth;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Contracts\Auth\Guard;
