@@ -26,7 +26,7 @@ class OauthController extends Controller
 
         $oauthUser = Socialite::driver($type)->user();
 
-        $userOauth = UserOauth::findOrCreate($oauthUser->id);
+        $userOauth = UserOauth::firstOrCreate($oauthUser->id);
         $userOauth->auth_type = $type;
         $userOauth->access_token = $oauthUser->accessTokenResponseBody['access_token'];
         $userOauth->refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
