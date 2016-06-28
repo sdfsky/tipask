@@ -12,7 +12,8 @@ namespace App\Http\Controllers\Account;
 use App\Http\Controllers\Controller;
 use App\Models\EmailToken;
 use App\Models\UserOauth;
-use App\Services\Registrar;
+use Illuminate\Contracts\Auth\Registrar;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -50,7 +51,7 @@ class OauthController extends Controller
     }
 
 
-    public function register(Request $request,Registrar $registrar){
+    public function register(Request $request,Registrar $registrar,Guard $auth){
 
         $request->flash();
         /*表单数据校验*/
@@ -72,7 +73,7 @@ class OauthController extends Controller
             $userOauth->save();
         }
         $user->attachRole(2); //默认注册为普通用户角色
-        $this->auth->login($user);
+        $auth->login($user);
         $message = '登录成功!';
 
         if($this->credit($request->user()->id,'register',Setting()->get('coins_register'),Setting()->get('credits_register'))){
