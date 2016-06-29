@@ -19,7 +19,7 @@ class CreateUserOauthTable extends Migration
             $table->char("avatar",255);
             $table->integer('user_id')->index()->default(0);              //用户UID
             $table->string("access_token",64);
-            $table->string("refresh_token",64);
+            $table->string("refresh_token",64)->nullable();
             $table->integer("expires_in");
             $table->timestamps();
         });

@@ -31,6 +31,11 @@ class OauthController extends Controller
             abort(500);
         }
 
+        $refresh_token = '';
+        if(isset($oauthUser->accessTokenResponseBody['refresh_token'])){
+            $refresh_token = $oauthUser->accessTokenResponseBody['refresh_token'];
+        }
+
         if( Auth()->check() ){ //用户登录时处理绑定请求
             $request->user()->userOauth()->where("auth_type",'=',$type)->delete();
             $userOauth = UserOauth::create([
@@ -40,7 +45,7 @@ class OauthController extends Controller
                 'nickname'=>$oauthUser->nickname,
                 'avatar'=>$oauthUser->avatar,
                 'access_token'=>$oauthUser->accessTokenResponseBody['access_token'],
-                'refresh_token'=>$oauthUser->accessTokenResponseBody['refresh_token'],
+                'refresh_token'=>$refresh_token,
                 'expires_in'=>$oauthUser->accessTokenResponseBody['expires_in'],
             ]);
 
@@ -74,7 +79,7 @@ class OauthController extends Controller
             'nickname'=>$oauthUser->nickname,
             'avatar'=>$oauthUser->avatar,
             'access_token'=>$oauthUser->accessTokenResponseBody['access_token'],
-            'refresh_token'=>$oauthUser->accessTokenResponseBody['refresh_token'],
+            'refresh_token'=>$refresh_token,
             'expires_in'=>$oauthUser->accessTokenResponseBody['expires_in'],
         ]);
 
