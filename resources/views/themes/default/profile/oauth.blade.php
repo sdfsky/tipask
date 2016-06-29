@@ -22,6 +22,11 @@
                             <a class="btn btn-success">腾讯 QQ</a> <a href="{{ route('auth.oauth.unbind',['type'=>'qq']) }}" class="bind-delete btn btn-link btn-xs"><span class="glyphicon glyphicon-minus-sign text-muted"></span></a>
                         </li>
                         @endif
+                        @if(Auth()->user()->isOauthBind('weibo'))
+                        <li class="mb-10">
+                            <a class="btn btn-success">新浪微博</a> <a href="{{ route('auth.oauth.unbind',['type'=>'weibo']) }}" class="bind-delete btn btn-link btn-xs"><span class="glyphicon glyphicon-minus-sign text-muted"></span></a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -31,6 +36,9 @@
                     <ul class="list-inline">
                         @if(!Auth()->user()->isOauthBind('qq'))
                         <li class="mb-10"><a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default">腾讯QQ</a></li>
+                        @endif
+                        @if(!Auth()->user()->isOauthBind('weibo'))
+                        <li class="mb-10"><a href="{{ route('auth.oauth.login',['type'=>'weibo']) }}" class="btn btn-default">新浪微博</a></li>
                         @endif
                     </ul>
                 </div>
