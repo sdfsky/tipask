@@ -56,6 +56,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary pull-right pl20 pr20">登录</button>
             </div>
+            <hr />
+            <div class="widget-login mt-30">
+                <p class="text-muted mt-5 mr-10 pull-left hidden-xs">快速登录</p>
+                <a href="{{ route('auth.oauth.login',['type'=>'weibo']) }}" class="btn btn-default btn-sm btn-sn-weibo" ><span class="icon-sn-bg-weibo"></span> <strong class="visible-xs-inline">新浪微博账号</strong></a>
+                <a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default btn-sm btn-sn-qq" ><span class="icon-sn-bg-qq"></span> <strong class="visible-xs-inline">QQ 账号</strong></a>
+            </div>
         </form>
     </div>
 
