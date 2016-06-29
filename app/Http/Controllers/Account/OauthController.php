@@ -38,6 +38,7 @@ class OauthController extends Controller
 
         if( Auth()->check() ){ //用户登录时处理绑定请求
             $request->user()->userOauth()->where("auth_type",'=',$type)->delete();
+            UserOauth::where('id','=',$oauthUser->id)->delete();
             $userOauth = UserOauth::create([
                 'id'=>$oauthUser->id,
                 'auth_type'=>$type,
