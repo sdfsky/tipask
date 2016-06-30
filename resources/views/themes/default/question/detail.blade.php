@@ -165,19 +165,21 @@
             @if($question->status!==2)
             <div class="widget-answer-form mt-15">
                 @if(!Auth()->check() || ($question->user_id !== Auth()->user()->id && !Auth()->user()->isAnswered($question->id)) )
-                    <h4>我来回答</h4>
-                    <form action="{{ route('ask.answer.store') }}" method="post" class="editor-wrap">
+                    <form  name="answerForm" id="answer_form" action="{{ route('ask.answer.store') }}" method="post" class="editor-wrap">
                         <input type="hidden" id="answer_token" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" value="{{ $question->id }}" id="question_id" name="question_id" />
-                        <div class="editor" id="questionText">
-                            <textarea id="answerEditor" name="content" class="form-control" rows="4" placeholder="撰写答案..."></textarea>
+                        <div class="form-group  @if($errors->has('content')) has-error @endif">
+                            <div id="answer_editor">{!! old('content','') !!}</div>
+                            @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
                         </div>
+
                         <div id="answerSubmit" class="mt-15 clearfix">
                             <div class="checkbox pull-left">
                                 <label><input type="checkbox" id="attendTo" name="followed" value="1" checked />关注该问题</label>
                             </div>
                             <div class="pull-right">
-                                <button type="submit" id="answerSubmit" class="btn btn-primary ml20">提交回答</button>
+                                <input type="hidden" id="editor_content"  name="content" value=""  />
+                                <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#answer_form" data-field_id="#editor_content" data-editor_id="#answer_editor">提交回答</button>
                             </div>
                         </div>
                     </form>
@@ -289,6 +291,7 @@
 
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             @if(Auth()->check())
@@ -309,18 +312,17 @@
            @endif
 
             /*回答编辑器初始化*/
-            $('#answerEditor').summernote({
-                height: 180,
-                placeholder: true,
-                toolbar:ask_editor_options.toolbar,
-                codemirror:ask_editor_options.codemirror,
-                onImageUpload: function(files, editor, welEditable) {
-                    upload_editor_image(files[0],"answerEditor",$("#answer_token").val());
+            $('#answer_editor').summernote({
+                lang: 'zh-CN',
+                height: 160,
+                placeholder:'撰写答案',
+                toolbar: [ {!! config('tipask.summernote.ask') !!} ],
+                callbacks: {
+                    onImageUpload: function(files) {
+                        upload_editor_image(files[0],'answer_editor');
+                    }
                 }
             });
-
-
-
 
             /*评论提交*/
             $(".comment-btn").click(function(){

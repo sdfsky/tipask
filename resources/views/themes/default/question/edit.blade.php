@@ -26,13 +26,15 @@
             <input type="hidden" name="id" value="{{ $question->id }}" />
             <input type="hidden" id="tags" name="tags" value="{{ $question->tags->implode('name',',') }}" />
 
-            <div class="form-group">
+            <div class="form-group @if($errors->has('title')) has-error @endif ">
                 <label for="title">问题标题:</label>
-                <input id="title" type="text" name="title"  class="form-control input-lg" placeholder="请在这里概述您的问题" value="{{ $question->title }}" />
+                <input id="title" type="text" name="title"  class="form-control input-lg" placeholder="请在这里概述您的问题" value="{{ old('title',$question->title) }}" />
+                @if($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
             </div>
-            <div class="form-group">
-                <label for="editor">问题描述(选填)</label>
-                <textarea name="description" id="description" placeholder="您可以在这里继续补充问题细节" style="height:100px;width: 1000px;">{{ $question->description }}</textarea>
+            <div class="form-group  @if($errors->has('description')) has-error @endif">
+                <label for="question_editor">问题描述(选填)</label>
+                <div id="question_editor">{!! old('description',$question->description) !!}</div>
+                @if($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif
             </div>
             <div class="form-group">
                 <label for="select_tags">添加话题</label>
@@ -52,7 +54,8 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary pull-right">确认修改</button>
+                    <input type="hidden" id="editor_content"  name="description" value=""  />
+                    <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#questionForm" data-field_id="#editor_content" data-editor_id="#question_editor">确认修改</button>
                 </div>
 
             </div>
@@ -63,48 +66,22 @@
 @endsection
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script src="{{ asset('/static/js/select2/js/select2.min.js')}}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#description').summernote({
+            $('#question_editor').summernote({
+                lang: 'zh-CN',
                 height: 180,
-                placeholder: true,
-                toolbar:ask_editor_options.toolbar,
-                codemirror:ask_editor_options.codemirror,
-                onImageUpload: function(files, editor, welEditable) {
-                    upload_editor_image(files[0],"description",$("#editor_token").val());
+                placeholder:'您可以在这里继续补充问题细节',
+                toolbar: [ {!! config('tipask.summernote.ask') !!} ],
+                callbacks: {
+                    onImageUpload: function(files) {
+                        upload_editor_image(files[0],'question_editor');
+                    }
                 }
             });
-
-            $("#select_tags").select2({
-                theme:'bootstrap',
-                placeholder: "话题越精准，越容易让相关领域专业人士看到你的问题",
-                ajax: {
-                    url: '/ajax/loadTags',
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            word: params.term
-                        };
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                },
-                minimumInputLength:1,
-                tags:true
-            });
-
-            $("#select_tags").change(function(){
-                $("#tags").val($("#select_tags").val());
-            });
-
-
         });
     </script>
 @endsection

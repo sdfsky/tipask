@@ -18,34 +18,39 @@
             <li><a href="{{ route('ask.question.detail',['id'=>$answer->question_id]) }}">{{ $answer->question->title }}</a></li>
             <li class="active">编辑回答</li>
         </ol>
-        <form id="questionForm" method="POST" role="form" action="{{ route('ask.answer.update',['id'=>$answer->id]) }}">
+        <form id="answer_form" method="POST" role="form" action="{{ route('ask.answer.update',['id'=>$answer->id]) }}">
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
-            <div class="form-group">
-                <label for="editor">我的回答</label>
-                <textarea name="content" id="answer_content" placeholder="您可以在这里继续补充问题细节" style="height:100px;width: 1000px;">{{ $answer->content }}</textarea>
+
+            <div class="form-group  @if($errors->has('content')) has-error @endif">
+                <div id="answer_editor">{!! old('content',$answer->content) !!}</div>
+                @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
             </div>
             <div class="row mt-20">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary pull-right">确认修改</button>
+                    <input type="hidden" id="editor_content"  name="content" value=""  />
+                    <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#answer_form" data-field_id="#editor_content" data-editor_id="#answer_editor">保存修改</button>
                 </div>
 
             </div>
         </form>
-
     </div>
 
 @endsection
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#answer_content').summernote({
+            /*回答编辑器初始化*/
+            $('#answer_editor').summernote({
+                lang: 'zh-CN',
                 height: 240,
-                placeholder: true,
-                toolbar:ask_editor_options.toolbar,
-                codemirror:ask_editor_options.codemirror,
-                onImageUpload: function(files, editor, welEditable) {
-                    upload_editor_image(files[0],"answer_content",$("#editor_token").val());
+                placeholder:'撰写答案',
+                toolbar: [ {!! config('tipask.summernote.ask') !!} ],
+                callbacks: {
+                    onImageUpload: function(files) {
+                        upload_editor_image(files[0],'answer_editor');
+                    }
                 }
             });
         });

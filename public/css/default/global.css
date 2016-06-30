@@ -360,6 +360,16 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 }
 
 
+/*提问建议*/
+.widget-suggest .widget-suggest-list {
+    margin: 0;
+    overflow: auto;
+    max-height: 100px;
+}
+.widget-suggest li a {
+    font-weight: 700;
+}
+.widget-suggest li a em{color:#D0021B;font-style: normal;}
 /*详情页面头部*/
 
 .widget-question .title{margin: 0 0 10px;}
@@ -381,6 +391,7 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .widget-action button{margin-right:8px;min-width:58px}
 .widget-action strong{color:#333}
 .widget-action .no-stress{font-weight:400}
+
 /*问题回答*/
 .post-col{float:left;width:36px;position:relative}
 .post-col .unlike-alert{position:absolute;z-index:100;top:60px}

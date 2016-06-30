@@ -167,6 +167,8 @@ Route::Group(['namespace'=>'Ask'],function(){
     /*回答详情查看*/
     Route::get('question/{question_id}/answer/{id}',['as'=>'ask.answer.detail','uses'=>'AnswerController@detail'])->where(['id'=>'[0-9]+','question_id'=>'[0-9]+']);
 
+    /*问题建议*/
+    Route::post('question/suggest',['as'=>'ask.question.suggest','uses'=>'QuestionController@suggest']);
 
 
     /*需要登录的模块*/

@@ -38,5 +38,9 @@ return [
         'follow_user' => '关注了你',
 
     ],
+    'summernote'=>[
+        'ask' => "['common', ['bold','italic', 'underline',,'ol','link','picture','clear','undo','redo','fullscreen']]",
+        'aritcle' => "['common', ['bold','italic', 'underline',,'ol','link','picture','clear','undo','redo','fullscreen']]",
+    ]
 
 ];

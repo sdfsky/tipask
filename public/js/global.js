@@ -4,12 +4,7 @@
  */
 
 
-/*ajax设置项*/
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+
 
 
 
@@ -40,6 +35,13 @@ var showPopover = function () {
 
 
 $(function(){
+
+    /*ajax设置项*/
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     /*禁用bootstrap全局过度效果*/
     $.support.transition = false;
@@ -252,8 +254,44 @@ $(function(){
     $("#unread_messages").load("/ajax/unreadMessages");
 
 
+    /*标签自动选择*/
+    if($("#select_tags")>0){
+        $("#select_tags").select2({
+            theme:'bootstrap',
+            placeholder: "话题越精准，越容易让相关领域专业人士看到你的内容",
+            ajax: {
+                url: '/ajax/loadTags',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        word: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength:1,
+            tags:true
+        });
+        $("#select_tags").change(function(){
+            $("#tags").val($("#select_tags").val());
+        });
+    }
 
 
+    /*提交表单*/
+    $(".editor-submit").click(function(){
+        var editor_id = $(this).data('editor_id');
+        var form_id = $(this).data('form_id');
+        var field_id = $(this).data('field_id');
+        $(field_id).val($(editor_id).summernote('code'));
+        $(form_id).submit();
+    });
 
 
 });
@@ -291,9 +329,8 @@ function clear_comments(source_type,source_id){
  * @param editor
  * @param welEditable
  */
-function upload_editor_image(file,editorId,token){
+function upload_editor_image(file,editorId){
     data = new FormData();
-    data.append("_token",token);
     data.append("file", file);
     $.ajax({
         data: data,
@@ -304,8 +341,10 @@ function upload_editor_image(file,editorId,token){
         contentType: false,
         processData: false,
         success: function(url) {
-            console.log(url);
-            $('#'+editorId).summernote('editor.insertImage', url);
+            $('#'+editorId).summernote('insertImage', url, function ($image) {
+                $image.css('width', $image.width() / 2);
+                $image.addClass('img-responsive');
+            });
         }
     });
 }

@@ -7,9 +7,11 @@ use App\Models\Question;
 use App\Models\QuestionInvitation;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\XsSearch;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -90,7 +92,10 @@ class QuestionController extends Controller
             return $this->error(route('website.index'),'操作失败！您的邮箱还未验证，验证后才能进行该操作！');
         }
         $request->flash();
+
         $this->validate($request,$this->validateRules);
+
+
         $data = [
             'user_id'      => $loginUser->id,
             'title'        => trim($request->input('title')),
@@ -226,6 +231,30 @@ class QuestionController extends Controller
             DB::rollBack();
             return $this->error(route('ask.question.detail',['question_id'=>$id]),"追加悬赏失败，请稍后再试");
         }
+
+    }
+
+    /*问题建议*/
+    public function suggest(Request $request){
+
+        $validateRules = [
+            'word' => 'required|min:2|max:255',
+        ];
+        $this->validate($request,$validateRules);
+
+        if( Setting()->get('xunsearch_open',0) != 1 ){
+            return response('');
+        }
+        $word = $request->input('word');
+
+        $xsSearch = XsSearch::getSearch();
+        $model =  App::make('App\Models\\Question');
+        $docs = $xsSearch->model($model)->addQuery('subject:'.$word)->setLimit(10,0)->search();
+        $suggestList = '';
+        foreach($docs as $doc){
+            $suggestList .= '<li><a href="'.route('ask.question.detail',['id'=>$doc->id]).'" target="_blank" class="mr-10">'.XsSearch::getSearch()->highlight($doc->subject).'</a></li>';
+        }
+        return response($suggestList);
 
     }
 

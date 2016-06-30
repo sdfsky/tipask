@@ -79,7 +79,7 @@
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">热门问答</h4>
+                        <h4 class="widget-box-title">热门问答 <a href="{{ route('website.ask',['filter'=>'hottest']) }}" title="更多">»</a> </h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($hotQuestions as $hotQuestion)
                             <li class="widget-links-item">
@@ -91,7 +91,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">悬赏问答</h4>
+                        <h4 class="widget-box-title">悬赏问答 <a href="{{ route('website.ask',['filter'=>'reward']) }}" title="更多">»</a></h4>
 
                         <ul class="widget-links list-unstyled">
                             @foreach($rewardQuestions as $rewardQuestion)
@@ -107,7 +107,7 @@
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">热门文章</h4>
+                        <h4 class="widget-box-title">热门文章 <a href="{{ route('website.blog',['filter'=>'hottest']) }}" title="更多">»</a></h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($hotArticles as $hotArticle)
                                 <li class="widget-links-item">
@@ -118,7 +118,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">最新文章</h4>
+                        <h4 class="widget-box-title">最新文章 <a href="{{ route('website.blog',['filter'=>'newest']) }}" title="更多">»</a></h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($newestArticles as $newestArticle)
                                 <li class="widget-links-item">
@@ -171,7 +171,6 @@
                         <span class="text-muted pull-right">{{ $topCoinUser['coins'] }} 金币</span>
                     </li>
                     @endforeach
-
                 </ol>
             </div>
         </div>
