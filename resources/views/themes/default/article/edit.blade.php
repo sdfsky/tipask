@@ -17,20 +17,26 @@
     <div class="row mt-10">
         <ol class="breadcrumb">
             <li><a href="{{ route('website.blog') }}">文章</a></li>
+            <li><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a></li>
             <li class="active">编辑文章</li>
         </ol>
-        <form id="articleForm" method="POST" role="form" action="{{ route('blog.article.update',['id'=>$article->id]) }}">
+        <form id="article_form" method="POST" role="form" action="{{ route('blog.article.update',['id'=>$article->id]) }}">
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" id="tags" name="tags" value="{{ $article->tags->implode('name',',') }}" />
 
-            <div class="form-group">
+
+            <div class="form-group @if($errors->has('title')) has-error @endif ">
                 <label for="title">文章标题:</label>
-                <input id="title" type="text" name="title"  class="form-control input-lg" placeholder="我想起那天下午在夕阳下的奔跑,那是我逝去的青春" value="{{ $article->title }}" />
+                <input id="title" type="text" name="title"  class="form-control input-lg" placeholder="我想起那天下午在夕阳下的奔跑,那是我逝去的青春" value="{{ old('title',$article->title) }}" />
+                @if($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
             </div>
 
-            <div class="form-group">
-                <label for="editor">文章正文：</label>
-                <textarea name="content" id="article_editor" class="form-control"  style="height:300px;">{{ $article->content }}</textarea>
+
+
+            <div class="form-group  @if($errors->has('content')) has-error @endif">
+                <label for="article_editor">文章正文：</label>
+                <div id="article_editor">{!! old('content', $article->content) !!}</div>
+                @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
             </div>
 
             <div class="form-group">
@@ -49,7 +55,8 @@
 
             <div class="row mt-20">
                 <div class="col-md-4 col-md-offset-8">
-                    <button type="submit" class="btn btn-primary pull-right">发布文章</button>
+                    <input type="hidden" id="editor_content"  name="content" value=""  />
+                    <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#article_form" data-field_id="#editor_content" data-editor_id="#article_editor">提交修改</button>
                 </div>
             </div>
         </form>
@@ -59,44 +66,22 @@
 @endsection
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script src="{{ asset('/static/js/select2/js/select2.min.js')}}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
 
             $('#article_editor').summernote({
-                height: 300,
-                codemirror:ask_editor_options.codemirror,
-                onImageUpload: function(files, editor, welEditable) {
-                    upload_editor_image(files[0],"article_editor",$("#editor_token").val());
+                lang: 'zh-CN',
+                height: 350,
+                placeholder:'撰写文章',
+                toolbar: [ {!! config('tipask.summernote.blog') !!} ],
+                callbacks: {
+                    onImageUpload: function(files) {
+                        upload_editor_image(files[0],'article_editor');
+                    }
                 }
-            });
-
-            $("#select_tags").select2({
-                theme:'bootstrap',
-                placeholder: "话题越精准，越容易让相关领域专业人士看到你的问题",
-                ajax: {
-                    url: '/ajax/loadTags',
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            word: params.term
-                        };
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                },
-                minimumInputLength:1,
-                tags:true
-            });
-
-            $("#select_tags").change(function(){
-                $("#tags").val($("#select_tags").val());
             });
 
         });

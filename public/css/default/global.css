@@ -367,7 +367,7 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
     max-height: 100px;
 }
 .widget-suggest li a {
-    font-weight: 700;
+    color:#017e66;
 }
 .widget-suggest li a em{color:#D0021B;font-style: normal;}
 /*详情页面头部*/

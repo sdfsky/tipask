@@ -252,7 +252,18 @@ class QuestionController extends Controller
         $docs = $xsSearch->model($model)->addQuery('subject:'.$word)->setLimit(10,0)->search();
         $suggestList = '';
         foreach($docs as $doc){
-            $suggestList .= '<li><a href="'.route('ask.question.detail',['id'=>$doc->id]).'" target="_blank" class="mr-10">'.XsSearch::getSearch()->highlight($doc->subject).'</a></li>';
+            $question = Question::find($doc->id);
+            if( !$question ){
+                continue;
+            }
+            $suggestList .= '<li>';
+
+            if($question->status === 2){
+                $suggestList .= '<span class="label label-success pull-left mr-5">解决</span>';
+            }
+            $suggestList .= '<a href="'.route('ask.question.detail',['id'=>$doc->id]).'" target="_blank" class="mr-10">'.XsSearch::getSearch()->highlight($doc->subject).'</a>';
+            $suggestList .= '<small class="text-muted">'.$question->answers.' 回答</small>';
+            $suggestList .= '</li>';
         }
         return response($suggestList);
 

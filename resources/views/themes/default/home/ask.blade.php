@@ -30,7 +30,7 @@
                     <div class="summary">
                         <ul class="author list-inline">
                             <li>
-                                <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}">{{ $question->user->name }}</a>
+                                <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}" target="_blank">{{ $question->user->name }}</a>
                                 <span class="split"></span>
                                 <span class="askDate">{{ timestamp_format($question->created_at) }}</span>
                             </li>
@@ -39,12 +39,12 @@
                             @if($question->price>0)
                                 <span class="text-gold"><i class="fa fa-database"></i> {{ $question->price }}</span>
                             @endif
-                            <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a>
+                            <a href="{{ route('ask.question.detail',['id'=>$question->id]) }}" target="_blank" >{{ $question->title }}</a>
                         </h2>
                         @if($question->tags)
                         <ul class="taglist-inline ib">
                             @foreach($question->tags as $tag)
-                                <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
+                                <li class="tagPopup"><a class="tag" target="_blank" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
                             @endforeach
                         </ul>
                         @endif

@@ -4,27 +4,6 @@
  */
 
 
-
-
-
-
-/*编辑器toolbar全局配置*/
-var ask_editor_options = {
-    toolbar: [
-        ['style', ['bold', 'clear']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['insert', ['link', 'picture', 'hr']],
-        ['view', ['fullscreen']]
-    ],
-    codemirror: {
-        mode: 'text/html',
-        htmlMode: true,
-        lineNumbers: true,
-        theme: 'monokai'
-    }
-};
-
-
 var showPopover = function () {
         $(this).popover('show');
     }
@@ -255,7 +234,7 @@ $(function(){
 
 
     /*标签自动选择*/
-    if($("#select_tags")>0){
+    if( $("#select_tags").length > 0 ){
         $("#select_tags").select2({
             theme:'bootstrap',
             placeholder: "话题越精准，越容易让相关领域专业人士看到你的内容",

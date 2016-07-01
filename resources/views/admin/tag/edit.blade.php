@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-default">
-                    <form role="form" name="tagForm" method="POST" enctype="multipart/form-data" action="{{ route('admin.tag.update',['id'=>$tag->id]) }}">
+                    <form role="form" name="tagForm" id="tag_form" method="POST" enctype="multipart/form-data" action="{{ route('admin.tag.update',['id'=>$tag->id]) }}">
                         <input name="_method" type="hidden" value="PUT">
                         <input type="hidden" name="_token" id="editor_token" value="{{ csrf_token() }}">
                         <div class="box-body">
@@ -50,13 +50,14 @@
 
                             <div class="form-group @if ($errors->has('description')) has-error @endif">
                                 <label for="name">话题详细介绍</label>
-                                <textarea name="description" id="description" class="form-control" placeholder="话题详细介绍">{{ old('description',$tag->description) }}</textarea>
+                                <div id="tag_editor">{!! old('description',$tag->description) !!}</div>
                                 @if ($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif
                             </div>
 
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">保存</button>
+                            <input type="hidden" id="editor_content"  name="description" value=""  />
+                            <button type="button" class="btn btn-primary editor-submit" data-form_id="#tag_form" data-field_id="#editor_content" data-editor_id="#tag_editor">保存</button>
                             <button type="reset" class="btn btn-success">重置</button>
                         </div>
                     </form>
@@ -68,16 +69,19 @@
 
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script type="text/javascript">
         $(function(){
             set_active_menu('global',"{{ route('admin.tag.index') }}");
-            $('#description').summernote({
+            $('#tag_editor').summernote({
+                lang: 'zh-CN',
                 height: 300,
-                placeholder:true,
-                toolbar:ask_editor_options.toolbar,
-                codemirror:ask_editor_options.codemirror,
-                onImageUpload: function(files, editor, welEditable) {
-                    upload_editor_image(files[0],"description",$("#editor_token").val());
+                placeholder:'完善话题详情',
+                toolbar: [ {!! config('tipask.summernote.blog') !!} ],
+                callbacks: {
+                    onImageUpload: function(files) {
+                        upload_editor_image(files[0],'tag_editor');
+                    }
                 }
             });
 

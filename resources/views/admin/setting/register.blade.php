@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-primary">
-                    <form role="form" name="addForm" method="POST" action="{{ route('admin.setting.register') }}">
+                    <form role="form" name="addForm" id="register_form" method="POST" action="{{ route('admin.setting.register') }}">
                         <input type="hidden" name="_token" id="editor_token" value="{{ csrf_token() }}">
                         <div class="box-body">
                             <div class="form-group">
@@ -33,14 +33,16 @@
                                 <label for="website_url">注册欢迎语</label>
                                 <input type="text" class="form-control" name="register_title" placeholder="欢迎加入Tipask站长社区" value="{{ old('register_title',Setting()->get('register_title')) }}"  />
                             </div>
-                            <div class="form-group">
-                                <label for="register_license">用户注册协议</label>
-                                <textarea name="register_license" id="register_license" class="form-control"  style="height:300px;">{{ old('register_license',Setting()->get('register_license')) }}</textarea>
 
+                            <div class="form-group">
+                                <label for="register_editor">用户注册协议</label>
+                                <div id="register_editor">{!! old('register_license',Setting()->get('register_license')) !!}</div>
                             </div>
+
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">保存</button>
+                            <input type="hidden" id="editor_content"  name="register_license" value=""  />
+                            <button type="button" class="btn btn-primary editor-submit" data-form_id="#register_form" data-field_id="#editor_content" data-editor_id="#register_editor">保存</button>
                             <button type="reset" class="btn btn-success">重置</button>
                         </div>
                     </form>
@@ -52,16 +54,19 @@
 @endsection
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script type="text/javascript">
         $(function(){
             set_active_menu('global',"{{ route('admin.setting.register') }}");
-            $('#register_license').summernote({
+            $('#register_editor').summernote({
+                lang: 'zh-CN',
                 height: 300,
-                placeholder:true,
-                toolbar:ask_editor_options.toolbar,
-                codemirror:ask_editor_options.codemirror,
-                onImageUpload: function(files, editor, welEditable) {
-                    upload_editor_image(files[0],"register_license",$("#editor_token").val());
+                placeholder:'完善用户注册协议',
+                toolbar: [ {!! config('tipask.summernote.blog') !!} ],
+                callbacks: {
+                    onImageUpload: function(files) {
+                        upload_editor_image(files[0],'register_editor');
+                    }
                 }
             });
 

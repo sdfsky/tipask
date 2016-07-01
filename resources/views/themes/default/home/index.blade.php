@@ -63,7 +63,7 @@
                 @foreach($hotExperts as $expert)
                     <section class="col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$expert->id.'_big'])}}" alt="{{ $expert->name }}"></a>
+                            <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}" target="_blank"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$expert->id.'_big'])}}" alt="{{ $expert->name }}"></a>
 
                             <div class="caption">
                                 <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}">{{ $expert->name }}</a></h4>
@@ -79,11 +79,11 @@
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">热门问答 <a href="{{ route('website.ask',['filter'=>'hottest']) }}" title="更多">»</a> </h4>
+                        <h4 class="widget-box-title">热门问答 <a href="{{ route('website.ask',['filter'=>'hottest']) }}" target="_blank" title="更多">»</a> </h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($hotQuestions as $hotQuestion)
                             <li class="widget-links-item">
-                                <a title="{{ $hotQuestion->title }}"  href="{{ route('ask.question.detail',['id'=>$hotQuestion->id]) }}">{{ $hotQuestion->title }}</a>
+                                <a title="{{ $hotQuestion->title }}" target="_blank"  href="{{ route('ask.question.detail',['id'=>$hotQuestion->id]) }}">{{ $hotQuestion->title }}</a>
                                 <small class="text-muted">{{ $hotQuestion->answers }} 回答</small>
                             </li>
                             @endforeach
@@ -91,13 +91,13 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">悬赏问答 <a href="{{ route('website.ask',['filter'=>'reward']) }}" title="更多">»</a></h4>
+                        <h4 class="widget-box-title">悬赏问答 <a href="{{ route('website.ask',['filter'=>'reward']) }}" target="_blank" title="更多">»</a></h4>
 
                         <ul class="widget-links list-unstyled">
                             @foreach($rewardQuestions as $rewardQuestion)
                                 <li class="widget-links-item">
                                     <span class="text-gold"><i class="fa fa-database"></i> {{ $rewardQuestion->price }}</span>
-                                     <a title="{{ $rewardQuestion->title }}" href="{{ route('ask.question.detail',['id'=>$rewardQuestion->id]) }}">{{ $rewardQuestion->title }}</a>
+                                     <a target="_blank" title="{{ $rewardQuestion->title }}" href="{{ route('ask.question.detail',['id'=>$rewardQuestion->id]) }}">{{ $rewardQuestion->title }}</a>
                             @endforeach
                         </ul>
                     </div>
@@ -111,7 +111,7 @@
                         <ul class="widget-links list-unstyled">
                             @foreach($hotArticles as $hotArticle)
                                 <li class="widget-links-item">
-                                    <a title="{{ $hotArticle->title }}"  href="{{ route('blog.article.detail',['id'=>$hotArticle->id]) }}">{{ $hotArticle->title }}</a>
+                                    <a title="{{ $hotArticle->title }}" target="_blank"  href="{{ route('blog.article.detail',['id'=>$hotArticle->id]) }}">{{ $hotArticle->title }}</a>
                                     <small class="text-muted">{{ $hotArticle->views }} 浏览</small>
                                 </li>
                             @endforeach
@@ -122,7 +122,7 @@
                         <ul class="widget-links list-unstyled">
                             @foreach($newestArticles as $newestArticle)
                                 <li class="widget-links-item">
-                                    <a title="{{ $newestArticle->title }}"  href="{{ route('blog.article.detail',['id'=>$newestArticle->id]) }}">{{ $newestArticle->title }}</a>
+                                    <a title="{{ $newestArticle->title }}" target="_blank"  href="{{ route('blog.article.detail',['id'=>$newestArticle->id]) }}">{{ $newestArticle->title }}</a>
                                     <small class="text-muted">{{ $newestArticle->views }} 浏览</small>
                                 </li>
                             @endforeach
@@ -143,7 +143,7 @@
                 <ul class="widget-links list-unstyled">
                     @foreach($newestNotices as $newestNotice)
                     <li class="widget-links-item">
-                        <a title="{{ $newestNotice->subject }}" href="{{ $newestNotice->url }}" target="_blank">{{ $newestNotice->subject }}</a>
+                        <a title="{{ $newestNotice->subject }}" href="{{ $newestNotice->url }}">{{ $newestNotice->subject }}</a>
                     </li>
                     @endforeach
                 </ul>
@@ -153,7 +153,7 @@
                 <h2 class="h4 widget-box-title">热议话题 <a href="{{ route('website.topic') }}" title="更多">»</a></h2>
                 <ul class="taglist-inline multi">
                     @foreach($hotTags as $hotTag)
-                    <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$hotTag->name]) }}">{{ $hotTag->name }}</a></li>
+                    <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$hotTag->name]) }}" target="_blank">{{ $hotTag->name }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -167,7 +167,7 @@
                     @foreach($topCoinUsers as $index => $topCoinUser)
                     <li class="text-muted">
                         <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser['id'].'_middle'])}}">
-                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser['id']]) }}" class="ellipsis">{{ $topCoinUser['name'] }}</a>
+                        <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser['id']]) }}" class="ellipsis" target="_blank">{{ $topCoinUser['name'] }}</a>
                         <span class="text-muted pull-right">{{ $topCoinUser['coins'] }} 金币</span>
                     </li>
                     @endforeach

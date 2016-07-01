@@ -26,14 +26,14 @@
                         </div>
                     </div>
                     <div class="summary">
-                        <h2 class="title"><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a></h2>
+                        <h2 class="title"><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}" target="_blank" >{{ $article->title }}</a></h2>
                         <p class="excerpt wordbreak hidden-xs">{{ $article->summary }}</p>
                         <ul class="author list-inline">
                             <li class="pull-right" title="{{ $article->collections }} 收藏">
                                 <small class="glyphicon glyphicon-bookmark"></small> {{ $article->collections }}
                             </li>
                             <li>
-                                <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}">
+                                <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}" target="_blank">
                                     <img class="avatar-20 mr-10 hidden-xs" src="{{ route('website.image.avatar',['avatar_name'=>$article->user_id.'_small']) }}" alt="{{ $article->user->name }}"> {{ $article->user->name }}
                                 </a>
                                 发布于 {{ timestamp_format($article->created_at) }}

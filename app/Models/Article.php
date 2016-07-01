@@ -25,9 +25,14 @@ class Article extends Model
             if(Setting()->get('verify_article')==1){
                 $article->status = 0;
             }
+            if( trim($article->summary) === '' ){
+                $article->summary = str_limit(strip_tags($article->content),180);
+            }
 
         });
+
         static::saved(function($article){
+
             App::offsetGet('search')->update($article);
         });
         /*监听删除事件*/

@@ -17,15 +17,11 @@ class ArticleController extends Controller
 
     /*问题创建校验*/
     protected $validateRules = [
-        'title' => 'required|max:255',
-        'content' => 'max:65535',
+        'title' => 'required|min:5|max:255',
+        'content' => 'required|min:50|max:65535',
         'summary' => 'sometimes|max:255',
         'tags' => 'sometimes|max:128',
     ];
-
-
-
-
 
     /**
      * Show the form for creating a new resource.

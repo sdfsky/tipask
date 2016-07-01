@@ -36,11 +36,10 @@ return [
         'adopt_answer' => '采纳了您的回答',
         'create_article' => '发表了文章',
         'follow_user' => '关注了你',
-
     ],
     'summernote'=>[
-        'ask' => "['common', ['bold','italic', 'underline',,'ol','link','picture','clear','undo','redo','fullscreen']]",
-        'aritcle' => "['common', ['bold','italic', 'underline',,'ol','link','picture','clear','undo','redo','fullscreen']]",
+        'ask' => "['common', ['style','bold','ol','link','picture','clear','fullscreen']]",
+        'blog' => "['common', ['style','bold','color','ol', 'paragraph','table','link','picture','clear','fullscreen']]",
     ]
 
 ];

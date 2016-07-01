@@ -4,6 +4,13 @@
 /*ajax设置项*/
 
 $(function () {
+    /*ajax设置项*/
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $("#sliderbar_control").click(function(){
         var sidebar_collapse = 0;
         if($('body').hasClass('sidebar-collapse')){
@@ -49,25 +56,18 @@ $(function () {
         }
     });
 
+    /*提交表单*/
+    $(".editor-submit").click(function(){
+        var editor_id = $(this).data('editor_id');
+        var form_id = $(this).data('form_id');
+        var field_id = $(this).data('field_id');
+        $(field_id).val($(editor_id).summernote('code'));
+        $(form_id).submit();
+    });
 
 });
 
 
-/*编辑器toolbar全局配置*/
-var ask_editor_options = {
-    toolbar: [
-        ['style', ['bold', 'clear']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['insert', ['link', 'picture', 'hr']],
-        ['view', ['fullscreen']]
-    ],
-    codemirror: {
-        mode: 'text/html',
-        htmlMode: true,
-        lineNumbers: true,
-        theme: 'monokai'
-    }
-};
 
 /**
  * 编辑器图片图片文件方式上传
@@ -75,24 +75,27 @@ var ask_editor_options = {
  * @param editor
  * @param welEditable
  */
-function upload_editor_image(file,editorId,token){
+function upload_editor_image(file,editorId){
     data = new FormData();
-    data.append("_token",token);
     data.append("file", file);
     $.ajax({
         data: data,
         type: "POST",
         dataType : 'text',
-        url: site_url+"/image/upload",
+        url: "/image/upload",
         cache: false,
         contentType: false,
         processData: false,
         success: function(url) {
-            console.log(url);
-            $('#'+editorId).summernote('editor.insertImage', url);
+            $('#'+editorId).summernote('insertImage', url, function ($image) {
+                $image.css('width', $image.width() / 2);
+                $image.addClass('img-responsive');
+            });
         }
     });
 }
+
+
 
 
 /*删除确认*/
