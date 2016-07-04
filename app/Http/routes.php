@@ -267,6 +267,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*用户退出*/
     Route::get('logout',['as'=>'admin.account.logout','uses'=>'AccountController@logout']);
 
+    Route::match(['get','post'],'upgrade',['as'=>'admin.system.upgrade','uses'=>'SystemController@upgrade']);
+
     /*首页*/
     Route::resource('index', 'IndexController', ['only' => ['index']]);
     Route::get('index/sidebar',['as'=>'sidebar','uses'=>'IndexController@sidebar']);
@@ -365,6 +367,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*XunSearch索引管理*/
     Route::get("xunSearch/clear",['as'=>'admin.xunSearch.clear','uses'=>'XunSearchController@clear']);
     Route::get("xunSearch/rebuild",['as'=>'admin.xunSearch.rebuild','uses'=>'XunSearchController@rebuild']);
+
+
 
 });
 

@@ -178,8 +178,8 @@
                                 <label><input type="checkbox" id="attendTo" name="followed" value="1" checked />关注该问题</label>
                             </div>
                             <div class="pull-right">
-                                <input type="hidden" id="editor_content"  name="content" value=""  />
-                                <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#answer_form" data-field_id="#editor_content" data-editor_id="#answer_editor">提交回答</button>
+                                <input type="hidden" id="answer_editor_content"  name="content" value=""  />
+                                <button type="submit" class="btn btn-primary pull-right">提交回答</button>
                             </div>
                         </div>
                     </form>
@@ -221,7 +221,7 @@
                 <ul class="widget-links list-unstyled list-text">
                     @foreach($relatedQuestions as $relatedQuestion)
                         @if($relatedQuestion->id != $question->id)
-                        <li class="widget-links__item">
+                        <li class="widget-links-item">
                             <a title="{{ $relatedQuestion->title }}" href="{{ route('ask.question.detail',['question_id'=>$relatedQuestion->id]) }}">{{ $relatedQuestion->title }}</a>
                             <small class="text-muted">{{ $relatedQuestion->answers }} 回答</small>
                         </li>
@@ -318,7 +318,11 @@
                 placeholder:'撰写答案',
                 toolbar: [ {!! config('tipask.summernote.ask') !!} ],
                 callbacks: {
-                    onImageUpload: function(files) {
+                    onChange:function (contents, $editable) {
+                        var code = $(this).summernote("code");
+                        $("#answer_editor_content").val(code);
+                    },
+                    onImageUpload:function(files) {
                         upload_editor_image(files[0],'answer_editor');
                     }
                 }
@@ -364,8 +368,6 @@
                 });
             });
 
-
-
             /*采纳回答为最佳答案*/
             $(".adopt-answer").click(function(){
                 var answer_id = $(this).data('answer_id');
@@ -376,7 +378,6 @@
             $("#adoptAnswerSubmit").click(function(){
                 document.location = "/answer/adopt/"+$(this).data('answer_id');
             });
-
 
         });
     </script>
