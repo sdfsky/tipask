@@ -127,9 +127,6 @@ class Question extends Model
     }
 
 
-
-
-
     /*问题所有回答*/
     public function answers()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Area;
 use App\Models\User;
 use App\Services\Registrar;
 use Bican\Roles\Models\Role;
@@ -9,6 +10,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UserController extends AdminController
 {
@@ -87,7 +91,13 @@ class UserController extends AdminController
     {
         $user = User::find($id);
         $roles = Role::orderby('name','asc')->get();
-        return view('admin.user.edit')->with('user',$user)->with('roles',$roles);
+        $provinces = Area::provinces();
+        $cities = Area::cities($user->province);
+        $data = [
+            'provinces' => $provinces,
+            'cities' => $cities,
+        ];
+        return view('admin.user.edit')->with(compact('user','roles','data'));
     }
 
     /**
@@ -110,6 +120,28 @@ class UserController extends AdminController
         }
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->title = $request->input('title','');
+        $user->gender = $request->input('gender',0);
+        $user->province = $request->input('province',0);
+        $user->city = $request->input('city',0);
+        $user->description = $request->input('description');
+
+        if($request->hasFile('avatar')){
+            $user_id = $user->id;
+            $file = $request->file('avatar');
+            $avatarDir = User::getAvatarDir($user_id);
+            $extension = $file->getClientOriginalExtension();
+
+            File::delete(storage_path('app/'.User::getAvatarPath($user_id,'big')));
+            File::delete(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
+            File::delete(storage_path('app/'.User::getAvatarPath($user_id,'small')));
+
+            Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($user_id,'origin').'.'.$extension,File::get($file));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($user_id,'big')));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($user_id,'small')));
+        }
+
         $user->save();
         $user->detachAllRoles();
         $user->attachRole($request->input('role_id'));

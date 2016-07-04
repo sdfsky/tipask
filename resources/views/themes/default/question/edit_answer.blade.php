@@ -30,7 +30,6 @@
                     <input type="hidden" id="answer_editor_content"  name="content" value=""  />
                     <button type="submit" class="btn btn-primary pull-right editor-submit" >保存修改</button>
                 </div>
-
             </div>
         </form>
     </div>

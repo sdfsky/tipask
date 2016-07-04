@@ -147,9 +147,10 @@ class AnswerController extends Controller
             abort(404);
         }
 
-        if($request->user()->id !== $answer->question->user_id){
+        if(($request->user()->id !== $answer->question->user_id) && !$request->user()->is('admin')  ){
             abort(403);
         }
+
 
         DB::beginTransaction();
         try{
@@ -160,7 +161,7 @@ class AnswerController extends Controller
             $answer->question->status = 2;
             $answer->question->save();
 
-            $request->user()->userData()->increment('adoptions');
+            $answer->user->userData()->increment('adoptions');
 
             /*悬赏处理*/
             if($answer->question->price > 0){
