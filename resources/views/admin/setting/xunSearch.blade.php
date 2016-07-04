@@ -29,7 +29,7 @@
 
                             <div class="form-group">
                                 <label for="website_url">搜索框提示语</label>
-                                <input type="text" class="form-control" name="search_placeholder" placeholder="有问题，搜下先" value="{{ old('search_placeholder',Setting()->get('search_placeholder')) }}"  />
+                                <input type="text" class="form-control" name="search_placeholder" placeholder="输入关键词" value="{{ old('search_placeholder',Setting()->get('search_placeholder')) }}"  />
                             </div>
                         </div>
                         <div class="box-footer">
