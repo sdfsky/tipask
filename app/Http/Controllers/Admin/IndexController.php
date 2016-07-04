@@ -152,8 +152,20 @@ class IndexController extends AdminController
         $systemInfo['runOS'] = PHP_OS;
         $systemInfo['maxUploadSize'] = ini_get('upload_max_filesize');
         $systemInfo['maxExecutionTime'] = ini_get('max_execution_time');
-        $systemInfo['hostName'] = $_SERVER['SERVER_NAME'] .' / '. $_SERVER['SERVER_ADDR'].':'.$_SERVER['SERVER_PORT'];
-        $systemInfo['serverInfo'] = $_SERVER['SERVER_SOFTWARE'];
+        $systemInfo['hostName'] = '';
+        if(isset($_SERVER['SERVER_NAME'])){
+            $systemInfo['hostName'] .= $_SERVER['SERVER_NAME'].' / '.;
+        }
+        if(isset($_SERVER['SERVER_ADDR'])){
+            $systemInfo['hostName'] .= $_SERVER['SERVER_ADDR'].' / '.;
+        }
+        if(isset($_SERVER['SERVER_PORT'])){
+            $systemInfo['hostName'] .= $_SERVER['SERVER_PORT'];
+        }
+        $systemInfo['serverInfo'] = '';
+        if(isset($_SERVER['SERVER_SOFTWARE'])){
+            $systemInfo['serverInfo'] = $_SERVER['SERVER_SOFTWARE'];
+        }
         return $systemInfo;
     }
 
