@@ -48,8 +48,8 @@
 
             <div class="row mt-20">
                 <div class="col-md-4 col-md-offset-8">
-                    <input type="hidden" id="editor_content"  name="content" value=""  />
-                    <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#article_form" data-field_id="#editor_content" data-editor_id="#article_editor">发布文章</button>
+                    <input type="hidden" id="article_editor_content"  name="content" value=""  />
+                    <button type="submit" class="btn btn-primary pull-right editor-submit">发布文章</button>
                 </div>
             </div>
         </form>
@@ -70,6 +70,10 @@
                 placeholder:'撰写文章',
                 toolbar: [ {!! config('tipask.summernote.blog') !!} ],
                 callbacks: {
+                    onChange:function (contents, $editable) {
+                        var code = $(this).summernote("code");
+                        $("#article_editor_content").val(code);
+                    },
                     onImageUpload: function(files) {
                         upload_editor_image(files[0],'article_editor');
                     }

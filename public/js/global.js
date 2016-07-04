@@ -262,17 +262,6 @@ $(function(){
         });
     }
 
-
-    /*提交表单*/
-    $(".editor-submit").click(function(){
-        var editor_id = $(this).data('editor_id');
-        var form_id = $(this).data('form_id');
-        var field_id = $(this).data('field_id');
-        $(field_id).val($(editor_id).summernote('code'));
-        $(form_id).submit();
-    });
-
-
 });
 
 

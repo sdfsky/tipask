@@ -27,8 +27,8 @@
             </div>
             <div class="row mt-20">
                 <div class="col-md-12">
-                    <input type="hidden" id="editor_content"  name="content" value=""  />
-                    <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#answer_form" data-field_id="#editor_content" data-editor_id="#answer_editor">保存修改</button>
+                    <input type="hidden" id="answer_editor_content"  name="content" value=""  />
+                    <button type="submit" class="btn btn-primary pull-right editor-submit" >保存修改</button>
                 </div>
 
             </div>
@@ -48,6 +48,10 @@
                 placeholder:'撰写答案',
                 toolbar: [ {!! config('tipask.summernote.ask') !!} ],
                 callbacks: {
+                    onChange:function (contents, $editable) {
+                        var code = $(this).summernote("code");
+                        $("#answer_editor_content").val(code);
+                    },
                     onImageUpload: function(files) {
                         upload_editor_image(files[0],'answer_editor');
                     }

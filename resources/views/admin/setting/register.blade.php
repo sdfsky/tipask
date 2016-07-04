@@ -41,8 +41,8 @@
 
                         </div>
                         <div class="box-footer">
-                            <input type="hidden" id="editor_content"  name="register_license" value=""  />
-                            <button type="button" class="btn btn-primary editor-submit" data-form_id="#register_form" data-field_id="#editor_content" data-editor_id="#register_editor">保存</button>
+                            <input type="hidden" id="register_editor_content"  name="register_license" value=""  />
+                            <button type="submit" class="btn btn-primary editor-submit" >保存</button>
                             <button type="reset" class="btn btn-success">重置</button>
                         </div>
                     </form>
@@ -64,6 +64,10 @@
                 placeholder:'完善用户注册协议',
                 toolbar: [ {!! config('tipask.summernote.blog') !!} ],
                 callbacks: {
+                    onChange:function (contents, $editable) {
+                        var code = $(this).summernote("code");
+                        $("#register_editor_content").val(code);
+                    },
                     onImageUpload: function(files) {
                         upload_editor_image(files[0],'register_editor');
                     }

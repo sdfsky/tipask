@@ -56,8 +56,8 @@
 
                         </div>
                         <div class="box-footer">
-                            <input type="hidden" id="editor_content"  name="description" value=""  />
-                            <button type="button" class="btn btn-primary editor-submit" data-form_id="#tag_form" data-field_id="#editor_content" data-editor_id="#tag_editor">保存</button>
+                            <input type="hidden" id="tag_editor_content"  name="description" value=""  />
+                            <button type="submit" class="btn btn-primary editor-submit" >保存</button>
                             <button type="reset" class="btn btn-success">重置</button>
                         </div>
                     </form>
@@ -79,6 +79,10 @@
                 placeholder:'完善话题详情',
                 toolbar: [ {!! config('tipask.summernote.blog') !!} ],
                 callbacks: {
+                    onChange:function (contents, $editable) {
+                        var code = $(this).summernote("code");
+                        $("#tag_editor_content").val(code);
+                    },
                     onImageUpload: function(files) {
                         upload_editor_image(files[0],'tag_editor');
                     }

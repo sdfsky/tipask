@@ -54,8 +54,8 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <input type="hidden" id="editor_content"  name="description" value=""  />
-                    <button type="button" class="btn btn-primary pull-right editor-submit" data-form_id="#questionForm" data-field_id="#editor_content" data-editor_id="#question_editor">确认修改</button>
+                    <input type="hidden" id="question_editor_content"  name="description" value=""  />
+                    <button type="submit" class="btn btn-primary pull-right">确认修改</button>
                 </div>
 
             </div>
@@ -77,6 +77,10 @@
                 placeholder:'您可以在这里继续补充问题细节',
                 toolbar: [ {!! config('tipask.summernote.ask') !!} ],
                 callbacks: {
+                    onChange:function (contents, $editable) {
+                        var code = $(this).summernote("code");
+                        $("#question_editor_content").val(code);
+                    },
                     onImageUpload: function(files) {
                         upload_editor_image(files[0],'question_editor');
                     }
