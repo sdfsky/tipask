@@ -154,10 +154,10 @@ class IndexController extends AdminController
         $systemInfo['maxExecutionTime'] = ini_get('max_execution_time');
         $systemInfo['hostName'] = '';
         if(isset($_SERVER['SERVER_NAME'])){
-            $systemInfo['hostName'] .= $_SERVER['SERVER_NAME'].' / '.;
+            $systemInfo['hostName'] .= $_SERVER['SERVER_NAME'].' / ';
         }
         if(isset($_SERVER['SERVER_ADDR'])){
-            $systemInfo['hostName'] .= $_SERVER['SERVER_ADDR'].' / '.;
+            $systemInfo['hostName'] .= $_SERVER['SERVER_ADDR'].' / ';
         }
         if(isset($_SERVER['SERVER_PORT'])){
             $systemInfo['hostName'] .= $_SERVER['SERVER_PORT'];
