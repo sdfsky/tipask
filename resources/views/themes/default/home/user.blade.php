@@ -12,6 +12,8 @@
             <h2 class="h4  mt-30">活跃用户</h2>
             <div class="widget-streams users">
                 @foreach($users as $index=>$user)
+
+                @if($user->user)
                 <section class="hover-show streams-item">
                     <div class="stream-wrap media">
 
@@ -31,7 +33,7 @@
                             <div class="media-body">
                                 <h4 class="media-heading">
                                     <a href="{{ route('auth.space.index',['id'=>$user->user_id]) }}">{{ $user->user->name }}</a>
-                                    @if($user->authentication_status)<span class="text-gold"><i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i></span> @endif
+                                    @if($user->authentication_status===1)<span class="text-gold"><i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i></span> @endif
                                 </h4>
                                 <p class="text-muted">{{ $user->user->title }}</p>
                                 <p class="text-muted">{{ $user->coins }}金币 / {{ $user->supports }}赞同 / {{ $user->followers }}关注 / {{ $user->answers }}回答</p>
@@ -63,10 +65,10 @@
 
                     </div>
                 </section>
+                @endif
                 @endforeach
             </div>
-            <div class="text-center">
-            </div>
+            <div class="text-center">{!! str_replace('/?', '?', $users->render()) !!}</div>
         </div>
         @include('theme::layout.top_user_menu')
 

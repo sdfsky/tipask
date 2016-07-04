@@ -59,7 +59,7 @@
             </div>
 
             <div class="widget-box clearfix">
-                <h4 class="widget-box-title">推荐行家 <a href="{{ route('website.user') }}" title="更多">»</a> </h4>
+                <h4 class="widget-box-title">推荐行家 <a href="{{ route('website.experts') }}" title="更多">»</a> </h4>
                 @foreach($hotExperts as $expert)
                     <section class="col-sm-6 col-md-3">
                         <div class="thumbnail">

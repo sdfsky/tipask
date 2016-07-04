@@ -26,6 +26,9 @@ Route::get('/articles/{filter?}',['as'=>'website.blog','uses'=>'IndexController@
 /*用户*/
 Route::get('/users',['as'=>'website.user','uses'=>'IndexController@user']);
 
+/*experts*/
+Route::get('/experts',['as'=>'website.experts','uses'=>'IndexController@experts']);
+
 
 /*积分商城*/
 Route::get('/shop',['as'=>'website.shop','uses'=>'IndexController@shop']);
