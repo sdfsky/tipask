@@ -16,7 +16,9 @@ class Tag extends Model
         parent::boot();
 
         static::saved(function($tag){
-            App::offsetGet('search')->update($tag);
+            if(Setting()->get('xunsearch_open',0) == 1) {
+                App::offsetGet('search')->update($tag);
+            }
         });
 
 
@@ -24,7 +26,10 @@ class Tag extends Model
         static::deleted(function($tag){
             /*删除关注*/
             Attention::where('source_type','=',get_class($tag))->where('source_id','=',$tag->id)->delete();
-            App::offsetGet('search')->delete($tag);
+
+            if(Setting()->get('xunsearch_open',0) == 1){
+                App::offsetGet('search')->delete($tag);
+            }
         });
     }
 

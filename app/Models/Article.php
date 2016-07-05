@@ -33,7 +33,9 @@ class Article extends Model
 
         static::saved(function($article){
 
-            App::offsetGet('search')->update($article);
+            if(Setting()->get('xunsearch_open',0) == 1){
+                App::offsetGet('search')->update($article);
+            }
         });
         /*监听删除事件*/
         static::deleting(function($article){
@@ -52,7 +54,10 @@ class Article extends Model
         });
 
         static::deleted(function($article){
-            App::offsetGet('search')->delete($article);
+
+            if(Setting()->get('xunsearch_open',0) == 1){
+                App::offsetGet('search')->delete($article);
+            }
         });
     }
 

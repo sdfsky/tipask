@@ -32,7 +32,9 @@ class Question extends Model
         });
 
         static::saved(function($question){
-            App::offsetGet('search')->update($question);
+            if(Setting()->get('xunsearch_open',0) == 1) {
+                App::offsetGet('search')->update($question);
+            }
         });
 
         /*监听删除事件*/
@@ -62,7 +64,9 @@ class Question extends Model
             /*删除问题收藏*/
             Collection::where('source_type','=',get_class($question))->where('source_id','=',$question->id)->delete();
 
-            App::offsetGet('search')->delete($question);
+            if(Setting()->get('xunsearch_open',0) == 1) {
+                App::offsetGet('search')->delete($question);
+            }
 
         });
     }

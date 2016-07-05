@@ -45,7 +45,9 @@ class User extends Model implements AuthenticatableContract,
     {
         parent::boot();
         static::saved(function($user){
-            App::offsetGet('search')->update($user);
+            if(Setting()->get('xunsearch_open',0) == 1) {
+                App::offsetGet('search')->update($user);
+            }
         });
         static::deleted(function($user){
             /*删除角色管理*/
@@ -81,8 +83,9 @@ class User extends Model implements AuthenticatableContract,
             /*删除评论*/
             $user->comments()->delete();
 
-            App::offsetGet('search')->delete($user);
-
+            if(Setting()->get('xunsearch_open',0) == 1) {
+                App::offsetGet('search')->delete($user);
+            }
         });
     }
 
