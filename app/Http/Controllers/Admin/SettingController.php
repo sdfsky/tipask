@@ -15,6 +15,7 @@ class SettingController extends AdminController
 
         $validateRules = [
             'website_name' => 'required|max:128',
+            'website_slogan' => 'sometimes|max:128',
             'website_url' => 'required|active_url',
             'website_icp' => 'sometimes|max:128',
             'website_cache_time' => 'sometimes|digits_between:0,8640',

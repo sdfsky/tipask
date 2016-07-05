@@ -51,7 +51,7 @@ class InstallerController extends Controller
             $this->validate($request,$validateRules);
             $envData = [
                 'APP_ENV'=>'local',
-                'APP_DEBUG'=>false,
+                'APP_DEBUG'=>'true',
                 'APP_KEY'=>Str::random(32),
                 'DB_HOST'=>$request->input('database_host').':'.$request->input('database_port'),
                 'DB_DATABASE'=>$request->input('database_name'),

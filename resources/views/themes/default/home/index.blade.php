@@ -1,7 +1,7 @@
 @extends('theme::layout.public')
 
 @section('seo')
-    <title>{{ Setting()->get('website_name') }} - 做最好的中文问答系统</title>
+    <title>{{ Setting()->get('website_name') }} - {{ Setting()->get('website_slogan') }}</title>
     <meta name="description" content="tipask问答系统交流平台" />
     <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
 @endsection

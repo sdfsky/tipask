@@ -39,13 +39,15 @@ class Article extends Model
         static::deleting(function($article){
 
             /*用户文章数 -1 */
-            $article->user->userData->decrement('articles');
+            $article->user->userData()->decrement('articles');
 
             Collection::where('source_type','=',get_class($article))->where('source_id','=',$article->id)->delete();
 
-
             /*删除回答评论*/
             Comment::where('source_type','=',get_class($article))->where('source_id','=',$article->id)->delete();
+            /*删除动态*/
+            Doing::where('source_type','=',get_class($article))->where('source_id','=',$article->id)->delete();
+
 
         });
 

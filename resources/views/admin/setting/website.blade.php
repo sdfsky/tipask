@@ -25,6 +25,13 @@
                             @if ($errors->has('website_name')) <p class="help-block">{{ $errors->first('website_name') }}</p> @endif
                         </div>
 
+                        <div class="form-group @if ($errors->has('website_slogan')) has-error @endif">
+                            <label for="website_name">站点slogan</label>
+                            <span class="text-muted">(网站口号)</span>
+                            <input type="text" name="website_slogan" class="form-control " placeholder="做最好的中文问答系统" value="{{ old('website_slogan',Setting()->get('website_slogan')) }}">
+                            @if ($errors->has('website_slogan')) <p class="help-block">{{ $errors->first('website_slogan') }}</p> @endif
+                        </div>
+
                         <div class="form-group @if ($errors->has('website_url')) has-error @endif">
                             <label for="website_url">站点地址</label>
                             <span class="text-muted">(您站点的完整域名。例如: http://www.tipask.com，不要以斜杠 (“/”) 结尾)</span>
