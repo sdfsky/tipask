@@ -55,7 +55,7 @@
 
             <div class="row mt-20">
                 <div class="col-md-4 col-md-offset-8">
-                    <input type="hidden" id="article_editor_content"  name="content" value=""  />
+                    <input type="hidden" id="article_editor_content"  name="content" value="{{ $article->content }}"  />
                     <button type="submit" class="btn btn-primary pull-right editor-submit">提交修改</button>
                 </div>
             </div>
