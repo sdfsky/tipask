@@ -27,7 +27,7 @@
             </div>
             <div class="row mt-20">
                 <div class="col-md-12">
-                    <input type="hidden" id="answer_editor_content"  name="content" value=""  />
+                    <input type="hidden" id="answer_editor_content"  name="content" value="{{ $answer->content }}"  />
                     <button type="submit" class="btn btn-primary pull-right editor-submit" >保存修改</button>
                 </div>
             </div>

@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <input type="hidden" id="question_editor_content"  name="description" value=""  />
+                    <input type="hidden" id="question_editor_content"  name="description" value="{{ $question->description }}"  />
                     <button type="submit" class="btn btn-primary pull-right">确认修改</button>
                 </div>
 
