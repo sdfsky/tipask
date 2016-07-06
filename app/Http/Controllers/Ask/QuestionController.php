@@ -78,7 +78,6 @@ class QuestionController extends Controller
     public function create(Request $request)
     {
         $to_user_id =  $request->query('to_user_id',0);
-
         $toUser = User::find($to_user_id);
         return view("theme::question.create")->with('toUser',$toUser)->with('to_user_id',$to_user_id);
     }
@@ -95,12 +94,17 @@ class QuestionController extends Controller
 
         $this->validate($request,$this->validateRules);
 
+        $price = $request->input('price');
+
+        if($price && $request->user()->userData->coins < $price){
+            return $this->error(route('ask.question.create'),'操作失败！您的金币数不足！');
+        }
 
         $data = [
             'user_id'      => $loginUser->id,
             'title'        => trim($request->input('title')),
             'description'  => clean($request->input('description')),
-            'price'        => $request->input('price'),
+            'price'        => $price,
             'hide'         => intval($request->input('hide')),
             'status'       => 1,
         ];
@@ -112,7 +116,7 @@ class QuestionController extends Controller
 
             /*悬赏提问*/
             if($question->price > 0){
-                $this->credit($question->user_id,'ask',-$request->input('coins'),$question->id,$question->title);
+                $this->credit($question->user_id,'ask',-$question->price,0,$question->id,$question->title);
             }
 
             /*添加标签*/
