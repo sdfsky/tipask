@@ -94,9 +94,9 @@ class QuestionController extends Controller
 
         $this->validate($request,$this->validateRules);
 
-        $price = $request->input('price');
+        $price = abs($request->input('price'));
 
-        if($price && $request->user()->userData->coins < $price){
+        if($price > 0 && $request->user()->userData->coins < $price){
             return $this->error(route('ask.question.create'),'操作失败！您的金币数不足！');
         }
 
@@ -224,7 +224,7 @@ class QuestionController extends Controller
 
         DB::beginTransaction();
         try{
-            $this->credit($question->user_id,'append_reward',-$request->input('coins'),$question->id,$question->title);
+            $this->credit($question->user_id,'append_reward',-abs($request->input('coins')),0,$question->id,$question->title);
             $question->increment('price',$request->input('coins'));
 
             DB::commit();
