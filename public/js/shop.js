@@ -52,7 +52,7 @@ $(function(){
                 }else{
                     $("#modal_exchange").modal('hide');
                     alert('兑换申请提交成功，我们会在3个工作日内处理该兑换申请！');
-                    document.location.href= "{{ route('website.shop') }}";
+                    document.location.href= "/shop";
                 }
             }
         },'json');
