@@ -23,9 +23,10 @@ return [
     'cachePath' => storage_path('app/purifier'),
     'settings'  => [
         'default' => [
-            'HTML.Doctype'             => 'XHTML 1.0 Strict',
-            'HTML.Allowed'             => 'div,b,strong,i,em,pre,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src|style|class]',
+            'HTML.Doctype'             => 'XHTML 1.0 Transitional',
+            'HTML.Allowed'             => 'div,b,strong,i,em,pre,a[href|title|target],ul,ol,li,p[style],br,span[style],img[width|height|alt|src|style|class],table[class|width],td,tr',
             'CSS.AllowedProperties'    => 'font,font-size,width,height,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
+            'Attr.AllowedFrameTargets' =>'_blank',
             'AutoFormat.AutoParagraph' => true,
             'AutoFormat.RemoveEmpty'   => true,
         ],
