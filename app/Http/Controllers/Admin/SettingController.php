@@ -41,12 +41,33 @@ class SettingController extends AdminController
                 Setting()->set($name,$value);
             }
             Setting()->clearAll();
-
+            $_ENV['WEBSITE_URL'] = $request->input('website_url');
+            Setting()->writeToEnv();
             return $this->success(route('admin.setting.website'),'站点设置保存成功');
 
         }
 
         return view('admin.setting.website')->with('themes',$themes);
+    }
+
+
+    /*邮件配置*/
+    public function  email(Request $request)
+    {
+
+        if($request->isMethod('post')){
+            $data = $request->except('_token');
+            unset($data['_token']);
+            foreach($data as $name=>$value){
+                $_ENV[strtoupper($name)] = $value;
+                Setting()->set($name,$value);
+            }
+            Setting()->clearAll();
+            Setting()->writeToEnv();
+            return $this->success(route('admin.setting.email'),'邮箱配置保存成功');
+        }
+
+        return view('admin.setting.email');
     }
 
     /*时间格式设置*/
@@ -173,7 +194,10 @@ class SettingController extends AdminController
         return view('admin.setting.credits');
     }
 
-    public function xunSearch(Request $request){
+
+    /*xunsearch整合*/
+    public function xunSearch(Request $request)
+    {
         if($request->isMethod('post')){
             $data = $request->except('_token');
             unset($data['_token']);
@@ -185,6 +209,26 @@ class SettingController extends AdminController
             return $this->success(route('admin.setting.xunSearch'),'xunSearch设置成功');
         }
         return view('admin.setting.xunSearch');
+
+    }
+
+    public function oauth(Request $request)
+    {
+
+        if($request->isMethod('post')){
+            $data = $request->except('_token');
+            unset($data['_token']);
+            foreach($data as $name=>$value){
+                $_ENV[strtoupper($name)] = $value;
+                Setting()->set($name,$value);
+            }
+            Setting()->clearAll();
+            Setting()->writeToEnv();
+            return $this->success(route('admin.setting.oauth'),'一键登录设置成功');
+
+        }
+
+        return view('admin.setting.oauth');
 
     }
 

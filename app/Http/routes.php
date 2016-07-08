@@ -295,6 +295,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
 
     /*站点设置*/
     Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);
+    /*邮箱设置*/
+    Route::any('setting/email',['as'=>'admin.setting.email','uses'=>'SettingController@email']);
     /*时间设置*/
     Route::any('setting/time',['as'=>'admin.setting.time','uses'=>'SettingController@time']);
     /*注册设置*/
@@ -306,6 +308,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
 
     /*xunsearch整合*/
     Route::any('setting/xunSearch',['as'=>'admin.setting.xunSearch','uses'=>'SettingController@xunSearch']);
+    /*oauth2.0*/
+    Route::any('setting/oauth',['as'=>'admin.setting.oauth','uses'=>'SettingController@oauth']);
 
     /*问题删除*/
     Route::post('question/destroy',['as'=>'admin.question.destroy','uses'=>'QuestionController@destroy']);
@@ -362,7 +366,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     Route::resource('friendshipLink', 'FriendshipLinkController',['except' => ['show']]);
 
     /*工具管理*/
-    Route::match(['get','post'],'clearCache',['as'=>'admin.tool.clearCache','uses'=>'ToolController@clearCache']);
+    Route::match(['get','post'],'tool/clearCache',['as'=>'admin.tool.clearCache','uses'=>'ToolController@clearCache']);
+    Route::post('tool/sendTestEmail',['as'=>'admin.tool.sendTestEmail','uses'=>'ToolController@sendTestEmail']);
 
     /*XunSearch索引管理*/
     Route::get("xunSearch/clear",['as'=>'admin.xunSearch.clear','uses'=>'XunSearchController@clear']);

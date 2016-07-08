@@ -37,6 +37,17 @@ class Setting extends Model
     }
 
 
+    public static function writeToEnv(){
+        $env_path = base_path('.env');
+        $env_content = '';
+        ksort($_ENV);
+        foreach($_ENV as $key => $value ){
+            $env_content .= $key.'='.$value."\n";
+        }
+        file_put_contents($env_path,$env_content);
+    }
+
+
 
     /*清空配置缓存*/
     public static function clearAll()

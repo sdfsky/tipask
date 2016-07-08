@@ -49,10 +49,10 @@
                     <div class="box-body">
                         <div class="form-group">
                             <div class="col-xs-4">
-                                <a href="{{ route('admin.xunSearch.rebuild') }}" class="btn btn-success btn-sm btn-block">重建索引</a>
+                                <a href="{{ route('admin.xunSearch.rebuild') }}" class="btn btn-success btn-block">重建索引</a>
                             </div>
                             <div class="col-xs-4">
-                                <a href="{{ route('admin.xunSearch.clear') }}" class="btn btn-warning btn-sm btn-block">清除索引</a>
+                                <a href="{{ route('admin.xunSearch.clear') }}" class="btn btn-warning btn-block">清除索引</a>
                             </div>
                         </div>
                     </div>

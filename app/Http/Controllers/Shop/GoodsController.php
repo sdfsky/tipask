@@ -59,9 +59,9 @@ class GoodsController extends Controller
             return response()->json(['result'=>$validator->messages()], 200);
         }
 
-        DB::beginTransaction();
+        $this->credit($request->user()->id,'exchange',-$goods->coins,0,$goods->id,$goods->name);
+
         try{
-            $this->credit($request->user()->id,'exchange',-$goods->coins,0,$goods->id,$goods->name);
             $goods->decrement('remnants');
             $goods->save();
             $data = $request->all();
@@ -69,9 +69,7 @@ class GoodsController extends Controller
             $data['coins'] = $goods->coins;
             $data['status'] = 0;
             Exchange::create($data);
-            DB::commit();
         }catch(\Exception $e){
-            DB::rollBack();
             return response()->json(['result'=>['common'=>['数据库操作失败，请稍后再试！']]], 200);
         }
 

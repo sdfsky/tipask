@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'sky_php@qq.com', 'name' => 'sky_php'],
+    'from' => ['address' =>env('MAIL_FROM_ADDRESS',null), 'name' => env('MAIL_FROM_NAME',null)],
 
     /*
     |--------------------------------------------------------------------------

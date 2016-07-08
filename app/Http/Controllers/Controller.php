@@ -192,6 +192,10 @@ abstract class Controller extends BaseController
     /*邮件发送*/
     protected function sendEmail($to_user_id,$type,$subject,$extData,$force=false){
 
+        if(Setting()->get('mail_open') != 1){//关闭邮件发送
+            return false;
+        }
+
         $toUser = User::find($to_user_id);
         if(!$toUser){
             return false;

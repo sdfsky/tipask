@@ -9,6 +9,7 @@
         </a>
         <ul class="treeview-menu" id="global">
             <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-circle-o"></i> 站点设置</a></li>
+            <li><a href="{{ route('admin.setting.email') }}"><i class="fa fa-circle-o"></i> 邮箱设置</a></li>
             <li><a href="{{ route('admin.setting.register') }}"><i class="fa fa-circle-o"></i> 注册设置</a></li>
             <li><a href="{{ route('admin.setting.time') }}"><i class="fa fa-circle-o"></i> 时间设置</a></li>
             <li><a href="{{ route('admin.setting.irrigation') }}"><i class="fa fa-circle-o"></i> 防灌水设置</a></li>
@@ -62,6 +63,7 @@
         </a>
         <ul class="treeview-menu" id="third_part">
             <li><a href="{{ route('admin.setting.xunSearch') }}"><i class="fa fa-circle-o"></i> XunSearch</a></li>
+            <li><a href="{{ route('admin.setting.oauth') }}"><i class="fa fa-circle-o"></i>一键登录</a></li>
         </ul>
     </li>
 
