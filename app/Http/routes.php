@@ -73,7 +73,9 @@ Route::Group(['namespace'=>'Account'],function(){
 
 
     /*动态*/
-    Route::get('doings',['as'=>'auth.doing.index','uses'=>'DoingsController@index']);
+    Route::Group(['middleware'=>'auth'],function(){
+        Route::get('doings',['as'=>'auth.doing.index','uses'=>'DoingsController@index']);
+    });
 
 
     /*全局搜索*/

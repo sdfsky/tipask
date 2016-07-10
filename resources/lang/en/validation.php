@@ -75,6 +75,7 @@ return [
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
+    'captcha'              => 'The :attribute is invalid.',
 
     /*
     |--------------------------------------------------------------------------
