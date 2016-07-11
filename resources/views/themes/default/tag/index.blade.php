@@ -1,10 +1,7 @@
 @extends('theme::layout.public')
 
-@section('seo')
-    <title>{{ $tag->name }} - 话题 - {{ Setting()->get('website_name') }}</title>
-    <meta name="description" content="{{ $tag->summary }}" />
-    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
-@endsection
+@section('seo_title'){{ parse_seo_template('seo_topic_title',$tag) }}@endsection
+@section('seo_description'){{ parse_seo_template('seo_topic_description',$tag) }}@endsection
 
 @section('content')
     <div class="row">

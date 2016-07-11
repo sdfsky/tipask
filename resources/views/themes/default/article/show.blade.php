@@ -1,10 +1,8 @@
 @extends('theme::layout.public')
 
-@section('seo')
-    <title>{{ $article->title }} - {{ Setting()->get('website_name') }}</title>
-    <meta name="description" content="{{ $article->summary }}" />
-    <meta name="keywords" content="{{ $article->tags->implode('name',',') }}" />
-@endsection
+@section('seo_title'){{ parse_seo_template('seo_article_title',$article) }}@endsection
+@section('seo_keyword'){{ parse_seo_template('seo_article_keyword',$article) }}@endsection
+@section('seo_description'){{ parse_seo_template('seo_article_description',$article) }}@endsection
 
 @section('content')
     <div class="row mt-10">

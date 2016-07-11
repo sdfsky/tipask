@@ -1,10 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo')
-    <title>@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else他@endif收藏的@if($source_type==='questions')问题@else文章@endif - {{ Setting()->get('website_name') }}</title>
-    <meta name="description" content="tipask问答系统交流平台" />
-    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
-@endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else他@endif收藏的@if($source_type==='questions')问题@else文章@endif - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <div class="stream-following">

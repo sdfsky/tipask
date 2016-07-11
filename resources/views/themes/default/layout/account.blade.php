@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        @section('seo')
-        <title>用户登陆</title>
-        @show
-        <!-- Bootstrap -->
+    <title>@yield('seo_title') - {{ Setting()->get('website_name') }} </title>
+    <meta name="keywords" content="@yield('seo_title',parse_seo_template('seo_index_keyword','default'))" />
+    <meta name="description" content="@yield('seo_title',parse_seo_template('seo_index_description','default'))" />
+    <!-- Bootstrap -->
         <link href="{{ asset('static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/default/account.css')}}" rel="stylesheet">
 

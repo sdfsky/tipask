@@ -1,10 +1,7 @@
 @extends('theme::layout.public')
 
-@section('seo')
-    <title>行家认证 - {{ Setting()->get('website_name') }}</title>
-    <meta name="description" content="tipask问答系统交流平台" />
-    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
-@endsection
+@section('seo_title')行家认证 - {{ Setting()->get('website_name') }}@endsection
+
 
 @section('css')
     <link href="{{ asset('/static/js/select2/css/select2.min.css')}}" rel="stylesheet">

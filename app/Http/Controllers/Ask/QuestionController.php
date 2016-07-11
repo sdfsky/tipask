@@ -42,7 +42,6 @@ class QuestionController extends Controller
             abort(404);
         }
 
-
         /*问题查看数+1*/
         $question->increment('views');
 

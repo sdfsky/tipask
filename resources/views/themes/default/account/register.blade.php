@@ -1,10 +1,6 @@
 @extends('theme::layout.account')
 
-@section('seo')
-    <title>用户注册 - {{ Setting()->get('website_name') }}</title>
-    <meta name="description" content="tipask问答系统交流平台" />
-    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
-@endsection
+@section('seo_title')用户注册@endsection
 
 @section('content')
     <div class="header text-center">

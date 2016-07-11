@@ -1,10 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo')
-    <title>@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else他的@endif文章 - {{ Setting()->get('website_name') }}</title>
-    <meta name="description" content="tipask问答系统交流平台" />
-    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
-@endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else{{ $userInfo->name }}@endif的文章 - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <h4 class="space-stream-heading">{{ $articles->total() }} 篇文章</h4>

@@ -1,8 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo')
-    <title>@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else他的@endif首页 - {{ Setting()->get('website_name') }}</title>
-@endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else{{ $userInfo->name }}@endif的个人首页 - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <h2 class="h4">最近动态</h2>

@@ -194,6 +194,21 @@ class SettingController extends AdminController
         return view('admin.setting.credits');
     }
 
+    public function seo(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->except('_token');
+            unset($data['_token']);
+            foreach($data as $name=>$value){
+                Setting()->set($name,$value);
+            }
+            Setting()->clearAll();
+            return $this->success(route('admin.setting.seo'),'seo策略设置成功');
+        }
+        return view('admin.setting.seo');
+    }
+
+
 
     /*xunsearch整合*/
     public function xunSearch(Request $request)

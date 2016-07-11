@@ -1,10 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo')
-    <title>问答 - {{ Setting()->get('website_name') }}</title>
-    <meta name="description" content="tipask问答系统交流平台" />
-    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
-@endsection
+@section('seo_title')问答 - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <div class="row mt-10">

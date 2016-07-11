@@ -1,11 +1,5 @@
 @extends('theme::layout.public')
-
-@section('seo')
-    <title>{{ Setting()->get('website_name') }} - {{ Setting()->get('website_slogan') }}</title>
-    <meta name="description" content="tipask问答系统交流平台" />
-    <meta name="keywords" content="问答系统,PHP问答系统,Tipask问答系统 " />
-@endsection
-
+@section('seo_title'){{ parse_seo_template('seo_index_title','default') }}@endsection
 @section('jumbotron')
     @if(Auth()->guest())
     <div class="jumbotron text-center">

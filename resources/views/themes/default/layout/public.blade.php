@@ -2,11 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    @yield('seo')
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <title>@yield('seo_title',Setting()->get('website_name'))</title>
+    <meta name="keywords" content="@yield('seo_keyword',parse_seo_template('seo_index_keyword','default'))" />
+    <meta name="description" content="@yield('seo_description',parse_seo_template('seo_index_description','default'))" />
     <meta name="author" content="Tipask Team" />
     <meta name="copyright" content="2016 tipask.com" />
     {!! Setting()->get('website_header') !!}
