@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')问答 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')@if($filter === 'newest')最新的@elseif($filter === 'hottest')热门的@elseif($filter === 'reward')悬赏的@elseif($filter==='unAnswered')未回答的@endif问题 - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <div class="row mt-10">
@@ -9,7 +9,7 @@
                 <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.ask') }}">最新的</a></li>
                 <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.ask',['filter'=>'hottest']) }}">热门的</a></li>
                 <li @if($filter==='reward') class="active" @endif><a href="{{ route('website.ask',['filter'=>'reward']) }}">悬赏的</a></li>
-                <li @if($filter==='unAnswered') class="active" @endif><a href="{{ route('website.ask',['filter'=>'unAnswered']) }}">未回答</a></li>
+                <li @if($filter==='unAnswered') class="active" @endif><a href="{{ route('website.ask',['filter'=>'unAnswered']) }}">未回答的</a></li>
             </ul>
 
             <div class="stream-list question-stream">

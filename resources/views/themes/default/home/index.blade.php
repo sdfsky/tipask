@@ -3,7 +3,7 @@
 @section('jumbotron')
     @if(Auth()->guest())
     <div class="jumbotron text-center">
-        <h4>现在加入Tipask问答网，一起记录站长的世界 <a class="btn btn-primary ml-10" href="{{ route('auth.user.register') }}" role="button">立即注册</a> <a class="btn btn-default ml-5" href="{{ route('auth.user.login') }}" role="button">用户登陆</a></h4>
+        <h4>{{ Setting()->get('website_welcome','现在加入Tipask问答网，一起记录站长的世界') }} <a class="btn btn-primary ml-10" href="{{ route('auth.user.register') }}" role="button">立即注册</a> <a class="btn btn-default ml-5" href="{{ route('auth.user.login') }}" role="button">用户登陆</a></h4>
     </div>
     @endif
 @endsection

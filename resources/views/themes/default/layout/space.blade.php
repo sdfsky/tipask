@@ -84,14 +84,14 @@
                     <li @if(request()->route()->getName() == 'auth.space.attentions') class="active" @endif ><a href="{{ route('auth.space.attentions',['user_id'=>$userInfo->id,'source_type'=>'questions']) }}">我的的关注</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.collections') class="active" @endif ><a href="{{ route('auth.space.collections',['user_id'=>$userInfo->id,'source_type'=>'questions']) }}">我的的收藏</a></li>
                 @else
-                    <li @if(request()->route()->getName() == 'auth.space.index') class="active" @endif ><a href="{{ route('auth.space.index',['user_id'=>$userInfo->id]) }}">他的主页</a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.answers') class="active" @endif ><a href="{{ route('auth.space.answers',['user_id'=>$userInfo->id]) }}">他的回答</a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.questions') class="active" @endif ><a href="{{ route('auth.space.questions',['user_id'=>$userInfo->id]) }}">他的提问</a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.articles') class="active" @endif ><a href="{{ route('auth.space.articles',['user_id'=>$userInfo->id]) }}">他的文章</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.index') class="active" @endif ><a href="{{ route('auth.space.index',['user_id'=>$userInfo->id]) }}">TA的主页</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.answers') class="active" @endif ><a href="{{ route('auth.space.answers',['user_id'=>$userInfo->id]) }}">TA的回答</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.questions') class="active" @endif ><a href="{{ route('auth.space.questions',['user_id'=>$userInfo->id]) }}">TA的提问</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.articles') class="active" @endif ><a href="{{ route('auth.space.articles',['user_id'=>$userInfo->id]) }}">TA的文章</a></li>
                     <li role="separator" class="divider"><a></a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.coins') class="active" @endif ><a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}">他的金币</a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.credits') class="active" @endif ><a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}">他的经验</a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.followers') class="active" @endif ><a href="{{ route('auth.space.followers',['user_id'=>$userInfo->id]) }}">他的粉丝</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.coins') class="active" @endif ><a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}">TA的金币</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.credits') class="active" @endif ><a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}">TA的经验</a></li>
+                    <li @if(request()->route()->getName() == 'auth.space.followers') class="active" @endif ><a href="{{ route('auth.space.followers',['user_id'=>$userInfo->id]) }}">TA的粉丝</a></li>
                 @endif
             </ul>
         </div>

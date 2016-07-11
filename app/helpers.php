@@ -210,13 +210,13 @@ if( ! function_exists('parse_seo_template')){
 
         if(str_contains($type,'question')) {
             $seo_template = str_replace("{wtbt}", strip_tags($source->title), $seo_template);
-            $seo_template = str_replace("{wtms}", strip_tags($source->description), $seo_template);
+            $seo_template = str_replace("{wtms}", str_limit(strip_tags($source->description),200), $seo_template);
         }else if(str_contains($type,'article')){
             $seo_template = str_replace("{wzbt}",strip_tags($source->title),$seo_template);
             $seo_template = str_replace("{wzzy}",str_limit($source->summary,200),$seo_template);
         }else if(str_contains($type,'topic')){
             $seo_template = str_replace("{htmc}",$source->name,$seo_template);
-            $seo_template = str_replace("{htjj}",$source->summary,$seo_template);
+            $seo_template = str_replace("{htjj}",str_limit($source->summary,200),$seo_template);
         }
 
         return $seo_template;

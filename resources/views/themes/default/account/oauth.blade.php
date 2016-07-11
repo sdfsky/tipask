@@ -5,7 +5,7 @@
 @section('content')
     <div class="header text-center">
         <h1>
-            <a href="/" class="logo">
+            <a href="{{ route('website.index') }}" class="logo">
                 <img src="{{ asset('/css/default/login-logo.png') }}" alt="{{ Setting()->get('website_name') }}">
             </a>
         </h1>

@@ -50,9 +50,9 @@
                                 </li>
                                 <li>
                                     @if(Auth()->guest())
-                                        <a href="#" class="btn btn-default btn-sm">向他求助</a>
+                                        <a href="#" class="btn btn-default btn-sm">向TA求助</a>
                                     @elseif(Auth()->user()->id !== $user->user_id)
-                                        <a href="#" class="btn btn-default btn-sm">向他求助</a>
+                                        <a href="#" class="btn btn-default btn-sm">向TA求助</a
                                     @endif
 
                                 </li>
