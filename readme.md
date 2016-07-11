@@ -28,4 +28,4 @@ Tipask支持多主题，基于Blade模板引擎，方便模板定制和开发。
 
 在线求助：[wenda.tipask.com](http://wenda.tipask.com)
 
-授权协议：[www.tipask.com/license.html](www.tipask.com/license.html)
+授权协议：[www.tipask.com/license.html](http://www.tipask.com/license.html)
