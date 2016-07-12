@@ -92,9 +92,9 @@ class Question extends Model
     }
 
     /*最新问题*/
-    public static function newest()
+    public static function newest($pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->orderBy('created_at','DESC')->paginate(20);
+        $list = self::with('user')->where('status','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
     }
 

@@ -73,19 +73,19 @@
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">热门问答 <a href="{{ route('website.ask',['filter'=>'hottest']) }}" target="_blank" title="更多">»</a> </h4>
+                        <h4 class="widget-box-title">最新问题 <a href="{{ route('website.ask',['filter'=>'newest']) }}" target="_blank" title="更多">»</a> </h4>
                         <ul class="widget-links list-unstyled">
-                            @foreach($hotQuestions as $hotQuestion)
+                            @foreach($newestQuestions as $newQuestion)
                             <li class="widget-links-item">
-                                <a title="{{ $hotQuestion->title }}" target="_blank"  href="{{ route('ask.question.detail',['id'=>$hotQuestion->id]) }}">{{ $hotQuestion->title }}</a>
-                                <small class="text-muted">{{ $hotQuestion->answers }} 回答</small>
+                                <a title="{{ $newQuestion->title }}" target="_blank"  href="{{ route('ask.question.detail',['id'=>$newQuestion->id]) }}">{{ $newQuestion->title }}</a>
+                                <small class="text-muted">{{ $newQuestion->answers }} 回答</small>
                             </li>
                             @endforeach
 
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">悬赏问答 <a href="{{ route('website.ask',['filter'=>'reward']) }}" target="_blank" title="更多">»</a></h4>
+                        <h4 class="widget-box-title">悬赏问题 <a href="{{ route('website.ask',['filter'=>'reward']) }}" target="_blank" title="更多">»</a></h4>
 
                         <ul class="widget-links list-unstyled">
                             @foreach($rewardQuestions as $rewardQuestion)
