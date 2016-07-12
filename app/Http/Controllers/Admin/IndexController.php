@@ -64,7 +64,7 @@ class IndexController extends AdminController
                         $verifyRange[$i]++;
                     }
 
-                    if($user->userData->authentication_status === 1){
+                    if($user->userData && $user->userData->authentication_status === 1){
                         $authRange[$i]++;
                     }
                     break;
@@ -75,7 +75,7 @@ class IndexController extends AdminController
                         $verifyRange[$i]++;
                     }
 
-                    if($user->userData->authentication_status === 1){
+                    if($user->userData && $user->userData->authentication_status === 1){
                         $authRange[$i]++;
                     }
                 }
