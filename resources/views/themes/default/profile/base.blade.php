@@ -74,14 +74,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name" class="control-label col-sm-3">一句话介绍</label>
+                            <label for="name" class="control-label col-sm-3">身份职业</label>
                             <div class="col-sm-9">
                                 <input name="title" id="title" type="text" maxlength="32" placeholder="例如：汽车制造 / 产品设计师 / 登山爱好者" class="form-control" value="{{ Auth()->user()->title }}" />
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="setting-description" class="control-label col-sm-3">自我简介</label>
+                            <label for="setting-description" class="control-label col-sm-3">自我介绍</label>
                             <div class="col-sm-9">
                                 <textarea name="description" id="setting-description" class="form-control mono" rows="6">{{ Auth()->user()->description }}</textarea>
                             </div>
