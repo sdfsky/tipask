@@ -77,7 +77,7 @@ class AccountController extends Controller {
      */
     public function logout(){
 
-        Session::forget('admin.account.login');
+        Session::forget('admin.login');
         return redirect()->guest(route('admin.account.login'));
 
     }
