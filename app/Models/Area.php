@@ -31,7 +31,7 @@ class Area extends Model
     {
         $provinces = [];
         foreach(self::loadFromCache() as $area){
-            if($area->parent_id===0){
+            if($area->parent_id == 0){
                 array_push($provinces,$area);
             }
         }

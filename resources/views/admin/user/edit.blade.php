@@ -82,28 +82,30 @@
                           </div>
 
                             <div class="form-group">
-                                <label for="setting-city" class="control-label col-sm-2">所在城市</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control" name="province" id="province">
-                                        <option>请选择省份</option>
-                                        @foreach($data['provinces'] as $province)
-                                            <option value="{{ $province->id }}"  @if($user->province == $province->id) selected @endif>{{ $province->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-sm-5">
-                                    <select class="form-control" name="city" id="city">
-                                        <option>请选择城市</option>
-                                        @foreach($data['cities'] as $city)
-                                            <option value="{{ $city->id }}" @if($user->city == $city->id) selected @endif >{{ $city->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <label for="setting-city" class="control-label">所在城市</label>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="province" id="province">
+                                            <option>请选择省份</option>
+                                            @foreach($data['provinces'] as $province)
+                                                <option value="{{ $province->id }}"  @if($user->province == $province->id) selected @endif>{{ $province->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" name="city" id="city">
+                                            <option>请选择城市</option>
+                                            @foreach($data['cities'] as $city)
+                                                <option value="{{ $city->id }}" @if($user->city == $city->id) selected @endif >{{ $city->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
 
                             <div class="form-group @if ($errors->has('title')) has-error @endif">
-                                <label for="name">用户名</label>
+                                <label for="name">身份职业</label>
                                 <input type="text" name="title" class="form-control " placeholder="身份职业" value="{{ old('title',$user->title) }}">
                                 @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
                             </div>
