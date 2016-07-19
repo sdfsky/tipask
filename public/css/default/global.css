@@ -449,6 +449,8 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .widget-answers .answer-time{float:right;}
 .widget-answers .media-footer a{color:#999;}
 
+.answer_login_tips{border: 1px solid #e4e4e4;background: #fbfbfb;padding: 45px 0;height:18px;line-height: 18px;text-align: center;color: #666;}
+
 
 /*评论样式*/
 .widget-comments {list-style: none;font-size: 13px;color: #444;padding:10px;border: 1px solid #ddd;border-radius: 2px;resize: none;min-height:32px}
