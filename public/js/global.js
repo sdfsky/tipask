@@ -309,10 +309,18 @@ function upload_editor_image(file,editorId){
         contentType: false,
         processData: false,
         success: function(url) {
+            console.log(url)
+            if(url == 'error'){
+                alert('图片上传失败！');
+                return false;
+            }
             $('#'+editorId).summernote('insertImage', url, function ($image) {
                 $image.css('width', $image.width() / 2);
                 $image.addClass('img-responsive');
             });
+        },
+        error:function(){
+            alert('图片上传失败，请压缩图片大小再进行上传 :)');
         }
     });
 }

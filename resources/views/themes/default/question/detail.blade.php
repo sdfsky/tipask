@@ -163,7 +163,11 @@
             @if($question->status!==2)
             <div class="widget-answer-form mt-15">
 
-                @if(Auth()->check() && ($question->user_id !== Auth()->user()->id && !Auth()->user()->isAnswered($question->id)) )
+                @if(Auth()->guest())
+                    <div class="answer_login_tips mb-20">
+                        您需要登录后才可以回答问题，<a href="{{ route('auth.user.login') }}" rel="nofollow">登录</a>&nbsp;或者&nbsp;<a rel="nofollow" href="{{ route('auth.user.register') }}">注册</a>
+                    </div>
+                @elseif( Auth()->check() && ($question->user_id !== Auth()->user()->id && !Auth()->user()->isAnswered($question->id)) )
                     <form  name="answerForm" id="answer_form" action="{{ route('ask.answer.store') }}" method="post" class="editor-wrap">
                         <input type="hidden" id="answer_token" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" value="{{ $question->id }}" id="question_id" name="question_id" />
@@ -182,10 +186,6 @@
                             </div>
                         </div>
                     </form>
-                @else
-                    <div class="answer_login_tips mb-20">
-                        您需要登录后才可以回答问题，<a href="{{ route('auth.user.login') }}" rel="nofollow">登录</a>&nbsp;或者&nbsp;<a rel="nofollow" href="{{ route('auth.user.register') }}">注册</a>
-                    </div>
                 @endif
             </div>
             @endif

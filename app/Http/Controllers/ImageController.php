@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
 class ImageController extends Controller
@@ -45,7 +46,7 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $validateRules = [
-            'file' => 'required|image',
+            'file' => 'required|image|max:'.config('tipask.upload.image.max_size'),
         ];
 
         if($request->hasFile('file')){

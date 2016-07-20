@@ -41,6 +41,12 @@ return [
         'ask' => "['common', ['style','bold','ol','link','picture','clear','fullscreen']]",
         'blog' => "['common', ['style','bold','color','ol', 'paragraph','table','link','picture','clear','fullscreen']]",
     ],
+
+    'upload' =>[
+        'image'=>[
+            'max_size' => '2048' //图片上传大小 单位是kb
+        ]
+    ],
     'mail_drivers' => [
         'smtp' => '连接 SMTP 服务器发送',
         'sendmail' => '通过sendmail方式进行发送',
