@@ -66,16 +66,37 @@ class ProfileController extends Controller
             $file = $request->file('user_avatar');
             $avatarDir = User::getAvatarDir($user_id);
             $extension = $file->getClientOriginalExtension();
+            $extArray = array('png','gif','jpeg');
+            if($extension != 'jpg' && in_array($extension,$extArray)){
+                Image::make(File::get($file))->save(storage_path('app/'.User::getAvatarPath($user_id,'origin')));
+            }else{
+                Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($user_id,'origin').'.'.$extension,File::get($file));
+            }
+            
+            return response()->json(array(
+                'status' => 1,
+                'msg' => '头像上传成功'
+            ));
+        }
+        if($request->isMethod('POST')){
+            $x = intval($request->input('x'));
+            $y = intval($request->input('y'));
+            $width = intval($request->input('width'));
+            $height = intval($request->input('height'));
+            
+            $user_id = $request->user()->id;
 
             File::delete(storage_path('app/'.User::getAvatarPath($user_id,'big')));
             File::delete(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
             File::delete(storage_path('app/'.User::getAvatarPath($user_id,'small')));
 
-            Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($user_id,'origin').'.'.$extension,File::get($file));
-            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($user_id,'big')));
-            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
-            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin',$extension)))->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($user_id,'small')));
-            return response('ok');
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->crop($width,$height,$x,$y)->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($user_id,'big')));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->crop($width,$height,$x,$y)->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
+            Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->crop($width,$height,$x,$y)->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($user_id,'small')));
+            return response()->json(array(
+                'status' => 1,
+                'msg' => '头像截剪成功'
+            ));
         }
 
     }

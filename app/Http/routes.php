@@ -396,7 +396,7 @@ Route::get('ajax/loadUsers',['middleware' =>'auth','as'=>'website.ajax.loadUsers
 Route::get('ajax/unreadMessages',['as'=>'website.ajax.unreadMessages','uses'=>'AjaxController@unreadMessages']);
 
 
-Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|big|middle)']);
+Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|middle|big|origin)']);
 Route::get('image/show/{image_name}',['as'=>'website.image.show','uses'=>'ImageController@show']);
 Route::get('www/getList',['as'=>'website.www.getList','uses'=>'ApiController@getList']);
 

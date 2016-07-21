@@ -5,6 +5,7 @@
 @section('css')
     <link href="{{ asset('/static/js/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" />
     <link href="{{ asset('/static/js/webuploader/webuploader.css')}}" rel="stylesheet" />
+    <link href="{{ asset('/static/libs/cropper/cropper.min.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -15,15 +16,41 @@
         <div id="main" class="settings col-md-10 form-horizontal">
             <h2 class="h3 post-title">个人资料</h2>
             <div class="row mt-30">
-                <div class="col-md-3 col-md-push-9">
+                <div class="col-md-3 col-md-push-9 text-center">
                     <img class="avatar-128" id="user_avatar_image" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_big']) }}" alt="头像">
-
-                    <div id="uploader" class="wu-example mt-10">
-                        <!--用来存放文件信息-->
-                        <div id="thelist" class="uploader-list"></div>
+                    <div class="wu-example mt-10">
                         <div class="change-avatar">
-                            <div id="picker">修改头像</div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#avatar_modal">修改头像</button>
                             <p class="text-muted mt-10">从电脑中选择图片上传, 图像大小不要超过 2 MB</p>
+                            <div class="modal fade" id="avatar_modal" tabindex="-1" role="dialog" aria-labelledby="avatar_model_label">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="avatar_model_label">修改头像</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-center">
+                                                    <div id="avatar_origin" class="avatar-container">
+                                                        <img class="avatar-origin" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_origin']) }}">
+                                                    </div>
+                                                    <!--用来存放文件信息-->
+                                                    <div id="uploader">
+                                                        <div id="fileList" class="uploader-list"></div>
+                                                        <div id="filePicker" class="picker-container">选择图片</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 text-center mt-5">
+                                                    <div class="preview-container img-preview">
+                                                    </div>
+                                                    <button id="avatar_btn" type="button" class="btn btn-primary mt-20">保存头像</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,6 +131,7 @@
     <script src="{{ asset('/static/js/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('/static/js/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js') }}"></script>
     <script src="{{ asset('/static/js/webuploader/webuploader.min.js') }}"></script>
+    <script src="{{ asset('/static/libs/cropper/cropper.min.js') }}"></script>
 
     <script type="text/javascript">
         $(function(){
@@ -121,76 +149,115 @@
                 $("#city").load("{{ url('ajax/loadCities') }}/"+province_id);
             });
 
+            var filePicker = $('#filePicker');
+            var avatar_origin = $('#avatar_origin img');
+            var avatar_modal = $('#avatar_modal');
 
-            var uploader = WebUploader.create({
+            avatar_modal.on('shown.bs.modal', function(e) {
+                var user_avatar = avatar_origin.attr("src").split("?")[0] + "?" + Math.random();
+                avatar_origin.attr("src",user_avatar);
+                avatar_origin.cropper({
+                    aspectRatio: 1/1,
+                    modal: false,
+                    movable: false,
+                    zoomable: false,
+                    preview: ".img-preview",
+                    done: function(data) {
+                        console.log(data);
+                    }
+                });
 
-                // 选完文件后，是否自动上传。
-                auto: true,
+                var uploader = WebUploader.create({
 
-                // swf文件路径
-                swf: "{{ asset('/static/js/webuploader/Uploader.swf') }}",
+                    // 选完文件后，是否自动上传。
+                    auto: true,
 
-                // 文件接收服务端。
-                server: "{{ route('auth.profile.avatar') }}",
+                    // swf文件路径
+                    swf: "{{ asset('/static/js/webuploader/Uploader.swf') }}",
 
-                formData: {
-                    _token:'{{ csrf_token() }}'
-                },
-                method:'POST',
-                fileVal:'user_avatar',
-                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-                pick: '#picker',
-                fileNumLimit: 1,
-                fileSizeLimit: 2 * 1024 * 1024,    // 200 M
-                fileSingleSizeLimit: 2 * 1024 * 1024,    // 50 M
-                // 只允许选择图片文件。
-                accept: {
-                    title: 'Images',
-                    extensions: 'gif,jpg,jpeg,png',
-                    mimeTypes: 'image/*'
-                },
-                fileNumLimit: 1,
-                fileSingleSizeLimit: 2 * 1024 * 1024,
-                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-                resize: false
+                    // 文件接收服务端。
+                    server: "{{ route('auth.profile.avatar') }}",
+
+                    formData: {
+                        _token:'{{ csrf_token() }}'
+                    },
+                    method:'POST',
+                    fileVal:'user_avatar',
+                    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                    pick: '#filePicker',
+                    fileSingleSizeLimit: 2 * 1024 * 1024,    // 2M
+                    duplicate: true,
+                    // 只允许选择图片文件。
+                    accept: {
+                        title: 'Images',
+                        extensions: 'gif,jpg,jpeg,png',
+                        mimeTypes: 'image/*'
+                    },
+                    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                    resize: false
+                });
+
+                var webuploader_pick = $('.webuploader-pick');
+
+                uploader.on('error', function(msg) {
+                    if (msg == 'F_EXCEED_SIZE') {
+                        alert("图片大小不能越过2M");
+                    } else if (msg == 'Q_TYPE_DENIED') {
+                        alert("只支持GIF,JPG,JPEG,PNG图片格式");
+                    } else {
+                        alert(msg);
+                    }
+                });
+
+                // 文件上传过程中创建进度条实时显示。
+                uploader.on('uploadProgress', function(file, percentage) {
+                    webuploader_pick.text(parseInt(percentage * 100) + '%');
+                });
+
+                uploader.on('uploadSuccess', function(file, response) {
+                    var user_avatar = avatar_origin.attr("src").split("?")[0] + "?" + Math.random();
+                    avatar_origin.attr("src",user_avatar);
+                    avatar_origin.cropper('destroy');
+	                avatar_origin.cropper({
+                        aspectRatio: 1/1,
+                        modal: false,
+                        movable: false,
+                        zoomable: false,
+                        preview: ".img-preview",
+                        done: function(data) {
+                            console.log(data);
+                        }
+                    });
+                    $('#uploader').addClass('webuploader-element-invisible');
+                    console.log(response);
+                });
+
+                uploader.on('uploadError', function(file, reason) {
+                    alert('上传出错,错误原因：' + reason);
+                    webuploader_pick.text('选择图片');
+                });
             });
 
-            uploader.on('error', function( msg ) {
-                alert("图片上传大小不能超过2M");
+            avatar_modal.on('hidden.bs.modal', function(e) {
+                $('#uploader').removeClass('webuploader-element-invisible');
+                filePicker.removeClass('webuploader-container');
+                filePicker.text('选择图片');
+                avatar_origin.cropper('destroy');
             });
 
-            // 文件上传过程中创建进度条实时显示。
-            uploader.on('uploadProgress', function( file, percentage ) {
-                var $li = $( '#'+file.id ),
-                        $percent = $li.find('.progress .progress-bar');
-
-                // 避免重复创建
-                if ( !$percent.length ) {
-                    $percent = $('<div class="progress progress-striped active">' +
-                            '<div class="progress-bar" role="progressbar" style="width: 0%">' +
-                            '</div>' +
-                            '</div>').appendTo( $li ).find('.progress-bar');
-                }
-
-                $li.find('p.state').text('上传中');
-                $percent.css( 'width', percentage * 100 + '%' );
+            $('#avatar_btn').click(function(){
+                var cropper = avatar_origin.cropper('getData');
+                $.post("{{ route('auth.profile.avatar') }}", {_token: '{{ csrf_token() }}', x: cropper.x, y: cropper.y, width: cropper.width, height: cropper.height}, function(data){
+                    console.log(data);
+                    if (data.status === 1) {
+                        var user_avatar_image = $('#user_avatar_image');
+                        user_avatar_image.attr("src", user_avatar_image.attr("src").split("?")[0] + "?" + Math.random());
+                        var avatar_middle = $('.avatar-32');
+                        avatar_middle.attr("src", avatar_middle.attr("src").split("?")[0] + "?" + Math.random());
+                        avatar_modal.modal('hide');
+                    }
+                });
             });
-
-            uploader.on('uploadSuccess', function( file ,response) {
-                $( '#'+file.id ).find('p.state').text('');
-                var user_avatar = $('#user_avatar_image').attr("src")+"?"+Math.random();
-                $('#user_avatar_image').attr("src",user_avatar);
-                console.log('success'+response.message);
-            });
-
-            uploader.on('uploadError', function( file,reason ) {
-                $( '#'+file.id ).find('p.state').text('上传出错');
-            });
-
-            uploader.on('uploadComplete', function( file ) {
-                $( '#'+file.id ).find('.progress').fadeOut();
-            });
-
         });
     </script>
 @endsection
