@@ -1,41 +1,12 @@
 /*bootstrap样式重写*/
-
-.navbar-inverse {
-    background-color: #2a8c70;
-    border-color: #2b7a5c;
-}
-
-.navbar-inverse .navbar-nav>li>a{
-    color:#fff;
-}
-
-.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
-    background-color: #2b7a5c;
-}
-
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
-    background-color: #008151;
-}
-
-.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
-    background-color: #008151;
-}
-.navbar-inverse .navbar-toggle {
-    border-color: #008151;
-}
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: #008151;
-}
-
-.navbar-inverse .nav>li>a>.label {
-    position: absolute;
-    top: 9px;
-    right: 7px;
-    text-align: center;
-    font-size: 9px;
-    padding: 2px 4px;
-    line-height: 0.9;
-}
+.navbar-inverse{background-color:#2a8c70;border-color:#2b7a5c}
+.navbar-inverse .navbar-nav>li>a{color:#fff}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:focus,.navbar-inverse .navbar-nav>.active>a:hover{background-color:#2b7a5c}
+.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a:focus,.navbar-inverse .navbar-nav>.open>a:hover{background-color:#008151}
+.navbar-inverse .navbar-toggle:focus,.navbar-inverse .navbar-toggle:hover{background-color:#008151}
+.navbar-inverse .navbar-toggle{border-color:#008151}
+.navbar-inverse .navbar-collapse,.navbar-inverse .navbar-form{border-color:#008151}
+.navbar-inverse .nav>li>a>.label{position:absolute;top:9px;right:7px;text-align:center;font-size:9px;padding:2px 4px;line-height:.9}
 .btn-primary{border-color:#008151;background-color:#009a61;color:#fff;}
 .btn-primary.active,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.btn-primary.dropdown-toggle{border-color:#00432a;background-color:#006741;color:#fff;}
 .btn-primary.active,.btn-primary:active,.open>.btn-primary.dropdown-toggle{background-image:none;}
@@ -84,15 +55,7 @@ a{color:#333;text-decoration:none}
 a:focus,a:hover{color:#017e66;text-decoration:underline}
 a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
 
-
-
-.wrap {
-    padding-bottom: 30px;
-    position: relative;
-}
-
-
-
+.wrap{padding-bottom:30px;position:relative}
 
 /*margin-bottom*/
 .mb-10 {margin-bottom: 10px;}
@@ -118,49 +81,22 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .mr-10,.mr10{margin-right:10px;}
 .mr-20,.mr20{margin-right:20px;}
 .mr-30,.mr30{margin-right:30px;}
-
 .pt-30{padding-top: 30px;}
 
 /*边框border*/
-.border-top {
-    border-top: 1px solid #eee;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #eee;
-}
+.border-top{border-top:1px solid #eee}
+.border-bottom{border-bottom:1px solid #eee}
 
 /*字体颜色设置*/
 .black,.text-black{color:#333}
-
 .gold,.text-gold{color:#ff8a00;}
-
-
 .black:hover,.text-black:hover{color:#333}
-
-.bg-gray {
-    background-color: #F3F3F3;
-}
-
-
-
-.span-line {
-    margin-left: 8px;
-    margin-right: 8px;
-    color: #999999;
-}
-
-
+.bg-gray{background-color:#F3F3F3}
+.span-line{margin-left:8px;margin-right:8px;color:#999}
 /*内容隐藏*/
 .hidden{display:none !important;visibility:hidden !important}
 /*文字format*/
-.text-fmt {
-    overflow: hidden;
-    font-size: 14px;
-    line-height: 1.6;
-    word-wrap: break-word;
-}
-
+.text-fmt{overflow:hidden;font-size:14px;line-height:1.6;word-wrap:break-word}
 
 /*网站logo*/
 .logo{float:left;margin:0;display:inline-block;width:125px;}
@@ -182,18 +118,11 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 
 /*导航部分用户头像*/
 .user-menu >.user-avatar > a{padding:9px 15px;}
-
-.main-title {
-    margin: 30px 0 25px;
-    font-size: 18px;
-    vertical-align: middle;
-}
+.main-title{margin:30px 0 25px;font-size:18px;vertical-align:middle}
 
 
 /*公告alert*/
 .top-alert .alert{margin-bottom: 10px;border-radius:2px;}
-
-
 .side-alert{border: 1px solid #fbeed5;padding: 15px;}
 
 /*列表样式*/
@@ -227,45 +156,13 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .bookmark-rank{margin-right:10px}
 .bookmark-rank .collections,.bookmark-rank .followers{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px;background:#F0F5F3;color:#017E66}
 .bookmark-rank .followers{background:#5cb85c;color:#fff}
-
-.blog-rank {
-    float: left;
-    margin-right: 12px;
-    padding-right: 12px;
-    border-right: 1px solid #f3f3f3;
-    font-size: 16px;
-    text-align: center;
-    line-height: 1.2;
-    color: #666;
-}
-
-.blog-rank small {
-    display: block;
-    font-size: 12px;
-}
-
-.blog-rank .votes {
-    margin-bottom: 8px;
-    background: #f0f0f0;
-}
-
-.blog-rank .plus {
-    background: #009a61;
-    color: #fff;
-}
-
-.blog-rank .views, .blog-rank .votes {
-    display: block;
-    padding-top: 3px;
-    width: 45px;
-    height: 40px;
-    border-radius: 1px;
-}
-
-
+.blog-rank{float:left;margin-right:12px;padding-right:12px;border-right:1px solid #f3f3f3;font-size:16px;text-align:center;line-height:1.2;color:#666}
+.blog-rank small {display: block;font-size: 12px;}
+.blog-rank .votes {margin-bottom: 8px;background: #f0f0f0;}
+.blog-rank .plus {background: #009a61;color: #fff;}
+.blog-rank .views, .blog-rank .votes {display: block;padding-top: 3px;width: 45px;height: 40px;border-radius: 1px;}
 
 /*tag样式定义*/
-
 .tag-header{background:#f6f6f6;box-shadow:0 1px 2px 0 rgba(0,0,0,.24);padding:15px;margin-bottom:20px}
 .tag-header-title{margin-top:0;margin-right:15px;vertical-align:middle}
 .tag-header-follow{display:inline-block}
@@ -309,18 +206,9 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .widget-user .media-heading{font-size: 16px;font-weight: 700;}
 .widget-user p{padding: 0;margin: 0;}
 
-.widget-user-item {
-    border: none;
-    /* border-radius: 0; */
-    /* box-shadow: none; */
-    margin-top: 0;
-}
-
+.widget-user-item {border: none; margin-top: 0;}
 .widget-relation{padding:10px;border-top:1px solid #ddd;border-bottom:1px solid #eee; }
-
-.widget-links-item {
-    margin-bottom: 8px;
-}
+.widget-links-item {margin-bottom: 8px;}
 .widget-links-item a{margin-right:6px;}
 .widget-links-item small{display:inline-block;font-size:13px}
 .widget-links-item .ranks{float:left;padding:0;margin-right:5px;width:26px;background:#f3f3f3;color:#444;text-align:center;font-size:13px}
@@ -330,45 +218,14 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 
 /*消息菜单*/
 
-.widget-messages {
-    margin-bottom: 15px
-}
-
-.widget-message-item {
-    display: block;
-    color: #666;
-    margin-left: -10px;
-    padding: 6px 10px;
-    width: 100%;
-    text-decoration: none
-}
-
-.widget-message-item .badge {
-    margin-left: 5px;
-    padding: 2px 6px;
-    font-weight: 400
-}
-
-.widget-message-item.active, .widget-messages-item:hover {
-    text-decoration: none;
-    color: #008E59;
-    background-color: #F6F6F6
-}
-
-.widget-message-item.active .badge, .widget-message-item:hover .badge {
-    background-color: #008E59
-}
-
-
+.widget-messages {margin-bottom: 15px}
+.widget-message-item {display: block;color: #666;margin-left: -10px;padding: 6px 10px;width: 100%;text-decoration: none}
+.widget-message-item .badge {margin-left: 5px;padding: 2px 6px;font-weight: 400}
+.widget-message-item.active, .widget-messages-item:hover {text-decoration: none;color: #008E59;background-color: #F6F6F6}
+.widget-message-item.active .badge, .widget-message-item:hover .badge {background-color: #008E59}
 /*提问建议*/
-.widget-suggest .widget-suggest-list {
-    margin: 0;
-    overflow: auto;
-    max-height: 100px;
-}
-.widget-suggest li a {
-    color:#017e66;
-}
+.widget-suggest .widget-suggest-list {margin: 0;overflow: auto;max-height: 100px;}
+.widget-suggest li a {color:#017e66;}
 .widget-suggest li a em{color:#D0021B;font-style: normal;}
 /*详情页面头部*/
 
@@ -416,23 +273,11 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 
 /*活跃用户*/
 
-.users .action-list li {
-    padding: .35rem 0;
-}
-
+.users .action-list li {padding: .35rem 0;}
 .users .top-num .label{display: block;}
-
-
-
-
-
-
 /*我的通知*/
 .widget-notify blockquote{margin:10px;font-size: 13px;}
 .widget-notify .not_read,.widget-streams .not_read{background:#FFF9EA;}
-
-
-
 .widget-streams{margin-bottom:20px}
 .streams-item{position:relative;border-top:1px solid #EEE;padding-top:15px;padding-bottom:10px;margin-top:0}
 .streams-item .avatar-40{margin-top:3px}
@@ -448,15 +293,12 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .widget-answers .media{border-bottom:1px solid #eee;}
 .widget-answers .answer-time{float:right;}
 .widget-answers .media-footer a{color:#999;}
-
 .answer_login_tips{border: 1px solid #e4e4e4;background: #fbfbfb;padding: 45px 0;height:18px;line-height: 18px;text-align: center;color: #666;}
-
 
 /*评论样式*/
 .widget-comments {list-style: none;font-size: 13px;color: #444;padding:10px;border: 1px solid #ddd;border-radius: 2px;resize: none;min-height:32px}
 .widget-comments .media{border-bottom:1px solid #eee;font-size: 13px;}
 .media-footer{margin-bottom: 10px;}
-
 .sn-inline{list-style:none;display:inline;margin:0;padding:0;vertical-align:text-bottom}
 .sn-inline li{display:inline-block;margin-right:5px}
 .sn-inline li a{text-indent:110%;white-space:nowrap;overflow:hidden;text-transform:capitalize}
@@ -469,10 +311,6 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .exchange-doings{border:1px solid #eee;padding: 10px;}
 .exchange-doings ul{font-size:13px;}
 .exchange-doings ul li{padding-bottom: 10px;}
-
-
-
-
 /*搜索页面*/
 .best-tag,.search-category{margin-bottom:10px}
 .search-category>li>a{padding:2px 10px;color:#666}
@@ -487,20 +325,8 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .search-result a{color:#017e66;}
 .related-object{border:1px solid #ddd;border-radius:2px;padding:10px 15px;margin-bottom:20px}
 
-
 /*页面底部footer*/
-#footer {
-    border-top: 1px solid #EEE;
-    padding: 20px 0;
-    color: #888;
-    line-height: 1.6;
-    vertical-align: top;
-}
+#footer {border-top: 1px solid #EEE;padding: 20px 0;color: #888;line-height: 1.6;vertical-align: top;}
 
-#footer .copyright {
-    text-align: center;
-    font-size: 13px;
-}
-#footer a {
-    color: #888;
-}
+#footer .copyright {text-align: center;font-size: 13px;}
+#footer a {color: #888;}
