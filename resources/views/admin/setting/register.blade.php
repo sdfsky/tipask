@@ -41,7 +41,7 @@
 
                         </div>
                         <div class="box-footer">
-                            <input type="hidden" id="register_editor_content"  name="register_license" value=""  />
+                            <input type="hidden" id="register_editor_content"  name="register_license" value="{{ old('register_license',Setting()->get('register_license')) }}"  />
                             <button type="submit" class="btn btn-primary editor-submit" >保存</button>
                             <button type="reset" class="btn btn-success">重置</button>
                         </div>
