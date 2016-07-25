@@ -5,7 +5,7 @@
 @section('css')
     <link href="{{ asset('/static/js/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" />
     <link href="{{ asset('/static/js/webuploader/webuploader.css')}}" rel="stylesheet" />
-    <link href="{{ asset('/static/libs/cropper/cropper.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('/static/js/cropper/cropper.min.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -131,7 +131,7 @@
     <script src="{{ asset('/static/js/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('/static/js/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js') }}"></script>
     <script src="{{ asset('/static/js/webuploader/webuploader.min.js') }}"></script>
-    <script src="{{ asset('/static/libs/cropper/cropper.min.js') }}"></script>
+    <script src="{{ asset('/static/js/cropper/cropper.min.js') }}"></script>
 
     <script type="text/javascript">
         $(function(){

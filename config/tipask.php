@@ -8,7 +8,7 @@
 
 return [
     'version' => 'Tipask3.0',
-    'release' => '20160711',
+    'release' => '20160725',
     'user_cache_time' => 1, //用户数据缓存时间单位分钟
     'admin' => [
         'page_size' => 15,  //后台分页列表显示数目
@@ -23,7 +23,6 @@ return [
         'answer_adopted' => '回答被采纳',
         'create_article' => '发表了文章',
         'exchange' => '兑换商品',
-
     ],
     'notification_types' =>[
         'answer'  => '回答了问题',

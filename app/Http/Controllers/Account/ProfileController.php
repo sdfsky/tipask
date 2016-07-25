@@ -60,6 +60,7 @@ class ProfileController extends Controller
         $validateRules = [
             'user_avatar' => 'required|image',
         ];
+
         if($request->hasFile('user_avatar')){
             $this->validate($request,$validateRules);
             $user_id = $request->user()->id;
@@ -78,6 +79,7 @@ class ProfileController extends Controller
                 'msg' => '头像上传成功'
             ));
         }
+
         if($request->isMethod('POST')){
             $x = intval($request->input('x'));
             $y = intval($request->input('y'));
