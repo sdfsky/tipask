@@ -174,7 +174,7 @@
                         <a href="javascript:void(0);" class="send-email-token">重新发送激活邮件</a>
                     </p>
                     <div class="send-email-tips" style="display: none">
-                        <div class="alert alert-success">一封验证邮件已经发送至 <strong>{{ Auth()->user()->email }}</strong>，请登陆邮箱根据提示完成操作</div>
+                        <div class="alert alert-success">一封验证邮件已经发送至 <strong>{{ Auth()->user()->email }}</strong>，请登录邮箱根据提示完成操作</div>
                     </div>
                 </div>
             </div>
