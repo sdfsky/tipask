@@ -131,6 +131,8 @@ class SettingController extends AdminController
     {
         if($request->isMethod('post')){
             $data = $request->except('_token');
+            $data['code_login'] = $request->input('code_login',0);
+            $data['code_register'] = $request->input('code_register',0);
             foreach($data as $name => $value ){
                 Setting()->set($name,$value);
             }

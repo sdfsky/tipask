@@ -33,12 +33,17 @@ class UserController extends Controller
 
             $request->flashOnly('email');
 
-            /*表单数据校验*/
-            $this->validate($request, [
+            $validateRules = [
                 'email' => 'required|email',
-                'password' => 'required|min:6',
-                'captcha' => 'required|captcha'
-            ]);
+                'password' => 'required|min:6'
+            ];
+
+            if( Setting()->get('code_login') == 1){
+                $validateRules['captcha'] = 'required|captcha';
+            }
+
+            /*表单数据校验*/
+            $this->validate($request,$validateRules);
 
             /*只接收email和password的值*/
             $credentials = $request->only('email', 'password');
@@ -92,6 +97,10 @@ class UserController extends Controller
                 'email' => 'required|email|max:255|unique:users',
                 'password' => 'required|confirmed|min:6|max:16',
             ];
+
+            if( Setting()->get('code_register') == 1){
+                $validateRules['captcha'] = 'required|captcha';
+            }
 
             $this->validate($request,$validateRules);
 

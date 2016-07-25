@@ -49,9 +49,9 @@
                                 </li>
                                 <li>
                                     @if(Auth()->guest())
-                                        <a href="#" class="btn btn-default btn-sm">向他求助</a>
+                                        <a href="{{ route('ask.question.create') }}?to_user_id={{ $user['id'] }}" class="btn btn-default btn-sm">向TA求助</a>
                                     @elseif(Auth()->user()->id !== $user['id'])
-                                        <a href="#" class="btn btn-default btn-sm">向他求助</a>
+                                        <a href="{{ route('ask.question.create') }}?to_user_id={{ $user['id'] }}" class="btn btn-default btn-sm">向TA求助</a>
                                     @endif
 
                                 </li>
