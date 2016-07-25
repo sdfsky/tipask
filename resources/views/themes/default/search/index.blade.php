@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')搜索 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')搜索 - 第{{ $list->currentPage() }}页 -  {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     @if(Setting()->get("xunsearch_open",0))

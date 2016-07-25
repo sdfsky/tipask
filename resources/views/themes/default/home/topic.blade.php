@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')话题 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')话题 - 第{{ $topics->currentPage() }}页 - {{ Setting()->get('website_name') }}@endsection
 
 @section('css')
     <link href="{{ asset('/css/default/topic.css')}}" rel="stylesheet" />

@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')@if($filter === 'newest')最新的@elseif($filter === 'hottest')热门的@elseif($filter === 'reward')悬赏的@elseif($filter==='unAnswered')未回答的@endif问题 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')@if($filter === 'newest')最新的@elseif($filter === 'hottest')热门的@elseif($filter === 'reward')悬赏的@elseif($filter==='unAnswered')未回答的@endif问题 - 第{{ $questions->currentPage() }}页 - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <div class="row mt-10">

@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')问推荐行家 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')问推荐行家 - 第{{ $experts->currentPage() }}页 - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <h1 class="h3">推荐行家<br><small></small></h1>
