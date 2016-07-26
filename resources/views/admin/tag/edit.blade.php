@@ -56,7 +56,7 @@
 
                         </div>
                         <div class="box-footer">
-                            <input type="hidden" id="tag_editor_content"  name="description" value=""  />
+                            <input type="hidden" id="tag_editor_content"  name="description" value="{{ old('description',$tag->description) }}" />
                             <button type="submit" class="btn btn-primary editor-submit" >保存</button>
                             <button type="reset" class="btn btn-success">重置</button>
                         </div>
