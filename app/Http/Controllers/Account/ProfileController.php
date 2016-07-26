@@ -66,14 +66,19 @@ class ProfileController extends Controller
             $user_id = $request->user()->id;
             $file = $request->file('user_avatar');
             $avatarDir = User::getAvatarDir($user_id);
-            $extension = $file->getClientOriginalExtension();
-            $extArray = array('png','gif','jpeg');
-            if($extension != 'jpg' && in_array($extension,$extArray)){
-                Image::make(File::get($file))->save(storage_path('app/'.User::getAvatarPath($user_id,'origin')));
+            $extension = strtolower($file->getClientOriginalExtension());
+            $extArray = array('png', 'gif', 'jpeg', 'jpg');
+
+            if(in_array($extension, $extArray)){
+	            if($extension != 'jpg'){
+                    Image::make(File::get($file))->save(storage_path('app/'.User::getAvatarPath($user_id,'origin')));
+                }else{
+                    Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($user_id,'origin').'.'.$extension,File::get($file));
+                }
             }else{
-                Storage::disk('local')->put($avatarDir.'/'.User::getAvatarFileName($user_id,'origin').'.'.$extension,File::get($file));
+                return response('error');
             }
-            
+
             return response()->json(array(
                 'status' => 1,
                 'msg' => '头像上传成功'
@@ -85,7 +90,7 @@ class ProfileController extends Controller
             $y = intval($request->input('y'));
             $width = intval($request->input('width'));
             $height = intval($request->input('height'));
-            
+
             $user_id = $request->user()->id;
 
             File::delete(storage_path('app/'.User::getAvatarPath($user_id,'big')));
@@ -95,6 +100,7 @@ class ProfileController extends Controller
             Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->crop($width,$height,$x,$y)->resize(128,128)->save(storage_path('app/'.User::getAvatarPath($user_id,'big')));
             Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->crop($width,$height,$x,$y)->resize(64,64)->save(storage_path('app/'.User::getAvatarPath($user_id,'middle')));
             Image::make(storage_path('app/'.User::getAvatarPath($user_id,'origin')))->crop($width,$height,$x,$y)->resize(24,24)->save(storage_path('app/'.User::getAvatarPath($user_id,'small')));
+
             return response()->json(array(
                 'status' => 1,
                 'msg' => '头像截剪成功'
