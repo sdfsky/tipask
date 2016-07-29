@@ -142,7 +142,7 @@
         @endif
         <div class="text-center">
             <a href="{{ route('website.index') }}">{{ Setting()->get('website_name') }}</a><span class="span-line">|</span>
-            <a href="mailto:tipask@qq.com" target="_blank">联系我们</a><span class="span-line">|</span>
+            <a href="mailto:{{ Setting()->get('website_admin_email) }}" target="_blank">联系我们</a><span class="span-line">|</span>
             <a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
         </div>
         <div class="copyright mt-10">

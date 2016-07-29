@@ -91,7 +91,7 @@ class InstallerController extends Controller
 
 
     public function initDB(){
-
+        set_time_limit(0);//不限制执行时间
         /*创建表结构*/
         try{
             Artisan::call('migrate');
