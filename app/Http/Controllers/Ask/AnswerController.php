@@ -17,7 +17,7 @@ class AnswerController extends Controller
 
     /*问题创建校验*/
     protected $validateRules = [
-        'content' => 'min:15|max:65535',
+        'content' => 'required|min:15|max:65535',
     ];
 
 
