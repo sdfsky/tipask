@@ -31,7 +31,11 @@ class Taggable extends Model
             $tags = self::hottest(25);
             $tags->map(function($tag){
                 $tagInfo = Tag::find($tag->tag_id);
-                $tag->name = $tagInfo->name;
+                if(!$tagInfo){
+                    $tag->name = '';
+                }else{
+                    $tag->name = $tagInfo->name;
+                }
             });
             return $tags;
         });

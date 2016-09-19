@@ -54,7 +54,6 @@ class Article extends Model
         });
 
         static::deleted(function($article){
-
             if(Setting()->get('xunsearch_open',0) == 1){
                 App::offsetGet('search')->delete($article);
             }

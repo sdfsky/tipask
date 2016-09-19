@@ -25,7 +25,7 @@ class Answer extends Model
 
         });
         /*监听删除事件*/
-        static::deleted(function($answer){
+        static::deleting(function($answer){
 
             /*问题回答数 -1 */
             $answer->question->decrement('answers');
