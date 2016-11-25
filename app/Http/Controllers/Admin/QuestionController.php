@@ -20,6 +20,9 @@ class QuestionController extends AdminController
 
         $query = Question::query();
 
+        $filter['category_id'] = $request->input('category_id',-1);
+
+
         /*提问人过滤*/
         if( isset($filter['user_id']) &&  $filter['user_id'] > 0 ){
             $query->where('user_id','=',$filter['user_id']);
@@ -38,6 +41,11 @@ class QuestionController extends AdminController
         /*问题状态过滤*/
         if( isset($filter['status']) && $filter['status'] > -1 ){
             $query->where('status','=',$filter['status']);
+        }
+
+        /*分类过滤*/
+        if( $filter['category_id']> 0 ){
+            $query->where('category_id','=',$filter['category_id']);
         }
 
         $questions = $query->orderBy('created_at','desc')->paginate(20);

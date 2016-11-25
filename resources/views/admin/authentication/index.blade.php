@@ -25,15 +25,21 @@
                                         <div class="col-xs-4">
                                             <input type="text" class="form-control" name="id_card" placeholder="身份证号码" value="{{ $filter['id_card'] or '' }}"/>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-xs-3">
                                             <select class="form-control" name="status">
-                                                <option value="-1">不选择</option>
+                                                <option value="-1">--状态--</option>
                                                 @foreach(trans_authentication_status('all') as $key => $status)
                                                     <option value="{{ $key }}" @if( isset($filter['status']) && $filter['status']==$key) selected @endif >{{ $status }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-xs-1">
+                                        <div class="col-xs-3">
+                                            <select class="form-control" name="category_id">
+                                                <option value="-1">--分类--</option>
+                                                @include('admin.category.option',['type'=>'experts','select_id'=>$filter['category_id']])
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-2">
                                             <button type="submit" class="btn btn-primary">搜索</button>
                                         </div>
                                     </form>
@@ -48,6 +54,7 @@
                                 <tr>
                                     <th><input type="checkbox" class="checkbox-toggle" /></th>
                                     <th>UID</th>
+                                    <th>所属分类</th>
                                     <th>真实姓名</th>
                                     <th>身份证号码</th>
                                     <th>认证领域</th>
@@ -60,6 +67,7 @@
                                     <tr>
                                         <td><input type="checkbox" name="id[]" value="{{ $authentication->user_id }}"/></td>
                                         <td>{{ $authentication->user_id }}</td>
+                                        <td>@if($authentication->category) {{ $authentication->category->name }} @else 无 @endif</td>
                                         <td>{{ $authentication->real_name }}</td>
                                         <td>{{ $authentication->id_card }}</td>
                                         <td>{{ $authentication->skill }}</td>

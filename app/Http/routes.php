@@ -15,13 +15,13 @@ Route::Group(['namespace'=>'Installer','middleware'=>'installer'],function(){
 Route::get('/',['as'=>'website.index','uses'=>'IndexController@index']);
 
 /*问答*/
-Route::get('/questions/{filter?}',['as'=>'website.ask','uses'=>'IndexController@ask'])->where(['filter'=>'(newest|hottest|reward|unAnswered)']);
+Route::get('/questions/{category_name?}/{filter?}',['as'=>'website.ask','uses'=>'IndexController@ask'])->where(['filter'=>'(newest|hottest|reward|unAnswered)']);
 
 /*标签*/
-Route::get('/topics',['as'=>'website.topic','uses'=>'IndexController@topic']);
+Route::get('/topics/{category_name?}',['as'=>'website.topic','uses'=>'IndexController@topic']);
 
 /*文章*/
-Route::get('/articles/{filter?}',['as'=>'website.blog','uses'=>'IndexController@blog'])->where(['filter'=>'(recommended|newest|hottest)']);
+Route::get('/articles/{category_name?}/{filter?}',['as'=>'website.blog','uses'=>'IndexController@blog'])->where(['filter'=>'(recommended|newest|hottest)']);
 
 /*用户*/
 Route::get('/users',['as'=>'website.user','uses'=>'IndexController@user']);
@@ -350,7 +350,11 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*标签审核*/
     Route::post('tag/verify',['as'=>'admin.tag.verify','uses'=>'TagController@verify']);
     /*标签管理*/
-    Route::resource('tag', 'TagController',['only' => ['index','edit','update']]);
+    Route::resource('tag', 'TagController',['except' => ['show','destroy']]);
+
+
+    /*分类管理*/
+    Route::resource('category', 'CategoryController',['except' => ['show']]);
 
 
 

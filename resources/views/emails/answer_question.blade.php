@@ -1,6 +1,6 @@
 @extends('emails.layout')
 
-@section('title')找回用户密码@endsection
+@section('title')回答问题@endsection
 
 @section('content')
     <table width="100%" cellpadding="0" cellspacing="0">

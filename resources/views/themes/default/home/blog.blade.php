@@ -3,21 +3,27 @@
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
-            <ul class="nav nav-tabs nav-tabs-zen mb-10">
-                <li @if($filter==='recommended') class="active" @endif><a href="{{ route('website.blog') }}">推荐的</a></li>
-                <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.blog',['filter'=>'hottest']) }}">热门的</a></li>
-                <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.blog',['filter'=>'newest']) }}">最新的</a></li>
+            @if( $categories )
+                <div class="row widget-category">
+                    <div class="col-sm-12">
+                        <ul class="list">
+                            @foreach( $categories as $category )
+                                <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+            <ul class="nav nav-tabs mb-10 mt-20">
+                <li @if($filter==='recommended') class="active" @endif><a href="{{ route('website.blog',['category_slug'=>$categorySlug]) }}">推荐的</a></li>
+                <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.blog',['category_slug'=>$categorySlug,'filter'=>'hottest']) }}">热门的</a></li>
+                <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.blog',['category_slug'=>$categorySlug,'filter'=>'newest']) }}">最新的</a></li>
             </ul>
             <div class="stream-list blog-stream">
                 @foreach($articles as $article)
-                <section class="stream-list-item">
+                <section class="stream-list-item clearfix">
                     <div class="blog-rank">
-                        <div class="votes @if($article->supports>0) plus @endif">
-                            {{ $article->supports }}<small>推荐</small>
-                        </div>
-                        <div class="views hidden-xs">
-                            {{ $article->views }}<small>浏览</small>
-                        </div>
+                        <a href="http://lanxi.baijia.baidu.com/article/691745" target="_blank" mon="col=13&amp;pn=1&amp;a=12"><img style="width: 200px;height:120px;" src="http://f.hiphotos.baidu.com/news/crop%3D84%2C1%2C609%2C365%3Bw%3D638/sign=a4daf82ccf5c1038303194828f29a73f/1c950a7b02087bf4475bafdffbd3572c11dfcf55.jpg"></a>
                     </div>
                     <div class="summary">
                         <h2 class="title"><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}" target="_blank" >{{ $article->title }}</a></h2>

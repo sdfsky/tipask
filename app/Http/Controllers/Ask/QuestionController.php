@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ask;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Question;
 use App\Models\QuestionInvitation;
 use App\Models\Tag;
@@ -24,8 +25,9 @@ class QuestionController extends Controller
     protected $validateRules = [
         'title' => 'required|max:255',
         'description' => 'sometimes|max:65535',
-        'price'=> 'digits_between:1,1000',
+        'price'=> 'sometimes|digits_between:0,100',
         'tags' => 'sometimes|max:128',
+        'category_id' => 'sometimes|numeric'
     ];
 
 
@@ -78,7 +80,7 @@ class QuestionController extends Controller
     {
         $to_user_id =  $request->query('to_user_id',0);
         $toUser = User::find($to_user_id);
-        return view("theme::question.create")->with('toUser',$toUser)->with('to_user_id',$to_user_id);
+        return view("theme::question.create")->with(compact('toUser','to_user_id'));
     }
 
 
@@ -101,6 +103,7 @@ class QuestionController extends Controller
 
         $data = [
             'user_id'      => $loginUser->id,
+            'category_id'      => $request->input('category_id',0),
             'title'        => trim($request->input('title')),
             'description'  => clean($request->input('description')),
             'price'        => $price,
@@ -168,8 +171,7 @@ class QuestionController extends Controller
         if($question->user_id !== $request->user()->id && !$request->user()->is('admin')){
             abort(403);
         }
-
-        return view("theme::question.edit")->with('question',$question);
+        return view("theme::question.edit")->with(compact('question'));
     }
 
 
@@ -192,6 +194,7 @@ class QuestionController extends Controller
         $question->title = trim($request->input('title'));
         $question->description = clean($request->input('description'));
         $question->hide = intval($request->input('hide'));
+        $question->category_id = $request->input('category_id',0);
 
         $question->save();
         $tagString = trim($request->input('tags'));

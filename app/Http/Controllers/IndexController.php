@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Exchange;
 use App\Models\FriendshipLink;
@@ -32,6 +33,7 @@ class IndexController extends Controller
     public function index()
     {
 
+
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();
 
@@ -48,7 +50,7 @@ class IndexController extends Controller
 
         /*热门问题*/
         $newestQuestions = Cache::remember('newest_questions',Setting()->get('website_cache_time',1),function() {
-            return  Question::newest(8);
+            return  Question::newest(0,8);
         });
 
         /*悬赏问题*/
@@ -91,7 +93,7 @@ class IndexController extends Controller
 
 
     /*问答模块*/
-    public function ask($filter='newest')
+    public function ask($categorySlug='all',$filter='newest')
     {
 
         $question = new Question();
@@ -100,46 +102,70 @@ class IndexController extends Controller
             abort(404);
         }
 
-        $questions =  call_user_func([$question,$filter]);
+        $currentCategoryId = $parentCategoryId = 0;
+        if( $categorySlug != 'all' ){
+            $category = Category::where("slug","=",$categorySlug)->first();
+            if(!$category){
+                abort(404);
+            }
+            $currentCategoryId = $category->id;
+        }
+
+        $questions =  call_user_func([$question,$filter] , $currentCategoryId );
 
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();
 
-
-
+        $categories = load_categories('questions');
         $topAnswerUsers = UserData::top('answers',8);
-        return view('theme::home.ask')->with('questions',$questions)
-            ->with('topAnswerUsers',$topAnswerUsers)
-            ->with('hotTags',$hotTags)
-            ->with('filter',$filter);
+        return view('theme::home.ask')->with(compact('questions','topAnswerUsers','hotTags','filter','categories','currentCategoryId','categorySlug'));
     }
 
 
-    public function blog($filter='recommended')
+    public function blog($categorySlug='all', $filter='recommended')
     {
         $article = new Article();
         if(!method_exists($article,$filter)){
             abort(404);
         }
 
-        $articles = call_user_func([$article,$filter]);
+        $currentCategoryId = $parentCategoryId = 0;
+        if( $categorySlug != 'all' ){
+            $category = Category::where("slug","=",$categorySlug)->first();
+            if(!$category){
+                abort(404);
+            }
+            $currentCategoryId = $category->id;
+        }
+
+
+        $articles = call_user_func([$article,$filter],$currentCategoryId);
 
         $hotUsers = UserData::activeInArticles();
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();
+        $categories = load_categories('articles');
 
-
-
-        return view('theme::home.blog')->with('articles',$articles)
-                                       ->with('hotUsers',$hotUsers)
-                                       ->with('hotTags',$hotTags)
-                                       ->with('filter',$filter);
+        return view('theme::home.blog')->with(compact('articles','hotUsers','hotTags','filter','categories','currentCategoryId','categorySlug'));
     }
 
-    public function topic()
+    public function topic( $categorySlug='all')
     {
-        $topics = Tag::orderBy('followers','DESC')->paginate(20);
-        return view('theme::home.topic')->with('topics',$topics);
+
+        $currentCategoryId = $parentCategoryId = 0;
+        if( $categorySlug != 'all' ){
+            $category = Category::where("slug","=",$categorySlug)->first();
+            if(!$category){
+                abort(404);
+            }
+            $currentCategoryId = $category->id;
+            $parentCategoryId = $category->parent_id;
+        }
+
+        $categories = load_categories('tags');
+
+        $topics = Tag::where("category_id","=",$currentCategoryId)->orderBy('followers','DESC')->paginate(20);
+        return view('theme::home.topic')->with(compact('topics','categories','currentCategoryId','categorySlug'));
     }
 
 

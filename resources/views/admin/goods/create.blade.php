@@ -8,12 +8,10 @@
             商品管理
             <small>添加商品</small>
         </h1>
-        <p class="breadcrumb"><a href="{{ back() }}">返回上一级</a></p>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                @include('admin/public/error')
                 <div class="box box-default">
                     <form role="form" name="addForm" method="POST" enctype="multipart/form-data" action="{{ route('admin.goods.store') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

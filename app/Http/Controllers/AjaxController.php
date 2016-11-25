@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Message;
 use App\Models\Notification;
 use App\Models\Tag;
+use App\Models\Taggable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -68,6 +69,9 @@ class AjaxController extends Controller
     public function loadTags(Request $request)
     {
         $word = $request->input('word');
+        if(!$word){
+            $tags = Taggable::hottest(10);
+        }
         $tags = Tag::where('name','like',$word.'%')->select('id',DB::raw('name as text'))->take(10)->get();
         $tags->map(function($tag){
             $tag->id = $tag->text;

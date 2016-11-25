@@ -13,17 +13,20 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="row">
-                            <div class="col-xs-3">
+                            <div class="col-xs-2">
                                 <div class="btn-group">
                                     <a href="{{ route('blog.article.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="创建新文章"><i class="fa fa-plus"></i></a>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.article.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.article.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
                                 </div>
                             </div>
-                            <div class="col-xs-9">
+                            <div class="col-xs-10">
                                 <div class="row">
                                     <form name="searchForm" action="{{ route('admin.article.index') }}" method="GET">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <div class="col-xs-3">
+                                            <input type="text" name="date_range" id="date_range" class="form-control" placeholder="时间范围" value="{{ $filter['date_range'] or '' }}" />
+                                        </div>
                                         <div class="col-xs-2">
                                             <input type="text" class="form-control" name="user_id" placeholder="作者UID" value="{{ $filter['user_id'] or '' }}"/>
                                         </div>
@@ -31,15 +34,18 @@
                                             <input type="text" class="form-control" name="word" placeholder="关键词" value="{{ $filter['word'] or '' }}"/>
                                         </div>
                                         <div class="col-xs-2">
+                                            <select class="form-control" name="category_id">
+                                                <option value="-1">--分类--</option>
+                                                @include('admin.category.option',['type'=>'articles','select_id'=>$filter['category_id']])
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-2">
                                             <select class="form-control" name="status">
-                                                <option value="-1">不选择</option>
+                                                <option value="-1">--状态--</option>
                                                 @foreach(trans_common_status('all') as $key => $status)
                                                     <option value="{{ $key }}" @if( isset($filter['status']) && $filter['status']==$key) selected @endif >{{ $status }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <input type="text" name="date_range" id="date_range" class="form-control" placeholder="时间范围" value="{{ $filter['date_range'] or '' }}" />
                                         </div>
                                         <div class="col-xs-1">
                                             <button type="submit" class="btn btn-primary">搜索</button>
@@ -56,6 +62,7 @@
                                 <tr>
                                     <th><input type="checkbox" class="checkbox-toggle" /></th>
                                     <th>标题</th>
+                                    <th>分类</th>
                                     <th>作者</th>
                                     <th>收藏/查看</th>
                                     <th>时间</th>
@@ -66,6 +73,7 @@
                                     <tr>
                                         <td><input type="checkbox" name="id[]" value="{{ $article->id }}"/></td>
                                         <td><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}" target="_blank">{{ $article->title }}</a></td>
+                                        <td>@if($article->category) {{ $article->category->name }} @else 无 @endif</td>
                                         <td>{{ $article->user->name }}<span class="text-muted">[UID:{{ $article->user_id }}]</span></td>
                                         <td>{{ $article->collections }} / {{ $article->views }}</td>
                                         <td>{{ timestamp_format($article->created_at) }}</td>

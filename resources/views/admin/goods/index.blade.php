@@ -19,7 +19,7 @@
                                 <div class="col-xs-12">
                                     <div class="btn-group">
                                         <a href="{{ route('admin.goods.create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="添加商品"><i class="fa fa-plus"></i></a>
-                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.goods.destroy') }}','确认审核通过选中项？')"><i class="fa fa-trash-o"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.goods.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
                                     </div>
                                 </div>
                             </div>

@@ -40,6 +40,14 @@
                                 @endif
                             </div>
 
+                            <div class="form-group">
+                                <label>所属分类</label>
+                                <select name="category_id" class="form-control">
+                                    <option value="0">选择分类</option>
+                                    @include('admin.category.option',['type'=>'experts','select_id'=>$authentication->category_id])
+                                </select>
+                            </div>
+
                             <div class="form-group @if($errors->has('skill')) has-error @endif">
                                 <label>认证领域</label>
                                 <input type="text" name="skill" class="form-control " placeholder="认证领域" value="{{ old('skill',$authentication->skill) }}">

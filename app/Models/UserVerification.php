@@ -19,7 +19,7 @@ class UserVerification extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'name','status'];
+    protected $fillable = ['user_id','category_id', 'name','status'];
 
     /**
      * The attributes excluded from the model's JSON form.

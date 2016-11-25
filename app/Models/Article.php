@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Relations\BelongsToCategoryTrait;
 use App\Models\Relations\BelongsToUserTrait;
 use App\Models\Relations\MorphManyCommentsTrait;
 use App\Models\Relations\MorphManyTagsTrait;
@@ -10,9 +11,9 @@ use Illuminate\Support\Facades\App;
 
 class Article extends Model
 {
-    use BelongsToUserTrait,MorphManyTagsTrait,MorphManyCommentsTrait;
+    use BelongsToUserTrait,MorphManyTagsTrait,MorphManyCommentsTrait,BelongsToCategoryTrait;
     protected $table = 'articles';
-    protected $fillable = ['title', 'user_id', 'content','tags','summary','status'];
+    protected $fillable = ['title', 'user_id','category_id', 'content','tags','summary','status'];
 
 
     public static function boot()
@@ -82,25 +83,38 @@ class Article extends Model
 
 
     /*推荐文章*/
-    public static function recommended()
+    public static function recommended($categoryId=0 , $pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->orderBy('supports','DESC')->orderBy('created_at','DESC')->paginate(20);
+        $query = self::query();
+        if( $categoryId > 0 ){
+            $query->where('category_id','=',$categoryId);
+        }
+
+        $list = $query->where('status','>',0)->orderBy('supports','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
     }
 
     /*热门文章*/
-    public static function hottest($pageSize=20)
+    public static function hottest($categoryId=0 , $pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->orderBy('views','DESC')->orderBy('collections','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
+        $query = self::query();
+        if( $categoryId > 0 ){
+            $query->where('category_id','=',$categoryId);
+        }
+        $list = $query->where('status','>',0)->orderBy('views','DESC')->orderBy('collections','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
 
     }
 
 
     /*最新问题*/
-    public static function newest($pageSize=20)
+    public static function newest($categoryId=0 , $pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
+        $query = self::query();
+        if( $categoryId > 0 ){
+            $query->where('category_id','=',$categoryId);
+        }
+        $list = $query->where('status','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
     }
 

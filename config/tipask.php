@@ -49,6 +49,12 @@ return [
     'mail_drivers' => [
         'smtp' => '连接 SMTP 服务器发送',
         'sendmail' => '通过sendmail方式进行发送',
+    ],
+    'category_types' => [
+        'questions' => '问题',
+        'articles' => '文章',
+        'tags' => '话题',
+        'experts' => '专家',
     ]
 
 ];

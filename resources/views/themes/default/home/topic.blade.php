@@ -7,7 +7,17 @@
 @endsection
 
 @section('content')
-        <h1 class="h3">话题<br><small>话题是最有效的内容组织形式，正确的使用话题能更快的发现和解决你的问题</small></h1>
+        @if( $categories )
+            <div class="row widget-category">
+                <div class="col-sm-12">
+                    <ul class="list">
+                        @foreach( $categories as $category )
+                            <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
         <div class="row tag-list mt-20">
             @foreach($topics as $topic)
             <section class="topic-list-item col-md-3">

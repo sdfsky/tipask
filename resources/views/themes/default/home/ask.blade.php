@@ -1,17 +1,27 @@
 @extends('theme::layout.public')
 
-@section('seo_title')@if($filter === 'newest')最新的@elseif($filter === 'hottest')热门的@elseif($filter === 'reward')悬赏的@elseif($filter==='unAnswered')未回答的@endif问题 - 第{{ $questions->currentPage() }}页 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')@if($filter === 'newest')最新的@elseif($filter === 'hottest')热门的@elseif($filter === 'reward')悬赏的@elseif($filter==='unAnswered')未回答的@endif问题 @if( $questions->currentPage()>1 ) - 第{{ $questions->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
-            <ul class="nav nav-tabs nav-tabs-zen mb10">
-                <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.ask') }}">最新的</a></li>
-                <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.ask',['filter'=>'hottest']) }}">热门的</a></li>
-                <li @if($filter==='reward') class="active" @endif><a href="{{ route('website.ask',['filter'=>'reward']) }}">悬赏的</a></li>
-                <li @if($filter==='unAnswered') class="active" @endif><a href="{{ route('website.ask',['filter'=>'unAnswered']) }}">未回答的</a></li>
+            @if( $categories )
+            <div class="row widget-category">
+                    <div class="col-sm-12">
+                        <ul class="list">
+                            @foreach( $categories as $category )
+                                <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+            </div>
+            @endif
+            <ul class="nav nav-tabs mb-10 mt-20">
+                <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$categorySlug]) }}">最新的</a></li>
+                <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.ask',['category_slug'=>$categorySlug,'filter'=>'hottest']) }}">热门的</a></li>
+                <li @if($filter==='reward') class="active" @endif><a href="{{ route('website.ask',['category_slug'=>$categorySlug,'filter'=>'reward']) }}">悬赏的</a></li>
+                <li @if($filter==='unAnswered') class="active" @endif><a href="{{ route('website.ask',['category_slug'=>$categorySlug,'filter'=>'unAnswered']) }}">未回答的</a></li>
             </ul>
-
             <div class="stream-list question-stream">
                 @foreach($questions as $question)
                 <section class="stream-list-item">

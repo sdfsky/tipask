@@ -29,6 +29,8 @@ class AuthenticationController extends AdminController
         $query = Authentication::query();
         $filter =  $request->all();
 
+        $filter['category_id'] = $request->input('category_id',-1);
+
         /*认证申请状态过滤*/
         if(isset($filter['status']) && $filter['status'] > -1){
             $query->where('status','=',$filter['status']);
@@ -36,6 +38,10 @@ class AuthenticationController extends AdminController
 
         if( isset($filter['id_card']) && $filter['id_card']){
             $query->where('id_card','=',$filter['id_card']);
+        }
+
+        if( $filter['category_id'] > 0 ){
+            $query->where('category_id','=',$filter['category_id']);
         }
 
         $authentications = $query->orderBy('updated_at','desc')->paginate(20);

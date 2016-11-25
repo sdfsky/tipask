@@ -47,7 +47,7 @@ class UserController extends Controller
 
             /*只接收email和password的值*/
             $credentials = $request->only('email', 'password');
-            
+
             /*根据邮箱地址和密码进行认证*/
             if ($this->auth->attempt($credentials, $request->has('remember')))
             {

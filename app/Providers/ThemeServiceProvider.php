@@ -14,7 +14,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot(View $view)
     {
-        $theme = Setting()->get('website_theme','default');
+        $theme = 'default';
         $view->addNameSpace('theme', [
             base_path()."/resources/views/themes/$theme",
             base_path().'/resources/views/themes/default',

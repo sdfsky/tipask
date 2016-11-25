@@ -32,13 +32,20 @@
                 <div id="question_editor">{!! old('description',$question->description) !!}</div>
                 @if($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif
             </div>
-            <div class="form-group">
-                <label for="select_tags">添加话题</label>
-                <select id="select_tags" name="select_tags" class="form-control" multiple="multiple" >
-                    @foreach($question->tags as $tag)
-                        <option selected="selected">{{ $tag->name }}</option>
-                    @endforeach
-                </select>
+            <div class="row">
+                <div class="col-xs-4">
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="0">请选择分类</option>
+                        @include('admin.category.option',['type'=>'questions','select_id'=>$question->category_id])
+                    </select>
+                </div>
+                <div class="col-xs-8">
+                    <select id="select_tags" name="select_tags" class="form-control" multiple="multiple" >
+                        @foreach($question->tags as $tag)
+                            <option selected="selected">{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="row mt-20">
@@ -66,6 +73,8 @@
     <script src="{{ asset('/static/js/select2/js/select2.min.js')}}"></script>
 
     <script type="text/javascript">
+        var category_id = "{{ $question->category_id }}";
+
         $(document).ready(function() {
             $('#question_editor').summernote({
                 lang: 'zh-CN',
@@ -80,6 +89,12 @@
                     onImageUpload: function(files) {
                         upload_editor_image(files[0],'question_editor');
                     }
+                }
+            });
+
+            $("#category_id option").each(function(){
+                if( $(this).val() == category_id ){
+                    $(this).attr("selected","selected");
                 }
             });
         });

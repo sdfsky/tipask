@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Relations\BelongsToCategoryTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
 class Tag extends Model
 {
+    use BelongsToCategoryTrait;
     protected $table = 'tags';
-    protected $fillable = ['name', 'logo', 'description'];
+    protected $fillable = ['name', 'logo', 'description','category_id'];
 
 
     public static function boot()

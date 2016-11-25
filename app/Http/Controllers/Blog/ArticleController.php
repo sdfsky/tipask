@@ -21,6 +21,7 @@ class ArticleController extends Controller
         'content' => 'required|min:50|max:65535',
         'summary' => 'sometimes|max:255',
         'tags' => 'sometimes|max:128',
+        'category_id' => 'sometimes|numeric'
     ];
 
     /**
@@ -50,6 +51,7 @@ class ArticleController extends Controller
         $this->validate($request,$this->validateRules);
         $data = [
             'user_id'      => $loginUser->id,
+            'category_id'      => intval($request->input('category_id')),
             'title'        => trim($request->input('title')),
             'content'  => clean($request->input('content')),
             'summary'  => $request->input('summary'),
@@ -96,10 +98,6 @@ class ArticleController extends Controller
      */
     public function show($id,Request $request)
     {
-
-
-
-
         $article = Article::find($id);
 
         /*问题查看数+1*/
@@ -144,7 +142,7 @@ class ArticleController extends Controller
             abort(403);
         }
 
-        return view("theme::article.edit")->with('article',$article);
+        return view("theme::article.edit")->with(compact('article'));
 
     }
 
@@ -173,6 +171,7 @@ class ArticleController extends Controller
         $article->title = trim($request->input('title'));
         $article->content = clean($request->input('content'));
         $article->summary = $request->input('summary');
+        $article->category_id = $request->input('category_id',0);
 
         $article->save();
         $tagString = trim($request->input('tags'));

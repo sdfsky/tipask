@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Relations\BelongsToCategoryTrait;
 use App\Models\Relations\BelongsToUserTrait;
 use App\Models\Relations\MorphManyCommentsTrait;
 use App\Models\Relations\MorphManyTagsTrait;
@@ -12,9 +13,9 @@ use Illuminate\Support\Facades\Cache;
 
 class Question extends Model
 {
-    use BelongsToUserTrait,MorphManyCommentsTrait,MorphManyTagsTrait;
+    use BelongsToUserTrait,MorphManyCommentsTrait,MorphManyTagsTrait,BelongsToCategoryTrait;
     protected $table = 'questions';
-    protected $fillable = ['title', 'user_id', 'description','tags','price','hide','status'];
+    protected $fillable = ['title', 'user_id','category_id','description','tags','price','hide','status'];
 
 
     public static function boot()
@@ -84,31 +85,47 @@ class Question extends Model
 
 
     /*热门问题*/
-    public static function hottest($pageSize=20)
+    public static function hottest($categoryId = 0,$pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
+        $query = self::with('user');
+        if( $categoryId > 0 ){
+            $query->where('category_id','=',$categoryId);
+        }
+        $list = $query->where('status','>',0)->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
 
     }
 
     /*最新问题*/
-    public static function newest($pageSize=20)
+    public static function newest($categoryId=0 , $pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
+        $query = self::with('user');
+        if( $categoryId > 0 ){
+            $query->where('category_id','=',$categoryId);
+        }
+        $list = $query->where('status','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
     }
 
     /*未回答的*/
-    public static function unAnswered()
+    public static function unAnswered($categoryId=0 , $pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->where('answers','=',0)->orderBy('created_at','DESC')->paginate(20);
+        $query = self::query();
+        if( $categoryId > 0 ){
+            $query->where('category_id','=',$categoryId);
+        }
+        $list = $query->where('status','>',0)->where('answers','=',0)->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
     }
 
     /*悬赏问题*/
-    public static function reward($pageSize=20)
+    public static function reward($categoryId=0 , $pageSize=20)
     {
-        $list = self::with('user')->where('status','>',0)->where('price','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
+        $query = self::query();
+        if( $categoryId > 0 ){
+            $query->where('category_id','=',$categoryId);
+        }
+        $list = $query->where('status','>',0)->where('price','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
     }
 
@@ -116,7 +133,7 @@ class Question extends Model
     public static function recent()
     {
         $list = Cache::remember('recent_questions',300, function() {
-            return self::where('status','>',0)->where('created_at','>',Carbon::today()->subWeek())->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->take(8)->get();
+            return self::where('status','>',0)->where('created_at','>',Carbon::today()->subWeek())->orderBy('views','DESC')->orderBy('answers','DESC')->orderBy('created_at','DESC')->take(12)->get();
         });
 
         return $list;

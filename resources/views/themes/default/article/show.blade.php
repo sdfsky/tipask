@@ -7,6 +7,12 @@
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
+
+            <ol class="breadcrumb">
+                <li><a href="http://www.tipaskx.com/admin/category">全部</a></li>
+                <li><a href="http://www.tipaskx.com/admin/category?category_id=1">默认分类</a></li>
+                <li><a href="http://www.tipaskx.com/admin/category?category_id=2">测试分类</a></li>
+            </ol>
             <div class="widget-question widget-article">
                 <h3 class="title">{{ $article->title }}</h3>
                 @if($article->tags)

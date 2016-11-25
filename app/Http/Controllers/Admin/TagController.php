@@ -11,7 +11,7 @@ class TagController extends AdminController
 {
     /*权限验证规则*/
     protected $validateRules = [
-        'name' => 'required|max:128',
+        'name' => 'required|max:128|unique:tags',
         'url' => 'sometimes|max:128',
         'summary' => 'sometimes|max:255',
         'description' => 'sometimes|max:65535',
@@ -27,6 +27,8 @@ class TagController extends AdminController
         $filter =  $request->all();
         $query = Tag::query();
 
+        $filter['category_id'] = $request->input('category_id',-1);
+
         /*问题标题过滤*/
         if( isset($filter['word']) && $filter['word'] ){
             $query->where('name','like', '%'.$filter['word'].'%');
@@ -37,6 +39,10 @@ class TagController extends AdminController
             $query->whereBetween('created_at',explode(" - ",$filter['date_range']));
         }
 
+        /*分类过滤*/
+        if( $filter['category_id']> 0 ){
+            $query->where('category_id','=',$filter['category_id']);
+        }
 
         $tags = $query->orderBy('updated_at','desc')->paginate(20);
         return view("admin.tag.index")->with('tags',$tags)->with('filter',$filter);
@@ -51,7 +57,7 @@ class TagController extends AdminController
      */
     public function create()
     {
-        //
+        return view('admin.tag.create');
     }
 
     /**
@@ -62,7 +68,22 @@ class TagController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request->flash();
+        $this->validate($request,$this->validateRules);
+        $data = $request->all();
+        if($request->hasFile('logo')){
+            $savePath = storage_path('app/tags/'.gmdate('ym'));
+            $file = $request->file('logo');
+            $fileName = uniqid(str_random(8)).'.'.$file->getClientOriginalExtension();
+            $target = $file->move($savePath,$fileName);
+            if($target){
+                $data['logo'] = 'tags-'.gmdate('ym').'-'.$fileName;
+            }
+        }
+        Tag::create($data);
+        return $this->success(route('admin.tag.index'),'标签创建成功');
     }
 
     /**
@@ -105,8 +126,10 @@ class TagController extends AdminController
         if(!$tag){
             return $this->error(route('admin.tag.index'),'话题不存在，请核实');
         }
+        $this->validateRules['name'] = 'required|max:128|unique:tags,name,'.$id;
         $this->validate($request,$this->validateRules);
         $tag->name = $request->input('name');
+        $tag->category_id = $request->input('category_id');
         $tag->summary = $request->input('summary');
         $tag->description = $request->input('description');
         if($request->hasFile('logo')){
