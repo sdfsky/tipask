@@ -39,7 +39,7 @@
                                 <label>头像</label>
                                 <input type="file" name="avatar" />
                                 <div style="margin-top: 10px;">
-                                    <img src="{{ route('website.image.avatar',['avatar_name'=>$user->id.'_big']) }}" width="100"/>
+                                    <img src="{{ get_user_avatar($user->id,'big') }}" width="100"/>
                                 </div>
                             </div>
 

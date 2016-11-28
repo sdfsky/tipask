@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2">
-                    <a class="text-left" href="{{ route('auth.space.index',['user_id'=>$userInfo->id]) }}"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$userInfo->id.'_big'])}}" alt="{{ $userInfo->name }}"></a>
+                    <a class="text-left" href="{{ route('auth.space.index',['user_id'=>$userInfo->id]) }}"><img class="avatar-128" src="{{ get_user_avatar($userInfo->id) }}" alt="{{ $userInfo->name }}"></a>
                 </div>
                 <div class="col-md-7">
                     <div class="space-header-name h3">

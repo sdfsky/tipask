@@ -27,6 +27,16 @@
                 @if($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
             </div>
 
+            <div class="form-group @if($errors->has('logo')) has-error @endif">
+                <label>文章封面</label>
+                <input type="file" name="logo"/>
+                @if($article->logo)
+                <div style="margin-top: 10px;">
+                    <img src="{{ route('website.image.show',['image_name'=>$article->logo]) }}" />
+                </div>
+                @endif
+                @if($errors->has('logo')) <p class="help-block">{{ $errors->first('logo') }}</p> @endif
+            </div>
 
 
             <div class="form-group  @if($errors->has('content')) has-error @endif">

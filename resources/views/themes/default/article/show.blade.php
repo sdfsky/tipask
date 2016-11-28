@@ -7,12 +7,6 @@
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
-
-            <ol class="breadcrumb">
-                <li><a href="http://www.tipaskx.com/admin/category">全部</a></li>
-                <li><a href="http://www.tipaskx.com/admin/category?category_id=1">默认分类</a></li>
-                <li><a href="http://www.tipaskx.com/admin/category?category_id=2">测试分类</a></li>
-            </ol>
             <div class="widget-question widget-article">
                 <h3 class="title">{{ $article->title }}</h3>
                 @if($article->tags)
@@ -22,7 +16,6 @@
                         @endforeach
                     </ul>
                 @endif
-
                 <div class="content mt-10">
                     <div class="quote mb-20">
                          {{ $article->summary }}
@@ -99,7 +92,7 @@
         <div class="col-xs-12 col-md-3 side">
             <div class="widget-user">
                 <div class="media">
-                    <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}"><img class="media-object avatar-64" src="{{ route('website.image.avatar',['avatar_name'=>$article->user_id.'_middle'])}}" alt="不写代码的码农"></a>
+                    <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}"><img class="media-object avatar-64" src="{{ get_user_avatar($article->user_id) }}" alt="不写代码的码农"></a>
                     <div class="media-body ">
                         <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}" class="media-heading">{{ $article->user->name }}</a>
                         @if($article->user->title)
@@ -117,7 +110,7 @@
                 <ol class="widget-top10">
                     @foreach($topUsers as $index => $topUser)
                         <li class="text-muted">
-                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topUser['id'].'_middle'])}}">
+                            <img class="avatar-32" src="{{ get_user_avatar($topUser['id'],'middle') }}">
                             <a href="{{ route('auth.space.index',['user_id'=>$topUser['id']]) }}" class="ellipsis">{{ $topUser['name'] }}</a>
                             <span class="text-muted pull-right">{{ $topUser['articles'] }} 文章</span>
                         </li>

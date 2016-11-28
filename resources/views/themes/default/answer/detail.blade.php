@@ -59,7 +59,7 @@
                 <div class="media">
                         <div class="media-left">
                             <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="avatar-link user-card" target="_blank">
-                                <img class="avatar-40"  src="{{ route('website.image.avatar',['avatar_name'=>$answer->user_id.'_middle']) }}" alt="{{ $answer->user['name'] }}"></a>
+                                <img class="avatar-40"  src="{{ get_user_avatar($answer->user_id,'middle') }}" alt="{{ $answer->user['name'] }}"></a>
                             </a>
                         </div>
                         <div class="media-body">

@@ -160,7 +160,7 @@
                 <ol class="widget-top10">
                     @foreach($topCoinUsers as $index => $topCoinUser)
                     <li class="text-muted">
-                        <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topCoinUser['id'].'_middle'])}}">
+                        <img class="avatar-32" src="{{ get_user_avatar($topCoinUser['id']) }}">
                         <a href="{{ route('auth.space.index',['user_id'=>$topCoinUser['id']]) }}" class="ellipsis" target="_blank">{{ $topCoinUser['name'] }}</a>
                         <span class="text-muted pull-right">{{ $topCoinUser['coins'] }} 金币</span>
                     </li>

@@ -7,37 +7,40 @@
                 <div class="row widget-category">
                     <div class="col-sm-12">
                         <ul class="list">
+                            <li><a href="{{ route('website.blog') }}">全部</a></li>
                             @foreach( $categories as $category )
-                                <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                                <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.blog',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
             @endif
-            <ul class="nav nav-tabs mb-10 mt-20">
-                <li @if($filter==='recommended') class="active" @endif><a href="{{ route('website.blog',['category_slug'=>$categorySlug]) }}">推荐的</a></li>
-                <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.blog',['category_slug'=>$categorySlug,'filter'=>'hottest']) }}">热门的</a></li>
-                <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.blog',['category_slug'=>$categorySlug,'filter'=>'newest']) }}">最新的</a></li>
-            </ul>
             <div class="stream-list blog-stream">
                 @foreach($articles as $article)
                 <section class="stream-list-item clearfix">
-                    <div class="blog-rank">
-                        <a href="http://lanxi.baijia.baidu.com/article/691745" target="_blank" mon="col=13&amp;pn=1&amp;a=12"><img style="width: 200px;height:120px;" src="http://f.hiphotos.baidu.com/news/crop%3D84%2C1%2C609%2C365%3Bw%3D638/sign=a4daf82ccf5c1038303194828f29a73f/1c950a7b02087bf4475bafdffbd3572c11dfcf55.jpg"></a>
+                    @if( $article->logo )
+                    <div class="blog-rank hidden-xs">
+                        <a href="{{ route('blog.article.detail',['id'=>$article->id]) }}" target="_blank"><img style="width: 200px;height:120px;" src="{{ route('website.image.show',['image_name'=>$article->logo]) }}"></a>
                     </div>
+                    @endif
                     <div class="summary">
                         <h2 class="title"><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}" target="_blank" >{{ $article->title }}</a></h2>
-                        <p class="excerpt wordbreak hidden-xs">{{ $article->summary }}</p>
-                        <ul class="author list-inline">
+                        <p class="excerpt wordbreak">{{ $article->summary }}</p>
+                        <ul class="author list-inline mt-20">
                             <li class="pull-right" title="{{ $article->collections }} 收藏">
-                                <small class="glyphicon glyphicon-bookmark"></small> {{ $article->collections }}
+                                <span class="glyphicon glyphicon-bookmark"></span> {{ $article->collections }}
+                            </li>
+                            <li class="pull-right" title="{{ $article->collections }} 推荐">
+                                <span class="glyphicon glyphicon-thumbs-up"></span> {{ $article->supports }}
                             </li>
                             <li>
                                 <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}" target="_blank">
-                                    <img class="avatar-20 mr-10 hidden-xs" src="{{ route('website.image.avatar',['avatar_name'=>$article->user_id.'_small']) }}" alt="{{ $article->user->name }}"> {{ $article->user->name }}
+                                    <img class="avatar-20 mr-10 hidden-xs" src="{{ get_user_avatar($article->user_id,'small') }}" alt="{{ $article->user->name }}"> {{ $article->user->name }}
                                 </a>
-                                发布于 {{ timestamp_format($article->created_at) }}
                             </li>
+                            <li>发布于 {{ timestamp_format($article->created_at) }}</li>
+                            <li>阅读 ( {{$article->views}} )</li>
+
                         </ul>
                     </div>
                 </section>
@@ -64,13 +67,27 @@
                 </ul>
             </div>
 
+
+            <div class="widget-box">
+                <h2 class="h4 widget-box__title">热门文章</h2>
+                <ul class="widget-links list-unstyled list-text">
+                    @foreach($articles as $article)
+                            <li class="widget-links-item">
+                                <a title="{{ $article->title }}" href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a>
+                                <small class="text-muted">{{ $article->answers }} 回答</small>
+                            </li>
+                    @endforeach
+                </ul>
+            </div>
+
+
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热门作者 <a href="{{ route('auth.top.articles') }}">»</a></h2>
                 <ul class="list-unstyled">
                     @foreach($hotUsers as $hotUser)
                     <li class="media  widget-user-item ">
                         <a href="{{ route('auth.space.index',['user_id'=>$hotUser['id']]) }}" class="user-card pull-left" target="_blank">
-                            <img class="avatar-50"  src="{{ route('website.image.avatar',['avatar_name'=>$hotUser['id'].'_middle']) }}" alt="{{ $hotUser->name }}"></a>
+                            <img class="avatar-50"  src="{{ get_user_avatar($hotUser['id']) }}" alt="{{ $hotUser->name }}"></a>
                         </a>
                         <div class="media-object">
                             <strong><a href="{{ route('auth.space.index',['user_id'=>$hotUser['id']]) }}">{{ $hotUser['name'] }}</a></strong>

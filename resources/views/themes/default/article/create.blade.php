@@ -15,7 +15,7 @@
             <li><a href="{{ route('website.blog') }}">文章</a></li>
             <li class="active">撰写文章</li>
         </ol>
-        <form id="article_form" method="POST" role="form" action="{{ route('blog.article.store') }}">
+        <form id="article_form" method="POST" role="form" enctype="multipart/form-data" action="{{ route('blog.article.store') }}">
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" id="tags" name="tags" value="" />
 
@@ -24,7 +24,11 @@
                 <input id="title" type="text" name="title"  class="form-control input-lg" placeholder="我想起那天下午在夕阳下的奔跑,那是我逝去的青春" value="{{ old('title','') }}" />
                 @if($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
             </div>
-
+            <div class="form-group @if($errors->has('logo')) has-error @endif">
+                <label>文章封面</label>
+                <input type="file" name="logo"/>
+                @if($errors->has('logo')) <p class="help-block">{{ $errors->first('logo') }}</p> @else <p class="help-block">建议尺寸200*120</p> @endif
+            </div>
             <div class="form-group  @if($errors->has('content')) has-error @endif">
                 <label for="article_editor">文章正文：</label>
                 <div id="article_editor">{!! old('content','') !!}</div>
@@ -50,7 +54,7 @@
 
             <div class="row mt-20">
                 <div class="col-md-4 col-md-offset-8">
-                    <input type="hidden" id="article_editor_content"  name="content" value=""  />
+                    <input type="hidden" id="article_editor_content"  name="content" value="{{ old('content','') }}"  />
                     <button type="submit" class="btn btn-primary pull-right editor-submit">发布文章</button>
                 </div>
             </div>

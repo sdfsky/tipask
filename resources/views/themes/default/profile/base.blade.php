@@ -17,7 +17,7 @@
             <h2 class="h3 post-title">个人资料</h2>
             <div class="row mt-30">
                 <div class="col-md-3 col-md-push-9 text-center">
-                    <img class="avatar-128" id="user_avatar_image" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_big']) }}" alt="头像">
+                    <img class="avatar-128" id="user_avatar_image" src="{{ get_user_avatar(Auth()->user()->id,'big') }}" alt="头像">
                     <div class="wu-example mt-10">
                         <div class="change-avatar">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#avatar_modal">修改头像</button>
@@ -33,7 +33,7 @@
                                             <div class="row">
                                                 <div class="col-xs-6 text-center">
                                                     <div id="avatar_origin" class="avatar-container">
-                                                        <img class="avatar-origin" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_origin']) }}">
+                                                        <img class="avatar-origin" src="{{ get_user_avatar(Auth()->user()->id,'origin') }}">
                                                     </div>
                                                     <!--用来存放文件信息-->
                                                     <div id="uploader">

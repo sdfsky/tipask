@@ -14,7 +14,7 @@
                     <div class="stream-wrap media">
                         <div class="pull-left">
                             <a href="{{ route('auth.space.index',['user_id'=>$doing->user_id]) }}" target="_blank">
-                                <img class="media-object avatar-40" src="{{ route('website.image.avatar',['avatar_name'=>$doing->user_id.'_middle'])}}" alt="{{ $doing->user->name }}">
+                                <img class="media-object avatar-40" src="{{ get_user_avatar($doing->user_id) }}" alt="{{ $doing->user->name }}">
                             </a>
                         </div>
                         <div class="media-body">

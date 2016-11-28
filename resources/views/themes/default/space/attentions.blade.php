@@ -32,7 +32,7 @@
                     <li>
                         <div class="row">
                             <div class="col-md-10">
-                                <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$attention->source_id.'_middle'])}}" />
+                                <img class="avatar-32" src="{{ get_user_avatar($attention->source_id) }}" />
                                 <div>
                                     <a href="{{ route('auth.space.index',['user_id'=>$attention->source_id]) }}">{{ $attention['info']->name }}</a> @if($attention['info']->title) <span class="text-muted ml-5">- {{ $attention['info']->title  }}</span> @endif
                                     <div class="stream-following-followed">{{ $attention['info']->userData->supports }}赞同 / {{ $attention['info']->userData->followers }}关注 / {{ $attention['info']->userData->answers }}回答</div>

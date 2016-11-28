@@ -109,7 +109,7 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_big']) }}" class="img-circle" alt="User Image" />
+                                <img src="{{ get_user_avatar(Auth()->user()->id,'middle') }}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ Auth()->user()->name }}
                                     <small>{{ Auth()->user()->title }}</small>

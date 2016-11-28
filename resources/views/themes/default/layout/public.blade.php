@@ -68,7 +68,7 @@
                         <li><a href="{{ route('auth.message.index') }}" class="active" id="unread_messages"><i class="fa fa-envelope-o fa-lg"></i></a></li>
                         <li class="dropdown user-avatar">
                             <a href="{{ route('auth.profile.base') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <img class="avatar-32 mr-5" alt="{{ Auth()->user()->name }}" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_middle'])}}" >
+                                <img class="avatar-32 mr-5" alt="{{ Auth()->user()->name }}" src="{{ get_user_avatar(Auth()->user()->id) }}" >
                                 <span>{{ Auth()->user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu" role="menu">

@@ -9,6 +9,7 @@
             <div class="row widget-category">
                     <div class="col-sm-12">
                         <ul class="list">
+                            <li><a href="{{ route('website.ask') }}">全部</a></li>
                             @foreach( $categories as $category )
                                 <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
                             @endforeach
@@ -87,7 +88,7 @@
                 <ol class="widget-top10">
                     @foreach($topAnswerUsers as $index => $topAnswerUser)
                         <li class="text-muted">
-                            <img class="avatar-32" src="{{ route('website.image.avatar',['avatar_name'=>$topAnswerUser['id'].'_middle'])}}">
+                            <img class="avatar-32" src="{{ get_user_avatar($topAnswerUser['id']) }}">
                             <a href="{{ route('auth.space.index',['user_id'=>$topAnswerUser['id']]) }}" class="ellipsis">{{ $topAnswerUser['name'] }}</a>
                             <span class="text-muted pull-right">{{ $topAnswerUser['answers'] }} 回答</span>
                         </li>

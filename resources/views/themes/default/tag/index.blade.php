@@ -86,7 +86,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}">
-                                                <img class="avatar-20 mr-10 hidden-xs" src="{{ route('website.image.avatar',['avatar_name'=>$article->user_id.'_small']) }}" alt="{{ $article->user->name }}"> {{ $article->user->name }}
+                                                <img class="avatar-20 mr-10 hidden-xs" src="{{ get_user_avatar($article->user_id,'small') }}" alt="{{ $article->user->name }}"> {{ $article->user->name }}
                                             </a>
                                             发布于 {{ timestamp_format($article->created_at) }}
                                         </li>
@@ -126,7 +126,7 @@
                     @foreach($followers as $follower)
                         <li class="media  widget-user-item ">
                             <a href="{{ route('auth.space.index',['user_id'=>$follower->user_id]) }}" class="user-card pull-left" target="_blank">
-                                <img class="avatar-50"  src="{{ route('website.image.avatar',['avatar_name'=>$follower->user_id.'_middle']) }}" alt="{{ $follower->user->name }}"></a>
+                                <img class="avatar-50"  src="{{ get_user_avatar($follower->user_id) }}" alt="{{ $follower->user->name }}"></a>
                             </a>
                             <div class="media-object">
                                 <strong><a href="{{ route('auth.space.index',['user_id'=>$follower->user_id]) }}" target="_blank">{{ $follower->user->name }}</a></strong>

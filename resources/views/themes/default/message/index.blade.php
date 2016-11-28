@@ -32,7 +32,7 @@
                     <div class="stream-wrap media">
                         <div class="pull-left">
                             <a href="{{ route('auth.space.index',['id'=>$message->from_user_id]) }}" >
-                                <img class="media-object avatar-40" src="{{ route('website.image.avatar',['avatar_name'=>$message->from_user_id.'_middle']) }}" alt="{{ $message->fromUser->name }}">
+                                <img class="media-object avatar-40" src="{{ get_user_avatar($message->from_user_id) }}" alt="{{ $message->fromUser->name }}">
                             </a>
                         </div>
                         <div class="media-body">

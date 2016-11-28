@@ -23,7 +23,7 @@
                             </div>
                             <div class="pull-left mr-10">
                                 <a href="{{ route('auth.space.index',['id'=>$user->user_id]) }}" target="_blank">
-                                    <img class="media-object avatar-64" src="{{ route('website.image.avatar',['avatar_name'=>$user->user_id.'_big'])}}" alt="{{ $user->user->name }}">
+                                    <img class="media-object avatar-64" src="{{ get_user_avatar($user->user_id,'big') }}" alt="{{ $user->user->name }}">
                                 </a>
                             </div>
                             <div class="media-body">

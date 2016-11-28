@@ -34,7 +34,7 @@
             @if(Auth()->check())
                 <div class="widget-user">
                     <div class="media">
-                        <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}"><img class="media-object avatar-64" src="{{ route('website.image.avatar',['avatar_name'=>Auth()->user()->id.'_middle'])}}" alt="不写代码的码农"></a>
+                        <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}"><img class="media-object avatar-64" src="{{ get_user_avatar(Auth()->user()->id) }}" alt="{{ Auth()->user()->name }}" /></a>
                         <div class="media-body ">
                             <a href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}" class="media-heading">{{ Auth()->user()->name }}</a>
                             <p class="text-muted"><span class="text-gold"><i class="fa fa-database"></i> {{ Auth()->user()->userData->coins }}</span> </p>

@@ -9,7 +9,7 @@
             @foreach($experts as $expert)
                 <section class="col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}" target="_blank"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$expert->id.'_big'])}}" alt="{{ $expert->name }}"></a>
+                        <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}" target="_blank"><img class="avatar-128" src="{{ get_user_avatar($expert->id,'big') }}" alt="{{ $expert->name }}"></a>
 
                         <div class="caption">
                             <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}">{{ $expert->name }}</a></h4>
