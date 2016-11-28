@@ -29,6 +29,9 @@
 .pagination-sm>li:first-child>a,.pagination-sm>li:first-child>span{border-bottom-left-radius:3px;border-top-left-radius:3px;}
 .pagination-sm>li:last-child>a,.pagination-sm>li:last-child>span{border-top-right-radius:3px;border-bottom-right-radius:3px;}
 
+.breadcrumb{background-color:#ffffff;}
+.breadcrumb>li+li:before{content:">\00a0";}
+
 
 .list-group{margin-bottom:20px;padding-left:0}
 .list-group-item{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}
@@ -54,7 +57,11 @@ button,input,select,textarea{font-family:inherit;font-size:inherit;line-height:i
 a{color:#333;text-decoration:none}
 a:focus,a:hover{color:#017e66;text-decoration:underline}
 a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
-
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 .wrap{padding-bottom:30px;position:relative}
 
 /*margin-bottom*/
@@ -134,7 +141,7 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .stream-list.top-indent{margin-top:-10px}
 .stream-list-item{margin:0;border-bottom:1px solid #eee;padding:10px 0}
 .stream-list-item .author{margin-bottom:5px;color:#999;font-size:13px}
-.stream-list-item .author a{color:#999}
+.stream-list-item .author a{color:#2b7a5c}
 .stream-list-item .author small{color:#ddd}
 .stream-list-item .title{display:inline;margin:0 5px 0 0;font-size:16px}
 .stream-list-item .title a{color:#333}
@@ -160,7 +167,7 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .bookmark-rank{margin-right:10px}
 .bookmark-rank .collections,.bookmark-rank .followers{display:inline-block;padding-top:3px;width:40px;height:40px;-moz-border-radius:1px;-webkit-border-radius:1px;border-radius:1px;background:#F0F5F3;color:#017E66}
 .bookmark-rank .followers{background:#5cb85c;color:#fff}
-.blog-rank{float:left;margin-right:12px;padding-right:12px;border-right:1px solid #f3f3f3;font-size:16px;text-align:center;line-height:1.2;color:#666}
+.blog-rank{float:left;margin-right:12px;padding-right:12px;font-size:16px;text-align:center;line-height:1.2;color:#666}
 .blog-rank small {display: block;font-size: 12px;}
 .blog-rank .votes {margin-bottom: 8px;background: #f0f0f0;}
 .blog-rank .plus {background: #009a61;color: #fff;}
@@ -186,6 +193,32 @@ a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-of
 .taglist-inline.multi>li{margin-bottom:5px}
 .taglist--block>li{margin-bottom:8px}
 
+/*分类模块样式定义*/
+.widget-category{border-bottom:1px solid #eee; padding:15px 0 8px;}
+.widget-category .list > li {
+    float: left;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    margin: 0 10px 10px 0;
+}
+
+.widget-category .list a {
+    display: block;
+    padding: 0 10px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: 1px solid #daecf5;
+}
+
+.widget-category .active  a {
+    background: #017e66;
+    border-color: #017e66;
+    color: #fff;
+}
+
+.widget-category .breadcrumb{padding: 0 15px;margin-bottom:10px;}
 
 
 /*wget-box*/

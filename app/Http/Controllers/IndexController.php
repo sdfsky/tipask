@@ -55,17 +55,17 @@ class IndexController extends Controller
 
         /*悬赏问题*/
         $rewardQuestions = Cache::remember('reward_questions',Setting()->get('website_cache_time',1),function() {
-            return  Question::reward(8);
+            return  Question::reward(0,8);
         });
 
         /*热门文章*/
         $hotArticles = Cache::remember('hot_articles',Setting()->get('website_cache_time',1),function() {
-            return  Article::hottest(8);
+            return  Article::hottest(0,8);
         });
 
         /*最新文章*/
         $newestArticles = Cache::remember('newest_articles',Setting()->get('website_cache_time',1),function() {
-            return  Article::newest(8);
+            return  Article::newest(0,8);
         });
 
 
@@ -122,7 +122,7 @@ class IndexController extends Controller
     }
 
 
-    public function blog($categorySlug='all', $filter='recommended')
+    public function blog($categorySlug='all', $filter='newest')
     {
         $article = new Article();
         if(!method_exists($article,$filter)){

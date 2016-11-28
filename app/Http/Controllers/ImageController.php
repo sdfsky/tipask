@@ -20,12 +20,17 @@ class ImageController extends Controller
      */
     public function avatar($avatar_name)
     {
-        list($user_id,$size) = explode('_',$avatar_name);
+        list($user_id,$size) = explode('_',str_replace(".jpg",'',$avatar_name));
         $avatarFile = storage_path('app/'.User::getAvatarPath($user_id,$size));
         if(!is_file($avatarFile)){
             $avatarFile = public_path('static/images/default_avatar.jpg');
         }
-        return Image::make($avatarFile)->response();
+        $image =   Image::make($avatarFile);
+        $response = response()->make($image->encode('jpg'));
+        $response->header('Content-Type', 'image/jpeg');
+        $response->header('Expires',  date(DATE_RFC822,strtotime(" 30 day")));
+        $response->header('Cache-Control', 'private, max-age=259200, pre-check=259200');
+        return $response;
     }
 
 

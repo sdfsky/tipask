@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -49,14 +51,28 @@ class ArticleController extends Controller
 
         $request->flash();
         $this->validate($request,$this->validateRules);
+
         $data = [
             'user_id'      => $loginUser->id,
-            'category_id'      => intval($request->input('category_id')),
+            'category_id'      => intval($request->input('category_id',0)),
             'title'        => trim($request->input('title')),
             'content'  => clean($request->input('content')),
             'summary'  => $request->input('summary'),
             'status'       => 1,
         ];
+
+        if($request->hasFile('logo')){
+            $validateRules = [
+                'logo' => 'required|image|max:'.config('tipask.upload.image.max_size'),
+            ];
+            $this->validate($request,$validateRules);
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filePath = 'articles/'.gmdate("Y")."/".gmdate("m")."/".uniqid(str_random(8)).'.'.$extension;
+            Storage::disk('local')->put($filePath,File::get($file));
+            $data['logo'] = str_replace("/","-",$filePath);
+        }
+
 
         $article = Article::create($data);
 

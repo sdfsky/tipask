@@ -13,7 +13,7 @@ class Article extends Model
 {
     use BelongsToUserTrait,MorphManyTagsTrait,MorphManyCommentsTrait,BelongsToCategoryTrait;
     protected $table = 'articles';
-    protected $fillable = ['title', 'user_id','category_id', 'content','tags','summary','status'];
+    protected $fillable = ['title', 'user_id','category_id', 'content','tags','summary','status','logo'];
 
 
     public static function boot()
