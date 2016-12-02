@@ -9,7 +9,7 @@ class Comment extends Model
 {
     use BelongsToUserTrait;
     protected $table = 'comments';
-    protected $fillable = ['user_id', 'content','source_id','source_type','to_user_id','status'];
+    protected $fillable = ['user_id', 'content','source_id','source_type','to_user_id','supports','status'];
 
 
     public static function boot()

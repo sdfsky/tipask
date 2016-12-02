@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\Answer;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\Support;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,8 @@ class SupportController extends Controller
             $source  = Answer::find($source_id);
         }elseif($source_type === 'article'){
             $source  = Article::find($source_id);
+        }elseif($source_type === 'comment'){
+            $source  = Comment::find($source_id);
         }
 
         if(!$source){

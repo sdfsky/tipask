@@ -63,6 +63,7 @@ class CommentController extends Controller
             'source_type' => get_class($source),
             'to_user_id'  => $request->input('to_user_id'),
             'status'      => 1,
+            'supports'    => 0
         ];
 
 
@@ -103,7 +104,7 @@ class CommentController extends Controller
         if(!$source){
             abort(404);
         }
-        $comments = $source->comments()->simplePaginate(15);
+        $comments = $source->comments()->orderBy('supports','desc')->orderBy('created_at','desc')->simplePaginate(15);
 
        return view('theme::comment.paginate')->with('comments',$comments)
                                          ->with('source_type',$source_type)

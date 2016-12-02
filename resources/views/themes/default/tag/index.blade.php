@@ -40,7 +40,7 @@
                         @foreach($sources as $question)
                             <section class="stream-list-item">
                                 <div class="qa-rank">
-                                    <div class="answers">
+                                    <div class="answers @if($question->status===2) solved @elseif($question->answers>0) answered @endif ">
                                         {{ $question->answers }}<small>回答</small>
                                     </div>
                                     <div class="views hidden-xs">

@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]"  type="checkbox" value="comment_answer" @if(in_array('invite_answer',$siteNotifications))) checked @endif > 当有人评论我的回答时
+                                        <input name="site_notifications[]"  type="checkbox" value="comment_answer" @if(in_array('comment_answer',$siteNotifications))) checked @endif > 当有人评论我的回答时
                                     </label>
                                 </div>
                                 <div class="checkbox">

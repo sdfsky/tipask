@@ -185,18 +185,18 @@ class ProfileController extends Controller
     public function anyNotification(Request $request)
     {
         if($request->isMethod('post')){
-            $siteNotifications = $request->input('site_notifications');
-            $emailNotifications = $request->input('email_notifications');
+            $siteNotifications = $request->input('site_notifications','');
+            $emailNotifications = $request->input('email_notifications','');
+            $request->user()->site_notifications = '';
             if($siteNotifications){
                 $request->user()->site_notifications = implode(",",$siteNotifications);
             }
+            $request->user()->email_notifications = '';
             if($emailNotifications){
                 $request->user()->email_notifications = implode(",",$emailNotifications);
             }
 
-            if($siteNotifications || $emailNotifications){
-                $request->user()->save();
-            }
+            $request->user()->save();
             return $this->success(route('auth.profile.notification'),'通知提醒策略设置成功');
 
         }

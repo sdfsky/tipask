@@ -24,10 +24,13 @@
                         {!! $article->content !!}
                     </div>
                     <div class="post-opt mt-30">
-                        <ul class="list-inline">
-                            <li class="text-muted">
+                        <ul class="list-inline text-muted">
+                            <li>
                                 <i class="fa fa-clock-o"></i>
                                 发表于 {{ timestamp_format($article->created_at) }}
+                            </li>
+                            <li>阅读 ( {{$article->views}} )</li>
+                            <li>分类：<a href="{{ route('website.blog',['category_slug'=>$article->category->slug]) }}" target="_blank">{{ $article->category->name }}</a>
                             </li>
                             @if($article->status !== 2 && Auth()->check() && (Auth()->user()->id === $article->user_id || Auth()->user()->is('admin') ) )
                             <li><a href="{{ route('blog.article.edit',['id'=>$article->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="进一步完善文章内容"><i class="fa fa-edit"></i> 编辑</a></li>

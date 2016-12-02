@@ -35,7 +35,7 @@
                                 <input type="file" name="id_card_image" />
                                 @if($authentication->id_card_image)
                                 <div style="margin-top: 10px;">
-                                    <img class="img-responsive" src="{{ route('website.image.show',['image_name'=>$authentication->id_card_image]) }}" />
+                                    <img class="img-responsive" width="400" src="{{ route('website.image.show',['image_name'=>$authentication->id_card_image]) }}" />
                                 </div>
                                 @endif
                             </div>
@@ -59,7 +59,7 @@
                                 <input type="file" name="skill_image" />
                                 @if($authentication->skill_image)
                                     <div style="margin-top: 10px;">
-                                        <img class="img-responsive" src="{{ route('website.image.show',['image_name'=>$authentication->skill_image]) }}" />
+                                        <img class="img-responsive" width="400" src="{{ route('website.image.show',['image_name'=>$authentication->skill_image]) }}" />
                                     </div>
                                 @endif
                             </div>

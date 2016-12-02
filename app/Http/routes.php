@@ -151,8 +151,8 @@ Route::Group(['namespace'=>'Account'],function(){
     });
 
     /*点赞*/
-    Route::get('support/{source_type}/{source_id}',['as'=>'auth.support.store','uses'=>'SupportController@store'])->where(['source_type'=>'(answer|article)','source_id'=>'[0-9]+']);
-    Route::get('support/check/{source_type}/{source_id}',['as'=>'auth.support.check','uses'=>'SupportController@check'])->where(['source_type'=>'(answer|article)','source_id'=>'[0-9]+']);
+    Route::get('support/{source_type}/{source_id}',['as'=>'auth.support.store','uses'=>'SupportController@store'])->where(['source_type'=>'(answer|article|comment)','source_id'=>'[0-9]+']);
+    Route::get('support/check/{source_type}/{source_id}',['as'=>'auth.support.check','uses'=>'SupportController@check'])->where(['source_type'=>'(answer|article|comment)','source_id'=>'[0-9]+']);
 
 
 
