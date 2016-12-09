@@ -10,8 +10,7 @@
 @endsection
 
 @section('content')
-
-    <div class="row">
+    <div class="row mt-10">
         <ol class="breadcrumb">
             <li><a href="{{ route('website.ask') }}">问答</a></li>
             <li><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></li>
@@ -49,14 +48,23 @@
             </div>
 
             <div class="row mt-20">
-                <div class="col-md-8">
-                    <div class="checkbox pull-left">
-                        <label>
-                            <input type="checkbox" name="hide" value="1"  @if($question->hide==1) checked @endif /> 匿名
-                        </label>
-                    </div>
+                <div class="col-xs-12 col-md-11">
+                    <ul class="list-inline">
+                        @if( Setting()->get('code_create_question') )
+                            <li class="pull-right">
+                                <div class="form-group @if ($errors->first('captcha')) has-error @endif">
+                                    <input type="text" class="form-control" name="captcha" required="" placeholder="验证码" />
+                                    @if ($errors->first('captcha'))
+                                        <span class="help-block">{{ $errors->first('captcha') }}</span>
+                                    @endif
+                                    <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
+                                </div>
+                            </li>
+                        @endif
+                        <li><input type="checkbox" name="hide" value="1"  @if($question->hide==1) checked @endif />&nbsp;匿名</li>
+                    </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-12 col-md-1">
                     <input type="hidden" id="question_editor_content"  name="description" value="{{ $question->description }}"  />
                     <button type="submit" class="btn btn-primary pull-right">确认修改</button>
                 </div>

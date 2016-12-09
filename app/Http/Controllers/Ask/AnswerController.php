@@ -42,6 +42,11 @@ class AnswerController extends Controller
         }
         $loginUser = $request->user();
         $request->flash();
+        /*普通用户修改需要输入验证码*/
+        if( Setting()->get('code_create_answer') ){
+            $this->validateRules['captcha'] = 'required|captcha';
+        }
+
         $this->validate($request,$this->validateRules);
         $answerContent = clean($request->input('content'));
         $data = [
@@ -128,6 +133,11 @@ class AnswerController extends Controller
         }
 
         $request->flash();
+        /*普通用户修改需要输入验证码*/
+        if( Setting()->get('code_create_answer') ){
+            $this->validateRules['captcha'] = 'required|captcha';
+        }
+
         $this->validate($request,$this->validateRules);
 
         $answer->content = clean($request->input('content'));

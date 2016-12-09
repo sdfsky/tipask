@@ -64,8 +64,11 @@
                                 <label for="website_url">启用验证码</label>
                                 <span class="text-muted">(验证码可以避免恶意注册及恶意灌水，请选择需要打开验证码的操作)</span>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" name="code_login" value="1"  @if(Setting()->get('code_login') == 1) checked @endif /> 登录页面 </label>
-                                    <label><input type="checkbox" name="code_register" value="1" @if(Setting()->get('code_register') == 1) checked @endif /> 注册页面</label>
+                                    <input type="checkbox" name="code_login" value="1"  @if(Setting()->get('code_login') == 1) checked @endif /> 登录
+                                    <label><input type="checkbox" name="code_register" value="1" @if(Setting()->get('code_register') == 1) checked @endif /> 注册</label>
+                                    <label><input type="checkbox" name="code_create_question" value="1" @if(Setting()->get('code_create_question') == 1) checked @endif /> 发起提问</label>
+                                    <label><input type="checkbox" name="code_create_answer" value="1" @if(Setting()->get('code_create_answer') == 1) checked @endif /> 回答问题</label>
+                                    <label><input type="checkbox" name="code_create_article" value="1" @if(Setting()->get('code_create_article') == 1) checked @endif /> 发布文章</label>
                                 </div>
                             </div>
                         </div>

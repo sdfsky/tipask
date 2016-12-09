@@ -176,12 +176,27 @@
                             @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
                         </div>
 
-                        <div id="answerSubmit" class="mt-15 clearfix">
-                            <div class="checkbox pull-left">
-                                <label><input type="checkbox" id="attendTo" name="followed" value="1" checked />关注该问题</label>
+
+
+                        <div class="row mt-20">
+                            <div class="col-xs-12 col-md-10">
+                                <ul class="list-inline">
+                                        <li class="checkbox"> <label><input type="checkbox" id="attendTo" name="followed" value="1" checked />关注该问题</label></li>
+                                    @if( Setting()->get('code_create_answer') )
+                                        <li class="pull-right">
+                                            <div class="form-group @if ($errors->first('captcha')) has-error @endif">
+                                                <input type="text" class="form-control" name="captcha" required="" placeholder="验证码" />
+                                                @if ($errors->first('captcha'))
+                                                    <span class="help-block">{{ $errors->first('captcha') }}</span>
+                                                @endif
+                                                <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
+                                            </div>
+                                        </li>
+                                    @endif
+                                </ul>
                             </div>
-                            <div class="pull-right">
-                                <input type="hidden" id="answer_editor_content"  name="content" value=""  />
+                            <div class="col-xs-12 col-md-2">
+                                <input type="hidden" id="answer_editor_content"  name="content" value="{{ old('content','') }}"  />
                                 <button type="submit" class="btn btn-primary pull-right">提交回答</button>
                             </div>
                         </div>

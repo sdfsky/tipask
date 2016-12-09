@@ -93,8 +93,12 @@ class QuestionController extends Controller
         }
         $request->flash();
 
-        $this->validate($request,$this->validateRules);
+        /*如果开启验证码则需要输入验证码*/
+        if( Setting()->get('code_create_question') ){
+            $this->validateRules['captcha'] = 'required|captcha';
+        }
 
+        $this->validate($request,$this->validateRules);
         $price = abs($request->input('price'));
 
         if($price > 0 && $request->user()->userData->coins < $price){
@@ -189,8 +193,13 @@ class QuestionController extends Controller
         }
 
         $request->flash();
-        $this->validate($request,$this->validateRules);
 
+        /*普通用户修改需要输入验证码*/
+        if( Setting()->get('code_create_question') ){
+            $this->validateRules['captcha'] = 'required|captcha';
+        }
+
+        $this->validate($request,$this->validateRules);
         $question->title = trim($request->input('title'));
         $question->description = clean($request->input('description'));
         $question->hide = intval($request->input('hide'));

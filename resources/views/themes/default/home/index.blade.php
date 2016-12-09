@@ -57,7 +57,7 @@
                 @foreach($hotExperts as $expert)
                     <section class="col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}" target="_blank"><img class="avatar-128" src="{{ route('website.image.avatar',['avatar_name'=>$expert->id.'_big'])}}" alt="{{ $expert->name }}"></a>
+                            <a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}" target="_blank"><img class="avatar-128" src="{{ get_user_avatar($expert->id,'big') }}" alt="{{ $expert->name }}"></a>
 
                             <div class="caption">
                                 <h4 class="text-center"><a href="{{ route('auth.space.index',['user_id'=>$expert->id]) }}">{{ $expert->name }}</a></h4>
@@ -73,7 +73,7 @@
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">最新问题 <a href="{{ route('website.ask',['filter'=>'newest']) }}" target="_blank" title="更多">»</a> </h4>
+                        <h4 class="widget-box-title">最新问题 <a href="{{ route('website.ask',['category_slug'=>'all','filter'=>'newest']) }}" target="_blank" title="更多">»</a> </h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($newestQuestions as $newQuestion)
                             <li class="widget-links-item">
@@ -85,7 +85,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">悬赏问题 <a href="{{ route('website.ask',['filter'=>'reward']) }}" target="_blank" title="更多">»</a></h4>
+                        <h4 class="widget-box-title">悬赏问题 <a href="{{ route('website.ask',['category_slug'=>'all','filter'=>'reward']) }}" target="_blank" title="更多">»</a></h4>
 
                         <ul class="widget-links list-unstyled">
                             @foreach($rewardQuestions as $rewardQuestion)
@@ -101,7 +101,7 @@
             <div class="widget-box">
                 <div class="job-list-item row">
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">热门文章 <a href="{{ route('website.blog',['filter'=>'hottest']) }}" title="更多">»</a></h4>
+                        <h4 class="widget-box-title">热门文章 <a href="{{ route('website.blog',['category_slug'=>'all','filter'=>'hottest']) }}" title="更多">»</a></h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($hotArticles as $hotArticle)
                                 <li class="widget-links-item">
@@ -112,7 +112,7 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="widget-box-title">最新文章 <a href="{{ route('website.blog',['filter'=>'newest']) }}" title="更多">»</a></h4>
+                        <h4 class="widget-box-title">最新文章 <a href="{{ route('website.blog',['category_slug'=>'all','filter'=>'newest']) }}" title="更多">»</a></h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($newestArticles as $newestArticle)
                                 <li class="widget-links-item">
@@ -131,6 +131,40 @@
             <div class="side-alert alert alert-link">
                 <a href="{{ route('ask.question.create') }}" class="btn btn-warning btn-block">我要提问</a>
                 <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block">分享经验</a>
+            </div>
+            <div class="widget-user-nav">
+                <div class="row">
+                    <div class="col-sm-6 widget-nav-item ">
+                        <a  class="widget-nav-item-link" href="/user/draft">
+                            我的提问
+                        </a>
+                    </div>
+                    <div class="col-sm-6 widget-nav-item ">
+                        <a class="widget-nav-item-link " href="/user/note">
+                            我的回答
+                        </a>
+                    </div>
+                    <div class="col-sm-6 widget-nav-item ">
+                        <a class="widget-nav-item-link" href="/user/bookmarks">
+                            我的收藏
+                        </a>
+                    </div>
+                    <div class="col-sm-6 widget-nav-item ">
+                        <a class="widget-nav-item-link" href="/u/sdf_sky/questions/following">
+                            我关注的
+                        </a>
+                    </div>
+                    <div class="col-sm-6 widget-nav-item ">
+                        <a id="inviteCount" class="widget-nav-item-link" href="/user/invited">
+                            受邀回答
+                        </a>
+                    </div>
+                    <div class="col-sm-6 widget-nav-item ">
+                        <a id="inviteCount" class="widget-nav-item-link" href="/user/invited">
+                            我的兑换
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="widget-box">
                 <h4 class="widget-box-title">最新公告</h4>
@@ -169,4 +203,5 @@
             </div>
         </div>
     </div>
+
 @endsection

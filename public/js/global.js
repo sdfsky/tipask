@@ -237,7 +237,7 @@ $(function(){
     if( $("#select_tags").length > 0 ){
         $("#select_tags").select2({
             theme:'bootstrap',
-            placeholder: "话题越精准，越容易让相关领域专业人士看到你的内容",
+            placeholder: "选择话题",
             ajax: {
                 url: '/ajax/loadTags',
                 dataType: 'json',

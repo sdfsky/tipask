@@ -141,12 +141,17 @@ class IndexController extends Controller
 
         $articles = call_user_func([$article,$filter],$currentCategoryId);
 
+        /*热门文章*/
+        $hotArticles = Cache::remember('hot_articles',Setting()->get('website_cache_time',1),function() {
+            return  Article::recommended(0,8);
+        });
+
         $hotUsers = UserData::activeInArticles();
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();
         $categories = load_categories('articles');
 
-        return view('theme::home.blog')->with(compact('articles','hotUsers','hotTags','filter','categories','currentCategoryId','categorySlug'));
+        return view('theme::home.blog')->with(compact('articles','hotUsers','hotTags','filter','categories','currentCategoryId','categorySlug','hotArticles'));
     }
 
     public function topic( $categorySlug='all')

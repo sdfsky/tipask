@@ -50,6 +50,12 @@ class ArticleController extends Controller
         }
 
         $request->flash();
+
+        /*如果开启验证码则需要输入验证码*/
+        if( Setting()->get('code_create_article') ){
+            $this->validateRules['captcha'] = 'required|captcha';
+        }
+
         $this->validate($request,$this->validateRules);
 
         $data = [
@@ -182,6 +188,12 @@ class ArticleController extends Controller
         }
 
         $request->flash();
+
+        /*如果开启验证码则需要输入验证码*/
+        if( Setting()->get('code_create_article') ){
+            $this->validateRules['captcha'] = 'required|captcha';
+        }
+
         $this->validate($request,$this->validateRules);
 
         $article->title = trim($request->input('title'));

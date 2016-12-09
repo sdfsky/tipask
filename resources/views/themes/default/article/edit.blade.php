@@ -67,7 +67,22 @@
             </div>
 
             <div class="row mt-20">
-                <div class="col-md-4 col-md-offset-8">
+                <div class="col-xs-12 col-md-11">
+                    <ul class="list-inline">
+                        @if( Setting()->get('code_create_article') )
+                            <li class="pull-right">
+                                <div class="form-group @if ($errors->first('captcha')) has-error @endif">
+                                    <input type="text" class="form-control" name="captcha" required="" placeholder="验证码" />
+                                    @if ($errors->first('captcha'))
+                                        <span class="help-block">{{ $errors->first('captcha') }}</span>
+                                    @endif
+                                    <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
+                                </div>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-md-1">
                     <input type="hidden" id="article_editor_content"  name="content" value="{{ $article->content }}"  />
                     <button type="submit" class="btn btn-primary pull-right editor-submit">提交修改</button>
                 </div>
