@@ -12,11 +12,7 @@
     <section class="content-header">
         <h1>
             编辑话题
-            <small>编辑话题信息</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ route('admin.tag.index') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

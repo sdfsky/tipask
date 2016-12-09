@@ -6,9 +6,6 @@
         时间设置
         <small>默认时区及时间格式设置</small>
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-    </ol>
 </section>
 <section class="content">
     <div class="row">

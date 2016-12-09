@@ -5,9 +5,6 @@
         <h1>
             编辑兑换记录
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ back() }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

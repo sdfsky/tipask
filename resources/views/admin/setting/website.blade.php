@@ -6,9 +6,6 @@
         站点设置
         <small>站点信息设置</small>
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-    </ol>
 </section>
 <section class="content">
     <div class="row">

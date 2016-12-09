@@ -5,9 +5,6 @@
         <h1>
             XunSearch全文检索整合
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

@@ -8,7 +8,6 @@
             友情链接管理
             <small>添加友情链接</small>
         </h1>
-        <p class="breadcrumb"><a href="{{ back() }}">返回上一级</a></p>
     </section>
     <section class="content">
         <div class="row">

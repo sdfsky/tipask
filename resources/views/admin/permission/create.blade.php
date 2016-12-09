@@ -6,9 +6,6 @@
             新建权限
             <small>添加新权限</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ route('admin.permission.index') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

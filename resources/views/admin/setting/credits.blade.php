@@ -6,9 +6,6 @@
         积分设置
         <small>网站用户积分策略设置</small>
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.setting.credits') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-    </ol>
 </section>
 <section class="content">
     <div class="row">

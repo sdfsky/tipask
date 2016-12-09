@@ -6,9 +6,6 @@
             新建角色
             <small>添加新角色</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ route('admin.role.index') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

@@ -5,7 +5,6 @@
 @section('content')
     <section class="content-header">
         <h1>公告管理</h1>
-        <p class="breadcrumb"><a href="{{ back() }}">返回上一级</a></p>
     </section>
     <section class="content">
         <div class="row">

@@ -12,7 +12,6 @@
                 @endif
             <small>显示当前系统设置菜单信息</small>
         </h1>
-        <p class="breadcrumb"><a href="{{ back() }}">返回上一级</a></p>
     </section>
     <section class="content">
         <div class="row">

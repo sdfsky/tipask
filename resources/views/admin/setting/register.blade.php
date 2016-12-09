@@ -9,9 +9,6 @@
             注册设置
             <small>全站注册策略设置</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ route('admin.setting.website') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

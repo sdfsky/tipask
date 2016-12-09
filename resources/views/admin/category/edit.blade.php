@@ -2,12 +2,7 @@
 @section('title')编辑分类@endsection
 @section('content')
     <section class="content-header">
-        <h1>
-            编辑分类
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ back() }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
+        <h1>编辑分类</h1>
     </section>
     <section class="content">
         <div class="row">

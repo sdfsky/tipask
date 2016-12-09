@@ -14,9 +14,6 @@
             编辑用户
             <small>编辑用户信息</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-mail-reply"></i> 返回</a></li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">

@@ -10,7 +10,6 @@
             用户列表
             <small>显示当前系统的所有注册用户</small>
         </h1>
-        <p class="breadcrumb"><a href="{{ back() }}">返回上一级</a></p>
     </section>
     <section class="content">
         <div class="row">
