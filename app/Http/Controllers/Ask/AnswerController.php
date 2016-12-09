@@ -30,10 +30,19 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->user()->status === 0){
+        $loginUser = $request->user();
+        if($loginUser->status === 0){
             return $this->error(route('website.index'),'操作失败！您的邮箱还未验证，验证后才能进行该操作！');
         }
-        
+
+        /*防灌水检查*/
+        if( Setting()->get('answer_limit_num') > 0 ){
+            $questionCount = $this->counter('answer_num_'. $loginUser->id);
+            if( $questionCount > Setting()->get('answer_limit_num')){
+                return $this->showErrorMsg(route('website.index'),'你已超过每小时回答限制数'.Setting()->get('answer_limit_num').'，请稍后再进行该操作，如有疑问请联系管理员!');
+            }
+        }
+
         $question_id = $request->input('question_id');
         $question = Question::find($question_id);
 
@@ -93,6 +102,8 @@ class AnswerController extends Controller
             /*修改问题邀请表的回答状态*/
             QuestionInvitation::where('question_id','=',$question->id)->where('user_id','=',$request->user()->id)->update(['status'=>1]);
 
+            $this->counter( 'answer_num_'. $answer->user_id , 1 , 3600 );
+
             /*记录积分*/
             if($answer->status ==1 && $this->credit($request->user()->id,'answer',Setting()->get('coins_answer'),Setting()->get('credits_answer'),$question->id,$question->title)){
                 $message = '回答成功! '.get_credit_message(Setting()->get('credits_answer'),Setting()->get('coins_answer'));
@@ -114,6 +125,16 @@ class AnswerController extends Controller
 
         if($answer->user_id !== $request->user()->id && !$request->user()->is('admin')){
             abort(403);
+        }
+
+        /*编辑回答时效控制*/
+        if( !$request->user()->is('admin') && Setting()->get('edit_answer_timeout') ){
+            $period = time() - $answer->created_at;
+
+            if( $period > Setting()->get('edit_answer_timeout') ){
+                return $this->showErrorMsg(route('ask.question.detail',['id'=>$answer->question_id]),'你已超过回答可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
+            }
+
         }
 
         return view("theme::question.edit_answer")->with('answer',$answer);

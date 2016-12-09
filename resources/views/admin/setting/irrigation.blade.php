@@ -70,6 +70,46 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="box box-default">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">内容写入限制策略</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="website_url">1小时内最大提问数</label>
+                                <span class="text-muted">(设置为0则不做任何限制)</span>
+                                <input type="text" class="form-control" name="question_limit_num" placeholder="0为不限制" value="{{ old('question_limit_num',Setting()->get('question_limit_num' , 0)) }}"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="website_url">1小时内最大回答数</label>
+                                <span class="text-muted">(设置为0则不做任何限制)</span>
+                                <input type="text" class="form-control" name="answer_limit_num" placeholder="0为不限制" value="{{ old('answer_limit_num',Setting()->get('answer_limit_num' , 0)) }}"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="website_url">1小时内最大文章发表次数</label>
+                                <span class="text-muted">(设置为0则不做任何限制)</span>
+                                <input type="text" class="form-control" name="article_limit_num" placeholder="0为不限制" value="{{ old('article_limit_num',Setting()->get('article_limit_num' , 0)) }}"  />
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <label for="website_url">提问后编辑内容时效</label>
+                                <span class="text-muted">(默认单位是秒，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
+                                <input type="text" class="form-control" name="edit_question_timeout" placeholder="0为不限制" value="{{ old('edit_question_timeout',Setting()->get('edit_question_timeout' , 0)) }}"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="website_url">发起文章后编辑内容时效</label>
+                                <span class="text-muted">(默认单位是秒，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
+                                <input type="text" class="form-control" name="edit_article_timeout" placeholder="0为不限制" value="{{ old('edit_article_timeout',Setting()->get('edit_article_timeout' , 0)) }}"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="website_url">撰写回答后编辑内容时效</label>
+                                <span class="text-muted">(默认单位是秒，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
+                                <input type="text" class="form-control" name="edit_answer_timeout" placeholder="0为不限制" value="{{ old('edit_answer_timeout',Setting()->get('edit_answer_timeout' , 0)) }}"  />
+                            </div>
+
+                        </div>
+                    </div>
                     <div>
                         <button type="submit" class="btn btn-primary" >保存</button>
                         <button type="reset" class="btn btn-success">重置</button>

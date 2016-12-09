@@ -91,8 +91,16 @@ class QuestionController extends Controller
         if($request->user()->status === 0){
             return $this->error(route('website.index'),'操作失败！您的邮箱还未验证，验证后才能进行该操作！');
         }
-        $request->flash();
 
+        /*防灌水检查*/
+        if( Setting()->get('question_limit_num') > 0 ){
+            $questionCount = $this->counter('question_num_'. $loginUser->id);
+            if( $questionCount > Setting()->get('question_limit_num')){
+                return $this->showErrorMsg(route('website.index'),'你已超过每小时最大提问数'.Setting()->get('question_limit_num').'，如有疑问请联系管理员!');
+            }
+        }
+
+        $request->flash();
         /*如果开启验证码则需要输入验证码*/
         if( Setting()->get('code_create_question') ){
             $this->validateRules['captcha'] = 'required|captcha';
@@ -153,6 +161,8 @@ class QuestionController extends Controller
                 $message = '问题发布成功！为了确保问答的质量，我们会对您的提问内容进行审核。请耐心等待......';
             }
 
+            $this->counter( 'question_num_'. $question->user_id , 1 , 3600 );
+
             return $this->success(route('ask.question.detail',['question_id'=>$question->id]),$message);
 
 
@@ -175,6 +185,17 @@ class QuestionController extends Controller
         if($question->user_id !== $request->user()->id && !$request->user()->is('admin')){
             abort(403);
         }
+
+        /*编辑问题时效控制*/
+        if( !$request->user()->is('admin') && Setting()->get('edit_question_timeout') ){
+            $period = time() - $question->created_at;
+
+            if( $period > Setting()->get('edit_question_timeout') ){
+                return $this->showErrorMsg(route('website.index'),'你已超过问题可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
+            }
+
+        }
+
         return view("theme::question.edit")->with(compact('question'));
     }
 

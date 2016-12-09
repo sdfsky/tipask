@@ -49,6 +49,14 @@ class ArticleController extends Controller
             return $this->error(route('website.index'),'操作失败！您的邮箱还未验证，验证后才能进行该操作！');
         }
 
+        /*防灌水检查*/
+        if( Setting()->get('article_limit_num') > 0 ){
+            $questionCount = $this->counter('article_num_'. $loginUser->id);
+            if( $questionCount > Setting()->get('article_limit_num')){
+                return $this->showErrorMsg(route('website.index'),'你已超过每小时文章发表限制数'.Setting()->get('article_limit_num').'，请稍后再进行该操作，如有疑问请联系管理员!');
+            }
+        }
+
         $request->flash();
 
         /*如果开启验证码则需要输入验证码*/
@@ -102,6 +110,9 @@ class ArticleController extends Controller
             }else{
                 $message = '文章发布成功！为了确保文章的质量，我们会对您发布的文章进行审核。请耐心等待......';
             }
+
+            $this->counter( 'article_num_'. $article->user_id , 1 , 3600 );
+
 
             return $this->success(route('blog.article.detail',['id'=>$article->id]),$message);
 
@@ -163,6 +174,17 @@ class ArticleController extends Controller
         if($article->user_id !== $request->user()->id && !$request->user()->is('admin')){
             abort(403);
         }
+
+        /*编辑问题时效控制*/
+        if( !$request->user()->is('admin') && Setting()->get('edit_article_timeout') ){
+            $period = time() - $article->created_at;
+
+            if( $period > Setting()->get('edit_article_timeout') ){
+                return $this->showErrorMsg(route('website.index'),'你已超过文章可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
+            }
+
+        }
+
 
         return view("theme::article.edit")->with(compact('article'));
 

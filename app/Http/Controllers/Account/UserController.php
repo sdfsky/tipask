@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -87,6 +88,14 @@ class UserController extends Controller
             return $this->showErrorMsg(route('website.index'),'管理员已关闭了网站的注册功能！');
         }
 
+        /*防灌水检查*/
+        if( Setting()->get('register_limit_num') > 0 ){
+            $registerCount = $this->counter('register_number_'.md5($request->ip()));
+            if( $registerCount > Setting()->get('register_limit_num')){
+                return $this->showErrorMsg(route('website.index'),'您的当前的IP已经超过当日最大注册数目，如有疑问请联系管理员');
+            }
+        }
+
         /*注册表单处理*/
         if($request->isMethod('post'))
         {
@@ -124,8 +133,11 @@ class UserController extends Controller
                 'action'=> 'register'
             ]);
 
-          $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
+            $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
 
+            /*记录注册ip*/
+
+            $this->counter('register_number_'.md5($request->ip()) , 1 );
 
             return $this->success(route('website.index'),$message);
         }

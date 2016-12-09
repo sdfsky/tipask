@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -222,6 +223,33 @@ abstract class Controller extends BaseController
         });
 
     }
+
+
+    /**
+     * 业务层计数器
+     * @param $key 计数器key
+     * @param null $step 级数步子
+     * @param int $expiration 有效期
+     * @return Int count
+     */
+    protected function counter($key,$step=null,$expiration=86400){
+
+        $count = Cache::get($key,0);
+        /*直接获取值*/
+        if( $step === null ){
+            return $count;
+        }
+
+        $count = $count + $step;
+
+        Cache::set($key,$count,$expiration);
+
+        return $count;
+
+    }
+
+
+
 
 
 

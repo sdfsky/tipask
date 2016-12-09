@@ -26,6 +26,14 @@
                                 </div>
                             </div>
 
+
+
+                            <div class="form-group">
+                                <label for="website_url">24小时内同一IP的最大注册用户数目</label>
+                                <span class="text-muted">(设置为0代表不做任何限制)</span>
+                                <input type="text" class="form-control" name="register_limit_num" placeholder="0为不限制" value="{{ old('register_limit_num',Setting()->get('register_limit_num' , 0)) }}"  />
+                            </div>
+
                             <div class="form-group">
                                 <label for="website_url">注册欢迎语</label>
                                 <input type="text" class="form-control" name="register_title" placeholder="欢迎加入Tipask站长社区" value="{{ old('register_title',Setting()->get('register_title')) }}"  />
