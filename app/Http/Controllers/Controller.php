@@ -48,6 +48,32 @@ abstract class Controller extends BaseController
         return view('errors.error')->with(compact('url','message'));
     }
 
+    /**
+     * 成功回调
+     * @param $message
+     */
+    protected function ajaxSuccess($message){
+        $data = array(
+            'code' => 0,
+            'message' => $message
+        );
+        return response()->json($data);
+    }
+
+
+    /**
+     * 错误处理
+     * @param $code
+     * @param $message
+     */
+    protected function ajaxError($code,$message){
+        $data = array(
+            'code' => $code,
+            'message' => $message
+        );
+        return response()->json($data);
+    }
+
 
 
 
@@ -164,6 +190,8 @@ abstract class Controller extends BaseController
             'refer_id'  => $refer_id,
             'is_read'    => 0
         ]);
+
+
     }
 
 
@@ -191,38 +219,28 @@ abstract class Controller extends BaseController
 
 
     /*邮件发送*/
-    protected function sendEmail($to_user_id,$type,$subject,$extData,$force=false){
+    protected function sendEmail($email,$subject,$message){
 
         if(Setting()->get('mail_open') != 1){//关闭邮件发送
             return false;
         }
 
-        $toUser = User::find($to_user_id);
-        if(!$toUser){
-            return false;
-        }
-
-        /*站内消息策略*/
-        if(!in_array($type,explode(",",$toUser->email_notifications)) && !$force){
-            return false;
-        }
-
-
-        $emailData = [
-            'email' => $toUser['email'],
-            'name' => $toUser['name'],
-            'type' => $type,
+        $data = [
+            'email' => $email,
             'subject' => $subject,
-            'data' => $extData,
+            'body' => $message,
         ];
 
 
-        Mail::queue('emails.'.$emailData['type'], $emailData, function($message) use ($emailData)
+        Mail::queue('emails.common', $data, function($message) use ($data)
         {
-            $message->to($emailData['email'],$emailData['name'])->subject($emailData['subject']);
+            $message->to($data['email'])->subject($data['subject']);
         });
 
     }
+
+
+
 
 
     /**
@@ -242,7 +260,7 @@ abstract class Controller extends BaseController
 
         $count = $count + $step;
 
-        Cache::set($key,$count,$expiration);
+        Cache::put($key,$count,$expiration);
 
         return $count;
 

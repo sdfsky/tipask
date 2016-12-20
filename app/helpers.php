@@ -240,3 +240,32 @@ if(! function_exists('get_user_avatar')){
     }
 }
 
+
+/*常见的正则判断*/
+
+/*邮箱判断*/
+if( !function_exists('is_email') ){
+    function is_email($email){
+        $reg = "/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/";
+        if( preg_match($reg,$email) ){
+            return true;
+        }
+        return false;
+    }
+}
+
+/*手机号码判断*/
+if( !function_exists('is_email') ){
+    function is_email($email){
+        $reg = "/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/";
+        if( preg_match($reg,$email) ){
+            return true;
+        }
+        return false;
+    }
+}
+
+
+
+
+

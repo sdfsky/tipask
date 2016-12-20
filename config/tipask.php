@@ -10,6 +10,7 @@ return [
     'version' => 'Tipask3.0',
     'release' => '20160725',
     'user_cache_time' => 1, //用户数据缓存时间单位分钟
+    'user_invite_limit' => 10,//用户邀请回答限制数
     'admin' => [
         'page_size' => 15,  //后台分页列表显示数目
     ],
@@ -56,5 +57,6 @@ return [
         'tags' => '话题',
         'experts' => '专家',
     ]
+
 
 ];

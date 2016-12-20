@@ -157,6 +157,9 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasOne('App\Models\UserData');
     }
 
+    public function userTag(){
+        return $this->hasMany('App\Models\UserTag');
+    }
 
     public function userOauth(){
         return $this->hasMany('App\Models\UserOauth');
@@ -288,6 +291,14 @@ class User extends Model implements AuthenticatableContract,
             return true;
         }
         return false;
+    }
+
+    /*判断用户是否开启了邮件通知*/
+    public function allowedEmailNotify($type){
+        if(!in_array($type,explode(",",$this->email_notifications))){
+            return false;
+        }
+        return true;
     }
 
 

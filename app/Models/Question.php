@@ -139,6 +139,11 @@ class Question extends Model
         return $list;
     }
 
+    /*是否已经邀请用户回答了*/
+    public function isInvited($sendTo,$fromUserId){
+        return $this->invitations()->where("send_to","=",$sendTo)->where("from_user_id","=",$fromUserId)->count();
+    }
+
 
     /*问题搜索*/
     public static function search($word,$size=16)
@@ -152,6 +157,13 @@ class Question extends Model
     public function answers()
     {
         return $this->hasMany('App\Models\Answer','question_id');
+    }
+
+
+    /*问题所有邀请*/
+    public function invitations()
+    {
+        return $this->hasMany('App\Models\QuestionInvitation','question_id');
     }
 
 

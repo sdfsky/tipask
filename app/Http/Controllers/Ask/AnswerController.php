@@ -7,6 +7,7 @@ use App\Models\Attention;
 use App\Models\Question;
 use App\Models\QuestionInvitation;
 use App\Models\Setting;
+use App\Models\UserTag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -73,6 +74,8 @@ class AnswerController extends Controller
 
             /*问题回答数+1*/
             $question->increment('answers');
+
+            UserTag::multiIncrement($loginUser->id,$question->tags()->get(),'answers');
 
             /*记录动态*/
             $this->doing($answer->user_id,'answer',get_class($question),$question->id,$question->title,$answer->content);
@@ -196,12 +199,16 @@ class AnswerController extends Controller
 
             /*悬赏处理*/
             $this->credit($answer->user_id,'answer_adopted',($answer->question->price+Setting()->get('coins_adopted',0)),Setting()->get('credits_adopted'),$answer->question->id,$answer->question->title);
-
-
             DB::commit();
 
+            UserTag::multiIncrement($request->user()->id,$answer->question->tags()->get(),'adoptions');
             $this->notify($request->user()->id,$answer->user_id,'adopt_answer',$answer->question_title,$answer->question_id);
-            $this->sendEmail($answer->user_id,' ','恭喜！你对于问题['.$answer->question_title.']的回答被采纳了！',$answer);
+            /*发送邮件通知*/
+            if($answer->user()->allowedEmailNotify('adopt_answer')){
+                $emailSubject = '您对于问题「'.$answer->question_title.'」的回答被采纳了！';
+                $emailContent = "您对于问题「".$answer->question_title."」的回答被采纳了！<br /> 点击此链接查看详情  →  ".route('ask.question.detail',['question_id'=>$answer->question_id]);
+                $this->sendEmail($answer->user->email,$emailSubject,$emailContent);
+            }
             return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答采纳成功!".get_credit_message(Setting()->get('credits_adopted'),Setting()->get('coins_adopted')));
 
         }catch (\Exception $e) {

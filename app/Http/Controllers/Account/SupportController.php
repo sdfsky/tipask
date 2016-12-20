@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Support;
+use App\Models\UserTag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -59,6 +60,11 @@ class SupportController extends Controller
         if($support){
             $source->increment('supports');
             $source->user->userData->increment('supports');
+            if($source_type=='answer'){
+                UserTag::multiIncrement($source->user_id,$source->question->tags()->get(),'supports');
+            }else if($source_type=='article'){
+                UserTag::multiIncrement($source->user_id,$source->tags()->get(),'supports');
+            }
         }
 
         return response('success');

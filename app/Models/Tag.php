@@ -60,7 +60,6 @@ class Tag extends Model
             {
                 $taggable->tags()->attach($tag->id);
             }
-
         }
         return $tags;
     }

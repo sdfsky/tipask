@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Question;
 use App\Models\Tag;
 use App\Models\UserData;
+use App\Models\UserTag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -102,6 +103,9 @@ class ArticleController extends Controller
 
             /*用户提问数+1*/
             $loginUser->userData()->increment('articles');
+
+            UserTag::multiIncrement($loginUser->id,$article->tags()->get(),'articles');
+
 
             $this->credit($request->user()->id,'writeArticle',Setting()->get('coins_write_article'),Setting()->get('credits_write_article'),$article->id,$article->title);
 

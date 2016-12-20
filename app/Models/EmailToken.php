@@ -20,29 +20,6 @@ class EmailToken extends Model
     protected $fillable = ['email','action','token'];
 
 
-    public static function createAndSend($data)
-    {
-
-        $emailToken = self::create([
-            'email' => $data['email'],
-            'token' => $data['token'],
-            'action'=>$data['action'],
-            'created_at' => Carbon::now()
-        ]);
-
-        if($emailToken){
-
-            Mail::queue('emails.findPassword', $data, function($message) use ($data)
-            {
-                $message->to($data['email'],$data['name'])->subject($data['subject']);
-            });
-        }
-
-        return $emailToken;
-
-    }
-
-
     /*清空toke信息*/
     public static function clear($email,$action)
     {

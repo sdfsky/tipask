@@ -3,20 +3,18 @@
 namespace App\Http\Controllers\Ask;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Question;
 use App\Models\QuestionInvitation;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\UserTag;
 use App\Models\XsSearch;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Jenssegers\Date\Date;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
@@ -137,6 +135,7 @@ class QuestionController extends Controller
             $tagString = trim($request->input('tags'));
             Tag::multiSave($tagString,$question);
 
+
             //记录动态
             $this->doing($question->user_id,'ask',get_class($question),$question->id,$question->title,$question->description);
 
@@ -145,15 +144,11 @@ class QuestionController extends Controller
             $to_user_id = $request->input('to_user_id',0);
             $this->notify($question->user_id,$to_user_id,'invite_answer',$question->title,$question->id);
 
-            if($to_user_id && QuestionInvitation::create(['question_id'=>$question->id,'user_id'=>$to_user_id])){
-                /*发送邮件*/
-                $this->sendEmail($to_user_id,'invite_answer','问题求助：'.$question->title,$question);
-            }
-
-
+            $this->invite($question->id,$to_user_id,$request);
 
             /*用户提问数+1*/
             $loginUser->userData()->increment('questions');
+            UserTag::multiIncrement($loginUser->id,$question->tags()->get(),'questions');
             $this->credit($request->user()->id,'ask',Setting()->get('coins_ask'),Setting()->get('credits_ask'),$question->id,$question->title);
             if($question->status == 1 ){
                 $message = '发起提问成功! '.get_credit_message(Setting()->get('credits_ask'),Setting()->get('coins_ask'));
@@ -304,5 +299,139 @@ class QuestionController extends Controller
         return response($suggestList);
 
     }
+
+
+    /*邀请回答*/
+    public function invite($question_id,$to_user_id,Request $request){
+
+        $loginUser = $request->user();
+
+        if($loginUser->id == $to_user_id){
+            return $this->ajaxError(50009,'不用邀请自己，您可以直接回答 ：）');
+        }
+
+        $question = Question::find($question_id);
+        if(!$question){
+           return $this->ajaxError(50001,'notFound');
+        }
+
+        if( $this->counter('question_invite_num_'.$loginUser->id) > config('tipask.user_invite_limit') ){
+            return $this->ajaxError(50007,'超出每天最大邀请次数');
+        }
+
+
+        $toUser = User::find(intval($to_user_id));
+        if(!$toUser){
+            return $this->ajaxError(50005,'被邀请用户不存在');
+        }
+
+        if(!$toUser->allowedEmailNotify('invite_answer')){
+            return $this->ajaxError(50006,'邀请人设置为不允许被邀请回答');
+        }
+
+        /*是否已邀请，不能重复邀请*/
+        if($question->isInvited($toUser->email,$loginUser->id)){
+            return $this->ajaxError(50008,'该用户已被邀请，不能重复邀请');
+        }
+
+        $invitation = QuestionInvitation::create([
+            'from_user_id'=> $loginUser->id,
+            'question_id'=> $question->id,
+            'user_id'=> $toUser->id,
+            'send_to'=> $toUser->email
+        ]);
+
+        if($invitation){
+            $this->counter('question_invite_num_'.$loginUser->id);
+            $subject = $loginUser->name."在「".Setting()->get('website_name')."」向您发起了回答邀请";
+            $message = "我在 ".Setting()->get('website_name')." 上遇到了问题「".$question->title."」 → ".route("ask.question.detail",['question_id'=>$question->id])."，希望您能帮我解答 ";
+            $this->sendEmail($invitation->send_to,$subject,$message);
+            return $this->ajaxSuccess('success');
+        }
+
+        return $this->ajaxError(10008,'邀请失败，请稍后再试');
+    }
+
+
+    public function inviteEmail($question_id,Request $request){
+
+        $loginUser = $request->user();
+
+        if( $this->counter('question_invite_num_'.$loginUser->id) > config('tipask.user_invite_limit') ){
+            return $this->ajaxError(50007,'超出每天最大邀请次数');
+        }
+
+        $question = Question::find($question_id);
+        if(!$question){
+            return $this->ajaxError(50001,'question not fund');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'sendTo' =>  'required|email|max:255',
+            'message' =>'required|min:10|max:10000',
+        ]);
+
+        if($validator->fails()){
+            $this->ajaxError(50011,'字段校验失败');
+        }
+
+        $loginUser = $request->user();
+        $email    = $request->input('sendTo');
+        $content = $request->input('message');
+        /*是否已邀请，不能重复邀请*/
+        if($question->isInvited($email,$loginUser->id)){
+            return $this->ajaxError(50008,'该用户已被邀请，不能重复邀请');
+        }
+
+        $invitation = QuestionInvitation::create([
+            'from_user_id'=> $loginUser->id,
+            'question_id'=> $question->id,
+            'user_id'=> 0,
+            'send_to'=> $email
+        ]);
+
+        if($invitation){
+            $this->counter('question_invite_num_'.$loginUser->id,1);
+            $subject = $loginUser->name."在「".Setting()->get('website_name')."」向您发起了回答邀请";
+            $message = $content;
+            $this->sendEmail($invitation->send_to,$subject,$message);
+            return $this->ajaxSuccess('success');
+        }
+
+        return $this->ajaxError(10008,'邀请失败，请稍后再试');
+    }
+
+    public function invitations($question_id,$type){
+        $question = Question::find($question_id);
+        if(!$question){
+            return $this->ajaxError(50001,'question not fund');
+        }
+
+        $showRows = ($type=='part') ? 3:100;
+
+        $invitations = $question->invitations()->where("user_id",">",0)->orderBy('created_at','desc')->groupBy('user_id')->take($showRows);
+
+        $invitedUsers = [];
+        foreach( $invitations->get() as $invitation ){
+            if($invitation->user()){
+                $invitedUsers[] = '<a target="_blank" href="'.route('auth.space.index',['user_id'=>$invitation->user->id]).'">'.$invitation->user->name.'</a>';
+            }
+        }
+
+        $invitedHtml = implode(",&nbsp;",$invitedUsers);
+
+        $totalInvitedNum = $invitations->count();
+        if( $type == 'part' &&  $totalInvitedNum > $showRows ){
+            $invitedHtml .= '等 <a id="showAllInvitedUsers" href="javascript:void(0);">'.$totalInvitedNum.'</a> 人';
+        }
+        if( $totalInvitedNum > 0 ){
+            $invitedHtml .= '&nbsp;已被邀请';
+        }
+
+        return response($invitedHtml);
+
+    }
+
+
 
 }

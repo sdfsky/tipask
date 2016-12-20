@@ -260,7 +260,7 @@ ul{
 .widget-question .adopt_time{font-size: 14px;font-weight: normal;}
 .widget-question .user-info{padding:20px 0px 0px;}
 
-.widget-article .quote{padding: 25px;background: #f3f5f9;line-height: 24px;}
+.widget-article .quote{padding: 25px;background: #f3f5f9;line-height: 24px;overflow: hidden;}
 
 .best-answer .options a{color:#666;}
 .post-opt a{color:#999}
@@ -327,6 +327,16 @@ ul{
 .sn-inline li{display:inline-block;margin-right:5px}
 .sn-inline li a{text-indent:110%;white-space:nowrap;overflow:hidden;text-transform:capitalize}
 
+
+/*modal样式*/
+
+.invite-question-modal{padding-top: 10px;}
+.invite-question-list{height: 275px;overflow: scroll;}
+.invite-question-item{height: 38px;margin-bottom: 20px;position: relative;}
+.invite-question-item img{float: left;width: 32px;border-radius: 50%;margin-right: 10px;}
+.invite-question-user-info{padding-right:70px;padding-left:40px;}
+.invite-question-user-desc{display: block;color: #999;font-size: 13px;}
+.invite-question-item-btn,.invite-question-item-btn_active{position: absolute;right: 15px;top: 10px;}
 
 /*表单相关*/
 .required:after{content:" *";color:#ED1C24}

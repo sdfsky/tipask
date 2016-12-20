@@ -24,6 +24,7 @@ class Taggable extends Model
 
     }
 
+
     /*全局热门标签*/
     public static function globalHotTags()
     {

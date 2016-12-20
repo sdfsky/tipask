@@ -133,10 +133,13 @@ class UserController extends Controller
                 'action'=> 'register'
             ]);
 
-            $this->sendEmail($user->id,'register','欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！',$emailToken,true);
+            if($emailToken){
+                $subject = '欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！';
+                $content = "「".$$request->user()->name."」您好，请激活您在 ".Setting()->get('website_name')." 的注册邮箱！<br /> 请在1小时内点击该链接激活注册账号 → ".route('auth.email.verifyToken',['action'=>$emailToken->action,'token'=>$emailToken->token])."<br />如非本人操作，请忽略此邮件！";
+                $this->sendEmail($emailToken->email,$subject,$content);
+            }
 
             /*记录注册ip*/
-
             $this->counter('register_number_'.md5($request->ip()) , 1 );
 
             return $this->success(route('website.index'),$message);
@@ -158,14 +161,17 @@ class UserController extends Controller
                 'captcha' => 'required|captcha'
             ]);
 
-            $emailToken = EmailToken::createAndSend([
-                'email' => $request->input('email'),
-                'action' => 'findPassword',
-                'name'=>Setting()->get('website_name').'用户',
-                'subject' => Setting()->get('website_name').'找回密码',
+            $emailToken = EmailToken::create([
+                'email' =>  $request->input('email'),
                 'token' => EmailToken::createToken(),
+                'action'=> 'findPassword'
             ]);
 
+            if($emailToken){
+                $subject = Setting()->get('website_name').' 找回密码通知';
+                $content = "如果您在 ".Setting()->get('website_name')."的密码丢失，请点击下方链接找回 → ".route('auth.user.findPassword',['token'=>$emailToken->token])."<br />如非本人操作，请忽略此邮件！";
+                $this->sendEmail($emailToken->email,$subject,$content);
+            }
 
             return view("theme::account.forgetPassword")->with('success','ok')->with('email',$request->input('email'));
 

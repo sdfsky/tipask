@@ -33,6 +33,7 @@ class IndexController extends Controller
     public function index()
     {
 
+        echo bcrypt('123456');
 
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();

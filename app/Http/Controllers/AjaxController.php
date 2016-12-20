@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Ask\QuestionController;
 use App\Models\Area;
 use App\Models\Message;
 use App\Models\Notification;
+use App\Models\Question;
+use App\Models\QuestionInvitation;
 use App\Models\Tag;
 use App\Models\Taggable;
 use App\Models\User;
+use App\Models\UserTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -69,6 +73,7 @@ class AjaxController extends Controller
     public function loadTags(Request $request)
     {
         $word = $request->input('word');
+        $tags = [];
         if(!$word){
             $tags = Taggable::hottest(10);
         }
@@ -88,13 +93,78 @@ class AjaxController extends Controller
 
         $users = User::where('id','<>',$request->user()->id)->where('name','like',"$word%")->take(10)->get();
         $users->map(function($user){
-            $user->avatar = route('website.image.avatar',['avatar_name'=>$user->id.'_middle']);
+            $user->avatar = get_user_avatar($user->id);
             $user->coins = $user->userData->coins;
             $user->answers = $user->userData->answers;
             $user->followers = $user->userData->followers;
         });
         return response()->json($users->toArray());
     }
+
+
+    public function loadInviteUsers(Request $request)
+    {
+        $questionId = $request->input('question_id',0);
+        $question = Question::find($questionId);
+        if(!$question){
+            return $this->ajaxError(10004,'notFund');
+        }
+        $tags = $question->tags()->get();
+
+        $tagIds = array_pluck($tags,"id");
+
+        if(!$tagIds){
+            return $this->ajaxError(10004,'noData');
+        }
+
+        $word = $request->input('word','');
+
+        if(trim($word)){
+            $users = User::where('id','<>',$request->user()->id)->where('name','like',"$word%")->take(10)->get();
+            $users->map(function($user) use($tagIds,$question) {
+                $user->tag_name = '';
+                $user->tag_answers = 0;
+                $userTag = UserTag::where("user_id","=",$user->id)->whereIn("tag_id",$tagIds)->orderBy("answers","desc")->orderBy("created_at","desc")->first();
+                if($userTag){
+                    $tag = Tag::find($userTag->tag_id);
+                    if($tag){
+                        $user->tag_name = $tag->name;
+                    }
+                    $user->tag_answers = $userTag->answers;
+                }
+                $user->avatar = get_user_avatar($user->id);
+                $user->url = route('auth.space.index',['user_id'=>$user->user_id]);
+                $user->isInvited = 0;
+
+            });
+        }else{
+
+            $invitations = $question->invitations()->get();
+            $invitedUserIds = array_pluck($invitations,'user_id');
+            $userTags = UserTag::whereIn("tag_id",$tagIds)->whereNotIn("user_id",$invitedUserIds)->orderBy("answers","desc")->orderBy("supports","desc")->select("user_id","tag_id","answers","supports")->take(16)->groupBy("user_id")->get();
+            $users = [];
+            foreach($userTags as $userTag){
+                $user = User::find($userTag->user_id);
+                if(!$user){
+                    continue;
+                }
+                $user->tag_name = '';
+                $user->tag_answers = 0;
+                $tag = Tag::find($userTag->tag_id);
+                if($tag){
+                    $user->tag_name = $tag->name;
+                }
+                $user->tag_answers = $userTag->answers;
+                $user->avatar = get_user_avatar($userTag->user_id);
+                $user->url = route('auth.space.index',['user_id'=>$userTag->user_id]);
+                $user->isInvited = 0;
+                $users[] = $user;
+            }
+        }
+
+        return $this->ajaxSuccess($users);
+    }
+
 
 
 

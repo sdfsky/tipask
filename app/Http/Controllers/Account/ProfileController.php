@@ -163,7 +163,11 @@ class ProfileController extends Controller
                     'token' => EmailToken::createToken(),
                 ]);
 
-                $this->sendEmail($request->user()->id,'verify','您好，请激活您在'.Setting()->get('website_name').'注册的邮箱！',$emailToken,true);
+                if($emailToken){
+                    $subject = '欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！';
+                    $content = "「".$$request->user()->name."」您好，请激活您在 ".Setting()->get('website_name')." 的注册邮箱！<br /> 请在1小时内点击该链接激活注册账号 → ".route('auth.email.verifyToken',['action'=>$emailToken->action,'token'=>$emailToken->token])."<br />如非本人操作，请忽略此邮件！";
+                    $this->sendEmail($emailToken->email,$subject,$content);
+                }
 
                 return $this->success(route('auth.profile.email'),'邮箱修改成功！一封验证邮件已经发到您的邮箱'.$request->user()->email.',请登陆邮箱进行验证！');
             }

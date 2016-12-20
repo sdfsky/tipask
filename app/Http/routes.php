@@ -192,6 +192,11 @@ Route::Group(['namespace'=>'Ask'],function(){
         /*追加悬赏*/
         Route::post('question/{id}/appendReward',['as'=>'ask.question.appendReward','uses'=>'QuestionController@appendReward'])->where(['id'=>'[0-9]+']);
 
+        /*邀请回答*/
+        Route::get('question/invite/{question_id}/{to_user_id}',['as'=>'ask.question.invite','uses'=>'QuestionController@invite'])->where(['question_id'=>'[0-9]+','to_user_id'=>'[0-9]+']);
+        Route::any('question/inviteEmail/{question_id}',['as'=>'ask.question.inviteEmail','uses'=>'QuestionController@inviteEmail'])->where(['question_id'=>'[0-9]+']);
+        Route::get('question/{question_id}/invitations/{type}',['as'=>'ask.question.invitations','uses'=>'QuestionController@invitations'])->where(['question_id'=>'[0-9]+','type'=>'(part|all)']);
+
         /*采纳回答*/
         Route::get('answer/adopt/{id}',['as'=>'ask.answer.adopt','uses'=>'AnswerController@adopt'])->where(['id'=>'[0-9]+']);
 
@@ -204,6 +209,7 @@ Route::Group(['namespace'=>'Ask'],function(){
 
         /*评论添加*/
         Route::post('comment/store',['as'=>'ask.comment.store','uses'=>'CommentController@store']);
+
 
     });
 
@@ -395,6 +401,7 @@ Route::get('ajax/unreadNotifications',['as'=>'website.ajax.unreadNotifications',
 Route::get('ajax/loadTags',['as'=>'website.ajax.loadTags','uses'=>'AjaxController@loadTags']);
 
 Route::get('ajax/loadUsers',['middleware' =>'auth','as'=>'website.ajax.loadUsers','uses'=>'AjaxController@loadUsers']);
+Route::get('ajax/loadInviteUsers',['middleware' =>'auth','as'=>'website.ajax.loadInviteUsers','uses'=>'AjaxController@loadInviteUsers']);
 
 /*加载未读私信数目*/
 Route::get('ajax/unreadMessages',['as'=>'website.ajax.unreadMessages','uses'=>'AjaxController@unreadMessages']);

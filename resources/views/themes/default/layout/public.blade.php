@@ -14,7 +14,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('/static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/static/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/css/default/global.css')}}" rel="stylesheet" />
+    <link href="{{ asset('/css/default/global.css')}}?v={{ config('tipask.release') }}" rel="stylesheet" />
     @yield('css')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
