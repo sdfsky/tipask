@@ -32,9 +32,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-
-        echo bcrypt('123456');
-
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();
 
@@ -103,7 +100,7 @@ class IndexController extends Controller
             abort(404);
         }
 
-        $currentCategoryId = $parentCategoryId = 0;
+        $currentCategoryId = 0;
         if( $categorySlug != 'all' ){
             $category = Category::where("slug","=",$categorySlug)->first();
             if(!$category){
@@ -130,7 +127,7 @@ class IndexController extends Controller
             abort(404);
         }
 
-        $currentCategoryId = $parentCategoryId = 0;
+        $currentCategoryId = 0;
         if( $categorySlug != 'all' ){
             $category = Category::where("slug","=",$categorySlug)->first();
             if(!$category){
@@ -158,14 +155,13 @@ class IndexController extends Controller
     public function topic( $categorySlug='all')
     {
 
-        $currentCategoryId = $parentCategoryId = 0;
+        $currentCategoryId = 0;
         if( $categorySlug != 'all' ){
             $category = Category::where("slug","=",$categorySlug)->first();
             if(!$category){
                 abort(404);
             }
             $currentCategoryId = $category->id;
-            $parentCategoryId = $category->parent_id;
         }
 
         $categories = load_categories('tags');

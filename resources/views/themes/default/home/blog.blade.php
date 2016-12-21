@@ -1,10 +1,10 @@
 @extends('theme::layout.public')
-@section('seo_title')@section('seo_title')@if($filter === 'newest')最新的@elseif($filter === 'hottest')热门的@elseif($filter === 'recommended')推荐的@endif文章  @if( $articles->currentPage()>1 ) - 第{{ $articles->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')@section('seo_title')@if($filter === 'hottest')热门的@elseif($filter === 'recommended')推荐的@endif文章  @if( $articles->currentPage()>1 ) - 第{{ $articles->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}@endsection
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
             @if( $categories )
-                <div class="row widget-category">
+                <div class="widget-category clearfix mb-10">
                     <div class="col-sm-12">
                         <ul class="list">
                             <li><a href="{{ route('website.blog') }}">全部</a></li>
@@ -57,6 +57,7 @@
                 <p>今天，有什么经验需要分享呢？</p>
                 <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block mt-10">立即撰写</a>
             </div>
+            @include('theme::layout.auth_menu')
 
             <div class="widget-box">
                 <h2 class="h4 widget-box__title">推荐文章</h2>

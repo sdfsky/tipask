@@ -6,7 +6,7 @@
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
             @if( $categories )
-            <div class="row widget-category">
+            <div class="widget-category clearfix">
                     <div class="col-sm-12">
                         <ul class="list">
                             <li><a href="{{ route('website.ask') }}">全部</a></li>
@@ -70,7 +70,7 @@
                 <p>今天，你的网站遇到什么问题呢？</p>
                 <a href="{{ route('ask.question.create') }}" class="btn btn-primary btn-block mt-10">立即提问</a>
             </div>
-
+            @include('theme::layout.auth_menu')
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热议话题 <a href="{{ route('website.topic') }}" title="更多">»</a></h2>
                 <ul class="taglist-inline multi">

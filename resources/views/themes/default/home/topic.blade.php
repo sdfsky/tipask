@@ -1,18 +1,14 @@
 @extends('theme::layout.public')
-
-@section('seo_title')话题 - 第{{ $topics->currentPage() }}页 - {{ Setting()->get('website_name') }}@endsection
-
-@section('css')
-    <link href="{{ asset('/css/default/topic.css')}}" rel="stylesheet" />
-@endsection
-
+@section('seo_title')话题 @if($topics->currentPage()>1)- 第{{ $topics->currentPage() }}页@endif - {{ Setting()->get('website_name') }}@endsection
 @section('content')
-        @if( $categories )
-            <div class="row widget-category">
+    <p class="mt-10">话题不仅能组织和归类你的内容，还能关联相似的内容。正确的使用话题将让你的问题被更多人发现和解决。</p>
+    @if( $categories )
+            <div class="widget-category clearfix">
                 <div class="col-sm-12">
                     <ul class="list">
+                        <li><a href="{{ route('website.topic') }}">全部</a></li>
                         @foreach( $categories as $category )
-                            <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                            <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.topic',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>

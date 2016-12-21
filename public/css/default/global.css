@@ -41,6 +41,7 @@
 .list-group-item.active,.list-group-item.active:focus,.list-group-item.active:hover{z-index:2;color:#fff;background-color:#009a61;border-color:#009a61}
 .list-group-item.active .list-group-item-text,.list-group-item.active:focus .list-group-item-text,.list-group-item.active:hover .list-group-item-text{color:#67ffc7}
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{background-color:#017e66;}
+.nav-tabs>li>a{color:#333;}
 .box dl>dd,dl>dt{line-height: 50px;}
 
 
@@ -55,14 +56,9 @@ html{font-size:10px;-webkit-tap-highlight-color:transparent}
 body{font-family:Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;font-size:14px;line-height:1.5;color:#333;background-color:#fff}
 
 button,input,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit}
-a{color:#333;text-decoration:none}
-a:focus,a:hover{color:#017e66;text-decoration:underline}
-a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
-ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+a{color:#009a61;text-decoration:none}
+a:focus,a:hover{color:#004e31;text-decoration:underline;}
+ul{list-style: none;padding: 0;}
 .wrap{padding-bottom:30px;position:relative}
 
 /*margin-bottom*/
@@ -71,7 +67,6 @@ ul{
 .mb-30{margin-bottom:30px;}
 .mb-40{margin-bottom:40px;}
 .mb-50{margin-bottom:50px;}
-
 
 .mt-10 {margin-top: 10px;}
 .mt-15 {margin-top: 15px;}
@@ -142,14 +137,14 @@ ul{
 .stream-list.top-indent{margin-top:-10px}
 .stream-list-item{margin:0;border-bottom:1px solid #eee;padding:10px 0}
 .stream-list-item .author{margin-bottom:5px;color:#999;font-size:13px}
-.stream-list-item .author a{color:#2b7a5c}
 .stream-list-item .author small{color:#ddd}
+.stream-list-item .author a{color:#999;}
 .stream-list-item .title{display:inline;margin:0 5px 0 0;font-size:16px}
 .stream-list-item .title a{color:#333}
 .stream-list-item .title a:hover{color:#017e66}
 .stream-list-item .title a:visited{font-weight:400}
-.stream-list-item .small-title{margin:0 0 5px;font-size:16px}
-.stream-list-item .split:before{content:"·";color:#ddd}
+.stream-list-item .small-title{margin:0 0 5px;font-size:16px;}
+.stream-list-item .split:before{content:"·";color:#ddd;}
 .stream-list-item .summary{overflow:auto;overflow-x:hidden}
 .stream-list-item .excerpt{margin:5px 0 0;height:42px;color:#777;font-size:13px;line-height:1.6;overflow:hidden}
 .stream-list-item.highlight{background:#FFF9EB}
@@ -195,9 +190,10 @@ ul{
 .taglist--block>li{margin-bottom:8px}
 
 /*分类模块样式定义*/
-.widget-category{border-bottom:1px solid #eee; padding:15px 0 8px;}
+.widget-category{padding:15px 0;border: 1px solid #f0f5f3;border-radius: 4px;}
 .widget-category .list>li{float:left;position:relative;height:30px;line-height:30px;font-size:14px;margin:0 10px 10px 0}
-.widget-category .list a{display:block;padding:0 10px;border-radius:30px;text-decoration:none;border:1px solid #daecf5}
+.widget-category .list a{display:block;padding:0 10px;border-radius:30px;text-decoration:none;border:1px solid #daecf5;}
+.widget-category .list a:hover{color:#004e31;}
 .widget-category .active a{background:#017e66;border-color:#017e66;color:#fff}
 .widget-category .breadcrumb{padding:0 15px;margin-bottom:10px}
 
@@ -221,6 +217,8 @@ ul{
 .widget-box .media{margin:0;}
 .widget-box.no-border,.widget-box:first-child{margin-top:0;padding-top:0;border:none}
 .widget-box .panel-title{font-size: 14px;}
+.widget-box .widget-box-title .switch {font-size: 13px;font-weight: 400;}
+
 .widget-top10{padding-left:30px}
 .widget-top10 li{margin-bottom:8px}
 .widget-top10 img{margin-right:10px}
@@ -234,7 +232,8 @@ ul{
 .widget-user-item {border: none; margin-top: 0;}
 .widget-relation{padding:10px;border-top:1px solid #ddd;border-bottom:1px solid #eee; }
 .widget-links-item {margin-bottom: 8px;}
-.widget-links-item a{margin-right:6px;}
+.widget-links-item a{margin-right:6px;color:#333;}
+.widget-links-item a:hover{color:#017e66;}
 .widget-links-item small{display:inline-block;font-size:13px}
 .widget-links-item .ranks{float:left;padding:0;margin-right:5px;width:26px;background:#f3f3f3;color:#444;text-align:center;font-size:13px}
 .widget-bookmark-author .links li{padding:5px 0;border-top:1px dotted #ddd}
@@ -295,8 +294,18 @@ ul{
 .widget-vote .hate.active{background-position:-72px bottom}
 
 
-/*活跃用户*/
+/*话题模块*/
 
+.widget-topic{position:relative;height:170px;overflow:hidden;border:1px solid #ddd;margin-bottom:14px}
+.widget-topic h2{margin:12px;font-size:16px}
+.widget-topic p{margin:12px;height:75px;overflow:hidden;font-size:13px}
+.topic-list{margin-left:-7px;margin-right:-7px}
+.widget-topic-action{position:absolute;bottom:0;width:100%;padding:8px 12px;background-color:#f6f6f6}
+.widget-topic .h4 a{color:#333}
+
+
+
+/*活跃用户*/
 .users .action-list li {padding: .35rem 0;}
 .users .top-num .label{display: block;}
 /*我的通知*/
@@ -309,7 +318,8 @@ ul{
 .streams-item .stream-left{float:left;margin-right:15px}
 .streams-item .stream-right{float:left}
 .streams-item .text-muted{margin-bottom:4px}
-.streams-item .text-muted a{color:#666}
+.streams-item .title a{color:#333;}
+.streams-item .title a:hover{color:#017e66;}
 .streams-item .full-text{color:#777;font-size:13px;line-height:1.7;overflow:hidden;margin-bottom:5px;margin-top:4px}
 .messages .meta{font-size:13px;}
 
@@ -356,7 +366,6 @@ ul{
 .search-result section:hover { background-color: #fcf8e3;}
 .search-result section {margin: 0 -8px;padding: 5px 8px;}
 .search-result .h4{margin-bottom:2px;font-size:16px}
-.search-result a{color:#017e66;}
 .related-object{border:1px solid #ddd;border-radius:2px;padding:10px 15px;margin-bottom:20px}
 
 /*页面底部footer*/

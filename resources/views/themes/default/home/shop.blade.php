@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')商城 - 第{{ $goods->currentPage() }}页 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')商城 @if($goods->currentPage()>1)- 第{{ $goods->currentPage() }}页@endif - {{ Setting()->get('website_name') }}@endsection
 
 
 @section('content')

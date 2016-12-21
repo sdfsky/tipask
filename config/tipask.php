@@ -7,8 +7,8 @@
  */
 
 return [
-    'version' => 'Tipask3.0',
-    'release' => '20160725',
+    'version' => 'Tipask3.1',
+    'release' => '201601210',
     'user_cache_time' => 1, //用户数据缓存时间单位分钟
     'user_invite_limit' => 10,//用户邀请回答限制数
     'admin' => [
