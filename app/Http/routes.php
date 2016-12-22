@@ -275,7 +275,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*用户退出*/
     Route::get('logout',['as'=>'admin.account.logout','uses'=>'AccountController@logout']);
 
-    Route::match(['get','post'],'upgrade',['as'=>'admin.system.upgrade','uses'=>'SystemController@upgrade']);
+    Route::get('system/index',['as'=>'admin.system.index','uses'=>'SystemController@index']);
+    Route::post('system/upgrade',['as'=>'admin.system.upgrade','uses'=>'SystemController@upgrade']);
+    Route::post('system/adjust',['as'=>'admin.system.adjust','uses'=>'SystemController@adjust']);
 
     /*首页*/
     Route::resource('index', 'IndexController', ['only' => ['index']]);

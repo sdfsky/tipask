@@ -52,6 +52,7 @@ class User extends Model implements AuthenticatableContract,
         static::deleted(function($user){
             /*删除角色管理*/
             $user->roles()->delete();
+
             /*删除用户扩展信息*/
             $user->userData()->delete();
             $user->userOauth()->delete();
@@ -77,6 +78,9 @@ class User extends Model implements AuthenticatableContract,
 
             /*删除积分兑换*/
             $user->exchanges()->delete();
+
+            /*删除统计标签*/
+            $user->userTags()->delete();
 
             /*删除问题邀请*/
             $user->questionInvitations()->delete();
@@ -256,7 +260,10 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Models\Exchange');
     }
 
-
+    /*用户统计标签*/
+    public function userTags(){
+        return $this->hasMany('App\Models\UserTag','user_id');
+    }
 
 
     /*是否回答过问题*/
@@ -300,14 +307,6 @@ class User extends Model implements AuthenticatableContract,
         }
         return true;
     }
-
-
-
-
-
-
-
-
 
 
 

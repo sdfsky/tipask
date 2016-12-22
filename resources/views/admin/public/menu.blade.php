@@ -15,6 +15,7 @@
             <li><a href="{{ route('admin.setting.irrigation') }}"><i class="fa fa-circle-o"></i> 防灌水设置</a></li>
             <li><a href="{{ route('admin.setting.credits') }}"><i class="fa fa-circle-o"></i> 积分设置</a></li>
             <li><a href="{{ route('admin.setting.seo') }}"><i class="fa fa-circle-o"></i> SEO设置</a></li>
+            <li><a href="{{ route('admin.system.index') }}"><i class="fa fa-circle-o"></i> 系统工具</a></li>
         </ul>
     </li>
 

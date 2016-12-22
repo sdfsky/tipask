@@ -43,9 +43,10 @@ class Question extends Model
             /*删除回答*/
             $question->answers()->delete();
         });
+
         static::deleted(function($question){
             /*用户提问数 -1 */
-            $question->user->userData->decrement('questions');
+            $question->user()->userData()->where("questions",">",0)->decrement('questions');
 
             /*删除问题评论*/
             Comment::where('source_type','=',get_class($question))->where('source_id','=',$question->id)->delete();
