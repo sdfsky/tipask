@@ -1,8 +1,8 @@
 @extends('admin/public/layout')
-@section('title')编辑行家认证信息@endsection
+@section('title')编辑专家认证信息@endsection
 @section('content')
     <section class="content-header">
-        <h1>编辑行家认证信息</h1>
+        <h1>编辑专家认证信息</h1>
     </section>
     <section class="content">
         <div class="row">

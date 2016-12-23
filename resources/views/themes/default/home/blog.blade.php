@@ -96,7 +96,7 @@
                 <h2 class="h4 widget-box-title">热议话题 <a href="{{ route('website.topic') }}" title="更多">»</a></h2>
                 <ul class="taglist-inline multi">
                     @foreach($hotTags as $hotTag)
-                        <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$hotTag->name]) }}">{{ $hotTag->name }}</a></li>
+                        <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$hotTag->name,'source_type'=>'articles']) }}">{{ $hotTag->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

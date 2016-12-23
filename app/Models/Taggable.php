@@ -13,23 +13,28 @@ class Taggable extends Model
     protected $fillable = ['source_type', 'source_id', 'tag_id'];
 
 
-    public static function hottest($pageSize=20)
+    public static function hottest($type='all',$pageSize=20)
     {
+       $tagIds = Tag::lists('id');
+       $query =  DB::table('taggables')->select('tag_id',DB::raw('COUNT(id) as total_num'))
+            ->whereIn('tag_id',$tagIds);
+       if($type=='questions'){
+           $query->where('taggable_type','=','App\Models\Question');
+       }elseif($type=='articles'){
+           $query->where('taggable_type','=','App\Models\Article');
+       }
 
-       $taggables =  DB::table('taggables')->select('tag_id',DB::raw('COUNT(id) as total_num'))
-            ->groupBy('tag_id')
+       $taggables = $query->groupBy('tag_id')
             ->orderBy('total_num','desc')
             ->paginate($pageSize);
         return $taggables;
-
     }
 
-
     /*全局热门标签*/
-    public static function globalHotTags()
+    public static function globalHotTags( $type='all' )
     {
-        return Cache::remember('hot_tags',10,function(){
-            $tags = self::hottest(25);
+        return Cache::remember('hot_tags_'.$type,300,function() use($type){
+            $tags = self::hottest($type,25);
             $tags->map(function($tag){
                 $tagInfo = Tag::find($tag->tag_id);
                 if(!$tagInfo){

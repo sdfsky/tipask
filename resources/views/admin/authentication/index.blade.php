@@ -1,10 +1,10 @@
 @extends('admin/public/layout')
-@section('title')行家管理@endsection
+@section('title')专家管理@endsection
 @section('content')
     <section class="content-header">
         <h1>
-            行家管理
-            <small>管理系统的所有行家</small>
+            专家管理
+            <small>管理系统的所有专家</small>
         </h1>
     </section>
     <section class="content">

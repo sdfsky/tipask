@@ -215,6 +215,12 @@ class SettingController extends AdminController
     }
 
 
+    /*变量设置*/
+    public function variables(Request $request){
+        return view('admin.setting.variables');
+    }
+
+
 
     /*xunsearch整合*/
     public function xunSearch(Request $request)

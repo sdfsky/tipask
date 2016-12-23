@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')行家认证 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')专家认证 - {{ Setting()->get('website_name') }}@endsection
 
 
 @section('css')
@@ -14,7 +14,7 @@
         @include('theme::layout.profile_menu')
 
         <div id="main" class="settings col-md-10 form-horizontal">
-            <h2 class="h3 post-title">行家认证 <small>修改认证资料</small></h2>
+            <h2 class="h3 post-title">专家认证 <small>修改认证资料</small></h2>
             <div class="row mt-30">
                 <div class="col-md-8">
                     <form name="authForm" id="authentication_form" enctype="multipart/form-data" action="{{ route('auth.authentication.edit')}}" method="POST">
@@ -77,7 +77,7 @@
                                     <span class="help-block">{{ $errors->first('skill_image') }}</span>
                                 @else
                                     <div class="help-block">
-                                        1.请上传您的工卡、单位证明、资格证书、获奖证书等一切可证明您行家身份的材料照片<br />
+                                        1.请上传您的工卡、单位证明、资格证书、获奖证书等一切可证明您专家身份的材料照片<br />
                                         2.照片要求格式为JPG/JPEG/GIF/PNG，大小不要超过2M
                                     </div>
                                 @endif

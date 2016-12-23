@@ -27,7 +27,7 @@ Route::get('/articles/{category_name?}/{filter?}',['as'=>'website.blog','uses'=>
 Route::get('/users',['as'=>'website.user','uses'=>'IndexController@user']);
 
 /*experts*/
-Route::get('/experts',['as'=>'website.experts','uses'=>'IndexController@experts']);
+Route::get('/experts/{categorySlug?}/{provinceId?}',['as'=>'website.experts','uses'=>'IndexController@experts']);
 
 
 /*积分商城*/
