@@ -73,11 +73,15 @@ class AjaxController extends Controller
     public function loadTags(Request $request)
     {
         $word = $request->input('word');
+        if( strlen($word) > 10 ){
+            return response()->json($tags->toArray());
+        }
         $type = $request->input('type','all');
         $tags = [];
         if(!$word){
             $tags = Taggable::hottest($type,10);
         }
+
         $tags = Tag::where('name','like',$word.'%')->select('id',DB::raw('name as text'))->take(10)->get();
         $tags->map(function($tag){
             $tag->id = $tag->text;
