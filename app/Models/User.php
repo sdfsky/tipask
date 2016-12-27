@@ -266,6 +266,20 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
+    public function hotTags(){
+        $hotTagIds = $this->userTags()->select("tag_id")->distinct()->orderBy('supports','desc')->orderBy('answers','desc')->orderBy('created_at','desc')->take(5)->lists('tag_id');
+        $tags = [];
+        foreach($hotTagIds as $hotTagId){
+            $tag = Tag::find($hotTagId);
+            if($tag){
+                $tags[] = $tag;
+            }
+
+        }
+        return $tags;
+    }
+
+
     /*是否回答过问题*/
     public function isAnswered($questionId)
     {

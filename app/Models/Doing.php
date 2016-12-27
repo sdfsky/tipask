@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Relations\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Doing extends Model
 {
@@ -14,11 +15,36 @@ class Doing extends Model
 
     static function correlation(User $user)
     {
-      return self::join('attentions', function ($join) use($user) {
-               $join->on('attentions.source_id', '=', 'doings.source_id')
-                    ->on('attentions.source_type', '=', 'doings.source_type')
-                    ->where('attentions.user_id','=',$user->id);
-           })->where('doings.user_id','<>',$user->id)
+      $attentions = $user->attentions()->get();
+      $tags = $questions = $users = [];
+
+      foreach($attentions as $attention){
+          if($attention->source_type == 'App\Models\Tag'){
+                $tags[] = $attention->source_id;
+          }elseif($attention->source_type == 'App\Models\User'){
+                $users[] = $attention->source_id;
+          }elseif($attention->source_type == 'App\Models\Question'){
+                $questions[] = $attention->source_id;
+          }
+      }
+
+      if($tags){
+            $taggables = DB::table("taggables")->whereIn("tag_id",$tags)->get();
+            foreach($taggables as $tagable){
+                if($tagable->taggable_type == 'App\Models\Question'){
+                    $questions[] = $tagable->taggable_id;
+                }
+            }
+      }
+
+      return self::where(function($query) use($users){
+                     $query->whereIn("user_id",$users);
+                 })
+                 ->oRwhere(function($query) use($questions){
+                     $query->whereIn("source_id",$questions)->where("source_type","=","App\Models\Question");
+
+                 })
+                 ->where('doings.user_id','<>',$user->id)
              //->where('attentions.created_at','<','doings.created_at')
              ->select('doings.*')
              ->orderBy('doings.created_at','DESC');

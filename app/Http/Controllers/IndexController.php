@@ -17,6 +17,7 @@ use App\Models\Tag;
 use App\Models\Taggable;
 use App\Models\User;
 use App\Models\UserData;
+use App\Models\UserTag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

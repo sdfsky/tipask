@@ -34,28 +34,16 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <ul class="action-list list-unstyled">
+                            <ul class="action-list list-unstyled mt-20">
                                 <li>
                                     @if(Auth()->guest())
-                                        <button type="button" class="btn btn-success followerUser btn-sm" data-source_type = "user" data-source_id = "{{ $user['id'] }}"  data-show_num="false" data-toggle="tooltip" data-placement="left" title="" data-original-title="关注后将获得更新提醒">加关注</button>
+                                        <a href="{{ route('ask.question.create') }}?to_user_id={{ $user['id'] }}" class="btn btn-warning btn-sm">向TA求助</a>
                                     @elseif(Auth()->user()->id !== $user['id'])
-                                        @if(Auth()->user()->isFollowed(get_class($user->user),$user['id']))
-                                            <button type="button" class="btn btn-success btn-sm followerUser active" data-source_type = "user" data-source_id = "{{ $user['id'] }}"  data-show_num="false"  data-toggle="tooltip" data-placement="left" title="" data-original-title="关注后将获得更新提醒">已关注</button>
-                                        @else
-                                            <button type="button" class="btn btn-success followerUser btn-sm" data-source_type = "user" data-source_id = "{{ $user['id'] }}"  data-show_num="false" data-toggle="tooltip" data-placement="left" title="" data-original-title="关注后将获得更新提醒">加关注</button>
-                                        @endif
-                                    @endif
-                                </li>
-                                <li>
-                                    @if(Auth()->guest())
-                                        <a href="{{ route('ask.question.create') }}?to_user_id={{ $user['id'] }}" class="btn btn-default btn-sm">向TA求助</a>
-                                    @elseif(Auth()->user()->id !== $user['id'])
-                                        <a href="{{ route('ask.question.create') }}?to_user_id={{ $user['id'] }}" class="btn btn-default btn-sm">向TA求助</a>
+                                        <a href="{{ route('ask.question.create') }}?to_user_id={{ $user['id'] }}" class="btn btn-warning btn-sm">向TA求助</a>
                                     @endif
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                 </section>
                 @endforeach
