@@ -17,6 +17,7 @@
                                 <div class="btn-group">
                                     <a href="{{ route('ask.question.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="发起提问"><i class="fa fa-plus"></i></a>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.question.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
+                                    <button class="btn btn-default btn-sm" title="移动分类"  data-toggle="modal" data-target="#change_category_modal" ><i data-toggle="tooltip" title="移动分类" class="fa fa-bars" aria-hidden="true"></i></button>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.question.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
                                 </div>
                             </div>
@@ -118,6 +119,7 @@
 @endsection
 
 @section('script')
+    @include("admin.public.change_category_modal",['type'=>'questions','form_id'=>'item_form','form_action'=>route('admin.question.changeCategories')])
     <script type="text/javascript">
         set_active_menu('manage_content',"{{ route('admin.question.index') }}");
     </script>

@@ -101,7 +101,6 @@ class UserData extends Model
     }
 
 
-
     /*用户采纳率*/
     public function adoptPercent()
     {

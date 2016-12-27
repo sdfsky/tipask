@@ -145,6 +145,18 @@ class TagController extends AdminController
         return $this->success(route('admin.tag.index'),'标签修改成功');
     }
 
+    /*修改分类*/
+    public function changeCategories(Request $request){
+        $ids = $request->input('ids','');
+        $categoryId = $request->input('category_id',0);
+        if($ids){
+            Tag::whereIn('id',explode(",",$ids))->update(['category_id'=>$categoryId]);
+        }
+        return $this->success(route('admin.tag.index'),'分类修改成功');
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *

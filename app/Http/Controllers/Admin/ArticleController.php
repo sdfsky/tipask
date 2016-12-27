@@ -89,6 +89,18 @@ class ArticleController extends AdminController
 
     }
 
+    /*修改分类*/
+    public function changeCategories(Request $request){
+        $ids = $request->input('ids','');
+        $categoryId = $request->input('category_id',0);
+        if($ids){
+            Article::whereIn('id',explode(",",$ids))->update(['category_id'=>$categoryId]);
+        }
+        return $this->success(route('admin.article.index'),'分类修改成功');
+    }
+
+
+
     /**
      * 删除文章
      * @param  int  $id

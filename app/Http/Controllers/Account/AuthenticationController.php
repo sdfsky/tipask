@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Models\Attention;
 use App\Models\Authentication;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -24,9 +26,7 @@ class AuthenticationController extends Controller
      */
     public function getIndex()
     {
-
-       return view('theme::authentication.index');
-
+        return view('theme::authentication.index');
     }
 
     /**
@@ -62,6 +62,8 @@ class AuthenticationController extends Controller
         }
 
         Authentication::create($data);
+
+        $this->attendToTags(explode(",",$data['skill']),$request->user()->id);
 
         return $this->success(route('auth.authentication.index'),'您的申请已经提交成功！我们会在3个工作日内完成审核，请耐心等待！');
 
@@ -99,8 +101,9 @@ class AuthenticationController extends Controller
 
             $request->user()->authentication->update($data);
 
-            return $this->success(route('auth.authentication.index'),'您的申请已经提交成功！我们会在3个工作日内完成审核，请耐心等待！');
+            $this->attendToTags(explode(",",$data['skill']),$request->user()->id);
 
+            return $this->success(route('auth.authentication.index'),'您的申请已经提交成功！我们会在3个工作日内完成审核，请耐心等待！');
         }
 
         $authentication = $request->user()->authentication;
@@ -108,6 +111,23 @@ class AuthenticationController extends Controller
 
     }
 
+
+    /*关注标签*/
+    private function attendToTags($tags,$userId){
+        foreach( $tags as $tag ){
+            $newTag = Tag::firstOrCreate(['name'=>$tag]);
+            $attention = Attention::where("user_id",'=',$userId)->where('source_type','=',get_class($newTag))->where('source_id','=',$newTag->id)->first();
+            if(!$attention){
+                Attention::create([
+                    'user_id'     => $userId,
+                    'source_id'   => $newTag->id,
+                    'source_type' => get_class($newTag),
+                ]);
+                Tag::find($newTag->id)->increment('followers');
+            }
+
+        }
+    }
 
 
 

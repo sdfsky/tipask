@@ -53,7 +53,6 @@ class AttentionController extends Controller
             'user_id'     => $request->user()->id,
             'source_id'   => $source_id,
             'source_type' => get_class($source),
-            'subject'  => $subject,
         ];
 
         $attention = Attention::create($data);

@@ -71,7 +71,6 @@
                 </ul>
             </div>
 
-
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热门作者 <a href="{{ route('auth.top.articles') }}">»</a></h2>
                 <ul class="list-unstyled">
@@ -89,8 +88,6 @@
                     @endforeach
                 </ul>
             </div>
-
-
 
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热议话题 <a href="{{ route('website.topic') }}" title="更多">»</a></h2>

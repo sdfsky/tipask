@@ -73,9 +73,10 @@ class AjaxController extends Controller
     public function loadTags(Request $request)
     {
         $word = $request->input('word');
+        $type = $request->input('type','all');
         $tags = [];
         if(!$word){
-            $tags = Taggable::hottest(10);
+            $tags = Taggable::hottest($type,10);
         }
         $tags = Tag::where('name','like',$word.'%')->select('id',DB::raw('name as text'))->take(10)->get();
         $tags->map(function($tag){

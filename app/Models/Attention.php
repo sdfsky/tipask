@@ -10,6 +10,10 @@ class Attention extends Model
     protected $fillable = ['user_id','source_id','source_type'];
 
 
+    public static function store(){
+
+    }
+
 
 
 }

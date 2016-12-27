@@ -10,7 +10,7 @@ class Tag extends Model
 {
     use BelongsToCategoryTrait;
     protected $table = 'tags';
-    protected $fillable = ['name', 'logo', 'description','category_id'];
+    protected $fillable = ['name', 'logo', 'description','category_id','followers'];
 
 
     public static function boot()

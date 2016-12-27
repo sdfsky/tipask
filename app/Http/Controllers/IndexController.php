@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Authentication;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Exchange;
@@ -181,13 +182,14 @@ class IndexController extends Controller
         $hotProvinces = Cache::remember('hot_expert_cities',Setting()->get('website_cache_time',1),function() {
             return  DB::table("users")->join("authentications","users.id","=","authentications.user_id")->select('province', DB::raw('COUNT(id) as total'))->groupBy('province')->orderBy('total','desc')->get();
         });
-        $query = UserData::leftJoin('users', 'users.id', '=', 'user_data.user_id')->where('users.status','>',0)->where('user_data.authentication_status','=',1);
+        $query = UserData::leftJoin('users', 'users.id', '=', 'user_data.user_id')->where('users.status','>',0)->where('user_data.authentication_status','=',1)
+                         ->leftJoin("authentications","authentications.user_id","=","user_data.user_id");
         $categoryId = 0;
         if( $categorySlug != 'all' ){
             $category = Category::where("slug","=",$categorySlug)->first();
             if($category){
                 $categoryId = $category->id;
-                $query->leftJoin("authentications","authentications.user_id","=","user_data.user_id")->where("authentications.category_id","=",$categoryId);
+                $query->where("authentications.category_id","=",$categoryId);
             }
         }
 
@@ -202,8 +204,9 @@ class IndexController extends Controller
         $experts = $query->orderBy('user_data.answers','DESC')
                         ->orderBy('user_data.articles','DESC')
                         ->orderBy('users.updated_at','DESC')
-                        ->select('users.id','users.name','users.description','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
+                        ->select('users.id','users.name','users.description','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status','authentications.skill')
                         ->paginate(16);
+
         return view('theme::home.expert')->with(compact('experts','categories','hotProvinces','categorySlug','categoryId','provinceId','word'));
     }
 

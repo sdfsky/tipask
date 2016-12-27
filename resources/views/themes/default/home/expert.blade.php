@@ -65,9 +65,11 @@
                                     <p class="text-muted">{{ $expert->answers }}回答 / {{ $expert->answers }}赞同 / {{ $expert->followers }}关注 </p>
                                     <ul class="taglist-inline ib">
                                         <li class="tagPopup text-muted">认证领域：</li>
-                                        <li class="tagPopup"><a class="tag" target="_blank" href="http://www.tipaskx.com/topic/%E6%B5%8B%E8%AF%95">测试</a></li>
-                                        <li class="tagPopup"><a class="tag" target="_blank" href="http://www.tipaskx.com/topic/%E5%BE%AE%E8%BD%AF">微软</a></li>
-                                        <li class="tagPopup"><a class="tag" target="_blank" href="http://www.tipaskx.com/topic/%E6%B4%9B%E5%9F%BA%E4%BA%9A">洛基亚</a></li>
+                                        @if($expert->skill)
+                                            @foreach( explode(",",old('tags',$expert->skill)) as $tag)
+                                                <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$tag,'source_type'=>'questions']) }}">{{ $tag }}</a></li>
+                                            @endforeach
+                                        @endif
                                     </ul>
                                     <p class="text-muted mt-10">简介：{{ str_limit($expert->description,200) }} </p>
                                 </div>

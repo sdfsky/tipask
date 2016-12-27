@@ -300,6 +300,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*认证管理*/
     Route::post('authentication/destroy',['as'=>'admin.authentication.destroy','uses'=>'AuthenticationController@destroy']);
     Route::post('authentication/verify',['as'=>'admin.authentication.verify','uses'=>'AuthenticationController@verify']);
+    /*修改分类核*/
+    Route::post('authentication/changeCategories',['as'=>'admin.authentication.changeCategories','uses'=>'AuthenticationController@changeCategories']);
     Route::resource('authentication', 'AuthenticationController',['except' => ['show','create','store','destroy']]);
 
 
@@ -325,6 +327,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
 
     /*问题删除*/
     Route::post('question/destroy',['as'=>'admin.question.destroy','uses'=>'QuestionController@destroy']);
+    /*修改分类核*/
+    Route::post('question/changeCategories',['as'=>'admin.question.changeCategories','uses'=>'QuestionController@changeCategories']);
     /*问题审核*/
     Route::post('question/verify',['as'=>'admin.question.verify','uses'=>'QuestionController@verify']);
     /*问题管理*/
@@ -342,6 +346,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     Route::post('article/destroy',['as'=>'admin.article.destroy','uses'=>'ArticleController@destroy']);
     /*文章审核*/
     Route::post('article/verify',['as'=>'admin.article.verify','uses'=>'ArticleController@verify']);
+    /*修改分类核*/
+    Route::post('article/changeCategories',['as'=>'admin.article.changeCategories','uses'=>'ArticleController@changeCategories']);
     /*文章管理*/
     Route::resource('article', 'ArticleController',['only' => ['index','edit','update']]);
 
@@ -355,6 +361,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
 
     /*标签删除*/
     Route::post('tag/destroy',['as'=>'admin.tag.destroy','uses'=>'TagController@destroy']);
+    /*修改分类核*/
+    Route::post('tag/changeCategories',['as'=>'admin.tag.changeCategories','uses'=>'TagController@changeCategories']);
+
     /*标签审核*/
     Route::post('tag/verify',['as'=>'admin.tag.verify','uses'=>'TagController@verify']);
     /*标签管理*/
