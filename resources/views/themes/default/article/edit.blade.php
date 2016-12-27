@@ -16,7 +16,7 @@
             <li><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}">{{ $article->title }}</a></li>
             <li class="active">编辑文章</li>
         </ol>
-        <form id="article_form" method="POST" role="form" action="{{ route('blog.article.update',['id'=>$article->id]) }}">
+        <form id="article_form" method="POST" role="form" enctype="multipart/form-data" action="{{ route('blog.article.update',['id'=>$article->id]) }}">
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" id="tags" name="tags" value="{{ $article->tags->implode('name',',') }}" />
 
@@ -29,7 +29,7 @@
 
             <div class="form-group @if($errors->has('logo')) has-error @endif">
                 <label>文章封面</label>
-                <input type="file" name="logo"/>
+                <input type="file" name="logo" />
                 @if($article->logo)
                 <div style="margin-top: 10px;">
                     <img src="{{ route('website.image.show',['image_name'=>$article->logo]) }}" />

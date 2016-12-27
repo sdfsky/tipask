@@ -220,12 +220,28 @@ class ArticleController extends Controller
             $this->validateRules['captcha'] = 'required|captcha';
         }
 
+
+
+
         $this->validate($request,$this->validateRules);
 
         $article->title = trim($request->input('title'));
         $article->content = clean($request->input('content'));
         $article->summary = $request->input('summary');
         $article->category_id = $request->input('category_id',0);
+
+        if($request->hasFile('logo')){
+            $validateRules = [
+                'logo' => 'required|image|max:'.config('tipask.upload.image.max_size'),
+            ];
+            $this->validate($request,$validateRules);
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filePath = 'articles/'.gmdate("Y")."/".gmdate("m")."/".uniqid(str_random(8)).'.'.$extension;
+            Storage::disk('local')->put($filePath,File::get($file));
+            $article->logo = str_replace("/","-",$filePath);
+        }
+
 
         $article->save();
         $tagString = trim($request->input('tags'));
