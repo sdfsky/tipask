@@ -23,17 +23,10 @@ class Category extends Model
 
         /*监听删除事件*/
         static::deleting(function($category){
-            /*删除子分类*/
-            $categoryIds = self::getAllChildIds($category->id);
-            Category::destroy($categoryIds);
-            $categoryIds[] = $category->id;
-
-            /*修改相关内容关联关系*/
-            Question::whereIn('category_id',$categoryIds)->update(['category_id'=>0]);
-            Article::whereIn('category_id',$categoryIds)->update(['category_id'=>0]);
-            Tag::whereIn('category_id',$categoryIds)->update(['category_id'=>0]);
-            Authentication::whereIn('category_id',$categoryIds)->update(['category_id'=>0]);
-
+            $category->questions()->update(['category_id'=>0]);
+            $category->articles()->update(['category_id'=>0]);
+            $category->tags()->update(['category_id'=>0]);
+            $category->experts()->update(['category_id'=>0]);
         });
     }
 
@@ -45,6 +38,35 @@ class Category extends Model
     public function questions()
     {
         return $this->hasMany('App\Models\Question','category_id');
+    }
+
+
+    /**
+     * 获取用户问题
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Models\Article','category_id');
+    }
+
+    /**
+     * 获取用户问题
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tags()
+    {
+        return $this->hasMany('App\Models\Tag','category_id');
+    }
+
+
+    /**
+     * 获取用户问题
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function experts()
+    {
+        return $this->hasMany('App\Models\Authentication','category_id');
     }
 
 
