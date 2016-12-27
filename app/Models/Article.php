@@ -79,9 +79,6 @@ class Article extends Model
     }
 
 
-
-
-
     /*推荐文章*/
     public static function recommended($categoryId=0 , $pageSize=20)
     {
