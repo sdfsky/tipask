@@ -25,7 +25,7 @@
 
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="cacheItems[]" value="view" />
+                                            <input type="checkbox" name="cacheItems[]" value="view" checked="checked"/>
                                             更新模板缓存
                                         </label>
                                     </div>

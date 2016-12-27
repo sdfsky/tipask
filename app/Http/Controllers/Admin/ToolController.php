@@ -23,6 +23,7 @@ class ToolController extends AdminController
 
             if(isset($cacheItems['data'])){
                 Artisan::call('cache:clear');
+                Artisan::call('config:clear');
             }
 
             if(isset($cacheItems['view'])){
