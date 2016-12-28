@@ -120,16 +120,11 @@ class AnswerController extends Controller
 
     public function edit($id,Request $request)
     {
-        $answer = Answer::find($id);
-
-        if(!$answer){
-            abort(404);
-        }
+        $answer = Answer::findOrFail($id);
 
         if($answer->user_id !== $request->user()->id && !$request->user()->is('admin')){
             abort(403);
         }
-
         /*编辑回答时效控制*/
         if( !$request->user()->is('admin') && Setting()->get('edit_answer_timeout') ){
             if( $answer->created_at->diffInMinutes() > Setting()->get('edit_answer_timeout') ){
@@ -193,26 +188,28 @@ class AnswerController extends Controller
             $answer->question->status = 2;
             $answer->question->save();
 
-            $answer->user->userData()->increment('adoptions');
+            $answer->user->userData->increment('adoptions');
 
             /*悬赏处理*/
             $this->credit($answer->user_id,'answer_adopted',($answer->question->price+Setting()->get('coins_adopted',0)),Setting()->get('credits_adopted'),$answer->question->id,$answer->question->title);
-            DB::commit();
 
             UserTag::multiIncrement($request->user()->id,$answer->question->tags()->get(),'adoptions');
             $this->notify($request->user()->id,$answer->user_id,'adopt_answer',$answer->question_title,$answer->question_id);
+            DB::commit();
             /*发送邮件通知*/
-            if($answer->user()->allowedEmailNotify('adopt_answer')){
+            if($answer->user->allowedEmailNotify('adopt_answer')){
                 $emailSubject = '您对于问题「'.$answer->question_title.'」的回答被采纳了！';
                 $emailContent = "您对于问题「".$answer->question_title."」的回答被采纳了！<br /> 点击此链接查看详情  →  ".route('ask.question.detail',['question_id'=>$answer->question_id]);
                 $this->sendEmail($answer->user->email,$emailSubject,$emailContent);
             }
+
             return $this->success(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答采纳成功!".get_credit_message(Setting()->get('credits_adopted'),Setting()->get('coins_adopted')));
 
         }catch (\Exception $e) {
+            echo $e->getMessage();
             DB::rollBack();
         }
-
+        exit;
         return $this->error(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答采纳失败，请稍后再试！");
 
 
@@ -225,12 +222,7 @@ class AnswerController extends Controller
     public function detail($question_id,$id,Request $request)
     {
 
-        $question = Question::find($question_id);
-
-        if(empty($question)){
-            abort(404);
-        }
-
+        $question = Question::findOrFail($question_id);
 
         /*问题查看数+1*/
         $question->increment('views');
