@@ -19,7 +19,7 @@ class ApiController extends Controller
     public function getList(){
 
         $hotQuestions = Cache::remember('tipask_hot_questions',10,function() {
-            return  Question::hottest(0,6);
+            return  Question::hottest(0,8);
         });
 
         /*悬赏问题*/
