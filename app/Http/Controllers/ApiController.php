@@ -27,7 +27,7 @@ class ApiController extends Controller
             return  Question::reward(0,8);
         });
 
-        $hotArticles = Cache::remember('tipask_articles',10,function() {
+        $hotArticles = Cache::remember('tipask_hot_articles',10,function() {
             return  Article::hottest(0,8);
         });
 
