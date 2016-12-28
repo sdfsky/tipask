@@ -116,8 +116,10 @@ class IndexController extends Controller
         $hotTags =  Taggable::globalHotTags('questions');
 
         $categories = load_categories('questions');
-        $topAnswerUsers = UserData::top('answers',8);
-        return view('theme::home.ask')->with(compact('questions','topAnswerUsers','hotTags','filter','categories','currentCategoryId','categorySlug'));
+        $hotUsers = Cache::remember('ask_hot_users',Setting()->get('website_cache_time',1),function() {
+            return  UserData::activities(8);
+        });
+        return view('theme::home.ask')->with(compact('questions','hotUsers','hotTags','filter','categories','currentCategoryId','categorySlug'));
     }
 
 

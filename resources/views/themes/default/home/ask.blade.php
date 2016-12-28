@@ -82,15 +82,15 @@
 
             <div class="widget-box mt30">
                 <h2 class="widget-box-title">
-                    回答榜
-                    <a href="{{ route('auth.top.coins') }}" title="更多">»</a>
+                    活跃用户
+                    <a href="{{ route('website.user') }}" title="更多">»</a>
                 </h2>
                 <ol class="widget-top10">
-                    @foreach($topAnswerUsers as $index => $topAnswerUser)
+                    @foreach($hotUsers as $index => $hotUser)
                         <li class="text-muted">
-                            <img class="avatar-32" src="{{ get_user_avatar($topAnswerUser['id']) }}">
-                            <a href="{{ route('auth.space.index',['user_id'=>$topAnswerUser['id']]) }}" class="ellipsis">{{ $topAnswerUser['name'] }}</a>
-                            <span class="text-muted pull-right">{{ $topAnswerUser['answers'] }} 回答</span>
+                            <img class="avatar-32" src="{{ get_user_avatar($hotUser['id']) }}">
+                            <a href="{{ route('auth.space.index',['user_id'=>$hotUser['id']]) }}" class="ellipsis">{{ $hotUser['name'] }}</a>
+                            <span class="text-muted pull-right">{{ $hotUser['credits'] }} 经验</span>
                         </li>
                     @endforeach
 
