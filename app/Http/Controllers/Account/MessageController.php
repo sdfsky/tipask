@@ -29,21 +29,21 @@ class MessageController extends Controller
     {
         $loginUser = Auth()->user();
 
-        $databasePrefix = Config::get('database.connections.mysql.prefix');
-
-
         /*子查询进行分组*/
-        $subQuery = Message::select(DB::raw("max(created_at) as max_created_at"),'from_user_id')->whereRaw('to_user_id = '.$loginUser->id.' AND to_deleted=0 ')->groupBy('from_user_id');
+        $subQuery = Message::where("to_user_id","=",$loginUser->id)->where("to_deleted","=",0)->orderBy("created_at","desc");
 
         /*联查子查询再进行排序*/
-        $messages = DB::table(DB::raw("({$subQuery->toSql()}) as ".$databasePrefix."sub"))
-            ->join('messages','messages.from_user_id','=','sub.from_user_id')
-            ->whereRaw($databasePrefix.'messages.created_at = '.$databasePrefix.'sub.max_created_at')
-            ->select('messages.*')->paginate(10);
+        $messages = DB::table(DB::raw("({$subQuery->toSql()}) as t "))
+            ->mergeBindings($subQuery->getQuery())
+            ->select("*")
+            ->groupBy("from_user_id")
+            ->orderBy("created_at","desc")
+            ->paginate(10);
 
         $messages->map(function($message) {
             $message->fromUser = User::find($message->from_user_id);
         });
+
         return view('theme::message.index')->with('messages',$messages);
     }
 
