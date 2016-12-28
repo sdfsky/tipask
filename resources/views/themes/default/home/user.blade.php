@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')活跃用户 @if($users->currentPage()>1))- 第{{ $users->currentPage() }}页@endif - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')活跃用户 @if($users->currentPage()>1)- 第{{ $users->currentPage() }}页@endif - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <div class="row">
