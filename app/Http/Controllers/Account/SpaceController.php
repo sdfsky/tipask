@@ -78,7 +78,7 @@ class SpaceController extends Controller
     {
         $coins = Credit::where('user_id','=',$this->user->id)->where('coins','<>',0)->orderBy('created_at','DESC')->paginate(10);
         $coins->map(function($coin){
-            $coin->action = Config::get('tipask.user_actions.'.$coin->action);
+            $coin->actionText = Config::get('tipask.user_actions.'.$coin->action);
         });
         return view('theme::space.coins')->with('coins',$coins);
     }
@@ -89,7 +89,7 @@ class SpaceController extends Controller
     {
         $credits = Credit::where('user_id','=',$this->user->id)->where('credits','<>',0)->orderBy('created_at','DESC')->paginate(10);
         $credits->map(function($credit){
-            $credit->action = Config::get('tipask.user_actions.'.$credit->action);
+            $credit->actionText = Config::get('tipask.user_actions.'.$credit->action);
         });
         return view('theme::space.credits')->with('credits',$credits);
     }

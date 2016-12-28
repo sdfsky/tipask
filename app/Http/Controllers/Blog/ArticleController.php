@@ -107,7 +107,7 @@ class ArticleController extends Controller
             UserTag::multiIncrement($loginUser->id,$article->tags()->get(),'articles');
 
 
-            $this->credit($request->user()->id,'writeArticle',Setting()->get('coins_write_article'),Setting()->get('credits_write_article'),$article->id,$article->title);
+            $this->credit($request->user()->id,'create_article',Setting()->get('coins_write_article'),Setting()->get('credits_write_article'),$article->id,$article->title);
 
             if($article->status === 1 ){
                 $message = '文章发布成功! '.get_credit_message(Setting()->get('credits_write_article'),Setting()->get('coins_write_article'));

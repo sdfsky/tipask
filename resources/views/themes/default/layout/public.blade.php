@@ -220,7 +220,7 @@
 <script type="text/javascript">
     var is_login = Boolean("{{ Auth()->check() }}");
 </script>
-<script src="{{ asset('js/global.js') }}"></script>
+<script src="{{ asset('js/global.js') }}?v={{ config('tipask.release') }}"></script>
 @yield('script')
 
 {!! Setting()->get('website_footer') !!}

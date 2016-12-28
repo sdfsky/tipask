@@ -12,13 +12,11 @@
                         <span class="badge">{{ integer_string($credit->credits) }}</span>
                     </div>
                     <p>
-                        <span class="text-muted">{{ $credit->action }} · {{ timestamp_format($credit->created_at) }}</span>
-                        @if($credit->source_id > 0)
-                            @if($credit->action === 'writeArticle')
-                                <a target="_blank" class="ml-10" href="{{ route('ask.question.detail',['question_id'=>$credit->source_id]) }}">{{ $credit->source_subject }}</a>
-                            @else
-                                <a target="_blank" class="ml-10" href="{{ route('ask.question.detail',['question_id'=>$credit->source_id]) }}">{{ $credit->source_subject }}</a>
-                            @endif
+                        <span class="text-muted">{{ $credit->actionText }} · {{ timestamp_format($credit->created_at) }}</span>
+                        @if(in_array($credit->action,['ask','answer','answer_adopted']))
+                            <a href="{{ route('ask.question.detail',['id'=>$credit->source_id]) }}">{{ $credit->subject }}</a>
+                        @elseif(in_array($credit->action,['create_article']))
+                            <a href="{{ route('blog.article.detail',['id'=>$credit->source_id]) }}">{{ $credit->subject }}</a>
                         @endif
                     </p>
                 </li>

@@ -57,7 +57,7 @@ class AjaxController extends Controller
 
     public function unreadMessages()
     {
-        $total = Message::where('to_user_id','=',Auth()->user()->id)->where('is_read','=',0)->count();
+        $total = Message::where('to_user_id','=',Auth()->user()->id)->where('is_read','=',0)->where("to_deleted","<>",1)->where("from_deleted","<>",1)->count();
         $response = '<span class="fa fa-envelope-o fa-lg"></span>';
         if( $total > 0 ){
             if($total > 99){
@@ -73,11 +73,11 @@ class AjaxController extends Controller
     public function loadTags(Request $request)
     {
         $word = $request->input('word');
+        $tags = [];
         if( strlen($word) > 10 ){
-            return response()->json($tags->toArray());
+            return response()->json($tags);
         }
         $type = $request->input('type','all');
-        $tags = [];
         if(!$word){
             $tags = Taggable::hottest($type,10);
         }
