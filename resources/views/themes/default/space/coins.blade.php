@@ -14,9 +14,9 @@
                     <p>
                         <span class="text-muted">{{ $coin->actionText }} · {{ timestamp_format($coin->created_at) }}</span>
                         @if(in_array($coin->action,['ask','answer','answer_adopted']))
-                            <a href="{{ route('ask.question.detail',['id'=>$coin->source_id]) }}">{{ $coin->subject }}</a>
+                            <a class="ml-5" target="_blank" href="{{ route('ask.question.detail',['id'=>$coin->source_id]) }}">{{ $coin->source_subject }}</a>
                         @elseif(in_array($coin->action,['create_article']))
-                            <a href="{{ route('blog.article.detail',['id'=>$coin->source_id]) }}">{{ $coin->subject }}</a>
+                            <a class="ml-5" target="_blank" href="{{ route('blog.article.detail',['id'=>$coin->source_id]) }}">{{ $coin->source_subject }}</a>
                         @endif
                     </p>
                 </li>
