@@ -181,15 +181,10 @@ class ArticleController extends Controller
 
         /*编辑问题时效控制*/
         if( !$request->user()->is('admin') && Setting()->get('edit_article_timeout') ){
-            $period = time() - $article->created_at;
-
-            if( $period > Setting()->get('edit_article_timeout') ){
+            if( $article->created_at->diffInMinutes() > Setting()->get('edit_article_timeout') ){
                 return $this->showErrorMsg(route('website.index'),'你已超过文章可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
             }
-
         }
-
-
         return view("theme::article.edit")->with(compact('article'));
 
     }

@@ -132,9 +132,7 @@ class AnswerController extends Controller
 
         /*编辑回答时效控制*/
         if( !$request->user()->is('admin') && Setting()->get('edit_answer_timeout') ){
-            $period = time() - $answer->created_at;
-
-            if( $period > Setting()->get('edit_answer_timeout') ){
+            if( $answer->created_at->diffInMinutes() > Setting()->get('edit_answer_timeout') ){
                 return $this->showErrorMsg(route('ask.question.detail',['id'=>$answer->question_id]),'你已超过回答可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
             }
 

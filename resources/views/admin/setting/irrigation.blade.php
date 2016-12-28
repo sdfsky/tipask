@@ -94,17 +94,17 @@
                             <hr />
                             <div class="form-group">
                                 <label for="website_url">提问后编辑内容时效</label>
-                                <span class="text-muted">(默认单位是秒，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
+                                <span class="text-muted">(默认单位是分钟，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
                                 <input type="text" class="form-control" name="edit_question_timeout" placeholder="0为不限制" value="{{ old('edit_question_timeout',Setting()->get('edit_question_timeout' , 0)) }}"  />
                             </div>
                             <div class="form-group">
                                 <label for="website_url">发起文章后编辑内容时效</label>
-                                <span class="text-muted">(默认单位是秒，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
+                                <span class="text-muted">(默认单位是分钟，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
                                 <input type="text" class="form-control" name="edit_article_timeout" placeholder="0为不限制" value="{{ old('edit_article_timeout',Setting()->get('edit_article_timeout' , 0)) }}"  />
                             </div>
                             <div class="form-group">
                                 <label for="website_url">撰写回答后编辑内容时效</label>
-                                <span class="text-muted">(默认单位是秒，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
+                                <span class="text-muted">(默认单位是分钟，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
                                 <input type="text" class="form-control" name="edit_answer_timeout" placeholder="0为不限制" value="{{ old('edit_answer_timeout',Setting()->get('edit_answer_timeout' , 0)) }}"  />
                             </div>
 

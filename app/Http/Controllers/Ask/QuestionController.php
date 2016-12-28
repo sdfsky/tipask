@@ -36,6 +36,8 @@ class QuestionController extends Controller
     public function detail($id,Request $request)
     {
 
+
+
         $question = Question::find($id);
 
         if(empty($question)){
@@ -183,9 +185,7 @@ class QuestionController extends Controller
 
         /*编辑问题时效控制*/
         if( !$request->user()->is('admin') && Setting()->get('edit_question_timeout') ){
-            $period = time() - $question->created_at;
-
-            if( $period > Setting()->get('edit_question_timeout') ){
+            if( $question->created_at->diffInMinutes() > Setting()->get('edit_question_timeout') ){
                 return $this->showErrorMsg(route('website.index'),'你已超过问题可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
             }
 
