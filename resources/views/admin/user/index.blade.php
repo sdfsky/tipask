@@ -76,7 +76,7 @@
                                 <td>{{ Area()->getName($user->province) }} @if($user->city>0 &&  Area()->getName($user->province)!=Area()->getName($user->city)) - {{ Area()->getName($user->city) }} @endif</td>
                                 <td>{{ $user->created_at }}</td>
                                 <td>{{ $user->updated_at }}</td>
-                                <td><span class="label @if($user->status===0) label-danger @elseif($user->status===1) label-success @endif">{{ trans_common_status($user->status) }}</span> </td>
+                                <td><span class="label @if($user->status===0) label-danger @elseif($user->status===-1) label-default @elseif($user->status===1) label-success @endif">{{ trans_common_status($user->status) }}</span> </td>
                                 <td>
                                     <div class="btn-group-xs" >
                                       <a class="btn btn-default" href="{{ route('admin.user.edit',['id'=>$user->id]) }}" data-toggle="tooltip" title="编辑用户信息"><i class="fa fa-edit"></i></a>

@@ -16,8 +16,6 @@ class AdminAuthenticate
     public function handle($request, Closure $next)
     {
 
-      //  echo $request->route()->getName();
-
         if(!$request->user()->is('admin')){
             abort(403);
         }

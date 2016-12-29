@@ -179,15 +179,14 @@ Route::Group(['namespace'=>'Ask'],function(){
     /*需要登录的模块*/
     Route::Group(['middleware'=>'auth'],function(){
 
-
         /*问题创建*/
         Route::get('question/create',['as'=>'ask.question.create','uses'=>'QuestionController@create']);
-        Route::post('question/store',['middleware' =>'auth','as'=>'ask.question.store','uses'=>'QuestionController@store']);
+        Route::post('question/store',['middleware' =>'ban.user','as'=>'ask.question.store','uses'=>'QuestionController@store']);
 
 
         /*问题修改*/
         Route::get('question/edit/{id}',['as'=>'ask.question.edit','uses'=>'QuestionController@edit'])->where(['id'=>'[0-9]+']);
-        Route::post('question/update',['as'=>'ask.question.update','uses'=>'QuestionController@update']);
+        Route::post('question/update',['middleware' =>'ban.user','as'=>'ask.question.update','uses'=>'QuestionController@update']);
 
         /*追加悬赏*/
         Route::post('question/{id}/appendReward',['as'=>'ask.question.appendReward','uses'=>'QuestionController@appendReward'])->where(['id'=>'[0-9]+']);
@@ -208,7 +207,7 @@ Route::Group(['namespace'=>'Ask'],function(){
         Route::post('answer/update/{id}',['as'=>'ask.answer.update','uses'=>'AnswerController@update'])->where(['id'=>'[0-9]+']);
 
         /*评论添加*/
-        Route::post('comment/store',['as'=>'ask.comment.store','uses'=>'CommentController@store']);
+        Route::post('comment/store',['middleware' =>'ban.user','as'=>'ask.comment.store','uses'=>'CommentController@store']);
 
 
     });
@@ -235,10 +234,9 @@ Route::Group(['namespace'=>'Blog'],function(){
 
         /*文章创建*/
         Route::get('article/create',['as'=>'blog.article.create','uses'=>'ArticleController@create']);
-        Route::post('article/store',['as'=>'blog.article.store','uses'=>'ArticleController@store']);
+        Route::post('article/store',['middleware' =>'ban.user','as'=>'blog.article.store','uses'=>'ArticleController@store']);
         Route::get('article/edit/{id}',['as'=>'blog.article.edit','uses'=>'ArticleController@edit'])->where(['id'=>'[0-9]+']);
-        Route::post('article/update',['as'=>'blog.article.update','uses'=>'ArticleController@update']);
-
+        Route::post('article/update',['middleware' =>'ban.user','as'=>'blog.article.update','uses'=>'ArticleController@update']);
     });
 
 });

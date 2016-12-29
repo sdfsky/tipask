@@ -30,6 +30,7 @@ class Kernel extends HttpKernel
         'auth.admin' => \App\Http\Middleware\AdminAuthenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'ban.user' => \App\Http\Middleware\BanUserCheck::class,
         'permission' => \Bican\Roles\Middleware\VerifyPermission::class,
         'installer' => \App\Http\Middleware\InstallerCheck::class
     ];
