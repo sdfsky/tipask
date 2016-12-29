@@ -29,7 +29,7 @@ class Comment extends Model
         static::deleting(function($comment){
 
             /*问题、回答、文章评论数 -1*/
-            $comment->source()->decrement('comments');
+            $comment->source()->where("comments",">",0)->decrement('comments');
 
         });
     }
