@@ -3,3 +3,4 @@ vendor/
 bootstrap/cache/
 storage/
 .env
+composer.lock
