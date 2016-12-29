@@ -46,7 +46,7 @@ class UserController extends AdminController
         }
 
         /*状态过滤*/
-        if( isset($filter['status']) && $filter['status'] > -1 ){
+        if( isset($filter['status']) && $filter['status'] > -2 ){
             $query->where('status','=',$filter['status']);
         }
 
