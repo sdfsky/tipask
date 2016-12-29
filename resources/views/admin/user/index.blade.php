@@ -28,18 +28,21 @@
                                 <div class="row">
                                     <form name="searchForm" action="{{ route('admin.user.index') }}" method="GET">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <div class="col-xs-2">
+                                        <div class="col-xs-2 hidden-xs">
+                                            <input type="text" class="form-control" name="user_id" placeholder="UID" value="{{ $filter['user_id'] or '' }}"/>
+                                        </div>
+                                        <div class="col-xs-3 hidden-xs">
                                             <input type="text" class="form-control" name="word" placeholder="用户名|邮箱" value="{{ $filter['word'] or '' }}"/>
                                         </div>
                                         <div class="col-xs-2">
                                             <select class="form-control" name="status">
-                                                <option value="-1">不选择</option>
+                                                <option value="-9">不选择</option>
                                                 @foreach(trans_common_status('all') as $key => $status)
                                                     <option value="{{ $key }}" @if( isset($filter['status']) && $filter['status']==$key) selected @endif >{{ $status }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-xs-3">
+                                        <div class="col-xs-3 hidden-xs">
                                             <input type="text" name="date_range" id="date_range" class="form-control" placeholder="时间范围" value="{{ $filter['date_range'] or '' }}" />
                                         </div>
                                         <div class="col-xs-1">

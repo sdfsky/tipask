@@ -31,6 +31,10 @@ class UserController extends AdminController
 
         $query = User::query();
 
+        if(isset($filter['user_id']) && $filter['user_id'] > 0){
+            $query->where("id","=",$filter['user_id']);
+        }
+
         /*关键词过滤*/
         if( isset($filter['word']) && $filter['word'] ){
             $query->where(function($subQuery) use ($filter) {
