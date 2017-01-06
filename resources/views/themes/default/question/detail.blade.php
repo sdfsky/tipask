@@ -84,7 +84,7 @@
                     <div class="media user-info border-top">
                         <div class="media-left">
                             <a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" target="_blank">
-                                <img class="avatar-40"  src="{{ get_user_avatar($bestAnswer->user_id) }}" alt="{{ $bestAnswer->user->name }}"></a>
+                                <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($bestAnswer->user_id) }}" alt="{{ $bestAnswer->user->name }}"></a>
                             </a>
                         </div>
                         <div class="media-body">
@@ -118,7 +118,7 @@
                 <div class="media">
                     <div class="media-left">
                         <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="avatar-link user-card" target="_blank">
-                            <img class="avatar-40"  src="{{ get_user_avatar($answer->user_id) }}" alt="{{ $answer->user['name'] }}"></a>
+                            <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($answer->user_id) }}" alt="{{ $answer->user['name'] }}"></a>
                         </a>
                     </div>
                     <div class="media-body">
