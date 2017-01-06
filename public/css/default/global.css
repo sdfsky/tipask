@@ -50,6 +50,8 @@
 blockquote{font-size: 13px;}
 .jumbotron{margin-bottom: 10px;}
 
+pre{white-space: pre-wrap;word-wrap: break-word;}
+
 /*row-horizon*/
 .row-horizon{overflow-x:scroll;overflow-y:hidden;white-space:nowrap;-webkit-overflow-scrolling:touch}
 .row-horizon>[class*=col-lg],.row-horizon>[class*=col-md],.row-horizon>[class*=col-sm],.row-horizon>[class*=col-xs]{float:none;display:inline-block;white-space:normal;vertical-align:top}
