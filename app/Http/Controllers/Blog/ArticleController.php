@@ -135,7 +135,7 @@ class ArticleController extends Controller
      */
     public function show($id,Request $request)
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
 
         /*问题查看数+1*/
         $article->increment('views');
