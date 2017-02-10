@@ -50,8 +50,6 @@ class User extends Model implements AuthenticatableContract,
             }
         });
         static::deleted(function($user){
-            /*删除角色管理*/
-            $user->roles()->delete();
 
             /*删除用户扩展信息*/
             $user->userData()->delete();
@@ -86,6 +84,9 @@ class User extends Model implements AuthenticatableContract,
             $user->questionInvitations()->delete();
             /*删除评论*/
             $user->comments()->delete();
+
+            /*删除角色管理*/
+            $user->detachAllRoles();
 
             if(Setting()->get('xunsearch_open',0) == 1) {
                 App::offsetGet('search')->delete($user);
