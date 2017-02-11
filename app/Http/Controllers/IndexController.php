@@ -76,7 +76,7 @@ class IndexController extends Controller
 
         /*财富榜*/
 
-        $topCoinUsers = Cache::remember('top_coin_users',Setting()->get('website_cache_time',1),function() {
+        $topCoinUsers = Cache::remember('index_top_coin_users',Setting()->get('website_cache_time',1),function() {
             return  UserData::top('coins',8);
         });
 

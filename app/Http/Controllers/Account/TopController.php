@@ -18,8 +18,8 @@ class TopController extends Controller
      */
     public function coins()
     {
-        $users = Cache::remember('top_coin_users',10,function() {
-            return  UserData::top('coins',8);
+        $users = Cache::remember('top_coin_users',60,function() {
+            return  UserData::top('coins',50);
         });
         return view('theme::top.coins')->with('users',$users);
     }
@@ -31,8 +31,8 @@ class TopController extends Controller
      */
     public function answers()
     {
-        $users = Cache::remember('top_answer_users',10,function() {
-            return  UserData::top('answers',20);
+        $users = Cache::remember('top_answer_users',60,function() {
+            return  UserData::top('answers',50);
         });
 
         return view('theme::top.answers')->with('users',$users);
@@ -46,8 +46,8 @@ class TopController extends Controller
      */
     public function articles()
     {
-        $users = Cache::remember('top_article_users',10,function() {
-            return  UserData::top('articles',20);
+        $users = Cache::remember('top_article_users',60,function() {
+            return  UserData::top('articles',50);
         });
         return view('theme::top.articles')->with('users',$users);
     }

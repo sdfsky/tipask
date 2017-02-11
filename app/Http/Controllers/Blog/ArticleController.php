@@ -140,7 +140,7 @@ class ArticleController extends Controller
         /*问题查看数+1*/
         $article->increment('views');
 
-        $topUsers = Cache::remember('top_article_users',10,function() {
+        $topUsers = Cache::remember('article_top_article_users',10,function() {
             return  UserData::top('articles',8);
         });
 
