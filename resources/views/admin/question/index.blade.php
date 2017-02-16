@@ -59,38 +59,40 @@
                     <div class="box-body  no-padding">
                         <form name="itemForm" id="item_form" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle" /></th>
-                                    <th>ID</th>
-                                    <th>悬赏</th>
-                                    <th>分类</th>
-                                    <th>标题</th>
-                                    <th>提问人</th>
-                                    <th>回答/查看</th>
-                                    <th>时间</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($questions as $question)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" name="id[]" value="{{ $question->id }}"/></td>
-                                        <td>{{ $question->id }}</td>
-                                        <td><span class="text-gold"><i class="fa fa-database"></i> {{ $question->price }}</span></td>
-                                        <td>@if( $question->category ) {{ $question->category->name }} @else 无 @endif</td>
-                                        <td><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}" target="_blank">{{ $question->title }}</a></td>
-                                        <td>{{ $question->user->name }}<span class="text-muted">[UID:{{ $question->user_id }}]</span></td>
-                                        <td>{{ $question->answers }} / {{ $question->views }}</td>
-                                        <td>{{ timestamp_format($question->created_at) }}</td>
-                                        <td><span class="label @if($question->status===0) label-danger @elseif($question->status===1) label-warning @else label-success @endif">{{ trans_question_status($question->status) }}</span> </td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" target="_blank" href="{{ route('ask.question.edit',['id'=>$question->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
+                                        <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                        <th>ID</th>
+                                        <th>悬赏</th>
+                                        <th>分类</th>
+                                        <th>标题</th>
+                                        <th>提问人</th>
+                                        <th>回答/查看</th>
+                                        <th>时间</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach($questions as $question)
+                                        <tr>
+                                            <td><input type="checkbox" name="id[]" value="{{ $question->id }}"/></td>
+                                            <td>{{ $question->id }}</td>
+                                            <td><span class="text-gold"><i class="fa fa-database"></i> {{ $question->price }}</span></td>
+                                            <td>@if( $question->category ) {{ $question->category->name }} @else 无 @endif</td>
+                                            <td><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}" target="_blank">{{ $question->title }}</a></td>
+                                            <td>{{ $question->user->name }}<span class="text-muted">[UID:{{ $question->user_id }}]</span></td>
+                                            <td>{{ $question->answers }} / {{ $question->views }}</td>
+                                            <td>{{ timestamp_format($question->created_at) }}</td>
+                                            <td><span class="label @if($question->status===0) label-danger @elseif($question->status===1) label-warning @else label-success @endif">{{ trans_question_status($question->status) }}</span> </td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" target="_blank" href="{{ route('ask.question.edit',['id'=>$question->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </form>
                     </div>
                     <div class="box-footer clearfix">

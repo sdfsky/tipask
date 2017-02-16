@@ -51,38 +51,40 @@
                     <div class="box-body  no-padding">
                         <form name="itemForm" id="item_form" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle" /></th>
-                                    <th>UID</th>
-                                    <th>所属分类</th>
-                                    <th>真实姓名</th>
-                                    <th>身份证号码</th>
-                                    <th>认证领域</th>
-                                    <th>提交时间</th>
-                                    <th>更新时间</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($authentications as $authentication)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" name="id[]" value="{{ $authentication->user_id }}"/></td>
-                                        <td>{{ $authentication->user_id }}</td>
-                                        <td>@if($authentication->category) {{ $authentication->category->name }} @else 无 @endif</td>
-                                        <td>{{ $authentication->real_name }}</td>
-                                        <td>{{ $authentication->id_card }}</td>
-                                        <td>{{ $authentication->skill }}</td>
-                                        <td>{{ timestamp_format($authentication->created_at) }}</td>
-                                        <td>{{ timestamp_format($authentication->updated_at) }}</td>
-                                        <td><span class="label @if($authentication->status===0) label-warning  @elseif($authentication->status===1) label-success @else label-default  @endif">{{ trans_authentication_status($authentication->status) }}</span> </td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.authentication.edit',['user_id'=>$authentication->user_id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
+                                        <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                        <th>UID</th>
+                                        <th>所属分类</th>
+                                        <th>真实姓名</th>
+                                        <th>身份证号码</th>
+                                        <th>认证领域</th>
+                                        <th>提交时间</th>
+                                        <th>更新时间</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach($authentications as $authentication)
+                                        <tr>
+                                            <td><input type="checkbox" name="id[]" value="{{ $authentication->user_id }}"/></td>
+                                            <td>{{ $authentication->user_id }}</td>
+                                            <td>@if($authentication->category) {{ $authentication->category->name }} @else 无 @endif</td>
+                                            <td>{{ $authentication->real_name }}</td>
+                                            <td>{{ $authentication->id_card }}</td>
+                                            <td>{{ $authentication->skill }}</td>
+                                            <td>{{ timestamp_format($authentication->created_at) }}</td>
+                                            <td>{{ timestamp_format($authentication->updated_at) }}</td>
+                                            <td><span class="label @if($authentication->status===0) label-warning  @elseif($authentication->status===1) label-success @else label-default  @endif">{{ trans_authentication_status($authentication->status) }}</span> </td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" href="{{ route('admin.authentication.edit',['user_id'=>$authentication->user_id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </form>
                     </div>
                     <div class="box-footer clearfix">
