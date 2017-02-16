@@ -47,20 +47,21 @@ class IndexController extends AdminController
             $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::today()->timestamp - (6-$i) * 24 * 3600 );
             $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
         }
-        $nowTime = Carbon::now()->timestamp;
 
-        $users = User::where('created_at','>',$labelTimes[0]->timestamp)->where('created_at','<',$nowTime)->get();
+        $nowTime = Carbon::now();
+
+        $users = User::where('created_at','>',$labelTimes[0])->where('created_at','<',$nowTime)->get();
 
         $registerRange = $verifyRange = $authRange = [0,0,0,0,0,0,0];
 
         for( $i=0 ; $i < 7 ; $i++ ){
-            $startTime = $labelTimes[$i]->timestamp;
+            $startTime = $labelTimes[$i];
             $endTime = $nowTime;
             if(isset($labelTimes[$i+1])){
-                $endTime = $labelTimes[$i+1]->timestamp;
+                $endTime = $labelTimes[$i+1];
             }
             foreach($users as $user){
-                if( $user->created_at->timestamp > $startTime && $user->created_at->timestamp < $endTime ){
+                if( $user->created_at > $startTime && $user->created_at < $endTime ){
                     $registerRange[$i]++;
                     if( $user->status > 0 ){
                         $verifyRange[$i]++;
