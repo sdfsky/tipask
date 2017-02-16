@@ -48,16 +48,19 @@ class IndexController extends AdminController
             $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
         }
 
-        $users = User::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
+        $users = User::where('created_at','>',$labelTimes[0]->timestamp)->where('created_at','<',$labelTimes[6]->timestamp)->get();
 
         $registerRange = $verifyRange = $authRange = [0,0,0,0,0,0,0];
 
         for( $i=0 ; $i < 7 ; $i++ ){
+            $startTime = $labelTimes[$i]->timestamp;
+            $endTime = Carbon::now();
+            if(isset($labelTimes[$i+1])){
+                $endTime = $labelTimes[$i+1]->timestamp;
+            }
             foreach($users as $user){
-                if( $i === 6 &&  $user->created_at->timestamp > $labelTimes[$i]->timestamp ){
-
+                if( $user->created_at->timestamp > $startTime && $user->created_at->timestamp < $endTime ){
                     $registerRange[$i]++;
-
                     if( $user->status > 0 ){
                         $verifyRange[$i]++;
                     }
@@ -65,19 +68,7 @@ class IndexController extends AdminController
                     if($user->userData && $user->userData->authentication_status === 1){
                         $authRange[$i]++;
                     }
-                }else{
-                    if( $user->created_at->timestamp > $labelTimes[$i]->timestamp && $user->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
-                        $registerRange[$i]++;
-                        if( $user->status > 0 ){
-                            $verifyRange[$i]++;
-                        }
-
-                        if($user->userData && $user->userData->authentication_status === 1){
-                            $authRange[$i]++;
-                        }
-                    }
                 }
-
             }
 
         }
