@@ -59,34 +59,36 @@
                     <div class="box-body  no-padding">
                         <form name="itemForm" id="item_form" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle" /></th>
-                                    <th>标题</th>
-                                    <th>分类</th>
-                                    <th>作者</th>
-                                    <th>收藏/查看</th>
-                                    <th>时间</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($articles as $article)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" name="id[]" value="{{ $article->id }}"/></td>
-                                        <td><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}" target="_blank">{{ $article->title }}</a></td>
-                                        <td>@if($article->category) {{ $article->category->name }} @else 无 @endif</td>
-                                        <td>{{ $article->user->name }}<span class="text-muted">[UID:{{ $article->user_id }}]</span></td>
-                                        <td>{{ $article->collections }} / {{ $article->views }}</td>
-                                        <td>{{ timestamp_format($article->created_at) }}</td>
-                                        <td><span class="label @if($article->status===0) label-danger  @else label-success @endif">{{ trans_common_status($article->status) }}</span> </td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" target="_blank" href="{{ route('blog.article.edit',['id'=>$article->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
+                                        <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                        <th>标题</th>
+                                        <th>分类</th>
+                                        <th>作者</th>
+                                        <th>收藏/查看</th>
+                                        <th>时间</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach($articles as $article)
+                                        <tr>
+                                            <td><input type="checkbox" name="id[]" value="{{ $article->id }}"/></td>
+                                            <td><a href="{{ route('blog.article.detail',['id'=>$article->id]) }}" target="_blank">{{ $article->title }}</a></td>
+                                            <td>@if($article->category) {{ $article->category->name }} @else 无 @endif</td>
+                                            <td>{{ $article->user->name }}<span class="text-muted">[UID:{{ $article->user_id }}]</span></td>
+                                            <td>{{ $article->collections }} / {{ $article->views }}</td>
+                                            <td>{{ timestamp_format($article->created_at) }}</td>
+                                            <td><span class="label @if($article->status===0) label-danger  @else label-success @endif">{{ trans_common_status($article->status) }}</span> </td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" target="_blank" href="{{ route('blog.article.edit',['id'=>$article->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </form>
                     </div>
                     <div class="box-footer clearfix">

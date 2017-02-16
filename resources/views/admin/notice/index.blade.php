@@ -24,30 +24,32 @@
                             </div>
                         </div>
                         <div class="box-body  no-padding">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle"/></th>
-                                    <th>公告标题</th>
-                                    <th>URL</th>
-                                    <th>状态</th>
-                                    <th>更新时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($notices as $notice)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" value="{{ $notice->id }}" name="ids[]"/></td>
-                                        <td>{{ $notice->subject }}</td>
-                                        <td>{{ $notice->url }}</td>
-                                        <td>{{ trans_common_status($notice->status) }}</td>
-                                        <td>{{ $notice->updated_at }}</td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.notice.edit',['id'=>$notice->id]) }}" data-toggle="tooltip" title="编辑公告信息"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
+                                        <th><input type="checkbox" class="checkbox-toggle"/></th>
+                                        <th>公告标题</th>
+                                        <th>URL</th>
+                                        <th>状态</th>
+                                        <th>更新时间</th>
+                                        <th>操作</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach($notices as $notice)
+                                        <tr>
+                                            <td><input type="checkbox" value="{{ $notice->id }}" name="ids[]"/></td>
+                                            <td>{{ $notice->subject }}</td>
+                                            <td>{{ $notice->url }}</td>
+                                            <td>{{ trans_common_status($notice->status) }}</td>
+                                            <td>{{ $notice->updated_at }}</td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" href="{{ route('admin.notice.edit',['id'=>$notice->id]) }}" data-toggle="tooltip" title="编辑公告信息"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </div>
                         <div class="box-footer clearfix">
                             {!! str_replace('/?', '?', $notices->render()) !!}

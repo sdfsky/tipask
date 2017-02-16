@@ -24,32 +24,34 @@
                             </div>
                         </div>
                         <div class="box-body  no-padding">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle"/></th>
-                                    <th>排序</th>
-                                    <th>推荐标题</th>
-                                    <th>URL</th>
-                                    <th>状态</th>
-                                    <th>更新时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($recommendations as $recommendation)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" value="{{ $recommendation->id }}" name="ids[]"/></td>
-                                        <td>{{ $recommendation->sort }}</td>
-                                        <td>{{ $recommendation->subject }}</td>
-                                        <td>{{ $recommendation->url }}</td>
-                                        <td>{{ trans_common_status($recommendation->status) }}</td>
-                                        <td>{{ $recommendation->updated_at }}</td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.recommendation.edit',['id'=>$recommendation->id]) }}" data-toggle="tooltip" title="编辑推荐信息"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
+                                        <th><input type="checkbox" class="checkbox-toggle"/></th>
+                                        <th>排序</th>
+                                        <th>推荐标题</th>
+                                        <th>URL</th>
+                                        <th>状态</th>
+                                        <th>更新时间</th>
+                                        <th>操作</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach($recommendations as $recommendation)
+                                        <tr>
+                                            <td><input type="checkbox" value="{{ $recommendation->id }}" name="ids[]"/></td>
+                                            <td>{{ $recommendation->sort }}</td>
+                                            <td>{{ $recommendation->subject }}</td>
+                                            <td>{{ $recommendation->url }}</td>
+                                            <td>{{ trans_common_status($recommendation->status) }}</td>
+                                            <td>{{ $recommendation->updated_at }}</td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" href="{{ route('admin.recommendation.edit',['id'=>$recommendation->id]) }}" data-toggle="tooltip" title="编辑推荐信息"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </div>
                         <div class="box-footer clearfix">
                             {!! str_replace('/?', '?', $recommendations->render()) !!}

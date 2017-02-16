@@ -51,39 +51,41 @@
                     <div class="box-body  no-padding">
                         <form name="itemForm" id="item_form" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle" /></th>
-                                    <th>内容</th>
-                                    <th>评论者</th>
-                                    <th>时间</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($comments as $comment)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" name="id[]" value="{{ $comment->id }}"/></td>
-                                        <td width="60%" style="height:100px;">
-                                            <div style= "OVERFLOW-Y:auto;height:60px">{!! $comment->content !!}</div>
-                                            @if($comment->source()->first())
-                                            来源于@if(str_contains($comment->source_type,'Question'))问题[<a href="{{ route('ask.question.detail',['id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->title }}</a>]
+                                        <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                        <th>内容</th>
+                                        <th>评论者</th>
+                                        <th>时间</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    @foreach($comments as $comment)
+                                        <tr>
+                                            <td><input type="checkbox" name="id[]" value="{{ $comment->id }}"/></td>
+                                            <td width="60%" style="height:100px;">
+                                                <div style= "OVERFLOW-Y:auto;height:60px">{!! $comment->content !!}</div>
+                                                @if($comment->source()->first())
+                                                    来源于@if(str_contains($comment->source_type,'Question'))问题[<a href="{{ route('ask.question.detail',['id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->title }}</a>]
                                                     @elseif(str_contains($comment->source_type,'Answer'))回答[<a href="{{ route('ask.answer.detail',['question_id'=>$comment->source()->first()->question_id,'id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->question_title }}</a>]
                                                     @elseif(str_contains($comment->source_type,'Article'))文章[<a href="{{ route('blog.article.detail',['id'=>$comment->source_id]) }}" target="_blank" >{{ $comment->source()->first()->title }}</a>]
                                                     @endif
-                                            @endif
+                                                @endif
 
-                                        </td>
-                                        <td>{{ $comment->user->name }} <span class="text-muted">[UID:{{ $comment->user_id }}]</span></td>
-                                        <td>{{ timestamp_format($comment->created_at) }}</td>
-                                        <td><span class="label @if($comment->status===0) label-danger @elseif($comment->status===1)label-success @endif">{{ trans_common_status($comment->status) }}</span> </td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.comment.edit',['id'=>$comment->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
+                                            </td>
+                                            <td>{{ $comment->user->name }} <span class="text-muted">[UID:{{ $comment->user_id }}]</span></td>
+                                            <td>{{ timestamp_format($comment->created_at) }}</td>
+                                            <td><span class="label @if($comment->status===0) label-danger @elseif($comment->status===1)label-success @endif">{{ trans_common_status($comment->status) }}</span> </td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" href="{{ route('admin.comment.edit',['id'=>$comment->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </form>
                     </div>
                     <div class="box-footer clearfix">

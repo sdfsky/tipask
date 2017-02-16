@@ -51,35 +51,37 @@
                     <div class="box-body  no-padding">
                         <form name="itemForm" id="item_form" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle" /></th>
-                                    <th>内容</th>
-                                    <th>回答者</th>
-                                    <th>赞同</th>
-                                    <th>时间</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($answers as $answer)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" name="id[]" value="{{ $answer->id }}"/></td>
-                                        <td width="60%" style="height:100px;">
-                                            <b><a href="{{ route('ask.answer.detail',['question_id'=>$answer->question_id,'id'=>$answer->id]) }}" target="_blank" >{{ $answer->question->title }}</a></b> <span class="text-muted">[QID:{{ $answer->question_id }}]</span>
-                                            <div style= "OVERFLOW-Y:auto;height:100px">{!! $answer->content !!}</div>
-                                        </td>
-                                        <td>{{ $answer->user->name }} <span class="text-muted">[UID:{{ $answer->user_id }}]</span></td>
-                                        <td>{{ $answer->supports }}</td>
-                                        <td>{{ timestamp_format($answer->created_at) }}</td>
-                                        <td><span class="label @if($answer->status===0) label-danger @elseif($answer->status===1) label-warning @else label-success @endif">{{ trans_common_status($answer->status) }}</span> </td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" target="_blank" href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
+                                        <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                        <th>内容</th>
+                                        <th>回答者</th>
+                                        <th>赞同</th>
+                                        <th>时间</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach($answers as $answer)
+                                        <tr>
+                                            <td><input type="checkbox" name="id[]" value="{{ $answer->id }}"/></td>
+                                            <td width="60%" style="height:100px;">
+                                                <b><a href="{{ route('ask.answer.detail',['question_id'=>$answer->question_id,'id'=>$answer->id]) }}" target="_blank" >{{ $answer->question->title }}</a></b> <span class="text-muted">[QID:{{ $answer->question_id }}]</span>
+                                                <div style= "OVERFLOW-Y:auto;height:100px">{!! $answer->content !!}</div>
+                                            </td>
+                                            <td>{{ $answer->user->name }} <span class="text-muted">[UID:{{ $answer->user_id }}]</span></td>
+                                            <td>{{ $answer->supports }}</td>
+                                            <td>{{ timestamp_format($answer->created_at) }}</td>
+                                            <td><span class="label @if($answer->status===0) label-danger @elseif($answer->status===1) label-warning @else label-success @endif">{{ trans_common_status($answer->status) }}</span> </td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" target="_blank" href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </form>
                     </div>
                     <div class="box-footer clearfix">

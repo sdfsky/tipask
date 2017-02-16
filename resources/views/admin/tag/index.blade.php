@@ -47,39 +47,41 @@
                     <div class="box-body  no-padding">
                         <form name="itemForm" id="item_form" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th><input type="checkbox" class="checkbox-toggle" /></th>
-                                    <th>ID</th>
-                                    <th>图标</th>
-                                    <th>名称</th>
-                                    <th>分类</th>
-                                    <th>简介</th>
-                                    <th>粉丝数</th>
-                                    <th>创建时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                @foreach($tags as $tag)
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td><input type="checkbox" name="id[]" value="{{ $tag->id }}"/></td>
-                                        <td>{{ $tag->id }}</td>
-                                        <td> @if($tag->logo)
-                                                    <img src="{{ route('website.image.show',['image_name'=>$tag->logo]) }}"  style="width: 27px;"/>
-                                            @endif
-                                        </td>
-                                        <td><a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'questions']) }}" target="_blank">{{ $tag->name }}</a></td>
-                                        <td>@if($tag->category){{ $tag->category->name }} @else 无 @endif</td>
-                                        <td width="50%">{{ $tag->summary }}</td>
-                                        <td>{{ $tag->followers }}</td>
-                                        <td>{{ timestamp_format($tag->created_at) }}</td>
-                                        <td>
-                                            <div class="btn-group-xs" >
-                                                <a class="btn btn-default" href="{{ route('admin.tag.edit',['id'=>$tag->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
-                                            </div>
-                                        </td>
+                                        <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                        <th>ID</th>
+                                        <th>图标</th>
+                                        <th>名称</th>
+                                        <th>分类</th>
+                                        <th>简介</th>
+                                        <th>粉丝数</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
                                     </tr>
-                                @endforeach
-                            </table>
+                                    @foreach($tags as $tag)
+                                        <tr>
+                                            <td><input type="checkbox" name="id[]" value="{{ $tag->id }}"/></td>
+                                            <td>{{ $tag->id }}</td>
+                                            <td> @if($tag->logo)
+                                                    <img src="{{ route('website.image.show',['image_name'=>$tag->logo]) }}"  style="width: 27px;"/>
+                                                @endif
+                                            </td>
+                                            <td><a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'questions']) }}" target="_blank">{{ $tag->name }}</a></td>
+                                            <td>@if($tag->category){{ $tag->category->name }} @else 无 @endif</td>
+                                            <td width="50%">{{ $tag->summary }}</td>
+                                            <td>{{ $tag->followers }}</td>
+                                            <td>{{ timestamp_format($tag->created_at) }}</td>
+                                            <td>
+                                                <div class="btn-group-xs" >
+                                                    <a class="btn btn-default" href="{{ route('admin.tag.edit',['id'=>$tag->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
                         </form>
                     </div>
                     <div class="box-footer clearfix">
