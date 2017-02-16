@@ -84,44 +84,42 @@ class IndexController extends AdminController
         /*生成Labels*/
         $labelTimes = $chartLabels = [];
         for( $i=0 ; $i < 7 ; $i++ ){
-            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::now()->timestamp - (7-$i) * 24 * 3600 );
+            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::now()->timestamp - (6-$i) * 24 * 3600 );
             $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
         }
 
-        $questions = Question::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
-        $answers = Answer::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
-        $articles = Article::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
+        $nowTime = Carbon::now();
+
+
+        $questions = Question::where('created_at','>',$labelTimes[0])->where('created_at','<',$nowTime)->get();
+        $answers = Answer::where('created_at','>',$labelTimes[0])->where('created_at','<',$nowTime)->get();
+        $articles = Article::where('created_at','>',$labelTimes[0])->where('created_at','<',$nowTime)->get();
 
         $questionRange = $answerRange = $articleRange = [0,0,0,0,0,0,0];
 
         for( $i=0 ; $i < 7 ; $i++ ){
+            $startTime = $labelTimes[$i];
+            $endTime = $nowTime;
+            if(isset($labelTimes[$i+1])){
+                $endTime = $labelTimes[$i+1];
+            }
+
             /*问题统计*/
             foreach($questions as $question){
-                if( $i === 6 &&  $question->created_at->timestamp > $labelTimes[$i]->timestamp ){
-                    $questionRange[$i]++;
-                    break;
-                }
-                if( $question->created_at->timestamp > $labelTimes[$i]->timestamp && $question->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                if( $question->created_at > $startTime && $question->created_at < $endTime ){
                     $questionRange[$i]++;
                 }
             }
+
             /*回答统计*/
             foreach($answers as $answer){
-                if( $i === 6 &&  $answer->created_at->timestamp > $labelTimes[$i]->timestamp ){
-                    $answerRange[$i]++;
-                    break;
-                }
-                if( $answer->created_at->timestamp > $labelTimes[$i]->timestamp && $answer->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                if( $answer->created_at > $startTime && $answer->created_at < $endTime ){
                     $answerRange[$i]++;
                 }
             }
             /*文章统计*/
             foreach($articles as $article){
-                if( $i === 6 &&  $article->created_at->timestamp > $labelTimes[$i]->timestamp ){
-                    $articleRange[$i]++;
-                    break;
-                }
-                if( $article->created_at->timestamp > $labelTimes[$i]->timestamp && $article->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                if( $article->created_at > $startTime && $article->created_at < $endTime ){
                     $articleRange[$i]++;
                 }
             }
