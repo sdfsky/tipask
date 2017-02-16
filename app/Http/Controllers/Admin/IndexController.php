@@ -44,10 +44,9 @@ class IndexController extends AdminController
         $labelTimes = $chartLabels = [];
 
         for( $i=0 ; $i < 7 ; $i++ ){
-            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::today()->timestamp - (7-$i) * 24 * 3600 );
+            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::today()->timestamp - (6-$i) * 24 * 3600 );
             $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
         }
-
 
         $users = User::where('created_at','>',$labelTimes[0])->where('created_at','<',$labelTimes[6])->get();
 
