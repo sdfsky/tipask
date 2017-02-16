@@ -53,7 +53,6 @@ class IndexController extends AdminController
         $registerRange = $verifyRange = $authRange = [0,0,0,0,0,0,0];
 
         for( $i=0 ; $i < 7 ; $i++ ){
-
             foreach($users as $user){
                 if( $i === 6 &&  $user->created_at->timestamp > $labelTimes[$i]->timestamp ){
 
@@ -66,18 +65,19 @@ class IndexController extends AdminController
                     if($user->userData && $user->userData->authentication_status === 1){
                         $authRange[$i]++;
                     }
-                    break;
-                }
-                if( $user->created_at->timestamp > $labelTimes[$i]->timestamp && $user->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
-                    $registerRange[$i]++;
-                    if( $user->status > 0 ){
-                        $verifyRange[$i]++;
-                    }
+                }else{
+                    if( $user->created_at->timestamp > $labelTimes[$i]->timestamp && $user->created_at->timestamp < $labelTimes[$i+1]->timestamp ){
+                        $registerRange[$i]++;
+                        if( $user->status > 0 ){
+                            $verifyRange[$i]++;
+                        }
 
-                    if($user->userData && $user->userData->authentication_status === 1){
-                        $authRange[$i]++;
+                        if($user->userData && $user->userData->authentication_status === 1){
+                            $authRange[$i]++;
+                        }
                     }
                 }
+
             }
 
         }
