@@ -84,7 +84,7 @@ class IndexController extends AdminController
         /*生成Labels*/
         $labelTimes = $chartLabels = [];
         for( $i=0 ; $i < 7 ; $i++ ){
-            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::now()->timestamp - (6-$i) * 24 * 3600 );
+            $labelTimes[$i] = Carbon::createFromTimestamp( Carbon::today()->timestamp - (6-$i) * 24 * 3600 );
             $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
         }
 
