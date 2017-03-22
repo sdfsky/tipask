@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 @if($tag->summary)
-                <p class="tag-header-summary">{{ $tag->summary }}...<a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'details']) }}">[ 百科 ]</a></p>
+                <p class="tag-header-summary">{{ $tag->summary }}...<a href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'details']) }}">[ 百科 ]</a></p>
                 @else
                 <p class="tag-header-summary">暂无介绍</p>
                 @endif

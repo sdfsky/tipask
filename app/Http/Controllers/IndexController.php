@@ -43,7 +43,7 @@ class IndexController extends Controller
 
         /*热门专家*/
         $hotExperts = Cache::remember('hot_experts',Setting()->get('website_cache_time',1),function(){
-            return  UserData::hotExperts(8);
+            return  Authentication::hottest(8);
         });
 
 

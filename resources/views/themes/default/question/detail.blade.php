@@ -583,7 +583,5 @@
             $("#questionInviteUsers").load('/question/'+questionId+'/invitations/'+type);
         }
 
-
-
     </script>
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Relations\MorphManyTagsTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -18,7 +19,7 @@ class User extends Model implements AuthenticatableContract,
     CanResetPasswordContract,
     HasRoleAndPermissionContract
 {
-    use Authenticatable, CanResetPassword,HasRoleAndPermission;
+    use Authenticatable, CanResetPassword,HasRoleAndPermission,MorphManyTagsTrait;
 
     /**
      * The database table used by the model.

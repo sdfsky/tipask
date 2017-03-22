@@ -60,22 +60,6 @@ class UserData extends Model
     }
 
 
-    /*推荐行家*/
-    public static function hotExperts($size)
-    {
-        return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
-            ->where('users.status','>',0)
-            ->where('user_data.authentication_status','=',1)
-            ->orderBy('user_data.answers','DESC')
-            ->orderBy('user_data.articles','DESC')
-            ->orderBy('users.updated_at','DESC')
-            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
-            ->take($size)->get();
-    }
-
-
-
-
 
     /*财富榜*/
 
