@@ -28,8 +28,6 @@ class ImageController extends Controller
         $image =   Image::make($avatarFile);
         $response = response()->make($image->encode('jpg'));
         $response->header('Content-Type', 'image/jpeg');
-        $response->header('Expires',  date(DATE_RFC822,strtotime(" 30 day")));
-        $response->header('Cache-Control', 'private, max-age=259200, pre-check=259200');
         return $response;
     }
 
