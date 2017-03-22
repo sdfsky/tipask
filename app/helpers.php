@@ -30,6 +30,31 @@ if (! function_exists('trans_goods_post_type')) {
 
 }
 
+if (! function_exists('trans_gender_name')) {
+
+    function trans_gender_name($post_type){
+        $map = [
+            0 => '保密',
+            1 => '男',
+            2 => '女',
+        ];
+
+        if($post_type==='all'){
+            return $map;
+        }
+
+
+        if(isset($map[$post_type])){
+            return $map[$post_type];
+        }
+
+        return '';
+
+    }
+
+}
+
+
 /*行家认证状态文字定义*/
 if (! function_exists('trans_authentication_status')) {
 
@@ -256,13 +281,13 @@ if( !function_exists('is_email') ){
 }
 
 /*手机号码判断*/
-if( !function_exists('is_email') ){
-    function is_email($email){
-        $reg = "/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/";
-        if( preg_match($reg,$email) ){
-            return true;
+if( !function_exists('is_mobile') ){
+    function is_mobile($mobile){
+        $reg = "/^1[34578]\d{9}$/";
+        if( !preg_match($reg,$mobile) ){
+            return false;
         }
-        return false;
+        return true;
     }
 }
 

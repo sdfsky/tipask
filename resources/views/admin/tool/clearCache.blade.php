@@ -18,7 +18,7 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name='cacheItem[]' value="data" checked="checked"/>
+                                            <input type="checkbox" name='cacheItems[]' value="data" checked="checked"/>
                                             更新数据缓存
                                         </label>
                                     </div>

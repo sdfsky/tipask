@@ -1,6 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else{{ $userInfo->name }}@endif关注的@if($source_type==='questions')问题@elseif($source_type==='users')用户@else标签@endif@endsection
+@section('seo_title') @if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else{{ $userInfo->name }} @endif 关注的@if($source_type==='questions')问题@elseif($source_type==='users')用户 @else 标签 @endif @endsection
 
 @section('space_content')
     <div class="stream-following">
@@ -16,7 +16,7 @@
                     <li>
                         <div class="row">
                             <div class="col-md-10">
-                                <a class="stream-following-title" href="{{ route('ask.question.detail',['id'=>$attention->source_id]) }}">{{ $attention['info']->title }}</a>
+                                <a target="_blank" class="stream-following-title" href="{{ route('ask.question.detail',['id'=>$attention->source_id]) }}">{{ $attention['info']->title }}</a>
                             </div>
                             <div class="col-md-2 text-right">
                                 <span class="stream-following-followed mr-10">{{ $attention['info']->followers }} 关注</span>
@@ -34,7 +34,7 @@
                             <div class="col-md-10">
                                 <img class="avatar-32" src="{{ get_user_avatar($attention->source_id) }}" />
                                 <div>
-                                    <a href="{{ route('auth.space.index',['user_id'=>$attention->source_id]) }}">{{ $attention['info']->name }}</a> @if($attention['info']->title) <span class="text-muted ml-5">- {{ $attention['info']->title  }}</span> @endif
+                                    <a target="_blank" href="{{ route('auth.space.index',['user_id'=>$attention->source_id]) }}">{{ $attention['info']->name }}</a> @if($attention['info']->title) <span class="text-muted ml-5">- {{ $attention['info']->title  }}</span> @endif
                                     <div class="stream-following-followed">{{ $attention['info']->userData->supports }}赞同 / {{ $attention['info']->userData->followers }}关注 / {{ $attention['info']->userData->answers }}回答</div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                     <li>
                         <div class="row">
                             <div class="col-md-10">
-                                <a class="tag " href="/t/java" title="java">{{  $attention['info']->name }}</a>
+                                <a class="tag" target="_blank" href="{{ route('ask.tag.index',['id'=>$attention->source_id,'source_type'=>'questions']) }}" title="{{ $attention['info']->name }}">{{  $attention['info']->name }}</a>
                                 <div class="stream-following-desc">{{ $attention['info']->summary }}</div>
                             </div>
                             <div class="col-md-2 text-right">

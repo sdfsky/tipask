@@ -58,9 +58,10 @@
                                         <th>UID</th>
                                         <th>所属分类</th>
                                         <th>真实姓名</th>
+                                        <th>城市</th>
+                                        <th>职称</th>
                                         <th>身份证号码</th>
                                         <th>认证领域</th>
-                                        <th>提交时间</th>
                                         <th>更新时间</th>
                                         <th>状态</th>
                                         <th>操作</th>
@@ -71,9 +72,10 @@
                                             <td>{{ $authentication->user_id }}</td>
                                             <td>@if($authentication->category) {{ $authentication->category->name }} @else 无 @endif</td>
                                             <td>{{ $authentication->real_name }}</td>
+                                            <td>{{ Area()->getName($authentication->province) }} @if($authentication->city>0 &&  Area()->getName($authentication->province)!=Area()->getName($authentication->city)) - {{ Area()->getName($authentication->city) }} @endif</td>
+                                            <td>{{ $authentication->title }}</td>
                                             <td>{{ $authentication->id_card }}</td>
                                             <td>{{ $authentication->skill }}</td>
-                                            <td>{{ timestamp_format($authentication->created_at) }}</td>
                                             <td>{{ timestamp_format($authentication->updated_at) }}</td>
                                             <td><span class="label @if($authentication->status===0) label-warning  @elseif($authentication->status===1) label-success @else label-default  @endif">{{ trans_authentication_status($authentication->status) }}</span> </td>
                                             <td>

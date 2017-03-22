@@ -35,7 +35,7 @@ class UserController extends Controller
             $request->flashOnly('email');
 
             $validateRules = [
-                'email' => 'required|email',
+                'email' => 'required|min:8|max:128',
                 'password' => 'required|min:6'
             ];
 

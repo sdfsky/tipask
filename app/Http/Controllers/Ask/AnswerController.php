@@ -140,10 +140,7 @@ class AnswerController extends Controller
     /*修改问题内容*/
     public function update($id,Request $request)
     {
-        $answer = Answer::find($id);
-        if(!$answer){
-            abort(404);
-        }
+        $answer = Answer::findOrFail($id);
 
         if($answer->user_id !== $request->user()->id && !$request->user()->is('admin')){
             abort(403);
@@ -169,13 +166,15 @@ class AnswerController extends Controller
 
     public function adopt($id,Request $request)
     {
-        $answer = Answer::find($id);
-        if(!$answer){
-            abort(404);
-        }
+        $answer = Answer::findOrFail($id);
 
         if(($request->user()->id !== $answer->question->user_id) && !$request->user()->is('admin')  ){
             abort(403);
+        }
+
+        /*防止重复采纳*/
+        if($answer->adopted_at>0){
+            return $this->error(route('ask.question.detail',['question_id'=>$answer->question_id]),'该回答已被采纳，不能重复采纳');
         }
 
 
@@ -209,7 +208,6 @@ class AnswerController extends Controller
             echo $e->getMessage();
             DB::rollBack();
         }
-        exit;
         return $this->error(route('ask.question.detail',['question_id'=>$answer->question_id]),"回答采纳失败，请稍后再试！");
 
 

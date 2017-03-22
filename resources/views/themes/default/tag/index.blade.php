@@ -30,9 +30,9 @@
             </section>
 
             <ul class="nav nav-tabs nav-tabs-zen">
-                <li @if($source_type==='questions') class="active" @endif ><a href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">问答</a></li>
-                <li @if($source_type==='articles') class="active" @endif ><a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'articles']) }}">文章</a></li>
-                <li @if($source_type==='details') class="active" @endif ><a href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'details']) }}">百科</a></li>
+                <li @if($source_type==='questions') class="active" @endif ><a href="{{ route('ask.tag.index',['id'=>$tag->id]) }}">问答</a></li>
+                <li @if($source_type==='articles') class="active" @endif ><a href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'articles']) }}">文章</a></li>
+                <li @if($source_type==='details') class="active" @endif ><a href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'details']) }}">百科</a></li>
             </ul>
             <div class="tab-content">
                 <div class="stream-list">
@@ -59,7 +59,7 @@
                                     @if($question->tags)
                                         <ul class="taglist-inline ib">
                                             @foreach($question->tags as $tag)
-                                                <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
+                                                <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['id'=>$tag->id]) }}">{{ $tag->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -115,7 +115,7 @@
                 <h2 class="h4 widget-box__title">相关标签</h2>
                 <ul class="taglist-inline multi">
                     @foreach($tag->relations() as $relationTag)
-                    <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$relationTag->name]) }}">{{ $relationTag->name }}</a></li>
+                        <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['id'=>$relationTag->id]) }}">{{ $relationTag->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

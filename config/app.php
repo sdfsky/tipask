@@ -150,7 +150,8 @@ return [
         Bican\Roles\RolesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Sdfsky\TipaskXunSearch\ServiceProvider::class,
-        SocialiteProviders\Manager\ServiceProvider::class
+        SocialiteProviders\Manager\ServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
     ],
 
     /*

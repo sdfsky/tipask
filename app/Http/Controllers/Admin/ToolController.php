@@ -19,19 +19,16 @@ class ToolController extends AdminController
     public function clearCache(Request $request)
     {
         if($request->isMethod('post')){
-            $cacheItems = $request->input('cacheItems');
-
-            if(isset($cacheItems['data'])){
+            $cacheItems = $request->input('cacheItems',[]);
+            if(in_array('data',$cacheItems)){
                 Artisan::call('cache:clear');
                 Artisan::call('config:clear');
             }
 
-            if(isset($cacheItems['view'])){
+            if(in_array('view',$cacheItems)){
                 Artisan::call('view:clear');
             }
-
             return $this->success(route('admin.tool.clearCache'),'缓存更新成功');
-
         }
         return view('admin.tool.clearCache');
 

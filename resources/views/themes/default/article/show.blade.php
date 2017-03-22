@@ -12,7 +12,7 @@
                 @if($article->tags)
                     <ul class="taglist-inline">
                         @foreach($article->tags as $tag)
-                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['name'=>$tag->name]) }}">{{ $tag->name }}</a></li>
+                            <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['id'=>$tag->id]) }}">{{ $tag->name }}</a></li>
                         @endforeach
                     </ul>
                 @endif

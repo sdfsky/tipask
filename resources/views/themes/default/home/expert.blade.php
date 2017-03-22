@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')专家 @if($experts->currentPage()>1))- 第{{ $experts->currentPage() }}页@endif - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')专家 @if($experts->currentPage()>1))- 第{{ $experts->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <div class="row">
@@ -52,22 +52,22 @@
                         <div class="stream-wrap media">
                             <div class="col-md-9">
                                 <div class="pull-left mr-10">
-                                    <a href="{{ route('auth.space.index',['id'=>$expert->id]) }}" target="_blank">
-                                        <img class="media-object avatar-64" src="{{ get_user_avatar($expert->id,'middle') }}" alt="{{ $expert->name }}">
+                                    <a href="{{ route('auth.space.index',['id'=>$expert->user_id]) }}" target="_blank">
+                                        <img class="media-object avatar-64" src="{{ get_user_avatar($expert->user_id,'middle') }}" alt="{{ $expert->real_name }}">
                                     </a>
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading">
-                                        <a href="{{ route('auth.space.index',['id'=>$expert->id]) }}">{{ $expert->name }}</a>
+                                        <a href="{{ route('auth.space.index',['id'=>$expert->user_id]) }}">{{ $expert->real_name }}</a>
                                         @if($expert->authentication_status==1)<span class="text-gold"><i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i></span> @endif
                                     </h4>
                                     <p class="text-muted">{{ $expert->title }}</p>
                                     <p class="text-muted">{{ $expert->answers }}回答 / {{ $expert->answers }}赞同 / {{ $expert->followers }}关注 </p>
                                     <ul class="taglist-inline ib">
                                         <li class="tagPopup text-muted">认证领域：</li>
-                                        @if($expert->skill)
-                                            @foreach( explode(",",old('tags',$expert->skill)) as $tag)
-                                                <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$tag,'source_type'=>'questions']) }}">{{ $tag }}</a></li>
+                                        @if($expert->hotTags())
+                                            @foreach( $expert->hotTags() as $tag)
+                                                <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'questions']) }}">{{ $tag->name }}</a></li>
                                             @endforeach
                                         @endif
                                     </ul>
@@ -78,9 +78,9 @@
                                 <ul class="action-list list-unstyled mt-20">
                                     <li>
                                         @if(Auth()->guest())
-                                            <a href="{{ route('ask.question.create') }}?to_user_id={{ $expert->id }}" class="btn btn-warning btn-sm">向TA求助</a>
-                                        @elseif(Auth()->user()->id != $expert->id)
-                                            <a href="{{ route('ask.question.create') }}?to_user_id={{ $expert->id }}" class="btn btn-warning btn-sm">向TA求助</a>
+                                            <a href="{{ route('ask.question.create') }}?to_user_id={{ $expert->user_id }}" class="btn btn-warning btn-sm">向TA求助</a>
+                                        @elseif(Auth()->user()->id != $expert->user_id)
+                                            <a href="{{ route('ask.question.create') }}?to_user_id={{ $expert->user_id }}" class="btn btn-warning btn-sm">向TA求助</a>
                                         @endif
 
                                     </li>

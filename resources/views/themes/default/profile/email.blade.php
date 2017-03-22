@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')修改邮箱 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')绑定邮箱 - {{ Setting()->get('website_name') }}@endsection
 
 @section('content')
     <div class="row">
@@ -9,6 +9,15 @@
 
         <div id="main" class="settings col-md-10 form-horizontal">
             <h2 class="h3 post-title">修改邮箱</h2>
+            @if(Auth()->user()->userData->mobile_status == 1)
+                <div class="alert alert-success" role="alert">
+                    您的邮箱已绑定，如需修改，请按照下方提示进行操作！
+                </div>
+            @else
+                <div class="alert alert-warning" role="alert">
+                    您还未进行邮箱绑定，绑定后可通过邮箱地址登录系统.
+                </div>
+            @endif
             <div class="row mt-30">
                 <div class="col-md-8">
                     <form name="baseForm" id="base_form" action="{{ route('auth.profile.email')}}" method="POST">

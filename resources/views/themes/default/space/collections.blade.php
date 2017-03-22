@@ -1,6 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else他@endif收藏的@if($source_type==='questions')问题@else文章@endif - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title') @if(Auth()->check() && Auth()->user()->id === $userInfo->id )我 @else 他 @endif 收藏的@if($source_type==='questions')问题 @else 文章 @endif - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <div class="stream-following">

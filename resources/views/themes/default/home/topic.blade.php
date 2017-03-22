@@ -19,7 +19,7 @@
             <section class="topic-list-item col-md-3">
                 <div class="widget-topic">
                     <h2 class="h4">
-                        <a href="{{ route('ask.tag.index',['name'=>$topic->name]) }}" @if($topic->logo) class="tag-logo" style="background-image: url({{ route('website.image.show',['image_name'=>$topic->logo]) }});" @endif>{{ $topic->name }}</a>
+                        <a href="{{ route('ask.tag.index',['id'=>$topic->id]) }}" @if($topic->logo) class="tag-logo" style="background-image: url({{ route('website.image.show',['image_name'=>$topic->logo]) }});" @endif>{{ $topic->name }}</a>
                     </h2>
                     <p>
                         @if($topic->description)

@@ -13,14 +13,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($name,$source_type='questions')
+    public function index($id,$source_type='questions')
     {
-        $tag = Tag::where('name','=',$name)->first();
-        if(!$tag){
-            abort(404);
-        }
-
-
+        $tag = Tag::findOrFail($id);
         $sources = [];
         if($source_type=='questions'){
             $sources = $tag->questions()->orderBy('created_at','desc')->paginate(15);

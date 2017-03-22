@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('seo_title') - {{ Setting()->get('website_name') }} </title>
     <meta name="keywords" content="@yield('seo_title',parse_seo_template('seo_index_keyword','default'))" />
     <meta name="description" content="@yield('seo_title',parse_seo_template('seo_index_description','default'))" />

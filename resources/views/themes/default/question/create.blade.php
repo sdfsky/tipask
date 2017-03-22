@@ -1,6 +1,6 @@
 @extends('theme::layout.public')
 
-@section('seo_title')发起提问 - {{ Setting()->get('website_name') }}>@endsection
+@section('seo_title')发起提问 - {{ Setting()->get('website_name') }} @endsection
 
 @section('css')
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">

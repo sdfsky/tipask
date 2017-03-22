@@ -28,6 +28,11 @@ class Doing extends Model
           }
       }
 
+        /*追加用户标签*/
+      foreach( $user->tags()->get() as $tag ){
+          $tags[] = $tag->id;
+      }
+
       if($tags){
             $taggables = DB::table("taggables")->whereIn("tag_id",$tags)->get();
             foreach($taggables as $tagable){

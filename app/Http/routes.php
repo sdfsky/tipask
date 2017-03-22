@@ -33,6 +33,10 @@ Route::get('/experts/{categorySlug?}/{provinceId?}',['as'=>'website.experts','us
 /*积分商城*/
 Route::get('/shop',['as'=>'website.shop','uses'=>'IndexController@shop']);
 
+/*sitemap*/
+Route::get('/sitemap',['as'=>'website.sitemap','uses'=>'SiteMapController@index']);
+
+
 
 
 /*用户账号管理，包含用户登录注册等操作*/
@@ -214,7 +218,7 @@ Route::Group(['namespace'=>'Ask'],function(){
 
 
     /*标签首页*/
-    Route::get('topic/{name}/{source_type?}',['as'=>'ask.tag.index','uses'=>'TagController@index'])->where(['source_type'=>'(questions|articles|details)']);
+    Route::get('topic/{id}/{source_type?}',['as'=>'ask.tag.index','uses'=>'TagController@index'])->where(['id'=>'[0-9]+','source_type'=>'(questions|articles|details)']);
 
     /*加载评论*/
     Route::get('{source_type}/{source_id}/comments',['as'=>'ask.comment.show','uses'=>'CommentController@show'])->where(['source_type'=>'(question|answer|article)','source_id'=>'[0-9]+']);
@@ -322,6 +326,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     Route::any('setting/xunSearch',['as'=>'admin.setting.xunSearch','uses'=>'SettingController@xunSearch']);
     /*oauth2.0*/
     Route::any('setting/oauth',['as'=>'admin.setting.oauth','uses'=>'SettingController@oauth']);
+
+    /*财务管理*/
+    Route::resource('credit', 'CreditController',['except' => ['show']]);
 
     /*问题删除*/
     Route::post('question/destroy',['as'=>'admin.question.destroy','uses'=>'QuestionController@destroy']);

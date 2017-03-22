@@ -14,7 +14,8 @@
         "socialiteproviders/qq": "^2.0",
         "socialiteproviders/weibo": "^2.0",
         "socialiteproviders/weixin": "^2.0",
-        "sdfsky/tipask-xunsearch": "dev-master"
+        "sdfsky/tipask-xunsearch": "dev-master",
+        "roumen/sitemap": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

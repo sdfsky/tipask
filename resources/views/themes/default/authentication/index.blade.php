@@ -38,8 +38,14 @@
                                 <dl class="dl-horizontal">
                                     <dt>真实姓名</dt>
                                     <dd>{{ Auth()->user()->authentication->real_name }}</dd>
-                                    <dt>联系邮箱</dt>
-                                    <dd>{{ Auth()->user()->email }}</dd>
+                                    <dt>性别</dt>
+                                    <dd>{{ trans_gender_name(Auth()->user()->authentication->gender) }}</dd>
+                                    <dt>所在城市</dt>
+                                    <dd>{{ Area()->getName(Auth()->user()->authentication->province) }} @if(Auth()->user()->authentication->city>0 &&  Area()->getName(Auth()->user()->authentication->province)!=Area()->getName(Auth()->user()->authentication->city)) - {{ Area()->getName(Auth()->user()->authentication->city) }} @endif</dd>
+                                    <dt>职业身份</dt>
+                                    <dd>{{ Auth()->user()->authentication->title }}</dd>
+                                    <dt>个人简介</dt>
+                                    <dd>{{ Auth()->user()->authentication->description }}</dd>
                                     <dt>身份照号码</dt>
                                     <dd>{{ Auth()->user()->authentication->id_card }}</dd>
                                     <dt>身份照正面照片</dt>

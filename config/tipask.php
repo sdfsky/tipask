@@ -24,6 +24,9 @@ return [
         'answer_adopted' => '回答被采纳',
         'create_article' => '发表了文章',
         'exchange' => '兑换商品',
+        'charge' => '金币充值',
+        'reward_user' => '系统奖励',
+        'punish_user' => '金币充值',
     ],
     'notification_types' =>[
         'answer'  => '回答了问题',

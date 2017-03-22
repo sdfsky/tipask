@@ -36,7 +36,7 @@
                                 <ul class="taglist-inline ib">
                                     @if($user->user->hotTags())
                                         @foreach( $user->user->hotTags() as $tag)
-                                            <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['name'=>$tag->name,'source_type'=>'questions']) }}">{{ $tag->name }}</a></li>
+                                            <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'questions']) }}">{{ $tag->name }}</a></li>
                                         @endforeach
                                     @endif
                                 </ul>

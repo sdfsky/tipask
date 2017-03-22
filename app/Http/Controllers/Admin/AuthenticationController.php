@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Area;
 use App\Models\Authentication;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,9 @@ class AuthenticationController extends AdminController
 
     protected  $validateRules = [
         'real_name' => 'required|max:64',
-        'id_card' =>   'required|max:24',
+        'title' => 'required|max:128',
+        'description' => 'sometimes|max:9999',
+        'id_card' => 'required|max:64|unique:authentications',
         'id_card_image' => 'sometimes|image|max:2048',
         'skill' => 'required|max:128',
         'skill_image' => 'sometimes|image|max:2048',
@@ -58,7 +61,13 @@ class AuthenticationController extends AdminController
     public function edit($id)
     {
         $authentication = Authentication::find($id);
-        return view('admin.authentication.edit')->with(compact('authentication'));
+        $provinces = Area::provinces();
+        $cities = Area::cities($authentication->province);
+        $data = [
+            'provinces' => $provinces,
+            'cities' => $cities,
+        ];
+        return view('admin.authentication.edit')->with(compact('authentication','data'));
 
     }
 
