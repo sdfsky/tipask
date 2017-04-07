@@ -1,5 +1,5 @@
 @extends('theme::layout.public')
-@section('seo_title')话题 @if($topics->currentPage()>1)- 第{{ $topics->currentPage() }}页@endif - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')话题 @if($topics->currentPage()>1)- 第{{ $topics->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}@endsection
 @section('content')
     <p class="mt-10">话题不仅能组织和归类你的内容，还能关联相似的内容。正确的使用话题将让你的问题被更多人发现和解决。</p>
     @if( $categories )

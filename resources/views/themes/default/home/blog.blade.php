@@ -1,5 +1,5 @@
 @extends('theme::layout.public')
-@section('seo_title')@if($filter === 'hottest')热门的@elseif($filter === 'recommended')推荐的@endif文章  @if( $articles->currentPage()>1 ) - 第{{ $articles->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title') @if($filter === 'hottest')热门的 @elseif($filter === 'recommended')推荐的 @endif 文章  @if( $articles->currentPage()>1 ) - 第{{ $articles->currentPage() }}页 @endif - {{ Setting()->get('website_name') }} @endsection
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
@@ -97,7 +97,6 @@
                     @endforeach
                 </ul>
             </div>
-
 
         </div>
     </div>
