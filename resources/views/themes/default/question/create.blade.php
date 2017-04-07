@@ -50,7 +50,7 @@
                 <div class="col-md-7">
                     <div class="form-group">
                         <select id="select_tags" name="select_tags" class="form-control" multiple="multiple" >
-                            @foreach(explode(",",old('select_tags','')) as $tag)
+                            @foreach(array_filter(explode(",",old('select_tags',''))) as $tag)
                                 <option selected="selected">{{ $tag }}</option>
                             @endforeach
                         </select>
