@@ -41,9 +41,15 @@ class AuthenticationController extends Controller
     /**
      * 显示认证信息
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        return view('theme::authentication.index');
+        $provinces = Area::provinces();
+        $cities = Area::cities($request->user()->province);
+        $areaData = [
+            'provinces' => $provinces,
+            'cities' => $cities,
+        ];
+        return view('theme::authentication.index')->with(compact('areaData'));
     }
 
     /**

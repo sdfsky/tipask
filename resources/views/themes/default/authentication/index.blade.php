@@ -62,16 +62,65 @@
                     @else
                         <form name="authForm" id="authentication_form" enctype="multipart/form-data" action="{{ route('auth.authentication.store')}}" method="POST">
                             <input type="hidden" name="_token"  value="{{ csrf_token() }}" />
-                            <input type="hidden" id="tags" name="skill" value="" />
+                            <input type="hidden" id="tags" name="skill" value="{{ old('skill') }}" />
                             <div class="form-group @if ($errors->first('real_name')) has-error @endif">
                                 <label for="real_name" class="control-label col-sm-3 required">真实姓名</label>
                                 <div class="col-sm-9">
-                                    <input name="real_name" type="text" maxlength="32" placeholder="身份照真实姓名" class="form-control" value="{{ old('real_name','') }}" />
+                                    <input name="real_name" type="text" maxlength="32" placeholder="真实姓名" class="form-control" value="{{ old('real_name','') }}" />
                                     @if ($errors->first('real_name'))
                                         <span class="help-block">{{ $errors->first('real_name') }}</span>
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">性别</label>
+                                <div class="col-sm-9">
+                                    <label class="radio-inline"><input name="gender" type="radio" value="1" @if( old('gender',Auth()->user()->gender) == 1 ) checked @endif > 男</label>
+                                    <label class="radio-inline"><input name="gender" type="radio" value="2" @if( old('gender',Auth()->user()->gender)==2 ) checked @endif> 女</label>
+                                    <label class="radio-inline"><input name="gender" type="radio" value="0" @if( old('gender',Auth()->user()->gender)==0 ) checked @endif> 保密</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="setting-city" class="control-label col-sm-3">所在城市</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="province" id="province">
+                                        <option>请选择省份</option>
+                                        @foreach($areaData['provinces'] as $province)
+                                            <option value="{{ $province->id }}"  @if( old('province',Auth()->user()->province) == $province->id) selected @endif>{{ $province->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="city" id="city">
+                                        <option>请选择城市</option>
+                                        @foreach($areaData['cities'] as $city)
+                                            <option value="{{ $city->id }}" @if( old('city',Auth()->user()->city) == $city->id) selected @endif >{{ $city->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group @if ($errors->first('title')) has-error @endif">
+                                <label for="name" class="control-label col-sm-3">身份职业</label>
+                                <div class="col-sm-9">
+                                    <input name="title" id="title" type="text" maxlength="32" placeholder="例如：汽车制造 / 产品设计师 / 登山爱好者" class="form-control" value="{{ old('title','') }}" />
+                                    @if ($errors->first('title'))
+                                        <span class="help-block">{{ $errors->first('title') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group @if ($errors->first('description')) has-error @endif">
+                                <label for="setting-description" class="control-label col-sm-3">自我介绍</label>
+                                <div class="col-sm-9">
+                                    <textarea name="description" id="setting-description" class="form-control" rows="6">{{ old('description','') }}</textarea>
+                                    @if ($errors->first('description'))
+                                        <span class="help-block">{{ $errors->first('description') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group @if ($errors->first('id_card')) has-error @endif">
                                 <label for="id_card" class="control-label col-sm-3 required">身份照号码</label>
                                 <div class="col-sm-9">
@@ -100,8 +149,8 @@
                                 <div class="col-sm-9">
                                     <select id="select_tags" name="select_tags" class="form-control" multiple="multiple" >
 
-                                        @if(old('tags'))
-                                            @foreach( explode(",",old('tags')) as $tag)
+                                        @if(old('skill'))
+                                            @foreach( array_filter(explode(",",old('skill'))) as $tag)
                                                 <option value="{{ $tag }}" selected>{{ $tag }}</option>
                                             @endforeach
                                         @endif
@@ -125,7 +174,6 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="form-group @if ($errors->first('captcha')) has-error @endif">
                                 <label for="captcha" class="required control-label col-sm-3">验证码</label>
                                 <div class="col-sm-4">
@@ -176,6 +224,12 @@
                 },
                 minimumInputLength:1,
                 tags:true
+            });
+
+            /*加载省份城市*/
+            $("#province").change(function(){
+                var province_id = $(this).val();
+                $("#city").load("{{ url('ajax/loadCities') }}/"+province_id);
             });
 
             $("#select_tags").change(function(){
