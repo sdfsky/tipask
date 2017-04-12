@@ -239,6 +239,12 @@ $(function(){
         });
     }
 
+    /*fancybox处理*/
+    $(".description .text-fmt img,.best-answer .text-fmt img,.widget-answers .text-fmt img,.widget-article .text-fmt img").each(function(){
+        var image = $(this);
+        image.wrap('<a data-fancybox="gallery" href="'+image.attr("src")+'"></a>');
+    });
+
 });
 
 

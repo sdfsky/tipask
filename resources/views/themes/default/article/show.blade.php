@@ -3,7 +3,9 @@
 @section('seo_title'){{ parse_seo_template('seo_article_title',$article) }}@endsection
 @section('seo_keyword'){{ parse_seo_template('seo_article_keyword',$article) }}@endsection
 @section('seo_description'){{ parse_seo_template('seo_article_description',$article) }}@endsection
-
+@section('css')
+    <link href="{{ asset('/static/js/fancybox/jquery.fancybox.min.css')}}" rel="stylesheet">
+@endsection
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
@@ -128,6 +130,7 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript" src="{{ asset('/static/js/fancybox/jquery.fancybox.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var article_id = "{{ $article->id }}";

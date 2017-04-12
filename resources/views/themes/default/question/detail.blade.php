@@ -5,6 +5,7 @@
 @section('seo_description'){{ parse_seo_template('seo_question_description',$question) }}@endsection
 
 @section('css')
+    <link href="{{ asset('/static/js/fancybox/jquery.fancybox.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
 @endsection
 
@@ -360,6 +361,7 @@
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
+    <link href="{{ asset('/static/js/fancybox/jquery.fancybox.min.css')}}" rel="stylesheet">
     <script type="text/javascript">
         var invitation_timer = null;
         var question_id = "{{ $question->id }}";
