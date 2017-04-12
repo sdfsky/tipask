@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-md-pull-3">
-                    <form name="baseForm" id="base_form" action="{{ route('auth.profile.base')}}" method="POST">
+                    <form name="baseForm" id="base_form" action="{{ route('auth.profile.base')}}" enctype="multipart/form-data" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group @if ($errors->first('name')) has-error @endif">
                             <label for="name" class="required control-label col-sm-3">姓名</label>
@@ -113,6 +113,20 @@
                                 <textarea name="description" id="setting-description" class="form-control mono" rows="6">{{ Auth()->user()->description }}</textarea>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="setting-description" class="control-label col-sm-3">支付二维码</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="qrcode"/>
+                                @if($errors->has('qrcode')) <p class="help-block">{{ $errors->first('qrcode') }}</p> @else <p class="help-block">可上传微信或支付宝的收款二维码图片</p> @endif
+                                @if(Auth()->user()->qrcode)
+                                    <div style="margin-top: 10px;">
+                                        <img src="{{ route('website.image.show',['image_name'=>Auth()->user()->qrcode]) }}" />
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-action row">
                             <div class="col-sm-offset-3 col-sm-9">

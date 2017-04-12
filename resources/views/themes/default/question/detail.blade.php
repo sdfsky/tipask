@@ -77,11 +77,16 @@
                             <li class="pull-right">
                                 <a class="comments mr-10" data-toggle="collapse" href="#comments-answer-{{ $bestAnswer->id }}" aria-expanded="false" aria-controls="comment-{{ $bestAnswer->id }}"><i class="fa fa-comment-o"></i> {{ $bestAnswer->comments }} 条评论</a>
                                 <button class="btn btn-default btn-sm btn-support" data-source_id="{{ $bestAnswer->id }}" data-source_type="answer" data-support_num="{{ $bestAnswer->supports }}"><i class="fa fa-thumbs-o-up"></i> {{ $bestAnswer->supports }}</button>
+                                @if($bestAnswer->user->qrcode)
+                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#payment-qrcode-modal-answer-{{ $bestAnswer->id }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</button>
+                                @endif
                             </li>
                         </ul>
                     </div>
                     @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$bestAnswer->id,'hide_cancel'=>false])
-
+                    @if($bestAnswer->user->qrcode)
+                        @include('theme::layout.qrcode_pament',['source_id'=>'answer-'.$bestAnswer->id,'paymentUser'=>$bestAnswer->user,'message'=>'如果觉得我的回答对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
+                    @endif
                     <div class="media user-info border-top">
                         <div class="media-left">
                             <a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" target="_blank">
@@ -147,7 +152,10 @@
                                     <li><a href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="继续完善回答内容"><i class="fa fa-edit"></i> 编辑</a></li>
                                     @endif
                                     @if($question->status!==2 &&  ( Auth()->user()->id === $question->user_id || Auth()->user()->is('admin') ))
-                                    <li><a href="#" class="adopt-answer" data-toggle="modal" data-target="#adoptAnswer" data-answer_id="{{ $answer->id }}" data-answer_content="{{ str_limit($answer->content,200) }}"><i class="fa fa-check-square-o"></i> 采纳为最佳答案</a></li>
+                                    <li><a href="#" class="adopt-answer" data-toggle="modal" data-target="#adoptAnswer" data-answer_id="{{ $answer->id }}" data-answer_content="{{ str_limit($answer->content,200) }}"><i class="fa fa-check-square-o"></i> 采纳</a></li>
+                                    @endif
+                                    @if($answer->user->qrcode)
+                                        <li><a href="#" data-toggle="modal" data-target="#payment-qrcode-modal-answer-{{ $answer->id }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</a></li>
                                     @endif
                                 @endif
                                 <li class="pull-right">
@@ -156,6 +164,9 @@
                             </ul>
                         </div>
                         @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$answer->id,'hide_cancel'=>false])
+                        @if($answer->user->qrcode)
+                            @include('theme::layout.qrcode_pament',['source_id'=>'answer-'.$answer->id,'paymentUser'=>$answer->user,'message'=>'如果觉得我的回答对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
+                        @endif
                     </div>
                 </div>
                 @endforeach

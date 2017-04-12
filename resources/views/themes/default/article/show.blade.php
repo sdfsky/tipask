@@ -45,7 +45,9 @@
                 <div class="text-center mt-10 mb-20">
 
                     <button id="support-button" class="btn btn-success btn-lg mr-5" data-source_id="{{ $article->id }}" data-source_type="article"  data-support_num="{{ $article->supports }}">{{ $article->supports }} 推荐</button>
-
+                    @if($article->user->qrcode)
+                        <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#payment-qrcode-modal-article-{{ $article->id  }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</button>
+                    @endif
                     @if(Auth()->check() && Auth()->user()->isCollected(get_class($article),$article->id))
                         <button id="collect-button" class="btn btn-default btn-lg" data-loading-text="加载中..." data-source_type = "article" data-source_id = "{{ $article->id }}" > 已收藏</button>
                     @else
@@ -130,6 +132,7 @@
 @endsection
 
 @section('script')
+    @include('theme::layout.qrcode_pament',['source_id'=>'article-'.$article->id,'paymentUser'=>$article->user,'message'=>'如果觉得我的文章对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
     <script type="text/javascript" src="{{ asset('/static/js/fancybox/jquery.fancybox.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {

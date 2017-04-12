@@ -37,6 +37,18 @@ class ProfileController extends Controller
             $user->description = $request->input('description');
             $user->province = $request->input('province');
             $user->city = $request->input('city');
+            if($request->hasFile('qrcode')){
+                $validateRules = [
+                    'qrcode' => 'required|image|max:'.config('tipask.upload.image.max_size'),
+                ];
+                $this->validate($request,$validateRules);
+                $file = $request->file('qrcode');
+                $extension = $file->getClientOriginalExtension();
+                $filePath = 'qrcodes/'.gmdate("Y")."/".gmdate("m")."/".uniqid(str_random(8)).'.'.$extension;
+                Storage::disk('local')->put($filePath,File::get($file));
+                Image::make(storage_path('app/'.$filePath))->resize(320,435)->save();
+                $user->qrcode = str_replace("/","-",$filePath);
+            }
             $user->save();
             return $this->success(route('auth.profile.base'),'个人资料修改成功');
 
