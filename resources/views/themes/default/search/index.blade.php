@@ -55,7 +55,7 @@
                         @elseif( $item['class_uid'] === '7118e6ddaa8fea122e7df7a9b79fc104' )
                             <section class="widget-item">
                                 <h2 class="h4">
-                                    <a href="{{ route('ask.tag.index',['name'=>strip_tags($item['subject'])]) }}" target="_blank">{!! $item['subject'] !!}</a>
+                                    <a href="{{ route('ask.tag.index',['id'=>$item['id']]) }}" target="_blank">{!! $item['subject'] !!}</a>
                                 </h2>
                                 <p class="excerpt">{!! $item['content'] !!}</p>
                             </section>
@@ -127,7 +127,7 @@
                         @foreach($list as $tag)
                             <section class="widget-tag">
                                 <h2 class="h4">
-                                    <a href="{{ route('ask.tag.index',['name'=>$tag->name]) }}" target="_blank">{{ $tag->name }}</a>
+                                    <a href="{{ route('ask.tag.index',['id'=>$tag->id]) }}" target="_blank">{{ $tag->name }}</a>
                                 </h2>
                                 <p class="excerpt">{{ str_limit(strip_tags($tag->description),200) }}</p>
                             </section>
