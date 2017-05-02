@@ -12,7 +12,7 @@ Route::Group(['namespace'=>'Installer','middleware'=>'installer'],function(){
 
 
 /*首页*/
-Route::get('/',['as'=>'website.index','uses'=>'IndexController@index']);
+Route::get('/',['as'=>'website.index','middleware'=>'installerGuide','uses'=>'IndexController@index']);
 
 /*问答*/
 Route::get('/questions/{category_name?}/{filter?}',['as'=>'website.ask','uses'=>'IndexController@ask'])->where(['filter'=>'(newest|hottest|reward|unAnswered)']);

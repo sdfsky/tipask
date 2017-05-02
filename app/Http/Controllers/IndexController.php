@@ -33,6 +33,7 @@ class IndexController extends Controller
      */
     public function index()
     {
+        echo public_path();
         /*热门话题*/
         $hotTags =  Taggable::globalHotTags();
 

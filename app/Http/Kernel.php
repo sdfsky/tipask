@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'ban.user' => \App\Http\Middleware\BanUserCheck::class,
         'permission' => \Bican\Roles\Middleware\VerifyPermission::class,
-        'installer' => \App\Http\Middleware\InstallerCheck::class
+        'installer' => \App\Http\Middleware\InstallerCheck::class,
+        'installerGuide' => \App\Http\Middleware\InstallerGuide::class
     ];
 }

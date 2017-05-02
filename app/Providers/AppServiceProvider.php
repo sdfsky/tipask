@@ -31,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
             'Illuminate\Contracts\Auth\Registrar',
             'App\Services\Registrar'
         );
+        $this->app->bind('path.public', function() {
+            return base_path();
+        });
     }
 }
