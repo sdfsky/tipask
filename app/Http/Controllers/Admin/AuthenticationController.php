@@ -84,6 +84,7 @@ class AuthenticationController extends AdminController
         if(!$authentication){
             return $this->error(route('admin.authentication.index'),'行家认证信息不存在，请核实');
         }
+        $this->validateRules['id_card'] = 'required|max:64|unique:authentications,id_card,'.$authentication->user_id.',user_id';
         $this->validate($request,$this->validateRules);
 
         $data = $request->all();
