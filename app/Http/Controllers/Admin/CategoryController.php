@@ -27,9 +27,8 @@ class CategoryController extends AdminController
     public function index(Request $request)
     {
         $parentId = $request->input('parent_id', 0);
-        $parentCategories = Category::getParentCategories($parentId);
         $categories = Category::where('parent_id', '=', $parentId)->orderBy('sort','asc')->orderBy('created_at','asc')->paginate(config('tipask.admin.page_size'));
-        return view("admin.category.index")->with(compact('categories', 'parentCategories', 'parentId'));
+        return view("admin.category.index")->with(compact('categories'));
     }
 
     /**
