@@ -252,7 +252,8 @@ abstract class Controller extends BaseController
      */
     protected function counter($key,$step=null,$expiration=86400){
 
-        $count = Cache::get($key,0);
+        /*计数从1开始*/
+        $count = Cache::get($key,1);
         /*直接获取值*/
         if( $step === null ){
             return $count;
