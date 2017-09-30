@@ -158,7 +158,7 @@ class QuestionController extends Controller
                 $message = '问题发布成功！为了确保问答的质量，我们会对您的提问内容进行审核。请耐心等待......';
             }
 
-            $this->counter( 'question_num_'. $question->user_id , 1 , 3600 );
+            $this->counter( 'question_num_'. $question->user_id , 1 , 60 );
 
             return $this->success(route('ask.question.detail',['question_id'=>$question->id]),$message);
 
