@@ -342,7 +342,7 @@ class QuestionController extends Controller
         ]);
 
         if($invitation){
-            $this->counter('question_invite_num_'.$loginUser->id);
+            $this->counter('question_invite_num_'.$loginUser->id, 1);
             $subject = $loginUser->name."在「".Setting()->get('website_name')."」向您发起了回答邀请";
             $message = "我在 ".Setting()->get('website_name')." 上遇到了问题「".$question->title."」 → ".route("ask.question.detail",['question_id'=>$question->id])."，希望您能帮我解答 ";
             $this->sendEmail($invitation->send_to,$subject,$message);
