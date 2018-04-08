@@ -88,6 +88,7 @@ class UserData extends Model
     /*用户采纳率*/
     public function adoptPercent()
     {
+        if ($this->answers == 0) return 0;
         return round($this->adoptions / $this->answers, 2) * 100;
     }
 
