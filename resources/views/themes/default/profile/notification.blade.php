@@ -28,6 +28,11 @@
                                 </div>
                                 <div class="checkbox">
                                     <label>
+                                        <input name="site_notifications[]"  type="checkbox" value="answer" @if(in_array('answer',$siteNotifications)) checked @endif> 当有人回答我的问题时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
                                         <input name="site_notifications[]"  type="checkbox" value="comment_question" @if(in_array('comment_question',$siteNotifications)) checked @endif> 当有人评论我的问题时
                                     </label>
                                 </div>
