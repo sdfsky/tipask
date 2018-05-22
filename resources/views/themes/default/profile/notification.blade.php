@@ -18,37 +18,37 @@
                             <div class="col-sm-8">
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]" type="checkbox" value="follow_user" @if(in_array('follow_user',$siteNotifications))) checked @endif /> 当有人关注我时
+                                        <input name="site_notifications[]" type="checkbox" value="follow_user" @if(in_array('follow_user',$siteNotifications)) checked @endif /> 当有人关注我时
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]" type="checkbox" value="invite_answer" @if(in_array('invite_answer',$siteNotifications))) checked @endif /> 当有人邀请我回答问题时
+                                        <input name="site_notifications[]" type="checkbox" value="invite_answer" @if(in_array('invite_answer',$siteNotifications)) checked @endif /> 当有人邀请我回答问题时
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]"  type="checkbox" value="comment_question" @if(in_array('comment_question',$siteNotifications))) checked @endif> 当有人评论我的问题时
+                                        <input name="site_notifications[]"  type="checkbox" value="comment_question" @if(in_array('comment_question',$siteNotifications)) checked @endif> 当有人评论我的问题时
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]" type="checkbox" value="comment_article" @if(in_array('comment_article',$siteNotifications))) checked @endif> 当有人评论我的文章时
+                                        <input name="site_notifications[]" type="checkbox" value="comment_article" @if(in_array('comment_article',$siteNotifications)) checked @endif> 当有人评论我的文章时
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]" type="checkbox" value="adopt_answer" @if(in_array('adopt_answer',$siteNotifications))) checked @endif> 当有人采纳我的回答时
+                                        <input name="site_notifications[]" type="checkbox" value="adopt_answer" @if(in_array('adopt_answer',$siteNotifications)) checked @endif> 当有人采纳我的回答时
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]"  type="checkbox" value="comment_answer" @if(in_array('comment_answer',$siteNotifications))) checked @endif > 当有人评论我的回答时
+                                        <input name="site_notifications[]"  type="checkbox" value="comment_answer" @if(in_array('comment_answer',$siteNotifications)) checked @endif > 当有人评论我的回答时
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="site_notifications[]"  type="checkbox" value="reply_comment" @if(in_array('reply_comment',$siteNotifications))) checked @endif > 当有人回复我的评论时
+                                        <input name="site_notifications[]"  type="checkbox" value="reply_comment" @if(in_array('reply_comment',$siteNotifications)) checked @endif > 当有人回复我的评论时
                                     </label>
                                 </div>
                             </div>
@@ -58,12 +58,12 @@
                             <div class="col-sm-8">
                                 <div class="checkbox">
                                     <label>
-                                        <input name="email_notifications[]" type="checkbox" value="adopt_answer" @if(in_array('adopt_answer',$emailNotifications))) checked @endif  > 当有人采纳我的回答时
+                                        <input name="email_notifications[]" type="checkbox" value="adopt_answer" @if(in_array('adopt_answer',$emailNotifications)) checked @endif  > 当有人采纳我的回答时
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="email_notifications[]" type="checkbox" value="invite_answer" @if(in_array('invite_answer',$emailNotifications))) checked @endif  > 当有人邀请我回答问题时
+                                        <input name="email_notifications[]" type="checkbox" value="invite_answer" @if(in_array('invite_answer',$emailNotifications)) checked @endif  > 当有人邀请我回答问题时
                                     </label>
                                 </div>
                             </div>
