@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Account;
 use App\Http\Controllers\Controller;
 use App\Models\EmailToken;
 use App\Models\User;
+use App\Services\CaptchaService;
+use App\Services\CreditService;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
@@ -19,11 +21,13 @@ class UserController extends Controller
     protected $auth;
 
     protected $registrar;
+    protected $captchaService;
 
 
-    public function __construct(Guard $auth,Registrar $registrar){
+    public function __construct(Guard $auth,Registrar $registrar, CaptchaService $captchaService){
         $this->auth = $auth;
         $this->registrar = $registrar;
+        $this->captchaService = $captchaService;
     }
 
     public function login(Request $request){
@@ -40,7 +44,7 @@ class UserController extends Controller
             ];
 
             if( Setting()->get('code_login') == 1){
-                $validateRules['captcha'] = 'required|captcha';
+                $this->captchaService->setValidateRules('code_login', $validateRules);
             }
 
             /*表单数据校验*/
@@ -80,7 +84,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function register(Request $request)
+    public function register(Request $request, CaptchaService $captchaService)
     {
 
         /*注册是否开启*/
@@ -108,7 +112,7 @@ class UserController extends Controller
             ];
 
             if( Setting()->get('code_register') == 1){
-                $validateRules['captcha'] = 'required|captcha';
+                $captchaService->setValidateRules('code_register', $validateRules);
             }
 
             $this->validate($request,$validateRules);
@@ -234,6 +238,20 @@ class UserController extends Controller
 
     }
 
-
+    /*每日签到*/
+    public function sign(Request $request){
+        if(!Setting()->get('open_user_sign')){
+            abort(404);
+        }
+        $loginUser = $request->user();
+        if($loginUser->isSigned()){
+            return $this->error(route('website.index'),'今日已签到，不能重复签到');
+        }
+        $message = '签到成功!';
+        if(CreditService::create($loginUser->id, 'sign', Setting()->get('coins_sign'),Setting()->get('credits_sign'))){
+            $message .= get_credit_message(Setting()->get('credits_sign'),Setting()->get('coins_sign'));
+        }
+        return $this->success(route('website.index'),$message);
+    }
 
 }

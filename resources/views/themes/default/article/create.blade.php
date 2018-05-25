@@ -60,15 +60,7 @@
                 <div class="col-xs-12 col-md-11">
                     <ul class="list-inline">
                         @if( Setting()->get('code_create_article') )
-                            <li class="pull-right">
-                                <div class="form-group @if ($errors->first('captcha')) has-error @endif">
-                                    <input type="text" class="form-control" name="captcha" required="" placeholder="验证码" />
-                                    @if ($errors->first('captcha'))
-                                        <span class="help-block">{{ $errors->first('captcha') }}</span>
-                                    @endif
-                                    <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
-                                </div>
-                            </li>
+                            @include('theme::layout.auth_captcha')
                         @endif
                     </ul>
                 </div>

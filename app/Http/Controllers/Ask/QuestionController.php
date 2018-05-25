@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\UserTag;
 use App\Models\XsSearch;
+use App\Services\CaptchaService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -85,7 +86,7 @@ class QuestionController extends Controller
 
 
     /*创建提问*/
-    public function store(Request $request)
+    public function store(Request $request, CaptchaService $captchaService)
     {
         $loginUser = $request->user();
         if($request->user()->status === 0){
@@ -103,7 +104,7 @@ class QuestionController extends Controller
         $request->flash();
         /*如果开启验证码则需要输入验证码*/
         if( Setting()->get('code_create_question') ){
-            $this->validateRules['captcha'] = 'required|captcha';
+            $captchaService->setValidateRules('code_create_question',$this->validateRules);
         }
 
         $this->validate($request,$this->validateRules);

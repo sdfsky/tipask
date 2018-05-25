@@ -15,6 +15,8 @@
             <li><a href="{{ route('admin.setting.irrigation') }}"><i class="fa fa-circle-o"></i> 防灌水设置</a></li>
             <li><a href="{{ route('admin.setting.credits') }}"><i class="fa fa-circle-o"></i> 积分设置</a></li>
             <li><a href="{{ route('admin.setting.seo') }}"><i class="fa fa-circle-o"></i> SEO设置</a></li>
+            <li><a href="{{ route('admin.setting.custom') }}"><i class="fa fa-circle-o"></i> 功能定制</a></li>
+            <li><a href="{{ route('admin.setting.attach') }}"><i class="fa fa-circle-o"></i> 附件设置</a></li>
             {{--<li><a href="{{ route('admin.setting.variables') }}"><i class="fa fa-circle-o"></i> 变量设置</a></li>--}}
             <li><a href="{{ route('admin.system.index') }}"><i class="fa fa-circle-o"></i> 系统工具</a></li>
         </ul>
@@ -79,6 +81,7 @@
         <ul class="treeview-menu" id="third_part">
             <li><a href="{{ route('admin.setting.xunSearch') }}"><i class="fa fa-circle-o"></i> XunSearch</a></li>
             <li><a href="{{ route('admin.setting.oauth') }}"><i class="fa fa-circle-o"></i>一键登录</a></li>
+            <li><a href="{{ route('admin.setting.geetest') }}"><i class="fa fa-circle-o"></i>极验证整合</a></li>
         </ul>
     </li>
 

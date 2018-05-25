@@ -15,7 +15,8 @@
         "socialiteproviders/weibo": "^2.0",
         "socialiteproviders/weixin": "^2.0",
         "sdfsky/tipask-xunsearch": "dev-master",
-        "roumen/sitemap": "^2.6"
+        "roumen/sitemap": "^2.6",
+        "germey/geetest": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

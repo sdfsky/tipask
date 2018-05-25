@@ -45,4 +45,7 @@ return [
         'redirect' => env('OAUTH_WEIBO_REDIRECT'),
     ],
 
+    /*系统服务开关配置*/
+    'geetest_open' => env('GEETEST_OPEN',false), //极验证开关
+
 ];

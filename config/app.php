@@ -152,6 +152,7 @@ return [
         Sdfsky\TipaskXunSearch\ServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
+        Germey\Geetest\GeetestServiceProvider::class,
     ],
 
     /*
@@ -204,6 +205,7 @@ return [
         'Image'     => Intervention\Image\Facades\Image::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Search' => Sdfsky\TipaskXunSearch\Facade::class,
+        'Geetest' => Germey\Geetest\Geetest::class,
     ],
 
 ];

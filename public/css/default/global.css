@@ -187,6 +187,12 @@ ul{list-style: none;padding: 0;}
 /*公告alert*/
 .top-alert .alert{margin-bottom: 10px;border-radius:2px;}
 .side-alert{border: 1px solid #fbeed5;padding: 15px;}
+.side-sign{border: 1px solid #eee;padding: 15px;}
+.alert-question{color: #666;background-color: #f9fbfb;border-color: #f0f5f3;}
+.sign-box{height:38px}
+.sign-box dt{float:right;width:90px;height:40px;height:40px;margin:1px;font-size:0;overflow:hidden}
+.sign-box dd{float:right;margin-left:0;width:120px;height:15px;font-size:12px}
+.sign-box dd p{margin:0;padding-top:3px}
 
 /*列表样式*/
 .stream-list{margin-bottom:10px}

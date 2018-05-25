@@ -7,6 +7,7 @@ use App\Models\Question;
 use App\Models\Tag;
 use App\Models\UserData;
 use App\Models\UserTag;
+use App\Services\CaptchaService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -43,7 +44,7 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, CaptchaService $captchaService)
     {
         $loginUser = $request->user();
         if($request->user()->status === 0){
@@ -62,7 +63,7 @@ class ArticleController extends Controller
 
         /*如果开启验证码则需要输入验证码*/
         if( Setting()->get('code_create_article') ){
-            $this->validateRules['captcha'] = 'required|captcha';
+            $captchaService->setValidateRules('code_create_article',$this->validateRules);
         }
 
         $this->validate($request,$this->validateRules);
