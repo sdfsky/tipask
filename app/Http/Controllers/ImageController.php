@@ -39,7 +39,20 @@ class ImageController extends Controller
         if(!is_file($imageFile)){
             abort(404);
         }
-        return Image::make($imageFile)->response();
+
+
+        $image =   Image::make($imageFile);
+
+        if(config('tipask.upload.open_watermark') && $image_name != config('tipask.upload.watermark_image') && str_contains($image_name,'attachments')){
+            $watermarkImage = storage_path('app/'.str_replace("-","/",config('tipask.upload.watermark_image')));
+            $image->insert($watermarkImage, 'bottom-right', 15, 10);
+
+        }
+        $response = response()->make($image->encode('jpg'));
+        $response->header('Content-Type', 'image/jpeg');
+        $response->header('Expires',  date(DATE_RFC822,strtotime(" 7 day")));
+        $response->header('Cache-Control', 'private, max-age=259200, pre-check=259200');
+        return $response;
 
     }
 
@@ -49,11 +62,15 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $validateRules = [
-            'file' => 'required|image|max:'.config('tipask.upload.image.max_size'),
+            'file' => "required|image|max:".config('tipask.upload.attach_size'),
         ];
 
         if($request->hasFile('file')){
-            $this->validate($request,$validateRules);
+
+            $validator = Validator::make($request->all(),$validateRules);
+            if($validator->fails()){
+                return response('error');
+            }
             $file = $request->file('file');
             $extension = $file->getClientOriginalExtension();
             $filePath = 'attachments/'.gmdate("Y")."/".gmdate("m")."/".uniqid(str_random(8)).'.'.$extension;

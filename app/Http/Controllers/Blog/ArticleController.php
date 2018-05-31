@@ -79,7 +79,7 @@ class ArticleController extends Controller
 
         if($request->hasFile('logo')){
             $validateRules = [
-                'logo' => 'required|image|max:'.config('tipask.upload.image.max_size'),
+                'logo' => 'required|image|max:'.config('tipask.upload.image_size'),
             ];
             $this->validate($request,$validateRules);
             $file = $request->file('logo');
@@ -228,7 +228,7 @@ class ArticleController extends Controller
 
         if($request->hasFile('logo')){
             $validateRules = [
-                'logo' => 'required|image|max:'.config('tipask.upload.image.max_size'),
+                'logo' => 'required|image|max:'.config('tipask.upload.image_size'),
             ];
             $this->validate($request,$validateRules);
             $file = $request->file('logo');

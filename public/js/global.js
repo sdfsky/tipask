@@ -294,7 +294,7 @@ function upload_editor_image(file,editorId){
         success: function(url) {
             console.log(url)
             if(url == 'error'){
-                alert('图片上传失败！');
+                alert('图片上传失败！请压缩图片大小再进行上传');
                 return false;
             }
             $('#'+editorId).summernote('insertImage', url, function ($image) {
