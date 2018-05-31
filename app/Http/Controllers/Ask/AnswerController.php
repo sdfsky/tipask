@@ -81,8 +81,8 @@ class AnswerController extends Controller
             $this->doing($answer->user_id,'answer',get_class($question),$question->id,$question->title,$answer->content);
 
             /*记录通知*/
-            $this->notify($answer->user_id,$question->user_id,'answer',$question->title,$question->id,$answer->content);
-            
+            $this->notify($answer->user_id, $question->user_id, 'answer', $question->title, $answer->id, $answer->content, 'question', $question->id);
+
             /*回答后通知关注问题*/
             if(intval($request->input('followed'))){
                 $attention = Attention::where("user_id",'=',$request->user()->id)->where('source_type','=',get_class($question))->where('source_id','=',$question->id)->count();
