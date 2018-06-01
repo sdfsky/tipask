@@ -18,6 +18,11 @@
                             <div class="col-sm-8">
                                 <div class="checkbox">
                                     <label>
+                                        <input name="site_notifications[]" type="checkbox" value="answer" @if(in_array('answer',$siteNotifications))) checked @endif /> 当有人回答我问题时
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
                                         <input name="site_notifications[]" type="checkbox" value="follow_user" @if(in_array('follow_user',$siteNotifications))) checked @endif /> 当有人关注我时
                                     </label>
                                 </div>
