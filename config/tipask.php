@@ -27,6 +27,7 @@ return [
         'charge' => '金币充值',
         'reward_user' => '系统奖励',
         'punish_user' => '金币充值',
+        'sign' => '签到',
     ],
     'notification_types' =>[
         'answer'  => '回答了问题',
@@ -48,7 +49,11 @@ return [
     'upload' =>[
         'image'=>[
             'max_size' => '2048' //图片上传大小 单位是kb
-        ]
+        ],
+        'image_size'  => env('UPLOAD_IMAGE_SIZE',2048),    //最大上传图片大小
+        'attach_size' => env('UPLOAD_ATTACH_SIZE',8192),   //最大上传附件大小
+        'open_watermark' => env('UPLOAD_OPEN_WATERMARK',0),//开启图片水印
+        'watermark_image' => env('UPLOAD_WATERMARK_IMAGE',''),//图片水印地址
     ],
     'mail_drivers' => [
         'smtp' => '连接 SMTP 服务器发送',

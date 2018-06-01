@@ -39,7 +39,7 @@ class ProfileController extends Controller
             $user->city = $request->input('city');
             if($request->hasFile('qrcode')){
                 $validateRules = [
-                    'qrcode' => 'required|image|max:'.config('tipask.upload.image.max_size'),
+                    'qrcode' => 'required|image|max:'.config('tipask.upload.image_size'),
                 ];
                 $this->validate($request,$validateRules);
                 $file = $request->file('qrcode');

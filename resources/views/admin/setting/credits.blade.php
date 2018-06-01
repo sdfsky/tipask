@@ -47,6 +47,16 @@
                                 </tr>
 
                                 <tr>
+                                    <td>每日签到获得</td>
+                                    <td>
+                                        <div class="col-md-4 col-md-offset-4 @if ($errors->has('credits_sign')) has-error @endif "><input type="text" class="form-control" name="credits_sign" value="{{ old('credits_sign',Setting()->get('credits_sign')) }}" /></div>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-4 col-md-offset-4 @if ($errors->has('coins_sign')) has-error @endif "><input type="text" class="form-control" name="coins_sign" value="{{ old('coins_sign',Setting()->get('coins_sign')) }}" /></div>
+                                    </td>
+                                </tr>
+
+                                <tr>
                                     <td>提出问题获得</td>
                                     <td>
                                         <div class="col-md-4 col-md-offset-4 @if ($errors->has('credits_ask')) has-error @endif "><input type="text" class="form-control" name="credits_ask" value="{{ old('credits_ask',Setting()->get('credits_ask')) }}" /></div>

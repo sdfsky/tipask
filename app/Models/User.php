@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\Relations\MorphManyTagsTrait;
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -324,7 +325,11 @@ class User extends Model implements AuthenticatableContract,
         return true;
     }
 
-
+    /*当前是否已签到*/
+    public function isSigned(){
+        $today = Carbon::parse(date('Y-m-d 00:00:00'));
+        return $this->credits()->where('created_at','>',$today)->where('action','=','sign')->count();
+    }
 
 
 

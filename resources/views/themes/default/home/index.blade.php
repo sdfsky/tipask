@@ -133,7 +133,21 @@
                 <a href="{{ route('ask.question.create') }}" class="btn btn-warning btn-block">我要提问</a>
                 <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block">分享经验</a>
             </div>
-
+            @if(Setting()->get('open_user_sign'))
+                <div class="side-sign alert alert-link">
+                    <ul class="sign-box">
+                        @if(Auth()->check() && Auth()->user()->isSigned())
+                            <dt><button class="btn btn-primary btn-large" disabled>已签到</button></dt>
+                        @else
+                            <dt><a href="{{ route('auth.user.sign') }}" class="btn btn-primary btn-large">签&nbsp;&nbsp;到</a></dt>
+                        @endif
+                        <dd>
+                            <p>{{ $signDate->toDateString() }}</p>
+                            <p>{{ trans_day_of_week($signDate->dayOfWeek) }}</p>
+                        </dd>
+                    </ul>
+                </div>
+            @endif
             @include('theme::layout.auth_menu')
 
             <div class="widget-box">

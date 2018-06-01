@@ -259,4 +259,59 @@ class SettingController extends AdminController
 
     }
 
+    /*系统功能自定义*/
+    public function custom(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->except('_token');
+            foreach($data as $name => $value){
+                Setting()->set($name,$value);
+            }
+            Setting()->clearAll();
+            return $this->success(route('admin.setting.custom'),'配置保存成功');
+
+        }
+        return view('admin.setting.custom');
+    }
+
+    // 附件设置
+    public function attach(Request $request){
+        if($request->isMethod('post')){
+            $validateRules = [
+                'attach_image_size' => 'required|integer',
+                'attach_file_size' => 'required|integer',
+            ];
+            $request->flash();
+            $this->validate($request,$validateRules);
+            $imageSize = $request->input('attach_image_size');
+            $attachSize = $request->input('attach_file_size');
+            $openWaterMark = $request->input('attach_open_watermark',0);
+            $_ENV['UPLOAD_IMAGE_SIZE'] = $imageSize;
+            $_ENV['UPLOAD_ATTACH_SIZE'] = $attachSize;
+            $_ENV['UPLOAD_OPEN_WATERMARK'] = $openWaterMark;
+            if($request->hasFile('attach_watermark_image')){
+                $savePath = storage_path('app/watermarks');
+                $file = $request->file('attach_watermark_image');
+                $fileName = uniqid(str_random(8)).'.'.$file->getClientOriginalExtension();
+                $target = $file->move($savePath,$fileName);
+                if($target){
+                    $_ENV['UPLOAD_WATERMARK_IMAGE'] = 'watermarks-'.$fileName;
+                }
+            }
+            Setting()->writeToEnv();
+            return $this->success(route('admin.setting.attach'),'设置成功');
+        }
+        return view('admin.setting.attach');
+    }
+
+    // 极验证
+    public function geetest(Request $request){
+        if($request->isMethod('post')){
+            $_ENV['GEETEST_OPEN'] = $request->input('geetest_open',false);
+            $_ENV['GEETEST_ID'] = $request->input('geetest_id','');
+            $_ENV['GEETEST_KEY'] = $request->input('geetest_key','');
+            Setting()->writeToEnv();
+            return $this->success(route('admin.setting.geetest'),'配置保存成功');
+        }
+        return view('admin.setting.geetest');
+    }
 }

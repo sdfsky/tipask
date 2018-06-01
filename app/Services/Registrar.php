@@ -36,7 +36,7 @@ class Registrar implements RegistrarContract {
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'status' => $data['status'],
-            'site_notifications' => 'follow_user,invite_answer,answer,comment_question,comment_article,adopt_answer,comment_answer,reply_comment',
+            'site_notifications' => implode(',', array_keys(config('tipask.notification_types'))),
             'email_notifications' => 'adopt_answer,invite_answer'
         ]);
 

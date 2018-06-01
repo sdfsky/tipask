@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\QuestionInvitation;
 use App\Models\Setting;
 use App\Models\UserTag;
+use App\Services\CaptchaService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -29,7 +30,7 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, CaptchaService $captchaService)
     {
         $loginUser = $request->user();
         if($loginUser->status === 0){
@@ -54,7 +55,7 @@ class AnswerController extends Controller
         $request->flash();
         /*普通用户修改需要输入验证码*/
         if( Setting()->get('code_create_answer') ){
-            $this->validateRules['captcha'] = 'required|captcha';
+            $captchaService->setValidateRules('code_create_answer', $this->validateRules);
         }
 
         $this->validate($request,$this->validateRules);
