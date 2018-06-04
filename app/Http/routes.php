@@ -384,6 +384,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*分类管理*/
     Route::resource('category', 'CategoryController',['except' => ['show']]);
 
+    /*动态管理*/
+    Route::resource('dynamic', 'DynamicController',['except' => ['show']]);
+
 
 
     /*公告管理*/
