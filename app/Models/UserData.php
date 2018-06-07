@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Cache;
 
 class UserData extends Model
 {
-    use BelongsToUserTrait;
     protected $table = 'user_data';
 
     public $timestamps = false;
@@ -92,14 +91,15 @@ class UserData extends Model
         return round($this->adoptions / $this->answers, 2) * 100;
     }
 
-
-
-
-
-
-
-
-
+    /**
+     * Get the user relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'id');
+    }
 
 
 }
