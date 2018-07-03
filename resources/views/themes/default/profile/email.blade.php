@@ -9,7 +9,7 @@
 
         <div id="main" class="settings col-md-10 form-horizontal">
             <h2 class="h3 post-title">修改邮箱</h2>
-            @if(Auth()->user()->userData->mobile_status == 1)
+            @if(Auth()->user()->userData->email_status == 1)
                 <div class="alert alert-success" role="alert">
                     您的邮箱已绑定，如需修改，请按照下方提示进行操作！
                 </div>
