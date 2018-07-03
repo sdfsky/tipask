@@ -280,6 +280,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     Route::get('system/index',['as'=>'admin.system.index','uses'=>'SystemController@index']);
     Route::post('system/upgrade',['as'=>'admin.system.upgrade','uses'=>'SystemController@upgrade']);
     Route::post('system/adjust',['as'=>'admin.system.adjust','uses'=>'SystemController@adjust']);
+    /*同步动态*/
+    Route::post('system/synchronousdoing',['as'=>'admin.system.synchronousdoing','uses'=>'SystemController@synchronousDoing']);
 
     /*首页*/
     Route::resource('index', 'IndexController', ['only' => ['index']]);
@@ -383,6 +385,9 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
 
     /*分类管理*/
     Route::resource('category', 'CategoryController',['except' => ['show']]);
+
+    /*动态管理*/
+    Route::resource('dynamic', 'DynamicController',['except' => ['show']]);
 
 
 
