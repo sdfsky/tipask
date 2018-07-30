@@ -43,6 +43,7 @@
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary btn-lg">同步用户话题数据</button>
+                            <button type="button" class="btn btn-primary btn-lg synchronous-doing">同步动态数据</button>
                         </div>
                     </form>
                 </div>
@@ -51,8 +52,39 @@
     </section>
 @endsection
 
+<div id="page_message" class="page_mess_ok prompt" style="display:none;"></div>
 @section('script')
     <script type="text/javascript">
         set_active_menu('global',"{{ route('admin.system.index') }}");
+        $(function(){
+            $(".synchronous-doing").click(function(){
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('admin.system.synchronousdoing') }}",
+                    beforeSend: function(XMLHttpRequest){
+                        $(".page_mess_ok").css("background-color","#48bb5e");
+                        $(".prompt").html("正在同步中...");
+                        $(".synchronous-doing").attr('disabled',true);
+                        $(".prompt").css('display',"block");
+                    },
+                    success: function(data, textStatus){
+                        $(".prompt").html(data);
+                        setInterval(function(){
+                            $(".prompt").css('display',"none");
+                            $(".synchronous-doing").attr('disabled',false);
+                        },10000);
+                    },
+                    error: function(){
+                        $(".page_mess_ok").css("background-color","#AD3A37");
+                        $(".prompt").html("请重新同步");
+                        setInterval(function(){
+                            $(".prompt").css('display',"none");
+                            $(".synchronous-doing").attr('disabled',false);
+                        },10000)
+                    }
+                });
+
+            })
+        })
     </script>
 @endsection
