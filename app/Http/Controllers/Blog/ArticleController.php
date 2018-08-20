@@ -100,7 +100,7 @@ class ArticleController extends Controller
             Tag::multiSave($tagString,$article);
 
             //记录动态
-            $this->doing($article->user_id,'create_article',get_class($article),$article->id,$article->title,$article->summery);
+            $this->doing($article->user_id,'create_article',get_class($article),$article->id,$article->title,$article->summary);
 
             /*用户提问数+1*/
             $loginUser->userData()->increment('articles');
