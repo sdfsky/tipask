@@ -135,7 +135,7 @@
 
                     @endif
                     <div class="text-center">
-                        {!! str_replace('/?', '?', $list->render()) !!}
+                        {!! str_replace('/?', '?', $list->appends(['word'=>$word])->render()) !!}
                     </div>
                 </div>
                 <div class="col-md-3 side">
