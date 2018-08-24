@@ -91,8 +91,7 @@
                     </section>
                 @endforeach
             </div>
-            <div class="text-center">
-            </div>
+            <div class="text-center">  {!! str_replace('/?', '?', $experts->render()) !!} </div>
         </div>
         @include('theme::layout.top_user_menu')
 
