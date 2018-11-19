@@ -4,6 +4,7 @@
 
 @section('css')
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
+    <link href="{{ asset('/static/js/editormd/css/editormd.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -18,7 +19,16 @@
             <input type="hidden" id="editor_token" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group  @if($errors->has('content')) has-error @endif">
-                <div id="answer_editor">{!! old('content',$answer->content) !!}</div>
+                <?php 
+                    $mdcontent = htmlspecialchars(old('content','')); 
+                    if ($mdcontent == '') {
+                        $mdcontent = $answer->content;
+                    }
+                ?>
+                <textarea id="md_editor_content" style="display:none;">{{ $mdcontent }}</textarea>
+                <div id="md_editor">
+                    <textarea style="display:none;" name="content"></textarea>
+                </div>
                 @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
             </div>
             <div class="row mt-20">
@@ -38,7 +48,6 @@
                     </ul>
                 </div>
                 <div class="col-xs-12 col-md-1">
-                    <input type="hidden" id="answer_editor_content"  name="content" value="{{ $answer->content }}"  />
                     <button type="submit" class="btn btn-primary pull-right editor-submit" >保存修改</button>
                 </div>
             </div>
@@ -49,23 +58,19 @@
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
+    <script src="{{ asset('/static/js/editormd/editormd.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             /*回答编辑器初始化*/
-            $('#answer_editor').summernote({
-                lang: 'zh-CN',
-                height: 240,
-                placeholder:'撰写答案',
-                toolbar: [ {!! config('tipask.summernote.ask') !!} ],
-                callbacks: {
-                    onChange:function (contents, $editable) {
-                        var code = $(this).summernote("code");
-                        $("#answer_editor_content").val(code);
-                    },
-                    onImageUpload: function(files) {
-                        upload_editor_image(files[0],'answer_editor');
-                    }
-                }
+            editormd("md_editor", {
+	            path: "/static/js/editormd/lib/",
+                height: 640,
+                syncScrolling: "single",
+                saveHTMLToTextarea: true, 
+                appendMarkdown: $("#md_editor_content").text(),
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: "/image/upload"
             });
         });
     </script>

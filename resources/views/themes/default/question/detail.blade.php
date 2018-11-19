@@ -7,6 +7,7 @@
 @section('css')
     <link href="{{ asset('/static/js/fancybox/jquery.fancybox.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
+    <link href="{{ asset('/static/js/editormd/css/editormd.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -32,9 +33,8 @@
                     @if( $question->price > 0 && $question->status == 1 )
                         <div class="alert alert-question" role="alert">回答问题即可获得 <b>{{ Setting()->get('credits_answer',0) }}</b> 经验值，回答被采纳后即可获得 <b class="text-gold">{{ (intval(Setting()->get('coins_answers')) + $question->price) }} </b>金币。</div>
                     @endif
-                    <div class="text-fmt ">
-                        {!! $question->description !!}
-                    </div>
+                    <textarea id="md_view_content" style="display:none;">{{ $question->description }}</textarea>
+                    <div id="md_view"></div>
 
                     <div class="post-opt mt-10">
                         <ul class="list-inline text-muted">
@@ -75,9 +75,8 @@
                                 <span class="pull-right text-muted adopt_time">{{ timestamp_format($bestAnswer->adopted_at) }}</span>
                             </h3>
                         </div>
-                        <div class="text-fmt">
-                            {!! $bestAnswer->content !!}
-                        </div>
+                        <textarea id="md_bestAnswer_content" style="display:none;">{{ $bestAnswer->content }}</textarea>
+                        <div id="md_bestAnswer_view"></div>
                         <div class="options clearfix mt-10">
                             <ul class="list-inline pull-right">
                                 <li class="pull-right">
@@ -126,7 +125,7 @@
 
                 <h2 class="h4 post-title">@if($question->status===2) 其它 @endif {{ $answers->total() }} 个回答</h2>
 
-                @foreach( $answers as $answer )
+                @foreach( $answers as $key=>$answer )
                     <div class="media">
                         <div class="media-left">
                             <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="avatar-link user-card" target="_blank">
@@ -148,7 +147,8 @@
                                 @if($answer->user->authentication && $answer->user->authentication->status === 1)
                                     <span class="text-muted">擅长：{{ $answer->user->authentication->skill }}</span>
                                 @endif
-                                <div class="text-fmt mt-10 mb-10">{!! $answer->content !!}</div>
+                                <textarea id="md_answer_content{{ $key }}" style="display:none;">{{ $answer->content }}</textarea>
+                                <div class="text-fmt mt-10 mb-10" id="md_answer_view{{ $key }}"></div>
                             </div>
                             <div class="media-footer">
                                 <ul class="list-inline mb-20">
@@ -194,7 +194,13 @@
                             <input type="hidden" id="answer_token" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" value="{{ $question->id }}" id="question_id" name="question_id" />
                             <div class="form-group  @if($errors->has('content')) has-error @endif">
-                                <div id="answer_editor">{!! old('content','') !!}</div>
+                                <?php 
+                                    $mdcontent = htmlspecialchars(old('content','')); 
+                                ?>
+                                <textarea id="md_editor_content" style="display:none;">{{ $mdcontent }}</textarea>
+                                <div id="md_editor">
+                                    <textarea style="display:none;" name="content"></textarea>
+                                </div>
                                 @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
                             </div>
 
@@ -208,7 +214,6 @@
                                     </ul>
                                 </div>
                                 <div class="col-xs-12 col-md-2">
-                                    <input type="hidden" id="answer_editor_content"  name="content" value="{{ old('content','') }}"  />
                                     <button type="submit" class="btn btn-primary pull-right">提交回答</button>
                                 </div>
                             </div>
@@ -373,6 +378,14 @@
     <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/static/js/tipask/summernote-ext-attach.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/static/js/fancybox/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('/static/js/editormd/editormd.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/marked.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/prettify.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/raphael.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/underscore.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/sequence-diagram.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/flowchart.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/jquery.flowchart.min.js')}}"></script>
     <script type="text/javascript">
         var invitation_timer = null;
         var question_id = "{{ $question->id }}";
@@ -395,21 +408,81 @@
             @endif
 
             /*回答编辑器初始化*/
-            $('#answer_editor').summernote({
-                lang: 'zh-CN',
-                height: 160,
-                placeholder:'撰写答案',
-                toolbar: [ {!! config('tipask.summernote.ask') !!} ],
-                callbacks: {
-                    onChange:function (contents, $editable) {
-                        var code = $(this).summernote("code");
-                        $("#answer_editor_content").val(code);
-                    },
-                    onImageUpload:function(files) {
-                        upload_editor_image(files[0],'answer_editor');
-                    }
-                }
-            });
+            if ($("#md_editor").length > 0) {
+                editormd("md_editor", {
+                    path: "/static/js/editormd/lib/",
+                    height: 640,
+                    syncScrolling: "single",
+                    saveHTMLToTextarea: true, 
+                    appendMarkdown: $("#md_editor_content").text(),
+                    imageUpload: true,
+                    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                    imageUploadURL: "/image/upload"
+                });
+            };
+            
+            if ($("#md_view").length > 0) {
+                /** 问题mdview */
+                editormd.markdownToHTML("md_view", {
+                    path: "/static/js/editormd/lib/",
+                    markdown        : $("#md_view_content").text(),
+                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    //toc             : false,
+                    tocm            : true,    // Using [TOCM]
+                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                    //gfm             : false,
+                    //tocDropdown     : true,
+                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true,  // 默认不解析
+                });
+            };
+
+            @foreach( $answers as $key=>$answer )
+            /** 问题回答mdview */
+            editormd.markdownToHTML("md_answer_view{{ $key }}", {
+                path: "/static/js/editormd/lib/",
+                markdown        : $("#md_answer_content{{ $key }}").text(),
+                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                //toc             : false,
+                tocm            : true,    // Using [TOCM]
+                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                //gfm             : false,
+                //tocDropdown     : true,
+                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true,  // 默认不解析
+            }); 
+            @endforeach 
+
+            @if($question->status===2 && $bestAnswer)
+            /** 问题回答mdview */
+            editormd.markdownToHTML("md_bestAnswer_view", {
+                path: "/static/js/editormd/lib/",
+                markdown        : $("#md_bestAnswer_content").text(),
+                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                //toc             : false,
+                tocm            : true,    // Using [TOCM]
+                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                //gfm             : false,
+                //tocDropdown     : true,
+                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true,  // 默认不解析
+            }); 
+            @endif
 
             /*评论提交*/
             $(".comment-btn").click(function(){

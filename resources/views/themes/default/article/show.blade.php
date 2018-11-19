@@ -5,6 +5,7 @@
 @section('seo_description'){{ parse_seo_template('seo_article_description',$article) }}@endsection
 @section('css')
     <link href="{{ asset('/static/js/fancybox/jquery.fancybox.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/static/js/editormd/css/editormd.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="row mt-10">
@@ -22,9 +23,8 @@
                     <div class="quote mb-20">
                          {{ $article->summary }}
                     </div>
-                    <div class="text-fmt">
-                        {!! $article->content !!}
-                    </div>
+                    <textarea id="md_view_content" style="display:none;">{{ $article->content }}</textarea>
+                    <div id="md_view"></div>
                     <div class="post-opt mt-30">
                         <ul class="list-inline text-muted">
                             <li>
@@ -134,12 +134,38 @@
 @section('script')
     @include('theme::layout.qrcode_pament',['source_id'=>'article-'.$article->id,'paymentUser'=>$article->user,'message'=>'如果觉得我的文章对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
     <script type="text/javascript" src="{{ asset('/static/js/fancybox/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('/static/js/editormd/editormd.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/marked.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/prettify.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/raphael.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/underscore.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/sequence-diagram.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/flowchart.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/jquery.flowchart.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var article_id = "{{ $article->id }}";
             /*评论默认展开*/
             load_comments('article',article_id);
             $("#comments-article-"+article_id).collapse('show');
+
+            editormd.markdownToHTML("md_view", {
+                path: "/static/js/editormd/lib/",
+                markdown        : $("#md_view_content").text(),
+                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                //toc             : false,
+                tocm            : true,    // Using [TOCM]
+                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                //gfm             : false,
+                //tocDropdown     : true,
+                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true,  // 默认不解析
+            });
 
             /*评论提交*/
             $(".comment-btn").click(function(){

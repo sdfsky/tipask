@@ -59,7 +59,7 @@ class AnswerController extends Controller
         }
 
         $this->validate($request,$this->validateRules);
-        $answerContent = clean($request->input('content'));
+        $answerContent = htmlspecialchars($request->input('content'));
         $data = [
             'user_id'      => $loginUser->id,
             'question_id'      => $question_id,
@@ -155,7 +155,7 @@ class AnswerController extends Controller
 
         $this->validate($request,$this->validateRules);
 
-        $answer->content = clean($request->input('content'));
+        $answer->content = htmlspecialchars($request->input('content'));
         $answer->status = 1;
 
         $answer->save();

@@ -6,7 +6,7 @@
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
     <link href="{{ asset('/static/js/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/static/js/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet">
-
+    <link href="{{ asset('/static/js/editormd/css/editormd.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -27,8 +27,17 @@
                 @if($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
             </div>
             <div class="form-group  @if($errors->has('description')) has-error @endif">
-                <label for="question_editor">问题描述(选填)</label>
-                <div id="question_editor">{!! old('description',$question->description) !!}</div>
+                <label for="md_editor">问题描述(选填)</label>
+                <?php 
+                    $mdcontent = htmlspecialchars(old('description','')); 
+                    if ($mdcontent == '') {
+                        $mdcontent = $question->description;
+                    }
+                ?>
+                <textarea id="md_editor_content" style="display:none;">{{ $mdcontent }}</textarea>
+                <div id="md_editor">
+                    <textarea style="display:none;" name="description"></textarea>
+                </div>
                 @if($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif
             </div>
             <div class="row">
@@ -65,7 +74,6 @@
                     </ul>
                 </div>
                 <div class="col-xs-12 col-md-1">
-                    <input type="hidden" id="question_editor_content"  name="description" value="{{ $question->description }}"  />
                     <button type="submit" class="btn btn-primary pull-right">确认修改</button>
                 </div>
 
@@ -79,25 +87,20 @@
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script src="{{ asset('/static/js/select2/js/select2.min.js')}}"></script>
-
+    <script src="{{ asset('/static/js/editormd/editormd.min.js')}}"></script>
     <script type="text/javascript">
         var category_id = "{{ $question->category_id }}";
 
         $(document).ready(function() {
-            $('#question_editor').summernote({
-                lang: 'zh-CN',
-                height: 180,
-                placeholder:'您可以在这里继续补充问题细节',
-                toolbar: [ {!! config('tipask.summernote.ask') !!} ],
-                callbacks: {
-                    onChange:function (contents, $editable) {
-                        var code = $(this).summernote("code");
-                        $("#question_editor_content").val(code);
-                    },
-                    onImageUpload: function(files) {
-                        upload_editor_image(files[0],'question_editor');
-                    }
-                }
+            editormd("md_editor", {
+	            path: "/static/js/editormd/lib/",
+                height: 640,
+                syncScrolling: "single",
+                saveHTMLToTextarea: true, 
+                appendMarkdown: $("#md_editor_content").text(),
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: "/image/upload"
             });
 
             $("#category_id option").each(function(){

@@ -6,6 +6,7 @@
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
     <link href="{{ asset('/static/js/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/static/js/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/static/js/editormd/css/editormd.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -40,8 +41,17 @@
 
 
             <div class="form-group  @if($errors->has('content')) has-error @endif">
-                <label for="article_editor">文章正文：</label>
-                <div id="article_editor">{!! old('content', $article->content) !!}</div>
+                <label for="md_editor">文章正文：</label>
+                <?php 
+                    $mdcontent = htmlspecialchars(old('content','')); 
+                    if ($mdcontent == '') {
+                        $mdcontent = $article->content;
+                    }
+                ?>
+                <textarea id="md_editor_content" style="display:none;">{{ $mdcontent }}</textarea>
+                <div id="md_editor">
+                    <textarea style="display:none;" name="content"></textarea>
+                </div>
                 @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
             </div>
 
@@ -83,7 +93,6 @@
                     </ul>
                 </div>
                 <div class="col-xs-12 col-md-1">
-                    <input type="hidden" id="article_editor_content"  name="content" value="{{ $article->content }}"  />
                     <button type="submit" class="btn btn-primary pull-right editor-submit">提交修改</button>
                 </div>
             </div>
@@ -96,25 +105,20 @@
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script src="{{ asset('/static/js/select2/js/select2.min.js')}}"></script>
-
+    <script src="{{ asset('/static/js/editormd/editormd.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var category_id = "{{ $article->category_id }}";
 
-            $('#article_editor').summernote({
-                lang: 'zh-CN',
-                height: 350,
-                placeholder:'撰写文章',
-                toolbar: [ {!! config('tipask.summernote.blog') !!} ],
-                callbacks: {
-                    onChange:function (contents, $editable) {
-                        var code = $(this).summernote("code");
-                        $("#article_editor_content").val(code);
-                    },
-                    onImageUpload: function(files) {
-                        upload_editor_image(files[0],'article_editor');
-                    }
-                }
+            editormd("md_editor", {
+	            path: "/static/js/editormd/lib/",
+                height: 640,
+                syncScrolling: "single",
+                saveHTMLToTextarea: true, 
+                appendMarkdown: $("#md_editor_content").text(),
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: "/image/upload"
             });
 
 
