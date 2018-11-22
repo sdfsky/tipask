@@ -42,8 +42,8 @@ return [
         'follow_user' => '关注了你',
     ],
     'summernote'=>[
-        'ask' => "['common', ['style','bold','ol','link','picture','clear','fullscreen']]",
-        'blog' => "['common', ['style','bold','color','ol', 'paragraph','table','link','picture','clear','fullscreen']]",
+        'ask' => "['common', ['style','bold','ol','link','picture','attachment','video','clear','codeview','fullscreen']]",
+        'blog' => "['common', ['style','bold','color','ol', 'paragraph','table','video','link','picture','attachment','clear','codeview','fullscreen']]",
     ],
 
     'upload' =>[

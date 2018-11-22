@@ -436,7 +436,9 @@ Route::get('ajax/unreadMessages',['as'=>'website.ajax.unreadMessages','uses'=>'A
 
 Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|middle|big|origin).jpg']);
 Route::get('image/show/{image_name}',['as'=>'website.image.show','uses'=>'ImageController@show']);
+Route::post('attach/upload',['as'=>'website.attach.upload','uses'=>'AttachController@upload']);
 
 Route::Group(['middleware'=>'auth'],function(){
     Route::post('image/upload',['as'=>'website.image.upload','uses'=>'ImageController@upload']);
+    Route::get('attach/download/{name}',['as'=>'website.attach.download','uses'=>'AttachController@download']);
 });
