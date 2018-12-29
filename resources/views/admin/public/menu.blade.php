@@ -83,6 +83,7 @@
             <li><a href="{{ route('admin.setting.xunSearch') }}"><i class="fa fa-circle-o"></i> XunSearch</a></li>
             <li><a href="{{ route('admin.setting.oauth') }}"><i class="fa fa-circle-o"></i>一键登录</a></li>
             <li><a href="{{ route('admin.setting.geetest') }}"><i class="fa fa-circle-o"></i>极验证整合</a></li>
+            <li><a href="{{ route('admin.setting.shenjian') }}"><i class="fa fa-circle-o"></i>神箭手采集</a></li>
         </ul>
     </li>
 

@@ -314,4 +314,15 @@ class SettingController extends AdminController
         }
         return view('admin.setting.geetest');
     }
+
+    // 神箭手
+    public function shenjian(Request $request){
+        if($request->isMethod('post')){
+            $_ENV['SHENJIAN_PASSWORD'] = $request->input('shenjian_password','shenjian.io');
+            $_ENV['SHENJIAN_UNIQUE'] = $request->input('shenjian_unique',0);
+            Setting()->writeToEnv();
+            return $this->success(route('admin.setting.shenjian'),'配置保存成功');
+        }
+        return view('admin.setting.shenjian');
+    }
 }

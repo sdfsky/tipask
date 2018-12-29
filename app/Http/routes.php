@@ -264,6 +264,16 @@ Route::Group(['namespace'=>'Shop'],function(){
 
 });
 
+// 第三方模块
+Route::Group(['namespace'=>'Vendor'],function (){
+    /**神箭手发布*/
+    Route::get("shenjian/version",function(){ta_success(ta_version(),"success");});
+    Route::post("shenjian/details",['as'=>'admin.shenjianshou.details','uses'=>'ShenJianShouController@details']);
+    Route::post("shenjian/details",['as'=>'admin.shenjianshou.article','uses'=>'ShenJianShouController@article']);
+    Route::post("shenjian/details",['as'=>'admin.shenjianshou.question','uses'=>'ShenJianShouController@question']);
+    Route::get("tt/{id}",['as'=>'admin.shenjianshou.tt','uses'=>'ShenJianShouController@tt']);
+});
+
 
 
 /*后台管理部分处理*/
@@ -332,6 +342,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     Route::any('setting/xunSearch',['as'=>'admin.setting.xunSearch','uses'=>'SettingController@xunSearch']);
     /*geetest*/
     Route::any('setting/geetest',['as'=>'admin.setting.geetest','uses'=>'SettingController@geetest']);
+    /**神箭手*/
+    Route::any('setting/shenjian',['as'=>'admin.setting.shenjian','uses'=>'SettingController@shenjian']);
     /*oauth2.0*/
     Route::any('setting/oauth',['as'=>'admin.setting.oauth','uses'=>'SettingController@oauth']);
 
@@ -413,7 +425,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*XunSearch索引管理*/
     Route::get("xunSearch/clear",['as'=>'admin.xunSearch.clear','uses'=>'XunSearchController@clear']);
     Route::get("xunSearch/rebuild",['as'=>'admin.xunSearch.rebuild','uses'=>'XunSearchController@rebuild']);
-
 
 
 });
