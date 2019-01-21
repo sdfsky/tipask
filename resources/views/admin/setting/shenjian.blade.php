@@ -24,11 +24,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">发布密码:</label>
-                                <input type="text" class="form-control" name="password" value="{{ Setting()->get('shenjian_password')?:"shenjian.io" }}"  />
+                                <input type="text" class="form-control" name="shenjian_password" value="{{ Setting()->get('shenjian_password')?:"shenjian.io" }}"  />
                             </div>
                             <div class="form-group">
                                 <label for="password">是否标题去重:</label>
-                                <input type="checkbox" name="unique" value="1" {{ Setting()->get('shenjian_unique')?"checked":"" }} /> (不重复插入相同标题)
+                                <input type="checkbox" name="shenjian_unique" value="1" {{ Setting()->get('shenjian_unique')?"checked":"" }} /> (不重复插入相同标题)
                             </div>
                         </div>
                         <div class="box-footer">

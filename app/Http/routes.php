@@ -269,8 +269,8 @@ Route::Group(['namespace'=>'Vendor'],function (){
     /**神箭手发布*/
     Route::get("shenjian/version",function(){ta_success(ta_version(),"success");});
     Route::post("shenjian/details",['as'=>'admin.shenjianshou.details','uses'=>'ShenJianShouController@details']);
-    Route::post("shenjian/details",['as'=>'admin.shenjianshou.article','uses'=>'ShenJianShouController@article']);
-    Route::post("shenjian/details",['as'=>'admin.shenjianshou.question','uses'=>'ShenJianShouController@question']);
+    Route::post("shenjian/article",['as'=>'admin.shenjianshou.article','uses'=>'ShenJianShouController@article']);
+    Route::post("shenjian/question",['as'=>'admin.shenjianshou.question','uses'=>'ShenJianShouController@question']);
     Route::get("tt/{id}",['as'=>'admin.shenjianshou.tt','uses'=>'ShenJianShouController@tt']);
 });
 

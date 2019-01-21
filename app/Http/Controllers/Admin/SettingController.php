@@ -320,6 +320,10 @@ class SettingController extends AdminController
         if($request->isMethod('post')){
             $_ENV['SHENJIAN_PASSWORD'] = $request->input('shenjian_password','shenjian.io');
             $_ENV['SHENJIAN_UNIQUE'] = $request->input('shenjian_unique',0);
+            $data = $request->except('_token');
+            foreach($data as $name => $value){
+                Setting()->set($name,$value);
+            }
             Setting()->writeToEnv();
             return $this->success(route('admin.setting.shenjian'),'配置保存成功');
         }
