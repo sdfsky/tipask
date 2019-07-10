@@ -65,7 +65,7 @@ class InstallerController extends Controller
             $env_path = base_path('.env');
 
             if (!file_exists($env_path)){
-                if(touch($env_path)){
+                if(!touch($env_path)){
                     return $this->error(route('website.installer.config'),'配置文件创建失败，请在网站根目录创建名称 .env 空文件文件并添加读写权限！');
                 }
             }
