@@ -116,7 +116,7 @@ class ArticleController extends Controller
                 $message = '文章发布成功！为了确保文章的质量，我们会对您发布的文章进行审核。请耐心等待......';
             }
 
-            $this->counter( 'article_num_'. $article->user_id , 1 , 3600 );
+            $this->counter( 'article_num_'. $article->user_id , 1 , 60 );
 
 
             return $this->success(route('blog.article.detail',['id'=>$article->id]),$message);

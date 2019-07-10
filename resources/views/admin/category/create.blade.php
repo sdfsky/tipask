@@ -15,7 +15,14 @@
                 <div class="box box-default">
                     <form role="form" name="addForm" method="POST"  action="{{ route('admin.category.store') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="parent_id" value="{{ $parentCategory['id'] }}">
                         <div class="box-body">
+
+                            <div class="form-group @if($errors->has('name')) has-error @endif">
+                                <label>上级分类</label>
+                                <input type="text" name="name" class="form-control" disabled  value="{{ $parentCategory['name'] }}">
+                                @if($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
+                            </div>
 
                             <div class="form-group @if($errors->has('name')) has-error @endif">
                                 <label>分类名称</label>

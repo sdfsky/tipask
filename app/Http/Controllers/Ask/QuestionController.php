@@ -159,7 +159,7 @@ class QuestionController extends Controller
                 $message = '问题发布成功！为了确保问答的质量，我们会对您的提问内容进行审核。请耐心等待......';
             }
 
-            $this->counter( 'question_num_'. $question->user_id , 1 , 3600 );
+            $this->counter( 'question_num_'. $question->user_id , 1 , 60 );
 
             return $this->success(route('ask.question.detail',['question_id'=>$question->id]),$message);
 
@@ -343,7 +343,7 @@ class QuestionController extends Controller
         ]);
 
         if($invitation){
-            $this->counter('question_invite_num_'.$loginUser->id);
+            $this->counter('question_invite_num_'.$loginUser->id, 1);
             $subject = $loginUser->name."在「".Setting()->get('website_name')."」向您发起了回答邀请";
             $message = "我在 ".Setting()->get('website_name')." 上遇到了问题「".$question->title."」 → ".route("ask.question.detail",['question_id'=>$question->id])."，希望您能帮我解答 ";
             $this->sendEmail($invitation->send_to,$subject,$message);

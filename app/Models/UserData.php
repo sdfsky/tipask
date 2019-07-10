@@ -19,7 +19,7 @@ class UserData extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'coins','credits','authentication_status','last_login_ip','registered_at','last_visit'];
+    protected $fillable = ['user_id', 'coins', 'credits', 'authentication_status', 'last_login_ip', 'registered_at', 'last_visit'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -33,12 +33,12 @@ class UserData extends Model
     public static function activeInArticles($size=8)
     {
 
-        $list = Cache::remember('active_in_articles',10,function() use($size) {
+        $list = Cache::remember('active_in_articles', 10, function () use ($size) {
             return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
-                          ->where('users.status','>',0)->where('user_data.articles','>',0)
-                          ->orderBy('user_data.articles','DESC')
-                          ->orderBy('users.created_at','DESC')
-                          ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
+                          ->where('users.status', '>', 0)->where('user_data.articles', '>', 0)
+                          ->orderBy('user_data.articles', 'DESC')
+                          ->orderBy('users.created_at', 'DESC')
+                          ->select('users.id', 'user_data.user_id', 'users.name', 'users.title', 'user_data.coins', 'user_data.credits', 'user_data.followers', 'user_data.supports', 'user_data.answers', 'user_data.articles', 'user_data.authentication_status')
                           ->take($size)->get();
         });
 
@@ -51,11 +51,11 @@ class UserData extends Model
     public static function activities($size)
     {
         return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
-            ->where('users.status','>',0)
-            ->orderBy('user_data.answers','DESC')
-            ->orderBy('user_data.articles','DESC')
-            ->orderBy('users.updated_at','DESC')
-            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
+            ->where('users.status', '>', 0)
+            ->orderBy('user_data.answers', 'DESC')
+            ->orderBy('user_data.articles', 'DESC')
+            ->orderBy('users.updated_at', 'DESC')
+            ->select('users.id', 'user_data.user_id', 'users.name', 'users.title', 'user_data.coins', 'user_data.credits', 'user_data.followers', 'user_data.supports', 'user_data.answers', 'user_data.articles', 'user_data.authentication_status')
             ->take($size)->get();
     }
 
@@ -66,9 +66,9 @@ class UserData extends Model
     public static function topCoins($size)
     {
         return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
-            ->where('users.status','>',0)->where('user_data.articles','>',0)
-            ->orderBy('user_data.coins','DESC')
-            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
+            ->where('users.status', '>', 0)->where('user_data.articles', '>', 0)
+            ->orderBy('user_data.coins', 'DESC')
+            ->select('users.id', 'user_data.user_id', 'users.name', 'users.title', 'user_data.coins', 'user_data.credits', 'user_data.followers', 'user_data.supports', 'user_data.answers', 'user_data.articles', 'user_data.authentication_status')
             ->take($size)->get();
     }
 
@@ -77,10 +77,10 @@ class UserData extends Model
     public static function  top($type,$size)
     {
         return  self::leftJoin('users', 'users.id', '=', 'user_data.user_id')
-            ->where('users.status','>',0)
-            ->orderBy('user_data.'.$type,'DESC')
-            ->orderBy('user_data.last_visit','DESC')
-            ->select('users.id','users.name','users.title','user_data.coins','user_data.credits','user_data.followers','user_data.supports','user_data.answers','user_data.articles','user_data.authentication_status')
+            ->where('users.status', '>', 0)
+            ->orderBy('user_data.'.$type, 'DESC')
+            ->orderBy('user_data.last_visit', 'DESC')
+            ->select('users.id', 'user_data.user_id', 'users.name', 'users.title', 'user_data.coins', 'user_data.credits', 'user_data.followers', 'user_data.supports', 'user_data.answers', 'user_data.articles', 'user_data.authentication_status')
             ->take($size)->get();
     }
 
@@ -88,17 +88,7 @@ class UserData extends Model
     /*用户采纳率*/
     public function adoptPercent()
     {
+        if ($this->answers == 0) return 0;
         return round($this->adoptions / $this->answers, 2) * 100;
     }
-
-
-
-
-
-
-
-
-
-
-
 }

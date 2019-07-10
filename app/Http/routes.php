@@ -264,6 +264,16 @@ Route::Group(['namespace'=>'Shop'],function(){
 
 });
 
+// 第三方模块
+Route::Group(['namespace'=>'Vendor'],function (){
+    /**神箭手发布*/
+    Route::get("shenjian/version",function(){ta_success(ta_version(),"success");});
+    Route::post("shenjian/details",['as'=>'admin.shenjianshou.details','uses'=>'ShenJianShouController@details']);
+    Route::post("shenjian/article",['as'=>'admin.shenjianshou.article','uses'=>'ShenJianShouController@article']);
+    Route::post("shenjian/question",['as'=>'admin.shenjianshou.question','uses'=>'ShenJianShouController@question']);
+    Route::get("tt/{id}",['as'=>'admin.shenjianshou.tt','uses'=>'ShenJianShouController@tt']);
+});
+
 
 
 /*后台管理部分处理*/
@@ -332,6 +342,8 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     Route::any('setting/xunSearch',['as'=>'admin.setting.xunSearch','uses'=>'SettingController@xunSearch']);
     /*geetest*/
     Route::any('setting/geetest',['as'=>'admin.setting.geetest','uses'=>'SettingController@geetest']);
+    /**神箭手*/
+    Route::any('setting/shenjian',['as'=>'admin.setting.shenjian','uses'=>'SettingController@shenjian']);
     /*oauth2.0*/
     Route::any('setting/oauth',['as'=>'admin.setting.oauth','uses'=>'SettingController@oauth']);
 
@@ -415,7 +427,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     Route::get("xunSearch/rebuild",['as'=>'admin.xunSearch.rebuild','uses'=>'XunSearchController@rebuild']);
 
 
-
 });
 
 
@@ -436,7 +447,9 @@ Route::get('ajax/unreadMessages',['as'=>'website.ajax.unreadMessages','uses'=>'A
 
 Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|middle|big|origin).jpg']);
 Route::get('image/show/{image_name}',['as'=>'website.image.show','uses'=>'ImageController@show']);
+Route::post('attach/upload',['as'=>'website.attach.upload','uses'=>'AttachController@upload']);
 
 Route::Group(['middleware'=>'auth'],function(){
     Route::post('image/upload',['as'=>'website.image.upload','uses'=>'ImageController@upload']);
+    Route::get('attach/download/{name}',['as'=>'website.attach.download','uses'=>'AttachController@download']);
 });

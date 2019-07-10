@@ -247,12 +247,13 @@ abstract class Controller extends BaseController
      * 业务层计数器
      * @param $key 计数器key
      * @param null $step 级数步子
-     * @param int $expiration 有效期
+     * @param int $expiration 有效期，单位分钟
      * @return Int count
      */
-    protected function counter($key,$step=null,$expiration=86400){
+    protected function counter($key,$step=null,$expiration=1440){
 
-        $count = Cache::get($key,0);
+        /*计数从1开始*/
+        $count = Cache::get($key,1);
         /*直接获取值*/
         if( $step === null ){
             return $count;
@@ -260,7 +261,7 @@ abstract class Controller extends BaseController
 
         $count = $count + $step;
 
-        Cache::put($key,$count,$expiration);
+        Cache::has($key) ? Cache::increment($key, $step) : Cache::put($key,$count,$expiration);
 
         return $count;
 

@@ -46,6 +46,10 @@
                                             <td><span class="label @if($category->status===0) label-danger  @else label-success @endif">{{ trans_common_status($category->status) }}</span> </td>
                                             <td>
                                                 <div class="btn-group-xs" >
+                                                    @if( $category->grade < 3 )
+                                                        <a class="btn btn-default" href="{{ route('admin.category.index',['parent_id'=>$category->id]) }}" data-toggle="tooltip" title="查看子分类"><i class="fa fa-bars" aria-hidden="true"></i> 查看</a>
+                                                        <a class="btn btn-warning" href="{{ route('admin.category.create',['parent_id'=>$category->id]) }}" data-toggle="tooltip" title="添加子分类"><i class="fa fa-plus-circle" aria-hidden="true"></i> 添加</a>
+                                                    @endif
                                                     <a class="btn btn-primary" href="{{ route('admin.category.edit',['id'=>$category->id]) }}" data-toggle="tooltip" title="编辑分类信息"><i class="fa fa-edit" aria-hidden="true"></i> 编辑</a>
                                                 </div>
                                             </td>

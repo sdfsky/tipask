@@ -17,8 +17,6 @@ class Category extends Model
 
         /*添加事件监听*/
         static::creating(function($category){
-            $category->parent_id = 0 ;
-            $category->grade = 1;
         });
 
         /*监听删除事件*/
@@ -122,6 +120,45 @@ class Category extends Model
         }
         return $categories;
 
+    }
+
+    public static function getParentCategories($categoryId)
+    {
+        if (!$categoryId) {
+            return [];
+        }
+        $allCategories = self::loadFromCache('all');
+        $category = self::findFromCache($categoryId);
+        $parentId = $category->parent_id;
+        $parentCategories[] = $category;
+        while (true) {
+            foreach ($allCategories as $key => $value) {
+                if ($value->id == $parentId) {
+                    $parentId = $value->parent_id;
+                    array_unshift($parentCategories, $value); //将父分类插入到数组第一个元素前
+                }
+            }
+            if ($parentId == 0) {
+                break;
+            }
+        }
+        return $parentCategories;
+    }
+
+    /**
+     * 查找一个分类信息
+     * @param $categoryId
+     * @return bool|mixed
+     */
+    public static function findFromCache($categoryId)
+    {
+        $categories = self::loadFromCache('all');
+        foreach ($categories as $category) {
+            if ($categoryId == $category->id) {
+                return $category;
+            }
+        }
+        return false;
     }
 
 }
