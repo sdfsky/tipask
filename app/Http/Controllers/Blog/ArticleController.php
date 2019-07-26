@@ -72,7 +72,7 @@ class ArticleController extends Controller
             'user_id'      => $loginUser->id,
             'category_id'      => intval($request->input('category_id',0)),
             'title'        => trim($request->input('title')),
-            'content'  => clean($request->input('content')),
+            'content'  => htmlspecialchars($request->input('content')),
             'summary'  => $request->input('summary'),
             'status'       => 1,
         ];
@@ -222,7 +222,7 @@ class ArticleController extends Controller
         $this->validate($request,$this->validateRules);
 
         $article->title = trim($request->input('title'));
-        $article->content = clean($request->input('content'));
+        $article->content = htmlspecialchars($request->input('content'));
         $article->summary = $request->input('summary');
         $article->category_id = $request->input('category_id',0);
 

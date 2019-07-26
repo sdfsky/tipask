@@ -118,7 +118,7 @@ class QuestionController extends Controller
             'user_id'      => $loginUser->id,
             'category_id'      => $request->input('category_id',0),
             'title'        => trim($request->input('title')),
-            'description'  => clean($request->input('description')),
+            'description'  => htmlspecialchars($request->input('description')),
             'price'        => $price,
             'hide'         => intval($request->input('hide')),
             'status'       => 1,
@@ -218,7 +218,7 @@ class QuestionController extends Controller
 
         $this->validate($request,$this->validateRules);
         $question->title = trim($request->input('title'));
-        $question->description = clean($request->input('description'));
+        $question->description = htmlspecialchars($request->input('description'));
         $question->hide = intval($request->input('hide'));
         $question->category_id = $request->input('category_id',0);
 
@@ -347,7 +347,7 @@ class QuestionController extends Controller
             $subject = $loginUser->name."在「".Setting()->get('website_name')."」向您发起了回答邀请";
             $message = "我在 ".Setting()->get('website_name')." 上遇到了问题「".$question->title."」 → ".route("ask.question.detail",['question_id'=>$question->id])."，希望您能帮我解答 ";
             $this->sendEmail($invitation->send_to,$subject,$message);
-
+            
             // 记录通知
             $this->notify($loginUser->id, $toUser->id, 'invite_answer', $question->title, $question->id);
             return $this->ajaxSuccess('success');

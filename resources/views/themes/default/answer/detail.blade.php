@@ -6,6 +6,7 @@
 
 @section('css')
     <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
+    <link href="{{ asset('/static/js/editormd/css/editormd.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -28,9 +29,8 @@
                     </ul>
                 @endif
                 <div class="description mt-10">
-                    <div class="text-fmt ">
-                        {!! $question->description !!}
-                    </div>
+                    <textarea id="md_view_content" style="display:none;">{{ $question->description }}</textarea>
+                    <div id="md_view"></div>
 
                     <div class="post-opt mt-10">
                         <ul class="list-inline">
@@ -70,7 +70,9 @@
                                 @endif
                                 <span class="answer-time text-muted hidden-xs">{{ timestamp_format($answer->created_at) }}</span>
                             </div>
-                            <div class="content"><p>{!! $answer->content !!}</p></div>
+                            <textarea id="md_answer_content" style="display:none;">{{ $answer->content }}</textarea>
+                            <div id="md_answer_view"></div>
+
                             <div class="media-footer">
                                 <ul class="list-inline mb-20">
                                     <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
@@ -203,6 +205,14 @@
 
 @section('script')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/editormd/editormd.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/marked.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/prettify.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/raphael.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/underscore.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/sequence-diagram.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/flowchart.min.js')}}"></script>
+    <script src="{{ asset('/static/js/editormd/lib/jquery.flowchart.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             @if(Auth()->check())
@@ -221,6 +231,48 @@
                 }
             });
             @endif
+
+            if ($("#md_view").length > 0) {
+                /** 问题mdview */
+                editormd.markdownToHTML("md_view", {
+                    path: "/static/js/editormd/lib/",
+                    markdown        : $("#md_view_content").text(),
+                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    //toc             : false,
+                    tocm            : true,    // Using [TOCM]
+                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                    //gfm             : false,
+                    //tocDropdown     : true,
+                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true,  // 默认不解析
+                });
+            };
+
+            if ($("#md_answer_view").length > 0) {
+                /** 问题mdview */
+                editormd.markdownToHTML("md_answer_view", {
+                    path: "/static/js/editormd/lib/",
+                    markdown        : $("#md_answer_content").text(),
+                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    //toc             : false,
+                    tocm            : true,    // Using [TOCM]
+                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                    //gfm             : false,
+                    //tocDropdown     : true,
+                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true,  // 默认不解析
+                });
+            };
 
 
             /*评论提交*/
