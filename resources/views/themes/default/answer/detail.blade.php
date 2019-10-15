@@ -59,7 +59,7 @@
                 <div class="media">
                         <div class="media-left">
                             <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="avatar-link user-card" target="_blank">
-                                <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($answer->user_id,'middle') }}" alt="{{ $answer->user['name'] }}"></a>
+                                <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($answer->user_id,'middle') }}" alt="{{ $answer->user['name'] }}">
                             </a>
                         </div>
                         <div class="media-body">
@@ -70,15 +70,17 @@
                                 @endif
                                 <span class="answer-time text-muted hidden-xs">{{ timestamp_format($answer->created_at) }}</span>
                             </div>
-                            <div class="content"><p>{!! $answer->content !!}</p></div>
+                            <div class="content">
+                                <div class="text-fmt mt-10 mb-10">{!! $answer->content !!}</div>
+                            </div>
                             <div class="media-footer">
                                 <ul class="list-inline mb-20">
                                     <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
                                     @if(Auth()->check())
-                                        @if($question->status!==2 &&  (Auth()->user()->id === $answer->user_id  || Auth()->user()->is('admin')))
+                                        @if($question->status!==2 &&  (Auth()->user()->id === $answer->user_id  || Auth()->user()->can('admin.login')))
                                             <li><a href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="继续完善回答内容"><i class="fa fa-edit"></i> 编辑</a></li>
                                         @endif
-                                        @if($question->status!==2 &&  (Auth()->user()->id === $question->user_id || Auth()->user()->is('admin') ))
+                                        @if($question->status!==2 &&  (Auth()->user()->id === $question->user_id || Auth()->user()->can('admin.login') ))
                                             <li><a href="#" class="adopt-answer" data-toggle="modal" data-target="#adoptAnswer" data-answer_id="{{ $answer->id }}" data-answer_content="{{ str_limit($answer->content,200) }}"><i class="fa fa-check-square-o"></i> 采纳为最佳答案</a></li>
                                         @endif
                                     @endif

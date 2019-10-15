@@ -16,16 +16,24 @@ use Illuminate\Http\Request;
 class CreditController extends AdminController
 {
 
-    public function index(){
+    public function index(Request $request){
+        $filter['user_id'] = $request->input('user_id','');
+        $filter['action'] = $request->input('action','');
+        $filter['date_range'] = $request->input('date_range','');
         $query = Credit::query();
         $query->where(function($query){
             $query->where('credits','<>',0)
-                  ->orWhere('coins','<>',0);
+                ->orWhere('coins','<>',0);
         });
         /*充值人过滤*/
         if( isset($filter['user_id']) &&  $filter['user_id'] > 0 ){
             $query->where('user_id','=',$filter['user_id']);
         }
+        /*类型过滤*/
+        if( isset($filter['action']) &&  $filter['action']){
+            $query->where('action','=',$filter['action']);
+        }
+
         /*时间过滤*/
         if( isset($filter['date_range']) && $filter['date_range'] ){
             $query->whereBetween('created_at',explode(" - ",$filter['date_range']));
@@ -34,8 +42,9 @@ class CreditController extends AdminController
         $credits->map(function($credit){
             $credit->actionText = config('tipask.user_actions.'.$credit->action);
         });
-        return view('admin.credit.index')->with(compact('credits'));
+        return view('admin.credit.index')->with(compact('credits','filter'));
     }
+
 
     public function create(){
         return view('admin.credit.create');

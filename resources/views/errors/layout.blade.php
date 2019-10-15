@@ -7,8 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <meta name="author" content="Tipask Team" />
-    <meta name="copyright" content="2016 tipask.com" />
-    {!! Setting()->get('website_header') !!}
+    <meta name="copyright" content="2018 tipask.com" />
     <link href="{{ asset('/static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/static/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
     <style>
@@ -54,7 +53,6 @@
 <script src="{{ asset('/static/js/jquery.min.js') }}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ asset('/static/css/bootstrap/js/bootstrap.min.js') }}"></script>
-{!! Setting()->get('website_footer') !!}
 
 </body>
 </html>

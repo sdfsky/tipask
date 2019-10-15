@@ -13,7 +13,7 @@ class Doing extends Model
     protected $fillable = ['user_id', 'action','source_type','source_id','subject','content','refer_id','refer_user_id','refer_content','created_at'];
     public $timestamps = false;
 
-    static function correlation(User $user)
+    public static function concerned(User $user)
     {
       $attentions = $user->attentions()->get();
       $tags = $questions = $users = [];
@@ -28,7 +28,7 @@ class Doing extends Model
           }
       }
 
-        /*追加用户标签*/
+      /*追加用户标签*/
       foreach( $user->tags()->get() as $tag ){
           $tags[] = $tag->id;
       }
@@ -53,6 +53,10 @@ class Doing extends Model
              //->where('attentions.created_at','<','doings.created_at')
              ->select('doings.*')
              ->orderBy('doings.created_at','DESC');
+    }
+
+   public static function newest(){
+        return self::where("source_type","=","App\Models\Question")->orderBy('created_at','desc');
     }
 
 

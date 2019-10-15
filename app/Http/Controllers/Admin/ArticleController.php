@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
+use App\Models\Category;
+use App\Services\CreditService;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -45,8 +48,12 @@ class ArticleController extends AdminController
         }
 
         /*分类过滤*/
+        /*分类过滤*/
         if( $filter['category_id']> 0 ){
-            $query->where('category_id','=',$filter['category_id']);
+            $category = Category::findFromCache($filter['category_id']);
+            if($category){
+                $query->whereIn('category_id',$category->getSubIds());
+            }
         }
 
 
@@ -84,6 +91,13 @@ class ArticleController extends AdminController
     public function verify(Request $request)
     {
         $articleIds = $request->input('id');
+        // 积分策略
+        $articles = Article::whereIn('id',$articleIds)->where('status','<>',1)->select('id','user_id','title')->get();
+        if (!empty($articles)){
+            foreach ($articles as $article){
+                CreditService::create($article->user_id,'create_article',Setting()->get('coins_write_article'),Setting()->get('credits_write_article'),$article->id,$article->title);
+            }
+        }
         Article::whereIn('id',$articleIds)->update(['status'=>1]);
         return $this->success(route('admin.article.index').'?status=0','文章审核成功');
 
@@ -108,7 +122,21 @@ class ArticleController extends AdminController
      */
     public function destroy(Request $request)
     {
-        Article::destroy($request->input('id'));
+        $articleIds = $request->input('ids');
+        // 给文章所有者发送站内通知
+        $ids = explode(',',$articleIds);
+        if ($request->input('report_type') == 99){
+            $reason = $request->input('reason');
+        }else{
+            $reason = trans_report_type($request->input('report_type'));
+        }
+        foreach ($ids as $id){
+            $article = Article::find($id);
+            // 记录到通知
+            NotificationService::notify(Auth()->user()->id, $article->user_id, 'remove_article', $article->title, $article->id, $reason);
+            Article::destroy($id);
+        }
+//        Article::destroy($request->input('id'));
         return $this->success(route('admin.article.index'),'文章删除成功');
     }
 }

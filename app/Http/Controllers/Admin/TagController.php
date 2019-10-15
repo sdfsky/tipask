@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,12 @@ class TagController extends AdminController
         }
 
         /*分类过滤*/
+        /*分类过滤*/
         if( $filter['category_id']> 0 ){
-            $query->where('category_id','=',$filter['category_id']);
+            $category = Category::findFromCache($filter['category_id']);
+            if($category){
+                $query->whereIn('category_id',$category->getSubIds());
+            }
         }
 
         $tags = $query->orderBy('updated_at','desc')->paginate(20);

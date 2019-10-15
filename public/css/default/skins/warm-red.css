@@ -1,0 +1,50 @@
+a{color:#f4645f;text-decoration:none}
+a:focus,a:hover{color:#d15854;text-decoration:underline;}
+.navbar-inverse{background-color:#f4645f;border-color:#d15854}
+
+.navbar-inverse .navbar-nav>li>a{color:#fff}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:focus,.navbar-inverse .navbar-nav>.active>a:hover{background-color:#d15854}
+.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a:focus,.navbar-inverse .navbar-nav>.open>a:hover{background-color:#d15854}
+.navbar-inverse .navbar-toggle:focus,.navbar-inverse .navbar-toggle:hover{background-color:#d15854}
+.navbar-inverse .navbar-toggle{border-color:#d15854}
+.navbar-inverse .navbar-collapse,.navbar-inverse .navbar-form{border-color:#d15854}
+.header-response .bottom-nav .active{color:#f4645f}
+.header-response .fa-user,.header-response .fa-search{color:#fff;}
+@media (max-width: 767px){.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {color: #fff;}}
+@media (max-width: 767px){.navbar-inverse .navbar-nav .open .dropdown-menu .divider {background-color: #d15854;}}
+.nav-child .tag.active{background-color:#f4645f;color:#fff;text-decoration:none}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{background-color:#f4645f;}
+.space-nav li.active a{background-color:#F6F6F6;color:#f4645f}
+
+.list-group-item.active,.list-group-item.active:focus,.list-group-item.active:hover{z-index:2;color:#fff;background-color:#f4645f;border-color:#f4645f}
+.list-group-item.active .list-group-item-text,.list-group-item.active:focus .list-group-item-text,.list-group-item.active:hover .list-group-item-text{color:#67ffc7}
+
+.widget-links-item a{margin-right:6px;color:#333;}
+.widget-links-item a:hover{text-decoration:underline;}
+.widget-message-item.active, .widget-messages-item:hover {text-decoration: none;color: #f4645f;background-color: #F6F6F6}
+.widget-message-item.active .badge, .widget-message-item:hover .badge {background-color: #f4645f}
+
+.tag{display:inline-block;padding:0 8px;color:#f4645f;background-color:#E7F2ED;height:24px;line-height:24px;font-weight:400;font-size:13px;text-align:center}
+.tag[href]:focus,.tag[href]:hover{background-color:#f4645f;color:#fff;text-decoration:none}
+.widget-category .list a{display:block;padding:0 10px;text-decoration:none;}
+.widget-category .list a:hover{color:#d15854;}
+.widget-category .active a{background:#f4645f;border-color:#f4645f;color:#fff;border-radius: 5px;}
+.widget-category .active a:hover{color:#e3faf3}
+.stream-list-item .title a{color:#333}
+.stream-list-item .title a:hover{color:#f4645f}
+.stream-list-item .title a:visited{font-weight:400}
+.streams-item .title a{color:#333;}
+.streams-item .title a:hover{color:#f4645f;}
+.bookmark-rank .answered,.qa-rank .answered{background-color:#f4645f;color:#fff}
+
+/*buttons*/
+.btn-primary{border-color:#d15854;background-color:#f4645f;color:#fff;}
+.btn-primary.active,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.btn-primary.dropdown-toggle{border-color:#00432a;background-color:#d15854;color:#fff;}
+.btn-primary.active,.btn-primary:active,.open>.btn-primary.dropdown-toggle{background-image:none;}
+.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary,fieldset[disabled] .btn-primary.active,fieldset[disabled] .btn-primary:active,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover{border-color:#d15854;background-color:#f4645f;}
+.btn-primary .badge{background-color:#fff;color:#f4645f;}
+.btn-success{border-color:#4cae4c;background-color:#5cb85c;color:#fff;}
+
+.pagination>li>a,.pagination>li>span{position:relative;float:left;margin-left:-1px;padding:6px 12px;border:1px solid #ddd;background-color:#fff;color:#f4645f;text-decoration:none;line-height:1.5;}
+.pagination>li>a:focus,.pagination>li>a:hover,.pagination>li>span:focus,.pagination>li>span:hover{border-color:#ddd;background-color:#eee;color:#d15854;}
+.pagination>.active>a,.pagination>.active>a:focus,.pagination>.active>a:hover,.pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover{z-index:2;border-color:#f4645f;background-color:#f4645f;color:#fff;cursor:default;}

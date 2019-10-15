@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\Cache;
 class UserOauth extends Model
 {
     use BelongsToUserTrait;
+    public $incrementing = false;
     protected $table = 'user_oauth';
     protected $primaryKey = 'id';
+
+
 
     /**
      * The attributes that are mass assignable.

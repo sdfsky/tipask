@@ -5,9 +5,10 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
-            <h2 class="h4  mt-30">
-                最新动态
-            </h2>
+            <ul class="nav nav-tabs mb-10 mt-20">
+                <li @if($filter==='newest') class="active" @endif ><a href="{{ route('auth.doing.index') }}">最新的</a></li>
+                <li @if($filter==='concerned') class="active" @endif><a href="{{ route('auth.doing.index',['filter'=>'concerned']) }}">关注的</a></li>
+            </ul>
             <div class="widget-streams">
                 @foreach($doings as $doing)
                 <section class="hover-show streams-item">

@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Area;
 use App\Models\Authentication;
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\User;
+use App\Services\SmsService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -43,12 +48,64 @@ class AuthenticationController extends AdminController
             $query->where('id_card','=',$filter['id_card']);
         }
 
-        if( $filter['category_id'] > 0 ){
-            $query->where('category_id','=',$filter['category_id']);
+        /*分类过滤*/
+        if( $filter['category_id']> 0 ){
+            $category = Category::findFromCache($filter['category_id']);
+            if($category){
+                $query->whereIn('category_id',$category->getSubIds());
+            }
         }
-
         $authentications = $query->orderBy('updated_at','desc')->paginate(20);
         return view('admin.authentication.index')->with(compact('filter','authentications'));
+    }
+
+    public function create(){
+        $provinces = Area::provinces();
+        return view('admin.authentication.create')->with(compact('provinces'));
+    }
+
+    public function store(Request $request){
+        $request->flash();
+        $this->validateRules['user_id'] = 'required|integer|unique:authentications';
+        $this->validate($request,$this->validateRules);
+        $userId = $request->input('user_id');
+        $authUser = User::find($userId);
+        if(!$authUser){
+            return $this->error(route('admin.authentication.create'),'申请认证的用户不存在，请核实user_id');
+        }
+
+        $data = $request->all();
+        if(isset($data['is_recommend']) && $data['is_recommend'] ==1){
+            $data['recommend_at'] = Carbon::now();
+        }
+
+        if($request->hasFile('id_card_image')){
+            $savePath = storage_path('app/authentications');
+            $file = $request->file('id_card_image');
+            $fileName = uniqid(str_random(8)).'.'.$file->getClientOriginalExtension();
+            $target = $file->move($savePath,$fileName);
+            if($target){
+                $data['id_card_image'] = 'authentications-'.$fileName;
+            }
+        }
+
+        if($request->hasFile('skill_image')){
+            $savePath = storage_path('app/authentications');
+            $file = $request->file('skill_image');
+            $fileName = uniqid(str_random(8)).'.'.$file->getClientOriginalExtension();
+            $target = $file->move($savePath,$fileName);
+            if($target){
+                $data['skill_image'] = 'authentications-'.$fileName;
+            }
+        }
+
+        $authentication = Authentication::create($data);
+        if($authentication){
+            Tag::multiSave($request->input('skill'),$request->user());
+        }
+
+        return $this->success(route('admin.authentication.index'),'行家认证信添加成功');
+
     }
 
 
@@ -84,10 +141,16 @@ class AuthenticationController extends AdminController
         if(!$authentication){
             return $this->error(route('admin.authentication.index'),'行家认证信息不存在，请核实');
         }
+        $request->flash();
+        $oldStatus = $authentication->status;
         $this->validateRules['id_card'] = 'required|max:64|unique:authentications,id_card,'.$authentication->user_id.',user_id';
         $this->validate($request,$this->validateRules);
 
         $data = $request->all();
+        $data['recommend_at'] = null;
+        if(isset($data['is_recommend']) && $data['is_recommend'] ==1){
+            $data['recommend_at'] = Carbon::now();
+        }
         if ($request->hasFile('id_card_image')) {
             $savePath = storage_path('app/authentications');
             $file = $request->file('id_card_image');
@@ -108,7 +171,20 @@ class AuthenticationController extends AdminController
             }
         }
 
-        $authentication->update($data);
+        $result = $authentication->update($data);
+
+        if($result){
+            Tag::multiSave($request->input('skill'),$request->user());
+            /*认证成功短信通知*/
+            if($authentication->status == 1 && $oldStatus == 0 ){
+                SmsService::sendSms($authentication->user->mobile,Setting()->get('sms_expert_success_template'),['real_name'=>$authentication->real_name]);
+            }
+            /*认证失败短信通知*/
+            if($authentication->status == 4 && $oldStatus == 0 ){
+                SmsService::sendSms($authentication->user->mobile,Setting()->get('sms_expert_fail_template'),['real_name'=>$authentication->real_name]);
+            }
+        }
+
         return $this->success(route('admin.authentication.index'),'行家认证信息修改成功');
 
 
@@ -137,4 +213,11 @@ class AuthenticationController extends AdminController
         Authentication::destroy($ids);
         return $this->success(route('admin.authentication.index'),'行家认证信息删除成功');
     }
+
+    public function recommend(Request $request){
+        $ids = $request->input('id');
+        Authentication::whereIn('user_id', $ids)->where('status','>', 0)->update(['recommend_at'=>Carbon::now()]);
+        return $this->success(route('admin.authentication.index'),'行家推荐显示成功！');
+    }
+
 }

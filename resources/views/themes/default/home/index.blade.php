@@ -2,7 +2,7 @@
 @section('seo_title'){{ parse_seo_template('seo_index_title','default') }}@endsection
 @section('jumbotron')
     @if(Auth()->guest())
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center hidden-xs">
         <h4>{{ Setting()->get('website_welcome','现在加入Tipask问答网，一起记录站长的世界') }} <a class="btn btn-primary ml-10" href="{{ route('auth.user.register') }}" role="button">立即注册</a> <a class="btn btn-default ml-5" href="{{ route('auth.user.login') }}" role="button">用户登录</a></h4>
     </div>
     @endif
@@ -51,14 +51,14 @@
                     </div>
                 </div>
             </div>
-            <div class="widget-box">
+            <div class="widget-box border-top">
                 <div class="job-list-item row">
                     <div class="col-md-6">
                         <h4 class="widget-box-title">最新问题 <a href="{{ route('website.ask',['category_slug'=>'all','filter'=>'newest']) }}" target="_blank" title="更多">»</a> </h4>
                         <ul class="widget-links list-unstyled">
                             @foreach($newestQuestions as $newQuestion)
                             <li class="widget-links-item">
-                                <a title="{{ $newQuestion->title }}" target="_blank"  href="{{ route('ask.question.detail',['id'=>$newQuestion->id]) }}">{{ $newQuestion->title }}</a>
+                                <a title="{{ $newQuestion->title }}" target="_blank"  href="{{ route('ask.question.detail',['id'=>$newQuestion->id]) }}">{{ str_limit($newQuestion->title,42) }}</a>
                                 <small class="text-muted">{{ $newQuestion->answers }} 回答</small>
                             </li>
                             @endforeach
@@ -72,43 +72,15 @@
                             @foreach($rewardQuestions as $rewardQuestion)
                                 <li class="widget-links-item">
                                     <span class="text-gold"><i class="fa fa-database"></i> {{ $rewardQuestion->price }}</span>
-                                     <a target="_blank" title="{{ $rewardQuestion->title }}" href="{{ route('ask.question.detail',['id'=>$rewardQuestion->id]) }}">{{ $rewardQuestion->title }}</a>
+                                     <a target="_blank" title="{{ $rewardQuestion->title }}" href="{{ route('ask.question.detail',['id'=>$rewardQuestion->id]) }}">{{ str_limit($rewardQuestion->title,42) }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
-
-            <div class="widget-box">
-                <div class="job-list-item row">
-                    <div class="col-md-6">
-                        <h4 class="widget-box-title">热门文章 <a href="{{ route('website.blog',['category_slug'=>'all','filter'=>'hottest']) }}" title="更多">»</a></h4>
-                        <ul class="widget-links list-unstyled">
-                            @foreach($hotArticles as $hotArticle)
-                                <li class="widget-links-item">
-                                    <a title="{{ $hotArticle->title }}" target="_blank"  href="{{ route('blog.article.detail',['id'=>$hotArticle->id]) }}">{{ $hotArticle->title }}</a>
-                                    <small class="text-muted">{{ $hotArticle->views }} 浏览</small>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 class="widget-box-title">最新文章 <a href="{{ route('website.blog',['category_slug'=>'all','filter'=>'newest']) }}" title="更多">»</a></h4>
-                        <ul class="widget-links list-unstyled">
-                            @foreach($newestArticles as $newestArticle)
-                                <li class="widget-links-item">
-                                    <a title="{{ $newestArticle->title }}" target="_blank"  href="{{ route('blog.article.detail',['id'=>$newestArticle->id]) }}">{{ $newestArticle->title }}</a>
-                                    <small class="text-muted">{{ $newestArticle->views }} 浏览</small>
-                                </li>
-                            @endforeach
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
             @if($hotExperts)
-                <div class="widget-box clearfix">
+                <div class="widget-box clearfix border-top">
                     <h4 class="widget-box-title">推荐专家 <a href="{{ route('website.experts') }}" title="更多">»</a></h4>
                     <div class="row row-horizon">
                         @foreach($hotExperts as $expert)
@@ -126,46 +98,92 @@
                     </div>
                 </div>
             @endif
-
+            <div class="widget-box border-top">
+                <div class="job-list-item row">
+                    <div class="col-md-6">
+                        <h4 class="widget-box-title">热门文章 <a href="{{ route('website.blog',['category_slug'=>'all','filter'=>'hottest']) }}" title="更多">»</a></h4>
+                        <ul class="widget-links list-unstyled">
+                            @foreach($hotArticles as $hotArticle)
+                                <li class="widget-links-item">
+                                    <a title="{{ $hotArticle->title }}" target="_blank"  href="{{ route('blog.article.detail',['id'=>$hotArticle->id]) }}">{{ str_limit($hotArticle->title,42) }}</a>
+                                    <small class="text-muted">{{ $hotArticle->views }} 浏览</small>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="widget-box-title">最新文章 <a href="{{ route('website.blog',['category_slug'=>'all','filter'=>'newest']) }}" title="更多">»</a></h4>
+                        <ul class="widget-links list-unstyled">
+                            @foreach($newestArticles as $newestArticle)
+                                <li class="widget-links-item">
+                                    <a title="{{ $newestArticle->title }}" target="_blank"  href="{{ route('blog.article.detail',['id'=>$newestArticle->id]) }}">{{ str_limit($newestArticle->title,42) }}</a>
+                                    <small class="text-muted">{{ $newestArticle->views }} 浏览</small>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @if($hotUsers)
+                <div class="widget-box clearfix border-top widget-user-box">
+                    <h4 class="widget-box-title">活跃用户 <a href="{{ route('website.user') }}" title="更多">»</a></h4>
+                    <ul class="user-list">
+                        @foreach($hotUsers as $hotUser)
+                            <li>
+                                <a href="{{ route('auth.space.index',['id'=>$hotUser->user_id]) }}" target="_blank" title="{{ $hotUser->user->name }}"><img class="avatar-50" src="{{ get_user_avatar($hotUser->user_id,'big') }}" alt="{{ $hotUser->user->name }}"></a>
+                                <span class="username"><a href="{{ route('auth.space.index',['id'=>$hotUser->user_id]) }}" title="{{$hotUser->user->name}}">{{ str_limit($hotUser->user->name,6,'')}}</a></span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
-        <div class="col-xs-12 col-md-3 side">
+        <div class="col-md-3 hidden-xs side">
             <div class="side-alert alert alert-link">
                 <a href="{{ route('ask.question.create') }}" class="btn btn-warning btn-block">我要提问</a>
                 <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block">分享经验</a>
             </div>
             @if(Setting()->get('open_user_sign'))
-                <div class="side-sign alert alert-link">
-                    <ul class="sign-box">
-                        @if(Auth()->check() && Auth()->user()->isSigned())
-                            <dt><button class="btn btn-primary btn-large" disabled>已签到</button></dt>
-                        @else
-                            <dt><a href="{{ route('auth.user.sign') }}" class="btn btn-primary btn-large">签&nbsp;&nbsp;到</a></dt>
-                        @endif
-                        <dd>
-                            <p>{{ $signDate->toDateString() }}</p>
-                            <p>{{ trans_day_of_week($signDate->dayOfWeek) }}</p>
-                        </dd>
-                    </ul>
-                </div>
+            <div class="side-sign alert alert-link">
+                <ul class="sign-box">
+                    @if(Auth()->check() && Auth()->user()->isSigned())
+                    <dt><button class="btn btn-primary btn-large" disabled>已签到</button></dt>
+                    @else
+                    <dt><a href="{{ route('auth.user.sign') }}" class="btn btn-primary btn-large">签&nbsp;&nbsp;到</a></dt>
+                    @endif
+                    <dd>
+                        <p>{{ $signDate->toDateString() }}</p>
+                        <p>{{ trans_day_of_week($signDate->dayOfWeek) }}</p>
+                    </dd>
+                </ul>
+            </div>
             @endif
             @include('theme::layout.auth_menu')
-
             <div class="widget-box">
                 <h4 class="widget-box-title">最新公告</h4>
                 <ul class="widget-links list-unstyled">
                     @foreach($newestNotices as $newestNotice)
                     <li class="widget-links-item">
-                        <a title="{{ $newestNotice->subject }}" href="{{ $newestNotice->url }}">{{ $newestNotice->subject }}</a>
+                        <a title="{{ $newestNotice->subject }}" href="{{ $newestNotice->url }}" @if($newestNotice->style) {!! $newestNotice->style !!} @endif >{{ $newestNotice->subject }}</a>
                     </li>
                     @endforeach
                 </ul>
             </div>
-
+            @if(config('services.weapp.open'))
+                <div class="widget-box text-center">
+                    <p class="text-danger">{{Setting()->get('weapp_app_slogan','微信扫一扫，打开小程序')}}</p>
+                    <ul class="widget-links list-unstyled">
+                        <li class="widget-links-item">
+                            <img  alt="小程序码" width="80%" src="{{ route('website.image.show',['image_name'=> Setting()->get('weapp_qrcode_image')]) }}" />
+                        </li>
+                    </ul>
+                </div>
+            @endif
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热议话题 <a href="{{ route('website.topic') }}" title="更多">»</a></h2>
                 <ul class="taglist-inline multi">
                     @foreach($hotTags as $hotTag)
-                        <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['id'=>$hotTag->tag_id]) }}" target="_blank">{{ $hotTag->name }}</a></li>
+                    <li class="tagPopup"><a class="tag" data-toggle="popover"  href="{{ route('ask.tag.index',['id'=>$hotTag->tag_id]) }}" target="_blank">{{ $hotTag->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

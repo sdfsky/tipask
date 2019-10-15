@@ -18,7 +18,8 @@
                                     <a href="{{ route('ask.question.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="发起提问"><i class="fa fa-plus"></i></a>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.question.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
                                     <button class="btn btn-default btn-sm" title="移动分类"  data-toggle="modal" data-target="#change_category_modal" ><i data-toggle="tooltip" title="移动分类" class="fa fa-bars" aria-hidden="true"></i></button>
-                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.question.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                    <button class="btn btn-default btn-sm" title="删除选中项"  data-toggle="modal" data-target="#send_report_modal" ><i data-toggle="tooltip" title="删除选中项" class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    {{--<button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.question.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>--}}
                                 </div>
                             </div>
                             <div class="col-xs-10">
@@ -83,7 +84,7 @@
                                             <td>{{ $question->user->name }}<span class="text-muted">[UID:{{ $question->user_id }}]</span></td>
                                             <td>{{ $question->answers }} / {{ $question->views }}</td>
                                             <td>{{ timestamp_format($question->created_at) }}</td>
-                                            <td><span class="label @if($question->status===0) label-danger @elseif($question->status===1) label-warning @else label-success @endif">{{ trans_question_status($question->status) }}</span> </td>
+                                            <td><span class="label @if($question->status===0) label-danger @elseif($question->status== -1) label-default @elseif($question->status===1) label-warning @else label-success @endif">{{ trans_question_status($question->status) }}</span> </td>
                                             <td>
                                                 <div class="btn-group-xs" >
                                                     <a class="btn btn-default" target="_blank" href="{{ route('ask.question.edit',['id'=>$question->id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
@@ -102,13 +103,14 @@
                                     <a href="{{ route('ask.question.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="发起提问"><i class="fa fa-plus"></i></a>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.question.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
                                     <button class="btn btn-default btn-sm" title="移动分类"  data-toggle="modal" data-target="#change_category_modal" ><i data-toggle="tooltip" title="移动分类" class="fa fa-bars" aria-hidden="true"></i></button>
-                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.question.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                    <button class="btn btn-default btn-sm" title="删除选中项"  data-toggle="modal" data-target="#send_report_modal" ><i data-toggle="tooltip" title="删除选中项" class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    {{--<button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.question.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>--}}
                                 </div>
                             </div>
                             <div class="col-sm-9">
                                 <div class="text-right">
                                     <span class="total-num">共 {{ $questions->total() }} 条数据</span>
-                                    {!! str_replace('/?', '?', $questions->render()) !!}
+                                    {!! str_replace('/?', '?', $questions->appends($filter)->links()) !!}
                                 </div>
                             </div>
                         </div>
@@ -123,6 +125,7 @@
 
 @section('script')
     @include("admin.public.change_category_modal",['type'=>'questions','form_id'=>'item_form','form_action'=>route('admin.question.changeCategories')])
+    @include("admin.public.report_modal",['type'=>'questions','form_id'=>'item_form','form_action'=>route('admin.question.destroy')])
     <script type="text/javascript">
         set_active_menu('manage_content',"{{ route('admin.question.index') }}");
     </script>

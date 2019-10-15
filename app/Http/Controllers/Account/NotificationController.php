@@ -19,7 +19,7 @@ class NotificationController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $notifications = Notification::where('to_user_id',$request->user()->id)->orderBy('created_at','DESC')->paginate(10);
+        $notifications = Notification::where('to_user_id',$request->user()->id)->orderBy('created_at','DESC')->paginate(12);
         $notifications->map(function($notification){
           $notification->type_text = Config::get('tipask.notification_types.'.$notification->type);
         });

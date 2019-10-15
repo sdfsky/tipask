@@ -5,8 +5,7 @@
     </div>
 @else
 <div class="form-group @if ($errors->first('captcha')) has-error @endif">
-    <label for="captcha" class="required">验证码</label>
-    <input type="text" class="form-control" id="captcha" name="captcha" required="" placeholder="请输入下方的验证码">
+    <input type="text" class="form-control" id="captcha" name="captcha" autocomplete="off" required="" placeholder="请输入下方的验证码">
     @if ($errors->first('captcha'))
         <span class="help-block">{{ $errors->first('captcha') }}</span>
     @endif

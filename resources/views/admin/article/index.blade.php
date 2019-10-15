@@ -18,7 +18,9 @@
                                     <a href="{{ route('blog.article.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="创建新文章"><i class="fa fa-plus"></i></a>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.article.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
                                     <button class="btn btn-default btn-sm" title="移动分类"  data-toggle="modal" data-target="#change_category_modal" ><i data-toggle="tooltip" title="移动分类" class="fa fa-bars" aria-hidden="true"></i></button>
-                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.article.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                    <button class="btn btn-default btn-sm" title="删除选中项"  data-toggle="modal" data-target="#send_report_modal" ><i data-toggle="tooltip" title="删除选中项" class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+                                    {{--<button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.article.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>--}}
                                 </div>
                             </div>
                             <div class="col-xs-10">
@@ -98,13 +100,14 @@
                                     <a href="{{ route('blog.article.create') }}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" title="创建新文章"><i class="fa fa-plus"></i></a>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.article.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
                                     <button class="btn btn-default btn-sm" title="移动分类"  data-toggle="modal" data-target="#change_category_modal" ><i data-toggle="tooltip" title="移动分类" class="fa fa-bars" aria-hidden="true"></i></button>
-                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.article.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                    <button class="btn btn-default btn-sm" title="删除选中项"  data-toggle="modal" data-target="#send_report_modal" ><i data-toggle="tooltip" title="删除选中项" class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    {{--<button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.article.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>--}}
                                 </div>
                             </div>
                             <div class="col-sm-9">
                                 <div class="text-right">
                                     <span class="total-num">共 {{ $articles->total() }} 条数据</span>
-                                    {!! str_replace('/?', '?', $articles->render()) !!}
+                                    {!! str_replace('/?', '?', $articles->appends($filter)->links()) !!}
                                 </div>
                             </div>
                         </div>
@@ -120,6 +123,7 @@
 
 @section('script')
     @include("admin.public.change_category_modal",['type'=>'articles','form_id'=>'item_form','form_action'=>route('admin.article.changeCategories')])
+    @include("admin.public.report_modal",['type'=>'article','form_id'=>'item_form','form_action'=>route('admin.article.destroy')])
     <script type="text/javascript">
         set_active_menu('manage_content',"{{ route('admin.article.index') }}");
     </script>

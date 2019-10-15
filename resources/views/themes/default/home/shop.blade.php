@@ -1,12 +1,16 @@
 @extends('theme::layout.public')
-
-@section('seo_title')商城 @if($goods->currentPage()>1)- 第{{ $goods->currentPage() }}页@endif - {{ Setting()->get('website_name') }}@endsection
-
-
+@section('seo_title')商城 @if($goods->currentPage()>1)- 第{{ $goods->currentPage() }}页 @endif - {{ Setting()->get('website_name') }} @endsection
 @section('content')
-    <h1 class="h3">积分商城<br><small></small></h1>
-    <div class="row  mt-20">
+    <div class="row mt-20">
         <div class="col-xs-12 col-md-9 main">
+            <ul class="nav nav-tabs mb-20 mt-20">
+                <li role="presentation" @if($categorySlug == 'all') class="active" @endif ><a href="{{ route('website.shop') }}">全部</a></li>
+                @foreach( $categories as $category )
+                    @if($category->parent_id == 0)
+                        <li role="presentation" @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.shop',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                    @endif
+                @endforeach
+            </ul>
             @foreach( $goods as $good )
             <section class="col-sm-6 col-md-4">
                 <div class="thumbnail">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Answer;
+use App\Services\CreditService;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -81,6 +83,13 @@ class AnswerController extends AdminController
     public function verify(Request $request)
     {
         $answerIds = $request->input('id');
+        // 积分策略
+        $answers = Answer::whereIn('id',$answerIds)->where('status','<>',1)->select('id','user_id','question_title')->get();
+        if (!empty($answers)){
+            foreach ($answers as $answer){
+                CreditService::create($answer->user_id,'answer',Setting()->get('coins_answer'),Setting()->get('credits_answer'),$answer->id,$answer->question_title);
+            }
+        }
         Answer::whereIn('id',$answerIds)->update(['status'=>1]);
         return $this->success(route('admin.answer.index').'?status=0','回答审核成功');
 
@@ -93,7 +102,21 @@ class AnswerController extends AdminController
      */
     public function destroy(Request $request)
     {
-        Answer::destroy($request->input('id'));
+        $answerIds = $request->input('ids');
+        // 给文章所有者发送站内通知
+        $ids = explode(',',$answerIds);
+        if ($request->input('report_type') == 99){
+            $reason = $request->input('reason');
+        }else{
+            $reason = trans_report_type($request->input('report_type'));
+        }
+        foreach ($ids as $id){
+            $answer = Answer::find($id);
+            // 记录到通知
+            NotificationService::notify(Auth()->user()->id, $answer->user_id, 'remove_answer', $answer->question_title, $answer->id, $reason);
+            Answer::destroy($id);
+        }
+//        Answer::destroy($request->input('id'));
         return $this->success(route('admin.answer.index'),'回答删除成功');
     }
 }

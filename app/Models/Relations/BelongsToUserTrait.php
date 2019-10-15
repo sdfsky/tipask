@@ -20,4 +20,14 @@ trait BelongsToUserTrait
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * Get the user relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function userData()
+    {
+        return $this->belongsTo('App\Models\UserData','user_id');
+    }
 }

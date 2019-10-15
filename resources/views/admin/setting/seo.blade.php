@@ -17,13 +17,14 @@
                         <ol>
                             <li>网站名称:wzmc（应用范围：所有位置）</li>
                             <li>网站口号:wzkh（应用范围：所有位置）</li>
-                            <li>话题列表:htlb（应用范围：问题、文章 查看页）</li>
+                            <li>话题列表:htlb（应用范围：问题、文章、课堂 查看页）</li>
                             <li>问题标题:wtbt（应用范围：问题查看页）</li>
                             <li>问题描述:wtms（应用范围：问题查看页）</li>
                             <li>问题状态:wtzt（应用范围：问题查看页）</li>
                             <li>文章标题:wzbt（应用范围：文章查看页）</li>
                             <li>文章摘要:wzzy（应用范围：文章查看页）</li>
-                            <li>话题名称:htmc（应用范围：话题查看页）</li>
+                            <li>课堂标题:ktbt (应用范围：课堂详情页面)</li>
+                            <li>课堂描述:ktms (应用范围：课堂详情页面)</li>
                             <li>话题名称:htmc（应用范围：话题查看页）</li>
                             <li>话题简介:htjj（应用范围：话题查看页）</li>
                         </ol>
@@ -103,6 +104,31 @@
                             <label for="seo_article_description">Meta Description</label>
                             <span class="text-muted">(给搜索引擎看的Description)</span>
                             <input type="text" class="form-control" name="seo_article_description" placeholder="Meta Description" value="{{ old('seo_article_description',Setting()->get('seo_article_description')) }}"  />
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">讲堂</h3>
+                    </div>
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="seo_video_title">Title</label>
+                            <span class="text-muted">(关键字将包含在每一个页面的title里面)</span>
+                            <input type="text" class="form-control" name="seo_video_title" placeholder="Title" value="{{ old('seo_video_title',Setting()->get('seo_video_title')) }}"  />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="seo_video_keyword">Meta keywords</label>
+                            <span class="text-muted">(给搜索引擎看的keywords)</span>
+                            <input type="text" class="form-control" name="seo_video_keyword" placeholder="Meta keywords" value="{{ old('seo_video_keyword',Setting()->get('seo_video_keyword')) }}"  />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="seo_video_description">Meta Description</label>
+                            <span class="text-muted">(给搜索引擎看的Description)</span>
+                            <input type="text" class="form-control" name="seo_video_description" placeholder="Meta Description" value="{{ old('seo_video_description',Setting()->get('seo_video_description')) }}"  />
                         </div>
                     </div>
                 </div>

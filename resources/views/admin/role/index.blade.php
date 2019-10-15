@@ -16,31 +16,18 @@
                         <div class="col-xs-2">
                              <div class="btn-group">
                                 <a href="{{ route('admin.role.create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="创建新角色"><i class="fa fa-plus"></i></a>
-                                <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_delete('确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                {{--<button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_delete('确认删除选中项？')"><i class="fa fa-trash-o"></i></button>--}}
                               </div>
-                        </div>
-                        <div class="col-xs-10">
-                            <div class="row">
-                                <form name="searchForm" action="{{ route('admin.role.index') }}" method="GET">
-                                    <div class="col-xs-3">
-                                        <input type="text" class="form-control" name="word" placeholder="角色名称" value="{{ $word }}"/>
-                                    </div>
-                                    <div class="col-xs-1">
-                                        <button type="submit" class="btn btn-primary">搜索</button>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                       </div>
                     </div>
                     <div class="box-body  no-padding">
                         <form name="itemForm" id="item_form" method="POST" action="{{ route('admin.role.destroy') }}">
-                            <input name="_method" type="hidden" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
-                                        <th><input type="checkbox" class="checkbox-toggle" /></th>
+                                        {{--<th><input type="checkbox" class="checkbox-toggle" /></th>--}}
                                         <th>角色名称</th>
                                         <th>唯一标示</th>
                                         <th>创建时间</th>
@@ -49,7 +36,7 @@
                                     </tr>
                                     @foreach($roles as $role)
                                         <tr>
-                                            <td><input type="checkbox" name="id[]" value="{{ $role->id }}"/></td>
+                                            {{--<td><input type="checkbox" name="id[]" value="{{ $role->id }}"/></td>--}}
                                             <td>{{ $role->name }}</td>
                                             <td>{{ $role->slug }}</td>
                                             <td>{{ $role->created_at }}</td>

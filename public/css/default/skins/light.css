@@ -1,0 +1,48 @@
+a{color:#007fff;text-decoration:none}
+a:focus,a:hover{color:#007fff;text-decoration:underline;}
+.navbar-inverse{background-color:#fff;border-color:#f1f1f1;font-size:16px;}
+.navbar-inverse .navbar-nav>li>a{color:#757575}
+.navbar-inverse .navbar-nav>li>a:focus,.navbar-inverse .navbar-nav>li>a:hover{color:#007fff;background-color:transparent}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:focus,.navbar-inverse .navbar-nav>.active>a:hover{background-color:#fff;color:#007fff;}
+.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a:focus,.navbar-inverse .navbar-nav>.open>a:hover{background-color:#f3f3f3;color:#007fff;}
+.navbar-inverse .navbar-toggle:focus,.navbar-inverse .navbar-toggle:hover{background-color:#f3f3f3}
+.navbar-inverse .navbar-toggle{border-color:#008151}
+.navbar-inverse .navbar-collapse,.navbar-inverse .navbar-form{border-color:#008151}
+.header-response .bottom-nav .active{color:#007fff}
+.header-response .fa-user,.header-response .fa-search{color:#007fff;}
+@media (max-width: 767px){.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {color: #007fff;}}
+@media (max-width: 767px){.navbar-inverse .navbar-nav .open .dropdown-menu .divider {background-color: #fff;}}
+.nav-child .tag.active{background-color:#0c0;color:#fff;text-decoration:none}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{background-color:#007fff;}
+.space-nav li.active a{background-color:#F6F6F6;color:#007fff}
+
+.list-group-item.active,.list-group-item.active:focus,.list-group-item.active:hover{z-index:2;color:#fff;background-color:#1c8bfc;border-color:#007fff}
+.list-group-item.active .list-group-item-text,.list-group-item.active:focus .list-group-item-text,.list-group-item.active:hover .list-group-item-text{color:#67ffc7}
+
+.widget-links-item a{margin-right:6px;color:#333;}
+.widget-links-item a:hover{text-decoration:underline;}
+.widget-message-item.active, .widget-messages-item:hover {text-decoration: none;color: #008E59;background-color: #F6F6F6}
+.widget-message-item.active .badge, .widget-message-item:hover .badge {background-color: #008E59}
+.tag{display:inline-block;padding:0 8px;color:#666;background-color:#f3f6f3;height:24px;line-height:24px;font-weight:400;font-size:13px;text-align:center}
+.tag[href]:focus,.tag[href]:hover{background-color:#0c0;color:#fff;text-decoration:none}
+.widget-category .list a{display:block;padding:0 10px;text-decoration:none;}
+.widget-category .list a:hover{color: #fff;background-color: #0c0;border-radius: 5px;}
+.widget-category .active a{color: #fff;background-color: #0c0;}
+.widget-category .active a:hover{color:#e3faf3}
+.stream-list-item .title a{color:#2e3135;}
+.stream-list-item .title a:hover{text-decoration: underline;}
+.streams-item .title a{color:#333;}
+.streams-item .title a:hover{color:#007fff;}
+.bookmark-rank .answered,.qa-rank .answered{background-color:#007fff;color:#fff}
+
+/*buttons*/
+.btn-primary{border-color:#0366ca;background-color:#007fff;color:#fff;}
+.btn-primary.active,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.btn-primary.dropdown-toggle{border-color:#0756a6;background-color:#0971da;color:#fff;}
+.btn-primary.active,.btn-primary:active,.open>.btn-primary.dropdown-toggle{background-image:none;}
+.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary,fieldset[disabled] .btn-primary.active,fieldset[disabled] .btn-primary:active,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover{border-color:#008151;background-color:#007fff;}
+.btn-primary .badge{background-color:#fff;color:#007fff;}
+.btn-success{border-color:#4cae4c;background-color:#5cb85c;color:#fff;}
+
+.pagination>li>a,.pagination>li>span{position:relative;float:left;margin-left:-1px;padding:6px 12px;border:1px solid #ddd;background-color:#fff;color:#007fff;text-decoration:none;line-height:1.5;}
+.pagination>li>a:focus,.pagination>li>a:hover,.pagination>li>span:focus,.pagination>li>span:hover{border-color:#ddd;background-color:#eee;color:#0366ca;}
+.pagination>.active>a,.pagination>.active>a:focus,.pagination>.active>a:hover,.pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover{z-index:2;border-color:#007fff;background-color:#007fff;color:#fff;cursor:default;}

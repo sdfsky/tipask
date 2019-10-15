@@ -5,15 +5,22 @@ namespace App\Http\Controllers\Account;
 use App\Models\Area;
 use App\Models\Authentication;
 use App\Models\EmailToken;
+use App\Models\Payment;
 use App\Models\User;
+use App\Services\PaymentService;
+use App\Services\SmsService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
+use Sdfsky\Pingpp\Facades\Pingpp;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProfileController extends Controller
 {
@@ -32,7 +39,9 @@ class ProfileController extends Controller
             $this->validate($request,$validateRules);
             $user->name = $request->input('name');
             $user->gender = $request->input('gender');
-            $user->birthday = $request->input('birthday');
+            if($request->input('birthday')){
+                $user->birthday = $request->input('birthday');
+            }
             $user->title = $request->input('title');
             $user->description = $request->input('description');
             $user->province = $request->input('province');
@@ -49,6 +58,7 @@ class ProfileController extends Controller
                 Image::make(storage_path('app/'.$filePath))->resize(320,435)->save();
                 $user->qrcode = str_replace("/","-",$filePath);
             }
+
             $user->save();
             return $this->success(route('auth.profile.base'),'个人资料修改成功');
 
@@ -187,6 +197,35 @@ class ProfileController extends Controller
         }
         return view('theme::profile.email');
     }
+
+
+    public function anyMobile(Request $request)
+    {
+        if($request->isMethod('post')){
+            $validateRules = [
+                'mobile' => 'required|max:11,'.$request->user()->id,
+                'code' => 'required|min:4|max:10',
+            ];
+
+            $this->validate($request,$validateRules);
+
+            $mobile = $request->input('mobile');
+            $code = $request->input('code');
+
+            if(!SmsService::verifySmsCode($mobile,$code)){
+                return $this->error(route('auth.profile.mobile'),"短信验证码错误，请重新验证");
+            }
+
+            $request->user()->mobile = $mobile;
+            $request->user()->status = 1;
+            $request->user()->save();
+            $request->user()->userData->mobile_status = 1;
+            $request->user()->userData->save();
+            return $this->success(route('auth.profile.mobile'),'手机号码绑定成功！');
+        }
+        return view('theme::profile.mobile');
+    }
+
 
 
 

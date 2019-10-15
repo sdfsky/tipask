@@ -1,2 +1,18 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// Variables
+@import "variables";
 
+// Bootstrap
+@import '~we-vue/lib/style.css';
+body {
+  font-family: -apple-system-font,Helvetica Neue,sans-serif;
+  line-height: 1.6;
+}
+body, html {
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+.page {
+  width: 100%;
+}

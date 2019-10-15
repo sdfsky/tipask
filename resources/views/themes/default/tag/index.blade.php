@@ -1,6 +1,7 @@
 @extends('theme::layout.public')
 
 @section('seo_title'){{ parse_seo_template('seo_topic_title',$tag) }}@endsection
+@section('seo_keyword'){{ parse_seo_template('seo_topic_keyword',$tag) }}@endsection
 @section('seo_description'){{ parse_seo_template('seo_topic_description',$tag) }}@endsection
 
 @section('content')
@@ -32,9 +33,12 @@
             <ul class="nav nav-tabs nav-tabs-zen">
                 <li @if($source_type==='questions') class="active" @endif ><a href="{{ route('ask.tag.index',['id'=>$tag->id]) }}">问答</a></li>
                 <li @if($source_type==='articles') class="active" @endif ><a href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'articles']) }}">文章</a></li>
+                @if(config('services.video_open'))
+                <li @if($source_type==='courses') class="active" @endif ><a href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'courses']) }}">课程</a></li>
+                @endif
                 <li @if($source_type==='details') class="active" @endif ><a href="{{ route('ask.tag.index',['id'=>$tag->id,'source_type'=>'details']) }}">百科</a></li>
             </ul>
-            <div class="tab-content">
+            <div class="tab-content mb-30">
                 <div class="stream-list">
                     @if($source_type==='questions')
                         @foreach($sources as $question)
@@ -48,13 +52,6 @@
                                     </div>
                                 </div>
                                 <div class="summary">
-                                    <ul class="author list-inline">
-                                        <li>
-                                            <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}">{{ $question->user->name }}</a>
-                                            <span class="split"></span>
-                                            <span class="askDate">{{ $question->created_at }}</span>
-                                        </li>
-                                    </ul>
                                     <h2 class="title"><a href="{{ route('ask.question.detail',['id'=>$question->id]) }}">{{ $question->title }}</a></h2>
                                     @if($question->tags)
                                         <ul class="taglist-inline ib">
@@ -63,6 +60,13 @@
                                             @endforeach
                                         </ul>
                                     @endif
+                                    <ul class="author list-inline">
+                                        <li>
+                                            <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}">{{ $question->user->name }}</a>
+                                            <span class="split"></span>
+                                            <span class="askDate">{{ $question->created_at }}</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </section>
                         @endforeach
@@ -94,6 +98,30 @@
                                 </div>
                             </section>
                         @endforeach
+                    @elseif($source_type == 'courses')
+                        <div class="live-block clearfix row mt-20">
+                            @foreach($sources as $course)
+                                <div class="item-container col-sm-4 pr-0">
+                                    <a href="{{ route('live.course.show',['id'=>$course->id]) }}" target="_blank">
+                                        <div class="item-wrapper">
+                                            <div class="item">
+                                                <div class="banner">
+                                                    <img src="{{ $course->logo }}" alt="{{ $course->title }}" height="150px">
+                                                </div>
+                                                <div class="pl-15 pr-15">
+                                                    <p class="title">{{ $course->title }}</p>
+                                                    <div class="clearfix">
+                                                        <span class="curPrice mr-3">@if($course->price == 0 ) 免费 @else <i class="fa fa-database"></i> {{ $course->price }} @endif </span>
+                                                        <span class="pull-right">{{ $course->sales }}人参与</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+
                     @else
                         <div class="text-fmt mt-10">{!! $tag->description  !!}</div>
                     @endif
@@ -115,7 +143,7 @@
                 <h2 class="h4 widget-box__title">相关标签</h2>
                 <ul class="taglist-inline multi">
                     @foreach($tag->relations() as $relationTag)
-                        <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['id'=>$relationTag->id]) }}">{{ $relationTag->name }}</a></li>
+                    <li class="tagPopup"><a class="tag" href="{{ route('ask.tag.index',['id'=>$relationTag->id]) }}">{{ $relationTag->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

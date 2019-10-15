@@ -25,6 +25,14 @@
                                     <label class="ml-20"><input type="radio" name="register_open" value="0" @if(Setting()->get('register_open','1') != 1) checked @endif > 拒绝 </label>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="website_url">注册类型</label>
+                                <span class="text-muted">(邮箱或者手机号)</span>
+                                <div class="radio">
+                                    <label><input type="radio" name="register_type" value="email" @if(Setting()->get('register_type','email') == 'email') checked @endif > 邮箱 </label>
+                                    <label class="ml-20"><input type="radio" name="register_type" value="mobile" @if(Setting()->get('register_type') == 'mobile') checked @endif > 手机号 </label>
+                                </div>
+                            </div>
 
 
 

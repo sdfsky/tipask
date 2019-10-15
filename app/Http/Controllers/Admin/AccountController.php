@@ -51,7 +51,7 @@ class AccountController extends Controller {
             /*根据邮箱地址和密码进行认证*/
             if ($this->auth->attempt($credentials))
             {
-                Session::set("admin.login",true);
+                session(['admin.login'=>true]);
                 /*认证成功后跳转到首页*/
                 return redirect()->to(route('admin.index.index'));
 

@@ -27,7 +27,10 @@ class ImageController extends Controller
         }
         $image =   Image::make($avatarFile);
         $response = response()->make($image->encode('jpg'));
+        $image->destroy();
         $response->header('Content-Type', 'image/jpeg');
+        $response->header('Expires',  date(DATE_RFC822,strtotime(" 2 day")));
+        $response->header('Cache-Control', 'private, max-age=86400, pre-check=86400');
         return $response;
     }
 
@@ -46,14 +49,12 @@ class ImageController extends Controller
         if(config('tipask.upload.open_watermark') && $image_name != config('tipask.upload.watermark_image') && str_contains($image_name,'attachments')){
             $watermarkImage = storage_path('app/'.str_replace("-","/",config('tipask.upload.watermark_image')));
             $image->insert($watermarkImage, 'bottom-right', 15, 10);
-
         }
         $response = response()->make($image->encode('jpg'));
         $response->header('Content-Type', 'image/jpeg');
         $response->header('Expires',  date(DATE_RFC822,strtotime(" 7 day")));
         $response->header('Cache-Control', 'private, max-age=259200, pre-check=259200');
         return $response;
-
     }
 
 
@@ -62,23 +63,21 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $validateRules = [
-            'file' => "required|image|max:".config('tipask.upload.attach_size'),
+            'file' => 'required|image|max:'.config('tipask.upload.attach_size'),
         ];
 
         if($request->hasFile('file')){
-
             $validator = Validator::make($request->all(),$validateRules);
-            if($validator->fails()){
+            if ($validator->fails()) {
                 return response('error');
             }
             $file = $request->file('file');
-            $extension = $file->getClientOriginalExtension();
+            $extension = $file->getClientOriginalExtension()?$file->getClientOriginalExtension():'jpg';
             $filePath = 'attachments/'.gmdate("Y")."/".gmdate("m")."/".uniqid(str_random(8)).'.'.$extension;
             Storage::disk('local')->put($filePath,File::get($file));
             return response(route("website.image.show",['image_name'=>str_replace("/","-",$filePath)]));
         }
         return response('error');
-
     }
 
 }

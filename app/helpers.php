@@ -6,21 +6,44 @@
  * Time: 下午7:11
  */
 
-/*商品类型字段定义*/
-if (! function_exists('trans_goods_post_type')) {
+if (!function_exists('trans_common_bool')) {
+    function trans_common_bool($value)
+    {
+        $map = [
+            0 => '否',
+            1 => '是',
+        ];
 
-    function trans_goods_post_type($post_type){
+        if ($value === 'all') {
+            return $map;
+        }
+
+
+        if (isset($map[$value])) {
+            return $map[$value];
+        }
+
+        return '';
+    }
+
+}
+
+/*商品类型字段定义*/
+if (!function_exists('trans_goods_post_type')) {
+
+    function trans_goods_post_type($post_type)
+    {
         $map = [
             0 => '不需要',
             1 => '需要',
         ];
 
-        if($post_type==='all'){
+        if ($post_type === 'all') {
             return $map;
         }
 
 
-        if(isset($map[$post_type])){
+        if (isset($map[$post_type])) {
             return $map[$post_type];
         }
 
@@ -30,21 +53,22 @@ if (! function_exists('trans_goods_post_type')) {
 
 }
 
-if (! function_exists('trans_gender_name')) {
+if (!function_exists('trans_gender_name')) {
 
-    function trans_gender_name($post_type){
+    function trans_gender_name($post_type)
+    {
         $map = [
             0 => '保密',
             1 => '男',
             2 => '女',
         ];
 
-        if($post_type==='all'){
+        if ($post_type === 'all') {
             return $map;
         }
 
 
-        if(isset($map[$post_type])){
+        if (isset($map[$post_type])) {
             return $map[$post_type];
         }
 
@@ -54,23 +78,23 @@ if (! function_exists('trans_gender_name')) {
 
 }
 
-
 /*行家认证状态文字定义*/
-if (! function_exists('trans_authentication_status')) {
+if (!function_exists('trans_authentication_status')) {
 
-    function trans_authentication_status($status){
+    function trans_authentication_status($status)
+    {
         $map = [
             0 => '待审核',
             1 => '审核通过',
             4 => '审核失败',
         ];
 
-        if($status==='all'){
+        if ($status === 'all') {
             return $map;
         }
 
 
-        if(isset($map[$status])){
+        if (isset($map[$status])) {
             return $map[$status];
         }
 
@@ -82,21 +106,22 @@ if (! function_exists('trans_authentication_status')) {
 
 
 /*公告状态文字定义*/
-if (! function_exists('trans_exchange_status')) {
+if (!function_exists('trans_exchange_status')) {
 
-    function trans_exchange_status($status){
+    function trans_exchange_status($status)
+    {
         $map = [
             0 => '未处理',
             1 => '已处理',
             4 => '兑换失败',
         ];
 
-        if($status==='all'){
+        if ($status === 'all') {
             return $map;
         }
 
 
-        if(isset($map[$status])){
+        if (isset($map[$status])) {
             return $map[$status];
         }
 
@@ -107,21 +132,115 @@ if (! function_exists('trans_exchange_status')) {
 }
 
 /*公告状态文字定义*/
-if (! function_exists('trans_common_status')) {
+if (!function_exists('trans_common_status')) {
 
-    function trans_common_status($status){
+    function trans_common_status($status)
+    {
         $map = [
             0 => '待审核',
             1 => '已审核',
-           -1 => '已禁言'
+            -1 => '已禁言'
         ];
 
-        if($status==='all'){
+        if ($status === 'all') {
             return $map;
         }
 
 
-        if(isset($map[$status])){
+        if (isset($map[$status])) {
+            return $map[$status];
+        }
+
+        return '';
+
+    }
+
+}
+
+/*草稿类型定义*/
+if (!function_exists('trans_draft_type')) {
+
+    function trans_draft_type($type)
+    {
+        $map = [
+            'question' => '提问',
+            'answer' => '回答',
+            'article' => '文章'
+        ];
+
+        if ($type === 'all') {
+            return $map;
+        }
+
+
+        if (isset($map[$type])) {
+            return $map[$type];
+        }
+
+        return '';
+
+    }
+
+}
+
+/*举报状态定义*/
+if (!function_exists('trans_report_status')) {
+
+    function trans_report_status($status)
+    {
+        $map = [
+            0 => '待处理',
+            1 => '已处理',
+            4 => '已忽略'
+        ];
+
+        if ($status === 'all') {
+            return $map;
+        }
+
+        if (isset($map[$status])) {
+            return $map[$status];
+        }
+
+        return '';
+    }
+}
+
+/*举报原因类型定义*/
+if (!function_exists('trans_report_type')) {
+
+    function trans_report_type($type)
+    {
+        // 读取定义的配置信息
+        $map = config('tipask.report_type');
+        if ($type === 'all') {
+            return $map;
+        }
+
+        if (isset($map[$type])) {
+            return $map[$type]['subject'];
+        }
+
+        return '';
+    }
+}
+
+/*公告状态文字定义*/
+if (!function_exists('trans_pay_status')) {
+
+    function trans_pay_status($status)
+    {
+        $map = [
+            0 => '待支付',
+            1 => '已支付',
+        ];
+
+        if ($status === 'all') {
+            return $map;
+        }
+
+
+        if (isset($map[$status])) {
             return $map[$status];
         }
 
@@ -133,20 +252,22 @@ if (! function_exists('trans_common_status')) {
 
 
 /*问题状态文本描述定义*/
-if (! function_exists('trans_question_status')) {
+if (!function_exists('trans_question_status')) {
 
-    function trans_question_status($status){
+    function trans_question_status($status)
+    {
         $map = [
+            -1 => '待支付',
             0 => '待审核',
             1 => '待解决',
             2 => '已解决',
         ];
 
-        if($status==='all'){
+        if ($status === 'all') {
             return $map;
         }
 
-        if(isset($map[$status])){
+        if (isset($map[$status])) {
             return $map[$status];
         }
 
@@ -155,146 +276,11 @@ if (! function_exists('trans_question_status')) {
 
 }
 
-
-
-/*数据库setting表操作*/
-if (! function_exists('Setting')) {
-
-    function Setting(){
-        return app('App\Models\Setting');
-    }
-
-}
-
-
-/*数据库Category表操作*/
-if (! function_exists('load_categories')) {
-
-    function load_categories( $type = 'all' ){
-        return app('App\Models\Category')->loadFromCache($type);
-    }
-
-}
-
-
-/*数据库area地区表操作*/
-if (! function_exists('Area')) {
-
-    function Area(){
-        return app('App\Models\Area');
-    }
-
-}
-
-
-/**
- * 将正整数转换为带+,例如 10 装换为 +10
- * 用户积分显示
- */
-if( ! function_exists('integer_string')){
-    function integer_string($value){
-        if($value>=0){
-            return '+'.$value;
-        }
-
-        return $value;
-    }
-}
-
-if( ! function_exists('get_credit_message')){
-    function get_credit_message($credits,$coins){
-        $messages = [];
-        if( $credits != 0 ){
-            $messages[] = '经验 '.integer_string($credits);
-        }
-        if( $coins != 0 ){
-            $messages[] = '金币 '.integer_string($coins);
-        }
-        return implode("，",$messages);
-    }
-}
-
-
-
-
-
-if(! function_exists('timestamp_format')){
-    function timestamp_format($date_time){
-        $timestamp = \Carbon\Carbon::instance(new DateTime($date_time));
-        $time_format_string = Setting()->get('date_format').' '.Setting()->get('time_format');
-        if(Setting()->get('time_friendly')==1){
-            return $timestamp->diffInWeeks(\Carbon\Carbon::now()) >= 1 ? $timestamp->format($time_format_string) : $timestamp->diffForHumans();
-        }
-        return $timestamp->format($time_format_string);
-
-    }
-}
-
-
-if( ! function_exists('parse_seo_template')){
-    function parse_seo_template($type,$source){
-        $seo_template = Setting()->get($type);
-        $seo_template = str_replace("{wzmc}",Setting()->get('website_name'),$seo_template);
-        $seo_template = str_replace("{wzkh}",Setting()->get('website_slogan'),$seo_template);
-
-        if(str_contains($type,['question','article'])){
-            if($source->tags){
-                $tagList = array_pluck($source->tags->toArray(),'name');
-                $seo_template = str_replace("{htlb}",implode(",",$tagList),$seo_template);
-            }
-        }
-
-        if(str_contains($type,'question')) {
-            $seo_template = str_replace("{wtbt}", strip_tags($source->title), $seo_template);
-            $seo_template = str_replace("{wtms}", str_limit(strip_tags($source->description),200), $seo_template);
-        }else if(str_contains($type,'article')){
-            $seo_template = str_replace("{wzbt}",strip_tags($source->title),$seo_template);
-            $seo_template = str_replace("{wzzy}",str_limit($source->summary,200),$seo_template);
-        }else if(str_contains($type,'topic')){
-            $seo_template = str_replace("{htmc}",$source->name,$seo_template);
-            $seo_template = str_replace("{htjj}",str_limit($source->summary,200),$seo_template);
-        }
-
-        return $seo_template;
-    }
-}
-
-/*生成头像图片地址*/
-if(! function_exists('get_user_avatar')){
-    function get_user_avatar($user_id,$size='middle',$extension='jpg'){
-        return route('website.image.avatar',['avatar_name'=>$user_id.'_'.$size.'.'.$extension]);
-    }
-}
-
-
-/*常见的正则判断*/
-
-/*邮箱判断*/
-if( !function_exists('is_email') ){
-    function is_email($email){
-        $reg = "/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/";
-        if( preg_match($reg,$email) ){
-            return true;
-        }
-        return false;
-    }
-}
-
-/*手机号码判断*/
-if( !function_exists('is_mobile') ){
-    function is_mobile($mobile){
-        $reg = "/^1[34578]\d{9}$/";
-        if( !preg_match($reg,$mobile) ){
-            return false;
-        }
-        return true;
-    }
-}
-
 /*问题状态文本描述定义*/
-if (! function_exists('trans_day_of_week')) {
+if (!function_exists('trans_day_of_week')) {
 
-    function trans_day_of_week($day){
+    function trans_day_of_week($day)
+    {
         $map = [
             0 => '星期天',
             1 => '星期一',
@@ -305,158 +291,448 @@ if (! function_exists('trans_day_of_week')) {
             6 => '星期六',
         ];
 
-        if($day==='all'){
+        if ($day === 'all') {
             return $map;
         }
 
-        if(isset($map[$day])){
+        if (isset($map[$day])) {
             return $map[$day];
         }
         return '';
     }
 
 }
+/*阿里云视频状态*/
+if (!function_exists('trans_aliyun_video_status')) {
+
+    function trans_aliyun_video_status($status)
+    {
+        $map = [
+            'Uploading' => '待上传',
+            'UploadSucc' => '上传成功',
+            'Transcoding' => '转码中',
+            'TranscodeFail' => '转码失败',
+            'Normal' => '可播放',
+            'Checking' => '审核中',
+            'Blocked' => '屏蔽'
+        ];
+
+        if ($status === 'all') {
+            return $map;
+        }
+
+        if (isset($map[$status])) {
+            return $map[$status];
+        }
+        return '未知';
+    }
+
+}
+
+if (!function_exists('trans_sale_status')) {
+    function trans_sale_status($status = 'all')
+    {
+        $map = [
+            0 => '未上架',
+            1 => '已上架'
+        ];
+
+        if ($status === 'all') {
+            return $map;
+        }
+        if (isset($map[$status])) {
+            return $map[$status];
+        }
+        return '';
+    }
+}
+
+if (!function_exists('trans_menu_type')) {
+    function trans_menu_type($type = 'all')
+    {
+        $map = [
+            1 => 'web版',
+            2 => '微信小程序'
+        ];
+
+        if ($type === 'all') {
+            return $map;
+        }
+        if (isset($map[$type])) {
+            return $map[$type];
+        }
+        return '';
+    }
+}
+
+
+if (!function_exists('trans_question_price')) {
+    function trans_question_price($price = 'all')
+    {
+        $map = [0, 5, 10, 15, 20, 30, 50, 80, 100];
+        return $map;
+    }
+}
+
+
+/*数据库setting表操作*/
+if (!function_exists('Setting')) {
+
+    function Setting()
+    {
+        return app('App\Models\Setting');
+    }
+
+}
+
+
+/*数据库Category表操作*/
+if (!function_exists('load_categories')) {
+
+    function load_categories($type = 'all')
+    {
+        return app('App\Models\Category')->loadFromCache($type);
+    }
+
+}
+
+/*数据库Category表操作*/
+if (!function_exists('make_option_tree')) {
+
+    function make_option_tree($type = 'all', $select_id = 0)
+    {
+        $categories = app('App\Models\Category')->loadFromCache($type);
+        return app('App\Models\Category')->makeOptionTree($categories, $select_id);
+    }
+
+}
+
+/*生成分类Tab下拉数据格式*/
+if (!function_exists('get_category_tab_data')) {
+
+    function get_category_tab_data($type = 'all', $size = 6)
+    {
+        $categories = app('App\Models\Category')->loadFromCache($type);
+        $rootCategories = [];
+        foreach ($categories as $category) {
+            if ($category->parent_id == 0) {
+                $rootCategories[] = $category;
+            }
+        }
+        $tabData['out_tabs'] = array_slice($rootCategories,0,$size);
+        $tabData['in_tabs'] = array_slice($rootCategories,$size);
+        return $tabData;
+    }
+
+}
+
+
+/*数据库area地区表操作*/
+if (!function_exists('Area')) {
+
+    function Area()
+    {
+        return app('App\Models\Area');
+    }
+
+}
+
 
 /**
- * 判断地址是否为内网
- * @param string $addr
- * @return bool
+ * 将正整数转换为带+,例如 10 装换为 +10
+ * 用户积分显示
  */
-if( !function_exists('isIntranet') ) {
-    function isIntranet($addr)
+if (!function_exists('integer_string')) {
+    function integer_string($value)
     {
-        //验证是否是 IPv4
-        if ( !filter_var($addr, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            return false;
+        if ($value >= 0) {
+            return '+' . $value;
         }
-        //是否为 内网
-        if ( !filter_var($addr, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
+
+        return $value;
+    }
+}
+
+if (!function_exists('get_credit_message')) {
+    function get_credit_message($credits, $coins)
+    {
+        $messages = [];
+        if ($credits != 0) {
+            $messages[] = '经验 ' . integer_string($credits);
+        }
+        if ($coins != 0) {
+            $messages[] = '金币 ' . integer_string($coins);
+        }
+        return implode("，", $messages);
+    }
+}
+
+
+if (!function_exists('timestamp_format')) {
+    function timestamp_format($timestamp, $showDateTime = true)
+    {
+        $carbon = \Carbon\Carbon::instance(new DateTime($timestamp));
+        $time_format_string = Setting()->get('date_format');
+        if ($showDateTime) {
+            $time_format_string .= ' ' . Setting()->get('time_format');
+        }
+        if (Setting()->get('time_friendly') == 1) {
+            return $carbon->diffInWeeks(\Carbon\Carbon::now()) >= 1 ? $carbon->format($time_format_string) : $carbon->diffForHumans();
+        }
+        return $carbon->format($time_format_string);
+
+    }
+}
+
+
+if (!function_exists('parse_seo_template')) {
+    function parse_seo_template($type, $source)
+    {
+        $seo_template = Setting()->get($type);
+        $seo_template = str_replace("{wzmc}", Setting()->get('website_name'), $seo_template);
+        $seo_template = str_replace("{wzkh}", Setting()->get('website_slogan'), $seo_template);
+
+        if (str_contains($type, ['question', 'article', 'video'])) {
+            if ($source->tags) {
+                $tagList = array_pluck($source->tags->toArray(), 'name');
+                $seo_template = str_replace("{htlb}", implode(",", $tagList), $seo_template);
+            }
+        }
+
+        if (str_contains($type, 'question')) {
+            $seo_template = str_replace("{wtbt}", strip_tags($source->title), $seo_template);
+            $seo_template = str_replace("{wtms}", str_limit(strip_tags($source->description), 200), $seo_template);
+        } else {
+            if (str_contains($type, 'article')) {
+                $seo_template = str_replace("{wzbt}", strip_tags($source->title), $seo_template);
+                $seo_template = str_replace("{wzzy}", str_limit($source->summary, 200), $seo_template);
+            } else {
+                if (str_contains($type, 'topic')) {
+                    $seo_template = str_replace("{htmc}", $source->name, $seo_template);
+                    $seo_template = str_replace("{htjj}", str_limit($source->summary, 200), $seo_template);
+                } else {
+                    if (str_contains($type, 'video')) {
+                        $seo_template = str_replace("{ktbt}", strip_tags($source->title), $seo_template);
+                        $seo_template = str_replace("{ktms}", str_limit(strip_tags($source->description), 200),
+                            $seo_template);
+                    }
+                }
+            }
+        }
+
+        return $seo_template;
+    }
+}
+
+/*生成头像图片地址*/
+if (!function_exists('get_user_avatar')) {
+    function get_user_avatar($user_id, $size = 'middle', $extension = 'jpg', $random = '')
+    {
+        $avatarName = $user_id . '_' . $size . '.' . $extension;
+
+        if ($random) {
+            $avatarName .= '?' . str_random(8);
+        }
+
+        return route('website.image.avatar', ['avatar_name' => $avatarName]);
+    }
+}
+
+
+/*常见的正则判断*/
+
+/*邮箱判断*/
+if (!function_exists('is_email')) {
+    function is_email($email)
+    {
+        $reg = "/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/";
+        if (preg_match($reg, $email)) {
             return true;
         }
         return false;
     }
 }
-if( !function_exists('ta_version') ) {
 
-    function ta_version()
+/*手机号码判断*/
+if (!function_exists('is_mobile')) {
+    function is_mobile($mobile)
     {
-        return ['plug_version' => '1.0', 'php_version' => PHP_VERSION, 'OS' => PHP_OS, 'cms_version' => config("tipask.version")];
-    }
-}
-
-if( !function_exists('ta_success') ) {
-    function ta_success($data = "", $message = "")
-    {
-        ta_result(1, $data, $message);
-    }
-}
-
-if( !function_exists('ta_fail') ) {
-    function ta_fail($code = 2, $data = "", $message = "")
-    {
-        ta_result($code, $data, $message);
-    }
-}
-
-if( !function_exists('ta_result') ) {
-    function ta_result($result = 1, $data = "", $message = "")
-    {
-        if (isset($_GET['callback']) && $_GET['callback']) {
-            die($_GET['callback'] . "(" . json_encode(["result" => $result, "data" => $data, "message" => urlencode($message)]) . ")");
-        } else {
-            die(json_encode(["result" => $result, "data" => $data, "message" => urlencode($message)]));
+        $reg = "/^1[3456789]\d{9}$/";
+        if (!preg_match($reg, $mobile)) {
+            return false;
         }
+        return true;
     }
 }
 
-/**
- * @return \Illuminate\Support\Collection
- */
-if( !function_exists('mergeRequest') ) {
-    function mergeRequest()
+
+/*创建唯一订单号*/
+if (!function_exists('build_order_no')) {
+    function build_order_no($user_id = 0)
     {
-        if (isset($_GET['callback'])) {
-            $request_data = array_merge($_GET, $_POST);
-        } else {
-            $request_data = $_POST;
+        $order_no = date('Ymd') . substr(implode(null, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+        $salt = md5($user_id);
+        $star = strtoupper(substr($salt, 1, 5));
+        return $order_no . $star;
+    }
+}
+
+
+/*创建唯一订单号*/
+if (!function_exists('random_number')) {
+    function random_number($length = 6)
+    {
+        $pool = '0123456789';
+        return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
+    }
+}
+
+
+/*金币转换元*/
+if (!function_exists('coins_to_cent')) {
+    function coins_to_cent($coins)
+    {
+        /*获取1元能够吗多少个金币*/
+        $charge_rage = config('pay.charge_rate');
+        if ($charge_rage > 0 && $coins > 0) {
+            $rate = ceil(100 / $charge_rage); //计算单个金币的价格
+            $result = $coins * $rate;
+            return $result;
         }
-        return collect($request_data);
+        return 0;
     }
 }
 
-if( !function_exists('ta_curl_headers') ) {
-    function ta_curl_headers($url)
+if (!function_exists('yuan_to_coins')) {
+    function yuan_to_coins($yuan)
     {
-        // 初始化Curl
-        $ch = curl_init();
-        // 开启header显示
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        // 不输出网页内容
-        curl_setopt($ch, CURLOPT_NOBODY, true);
-        // 禁止自动输出内容
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // 自动跳转
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-        // 跳转时自动设置来源地址
-        curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-        // 超时时间
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        // 设置URL
-        curl_setopt($ch, CURLOPT_URL, $url);
-        // 关闭SSL证书验证
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        // 返回结果
-        return curl_exec($ch);
-    }
-}
-
-if( !function_exists('ta_log') ) {
-    function ta_log($data)
-    {
-        if ($data && (is_array($data) || is_object($data))) {
-            if (method_exists($data, 'jsonSerialize')) {
-                $data = $data->jsonSerialize();
-            }
-            $str = json_encode($data);
-        } else {
-            $str = $data;
+        $charge_rage = config('pay.charge_rate');
+        if ($charge_rage > 0 && $yuan > 0) {
+            $result = $yuan * $charge_rage;
+            return $result;
         }
-        $myfile = fopen("ta_log.txt", "a") or die("Unable to open file!");
-        fwrite($myfile, $str);
-        fclose($myfile);
+        return false;
     }
 }
 
-if( !function_exists('ta_random_ip') ) {
-    function ta_random_ip()
+
+/*分转元*/
+if (!function_exists('cent_to_yuan')) {
+    function cent_to_yuan($cent)
     {
-        $ip_long = [
-            ['607649792', '608174079'], //36.56.0.0-36.63.255.255
-            ['1038614528', '1039007743'], //61.232.0.0-61.237.255.255
-            ['1783627776', '1784676351'], //106.80.0.0-106.95.255.255
-            ['2035023872', '2035154943'], //121.76.0.0-121.77.255.255
-            ['2078801920', '2079064063'], //123.232.0.0-123.235.255.255
-            ['-1950089216', '-1948778497'], //139.196.0.0-139.215.255.255
-            ['-1425539072', '-1425014785'], //171.8.0.0-171.15.255.255
-            ['-1236271104', '-1235419137'], //182.80.0.0-182.92.255.255
-            ['-770113536', '-768606209'], //210.25.0.0-210.47.255.255
-            ['-569376768', '-564133889'], //222.16.0.0-222.95.255.255
-        ];
-        $rand_key = mt_rand(0, 9);
-        $ip = long2ip(mt_rand($ip_long[$rand_key][0], $ip_long[$rand_key][1]));
-        return $ip;
+        return '￥' . number_format($cent / 100, 2);
     }
 }
 
-if( !function_exists('randEmail') ) {
-    function randEmail($username)
+if (!function_exists('format_money')) {
+    function format_money($money)
     {
-        $emailSps = ['163.com', 'qq.com', 'gmail.com', 'sina.com', 'weibo.com', 'yahoo.cn', '139.com'];
-        $f = substr(md5($username), 8, rand(6, 12));
-
-        return $f . '@' . $emailSps[rand(0, 6)];
+        return number_format($money / 100, 2);
     }
 }
+
+
+/*提取html内容中的img标签图片地址*/
+if (!function_exists('get_editor_images')) {
+    function get_editor_images($content)
+    {
+        preg_match_all('/<img[^>]+>/i', $content, $imgTags);
+        $imageUrls = [];
+        for ($i = 0; $i < count($imgTags[0]); $i++) {
+            preg_match('/src="([^"]+)/i', $imgTags[0][$i], $imgage);
+            $imageUrls[] = str_ireplace('src="', '', $imgage[0]);
+        }
+        return $imageUrls;
+    }
+}
+
+if (!function_exists('get_selected_images')) {
+    function get_selected_images($content)
+    {
+        preg_match_all('/<img[^>]+>/i', $content, $imgTags);
+        $selectedImages = [];
+        for ($i = 0; $i < count($imgTags[0]); $i++) {
+            preg_match('/src="([^"]+)/i', $imgTags[0][$i], $images);
+            $selectImage = [];
+            $selectImage['url'] = str_ireplace('src="', '', $images[0]);
+            $selectImage['path'] = substr($selectImage['url'], strripos($selectImage['url'], '/') + 1,
+                strlen($selectImage['url']));
+            $selectedImages[] = $selectImage;
+        }
+        return $selectedImages;
+    }
+}
+
+if (!function_exists('append_editor_images')) {
+    function append_editor_images($content, $images)
+    {
+        foreach ($images as $image) {
+            $imageUrl = route('website.image.show', ['image_name' => $image]);
+            $content .= '<p><img src="' . $imageUrl . '" class="img-responsive" alt="' . $image . '"></p>';
+        }
+        return $content;
+    }
+}
+
+if (!function_exists('env_cert')) {
+    function env_cert($env_param)
+    {
+        $cert_string = '';
+        if (file_exists(env($env_param, ''))) {
+            $cert_string = file_get_contents(env($env_param));
+        }
+        return $cert_string;
+    }
+}
+
+if (!function_exists('seconds_to_minutes')) {
+    function seconds_to_minutes($value)
+    {
+        $value = intval($value);
+        $minute = sprintf("%02d", floor($value / 60));
+        $seconds = sprintf("%02d", $value % 60);
+        return $value > 0 ? $minute . ':' . $seconds : '00:00';
+    }
+}
+
+if (!function_exists('aes_128_decode')) {
+    function aes_128_decode($session_key, $encrypted_data, $iv)
+    {
+        $ase_key = base64_decode($session_key);
+        $aes_iv = base64_decode($iv);
+        $aes_cipher = base64_decode($encrypted_data);
+        $result = openssl_decrypt($aes_cipher, "AES-128-CBC", $ase_key, 1, $aes_iv);
+        $dataObj = json_decode($result, true);
+        return $dataObj;
+    }
+}
+
+if (!function_exists('hide_mobile')) {
+    function hide_mobile($mobile)
+    {
+        return substr_replace($mobile, '****', 3, 4);
+    }
+}
+
+if (!function_exists('convert_video_duration')) {
+    function convert_video_duration($duration)
+    {
+        $timeArr = explode(":", $duration);
+        if (count($timeArr) > 2) {
+            return intval($timeArr[0]) * 3600 + intval($timeArr[1]) * 60 + intval($timeArr[2]);
+        }
+        return intval($timeArr[0]) * 60 + intval($timeArr[1]);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 

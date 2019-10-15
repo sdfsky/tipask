@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
             <h2 class="h4  mt-30">回答榜</h2>
-            <div class="widget-streams users">
+            <div class="widget-streams users border-top">
                 @foreach($users as $index=>$user)
                 <section class="hover-show streams-item">
                     <div class="stream-wrap media">

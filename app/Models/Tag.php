@@ -86,6 +86,11 @@ class Tag extends Model
         return $this->morphedByMany('App\Models\Article', 'taggable');
     }
 
+    public function courses()
+    {
+        return $this->morphedByMany('App\Models\Course', 'taggable');
+    }
+
 
 
     public function followers()

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\Question;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends AdminController
 {
@@ -45,7 +48,10 @@ class QuestionController extends AdminController
 
         /*分类过滤*/
         if( $filter['category_id']> 0 ){
-            $query->where('category_id','=',$filter['category_id']);
+            $category = Category::findFromCache($filter['category_id']);
+            if($category){
+                $query->whereIn('category_id',$category->getSubIds());
+            }
         }
 
         $questions = $query->orderBy('created_at','desc')->paginate(20);
@@ -103,8 +109,20 @@ class QuestionController extends AdminController
      */
     public function destroy(Request $request)
     {
-        $questionIds = $request->input('id');
-        Question::destroy($questionIds);
+        $questionIds = $request->input('ids');
+        // 给文章所有者发送站内通知
+        $ids = explode(',',$questionIds);
+        if ($request->input('report_type') == 99){
+            $reason = $request->input('reason');
+        }else{
+            $reason = trans_report_type($request->input('report_type'));
+        }
+        foreach ($ids as $id){
+            $question = Question::find($id);
+            // 记录到通知
+            NotificationService::notify(Auth()->user()->id, $question->user_id, 'remove_question', $question->title, $question->id, $reason);
+            Question::destroy($id);
+        }
         return $this->success(route('admin.question.index'),'问题删除成功');
     }
 }

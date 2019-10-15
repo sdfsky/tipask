@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Area;
+use App\Models\Role;
 use App\Models\User;
-use App\Services\Registrar;
-use Bican\Roles\Models\Role;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -71,7 +71,7 @@ class UserController extends AdminController
     /**
      * 保存创建用户信息
      */
-    public function store(Request $request,Registrar $registrar)
+    public function store(Request $request,UserRepository $userRepository)
     {
 
         $request->flash();
@@ -81,7 +81,7 @@ class UserController extends AdminController
         $formData['status'] = 1;
         $formData['visit_ip'] = $request->getClientIp();
 
-        $user = $registrar->create($formData);
+        $user = $userRepository->register($formData);
         $user->attachRole($request->input('role_id'));
         return $this->success(route('admin.user.index'),'用户添加成功！');
 

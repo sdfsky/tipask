@@ -11,7 +11,11 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmailToken;
+use App\Models\User;
 use App\Models\UserOauth;
+use App\Repositories\OauthRepository;
+use App\Repositories\UserRepository;
+use App\Services\SmsService;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
@@ -109,46 +113,58 @@ class OauthController extends Controller
     }
 
 
-    public function register(Request $request,Registrar $registrar,Guard $auth)
+    public function register(Request $request,UserRepository $userRepository,Guard $auth,OauthRepository $oauthRepository)
     {
+        $validateRules['name'] = 'required|min:2|max:100';
         $request->flash();
+
+        if(Setting()->get('register_type') == 'email'){
+            $validateRules['email'] = 'required|email|max:255|unique:users';
+        }else{
+            $validateRules['mobile'] = 'required|regex:/^1[3456789]\d{9}$/';
+            $validateRules['code'] = 'required|min:4|:max:8';
+        }
         /*表单数据校验*/
-        $this->validate($request, [
-            'email' => 'required|email|max:255|unique:users',
-            'name' => 'required|min:2|max:100',
-        ]);
+        $this->validate($request,$validateRules);
 
         $formData = $request->all();
         $formData['password'] = 'oauth';
         $formData['status'] = 0;
         $formData['visit_ip'] = $request->getClientIp();
-
-        $user = $registrar->create($formData);
-
-        if($user){//绑定用户信息
-            $userOauth = UserOauth::find($formData['auth_id']);
-            $userOauth->user_id = $user->id;
-            $userOauth->save();
+        /*手机模式认证*/
+        $user = [];
+        if( Setting()->get('register_type') == 'mobile' ){
+            if( !SmsService::verifySmsCode($formData['mobile'],$request->input('code')) )  {
+                return view("theme::account.register")->withErrors(['code'=>'验证码错误']);
+            }
+            $formData['status'] = 1;
+            $user = User::where("mobile","=",$formData['mobile'])->where("status","=",1)->first();
         }
-        $user->attachRole(2); //默认注册为普通用户角色
+        if(!$user){
+            $user = $userRepository->register($formData);
+            $user->attachRole(2); //默认注册为普通用户角色
+        }
+        $oauthRepository->bind($formData['auth_id'],$user->id);
         $auth->login($user);
         $message = '登录成功!';
 
-        if($this->credit($request->user()->id,'register',Setting()->get('coins_register'),Setting()->get('credits_register'))){
+        if($this->credit($request->user()->id,'register',Setting()->get('coins_register'),Setting()->get('coins_register'))){
             $message .= get_credit_message(Setting()->get('credits_register'),Setting()->get('coins_register'));
         }
 
-        /*发送邮箱验证邮件*/
-        $emailToken = EmailToken::create([
-            'email' => $user->email,
-            'token' => EmailToken::createToken(),
-            'action'=> 'register'
-        ]);
+        if(Setting()->get('register_type')=='email') {
+            /*发送邮箱验证邮件*/
+            $emailToken = EmailToken::create([
+                'email' => $user->email,
+                'token' => EmailToken::createToken(),
+                'action' => 'register'
+            ]);
 
-        if($emailToken){
-            $subject = '欢迎注册'.Setting()->get('website_name').',请激活您注册的邮箱！';
-            $content = "「".$request->user()->name."」您好，请激活您在 ".Setting()->get('website_name')." 的注册邮箱！<br /> 请在1小时内点击该链接激活注册账号 → ".route('auth.email.verifyToken',['action'=>$emailToken->action,'token'=>$emailToken->token])."<br />如非本人操作，请忽略此邮件！";
-            $this->sendEmail($emailToken->email,$subject,$content);
+            if ($emailToken) {
+                $subject = '欢迎注册' . Setting()->get('website_name') . ',请激活您注册的邮箱！';
+                $content = "「" . $request->user()->name . "」您好，请激活您在 " . Setting()->get('website_name') . " 的注册邮箱！<br /> 请在1小时内点击该链接激活注册账号 → " . route('auth.email.verifyToken', ['action' => $emailToken->action, 'token' => $emailToken->token]) . "<br />如非本人操作，请忽略此邮件！";
+                $this->sendEmail($emailToken->email, $subject, $content);
+            }
         }
 
         return $this->success(route('website.index'),$message);

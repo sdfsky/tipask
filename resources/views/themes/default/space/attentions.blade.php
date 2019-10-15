@@ -1,10 +1,10 @@
 @extends('theme::layout.space')
 
-@section('seo_title') @if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else{{ $userInfo->name }} @endif 关注的@if($source_type==='questions')问题@elseif($source_type==='users')用户 @else 标签 @endif @endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我的@else{{ $userInfo->name }} @endif 关注的@if($source_type==='questions')问题@elseif($source_type==='users')用户 @else 标签 @endif @endsection
 
 @section('space_content')
     <div class="stream-following">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs mt-20">
             <li @if($source_type==='questions') class="active" @endif ><a href="{{ route('auth.space.attentions',['user_id'=>$userInfo->id,'source_type'=>'questions']) }}">关注的问题</a></li>
             <li @if($source_type==='tags') class="active" @endif ><a href="{{ route('auth.space.attentions',['user_id'=>$userInfo->id,'source_type'=>'tags']) }}">关注的标签</a></li>
             <li @if($source_type==='users') class="active" @endif ><a href="{{ route('auth.space.attentions',['user_id'=>$userInfo->id,'source_type'=>'users']) }}">关注的人</a></li>

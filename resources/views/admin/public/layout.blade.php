@@ -68,6 +68,20 @@
                                 <!-- inner menu: contains the actual data -->
                                 @if(array_sum($notVerifiedData)>0)
                                 <ul class="menu">
+                                    @if( $notVerifiedData['users'] > 0 )
+                                    <li>
+                                        <a href="{{ route('admin.user.index') }}?status=0">
+                                            <i class="fa fa-user-circle text-yellow"></i> {{ $notVerifiedData['users'] }} 个用户需要审核
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if( $notVerifiedData['experts'] > 0 )
+                                        <li>
+                                            <a href="{{ route('admin.authentication.index') }}?status=0">
+                                                <i class="fa fa-graduation-cap text-yellow"></i> {{ $notVerifiedData['experts'] }} 个专家认证需要审核
+                                            </a>
+                                        </li>
+                                    @endif
                                     @if( $notVerifiedData['questions'] > 0 )
                                     <li>
                                         <a href="{{ route('admin.question.index') }}?status=0">
@@ -96,6 +110,13 @@
                                         </a>
                                     </li>
                                     @endif
+                                    @if( $notVerifiedData['exchanges'] > 0  )
+                                        <li>
+                                            <a href="{{ route('admin.exchange.index') }}?status=0">
+                                                <i class="fa fa-exchange text-yellow"></i> {{ $notVerifiedData['exchanges'] }} 个兑换申请需要审核
+                                            </a>
+                                        </li>
+                                    @endif
                                 </ul>
                                 @endif
                             </li>
@@ -104,7 +125,7 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                            <span class="hidden-xs">{{ Auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->

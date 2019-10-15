@@ -12,7 +12,7 @@
         <!--左侧菜单-->
         @include('theme::layout.profile_menu')
 
-        <div id="main" class="settings col-md-10 form-horizontal">
+        <div id="main" class="settings col-md-10 form-horizontal main">
             <h2 class="h3 post-title">专家认证</h2>
             @if(Auth()->user()->authentication)
                 @if( Auth()->user()->authentication->status === 0 )
@@ -104,7 +104,7 @@
                             <div class="form-group @if ($errors->first('title')) has-error @endif">
                                 <label for="name" class="control-label col-sm-3">身份职业</label>
                                 <div class="col-sm-9">
-                                    <input name="title" id="title" type="text" maxlength="32" placeholder="例如：汽车制造 / 产品设计师 / 登山爱好者" class="form-control" value="{{ old('title','') }}" />
+                                    <input name="title" id="title" type="text" maxlength="32" placeholder="例如：汽车制造 / 产品设计师 / 登山爱好者" class="form-control" value="{{ old('title',Auth()->user()->title) }}" />
                                     @if ($errors->first('title'))
                                         <span class="help-block">{{ $errors->first('title') }}</span>
                                     @endif
@@ -114,7 +114,7 @@
                             <div class="form-group @if ($errors->first('description')) has-error @endif">
                                 <label for="setting-description" class="control-label col-sm-3">自我介绍</label>
                                 <div class="col-sm-9">
-                                    <textarea name="description" id="setting-description" class="form-control" rows="6">{{ old('description','') }}</textarea>
+                                    <textarea name="description" id="setting-description" class="form-control" rows="6">{{ old('description',Auth()->user()->description) }}</textarea>
                                     @if ($errors->first('description'))
                                         <span class="help-block">{{ $errors->first('description') }}</span>
                                     @endif
@@ -185,7 +185,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-action row">
+                            <div class="form-action row mb-30">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <button class="btn btn-xl btn-primary profile-sub" type="submit">提交申请</button>
                                 </div>

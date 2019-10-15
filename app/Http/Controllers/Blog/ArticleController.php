@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Models\Article;
+use App\Models\Draft;
 use App\Models\Question;
 use App\Models\Tag;
 use App\Models\UserData;
@@ -10,10 +11,10 @@ use App\Models\UserTag;
 use App\Services\CaptchaService;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
@@ -33,9 +34,24 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view("theme::article.create");
+        $draftId = $request->query('draftId', '');
+        $draft = Draft::find($draftId);
+        if ($draftId && !$draft) {
+            abort(404);
+        }
+        $formData = [];
+        $formData['subject'] = '';
+        $formData['content'] = '';
+        $formData['category_id'] = 0;
+        if($draft){
+            $draft->form_data = json_decode($draft->form_data,true);
+            $formData['subject'] = $draft->subject;
+            $formData['content'] = $draft->editor_content;
+            $formData['category_id'] = $draft->form_data['category_id'];
+        }
+        return view("theme::article.create")->with(compact('formData'));
     }
 
     /**
@@ -100,17 +116,15 @@ class ArticleController extends Controller
             Tag::multiSave($tagString,$article);
 
             //记录动态
-            $this->doing($article->user_id,'create_article',get_class($article),$article->id,$article->title,$article->summary);
+            $this->doing($article->user_id,'create_article',get_class($article),$article->id,$article->title,$article->summery);
 
             /*用户提问数+1*/
             $loginUser->userData()->increment('articles');
 
             UserTag::multiIncrement($loginUser->id,$article->tags()->get(),'articles');
 
-
-            $this->credit($request->user()->id,'create_article',Setting()->get('coins_write_article'),Setting()->get('credits_write_article'),$article->id,$article->title);
-
             if($article->status === 1 ){
+                $this->credit($request->user()->id,'create_article',Setting()->get('coins_write_article'),Setting()->get('credits_write_article'),$article->id,$article->title);
                 $message = '文章发布成功! '.get_credit_message(Setting()->get('credits_write_article'),Setting()->get('coins_write_article'));
             }else{
                 $message = '文章发布成功！为了确保文章的质量，我们会对您发布的文章进行审核。请耐心等待......';
@@ -138,6 +152,13 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
 
+        /*待审核文章游客不可见，管理员和内容作者可见*/
+        if($article->status == 0){
+            if(Auth()->guest()){
+                abort(404);
+            }
+            $this->authorize('create',$article);
+        }
         /*问题查看数+1*/
         $article->increment('views');
 
@@ -146,10 +167,10 @@ class ArticleController extends Controller
         });
 
         /*相关问题*/
-        $relatedQuestions = Question::correlations($article->tags()->lists('tag_id'));
+        $relatedQuestions = Question::correlations($article->tags()->pluck('tag_id'));
 
         /*相关文章*/
-        $relatedArticles = Article::correlations($article->tags()->lists('tag_id'));
+        $relatedArticles = Article::correlations($article->tags()->pluck('tag_id'));
 
         /*设置通知为已读*/
         if($request->user()){
@@ -160,7 +181,6 @@ class ArticleController extends Controller
                                           ->with('topUsers',$topUsers)
                                           ->with('relatedQuestions',$relatedQuestions)
                                           ->with('relatedArticles',$relatedArticles);
-        ;
     }
 
     /**
@@ -176,15 +196,12 @@ class ArticleController extends Controller
             abort(404);
         }
 
-        if($article->user_id !== $request->user()->id && !$request->user()->is('admin')){
-            abort(403);
-        }
+        /*编辑权限控制*/
+        $this->authorize('update', $article);
 
         /*编辑问题时效控制*/
-        if( !$request->user()->is('admin') && Setting()->get('edit_article_timeout') ){
-            if( $article->created_at->diffInMinutes() > Setting()->get('edit_article_timeout') ){
-                return $this->showErrorMsg(route('website.index'),'你已超过文章可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
-            }
+        if(!Gate::allows('updateInTime',$article)){
+            return $this->showErrorMsg(route('website.index'),'你已超过文章可编辑的最大时长，不能进行编辑了。如有疑问请联系管理员!');
         }
         return view("theme::article.edit")->with(compact('article'));
 
@@ -197,7 +214,7 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,CaptchaService $captchaService)
     {
         $article_id = $request->input('id');
         $article = Article::find($article_id);
@@ -205,18 +222,14 @@ class ArticleController extends Controller
             abort(404);
         }
 
-        if($article->user_id !== $request->user()->id && !$request->user()->is('admin')){
-            abort(403);
-        }
+        $this->authorize('update', $article);
 
         $request->flash();
 
         /*如果开启验证码则需要输入验证码*/
         if( Setting()->get('code_create_article') ){
-            $this->validateRules['captcha'] = 'required|captcha';
+            $captchaService->setValidateRules('code_create_article', $this->validateRules);
         }
-
-
 
 
         $this->validate($request,$this->validateRules);

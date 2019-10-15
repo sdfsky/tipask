@@ -6,11 +6,11 @@
  * Time: 下午5:40
  */
 
-namespace app\Http\Controllers\Installer;
+namespace App\Http\Controllers\Installer;
 
+use App\Repositories\UserRepository;
 use Exception;
 use App\Models\Setting;
-use App\Services\Registrar;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -45,14 +45,15 @@ class InstallerController extends Controller
                 'database_password' => 'sometimes|max:128',
                 'database_name' => 'required|max:128',
                 'database_prefix' => 'required|max:64',
-
             ];
             $request->flash();
             $this->validate($request,$validateRules);
             $envData = [
+                'APP_NAME'=>str_random(12),
                 'APP_ENV'=>'local',
-                'APP_DEBUG'=>'true',
-                'APP_KEY'=>Str::random(32),
+                'APP_DEBUG'=>'false',
+                'APP_KEY'=>str_random(32),
+                'DB_CONNECTION'=>$request->input('database_driver'),
                 'DB_HOST'=>$request->input('database_host'),
                 'DB_PORT'=>$request->input('database_port'),
                 'DB_DATABASE'=>$request->input('database_name'),
@@ -110,7 +111,7 @@ class InstallerController extends Controller
 
     }
 
-    public function website(Request $request,Registrar $registrar)
+    public function website(Request $request,UserRepository $userRepository)
     {
 
         if($request->isMethod('post')){
@@ -136,10 +137,12 @@ class InstallerController extends Controller
             Setting::set('website_name',$request->input('website_name'));
             Setting::set('website_url',$request->input('website_url'));
             Setting::set('website_admin_email',$request->input('website_admin_email'));
-
-            $admin =  $registrar->create($registerData);
+            $envParams = [];
+            $envParams['APP_URL'] = $request->input('website_url','');
+            $envParams['WEBSITE_ADMIN_EMAIL'] = $request->input('website_admin_email','');
+            Setting()->setEnvParams($envParams);
+            $admin =  $userRepository->register($registerData);
             $admin->attachRole(1);
-
             return redirect()->route('website.installer.finished');
         }
 

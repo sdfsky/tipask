@@ -13,7 +13,7 @@ class ExchangeController extends AdminController
     /*权限验证规则*/
     protected $validateRules = [
         'real_name' => 'required|max:32',
-        'phone' => 'required|regex:/^1[34578]{1}\d{9}$/',
+        'phone' => 'required|regex:/^1[3456789]{1}\d{9}$/',
         'email' => 'required|email|max:64',
         'comment' => 'max:512'
     ];

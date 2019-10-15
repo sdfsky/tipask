@@ -29,7 +29,7 @@
 
 
 
-<script src='{{ asset('/js/admin/common.js') }}' type="text/javascript"></script>
+<script src="{{ asset('/js/admin/common.js') }}?v={{ config('tipask.release') }}" type="text/javascript"></script>
 
 @if ( session('message') )
 <script type="text/javascript">

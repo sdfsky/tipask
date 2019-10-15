@@ -9,7 +9,7 @@
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
-            <div class="widget-question widget-article">
+            <div class="widget-article">
                 <h3 class="title">{{ $article->title }}</h3>
                 @if($article->tags)
                     <ul class="taglist-inline">
@@ -36,23 +36,26 @@
                             <li>分类：<a href="{{ route('website.blog',['category_slug'=>$article->category->slug]) }}" target="_blank">{{ $article->category->name }}</a>
                             @endif
                             </li>
-                            @if($article->status !== 2 && Auth()->check() && (Auth()->user()->id === $article->user_id || Auth()->user()->is('admin') ) )
+                            @if($article->status !== 2 && Auth()->check() && (Auth()->user()->id === $article->user_id || Auth()->user()->can('admin.login') ) )
                             <li><a href="{{ route('blog.article.edit',['id'=>$article->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="进一步完善文章内容"><i class="fa fa-edit"></i> 编辑</a></li>
+                            @endif
+                            @if(Auth()->check())
+                            <li><a href="#"  class="report_btn" data-source_type="article" data-source_id="{{ $article->id }}" data-toggle="modal" data-target="#send_report_model" ><i class="fa fa-flag-o"></i> 举报</a></li>
                             @endif
                         </ul>
                     </div>
                 </div>
-                <div class="text-center mt-10 mb-20">
-
+                <div class="text-center mt-30 mb-20">
                     <button id="support-button" class="btn btn-success btn-lg mr-5" data-source_id="{{ $article->id }}" data-source_type="article"  data-support_num="{{ $article->supports }}">{{ $article->supports }} 推荐</button>
                     @if($article->user->qrcode)
-                        <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#payment-qrcode-modal-article-{{ $article->id  }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</button>
+                    <button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#payment-qrcode-modal-article-{{ $article->id  }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</button>
                     @endif
                     @if(Auth()->check() && Auth()->user()->isCollected(get_class($article),$article->id))
                         <button id="collect-button" class="btn btn-default btn-lg" data-loading-text="加载中..." data-source_type = "article" data-source_id = "{{ $article->id }}" > 已收藏</button>
                     @else
                         <button id="collect-button" class="btn btn-default btn-lg" data-loading-text="加载中..." data-source_type = "article" data-source_id = "{{ $article->id }}" > 收藏</button>
                     @endif
+
                 </div>
                 @if(Setting()->get('website_share_code')!='')
                 <div class="mb-10">
@@ -101,7 +104,7 @@
         <div class="col-xs-12 col-md-3 side">
             <div class="widget-user">
                 <div class="media">
-                    <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}"><img class="media-object avatar-64" src="{{ get_user_avatar($article->user_id) }}" alt="不写代码的码农"></a>
+                    <a class="pull-left" href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}"><img class="media-object avatar-64" src="{{ get_user_avatar($article->user_id) }}" alt="{{ $article->user->name }}"></a>
                     <div class="media-body ">
                         <a href="{{ route('auth.space.index',['user_id'=>$article->user_id]) }}" class="media-heading">{{ $article->user->name }}</a>
                         @if($article->user->title)
@@ -124,7 +127,6 @@
                             <span class="text-muted pull-right">{{ $topUser['articles'] }} 文章</span>
                         </li>
                     @endforeach
-
                 </ol>
             </div>
         </div>
@@ -132,7 +134,9 @@
 @endsection
 
 @section('script')
+    @include('theme::layout.report_modal')
     @include('theme::layout.qrcode_pament',['source_id'=>'article-'.$article->id,'paymentUser'=>$article->user,'message'=>'如果觉得我的文章对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
+
     <script type="text/javascript" src="{{ asset('/static/js/fancybox/jquery.fancybox.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {

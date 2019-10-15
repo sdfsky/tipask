@@ -13,11 +13,16 @@
                         <input type="hidden" name="_token" id="editor_token" value="{{ csrf_token() }}">
                         <div class="box-body">
 
-                            {{--<div class="form-group">--}}
-                                {{--<label for="answer_adopt_period">问题自动采纳时长（天）</label>--}}
-                                {{--<span class="text-muted">(在限定时长内，如果问题没有采纳回答，则有程序按照默认策略进行采纳,0为不自动采纳，单位是天)</span>--}}
-                                {{--<input type="text" name="answer_adopt_period" class="form-control" value="{{ Setting()->get('answer_adopt_period',0) }}" placeholder="问题自动采纳回答时长"  />--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <label for="answer_adopt_period">问题自动采纳时长（天）</label>
+                                <span class="text-muted">(在限定时长内，如果问题没有采纳回答，则有程序按照默认策略进行采纳,0为不自动采纳，单位是天)</span>
+                                <input type="text" name="answer_adopt_period" class="form-control" value="{{ Setting()->get('answer_adopt_period',0) }}" placeholder="问题自动采纳回答时长"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="answer_adopt_period">热门内容最大时长（天）</label>
+                                <span class="text-muted">(根据配置动态筛选时长以内的热门问题、文章，避免长期显示相同内容)</span>
+                                <input type="text" name="hot_content_period" class="form-control" value="{{ Setting()->get('hot_content_period',365) }}" placeholder="热门内容最大时长"  />
+                            </div>
 
                             <div class="form-group">
                                 <label for="website_url">开启自问自答</label>

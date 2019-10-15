@@ -1,6 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo_title') @if(Auth()->check() && Auth()->user()->id === $userInfo->id )我 @else {{ $userInfo->name }} @endif 的经验 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我 @else {{ $userInfo->name }} @endif 的经验 - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <h2 class="h4">{{ $credits->total() }} 条记录</h2>

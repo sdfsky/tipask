@@ -47,6 +47,7 @@
                     </div>
                 </div>
                 <h2 class="h4  mt-30">专家列表<a href="{{ route('auth.authentication.index') }}" class="pull-right text-danger" target="_blank">申请成为专家 <i class="fa fa-external-link-square text-green" aria-hidden="true"></i></a></h2>
+                <div class="widget-streams border-top">
                 @foreach($experts as $expert)
                     <section class="hover-show streams-item">
                         <div class="stream-wrap media">
@@ -90,8 +91,10 @@
                         </div>
                     </section>
                 @endforeach
+                </div>
             </div>
-            <div class="text-center">  {!! str_replace('/?', '?', $experts->render()) !!} </div>
+            <div class="text-center">
+            </div>
         </div>
         @include('theme::layout.top_user_menu')
 

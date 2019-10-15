@@ -1,6 +1,6 @@
 
 /*主页头部*/
-.space-header{background-color:#f6f6f6;padding:40px 0 30px}
+.space-header{background-color:#fff;padding:40px 0 30px}
 .space-header-name{margin:0}
 .space-header-desc{padding:10px;background: #eee;line-height:18px;}
 .space-header-desc p:last-child{margin-bottom:0}
@@ -17,7 +17,6 @@
 .space-nav li a{color:#666}
 .space-nav li.divider a{border-bottom:1px solid #eee;margin-right:5px;border-radius:0}
 .space-nav li.divider a:hover{background-color:transparent}
-.space-nav li.active a{background-color:#f0f5f3;color:#009a61}
 
 /*动态*/
 
@@ -39,7 +38,7 @@
 .credits .badge{background-color:#449d44;}
 
 /*公共表单列表*/
-.space-stream-heading{margin: 0;padding-bottom: 20px;border-bottom: 1px solid #eee;}
+.space-stream-heading{margin: 0;padding: 15px 0;border-bottom: 1px solid #eee;}
 .space-stream-list{list-style:none;padding:0;border-top:none}
 .space-stream-list li{padding:10px 0;border-bottom:1px solid #eee;margin-top:0}
 .space-stream-list li .badge{background-color:#fff;border:1px solid;text-align:center;margin-right:10px;width:30px;height:18px;font-weight:400;padding:0;line-height:18px}
@@ -53,3 +52,21 @@
 .stream-following-list >li{padding:12px 0;border-bottom:1px solid #eee}
 .stream-following-followed{color:#999;line-height:20px}
 .stream-following-desc {font-size: 13px;color: #666;line-height: 21px;}
+
+.space_mine_heading{margin:0;padding-bottom:20px;border-bottom:1px solid #eee}
+.space_mine_heading small{margin-left:15px}
+.space_mine_heading--filter span{font-size:14px;color:#999;line-height:20px;font-weight:400}
+.space_mine_heading--filter .btn-group{margin-left:10px}
+.space_mine_content{list-style:none;padding:0;border-top:none;margin-top:0}
+.space_mine_content--type{display:inline-block;font-size:13px;color:#999;line-height:26px;margin-right:10px}
+.space_mine_content li{padding:10px 0;border-bottom:1px solid #eee;margin-top:0}
+.space_mine_content li .badge{background-color:#FFF;border:1px solid;text-align:center;margin-right:10px;width:30px;height:18px;font-weight:400;padding:0;line-height:18px}
+.space_mine_content--text{color:#666}
+.space_mine_content--date{font-size:14px;color:#999;line-height:19px}
+.space_mine_content--title{font-size:14px;color:#333;line-height:26px}
+.space_mine_content--title-warp{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.space_mine_content--title-warp a:nth-child(2){font-size:13px;color:#999;margin-left:18px}
+.space_mine_content .label{display:inline-block;width:55px;line-height:26px;font-size:13px;padding:0;font-weight:500}
+.space_mine_content .label-warning{background-color:#FCF8E3;color:#8A6D3B}
+.space_mine_content .label-danger{background-color:rgba(235,138,136,.32);color:#CA4C48}
+.space_mine_content .label-success{background-color:#DFF0D8;color:#43894E}

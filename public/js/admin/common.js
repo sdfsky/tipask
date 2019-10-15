@@ -56,6 +56,40 @@ $(function () {
         }
     });
 
+    // 举报相关
+    $("#report_reason").hide();
+    $(".reportRadioItem").change(function() {
+        var id = $("input[name='report_type']:checked").val();
+        if (id == 99){
+            $("#report_reason").show();
+        }else{
+            $("#report_reason").hide();
+        }
+    });
+    $(".report_btn").click(function () {
+        var source_type = $(this).data('source_type');
+        var source_id = $(this).data('source_id');
+        $("input[name='source_type']").val(source_type);
+        $("input[name='source_id']").val(source_id);
+        console.log(source_type);
+        if (source_type == 'article'){
+            $("#reportModalLabel").text("举报此文章");
+        }else if(source_type == 'answer') {
+            $("#reportModalLabel").text("举报此回答");
+        }else if(source_type == 'question')
+        {
+            $("#reportModalLabel").text("举报此问题");
+        }
+    });
+
+    $("#report_submit_button").click(function () {
+        var report_type = $("input[name='report_type']:checked").val();
+        if(typeof(report_type) == "undefined"){
+            alert('请填写举报原因');
+        }
+        $("#report_form").submit();
+    });
+
 });
 
 

@@ -4,15 +4,13 @@
  */
 namespace App\Http\Controllers\Account;
 
+use App\Models\Course;
 use App\Models\Credit;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 
 class SpaceController extends Controller
@@ -72,6 +70,17 @@ class SpaceController extends Controller
         return view('theme::space.articles')->with('articles',$articles);
     }
 
+    public function courses($user_id,$filter='involved')
+    {
+        if ($filter == 'started'){
+            $ids = $this->user->courses()->pluck("id");
+        }else{
+            $ids = $this->user->credits()->where("action","=","buy_video")->pluck('source_id');
+        }
+        $courses = Course::whereIn("id",$ids)->orderBy("created_at","desc")->paginate(10);
+        return view('theme::space.courses')->with(compact('courses','filter'));
+    }
+
 
     /*我的金币*/
     public function coins()
@@ -106,7 +115,7 @@ class SpaceController extends Controller
     /*我的关注*/
     public function attentions(Request $request)
     {
-        $source_type = $request->route()->getParameter('source_type');
+        $source_type = $request->route()->parameter('source_type');
         $sourceClassMap = [
             'questions' => 'App\Models\Question',
             'users' => 'App\Models\User',
@@ -129,11 +138,12 @@ class SpaceController extends Controller
 
     public function collections(Request $request)
     {
-        $source_type = $request->route()->getParameter('source_type');
+        $source_type = $request->route()->parameter('source_type');
 
         $sourceClassMap = [
             'questions' => 'App\Models\Question',
             'articles' => 'App\Models\Article',
+            'courses' => 'App\Models\Course'
         ];
 
         if(!isset($sourceClassMap[$source_type])){

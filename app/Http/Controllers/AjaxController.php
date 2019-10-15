@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Message;
 use App\Models\Notification;
+use App\Models\Payment;
 use App\Models\Question;
+use App\Models\QuestionInvitation;
 use App\Models\Tag;
 use App\Models\Taggable;
 use App\Models\User;
 use App\Models\UserTag;
+use App\Services\SmsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AjaxController extends Controller
 {
@@ -78,14 +82,18 @@ class AjaxController extends Controller
         $type = $request->input('type','all');
         if(!$word){
             $tags = Taggable::hottest($type,10);
+        }else{
+            $tags = Tag::where('name','like',$word.'%')->take(10)->get();
         }
 
-        $tags = Tag::where('name','like',$word.'%')->select('id',DB::raw('name as text'))->take(10)->get();
-        $tags->map(function($tag){
-            $tag->id = $tag->text;
-        });
-
-        return response()->json($tags->toArray());
+        $selectTags = [];
+        foreach ($tags as $tag){
+            $selectTag = [];
+            $selectTag['id'] = $tag->name;
+            $selectTag['text'] = $tag->name;
+            $selectTags[] = $selectTag;
+        }
+        return response()->json($selectTags);
     }
 
 
@@ -166,6 +174,77 @@ class AjaxController extends Controller
         }
 
         return $this->ajaxSuccess($users);
+    }
+
+
+    public function sendSmsCode(Request $request){
+
+        if($request->isMethod('post')){
+            $validateRules['code'] = 'required|captcha';
+            $validator = Validator::make($request->all(),$validateRules);
+            if($validator->fails()){
+                return $this->ajaxError(10003,'验证码错误');
+            }
+
+            $mobile = $request->input('mobile','');
+            if(!is_mobile($mobile)){
+                return $this->ajaxError(10004,'手机号格式码错误');
+            }
+            $sendType = $request->input('send_type','');
+            if($request->user() && $sendType=='bind'){ //绑定手机号绑定处理
+                /*黑名单校验*/
+                if( $request->user()->status == -1 ){
+                    return $this->ajaxError(10011,'你无权进行该操作');
+                }
+                /*避免重复发送短信校验*/
+                if($request->user()->mobile == $mobile && $request->user()->userData->mobile_status==1){
+                    return $this->ajaxError(10008,'您的手机号已绑定，不能重复绑定');
+                }
+                /*已注册手机号校验*/
+                if(User::where("mobile","=",$mobile)->where("id","<>",$request->user()->id)->count() > 0){
+                    return $this->ajaxError(10009,'该手机号已注册，不能重复绑定');
+                }
+            }
+            if( $sendType =='register' && User::where("mobile","=",$mobile)->count() > 0){ //注册发送处理
+                return $this->ajaxError(10011,'该手机号已注册，不能重复注册');
+            }else if($sendType =='findPassword' && User::where("mobile","=",$mobile)->count() == 0){ //找回密码处理
+                return $this->ajaxError(10011,'该手机号不存在，请核实');
+            }
+
+            /*次数限制*/
+            $sendTimes = $this->counter('send_sms_counter_'.$mobile);
+            if($sendTimes > config('tipask.sms_limit_times',10)){
+                return $this->ajaxError(10005,'短信验证码发送数量已超出当日最大限制，请明天再试');
+            }
+
+            if(!SmsService::sendSmsCode($mobile)){
+                return $this->ajaxError(10006,'短信发送失败，请稍后再试');
+            }
+            $this->counter('send_sms_counter_'.$mobile,1);
+            return $this->ajaxSuccess("success");
+        }
+
+        return $this->ajaxError(10007,"请求错误");
+    }
+
+
+    public function getPaymentStatus(Request $request){
+        $validateRules['order_no'] = 'required|min:10|max:32';
+        $validator = Validator::make($request->all(),$validateRules);
+        if($validator->fails()){
+            return $this->ajaxError(20007,'参数错误');
+        }
+        $orderNo = $request->input('order_no');
+
+        $payment = Payment::where("order_no","=",$orderNo)->first();
+
+        if($payment){
+            if($payment->pay_status == 1){
+                return  $this->ajaxSuccess('ok');
+            }
+        }
+
+        return $this->ajaxSuccess('fail');
     }
 
 

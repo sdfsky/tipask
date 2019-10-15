@@ -16,7 +16,8 @@
                             <div class="col-xs-2">
                                 <div class="btn-group">
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.answer.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
-                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.answer.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                    <button class="btn btn-default btn-sm" title="删除选中项"  data-toggle="modal" data-target="#send_report_modal" ><i data-toggle="tooltip" title="删除选中项" class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    {{--<button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.answer.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>--}}
                                 </div>
                             </div>
                             <div class="col-xs-10">
@@ -89,13 +90,14 @@
                             <div class="col-sm-3">
                                 <div class="btn-group">
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="通过审核" onclick="confirm_submit('item_form','{{  route('admin.answer.verify') }}','确认审核通过选中项？')"><i class="fa fa-check-square-o"></i></button>
-                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.answer.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
+                                    <button class="btn btn-default btn-sm" title="删除选中项"  data-toggle="modal" data-target="#send_report_modal" ><i data-toggle="tooltip" title="删除选中项" class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    {{--<button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.answer.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>--}}
                                 </div>
                             </div>
                             <div class="col-sm-9">
                                 <div class="text-right">
                                     <span class="total-num">共 {{ $answers->total() }} 条数据</span>
-                                    {!! str_replace('/?', '?', $answers->render()) !!}
+                                    {!! str_replace('/?', '?', $answers->appends($filter)->links()) !!}
                                 </div>
                             </div>
                         </div>
@@ -109,6 +111,8 @@
 @endsection
 
 @section('script')
+    @include("admin.public.report_modal",['type'=>'answer','form_id'=>'item_form','form_action'=>route('admin.answer.destroy')])
+
     <script type="text/javascript">
         set_active_menu('manage_content',"{{ route('admin.answer.index') }}");
     </script>

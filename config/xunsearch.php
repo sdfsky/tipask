@@ -5,8 +5,8 @@ return [
     "project" => [
         "project.name" => "tipask",
         "project.default_charset" => "utf-8",
-        "server.index" => "127.0.0.1:8383",
-        "server.search" => "127.0.0.1:8384",
+        "server.index" => env('XUNSEARCH_INDEX',"127.0.0.1:8383"),
+        "server.search" => env('XUNSEARCH_SEARCH',"127.0.0.1:8384"),
         //remember change FIELD_LABEL_DEFAULT_SEARCH_PK value in Config.php
         "primary_key" => [
             "type" => "id"
@@ -97,6 +97,20 @@ return [
                     ],
                     'summary' => [
                         'search_field' => 'content',
+                    ],
+                ],
+                'primary_key' => 'id'
+            ],
+            \App\Models\Course::class => [
+                'fields' => [
+                    'title' => [
+                        'search_field' => 'subject',
+                    ],
+                    'description' => [
+                        'search_field' => 'content',
+                    ],
+                    'status' => [
+                        'search_field' => 'status',
                     ],
                 ],
                 'primary_key' => 'id'

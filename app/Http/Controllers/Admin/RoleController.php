@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use Bican\Roles\Models\Permission;
-use Bican\Roles\Models\Role;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,7 +22,7 @@ class RoleController extends AdminController
     public function index(Request $request)
     {
         $word = $request->input("word",'');
-        $roles = Role::where('name','like',"%$word%")->paginate(Config::get('tipask.admin.page_size'));
+        $roles = Role::where('name','like',"%$word%")->orderBy('sort','asc')->orderBy('id','asc')->paginate(Config::get('tipask.admin.page_size'));
         return view('admin.role.index')->with('roles',$roles)->with('word',$word);
     }
 
@@ -59,10 +58,10 @@ class RoleController extends AdminController
         }
         /*获取角色已有权限*/
         $role_permission_ids = $role->permissions()->get()->map(function($role_permission){
-            return $role_permission->id;
+            return $role_permission->pivot->permission_id;
         });
 
-        $permission['admin'] = Permission::where('slug','like','admin.%')->orderBy('name', 'asc')->get();
+        $permission['admin'] = Permission::where('slug','like','admin.%')->orderBy('id', 'asc')->get();
         return view('admin.role.edit')->with('role',$role)->with('permission',$permission)->with('role_permission_ids',$role_permission_ids);
     }
 
@@ -81,6 +80,7 @@ class RoleController extends AdminController
         $role->name = $request->input('name');
         $role->slug = $request->input('slug');
         $role->description = $request->input('description');
+        $role->sort = $request->input('sort');
         $role->save();
         return $this->success(route('admin.role.index'),'角色修改成功');
     }

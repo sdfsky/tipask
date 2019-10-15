@@ -1,4 +1,7 @@
 @extends('admin/public/layout')
+@section('css')
+    <link href="{{ asset('/static/js/summernote/summernote.css')}}" rel="stylesheet">
+@endsection
 @section('title')
     添加商品
 @endsection
@@ -37,6 +40,14 @@
                             </div>
 
                             <div class="form-group">
+                                <label>分类</label>
+                                <select name="category_id" class="form-control">
+                                    <option value="0">选择分类</option>
+                                    @include('admin.category.option',['type'=>'goods','select_id'=>0])
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label>logo图片</label>
                                 <input type="file" name="logo" />
                             </div>
@@ -54,10 +65,16 @@
                                 @if($errors->has('coins')) <p class="help-block">{{ $errors->first('coins') }}</p> @endif
                             </div>
 
-                            <div class="form-group @if($errors->has('description')) has-error @endif">
-                                <label>商品详情</label>
-                                <textarea name="description" class="form-control" placeholder="话题简介" style="height: 80px;">{{ old('description','') }}</textarea>
-                                @if($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif
+                            {{--<div class="form-group @if($errors->has('description')) has-error @endif">--}}
+                                {{--<label>商品详情</label>--}}
+                                {{--<textarea name="description" class="form-control" placeholder="话题简介" style="height: 80px;">{{ old('description','') }}</textarea>--}}
+                                {{--@if($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif--}}
+                            {{--</div>--}}
+
+                            <div class="form-group @if ($errors->has('description')) has-error @endif">
+                                <label for="name">商品详情</label>
+                                <div id="description_editor">{!! old('description','') !!}</div>
+                                @if ($errors->has('description')) <p class="help-block">{{ $errors->first('description') }}</p> @endif
                             </div>
 
 
@@ -75,6 +92,7 @@
                             </div>
                         </div>
                         <div class="box-footer">
+                            <input type="hidden" id="description_editor_content"  name="description" value="{{ old('description','') }}" />
                             <button type="submit" class="btn btn-primary">保存</button>
                         </div>
                     </form>
@@ -85,7 +103,27 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script type="text/javascript">
-        set_active_menu('operations',"{{ route('admin.notice.index') }}");
+        $(function(){
+            set_active_menu('manage_content',"{{ route('admin.tag.index') }}");
+            $('#description_editor').summernote({
+                lang: 'zh-CN',
+                height: 300,
+                placeholder:'完善话题详情',
+                toolbar: [ {!! config('tipask.summernote.blog') !!} ],
+                callbacks: {
+                    onChange:function (contents, $editable) {
+                        var code = $(this).summernote("code");
+                        $("#description_editor_content").val(code);
+                    },
+                    onImageUpload: function(files) {
+                        upload_editor_image(files[0],'description_editor');
+                    }
+                }
+            });
+
+        });
     </script>
 @endsection

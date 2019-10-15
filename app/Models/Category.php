@@ -17,6 +17,7 @@ class Category extends Model
 
         /*添加事件监听*/
         static::creating(function($category){
+
         });
 
         /*监听删除事件*/
@@ -25,6 +26,7 @@ class Category extends Model
             $category->articles()->update(['category_id'=>0]);
             $category->tags()->update(['category_id'=>0]);
             $category->experts()->update(['category_id'=>0]);
+            Category::destroy($category->getSubIds(false));
         });
     }
 
@@ -68,35 +70,57 @@ class Category extends Model
     }
 
 
-    public static function makeOptionTree($categories=null)
-    {
-        if(!$categories){
-            $categories = self::loadFromCache('all');
-        }
-
-        $optionTree = '';
+    /**
+     * 生成select下拉选择框
+     * @param $categories
+     * @param int $parentId
+     * @param int $depth
+     * @return string
+     */
+    public static function makeOptionTree($categories,$selectId=0, $parentId=0, $depth = 0){
+        $childTree = '';
         foreach ($categories as $category) {
-            if ($category->parent_id == 0) {
-                $optionTree .= "<option value=\"{$category->id}\">{$category->name}</option>";
-                $optionTree .= self::makeChildOption($categories, $category->id, 1);
+            if ( $parentId == $category->parent_id ) {
+                if($category->id == $selectId){
+                    $childTree .= "<option value=\"{$category->id}\" selected>";
+                }else{
+                    $childTree .= "<option value=\"{$category->id}\">";
+                }
+                $depthStr = str_repeat("--", $depth);
+                $childTree .= $depth ? "&nbsp;&nbsp;|{$depthStr}&nbsp;{$category->name}</option>" : "{$category->name}</option>";
+                $childTree .= self::makeOptionTree($categories,$selectId, $category->id, $depth + 1);
             }
         }
-        return $optionTree;
+        return $childTree;
+    }
+
+
+    public static function getSubCategoryIds($parentId=0){
+        $ids = '';
+        $categories  =  self::loadFromCache('all');
+        foreach ($categories as $category) {
+            if ( $parentId == $category->parent_id ) {
+                $ids .= $category->id.' ';
+                $ids .= self::getSubCategoryIds($category->id);
+            }
+        }
+
+        return $ids;
 
     }
 
 
-    public static function makeChildOption($categories, $parentId, $depth = 1){
-        $childTree = '';
-        foreach ($categories as $category) {
-            if ( $parentId == $category->parent_id ) {
-                $childTree .= "<option value=\"{$category->id}\">";
-                $depthStr = str_repeat("--", $depth);
-                $childTree .= $depth ? "&nbsp;&nbsp;|{$depthStr}&nbsp;{$category->name}</option>" : "{$category->name}</option>";
-                $childTree .= self::makeChildOption($categories, $category->id, $depth + 1);
-            }
-        }
-        return $childTree;
+    /*获取分类子分类ID*/
+    public function getSubIds($wrap=true){
+       $ids = self::getSubCategoryIds($this->id);
+       $subIds = trim($ids);
+       if($wrap){
+            $subIds = $this->id.' '.$subIds;
+       }
+       $subCategoryIds =  explode(" ",$subIds);
+       $subCategoryIds =array_filter($subCategoryIds);
+       sort($subCategoryIds);
+       return $subCategoryIds;
     }
 
 
@@ -122,43 +146,89 @@ class Category extends Model
 
     }
 
-    public static function getParentCategories($categoryId)
-    {
-        if (!$categoryId) {
+    /*查找摸一个分类信息*/
+    public static function findFromCache($categoryId){
+        $categories = self::loadFromCache('all');
+        foreach($categories as $category){
+            if($categoryId == $category->id){
+                return  $category;
+            }
+        }
+        return false;
+    }
+
+
+    /**生成树状结构
+     * @param $categories
+     * @param int $parentId
+     * @return array
+     */
+    public static function makeTree($categories,$parentId=0){
+        $tree = [];
+        foreach ($categories as $category) {
+            if ( $parentId == $category->parent_id ) {
+                $category->_child = self::makeTree($categories,$category->id);
+                $tree[] = $category;
+            }
+        }
+        return $tree;
+    }
+
+
+
+
+
+    /**
+     * 获取参数的所有父级分类
+     * @param int $cid 分类id
+     * @return array 参数分类和父类的信息集合
+     * @author huajie <banhuajie@163.com>
+     */
+    public  static function getParentCategories($categoryId){
+        if(!$categoryId){
             return [];
         }
-        $allCategories = self::loadFromCache('all');
-        $category = self::findFromCache($categoryId);
-        $parentId = $category->parent_id;
-        $parentCategories[] = $category;
-        while (true) {
-            foreach ($allCategories as $key => $value) {
-                if ($value->id == $parentId) {
+        $allCategories  =  self::loadFromCache('all');
+        $category  =   self::findFromCache($categoryId);
+        $parentId    =   $category->parent_id;
+        $parentCategories[]  =   $category;
+        while(true){
+            foreach ($allCategories as $key => $value){
+                if($value->id == $parentId){
                     $parentId = $value->parent_id;
-                    array_unshift($parentCategories, $value); //将父分类插入到数组第一个元素前
+                    array_unshift($parentCategories, $value);	//将父分类插入到数组第一个元素前
                 }
             }
-            if ($parentId == 0) {
+            if($parentId == 0){
                 break;
             }
         }
         return $parentCategories;
     }
 
-    /**
-     * 查找一个分类信息
-     * @param $categoryId
-     * @return bool|mixed
-     */
-    public static function findFromCache($categoryId)
-    {
+
+    /*判断是否有子分类*/
+    public function hasChild(){
         $categories = self::loadFromCache('all');
-        foreach ($categories as $category) {
-            if ($categoryId == $category->id) {
-                return $category;
+        foreach($categories as $category){
+            if($category->parent_id == $this->id){
+                return true;
             }
         }
         return false;
+    }
+
+
+    /*获取分类下的子分类*/
+    public function getSubChild(){
+        $categories = self::loadFromCache('all');
+        $children = [];
+        foreach($categories as $category){
+            if($category->parent_id == $this->id){
+                $children[] = $category;
+            }
+        }
+        return $children;
     }
 
 }

@@ -18,7 +18,8 @@ return [
         'mbstring',
         'tokenizer',
         'fileinfo',
-        'openssl'
+        'xml',
+        'gd',
     ],
 
     /*

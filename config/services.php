@@ -34,18 +34,44 @@ return [
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+    /*系统服务开关配置*/
+    'geetest_open' => env('GEETEST_OPEN',false), //极验证开关
+    'oauth_open'   => env('OAUTH_OPEN',0),       //oauth登陆开关
+    'sms_open'     => env('SMS_OPEN',0),
+    'video_open'          => env('VIDEO_OPEN',0),
+    'video_access_key'    => env('VIDEO_ACCESS_KEY',null),
+    'video_access_secret' => env('VIDEO_ACCESS_SECRET',null),
+
+    /*oauth 登陆项目配置*/
     'qq' => [
+        'open' => env('OAUTH_QQ_OPEN',0),
         'client_id' => env('OAUTH_QQ_KEY'),
         'client_secret' => env('OAUTH_QQ_SECRET'),
         'redirect' => env('OAUTH_QQ_REDIRECT'),
     ],
     'weibo' => [
+        'open' => env('OAUTH_WEIBO_OPEN',0),
         'client_id' => env('OAUTH_WEIBO_KEY'),
         'client_secret' => env('OAUTH_WEIBO_SECRET'),
         'redirect' => env('OAUTH_WEIBO_REDIRECT'),
     ],
-
-    /*系统服务开关配置*/
-    'geetest_open' => env('GEETEST_OPEN',false), //极验证开关
+    'weixin' => [
+        'open' => env('OAUTH_WEIXIN_OPEN',0),
+        'client_id' => env('OAUTH_WEIXIN_KEY'),
+        'client_secret' => env('OAUTH_WEIXIN_SECRET'),
+        'redirect' => env('OAUTH_WEIXIN_REDIRECT'),
+    ],
+    'weixinweb' => [
+        'open' => env('OAUTH_WEIXINWEB_OPEN',0),
+        'client_id' => env('OAUTH_WEIXINWEB_KEY'),
+        'client_secret' => env('OAUTH_WEIXINWEB_SECRET'),
+        'redirect' => env('OAUTH_WEIXINWEB_REDIRECT'),
+    ],
+    'weapp' => [
+        'open' => env('WEAPP_OPEN',0),
+        'app_id' => env('WEAPP_APP_ID'),
+        'app_secret' => env('WEAPP_APP_SECRET')
+    ]
 
 ];

@@ -11,8 +11,6 @@
                     <form role="form" name="settingForm" method="POST" action="{{ route('admin.setting.email') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-body">
-
-
                             <div class="form-group">
                                 <label for="website_url">开启邮件功能</label>
                                 <span class="text-muted">(若关闭则不会有邮件通知)</span>

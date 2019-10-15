@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="author" content="Tipask Team" />
-  <meta name="copyright" content="2016 tipask.com" />
+  <meta name="copyright" content="{{ date("Y") }} tipask.com" />
   <title>@yield('title')</title>
   <!-- Bootstrap -->
   <link href="{{ asset('/static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -45,7 +45,7 @@
 
 
 <footer class="main-footer text-center">
-  <strong>Copyright © 2010-{{ date("Y-m-d") }} <a href="http://www.tipask.com" target="_blank">tipask.com</a>.</strong> All rights reserved.
+  <strong>Copyright © 2010-{{ date("Y") }} <a href="http://www.tipask.com" target="_blank">tipask.com</a>.</strong> All rights reserved.
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

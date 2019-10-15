@@ -43,48 +43,34 @@
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary btn-lg">同步用户话题数据</button>
-                            <button type="button" class="btn btn-primary btn-lg synchronous-doing">同步动态数据</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
+        {{--<div class="row">--}}
+            {{--<div class="col-xs-12">--}}
+                {{--<div class="box box-default">--}}
+                    {{--<div class="box-header">--}}
+                        {{--<h3 class="box-title">数据导入</h3>--}}
+                    {{--</div>--}}
+                    {{--<form name="adjustForm" method="post" action="{{ route('admin.system.adjust') }}">--}}
+                        {{--<div class="box-body">--}}
+                            {{--<p>用于导入问答数据,点击下载[<a href="https://www.tipask.com/excel/import_template.xls" target="_blank">导入模板</a>]，请按照模板格式进行数据填充，然后点击下方的导入按钮</p>--}}
+                        {{--</div>--}}
+                        {{--<div class="box-footer">--}}
+                            {{--<a  class="btn btn-primary btn-lg" href="{{ route('admin.system.import') }}">通过模板导入数据</a>--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     </section>
 @endsection
 
-<div id="page_message" class="page_mess_ok prompt" style="display:none;"></div>
 @section('script')
     <script type="text/javascript">
         set_active_menu('global',"{{ route('admin.system.index') }}");
-        $(function(){
-            $(".synchronous-doing").click(function(){
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('admin.system.synchronousdoing') }}",
-                    beforeSend: function(XMLHttpRequest){
-                        $(".page_mess_ok").css("background-color","#48bb5e");
-                        $(".prompt").html("正在同步中...");
-                        $(".synchronous-doing").attr('disabled',true);
-                        $(".prompt").css('display',"block");
-                    },
-                    success: function(data, textStatus){
-                        $(".prompt").html(data);
-                        setInterval(function(){
-                            $(".prompt").css('display',"none");
-                            $(".synchronous-doing").attr('disabled',false);
-                        },10000);
-                    },
-                    error: function(){
-                        $(".page_mess_ok").css("background-color","#AD3A37");
-                        $(".prompt").html("请重新同步");
-                        setInterval(function(){
-                            $(".prompt").css('display',"none");
-                            $(".synchronous-doing").attr('disabled',false);
-                        },10000)
-                    }
-                });
-
-            })
-        })
     </script>
 @endsection

@@ -36,6 +36,7 @@ $(function(){
 
     /*验证码重新加载*/
     $("#reloadCaptcha").click(function(){
+        console.log("coming");
         var new_src = $(this).find("img").attr("src")+'&'+Math.random();
         $(this).find("img").attr("src",new_src);
     });
@@ -239,10 +240,85 @@ $(function(){
         });
     }
 
+
+    /*悬赏选择框处理*/
+
+    $(".reward-price-sample .btn-default").click(function(){
+        var button = $(this);
+        $(".reward-price-sample .btn-default").each(function(){
+            $(this).removeClass("active");
+        });
+        button.addClass("active");
+        return false;
+    });
+
+    $(".reward-price-sample .reward-price-number").keyup(function(){
+        var price = $.trim($(this).val());
+        if (!/^\d+$/.test(price) || parseInt(price) <= 0 ){
+            $(this).val('');
+        }
+
+        $(".reward-price-sample .btn-default").each(function(){
+            $(this).removeClass("active");
+        });
+
+        return false;
+
+    });
+
     /*fancybox处理*/
     $(".description .text-fmt img,.best-answer .text-fmt img,.widget-answers .text-fmt img,.widget-article .text-fmt img").each(function(){
         var image = $(this);
         image.wrap('<a data-fancybox="gallery" href="'+image.attr("src")+'"></a>');
+    });
+
+
+    // 举报相关
+    $("#report_reason").hide();
+    $(".reportRadioItem").change(function() {
+        var id = $("input[name='report_type']:checked").val();
+        if (id == 99){
+            $("#report_reason").show();
+        }else{
+            $("#report_reason").hide();
+        }
+    });
+    $(".report_btn").click(function () {
+        var source_type = $(this).data('source_type');
+        var source_id = $(this).data('source_id');
+        $("input[name='source_type']").val(source_type);
+        $("input[name='source_id']").val(source_id);
+        console.log(source_type);
+        if (source_type == 'article'){
+            $("#reportModalLabel").text("举报此文章");
+        }else if(source_type == 'answer') {
+            $("#reportModalLabel").text("举报此回答");
+        }else if(source_type == 'question')
+        {
+            $("#reportModalLabel").text("举报此问题");
+        }
+    });
+
+    $(".comments").map(function(){
+        var commentNum = $(this).text().replace(/[^0-9]/ig,"");
+        if(commentNum == 0){
+            return false;
+        }
+        var comment_id = $(this).attr('href');
+        var source_type = $(comment_id).data('source_type');
+        var source_id   = $(comment_id).data('source_id');
+        console.log(source_type+source_id);
+        load_comments(source_type,source_id);
+        $(comment_id).collapse('show');
+
+    });
+
+    $("#report_submit_button").click(function () {
+        var report_type = $("input[name='report_type']:checked").val();
+        if(typeof(report_type) == "undefined"){
+            alert('请填写举报原因');
+        }
+        $("#report_form").submit();
     });
 
 });
@@ -292,7 +368,7 @@ function upload_editor_image(file,editorId){
         contentType: false,
         processData: false,
         success: function(url) {
-            console.log(url)
+            console.log(url);
             if(url == 'error'){
                 alert('图片上传失败！请压缩图片大小再进行上传');
                 return false;
@@ -319,6 +395,41 @@ function check_login(){
     return true;
 }
 
+
+/*手机号码格式校验*/
+function is_mobile(mobile){
+     var reg = /^1[3456789]\d{9}$/;
+     var phone = $.trim(mobile);
+    if(phone == ''){
+        return false;
+    }
+    if(!reg.test(phone)){
+        return false;
+    }
+    return true;
+}
+
+
+function show_form_error(element,msg){
+    element.parent().addClass('has-error');
+    if(element.parent().find(".help-block").size() > 0){
+        element.parent().find(".help-block").html(msg);
+    }else{
+        element.after('<span class="help-block">'+msg+'</span>');
+    }
+}
+
+
+function get_button_price(){
+    var price = 0;
+    $(".reward-price-sample .btn-default").each(function(){
+        var button_price = $(this).data('price');
+        if($(this).hasClass('active')){
+            price = button_price;
+        }
+    });
+    return price;
+}
 
 
 

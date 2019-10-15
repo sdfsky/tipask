@@ -22,8 +22,8 @@
         <form role="form" name="loginForm" action="{{ route('auth.user.login') }}"  method="POST" >
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group @if ($errors->first('email')) has-error @endif">
-                    <label class="required">邮箱</label>
-                    <input type="text" class="form-control" name="email" required placeholder="注册邮箱" value="{{ old('email') }}">
+                    <label class="required">账户</label>
+                    <input type="text" class="form-control" name="email" required placeholder="邮箱或手机号" value="{{ old('email') }}">
                     @if ($errors->first('email'))
                      <span class="help-block">{{ $errors->first('email') }}</span>
                     @endif
@@ -36,23 +36,31 @@
                     <span class="help-block">{{ $errors->first('password') }}</span>
                     @endif
                 </div>
-
-
-                @if(Setting()->get('code_login') == 1)
-                    @include('theme::layout.auth_captcha')
-                @endif
+            @if(Setting()->get('code_login') == 1)
+                @include('theme::layout.auth_captcha')
+            @endif
             <div class="form-group clearfix">
                 <div class="checkbox pull-left">
                     <label><input name="remember" type="checkbox" value="1" checked> 记住登录状态</label>
                 </div>
                 <button type="submit" class="btn btn-primary pull-right pl20 pr20">登录</button>
             </div>
-            @if(Setting()->get('oauth_open') == 1)
+            @if(config('services.oauth_open'))
             <hr />
             <div class="widget-login mt-30">
                 <p class="text-muted mt-5 mr-10 pull-left hidden-xs">快速登录</p>
-                <a href="{{ route('auth.oauth.login',['type'=>'weibo']) }}" class="btn btn-default btn-sm btn-sn-weibo" ><span class="icon-sn-bg-weibo"></span> <strong class="visible-xs-inline">新浪微博账号</strong></a>
-                <a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default btn-sm btn-sn-qq" ><span class="icon-sn-bg-qq"></span> <strong class="visible-xs-inline">QQ 账号</strong></a>
+                @if(config('services.weixin.open'))
+                    <a href="{{ route('auth.oauth.login',['type'=>'weixin']) }}" class="btn btn-default btn-sm btn-sn-weixin hidden-lg" ><span class="icon-sn-bg-weixin"></span> <strong class="visible-xs-inline">微信账号</strong></a>
+                @endif
+                @if(config('services.weixinweb.open'))
+                    <a href="{{ route('auth.oauth.login',['type'=>'weixinweb']) }}" class="btn btn-default btn-sm btn-sn-weixin hidden-xs" ><span class="icon-sn-bg-weixin"></span> <strong class="visible-xs-inline">微信扫码</strong></a>
+                @endif
+                @if(config('services.qq.open'))
+                    <a href="{{ route('auth.oauth.login',['type'=>'qq']) }}" class="btn btn-default btn-sm btn-sn-qq" ><span class="icon-sn-bg-qq"></span> <strong class="visible-xs-inline">QQ 账号</strong></a>
+                @endif
+                @if(config('services.weibo.open'))
+                    <a href="{{ route('auth.oauth.login',['type'=>'weibo']) }}" class="btn btn-default btn-sm btn-sn-weibo" ><span class="icon-sn-bg-weibo"></span> <strong class="visible-xs-inline">新浪微博账号</strong></a>
+                @endif
             </div>
             @endif
         </form>

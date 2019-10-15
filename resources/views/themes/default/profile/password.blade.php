@@ -7,7 +7,7 @@
         <!--左侧菜单-->
         @include('theme::layout.profile_menu')
 
-        <div id="main" class="settings col-md-10 form-horizontal">
+        <div id="main" class="settings col-md-10 form-horizontal main">
             <h2 class="h3 post-title">修改密码</h2>
             <div class="row mt-30">
                 <div class="col-md-8">
@@ -50,7 +50,7 @@
                                 <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
                             </div>
                         </div>
-                        <div class="form-action row">
+                        <div class="form-action row mb-30">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button class="btn btn-xl btn-primary" type="submit">提交</button>
                             </div>

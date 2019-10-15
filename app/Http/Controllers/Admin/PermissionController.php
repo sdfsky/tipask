@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Bican\Roles\Models\Permission;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -45,7 +45,7 @@ class PermissionController extends AdminController
         $request->flash();
         $this->validateRules['slug'] = 'required|max:128|unique:permissions';
         $this->validate($request,$this->validateRules);
-        Permission::create($request->all());
+        Permission::create($request->only(['name', 'slug', 'model', 'description']));
         return $this->success(route('admin.permission.index'),'权限添加成功');
     }
 

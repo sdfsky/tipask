@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
-            <div class="mt-30 text-muted">
+            <div class="mt-10 text-muted">
                 <span>发私信给 <a  href="{{ route('auth.space.index',['id'=>$toUser->id]) }}">{{ $toUser->name }}</a> ： </span>
                 <span class="pull-right"><a href="{{ route('auth.message.index') }}" class="text-muted"><i class="fa fa-reply"></i> 返回</a></span>
             </div>
@@ -23,7 +23,7 @@
                 </form>
             </div>
 
-            <div class="widget-streams messages mt-15">
+            <div class="widget-streams messages mt-15 border-top">
                     @foreach($messages as $message)
                     <section class="hover-show streams-item" id="message_{{ $message->id }}">
                     @if($message->from_user_id == Auth()->user()->id)

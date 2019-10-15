@@ -6,6 +6,7 @@ use App\Models\Relations\BelongsToCategoryTrait;
 use App\Models\Relations\BelongsToUserTrait;
 use App\Models\Relations\MorphManyCommentsTrait;
 use App\Models\Relations\MorphManyTagsTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
@@ -83,8 +84,9 @@ class Article extends Model
     public static function recommended($categoryId=0 , $pageSize=20)
     {
         $query = self::query();
-        if( $categoryId > 0 ){
-            $query->where('category_id','=',$categoryId);
+        $category = Category::findFromCache($categoryId);
+        if( $category ){
+            $query->whereIn('category_id',$category->getSubIds());
         }
 
         $list = $query->where('status','>',0)->orderBy('supports','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
@@ -95,8 +97,12 @@ class Article extends Model
     public static function hottest($categoryId=0 , $pageSize=20)
     {
         $query = self::query();
-        if( $categoryId > 0 ){
-            $query->where('category_id','=',$categoryId);
+        $category = Category::findFromCache($categoryId);
+        if( $category ){
+            $query->whereIn('category_id',$category->getSubIds());
+        }
+        if(Setting()->get('hot_content_period',365)){
+            $query->where('created_at', ">" , Carbon::now()->subDays(Setting()->get('hot_content_period',365)));
         }
         $list = $query->where('status','>',0)->orderBy('views','DESC')->orderBy('collections','DESC')->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;
@@ -108,8 +114,9 @@ class Article extends Model
     public static function newest($categoryId=0 , $pageSize=20)
     {
         $query = self::query();
-        if( $categoryId > 0 ){
-            $query->where('category_id','=',$categoryId);
+        $category = Category::findFromCache($categoryId);
+        if( $category ){
+            $query->whereIn('category_id',$category->getSubIds());
         }
         $list = $query->where('status','>',0)->orderBy('created_at','DESC')->paginate($pageSize);
         return $list;

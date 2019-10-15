@@ -7,8 +7,8 @@
         <!--左侧菜单-->
         @include('theme::layout.profile_menu')
 
-        <div id="main" class="settings col-md-10 form-horizontal">
-            <h2 class="h3 post-title">修改邮箱</h2>
+        <div id="main" class="settings col-md-10 form-horizontal main">
+            <h2 class="h3 post-title">绑定邮箱</h2>
             @if(Auth()->user()->userData->email_status == 1)
                 <div class="alert alert-success" role="alert">
                     您的邮箱已绑定，如需修改，请按照下方提示进行操作！
@@ -41,7 +41,7 @@
                                 <div class="mt-10"><a href="javascript:void(0);" id="reloadCaptcha"><img src="{{ captcha_src()}}"></a></div>
                             </div>
                         </div>
-                        <div class="form-action row">
+                        <div class="form-action row mb-30">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button class="btn btn-xl btn-primary" type="submit">提交</button>
                             </div>

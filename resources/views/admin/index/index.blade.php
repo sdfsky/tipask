@@ -80,6 +80,27 @@
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
+                        <h3 class="box-title">订单数据报告</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-center">
+                                    <strong>订单数据统计</strong>
+                                </p>
+                                <div class="chart">
+                                    <canvas id="payment_chart" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
                         <h3 class="box-title">问答数据报告</h3>
                     </div>
                     <div class="box-body">
@@ -241,6 +262,38 @@
             }
         });
 
+        var paymentChart = new Chart($("#payment_chart"),{
+            type: 'bar',
+            data:{
+                labels:[{!! implode(",",$paymentChart['labels']) !!}],
+                datasets:[
+                    {
+                        label: '全部',
+                        backgroundColor:"rgba(204,102,51,0.9)",
+                        data:[{{ implode(",",$paymentChart['allRange']) }}]
+                    },
+                    {
+                        label: '待支付',
+                        backgroundColor:"rgba(51,102,153,0.9)",
+                        data:[{{ implode(",",$paymentChart['beenPaidRange']) }}]
+                    },
+                    {
+                        label: '已支付',
+                        backgroundColor: "rgba(0,166,90,0.9)",
+                        data: [{{ implode(",",$paymentChart['paidRange']) }}]
+                    }
+                ]
+            },
+            options:{
+                scales:{
+                    yAxes:[{
+                        ticks:{
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
 
     });
 </script>

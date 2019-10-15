@@ -9,7 +9,7 @@ class Exchange extends Model
 {
     use BelongsToUserTrait;
     protected $table = 'exchanges';
-    protected $fillable = ['user_id', 'goods_id','real_name','phone','email','comment','status'];
+    protected $fillable = ['user_id','coins', 'goods_id','real_name','phone','email','comment','status'];
 
 
     static function newest()

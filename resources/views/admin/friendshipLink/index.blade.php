@@ -11,7 +11,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <form role="form" name="item_form" id="item_form" method="post">
-                        <input name="_method" type="hidden" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-header">
                             <div class="row">

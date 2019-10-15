@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
 
 class Setting extends Model
 {
@@ -37,22 +38,36 @@ class Setting extends Model
     }
 
 
-    public static function writeToEnv(){
-        $env_path = base_path('.env');
-        $env_content = '';
-        ksort($_ENV);
-        foreach($_ENV as $key => $value ){
-            $env_content .= $key.'='.$value."\n";
+    /**
+     * 设置env配置文件
+     * @param $params
+     */
+    public static function setEnvParams($params){
+        if(!$params){
+            return false;
         }
-        file_put_contents($env_path,$env_content);
-    }
-
-
-
-    /*清空配置缓存*/
-    public static function clearAll()
-    {
-
+        $envPath = app()->environmentFilePath();
+        $envString = file_get_contents($envPath);
+        foreach ($params as $key => $value){
+            $envKey = strtoupper($key);
+            $oldValue = env($envKey,null);
+            $keyString = "{$envKey}=";
+            $oldEnvString = "{$key}={$oldValue}";
+            if(str_contains($oldValue,' ')){
+                $oldEnvString = "{$envKey}='$oldValue'";
+            }
+            $newEnvString = "{$envKey}=$value";
+            if(str_contains($value,' ')){
+                $newEnvString = "{$envKey}='$value'";
+            }
+            if(str_contains($envString,$keyString)){
+                $envString = str_replace($oldEnvString,$newEnvString,$envString);
+            }else{
+                $envString .= $newEnvString."\n";
+            }
+        }
+        file_put_contents($envPath,$envString);
+        return true;
     }
 
 }

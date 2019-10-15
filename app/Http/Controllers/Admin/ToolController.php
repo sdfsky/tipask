@@ -21,8 +21,8 @@ class ToolController extends AdminController
         if($request->isMethod('post')){
             $cacheItems = $request->input('cacheItems',[]);
             if(in_array('data',$cacheItems)){
-                Artisan::call('cache:clear');
-                Artisan::call('config:clear');
+               Artisan::call('cache:clear');
+               Artisan::call('config:clear');
             }
 
             if(in_array('view',$cacheItems)){

@@ -25,6 +25,22 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="website_url">搜索索引Host</label>
+                                <span class="text-muted">(请填写xunsearch服务Host及端口号)</span>
+                                <div>
+                                    <input type="text" class="form-control" name="xunsearch_index" placeholder="xunsearch服务IP及端口号,例如 127.0.0.1:8383" value="{{ old('xunsearch_index',Setting()->get('xunsearch_index')) }}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="website_url">搜索服务Host</label>
+                                <span class="text-muted">(请填写xunsearch搜索服务Host及端口号)</span>
+                                <div>
+                                    <input type="text" class="form-control" name="xunsearch_search" placeholder="xunsearch搜索服务IP及端口号,例如 127.0.0.1:8384" value="{{ old('xunsearch_search',Setting()->get('xunsearch_search')) }}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="website_url">搜索框提示语</label>
                                 <input type="text" class="form-control" name="search_placeholder" placeholder="输入关键词" value="{{ old('search_placeholder',Setting()->get('search_placeholder')) }}"  />
                             </div>

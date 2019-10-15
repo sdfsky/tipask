@@ -68,6 +68,15 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="website_skin">网站默认色调</label>
+                            <span class="text-muted">(网站的前台模板默认色调)</span>
+                            <select name="website_skin" class="form-control">
+                                @foreach(config('tipask.skins') as $skin =>$skinName)
+                                    <option value="{{ $skin }}" @if(config('tipask.skin') == $skin) selected @endif >{{ $skinName }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group @if ($errors->has('website_admin_email')) has-error @endif">
                             <label for="website_admin_email">系统缓存时间（分钟）</label>
                             <span class="text-muted">(设置范围是1-8640，缓存相关数据，包括首页缓存、积分排行榜等)</span>

@@ -62,23 +62,29 @@
                                         <th><input type="checkbox" class="checkbox-toggle"/></th>
                                         <th>用户ID</th>
                                         <th>用户名</th>
+                                        <th>手机</th>
                                         <th>邮箱</th>
                                         <th>身份职业</th>
                                         <th>地区</th>
-                                        <th>注册时间</th>
+                                        <th>注册ip</th>
                                         <th>更新时间</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     @foreach($users as $user)
                                         <tr>
-                                            <td><input type="checkbox" value="{{ $user->id }}" name="id[]"/></td>
+                                            @if($user->id ===1 || $user->id == \Illuminate\Support\Facades\Auth::user()->id)
+                                                <td></td>
+                                            @else
+                                                <td><input type="checkbox" value="{{ $user->id }}" name="id[]"/></td>
+                                            @endif
                                             <td>{{ $user->id }}</td>
                                             <td>{{ $user->name }}</td>
+                                            <td>{{ $user->mobile }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->title }}</td>
                                             <td>{{ Area()->getName($user->province) }} @if($user->city>0 &&  Area()->getName($user->province)!=Area()->getName($user->city)) - {{ Area()->getName($user->city) }} @endif</td>
-                                            <td>{{ $user->created_at }}</td>
+                                            <td>@if($user->userData){{ $user->userData->last_login_ip }}@endif</td>
                                             <td>{{ $user->updated_at }}</td>
                                             <td><span class="label @if($user->status===0) label-danger @elseif($user->status===-1) label-default @elseif($user->status===1) label-success @endif">{{ trans_common_status($user->status) }}</span> </td>
                                             <td>
@@ -104,7 +110,7 @@
                             <div class="col-sm-9">
                                 <div class="text-right">
                                     <span class="total-num">共 {{ $users->total() }} 条数据</span>
-                                    {!! str_replace('/?', '?', $users->render()) !!}
+                                    {!! str_replace('/?', '?', $users->appends($filter)->links()) !!}
                                 </div>
                             </div>
                         </div>

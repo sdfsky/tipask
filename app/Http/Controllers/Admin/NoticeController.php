@@ -16,6 +16,7 @@ class NoticeController extends AdminController
     protected $validateRules = [
         'subject' => 'required|max:255',
         'url' => 'required|max:255',
+        'style' => 'sometimes|max:255'
     ];
 
 
@@ -101,6 +102,7 @@ class NoticeController extends AdminController
         }
         $this->validate($request,$this->validateRules);
         $notice->subject = $request->input('subject');
+        $notice->style = $request->input('style','');
         $notice->url = $request->input('url');
         $notice->status = $request->input('status');
         $notice->save();

@@ -3,24 +3,18 @@
 namespace App\Models;
 use App\Models\Relations\MorphManyTagsTrait;
 use Carbon\Carbon;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Bican\Roles\Traits\HasRoleAndPermission;
-use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 
-class User extends Model implements AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract,
-    HasRoleAndPermissionContract
+class User extends Authenticatable
 {
-    use Authenticatable, CanResetPassword,HasRoleAndPermission,MorphManyTagsTrait;
+    use CanResetPassword,MorphManyTagsTrait,Notifiable;
 
     /**
      * The database table used by the model.
@@ -29,12 +23,14 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $table = 'users';
 
+    protected $roles;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password','status','site_notifications','email_notifications',''];
+    protected $fillable = ['name', 'email','mobile', 'password','status','site_notifications','email_notifications'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -73,6 +69,10 @@ class User extends Model implements AuthenticatableContract,
 
             /*删除积分设置*/
             $user->credits()->delete();
+
+            /*删除我的通知*/
+            $user->notifications()->delete();
+
             /*删除动态*/
             $user->doings()->delete();
 
@@ -95,7 +95,6 @@ class User extends Model implements AuthenticatableContract,
             }
         });
     }
-
     public static function getAvatarPath($userId,$size='big',$ext='jpg')
     {
         $avatarDir = self::getAvatarDir($userId);
@@ -155,6 +154,50 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function getRoles()
+    {
+        return (!$this->roles) ? $this->roles = $this->roles()->get() : $this->roles;
+    }
+
+    public function attachRole($role)
+    {
+        return (!$this->getRoles()->contains($role)) ? $this->roles()->attach($role) : true;
+    }
+
+    public function detachRole($role)
+    {
+        $this->roles = null;
+        return $this->roles()->detach($role);
+    }
+
+    public function detachAllRoles()
+    {
+        $this->roles = null;
+        return $this->roles()->detach();
+    }
+
+
+    /**
+     * 检测用户是否有权限
+     * @param string $permission
+     * @return mixed
+     */
+    public function hasPermission($permission){
+        $permissions = session('user_permissions',[]);
+        return (in_array($permission,$permissions) || $this->isSuperAdmin());
+    }
+
+    public function getPermissionsAttribute(){
+        return session('user_permissions',[]);
+    }
+
+
+
     /**
      *获取用户数据
      * @param $userId
@@ -177,6 +220,12 @@ class User extends Model implements AuthenticatableContract,
     public function authentication()
     {
         return $this->hasOne('App\Models\Authentication');
+    }
+
+    /*用户认证信息*/
+    public function lecturer()
+    {
+        return $this->hasOne('App\Models\Lecturer');
     }
 
     /**
@@ -206,6 +255,20 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Models\Article');
     }
+    /**
+     * 获取用户课程
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function courses()
+    {
+        return $this->hasMany('App\Models\Course');
+    }
+
+    /*我发起的通知*/
+    public function notifications(){
+        return $this->hasMany('App\Models\Notification');
+    }
+
 
     /**
      * 获取用户动态
@@ -268,9 +331,14 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\Models\UserTag','user_id');
     }
 
+    /*用户统计标签*/
+    public function payments(){
+        return $this->hasMany('App\Models\Payment','user_id');
+    }
+
 
     public function hotTags(){
-        $hotTagIds = $this->userTags()->select("tag_id")->distinct()->orderBy('supports','desc')->orderBy('answers','desc')->orderBy('created_at','desc')->take(5)->lists('tag_id');
+        $hotTagIds = $this->userTags()->select("tag_id")->distinct()->orderBy('supports','desc')->orderBy('answers','desc')->orderBy('created_at','desc')->take(5)->pluck('tag_id');
         $tags = [];
         foreach($hotTagIds as $hotTagId){
             $tag = Tag::find($hotTagId);
@@ -331,6 +399,16 @@ class User extends Model implements AuthenticatableContract,
         return $this->credits()->where('created_at','>',$today)->where('action','=','sign')->count();
     }
 
+    public function isSuperAdmin(){
+        return $this->id == config('tipask.super_admin_id');
+    }
 
+    public function openid(){
+        $oauth =  $this->userOauth()->where("auth_type","wechat-app")->first();
+        if($oauth){
+            return $oauth->id;
+        }
+        return '';
+    }
 
 }

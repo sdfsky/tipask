@@ -16,6 +16,12 @@ class SearchController extends Controller
 {
 
 
+    public function show(Request $request){
+        $word = trim($request->input('word'));
+        $filter = trim($request->input('filter'));
+        return view('theme::search.show')->with(compact('word','filter'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +36,7 @@ class SearchController extends Controller
 
         if ($validator->fails())
         {
-            return $this->error(route('website.index'),'搜索关键词不能为空');
+            return $this->error(route('auth.search.show'),'搜索关键词不能为空');
         }
 
         $word = trim($request->input('word'));
@@ -47,11 +53,9 @@ class SearchController extends Controller
                 }else{
                     $docs = $xsSearch->model($model)->addQuery($word)->addRange('status',0,null)->setLimit($pageSize,$startIndex)->search();
                 }
-
             }else{
-                $docs = $xsSearch->addQuery($word)->setLimit($pageSize,$startIndex)->search();
+                $docs = $xsSearch->setFuzzy()->addQuery($word)->setLimit($pageSize,$startIndex)->search();
             }
-
             $dataList = [];
 
             foreach($docs as $doc){
@@ -63,7 +67,6 @@ class SearchController extends Controller
                 $data['content'] = XsSearch::getSearch()->highlight($doc->content);
                 $dataList[] = $data;
             }
-
             $total = $xsSearch->count();
 
             $list = new Paginator($dataList, $total, $pageSize, $page,[
@@ -77,10 +80,23 @@ class SearchController extends Controller
             }
             $model =  App::make('App\Models\\'.ucfirst(str_singular($filter)));
             $list = $model::search($word);
+            if($filter === 'questions'){
+                $list->map(function($item) use ($word) {
+                    foreach (explode(" ", $word) as $k) {
+                        $item->title = $this->_highlight($k, $item->title);
+                        $item->description = $this->_highlight($k, $item->description);
+                    }
+                });
+            }
         }
 
 
         return view('theme::search.index')->with('word',$word)->with('filter',$filter)->with('list',$list);
+    }
+
+
+    private function _highlight($word,$subject){
+        return str_ireplace("$word","<em>$word</em>",$subject);
     }
 
 

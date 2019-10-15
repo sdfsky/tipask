@@ -2,17 +2,15 @@
 
 @section('seo_title')我的兑换 - {{ Setting()->get('website_name') }}@endsection
 
-
-
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
             <h2 class="h4  mt-30">
                 我的兑换
             </h2>
-            <div class="widget-streams">
+            <div class="widget-streams border-top">
                 @foreach($exchanges as $exchange)
-                    <section class="stream-list-item ">
+                    <section class="streams-item ">
                         <span class="text-gold"><i class="fa fa-database"></i> {{ $exchange->coins }}</span>
                         <a href="{{ route('shop.goods.detail',['id'=>$exchange->goods_id]) }}" target="_blank">{{ $exchange->goods->name }}</a>
                         @if($exchange->status === 0)

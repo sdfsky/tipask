@@ -48,7 +48,6 @@ class EmailController extends Controller
                 $user->save();
                 $user->userData->email_status = 1;
                 $user->userData->save();
-
             }
 
             $this->auth->login($user);

@@ -13,9 +13,10 @@
         <div class="box">
             <div class="box-body">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">数据库类型</label>
+                    <label for="exampleInputEmail1">数据库类型 {{ old('database_driver') }}</label>
                     <select name="database_driver" class="form-control">
-                        <option value="mysql">Mysql数据库</option>
+                        <option value="mysql" @if(old('database_driver') == 'mysql') selected @endif>Mysql数据库</option>
+                        <option value="pgsql" @if(old('database_driver') == 'pgsql') selected @endif>PostgreSQL数据库</option>
                     </select>
                 </div>
                 <div class="form-group @if($errors->has('database_host')) has-error @endif">

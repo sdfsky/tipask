@@ -13,7 +13,7 @@
         <!--左侧菜单-->
         @include('theme::layout.profile_menu')
 
-        <div id="main" class="settings col-md-10 form-horizontal">
+        <div id="main" class="settings col-md-10 form-horizontal main">
             <h2 class="h3 post-title">专家认证 <small>修改认证资料</small></h2>
             <div class="row mt-30">
                 <div class="col-md-8">
@@ -144,7 +144,7 @@
                             </div>
                         </div>
 
-                        <div class="form-action row">
+                        <div class="form-action row mb-30">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button class="btn btn-xl btn-primary profile-sub" type="submit">提交申请</button>
                                 <a class="btn btn-xl btn-default profile-sub" href="{{ route('auth.authentication.index') }}">返回</a>

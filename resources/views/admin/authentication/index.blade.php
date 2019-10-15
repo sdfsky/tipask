@@ -15,6 +15,8 @@
                         <div class="row">
                             <div class="col-xs-3">
                                 <div class="btn-group">
+                                    <a href="{{ route('admin.authentication.create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="添加专家认证"><i class="fa fa-plus"></i></a>
+                                    <button class="btn btn-default btn-sm" data-toggle="tooltip" title="设置为首页推荐" onclick="confirm_submit('item_form','{{  route('admin.authentication.recommend') }}','确认推荐选中项？')"><i class="fa fa-star-o" aria-hidden="true"></i></button>
                                     <button class="btn btn-default btn-sm" title="移动分类"  data-toggle="modal" data-target="#change_category_modal" ><i data-toggle="tooltip" title="移动分类" class="fa fa-bars" aria-hidden="true"></i></button>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.authentication.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
                                 </div>
@@ -64,6 +66,7 @@
                                         <th>认证领域</th>
                                         <th>更新时间</th>
                                         <th>状态</th>
+                                        <th>推荐</th>
                                         <th>操作</th>
                                     </tr>
                                     @foreach($authentications as $authentication)
@@ -78,6 +81,7 @@
                                             <td>{{ $authentication->skill }}</td>
                                             <td>{{ timestamp_format($authentication->updated_at) }}</td>
                                             <td><span class="label @if($authentication->status===0) label-warning  @elseif($authentication->status===1) label-success @else label-default  @endif">{{ trans_authentication_status($authentication->status) }}</span> </td>
+                                            <td><span class="label @if($authentication->recommend_at) label-success @else label-default  @endif">{{ trans_common_bool($authentication->recommend_at)}}</span> </td>
                                             <td>
                                                 <div class="btn-group-xs" >
                                                     <a class="btn btn-default" href="{{ route('admin.authentication.edit',['user_id'=>$authentication->user_id]) }}" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>
@@ -93,6 +97,7 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="btn-group">
+                                    <a href="{{ route('admin.authentication.create') }}" class="btn btn-default btn-sm" data-toggle="tooltip" title="添加专家认证"><i class="fa fa-plus"></i></a>
                                     <button class="btn btn-default btn-sm" title="移动分类"  data-toggle="modal" data-target="#change_category_modal" ><i data-toggle="tooltip" title="移动分类" class="fa fa-bars" aria-hidden="true"></i></button>
                                     <button class="btn btn-default btn-sm" data-toggle="tooltip" title="删除选中项" onclick="confirm_submit('item_form','{{  route('admin.authentication.destroy') }}','确认删除选中项？')"><i class="fa fa-trash-o"></i></button>
                                 </div>
@@ -100,7 +105,7 @@
                             <div class="col-sm-9">
                                 <div class="text-right">
                                     <span class="total-num">共 {{ $authentications->total() }} 条数据</span>
-                                    {!! str_replace('/?', '?', $authentications->render()) !!}
+                                    {!! str_replace('/?', '?', $authentications->appends($filter)->links()) !!}
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ class FriendshipLinkController extends AdminController
     protected $validateRules = [
         'name' => 'required|max:128',
         'url' => 'required|url|max:128',
-        'slogan' => 'sometimes|max:128',
+        'slogan' => 'required|max:128',
         'sort' => 'sometimes|integer',
     ];
 

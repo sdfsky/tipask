@@ -74,9 +74,9 @@
                                 <label>身份证正面图片</label>
                                 <input type="file" name="id_card_image" />
                                 @if($authentication->id_card_image)
-                                    <div style="margin-top: 10px;">
-                                        <img class="img-responsive" width="400" src="{{ route('website.image.show',['image_name'=>$authentication->id_card_image]) }}" />
-                                    </div>
+                                <div style="margin-top: 10px;">
+                                    <img class="img-responsive" width="400" src="{{ route('website.image.show',['image_name'=>$authentication->id_card_image]) }}" />
+                                </div>
                                 @endif
                             </div>
 
@@ -123,7 +123,15 @@
                                 <label>审核失败的原因</label>
                                 <textarea class="form-control" name="failed_reason" placeholder="仅审核失败的情况下填写"></textarea>
                             </div>
-
+                            <div class="form-group">
+                                <label>推荐</label>
+                                <span class="text-muted">(推荐后会按照推荐时间显示到首页)</span>
+                                <div class="radio">
+                                    @foreach( trans_common_bool('all') as $key => $name )
+                                        <label><input type="radio" name="is_recommend" value="{{ $key }}" @if( $authentication->recommend_at === $key) checked @endif /> {{ $name }}</label>&nbsp;&nbsp;
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">保存</button>
@@ -138,9 +146,9 @@
 @section('script')
     <script type="text/javascript">
         $(function(){
+            set_active_menu('manage_user',"{{ route('admin.authentication.index') }}");
             /*加载省份城市*/
             $("#province").change(function(){
-                set_active_menu('manage_user',"{{ route('admin.authentication.index') }}");
                 var province_id = $(this).val();
                 $("#city").load("{{ url('ajax/loadCities') }}/"+province_id);
             });

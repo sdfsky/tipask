@@ -22,11 +22,11 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-9 main">
-            <h2 class="h4  mt-30">
+            <h2 class="h4  mt-10">
                 我的私信
                 <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#send_message_model" >写消息</button>
             </h2>
-            <div class="widget-streams messages">
+            <div class="widget-streams messages border-top">
                 @foreach($messages as $message)
                 <section id="session_{{ $message->from_user_id }}" class="hover-show streams-item @if($message->is_read===0) not_read @endif ">
                     <div class="stream-wrap media">

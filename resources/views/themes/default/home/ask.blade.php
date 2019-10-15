@@ -1,22 +1,41 @@
 @extends('theme::layout.public')
 
-@section('seo_title') @if($filter === 'newest')最新的 @elseif($filter === 'hottest')热门的 @elseif($filter === 'reward')悬赏的 @elseif($filter==='unAnswered')未回答的 @endif 问题 @if( $questions->currentPage()>1 ) - 第{{ $questions->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')
+    @if($currentCategory){{ $currentCategory->name }} - @else 全部 - @endif
+    @if($filter === 'newest')最新的@elseif($filter === 'hottest')热门的@elseif($filter === 'reward')悬赏的@elseif($filter==='unAnswered')未回答的@endif - 问题@if( $questions->currentPage()>1 ) - 第{{ $questions->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}
+@endsection
 
 @section('content')
-    <div class="row mt-10">
-        <div class="col-xs-12 col-md-9 main">
-            @if( $categories )
+    <div class="row">
+        @if($parentCategories)
+            <ol class="breadcrumb text-muted">
+                <li><a href="{{ route('website.ask') }}">全部</a></li>
+                @foreach($parentCategories as $parentCategory)
+                    @if($parentId == $parentCategory->id)
+                        <li>{{ $parentCategory->name }}</li>
+                    @else
+                        <li><a href="{{ route('website.ask',['category_slug'=>$parentCategory->slug]) }}">{{ $parentCategory->name }}</a></li>
+                    @endif
+                @endforeach
+            </ol>
+        @endif
+        @if( $categories )
             <div class="widget-category clearfix">
-                    <div class="col-sm-12">
-                        <ul class="list">
-                            <li><a href="{{ route('website.ask') }}">全部</a></li>
-                            @foreach( $categories as $category )
-                                <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-            </div>
-            @endif
+                <ul class="list">
+                    @if($parentId == 0)
+                    <li @if( 0 == $currentCategoryId) class="active" @endif ><a href="{{ route('website.ask') }}">全部</a></li>
+                    @endif
+                    @foreach( $categories as $category )
+                        @if($category->parent_id == $parentId)
+                            <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
+                        @endif
+                    @endforeach
+                    </ul>
+                </div>
+        @endif
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-9 main">
             <ul class="nav nav-tabs mb-10 mt-20">
                 <li @if($filter==='newest') class="active" @endif ><a href="{{ route('website.ask',['category_slug'=>$categorySlug]) }}">最新的</a></li>
                 <li @if($filter==='hottest') class="active" @endif><a href="{{ route('website.ask',['category_slug'=>$categorySlug,'filter'=>'hottest']) }}">热门的</a></li>
@@ -35,13 +54,6 @@
                         </div>
                     </div>
                     <div class="summary">
-                        <ul class="author list-inline">
-                            <li>
-                                <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}" target="_blank">{{ $question->user->name }}</a>
-                                <span class="split"></span>
-                                <span class="askDate">{{ timestamp_format($question->created_at) }}</span>
-                            </li>
-                        </ul>
                         <h2 class="title">
                             @if($question->price>0)
                                 <span class="text-gold"><i class="fa fa-database"></i> {{ $question->price }}</span>
@@ -55,17 +67,29 @@
                             @endforeach
                         </ul>
                         @endif
+                        <ul class="author list-inline">
+                            <li>
+                                @if(!$question->hide)
+                                    <a href="{{ route('auth.space.index',['user_id'=>$question->user->id]) }}" target="_blank">{{ $question->user->name }}</a>
+                                    <span class="split"></span>
+                                @endif
+                                <span class="askDate">{{ timestamp_format($question->created_at) }}</span>
+                                @if($question->device == 2)
+                                    <span class="split"></span>
+                                    <span class="askDate"><i class="fa fa-mobile-phone" title="来自小程序"></i></span>
+                                @endif
+                            </li>
+                        </ul>
                     </div>
                 </section>
                 @endforeach
 
             </div><!-- /.stream-list -->
-
             <div class="text-center">
                 {!! str_replace('/?', '?', $questions->render()) !!}
             </div>
         </div><!-- /.main -->
-        <div class="col-xs-12 col-md-3 side">
+        <div class="col-md-3 hidden-xs side">
             <div class="side-alert alert alert-warning">
                 <p>今天，你的网站遇到什么问题呢？</p>
                 <a href="{{ route('ask.question.create') }}" class="btn btn-primary btn-block mt-10">立即提问</a>

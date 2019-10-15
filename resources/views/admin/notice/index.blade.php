@@ -11,7 +11,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <form role="form" name="listForm" method="post" action="{{ route('admin.notice.destroy') }}">
-                        <input name="_method" type="hidden" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-header">
                             <div class="row">
@@ -37,7 +36,7 @@
                                     @foreach($notices as $notice)
                                         <tr>
                                             <td><input type="checkbox" value="{{ $notice->id }}" name="ids[]"/></td>
-                                            <td>{{ $notice->subject }}</td>
+                                            <td @if($notice->style) {!! $notice->style !!} @endif> {!! $notice->subject !!}</td>
                                             <td>{{ $notice->url }}</td>
                                             <td>{{ trans_common_status($notice->status) }}</td>
                                             <td>{{ $notice->updated_at }}</td>

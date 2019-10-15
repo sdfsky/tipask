@@ -1,6 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo_title') @if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else{{ $userInfo->name }} @endif 的金币 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else{{ $userInfo->name }} @endif 的金币 - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <h2 class="h4">{{ $coins->total() }} 条记录</h2>
@@ -17,6 +17,8 @@
                             <a class="ml-5" target="_blank" href="{{ route('ask.question.detail',['id'=>$coin->source_id]) }}">{{ $coin->source_subject }}</a>
                         @elseif(in_array($coin->action,['create_article']))
                             <a class="ml-5" target="_blank" href="{{ route('blog.article.detail',['id'=>$coin->source_id]) }}">{{ $coin->source_subject }}</a>
+                        @elseif(in_array($coin->action,['buy_video','sale_video']))
+                            <a class="ml-5" target="_blank" href="{{ route('live.course.show',['id'=>$coin->source_id]) }}">{{ $coin->source_subject }}</a>
                         @endif
                     </p>
                 </li>

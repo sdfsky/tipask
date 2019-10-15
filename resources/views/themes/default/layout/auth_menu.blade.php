@@ -17,7 +17,7 @@
                 </a>
             </div>
             <div class="col-sm-6 col-xs-6  widget-nav-item ">
-                <a id="inviteCount" class="widget-nav-item-link" href="{{ route('auth.space.questions',['user_id'=>Auth()->user()->id]) }}">
+                <a id="inviteCount" class="widget-nav-item-link" href="{{ route('auth.space.articles',['user_id'=>Auth()->user()->id]) }}">
                     我的文章
                 </a>
             </div>

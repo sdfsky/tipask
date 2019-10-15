@@ -18,10 +18,18 @@
                                 <div class="col-xs-3">
                                     <input type="text" class="form-control" name="user_id" placeholder="UID" value="{{ $filter['user_id'] or '' }}"/>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-3">
+                                    <select class="form-control" name="action">
+                                        <option value="">不选择</option>
+                                        @foreach(config('tipask.user_actions') as $key => $displayName)
+                                            <option value="{{ $key }}" @if( isset($filter['action']) && $filter['action']==$key) selected @endif >{{ $displayName }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
                                     <input type="text" name="date_range" id="date_range" class="form-control" placeholder="时间范围" value="{{ $filter['date_range'] or '' }}" />
                                 </div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-2">
                                     <button type="submit" class="btn btn-primary">搜索</button>
                                     <a href="{{ route('admin.credit.create') }}" class="btn btn-warning">手动充值</a>
                                 </div>
@@ -61,7 +69,8 @@
                             <div class="col-sm-9">
                                 <div class="text-right">
                                     <span class="total-num">共 {{ $credits->total() }} 条数据</span>
-                                    {!! str_replace('/?', '?', $credits->render()) !!}
+{{--                                    {!! str_replace('/?', '?', $credits->appends(['uid'=>$filter['user_id'],'action'=>$filter['action'],'date_range'=>$filter['date_range']])->render()) !!}--}}
+                                    {!! str_replace('/?', '?', $credits->appends($filter)->links()) !!}
                                 </div>
                             </div>
                         </div>

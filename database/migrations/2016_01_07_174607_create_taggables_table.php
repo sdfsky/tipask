@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -16,7 +17,6 @@ class CreateTaggablesTable extends Migration
             $table->increments('id');
             $table->integer('tag_id')->unsigned()->index();  //标签ID
             $table->morphs('taggable');
-            $table->timestamps();
         });
     }
 

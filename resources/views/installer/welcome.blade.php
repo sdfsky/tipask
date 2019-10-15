@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="license" style="height: 500px;overflow:scroll;">
-                        <p>版权所有 (c) 2010-2016，tipask.com保留所有权利。</p>
+                        <p>版权所有 (c) 2010-{{ date("Y") }}，tipask.com保留所有权利。</p>
 
                         <p>感谢您选择Tipask问答产品。希望我们的努力能为您提供一个高效快速和强大的站点解决方案。</p>
 

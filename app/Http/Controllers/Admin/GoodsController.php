@@ -103,7 +103,9 @@ class GoodsController extends AdminController
         $goods->remnants = $request->input('remnants');
         $goods->coins = $request->input('coins');
         $goods->description = $request->input('description');
+        $goods->category_id = $request->input('category_id',0);
         $goods->status = $request->input('status');
+
         if($request->hasFile('logo')){
             $savePath = storage_path('app/goods/'.gmdate('ym'));
             $file = $request->file('logo');

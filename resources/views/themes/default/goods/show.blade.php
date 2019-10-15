@@ -24,9 +24,9 @@
                     </div>
                 </div>
             </div>
-            <div class="widget-box">
+            <div class="widget-box border-top">
                 <div class="widget-box-title">商品详情</div>
-                <div class="text-fmt">{{ $goods->description }}</div>
+                <div class="text-fmt">{!! $goods->description !!}</div>
             </div>
         </div>
         <div class="col-xs-12 col-md-3 side">

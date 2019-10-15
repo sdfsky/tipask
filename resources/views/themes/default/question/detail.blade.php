@@ -30,28 +30,31 @@
                 @endif
                 <div class="description mt-10">
                     @if( $question->price > 0 && $question->status == 1 )
-                        <div class="alert alert-question" role="alert">回答问题即可获得 <b>{{ Setting()->get('credits_answer',0) }}</b> 经验值，回答被采纳后即可获得 <b class="text-gold">{{ (intval(Setting()->get('coins_answers')) + $question->price) }} </b>金币。</div>
+                    <div class="alert alert-question" role="alert">回答问题即可获得 <b>{{ Setting()->get('credits_answer',0) }}</b> 经验值，回答被采纳后即可获得 <b class="text-gold">{{ (intval(Setting()->get('coins_adopted')) + $question->price) }} </b>金币。</div>
                     @endif
                     <div class="text-fmt ">
                         {!! $question->description !!}
                     </div>
 
-                    <div class="post-opt mt-10">
+                    <div class="post-opt mt-20">
                         <ul class="list-inline text-muted">
                             <li><a class="comments"  data-toggle="collapse"  href="#comments-question-{{ $question->id }}" aria-expanded="false" aria-controls="comment-{{ $question->id }}"><i class="fa fa-comment-o"></i> {{ $question->comments }} 条评论</a></li>
                             @if($question->category)
                                 <li>分类：<a href="{{ route('website.ask',['category_slug'=>$question->category->slug]) }}" target="_blank">{{ $question->category->name }}</a>
                             @endif
                             @if(Auth()->check())
-                                @if(($question->status !== 2 && Auth()->user()->id === $question->user_id) || Auth()->user()->can('admin.login') )
-                                    <li><a href="{{ route('ask.question.edit',['id'=>$question->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="补充细节，以得到更准确的答案"><i class="fa fa-edit"></i> 编辑</a></li>
-                                @endif
-                                @if( $question->status !== 2 && Auth()->user()->id === $question->user_id )
+                                @if( $question->status !== 2 )
                                     <li><a href="#" data-toggle="modal" data-target="#appendReward"  ><i class="fa fa-database"></i> 追加悬赏</a></li>
                                 @endif
                                 @if( $question->status !== 2 )
                                     <li><a href="#" data-toggle="modal" data-target="#inviteAnswer"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> 邀请回答</a></li>
                                 @endif
+                                @if(($question->status !== 2 && Auth()->user()->id === $question->user_id) || Auth()->user()->can('admin.login') )
+                                <li><a href="{{ route('ask.question.edit',['id'=>$question->id]) }}" class="edit" data-toggle="tooltip" data-placement="right" title="" data-original-title="补充细节，以得到更准确的答案"><i class="fa fa-edit"></i> 编辑</a></li>
+                                @endif
+                            @endif
+                            @if(Auth()->check())
+                                <li><a href="#" id="report_btn" class="report_btn" data-source_type="question" data-source_id="{{ $question->id }}" data-toggle="modal" data-target="#send_report_model" ><i class="fa fa-flag-o"></i> 举报</a></li>
                             @endif
                         </ul>
                     </div>
@@ -68,57 +71,57 @@
 
                 {{--最佳答案--}}
                 @if($question->status===2 && $bestAnswer)
-                    <div class="best-answer mt-10">
-                        <div class="trophy-title">
-                            <h3>
-                                <i class="fa fa-trophy"></i> 最佳答案
-                                <span class="pull-right text-muted adopt_time">{{ timestamp_format($bestAnswer->adopted_at) }}</span>
-                            </h3>
-                        </div>
-                        <div class="text-fmt">
-                            {!! $bestAnswer->content !!}
-                        </div>
-                        <div class="options clearfix mt-10">
-                            <ul class="list-inline pull-right">
-                                <li class="pull-right">
-                                    <a class="comments mr-10" data-toggle="collapse" href="#comments-answer-{{ $bestAnswer->id }}" aria-expanded="false" aria-controls="comment-{{ $bestAnswer->id }}"><i class="fa fa-comment-o"></i> {{ $bestAnswer->comments }} 条评论</a>
-                                    <button class="btn btn-default btn-sm btn-support" data-source_id="{{ $bestAnswer->id }}" data-source_type="answer" data-support_num="{{ $bestAnswer->supports }}"><i class="fa fa-thumbs-o-up"></i> {{ $bestAnswer->supports }}</button>
-                                    @if($bestAnswer->user->qrcode)
-                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#payment-qrcode-modal-answer-{{ $bestAnswer->id }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</button>
-                                    @endif
-                                </li>
-                            </ul>
-                        </div>
-                        @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$bestAnswer->id,'hide_cancel'=>false])
-                        @if($bestAnswer->user->qrcode)
-                            @include('theme::layout.qrcode_pament',['source_id'=>'answer-'.$bestAnswer->id,'paymentUser'=>$bestAnswer->user,'message'=>'如果觉得我的回答对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
-                        @endif
-                        <div class="media user-info border-top">
-                            <div class="media-left">
-                                <a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" target="_blank">
-                                    <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($bestAnswer->user_id) }}" alt="{{ $bestAnswer->user->name }}"></a>
-                                </a>
-                            </div>
-                            <div class="media-body">
-
-                                <div class="media-heading">
-                                    <strong><a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" class="mr5">{{ $bestAnswer->user->name }}</a> <span class="text-gold">@if($bestAnswer->user->authentication && $bestAnswer->user->authentication->status === 1)<i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i>@endif</span></strong>
-                                    @if($bestAnswer->user->title)
-                                        <span class="text-muted"> - {{ $bestAnswer->user->title }}</span>
-                                    @endif
-                                </div>
-
-                                <div class="content">
-                                    <span class="answer-time text-muted hidden-xs">@if($bestAnswer->user->authentication && $bestAnswer->user->authentication->status === 1) 擅长：{{ $bestAnswer->user->authentication->skill }} | @endif 采纳率 {{ $bestAnswer->user->userData->adoptPercent() }}% | 回答于 {{ timestamp_format($bestAnswer->created_at) }}</span>
-                                </div>
-                            </div>
-
-                        </div>
+                <div class="best-answer mt-15">
+                    <div class="trophy-title">
+                        <h3>
+                            <i class="fa fa-trophy"></i> 最佳答案
+                            <span class="pull-right text-muted adopt_time">{{ timestamp_format($bestAnswer->adopted_at) }}</span>
+                        </h3>
                     </div>
+                    <div class="text-fmt">
+                        {!! $bestAnswer->content !!}
+                    </div>
+                    <div class="options clearfix mt-10">
+                        <ul class="list-inline pull-right">
+                            <li class="pull-right">
+                                <a class="comments mr-10" data-toggle="collapse" href="#comments-answer-{{ $bestAnswer->id }}" aria-expanded="false" aria-controls="comment-{{ $bestAnswer->id }}"><i class="fa fa-comment-o"></i> {{ $bestAnswer->comments }} 条评论</a>
+                                <button class="btn btn-default btn-sm btn-support" data-source_id="{{ $bestAnswer->id }}" data-source_type="answer" data-support_num="{{ $bestAnswer->supports }}"><i class="fa fa-thumbs-o-up"></i> {{ $bestAnswer->supports }}</button>
+                                @if($bestAnswer->user->qrcode)
+                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#payment-qrcode-modal-answer-{{ $bestAnswer->id }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</button>
+                                @endif
+                            </li>
+                        </ul>
+                    </div>
+                    @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$bestAnswer->id,'hide_cancel'=>false])
+                    @if($bestAnswer->user->qrcode)
+                    @include('theme::layout.qrcode_pament',['source_id'=>'answer-'.$bestAnswer->id,'paymentUser'=>$bestAnswer->user,'message'=>'如果觉得我的回答对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
+                    @endif
+                    <div class="media user-info border-top">
+                        <div class="media-left">
+                            <a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" target="_blank">
+                                <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($bestAnswer->user_id) }}" alt="{{ $bestAnswer->user->name }}"></a>
+                            </a>
+                        </div>
+                        <div class="media-body">
+
+                            <div class="media-heading">
+                                <strong><a href="{{ route('auth.space.index',['user_id'=>$bestAnswer->user_id]) }}" class="mr5">{{ $bestAnswer->user->name }}</a> <span class="text-gold">@if($bestAnswer->user->authentication && $bestAnswer->user->authentication->status === 1)<i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i>@endif</span></strong>
+                                @if($bestAnswer->user->title)
+                                    <span class="text-muted"> - {{ $bestAnswer->user->title }}</span>
+                                @endif
+                            </div>
+
+                            <div class="content">
+                                <span class="answer-time text-muted hidden-xs">@if($bestAnswer->user->authentication && $bestAnswer->user->authentication->status === 1) 擅长：{{ $bestAnswer->user->authentication->skill }} | @endif 采纳率 {{ $bestAnswer->user->userData->adoptPercent() }}% | 回答于 {{ timestamp_format($bestAnswer->created_at) }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                 @endif
             </div>
 
-            <div class="widget-answers mt-15">
+            <div class="widget-answers mt-60">
                 <div class="btn-group pull-right" role="group">
                     <a href="{{ route('ask.question.detail',['question_id'=>$question->id]) }}" class="btn btn-default btn-xs @if(request()->input('sort','default')=='default') active @endif">默认排序</a>
                     <a href="{{ route('ask.question.detail',['question_id'=>$question->id,'sort'=>'created_at']) }}" id="sortby-created" class="btn btn-default btn-xs @if(request()->input('sort','default')=='created_at') active @endif">时间排序</a>
@@ -127,55 +130,57 @@
                 <h2 class="h4 post-title">@if($question->status===2) 其它 @endif {{ $answers->total() }} 个回答</h2>
 
                 @foreach( $answers as $answer )
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="avatar-link user-card" target="_blank">
-                                <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($answer->user_id) }}" alt="{{ $answer->user['name'] }}"></a>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <div class="media-heading">
-                                <strong>
-                                    <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr-5 user-card">{{ $answer->user['name'] }}</a><span class="text-gold">@if($answer->user->authentication && $answer->user->authentication->status === 1)<i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i>@endif
+                <div class="media">
+                    <div class="media-left">
+                        <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="avatar-link user-card" target="_blank">
+                            <img class="avatar-40 hidden-xs"  src="{{ get_user_avatar($answer->user_id) }}" alt="{{ $answer->user['name'] }}"></a>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="media-heading">
+                            <strong>
+                                <a href="{{ route('auth.space.index',['user_id'=>$answer->user_id]) }}" class="mr-5 user-card">{{ $answer->user['name'] }}</a><span class="text-gold">@if($answer->user->authentication && $answer->user->authentication->status === 1)<i class="fa fa-graduation-cap" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="" data-original-title="已通过行家认证"></i>@endif
                                 </span>
-                                </strong>
-                                @if($answer->user->title)
-                                    <span class="text-muted"> - {{ $answer->user->title }}</span>
-                                @endif
-                                <span class="answer-time text-muted hidden-xs">{{ timestamp_format($answer->created_at) }}</span>
-                            </div>
-                            <div class="content">
-                                @if($answer->user->authentication && $answer->user->authentication->status === 1)
-                                    <span class="text-muted">擅长：{{ $answer->user->authentication->skill }}</span>
-                                @endif
-                                <div class="text-fmt mt-10 mb-10">{!! $answer->content !!}</div>
-                            </div>
-                            <div class="media-footer">
-                                <ul class="list-inline mb-20">
-                                    <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
-                                    @if(Auth()->check())
-                                        @if($question->status!==2 &&  (Auth()->user()->id === $answer->user_id  || Auth()->user()->can('admin.login')) )
-                                            <li><a href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="继续完善回答内容"><i class="fa fa-edit"></i> 编辑</a></li>
-                                        @endif
-                                        @if($question->status!==2 &&  ( Auth()->user()->id === $question->user_id || Auth()->user()->can('admin.login') ))
-                                            <li><a href="#" class="adopt-answer" data-toggle="modal" data-target="#adoptAnswer" data-answer_id="{{ $answer->id }}" title="采纳该回答" data-answer_content="{{ str_limit($answer->content,200) }}"><i class="fa fa-check-square-o"></i> 采纳</a></li>
-                                        @endif
+                            </strong>
+                            @if($answer->user->title)
+                            <span class="text-muted"> - {{ $answer->user->title }}</span>
+                            @endif
+                            <span class="answer-time text-muted hidden-xs">{{ timestamp_format($answer->created_at) }}</span>
+                        </div>
+                        <div class="content">
+                            @if($answer->user->authentication && $answer->user->authentication->status === 1)
+                                <span class="text-muted">擅长：{{ $answer->user->authentication->skill }}</span>
+                            @endif
+                            <div class="text-fmt mt-10 mb-10">{!! $answer->content !!}</div>
+                        </div>
+                        <div class="media-footer">
+                            <ul class="list-inline mb-20">
+                                <li><a class="comments"  data-toggle="collapse"  href="#comments-answer-{{ $answer->id }}" aria-expanded="false" aria-controls="comment-{{ $answer->id }}"><i class="fa fa-comment-o"></i> {{ $answer->comments }} 条评论</a></li>
+                                @if(Auth()->check())
+                                    @if($question->status!==2 &&  (Auth()->user()->id === $answer->user_id  || Auth()->user()->can('admin.login')) )
+                                    <li><a href="{{ route('ask.answer.edit',['id'=>$answer->id]) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="继续完善回答内容"><i class="fa fa-edit"></i> 编辑</a></li>
+                                    @endif
+                                    @if($question->status!==2 &&  ( Auth()->user()->id === $question->user_id || Auth()->user()->can('admin.login') ))
+                                    <li><a href="#" class="adopt-answer" data-toggle="modal" data-target="#adoptAnswer" data-answer_id="{{ $answer->id }}" title="采纳该回答" data-answer_content="{{ str_limit($answer->content,200) }}"><i class="fa fa-check-square-o"></i> 采纳</a></li>
+                                    @endif
                                         @if($answer->user->qrcode)
                                             <li><a href="#" data-toggle="modal" data-target="#payment-qrcode-modal-answer-{{ $answer->id }}" ><i class="fa fa-heart-o" aria-hidden="true"></i> 打赏</a></li>
                                         @endif
-                                    @endif
-                                    <li class="pull-right">
-                                        <button class="btn btn-default btn-sm btn-support" data-source_id="{{ $answer->id }}" data-source_type="answer"  data-support_num="{{ $answer->supports }}"><i class="fa fa-thumbs-o-up"></i> {{ $answer->supports }}</button>
-
-                                    </li>
-                                </ul>
-                            </div>
-                            @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$answer->id,'hide_cancel'=>false])
-                            @if($answer->user->qrcode)
-                                @include('theme::layout.qrcode_pament',['source_id'=>'answer-'.$answer->id,'paymentUser'=>$answer->user,'message'=>'如果觉得我的回答对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
-                            @endif
+                                @endif
+                                @if(Auth()->check())
+                                    <li><a href="#" class="report_btn" data-source_type="answer" data-source_id="{{ $answer->id }}" data-toggle="modal" data-target="#send_report_model"><i class="fa fa-flag-o"></i> 举报</a></li>
+                                @endif
+                                <li class="pull-right">
+                                    <button class="btn btn-default btn-sm btn-support" data-source_id="{{ $answer->id }}" data-source_type="answer"  data-support_num="{{ $answer->supports }}"><i class="fa fa-thumbs-o-up"></i> {{ $answer->supports }}</button>
+                                </li>
+                            </ul>
                         </div>
+                        @include('theme::comment.collapse',['comment_source_type'=>'answer','comment_source_id'=>$answer->id,'hide_cancel'=>false])
+                        @if($answer->user->qrcode)
+                        @include('theme::layout.qrcode_pament',['source_id'=>'answer-'.$answer->id,'paymentUser'=>$answer->user,'message'=>'如果觉得我的回答对您有用，请随意打赏。你的支持将鼓励我继续创作！'])
+                        @endif
                     </div>
+                </div>
                 @endforeach
                 <div class="text-center">
                     {!! str_replace('/?', '?', $answers->render()) !!}
@@ -183,44 +188,47 @@
 
             </div>
             @if( $question->status!=2 || (Setting()->get('open_question_discuss') == 1))
-                <div class="widget-answer-form mt-15">
+            <div class="widget-answer-form mt-15">
 
-                    @if(Auth()->guest())
-                        <div class="answer_login_tips mb-20">
-                            您需要登录后才可以回答问题，<a href="{{ route('auth.user.login') }}" rel="nofollow">登录</a>&nbsp;或者&nbsp;<a rel="nofollow" href="{{ route('auth.user.register') }}">注册</a>
+                @if(Auth()->guest())
+                    <div class="answer_login_tips mb-20">
+                        您需要登录后才可以回答问题，<a href="{{ route('auth.user.login') }}" rel="nofollow">登录</a>&nbsp;或者&nbsp;<a rel="nofollow" href="{{ route('auth.user.register') }}">注册</a>
+                    </div>
+                @elseif( Auth()->check() && ( (Setting()->get('open_self_answer') == 1 ||  $question->user_id !== Auth()->user()->id ) && !Auth()->user()->isAnswered($question->id)) )
+                    <form  name="answerForm" id="answer_form" action="{{ route('ask.answer.store') }}" method="post" class="editor-wrap">
+                        <input type="hidden" id="answer_token" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" value="{{ $question->id }}" id="question_id" name="question_id" />
+                        <div class="form-group  @if($errors->has('content')) has-error @endif">
+                            <div id="answer_editor">{!! old('content',$formData['content']) !!}</div>
+                            @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
                         </div>
-                    @elseif( Auth()->check() && ( (Setting()->get('open_self_answer') == 1 ||  $question->user_id !== Auth()->user()->id ) && !Auth()->user()->isAnswered($question->id)) )
-                        <form  name="answerForm" id="answer_form" action="{{ route('ask.answer.store') }}" method="post" class="editor-wrap">
-                            <input type="hidden" id="answer_token" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" value="{{ $question->id }}" id="question_id" name="question_id" />
-                            <div class="form-group  @if($errors->has('content')) has-error @endif">
-                                <div id="answer_editor">{!! old('content','') !!}</div>
-                                @if($errors->has('content')) <p class="help-block">{{ $errors->first('content') }}</p> @endif
-                            </div>
 
-                            <div class="row mt-20">
-                                <div class="col-xs-12 col-md-10">
-                                    <ul class="list-inline">
+                        <div class="row mt-20">
+                            <div class="col-xs-12 col-md-9">
+                                <ul class="list-inline">
                                         <li class="checkbox"> <label><input type="checkbox" id="attendTo" name="followed" value="1" checked />关注该问题</label></li>
-                                        @if( Setting()->get('code_create_answer') )
+                                    @if( Setting()->get('code_create_answer') )
+                                        <li class="pull-right">
                                             @include('theme::layout.auth_captcha')
-                                        @endif
-                                    </ul>
-                                </div>
-                                <div class="col-xs-12 col-md-2">
-                                    <input type="hidden" id="answer_editor_content"  name="content" value="{{ old('content','') }}"  />
-                                    <button type="submit" class="btn btn-primary pull-right">提交回答</button>
-                                </div>
+                                        </li>
+                                    @endif
+                                </ul>
                             </div>
-                        </form>
-                    @endif
-                </div>
+                            <div class="col-xs-12 col-md-3">
+                                <input type="hidden" id="answer_editor_content"  name="content" value="{{ old('content',$formData['content']) }}"  />
+                                <span class="text-muted" id="draftStatus"></span>
+                                <button type="submit" class="btn btn-primary pull-right">提交回答</button>
+                            </div>
+                        </div>
+                    </form>
+                @endif
+            </div>
             @endif
 
         </div>
 
         <div class="col-xs-12 col-md-3 side">
-            <div class="widget-box">
+            <div class="widget-first-box">
                 <ul class="widget-action list-unstyled">
                     <li>
                         @if(Auth()->check() && Auth()->user()->isFollowed(get_class($question),$question->id))
@@ -241,7 +249,7 @@
                     <li>
                         <i class="fa fa-clock-o"></i>
                         @if($question->hide==0)
-                            <a href="{{ route('auth.space.index',['user_id'=>$question->user_id]) }}" target="_blank">{{ $question->user->name }}</a>
+                        <a href="{{ route('auth.space.index',['user_id'=>$question->user_id]) }}" target="_blank">{{ $question->user->name }}</a>
                         @endif
                         提出于 {{ timestamp_format($question->created_at) }}</li>
                 </ul>
@@ -251,10 +259,10 @@
                 <ul class="widget-links list-unstyled list-text">
                     @foreach($relatedQuestions as $relatedQuestion)
                         @if($relatedQuestion->id != $question->id)
-                            <li class="widget-links-item">
-                                <a title="{{ $relatedQuestion->title }}" href="{{ route('ask.question.detail',['question_id'=>$relatedQuestion->id]) }}">{{ $relatedQuestion->title }}</a>
-                                <small class="text-muted">{{ $relatedQuestion->answers }} 回答</small>
-                            </li>
+                        <li class="widget-links-item">
+                            <a title="{{ $relatedQuestion->title }}" href="{{ route('ask.question.detail',['question_id'=>$relatedQuestion->id]) }}">{{ $relatedQuestion->title }}</a>
+                            <small class="text-muted">{{ $relatedQuestion->answers }} 回答</small>
+                        </li>
                         @endif
                     @endforeach
                 </ul>
@@ -263,112 +271,113 @@
     </div>
 
     @if(Auth()->check())
-        <div class="modal" id="appendReward" tabindex="-1" role="dialog" aria-labelledby="appendRewardLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="appendModalLabel">追加悬赏</h4>
+    <div class="modal" id="appendReward" tabindex="-1" role="dialog" aria-labelledby="appendRewardLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="appendModalLabel">追加悬赏</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert" id="rewardAlert">
+                        <i class="fa fa-exclamation-circle"></i> 提高悬赏，以提高问题的关注度！
                     </div>
-                    <div class="modal-body">
-                        <div class="alert alert-success" role="alert" id="rewardAlert">
-                            <i class="fa fa-exclamation-circle"></i> 提高悬赏，以提高问题的关注度！
+
+                    <form class="form-inline" id="rewardForm" action="{{ route('ask.question.appendReward',['id'=>$question->id]) }}" method="post">
+                        <input type="hidden"  name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="reward">追加</label>
+                            <select class="form-control" name="coins" id="question_coins">
+                                <option value="3" selected>3</option><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="30">30</option><option value="50">50</option><option value="80">80</option><option value="100">100</option>
+                            </select> 个金币
                         </div>
+                        <div class="form-group">
+                             （您目前共有 <span class="text-gold">{{ Auth()->user()->userData->coins }}</span> 个金币）
+                        </div>
+                    </form>
 
-                        <form class="form-inline" id="rewardForm" action="{{ route('ask.question.appendReward',['id'=>$question->id]) }}" method="post">
-                            <input type="hidden"  name="_token" value="{{ csrf_token() }}">
-                            <div class="form-group">
-                                <label for="reward">追加</label>
-                                <select class="form-control" name="coins" id="question_coins">
-                                    <option value="3" selected>3</option><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="30">30</option><option value="50">50</option><option value="80">80</option><option value="100">100</option>
-                                </select> 个金币
-                            </div>
-                            <div class="form-group">
-                                （您目前共有 <span class="text-gold">{{ Auth()->user()->userData->coins }}</span> 个金币）
-                            </div>
-                        </form>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary" id="appendRewardSubmit">确认追加</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="appendRewardSubmit">确认追加</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="adoptAnswer" tabindex="-1" role="dialog" aria-labelledby="adoptAnswerLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="adoptModalLabel">采纳回答</h4>
+    </div>
+    <div class="modal" id="adoptAnswer" tabindex="-1" role="dialog" aria-labelledby="adoptAnswerLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="adoptModalLabel">采纳回答</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning" role="alert" id="adoptAnswerAlert">
+                        <i class="fa fa-exclamation-circle"></i> 确认采纳该回答为最佳答案？
                     </div>
-                    <div class="modal-body">
-                        <div class="alert alert-warning" role="alert" id="adoptAnswerAlert">
-                            <i class="fa fa-exclamation-circle"></i> 确认采纳该回答为最佳答案？
-                        </div>
-                        <blockquote id="answer_quote"></blockquote>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary" id="adoptAnswerSubmit">采纳该回答</button>
-                    </div>
+                    <blockquote id="answer_quote"></blockquote>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="adoptAnswerSubmit">采纳该回答</button>
                 </div>
             </div>
         </div>
-        <div class="modal" id="inviteAnswer" tabindex="-1" role="dialog" aria-labelledby="inviteAnswerLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="appendModalLabel">邀请回答</h4>
+    </div>
+    <div class="modal" id="inviteAnswer" tabindex="-1" role="dialog" aria-labelledby="inviteAnswerLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="appendModalLabel">邀请回答</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert" id="rewardAlert">
+                        <i class="fa fa-exclamation-circle"></i> 不知道答案？你还可以邀请他人进行解答，每天可以邀请{{ config('tipask.user_invite_limit') }}次。
                     </div>
-                    <div class="modal-body">
-                        <div class="alert alert-success" role="alert" id="rewardAlert">
-                            <i class="fa fa-exclamation-circle"></i> 不知道答案？你还可以邀请他人进行解答，每天可以邀请{{ config('tipask.user_invite_limit') }}次。
-                        </div>
-                        <form class="invite-popup" id="inviteEmailForm"  action="{{ route('ask.question.inviteEmail',['question_id'=>$question->id]) }}" method="get">
-                            <div style="position: relative;">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-by="username" href="#by-username" data-toggle="tab">站内邀请</a></li>
-                                    <li><a data-by="email" href="#by-email" data-toggle="tab">Email 邀请</a></li>
-                                </ul>
-                                <div class="tab-content invite-tab-content mt-10">
-                                    <div class="tab-pane active" id="by-username" data-type="username">
-                                        <div class="search-user" id="questionSlug">
-                                            <input id="invite_word" class="text-28 form-control" type="text" name="word" autocomplete="off" placeholder="搜索你要邀请的人">
-                                        </div>
-                                        <p class="help-block" id="questionInviteUsers"></p>
-                                        <div class="invite-question-modal">
-                                            <div class="row invite-question-list" id="invite_user_list">
-                                                <div class="text-center" id="invite_loading">
-                                                    <i class="fa fa-spinner fa-spin"></i>
-                                                </div>
+                    <form class="invite-popup" id="inviteEmailForm"  action="{{ route('ask.question.inviteEmail',['question_id'=>$question->id]) }}" method="get">
+                        <div style="position: relative;">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-by="username" href="#by-username" data-toggle="tab">站内邀请</a></li>
+                                <li><a data-by="email" href="#by-email" data-toggle="tab">Email 邀请</a></li>
+                            </ul>
+                            <div class="tab-content invite-tab-content mt-10">
+                                <div class="tab-pane active" id="by-username" data-type="username">
+                                    <div class="search-user" id="questionSlug">
+                                        <input id="invite_word" class="text-28 form-control" type="text" name="word" autocomplete="off" placeholder="搜索你要邀请的人">
+                                    </div>
+                                    <p class="help-block" id="questionInviteUsers"></p>
+                                    <div class="invite-question-modal">
+                                        <div class="row invite-question-list" id="invite_user_list">
+                                            <div class="text-center" id="invite_loading">
+                                                <i class="fa fa-spinner fa-spin"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="by-email" data-type="email">
-                                        <div class="mb-10">
-                                            <input class="text-28 form-control" type="email" name="sendTo" placeholder="Email 地址">
-                                        </div>
-                                        <p><textarea class="textarea-13 form-control" name="message" rows="5">我在 {{ Setting()->get('website_name') }} 上遇到了问题「{{ $question->title }}」 → {{ route('ask.question.detail',['question_id'=>$question->id]) }}，希望您能帮我解答 </textarea></p>
+                                </div>
+                                <div class="tab-pane" id="by-email" data-type="email">
+                                    <div class="mb-10">
+                                        <input class="text-28 form-control" type="email" name="sendTo" placeholder="Email 地址">
                                     </div>
+                                    <p><textarea class="textarea-13 form-control" name="message" rows="5">我在 {{ Setting()->get('website_name') }} 上遇到了问题「{{ $question->title }}」 → {{ route('ask.question.detail',['question_id'=>$question->id]) }}，希望您能帮我解答 </textarea></p>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </form>
 
-                    </div>
-                    <div class="modal-footer" style="display:none;">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary invite-email-btn">确认</button>
-                    </div>
+                </div>
+                <div class="modal-footer" style="display:none;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary invite-email-btn">确认</button>
                 </div>
             </div>
         </div>
+    </div>
     @endif
 @endsection
 
 @section('script')
+    @include('theme::layout.report_modal')
     <script src="{{ asset('/static/js/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('/static/js/summernote/lang/summernote-zh-CN.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/static/js/tipask/summernote-ext-attach.js') }}"></script>
@@ -392,7 +401,7 @@
                     $("#rewardForm").submit();
                 }
             });
-            @endif
+           @endif
 
             /*回答编辑器初始化*/
             $('#answer_editor').summernote({
@@ -404,6 +413,10 @@
                     onChange:function (contents, $editable) {
                         var code = $(this).summernote("code");
                         $("#answer_editor_content").val(code);
+                        $("#draftStatus").html('保存中...');
+                        $.post("{{ route('auth.draft.create',['type'=>'answer']) }}",$("#answer_form").serialize(),function(msg){
+                            $("#draftStatus").html('已保存草稿');
+                        });
                     },
                     onImageUpload:function(files) {
                         upload_editor_image(files[0],'answer_editor');
@@ -568,15 +581,15 @@
                     }else{
                         $.each(data.message,function(i,item){
                             inviteItemHtml+= '<div class="col-md-12 invite-question-item">' +
-                                '<img src="'+item.avatar+'" />'+
-                                '<div class="invite-question-user-info">'+
-                                '<a class="invite-question-user-name" target="_blank" href="'+item.url+'">'+item.name+'</a>'+
-                                '<span class="invite-question-user-desc">'+item.tag_name+' 标签下有 '+item.tag_answers+' 个回答</span>'+
-                                '</div>';
+                                    '<img src="'+item.avatar+'" />'+
+                                    '<div class="invite-question-user-info">'+
+                                    '<a class="invite-question-user-name" target="_blank" href="'+item.url+'">'+item.name+'</a>'+
+                                    '<span class="invite-question-user-desc">'+item.tag_name+' 标签下有 '+item.tag_answers+' 个回答</span>'+
+                                    '</div>';
                             if(item.isInvited>0){
-                                inviteItemHtml += '<button type="button" class="btn btn-default btn-xs invite-question-item-btn disabled" data-question_id="{{ $question->id }}"  data-user_id="'+item.id+'">已邀请</button>';
+                               inviteItemHtml += '<button type="button" class="btn btn-default btn-xs invite-question-item-btn disabled" data-question_id="{{ $question->id }}"  data-user_id="'+item.id+'">已邀请</button>';
                             }else{
-                                inviteItemHtml += '<button type="button" class="btn btn-default btn-xs invite-question-item-btn" data-question_id="{{ $question->id }}"  data-user_id="'+item.id+'">邀请回答</button>';
+                               inviteItemHtml += '<button type="button" class="btn btn-default btn-xs invite-question-item-btn" data-question_id="{{ $question->id }}"  data-user_id="'+item.id+'">邀请回答</button>';
                             }
                             inviteItemHtml += '</div>';
                         });

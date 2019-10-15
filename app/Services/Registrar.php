@@ -18,7 +18,6 @@ class Registrar implements RegistrarContract {
     {
         return Validator::make($data, [
             'name' => 'required|max:100',
-            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -31,28 +30,26 @@ class Registrar implements RegistrarContract {
      */
     public function create(array $data)
     {
-        $user =  User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'status' => $data['status'],
-            'site_notifications' => implode(',', array_keys(config('tipask.notification_types'))),
-            'email_notifications' => 'adopt_answer,invite_answer'
-        ]);
-
+        $data['password'] = bcrypt($data['password']);
+        $data['site_notifications'] = 'follow_user,invite_answer,comment_question,comment_article,adopt_answer,comment_answer,reply_comment';
+        $data['email_notifications'] = 'adopt_answer,invite_answer';
+        $user =  User::create($data);
         if($user){
-            UserData::create([
+            $userData = [
                 'user_id' => $user->id,
                 'coins' => 0,
                 'credits' => 20,
                 'registered_at' => Carbon::now(),
                 'last_visit' => Carbon::now(),
                 'last_login_ip' => $data['visit_ip'],
-            ]);
-        }
+            ];
 
+            if( $user->mobile ){
+                $userData['mobile_status'] = 1;
+            }
+            UserData::create($userData);
+        }
         return $user;
     }
-
 
 }

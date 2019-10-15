@@ -42,6 +42,22 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="website_url">开启课程审核</label>
+                                <span class="text-muted">(开启后，用户发布的课程要在课程管理中审核才能正常显示)</span>
+                                <div class="radio">
+                                    <label><input type="radio" name="verify_course" value="1" @if(Setting()->get('verify_course') == 1) checked @endif > 开启 </label>
+                                    <label class="ml-20"><input type="radio" name="verify_course" value="0" @if(Setting()->get('verify_course') != 1) checked @endif > 关闭 </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="website_url">开启视频审核</label>
+                                <span class="text-muted">(开启后，用户发布的视频要在视频管理中审核才能正常显示)</span>
+                                <div class="radio">
+                                    <label><input type="radio" name="verify_video" value="1" @if(Setting()->get('verify_video') == 1) checked @endif > 开启 </label>
+                                    <label class="ml-20"><input type="radio" name="verify_video" value="0" @if(Setting()->get('verify_video') != 1) checked @endif > 关闭 </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="website_url">开启评论审核</label>
                                 <span class="text-muted">(开启后，用户的评论需要在评论管理中审核才能正常显示)</span>
                                 <div class="radio">
@@ -101,6 +117,11 @@
                                 <label for="website_url">发起文章后编辑内容时效</label>
                                 <span class="text-muted">(默认单位是分钟，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
                                 <input type="text" class="form-control" name="edit_article_timeout" placeholder="0为不限制" value="{{ old('edit_article_timeout',Setting()->get('edit_article_timeout' , 0)) }}"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="website_url">发布视频教程后编辑内容时效</label>
+                                <span class="text-muted">(默认单位是分钟，设置后用户只能在编辑时间有效期内进行修改，设置为0则不做任何限制)</span>
+                                <input type="text" class="form-control" name="edit_video_timeout" placeholder="0为不限制" value="{{ old('edit_video_timeout',Setting()->get('edit_video_timeout' , 0)) }}"  />
                             </div>
                             <div class="form-group">
                                 <label for="website_url">撰写回答后编辑内容时效</label>

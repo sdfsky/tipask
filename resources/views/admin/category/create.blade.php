@@ -15,15 +15,13 @@
                 <div class="box box-default">
                     <form role="form" name="addForm" method="POST"  action="{{ route('admin.category.store') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="parent_id" value="{{ $parentCategory['id'] }}">
+                        <input type="hidden" name="parent_id" value="{{ $parentCategory['id'] }}" />
                         <div class="box-body">
-
                             <div class="form-group @if($errors->has('name')) has-error @endif">
                                 <label>上级分类</label>
                                 <input type="text" name="name" class="form-control" disabled  value="{{ $parentCategory['name'] }}">
                                 @if($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
                             </div>
-
                             <div class="form-group @if($errors->has('name')) has-error @endif">
                                 <label>分类名称</label>
                                 <input type="text" name="name" class="form-control " placeholder="分类名称" value="{{ old('name','') }}">
@@ -37,7 +35,6 @@
                                 @if($errors->has('slug')) <p class="help-block">{{ $errors->first('slug') }}</p> @endif
                             </div>
 
-
                             <div class="form-group">
                                 <label>栏目</label>
                                 <span class="text-muted">(允许显示的栏目)</span>
@@ -50,7 +47,7 @@
                             <div class="form-group @if($errors->has('sort')) has-error @endif">
                                 <label>排序</label>
                                 <span class="text-muted">(仅对当前层级分类有效)</span>
-                                <input type="text" name="sort" class="form-control " placeholder="排序" value="{{ old('sort','') }}">
+                                <input type="text" name="sort" class="form-control " placeholder="排序" value="{{ old('sort',0) }}">
                                 @if($errors->has('sort')) <p class="help-block">{{ $errors->first('sort') }}</p> @endif
                             </div>
 

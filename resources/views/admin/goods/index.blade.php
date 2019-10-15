@@ -11,7 +11,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <form role="form" name="item_form" id="item_form" method="post">
-                        <input name="_method" type="hidden" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-header">
                             <div class="row">
@@ -30,6 +29,7 @@
                                         <th><input type="checkbox" class="checkbox-toggle"/></th>
                                         <th>logo</th>
                                         <th>名称</th>
+                                        <th>分类</th>
                                         <th>是否需要邮寄</th>
                                         <th>金币</th>
                                         <th>剩余数量</th>
@@ -46,6 +46,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ $good->name }}</td>
+                                            <td>@if($good->category){{ $good->category->name }} @else 无 @endif</td>
                                             <td>{{ trans_goods_post_type($good->post_type) }}</td>
                                             <td>{{ $good->coins }}</td>
                                             <td>{{ $good->remnants }}</td>
@@ -74,6 +75,6 @@
 
 @section('script')
     <script type="text/javascript">
-        set_active_menu('operations',"{{ route('admin.notice.index') }}");
+        set_active_menu('operations',"{{ route('admin.goods.index') }}");
     </script>
 @endsection

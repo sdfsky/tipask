@@ -36,10 +36,14 @@ class GoodsController extends Controller
         $validator = Validator::make($request->all(), [
             'goods_id' => 'required|integer',
             'real_name' => 'required|max:32',
-            'phone' => 'required|regex:/^1[34578]{1}\d{9}$/',
+            'phone' => 'required|regex:/^1[3456789]{1}\d{9}$/',
             'email' => 'required|email|max:64',
             'comment' => 'max:512'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['result'=>$validator->messages()], 200);
+        }
 
         $goods = Goods::find($request->input('goods_id'));
 

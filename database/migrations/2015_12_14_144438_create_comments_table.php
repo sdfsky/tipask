@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -19,7 +20,7 @@ class CreateCommentsTable extends Migration
             $table->morphs('source');
             $table->integer('to_user_id')->unsigned()->nullable();
             $table->tinyInteger('status')->default(1);
-            $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4weixin
+            $table->tinyInteger('device')->default(1)->comment("设备类型：1web版本，2小程序");            //提问设备类型1pc,2安卓,3IOS,4weixin
             $table->timestamps();
         });
     }

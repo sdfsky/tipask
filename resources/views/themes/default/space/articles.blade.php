@@ -1,6 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo_title') @if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else{{ $userInfo->name }} @endif 的文章 - {{ Setting()->get('website_name') }} @endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我@else{{ $userInfo->name }} @endif 的文章 - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <h4 class="space-stream-heading">{{ $articles->total() }} 篇文章</h4>

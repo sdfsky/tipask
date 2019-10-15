@@ -42,8 +42,8 @@
                 @endif
             </div>
 
-            <div class="form-group has-feedback @if ($errors->first('captcha')) has-error @endif">
-                <input type="text" class="form-control" id="captcha" name="captcha" required="" placeholder="请输入下方的验证码">
+            <div class="form-group @if ($errors->first('captcha')) has-error @endif">
+                <input type="text" class="form-control" id="captcha" name="captcha" autocomplete="off" required="" placeholder="请输入下方的验证码">
                 @if ($errors->first('captcha'))
                 <span class="help-block">{{ $errors->first('captcha') }}</span>
                 @endif

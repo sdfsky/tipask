@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Relations\BelongsToUserDataTrait;
 use App\Models\Relations\BelongsToUserTrait;
 use App\Models\Relations\MorphManyCommentsTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ class Answer extends Model
 {
     use MorphManyCommentsTrait,BelongsToUserTrait;
     protected $table = 'answers';
-    protected $fillable = ['question_title','question_id','user_id', 'content','status'];
+    protected $fillable = ['question_title','question_id','user_id','device','content','status','created_at','updated_at'];
 
     public static function boot()
     {
@@ -40,6 +41,7 @@ class Answer extends Model
             Comment::where('source_type','=',get_class($answer))->where('source_id','=',$answer->id)->delete();
 
         });
+
     }
 
 

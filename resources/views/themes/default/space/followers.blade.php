@@ -1,6 +1,6 @@
 @extends('theme::layout.space')
 
-@section('seo_title') @if(Auth()->check() && Auth()->user()->id === $userInfo->id )我 @else {{ $userInfo->name }} @endif 的粉丝 - {{ Setting()->get('website_name') }}@endsection
+@section('seo_title')@if(Auth()->check() && Auth()->user()->id === $userInfo->id )我 @else {{ $userInfo->name }} @endif 的粉丝 - {{ Setting()->get('website_name') }}@endsection
 
 @section('space_content')
     <h2 class="h4">{{ $followers->total() }}  条记录</h2>
@@ -29,6 +29,9 @@
         </ul>
     </div>
 
+    <div class="text-center">
+        {!! str_replace('/?', '?', $followers->render()) !!}
+    </div>
 @endsection
 
 

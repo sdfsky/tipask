@@ -9,13 +9,14 @@
     <meta name="keywords" content="@yield('seo_keyword',parse_seo_template('seo_index_keyword','default'))" />
     <meta name="description" content="@yield('seo_description',parse_seo_template('seo_index_description','default'))" />
     <meta name="author" content="Tipask Team" />
-    <meta name="copyright" content="2016 tipask.com" />
+    <meta name="copyright" content="2018 tipask.com" />
     {!! Setting()->get('website_header') !!}
     <!-- Bootstrap -->
     <link href="{{ asset('/static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/static/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/css/default/global.css')}}?v={{ config('tipask.release') }}" rel="stylesheet" />
-    @yield('css')
+    <link href="{{ asset('/css/default/skins/'.config('tipask.skin').'.css')}}?v={{ config('tipask.release') }}" rel="stylesheet" />
+@yield('css')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,68 +26,111 @@
 </head>
 <body>
 
-<div class="top-common-nav  mb-50">
+<div class="global-nav mb-50">
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#global-navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div class="logo"><a class="navbar-brand logo" href="{{ route('website.index') }}"></a></div>
-            </div>
-
-            <div class="collapse navbar-collapse" id="global-navbar">
-                <form class="navbar-form navbar-left" role="search" id="top-search-form" action="{{ route('auth.search.index') }}" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="word" id="searchBox" class="form-control" placeholder="{{ Setting()->get('search_placeholder','') }}" />
-                        <span class="input-group-addon btn" ><span id="search-button" class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-                    </div>
-                </form>
-                <ul class="nav navbar-nav">
-                    <li @if(request()->route()->getName() == 'website.index') class="active" @endif><a href="{{ route('website.index') }}">首页 <span class="sr-only">(current)</span></a></li>
-
-                    @if(Auth()->check())
-                    <li @if(request()->route()->getName() == 'auth.doing.index') class="active" @endif><a href="{{ route('auth.doing.index') }}">发现</a></li>
-                    @endif
-                    <li @if(request()->route()->getName() == 'website.ask') class="active" @endif><a href="{{ route('website.ask') }}">问答</a></li>
-                    <li @if(request()->route()->getName() == 'website.blog') class="active" @endif><a href="{{ route('website.blog') }}">文章</a></li>
-                    <li @if(request()->route()->getName() == 'website.topic') class="active" @endif><a href="{{ route('website.topic') }}">话题</a></li>
-                    <li @if(request()->route()->getName() == 'website.shop') class="active" @endif><a href="{{ route('website.shop') }}">商城</a></li>
-                </ul>
-                @if (Auth::guest())
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ route('auth.user.login') }}">登录</a></li>
-                        <li><a href="{{ route('auth.user.register') }}">注册</a></li>
-                    </ul>
+        <div class="container nav">
+            <div class="visible-xs header-response">
+                <a href="{{ route('auth.search.show') }}" style="display:block"><i class="fa fa-search" aria-hidden="true"></i></a>
+                <div class="m-header-logo m-header-logo-response"><h1><a href="/" style="height:34px; background-size: auto 44px;"></a></h1></div>
+                @if(Auth()->check())
+                    <a href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}" class="pull-right login-btn"><i class="fa fa-user" aria-hidden="true"></i></a>
                 @else
-                    <ul class="nav navbar-nav user-menu navbar-right">
-                        <li><a href="{{ route('auth.notification.index') }}" class="active" id="unread_notifications"><span class="fa fa-bell-o fa-lg"></span></a></li>
-                        <li><a href="{{ route('auth.message.index') }}" class="active" id="unread_messages"><i class="fa fa-envelope-o fa-lg"></i></a></li>
-                        <li class="dropdown user-avatar">
-                            <a href="{{ route('auth.profile.base') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <img class="avatar-32 mr-5" alt="{{ Auth()->user()->name }}" src="{{ get_user_avatar(Auth()->user()->id) }}" >
-                                <span>{{ Auth()->user()->name }}</span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                @permission('admin.index.index')
-                                <li><a href="{{ route('admin.index.index') }}">系统设置</a></li>
-                                <li class="divider"></li>
-                                @endpermission
-
-                                <li><a href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}">我的主页</a></li>
-                                <li><a href="{{ route('auth.notification.index') }}">我的私信</a></li>
-                                <li><a href="{{ route('auth.profile.base') }}">账号设置</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{{ route('auth.user.logout') }}">退出</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <a href="{{ route('auth.user.login') }}" class="pull-right login-btn"><i class="fa fa-user" aria-hidden="true"></i></a>
                 @endif
+                <div class="bottom-nav">
+                    <div class="opts">
+                        <a class="opts-group @if(request()->route()->getName() == 'auth.doing.index') active @endif" href="{{ route('auth.doing.index') }}"><i class="fa fa-paper-plane" aria-hidden="true"></i><span>发现</span></a>
+                        <a class="opts-group @if(request()->route()->getName() == 'website.ask') active @endif" href="{{ route('website.ask') }}"><i class="fa fa-question-circle" aria-hidden="true"></i><span>问答</span></a>
+                        <div class="opts-group">
+                            <div class="btn-group dropup">
+                                <i class="fa fa-plus dropdown hoverDropdown" data-toggle="dropdown" aria-hidden="true" aria-expanded="false"><span>发起</span></i>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ route('ask.question.create') }}">提问</a></li>
+                                    <li><a href="{{ route('blog.article.create') }}">文章</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a class="opts-group @if(request()->route()->getName() == 'website.blog') active @endif" href="{{ route('website.blog') }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i><span>文章</span></a>
+                        <div class="opts-group">
+                            <div class="btn-group dropup">
+                                <i class="fa fa-bars dropdown hoverDropdown" data-toggle="dropdown" aria-hidden="true" aria-expanded="false"><span>更多</span></i>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ route('website.experts') }}">专家</a></li>
+                                    <li><a href="{{ route('website.topic') }}">话题</a></li>
+                                    <li><a href="{{ route('auth.top.coins') }}">财富榜</a></li>
+                                    <li><a href="{{ route('website.shop') }}">商城</a></li>
+                                    @if(Auth()->check())
+                                    <li><a href="{{ route('auth.user.logout') }}">退出</a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="row hidden-xs">
+                <div class="col-sm-8 col-md-9 col-lg-9">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#global-navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="logo"><a class="navbar-brand logo" href="{{ route('website.index') }}"></a></div>
+                    </div>
+                    <div class="collapse navbar-collapse" id="global-navbar">
+                        <ul class="nav navbar-nav">
+                            <li @if(request()->route()->getName() == 'website.index') class="active" @endif><a href="{{ route('website.index') }}">首页 <span class="sr-only">(current)</span></a></li>
+                            @if(Auth()->check())
+                                <li @if(request()->route()->getName() == 'auth.doing.index') class="active" @endif><a href="{{ route('auth.doing.index') }}">发现</a></li>
+                            @endif
+                            <li @if(request()->route()->getName() == 'website.ask') class="active" @endif><a href="{{ route('website.ask') }}">问答</a></li>
+                            <li @if(request()->route()->getName() == 'website.blog') class="active" @endif><a href="{{ route('website.blog') }}">文章</a></li>
+                            <li @if(request()->route()->getName() == 'website.topic') class="active" @endif><a href="{{ route('website.topic') }}">话题</a></li>
+                            <li @if(request()->route()->getName() == 'website.shop') class="active" @endif><a href="{{ route('website.shop') }}">商城</a></li>
+                        </ul>
+                        <form role="search" id="top-search-form" action="{{ route('auth.search.index') }}" method="GET" class="navbar-form hidden-sm hidden-xs pull-right">
+                            <span class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span></span>
+                            <input type="text" name="word" id="searchBox" class="form-control" placeholder="{{ Setting()->get('search_placeholder','') }}" />
+                        </form>
+                </div>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-3 text-right">
+                    @if ( Auth()->guest() )
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ route('auth.user.login') }}">登录</a></li>
+                            <li><a href="{{ route('auth.user.register') }}">注册</a></li>
+                        </ul>
+                    @else
+                        <ul class="nav navbar-nav user-menu navbar-right">
+                            <li><a href="{{ route('auth.notification.index') }}" class="active" id="unread_notifications"><span class="fa fa-bell-o fa-lg"></span></a></li>
+                            <li><a href="{{ route('auth.message.index') }}" class="active" id="unread_messages"><i class="fa fa-envelope-o fa-lg"></i></a></li>
+                            <li class="dropdown user-avatar">
+                                <a href="{{ route('auth.profile.base') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <img class="avatar-32 mr-5" alt="{{ Auth()->user()->name }}" src="{{ get_user_avatar(Auth()->user()->id,'middle','jpg',true) }}" >
+                                    <span>{{ Auth()->user()->name }}</span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                        @can('admin.login')
+                                        <li><a href="{{ route('admin.index.index') }}">系统设置</a></li>
+                                        <li class="divider"></li>
+                                        @endif
+                                        <li><a href="{{ route('auth.space.index',['user_id'=>Auth()->user()->id]) }}">我的主页</a></li>
+                                        @if(config('pay.open'))
+                                            <li><a href="{{ route('auth.profile.charge') }}">金币管理</a></li>
+                                        @endif
+                                        <li><a href="{{ route('auth.notification.index') }}">我的私信</a></li>
+                                        <li><a href="{{ route('auth.profile.base') }}">账号设置</a></li>
+                                        <li><a href="{{ route('auth.draft.index') }}">草稿箱</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="{{ route('auth.user.logout') }}">退出</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
+                </div>
+                </div>
         </div>
     </nav>
 </div>
@@ -144,8 +188,9 @@
             <a href="{{ route('website.index') }}">{{ Setting()->get('website_name') }}</a><span class="span-line">|</span>
             <a href="mailto:{{ Setting()->get('website_admin_email') }}" target="_blank">联系我们</a><span class="span-line">|</span>
             @if( Setting()->get('website_icp') )
-                <a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a>
+            <a href="http://www.miibeian.gov.cn" target="_blank">{{ Setting()->get('website_icp') }}</a><span class="span-line">|</span>
             @endif
+            <a href="{{ route('website.sitemap') }}">sitemap</a>
         </div>
         <div class="copyright mt-10">
             Powered By <a href="http://www.tipask.com" target="_blank">{{ Config('tipask.version') }}</a> Release {{ config('tipask.release') }} ©2009-{{ gmdate('Y') }} tipask.com
@@ -219,6 +264,7 @@
 <script src="{{ asset('/static/js/jquery.min.js') }}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ asset('/static/css/bootstrap/js/bootstrap.min.js') }}"></script>
+
 <script type="text/javascript">
     var is_login = Boolean("{{ Auth()->check() }}");
 </script>

@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -36,7 +36,7 @@ class CreateQuestionsTable extends Migration
 
             $table->integer('comments')->unsigned()->default(0);              //评论数
 
-            $table->tinyInteger('device')->default(1);            //提问设备类型1pc,2安卓,3IOS,4weixin
+            $table->tinyInteger('device')->default(1)->comment("设备类型：1web版本，2小程序");            //提问设备类型1pc,2安卓,3IOS,4weixin
 
             $table->tinyInteger('status')->default(0);            //提问状态0待审核,1已审核
 

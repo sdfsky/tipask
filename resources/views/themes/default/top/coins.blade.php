@@ -8,7 +8,7 @@
             <h2 class="h4  mt-30">财富榜</h2>
             <div class="widget-streams users">
                 @foreach($users as $index=>$user)
-                <section class="hover-show streams-item">
+                <section class="hover-show streams-item border-top">
                     <div class="stream-wrap media">
 
                         <div class="col-md-9">

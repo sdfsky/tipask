@@ -1,20 +1,33 @@
 @extends('theme::layout.public')
-@section('seo_title') @if($filter === 'hottest')热门的 @elseif($filter === 'recommended')推荐的 @endif 文章  @if( $articles->currentPage()>1 ) - 第{{ $articles->currentPage() }}页 @endif - {{ Setting()->get('website_name') }} @endsection
+@section('seo_title')
+    @if($currentCategory){{ $currentCategory->name }} - @else 全部 - @endif
+    @if($filter === 'hottest')热门的@elseif($filter === 'recommended')推荐的@endif 文章  @if( $articles->currentPage()>1 ) - 第{{ $articles->currentPage() }}页 @endif - {{ Setting()->get('website_name') }}
+@endsection
 @section('content')
     <div class="row mt-10">
         <div class="col-xs-12 col-md-9 main">
-            @if( $categories )
-                <div class="widget-category clearfix mb-10">
-                    <div class="col-sm-12">
-                        <ul class="list">
-                            <li><a href="{{ route('website.blog') }}">全部</a></li>
-                            @foreach( $categories as $category )
-                                <li @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.blog',['category_slug'=>$category->slug]) }}">{{ $category->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            @endif
+            <ul class="nav nav-tabs mt-20">
+                <li role="presentation" @if($categorySlug == 'all') class="active" @endif ><a href="{{ route('website.blog') }}">全部</a></li>
+                @foreach( $tabData['out_tabs'] as  $category )
+                        <li role="presentation" @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.blog',['category_slug'=>$category->slug,'filter'=>$filter]) }}">{{ $category->name }}</a></li>
+                @endforeach
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        更多 <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach( $tabData['in_tabs'] as  $category )
+                            <li role="presentation" @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.blog',['category_slug'=>$category->slug,'filter'=>$filter]) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav-child">
+                <span>筛选:&nbsp;</span>
+                <a href="{{ route('website.blog',['category_slug'=>$categorySlug,'filter'=>'newest']) }}" class="tag tag-sm @if( $filter == 'newest' ) active @endif mr-5">最新的</a>
+                <a href="{{ route('website.blog',['category_slug'=>$categorySlug,'filter'=>'recommended']) }}" class="tag tag-sm @if( $filter== 'recommended' ) active @endif mr-5">推荐的</a>
+                <a href="{{ route('website.blog',['category_slug'=>$categorySlug,'filter'=>'hottest']) }}" class="tag tag-sm @if( $filter == 'hottest' ) active @endif mr-5">热门的</a>
+            </div>
             <div class="stream-list blog-stream">
                 @foreach($articles as $article)
                 <section class="stream-list-item clearfix">
@@ -52,7 +65,7 @@
                 {!! str_replace('/?', '?', $articles->render()) !!}
             </div>
         </div><!-- /.main -->
-        <div class="col-xs-12 col-md-3 side">
+        <div class="col-md-3 hidden-xs side">
             <div class="side-alert alert alert-warning">
                 <p>今天，有什么经验需要分享呢？</p>
                 <a href="{{ route('blog.article.create') }}" class="btn btn-primary btn-block mt-10">立即撰写</a>
@@ -97,6 +110,7 @@
                     @endforeach
                 </ul>
             </div>
+
 
         </div>
     </div>

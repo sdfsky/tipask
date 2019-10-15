@@ -13,7 +13,7 @@
         <!--左侧菜单-->
         @include('theme::layout.profile_menu')
 
-        <div id="main" class="settings col-md-10 form-horizontal">
+        <div id="main" class="settings col-md-10 form-horizontal main">
             <h2 class="h3 post-title">个人资料</h2>
             <div class="row mt-30">
                 <div class="col-md-3 col-md-push-9 text-center">
@@ -33,7 +33,7 @@
                                             <div class="row">
                                                 <div class="col-xs-6 text-center">
                                                     <div id="avatar_origin" class="avatar-container">
-                                                        <img class="avatar-origin" src="{{ get_user_avatar(Auth()->user()->id,'origin') }}">
+                                                        <img class="avatar-origin" src="{{ get_user_avatar(Auth()->user()->id,'origin','jpg',true) }}">
                                                     </div>
                                                     <!--用来存放文件信息-->
                                                     <div id="uploader">
@@ -84,7 +84,7 @@
                             <label for="setting-city" class="control-label col-sm-3">所在城市</label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="province" id="province">
-                                    <option>请选择省份</option>
+                                    <option value="0">请选择省份</option>
                                     @foreach($data['provinces'] as $province)
                                         <option value="{{ $province->id }}"  @if(Auth()->user()->province == $province->id) selected @endif>{{ $province->name }}</option>
                                     @endforeach
@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-sm-5">
                                 <select class="form-control" name="city" id="city">
-                                    <option>请选择城市</option>
+                                    <option value="0">请选择城市</option>
                                     @foreach($data['cities'] as $city)
                                         <option value="{{ $city->id }}" @if(Auth()->user()->city == $city->id) selected @endif >{{ $city->name }}</option>
                                     @endforeach
@@ -127,8 +127,7 @@
                             </div>
                         </div>
 
-
-                        <div class="form-action row">
+                        <div class="form-action row mb-30">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button class="btn btn-xl btn-primary profile-sub" type="submit">提交</button>
                             </div>

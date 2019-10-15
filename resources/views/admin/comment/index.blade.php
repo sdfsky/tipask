@@ -99,7 +99,7 @@
                             <div class="col-sm-9">
                                 <div class="text-right">
                                     <span class="total-num">共 {{ $comments->total() }} 条数据</span>
-                                    {!! str_replace('/?', '?', $comments->render()) !!}
+                                    {!! str_replace('/?', '?', $comments->appends($filter)->links()) !!}
                                 </div>
                             </div>
                         </div>

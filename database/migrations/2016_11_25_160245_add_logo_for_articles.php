@@ -2,6 +2,7 @@
 /**
  * 文章表加入封面字段
  */
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 

@@ -7,6 +7,9 @@ use App\Models\Doing;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\UserData;
+use App\Services\CreditService;
+use App\Services\DoingService;
+use App\Services\NotificationService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -17,6 +20,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Larastarscn\AliDaYu\Facades\AliDaYu;
 
 abstract class Controller extends BaseController
 {
@@ -28,10 +32,13 @@ abstract class Controller extends BaseController
      * @param $message 消息内容
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function success($url,$message)
+    protected function success($url,$message,$intended=false)
     {
         Session::flash('message',$message);
         Session::flash('message_type',2);
+        if($intended){
+            return redirect()->intended($url);
+        }
         return redirect($url);
     }
 
@@ -75,8 +82,6 @@ abstract class Controller extends BaseController
     }
 
 
-
-
     /**
      * 修改用户积分
      * @param $user_id 用户id
@@ -87,36 +92,9 @@ abstract class Controller extends BaseController
      * @param int $credits    经验值
      * @return bool           操作成功返回true 否则  false
      */
-    protected function credit($user_id,$action,$coins = 0,$credits = 0,$source_id = 0 ,$source_subject = null)
+    protected function credit($user_id,$action,$coins = 0,$credits = 0,$source_id = 0 ,$source_subject = null,$through=false)
     {
-        DB::beginTransaction();
-        try{
-            /*用户登陆只添加一次积分*/
-            if($action == 'login' && Credit::where('user_id','=',$user_id)->where('action','=',$action)->where('created_at','>',Carbon::today())->count()>0){
-                return false;
-            }
-            /*记录详情数据*/
-            Credit::create([
-                'user_id' => $user_id,
-                'action' => $action,
-                'source_id' => $source_id,
-                'source_subject' => $source_subject,
-                'coins' => $coins,
-                'credits' => $credits,
-                'created_at' => Carbon::now()
-            ]);
-
-            /*修改用户账户信息*/
-            UserData::find($user_id)->increment('coins',$coins);
-            UserData::find($user_id)->increment('credits',$credits);
-            DB::commit();
-            return true;
-
-        }catch (\Exception $e) {
-            DB::rollBack();
-            return false;
-        }
-
+        return CreditService::create($user_id,$action,$coins,$credits,$source_id,$source_subject,$through);
     }
 
     /**
@@ -133,23 +111,7 @@ abstract class Controller extends BaseController
      */
     protected function doing($user_id,$action,$source_type,$source_id,$subject,$content='',$refer_id=0,$refer_user_id=0,$refer_content=null)
     {
-        try{
-            return Doing::create([
-                'user_id' => $user_id,
-                'action' => $action,
-                'source_id' => $source_id,
-                'source_type' => $source_type,
-                'subject' => $subject,
-                'content' => strip_tags($content),
-                'refer_id' => $refer_id,
-                'refer_user_id' => $refer_user_id,
-                'refer_content' => strip_tags($refer_content),
-                'created_at' => Carbon::now()
-            ]);
-        }catch (\Exception $e){
-            exit($e->getMessage());
-        }
-
+        return DoingService::create($user_id,$action,$source_type,$source_id,$subject,$content,$refer_id,$refer_user_id,$refer_content);
     }
 
 
@@ -164,33 +126,10 @@ abstract class Controller extends BaseController
      */
     protected function notify($from_user_id,$to_user_id,$type,$subject='',$source_id=0,$content='',$refer_type='',$refer_id=0)
     {
-        /*不能自己给自己发通知*/
-       if( $from_user_id == $to_user_id ){
-           return false;
-       }
 
-       $toUser = User::find($to_user_id);
+       $notificationService = new NotificationService();
 
-        if( !$toUser ){
-            return false;
-        }
-        /*站内消息策略*/
-        if(!in_array($type,explode(",",$toUser->site_notifications))){
-            return false;
-        }
-
-       return Notification::create([
-            'user_id'    => $from_user_id,
-            'to_user_id' => $to_user_id,
-            'type'       => $type,
-            'subject'    => strip_tags($subject),
-            'source_id'    => $source_id,
-            'content'  => $content,
-            'refer_type'  => $refer_type,
-            'refer_id'  => $refer_id,
-            'is_read'    => 0
-        ]);
-
+       return $notificationService->notify($from_user_id,$to_user_id,$type,$subject,$source_id,$content,$refer_type,$refer_id);
 
     }
 
@@ -212,6 +151,8 @@ abstract class Controller extends BaseController
             $types = ['comment_answer'];
         }else if($refer_type == 'user'){
             $types = ['follow_user'];
+        }else if($refer_type == 'course'){
+            $types = ['buy_video'];
         }
         $types[] = 'reply_comment';
         return Notification::where('to_user_id','=',Auth()->user()->id)->where('source_id','=',$source_id)->whereIn('type',$types)->where('is_read','=',0)->update(['is_read'=>1]);
@@ -221,39 +162,21 @@ abstract class Controller extends BaseController
     /*邮件发送*/
     protected function sendEmail($email,$subject,$message){
 
-        if(Setting()->get('mail_open') != 1){//关闭邮件发送
-            return false;
-        }
-
-        $data = [
-            'email' => $email,
-            'subject' => $subject,
-            'body' => $message,
-        ];
-
-
-        Mail::queue('emails.common', $data, function($message) use ($data)
-        {
-            $message->to($data['email'])->subject($data['subject']);
-        });
+        return NotificationService::sendEmail($email,$subject,$message);
 
     }
-
-
-
 
 
     /**
      * 业务层计数器
      * @param $key 计数器key
      * @param null $step 级数步子
-     * @param int $expiration 有效期，单位分钟
+     * @param int $expiration 有效期
      * @return Int count
      */
     protected function counter($key,$step=null,$expiration=1440){
 
-        /*计数从1开始*/
-        $count = Cache::get($key,1);
+        $count = Cache::get($key,0);
         /*直接获取值*/
         if( $step === null ){
             return $count;
@@ -261,16 +184,9 @@ abstract class Controller extends BaseController
 
         $count = $count + $step;
 
-        Cache::has($key) ? Cache::increment($key, $step) : Cache::put($key,$count,$expiration);
+        Cache::put($key,$count,$expiration);
 
         return $count;
-
     }
-
-
-
-
-
-
 
 }

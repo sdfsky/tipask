@@ -15,34 +15,35 @@ class CategoryController extends AdminController
     protected $validateRules = [
         'name' => 'required|max:255',
         'slug' => 'required|max:255|unique:categories',
+        'sort' => 'required|integer'
     ];
 
 
     /**
      * 分类列表页面
-     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $parentId = $request->input('parent_id', 0);
-        $categories = Category::where('parent_id', '=', $parentId)->orderBy('sort','asc')->orderBy('created_at','asc')->paginate(config('tipask.admin.page_size'));
-        return view("admin.category.index")->with(compact('categories'));
+        $parentId = $request->input("parent_id",0);
+        $parentCategoies = Category::getParentCategories($parentId);
+        $categories = Category::where("parent_id","=",$parentId)->orderBy('sort','asc')->orderBy('created_at','asc')->paginate(config('tipask.admin.page_size'));
+        return view("admin.category.index")->with(compact('categories','parentCategoies','parentId'));
     }
 
     /**
      * Show the form for creating a new resource.
-     * @param Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
-        $parentId = $request->input('parent_id', 0);
-        $parentCategory['id'] = $parentId;
-        $parentCategory['name'] = '无';
-        if ($parentId) {
-            $category = Category::findOrFail($parentId);
+        $parentId = $request->input("parent_id",0);
+        $parentCategory['id'] = $parentId ;
+        $parentCategory['name'] = '无' ;
+        if($parentId){
+            $category =  Category::findOrFail($parentId);
             $parentCategory['name'] = $category->name;
         }
         return view('admin.category.create')->with(compact('parentCategory'));
@@ -58,18 +59,18 @@ class CategoryController extends AdminController
     {
         $request->flash();
         $this->validate($request,$this->validateRules);
-        $parentId = $request->input('parent_id', 0);
+        $parentId = $request->input("parent_id",0);
         $types = $request->input("types",[]);
         $formData = $request->all();
         $formData['type'] = implode(",",$types);
         $formData['grade'] = 1;
-        if ($parentId) {
-            $parentCategory = Category::findOrFail($parentId);
+        if($parentId){
+            $parentCategory =  Category::findOrFail($parentId);
             $formData['grade'] = $parentCategory->grade + 1;
         }
         Category::create($formData);
         Artisan::call('cache:clear');
-        return $this->success(route('admin.category.index', ['parent_id' => $parentId]),'分类添加成功');
+        return $this->success(route('admin.category.index',['parent_id'=>$parentId]),'分类添加成功');
     }
 
 
@@ -113,7 +114,7 @@ class CategoryController extends AdminController
         $category->type = implode(",",$request->input('types'));
         $category->save();
         Artisan::call('cache:clear');
-        return $this->success(route('admin.category.index'),'分类添加成功');
+        return $this->success(route('admin.category.index',['parent_id'=>$category->parent_id]),'分类添加成功');
 
 
     }

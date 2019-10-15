@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,19 +13,24 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Question' => 'App\Policies\QuestionPolicy',
+        'App\Models\Article' => 'App\Policies\ArticlePolicy',
+        'App\Models\Answer' => 'App\Policies\AnswerPolicy',
+        'App\Models\Video' => 'App\Policies\VideoPolicy',
+        'App\Models\Course' => 'App\Policies\CoursePolicy',
     ];
 
     /**
-     * Register any application authentication / authorization services.
+     * Register any authentication / authorization services.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        parent::registerPolicies($gate);
+        $this->registerPolicies();
 
-        //
+        /*全局策略定义*/
+        Gate::define('admin.login',  'App\Policies\AuthPolicy@adminLogin');
+
     }
 }

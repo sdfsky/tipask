@@ -9,9 +9,9 @@
     <meta name="keywords" content="@yield('seo_title',parse_seo_template('seo_index_keyword','default'))" />
     <meta name="description" content="@yield('seo_title',parse_seo_template('seo_index_description','default'))" />
     <!-- Bootstrap -->
-        <link href="{{ asset('static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/default/account.css')}}" rel="stylesheet">
-
+    <link href="{{ asset('static/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/default/skins/'.config('tipask.skin').'.css')}}?v={{ config('tipask.release') }}" rel="stylesheet" />
+    <link href="{{ asset('css/default/account.css')}}?v={{ config('tipask.release') }}" rel="stylesheet" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -27,6 +27,10 @@
 <script src="{{ asset('static/js/jquery.min.js') }}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ asset('static/css/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/global.js') }}"></script>
+<script src="{{ asset('/static/js/geetest/geetest.js') }}"></script>
+
+<script src="{{ asset('js/global.js') }}?v={{ config('tipask.release') }}"></script>
+@yield('script')
+
 </body>
 </html>
