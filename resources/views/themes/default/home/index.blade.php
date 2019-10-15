@@ -169,16 +169,6 @@
                     @endforeach
                 </ul>
             </div>
-            @if(config('services.weapp.open'))
-                <div class="widget-box text-center">
-                    <p class="text-danger">{{Setting()->get('weapp_app_slogan','微信扫一扫，打开小程序')}}</p>
-                    <ul class="widget-links list-unstyled">
-                        <li class="widget-links-item">
-                            <img  alt="小程序码" width="80%" src="{{ route('website.image.show',['image_name'=> Setting()->get('weapp_qrcode_image')]) }}" />
-                        </li>
-                    </ul>
-                </div>
-            @endif
             <div class="widget-box">
                 <h2 class="h4 widget-box-title">热议话题 <a href="{{ route('website.topic') }}" title="更多">»</a></h2>
                 <ul class="taglist-inline multi">
