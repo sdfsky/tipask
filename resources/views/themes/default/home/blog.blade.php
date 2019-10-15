@@ -11,6 +11,7 @@
                 @foreach( $tabData['out_tabs'] as  $category )
                         <li role="presentation" @if( $category->id == $currentCategoryId ) class="active" @endif ><a href="{{ route('website.blog',['category_slug'=>$category->slug,'filter'=>$filter]) }}">{{ $category->name }}</a></li>
                 @endforeach
+                @if($tabData['in_tabs'])
                 <li role="presentation" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         更多 <span class="caret"></span>
@@ -21,6 +22,7 @@
                         @endforeach
                     </ul>
                 </li>
+                @endif
             </ul>
             <div class="nav-child">
                 <span>筛选:&nbsp;</span>

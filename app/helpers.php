@@ -646,33 +646,6 @@ if (!function_exists('get_editor_images')) {
     }
 }
 
-if (!function_exists('get_selected_images')) {
-    function get_selected_images($content)
-    {
-        preg_match_all('/<img[^>]+>/i', $content, $imgTags);
-        $selectedImages = [];
-        for ($i = 0; $i < count($imgTags[0]); $i++) {
-            preg_match('/src="([^"]+)/i', $imgTags[0][$i], $images);
-            $selectImage = [];
-            $selectImage['url'] = str_ireplace('src="', '', $images[0]);
-            $selectImage['path'] = substr($selectImage['url'], strripos($selectImage['url'], '/') + 1,
-                strlen($selectImage['url']));
-            $selectedImages[] = $selectImage;
-        }
-        return $selectedImages;
-    }
-}
-
-if (!function_exists('append_editor_images')) {
-    function append_editor_images($content, $images)
-    {
-        foreach ($images as $image) {
-            $imageUrl = route('website.image.show', ['image_name' => $image]);
-            $content .= '<p><img src="' . $imageUrl . '" class="img-responsive" alt="' . $image . '"></p>';
-        }
-        return $content;
-    }
-}
 
 if (!function_exists('env_cert')) {
     function env_cert($env_param)
@@ -685,45 +658,7 @@ if (!function_exists('env_cert')) {
     }
 }
 
-if (!function_exists('seconds_to_minutes')) {
-    function seconds_to_minutes($value)
-    {
-        $value = intval($value);
-        $minute = sprintf("%02d", floor($value / 60));
-        $seconds = sprintf("%02d", $value % 60);
-        return $value > 0 ? $minute . ':' . $seconds : '00:00';
-    }
-}
 
-if (!function_exists('aes_128_decode')) {
-    function aes_128_decode($session_key, $encrypted_data, $iv)
-    {
-        $ase_key = base64_decode($session_key);
-        $aes_iv = base64_decode($iv);
-        $aes_cipher = base64_decode($encrypted_data);
-        $result = openssl_decrypt($aes_cipher, "AES-128-CBC", $ase_key, 1, $aes_iv);
-        $dataObj = json_decode($result, true);
-        return $dataObj;
-    }
-}
-
-if (!function_exists('hide_mobile')) {
-    function hide_mobile($mobile)
-    {
-        return substr_replace($mobile, '****', 3, 4);
-    }
-}
-
-if (!function_exists('convert_video_duration')) {
-    function convert_video_duration($duration)
-    {
-        $timeArr = explode(":", $duration);
-        if (count($timeArr) > 2) {
-            return intval($timeArr[0]) * 3600 + intval($timeArr[1]) * 60 + intval($timeArr[2]);
-        }
-        return intval($timeArr[0]) * 60 + intval($timeArr[1]);
-    }
-}
 
 
 

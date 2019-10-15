@@ -15,8 +15,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        SyncAliVideo::class,
-        VideoToCourse::class
     ];
 
     /**
@@ -27,14 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        /*每分钟更新一下视频信息*/
-        $schedule->command('sync:video')->everyMinute();
-
         /*每天上午10点和下午3点自动采纳回答*/
         $schedule->command('adoptAnswer')->twiceDaily(10, 15);
-
-        /*每天4点备份备份一次数据库*/
-        $schedule->command("backup:run --only-db")->dailyAt('4:00');
 
     }
 
