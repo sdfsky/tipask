@@ -11,7 +11,7 @@ return [
     'theme'   => env('WEBSITE_THEME','default'),
     'skin'    => env('WEBSITE_SKIN','default'),
     'admin_email' => env('WEBSITE_ADMIN_EMAIL',''),
-    'release' => 20190908,
+    'release' => 20191015,
     'user_cache_time' => 1, //用户数据缓存时间单位分钟
     'user_invite_limit' => 10,//用户邀请回答限制数
     'super_admin_id' => env('SUPER_ADMIN_ID',1),
@@ -101,17 +101,5 @@ return [
             'subject' => '其他原因',
             'desc'    => '请补充说明'
         ],
-    ],
-    'recharge'=>[
-        'options'=>[
-            10 => '10 金币',
-            30 => '30 金币',
-            50 => '50 金币',
-            100 => '100 金币',
-            300 => '300 金币',
-            500 => '500 金币',
-            1000 => '1000 金币'
-        ],
-        'checked_option'=> 50,
-    ],
+    ]
 ];
