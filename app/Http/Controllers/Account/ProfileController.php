@@ -3,24 +3,16 @@
 namespace App\Http\Controllers\Account;
 
 use App\Models\Area;
-use App\Models\Authentication;
 use App\Models\EmailToken;
-use App\Models\Payment;
 use App\Models\User;
-use App\Services\PaymentService;
 use App\Services\SmsService;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
-use Sdfsky\Pingpp\Facades\Pingpp;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ProfileController extends Controller
 {

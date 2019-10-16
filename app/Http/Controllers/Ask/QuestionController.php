@@ -12,11 +12,8 @@ use App\Models\UserTag;
 use App\Models\XsSearch;
 use App\Services\CaptchaService;
 use App\Services\NotificationService;
-use App\Services\OrderService;
-use App\Services\PaymentService;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -144,18 +141,13 @@ class QuestionController extends Controller
             $captchaService->setValidateRules('code_create_question', $this->validateRules);
         }
 
-        $this->validate($request, $this->validateRules);
-        $originPrice = $price = abs($request->input('price'));
+        $this->validate($request,$this->validateRules);
+        $price = abs($request->input('price'));
 
-        $status = 1;
-        if ($price > 0 && $request->user()->userData->coins < $price) {
-            if (!config('pay.open')) {
-                return $this->error(route('ask.question.create'), '操作失败！您的金币数不足！');
-            }
-            $status = -1;
-            $originPrice = $price;
-            $price = 0;
+        if($price > 0 && $request->user()->userData->coins < $price){
+            return $this->error(route('ask.question.create'),'操作失败！您的金币数不足！');
         }
+
         $data = [
             'user_id' => $loginUser->id,
             'category_id' => $request->input('category_id', 0),
@@ -163,7 +155,7 @@ class QuestionController extends Controller
             'description' => clean($request->input('description')),
             'price' => $price,
             'hide' => intval($request->input('hide')),
-            'status' => $status,
+            'status' => 1,
         ];
         $question = Question::create($data);
         /*判断问题是否添加成功*/
@@ -195,12 +187,6 @@ class QuestionController extends Controller
             UserTag::multiIncrement($loginUser->id, $question->tags()->get(), 'questions');
             $this->credit($request->user()->id, 'ask', Setting()->get('coins_ask'), Setting()->get('credits_ask'),
                 $question->id, $question->title);
-
-            /*待支付悬赏提问处理*/
-            if ($status == -1) {
-                $payment = PaymentService::create($loginUser->id, coins_to_cent($originPrice), 'ask', $question->id);
-                return redirect(route('payment.payment.show', ['order_no' => $payment->order_no]));
-            }
 
             if ($question->status == 1) {
                 $message = '发起提问成功! ' . get_credit_message(Setting()->get('credits_ask'), Setting()->get('coins_ask'));

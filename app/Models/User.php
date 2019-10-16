@@ -331,10 +331,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserTag','user_id');
     }
 
-    /*用户统计标签*/
-    public function payments(){
-        return $this->hasMany('App\Models\Payment','user_id');
-    }
 
 
     public function hotTags(){
