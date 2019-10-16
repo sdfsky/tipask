@@ -30,7 +30,6 @@ class SiteMapController extends Controller
             $sitemap->add(URL::to(route('website.ask')), null, '1.0', 'daily');
             $sitemap->add(URL::to(route('website.topic')), null, '1.0', 'daily');
             $sitemap->add(URL::to(route('website.blog')), null, '1.0', 'daily');
-            $sitemap->add(URL::to(route('website.live')), null, '1.0', 'daily');
             $sitemap->add(URL::to(route('website.user')), null, '0.9', 'daily');
             $sitemap->add(URL::to(route('website.shop')), null, '0.7', 'weekly');
             $sitemap->add(URL::to(route('website.experts')), null, '0.8', 'weekly');
@@ -49,12 +48,6 @@ class SiteMapController extends Controller
             $articles = Article::where("status", ">", 0)->where('created_at', '>', $startTime)->orderBy('created_at', 'desc')->take(1200)->get();
             foreach ($articles as $article) {
                 $sitemap->add(URL::to(route('blog.article.detail', ['id' => $article->id])), $article->created_at, '0.9', 'daily');
-            }
-
-            /*课堂*/
-            $courses = Course::where("status", ">", 0)->where('sale_status','=',1)->where('created_at', '>', $startTime)->orderBy('created_at', 'desc')->take(1200)->get();
-            foreach ($courses as $course) {
-                $sitemap->add(URL::to(route('live.course.show', ['id' => $course->id])), $course->created_at, '0.9', 'daily');
             }
 
             /*话题*/

@@ -189,14 +189,6 @@ class PermissionSeeder extends Seeder
                 'updated_at' => '2016-02-16 17:57:51'
             ],
             [
-                'id' => '17',
-                'name' => '后台充值记录管理',
-                'slug' => 'admin.payment.index',
-                'description' => '后台充值记录管理',
-                'created_at' => '2016-02-16 17:57:51',
-                'updated_at' => '2016-02-16 17:57:51'
-            ],
-            [
                 'id' => '18',
                 'name' => '后台站点设置',
                 'slug' => 'admin.setting.website',
@@ -293,14 +285,6 @@ class PermissionSeeder extends Seeder
                 'updated_at' => '2016-02-16 17:57:51'
             ],
             [
-                'id' => '30',
-                'name' => '后台pingpp支付',
-                'slug' => 'admin.setting.pingpp',
-                'description' => '后台pingpp支付',
-                'created_at' => '2016-02-16 17:57:51',
-                'updated_at' => '2016-02-16 17:57:51'
-            ],
-            [
                 'id' => '31',
                 'name' => '后台极验证',
                 'slug' => 'admin.setting.geetest',
@@ -325,44 +309,12 @@ class PermissionSeeder extends Seeder
                 'updated_at' => '2016-02-16 17:57:51'
             ],
             [
-                'id' => '34',
-                'name' => '后台视频点播配置',
-                'slug' => 'admin.setting.video',
-                'description' => '后台视频点播配置',
-                'created_at' => '2016-02-16 17:57:51',
-                'updated_at' => '2016-02-16 17:57:51'
-            ],
-            [
                 'id' => '35',
                 'name' => '后台操作日志',
                 'slug' => 'admin.operationLog.index',
                 'description' => '后台操作日志',
                 'created_at' => '2016-02-16 17:57:51',
                 'updated_at' => '2016-02-16 17:57:51'
-            ],
-            [
-                'id' => '38',
-                'name' => '后台课程管理',
-                'slug' => 'admin.course.index',
-                'description' => '后台课程管理',
-                'created_at' => '2016-02-16 17:57:51',
-                'updated_at' => '2016-02-16 17:57:51'
-            ],
-            [
-                'id' => '39',
-                'name' => '后台视频管理',
-                'slug' => 'admin.video.index',
-                'description' => '后台视频管理',
-                'created_at' => '2016-02-16 17:57:51',
-                'updated_at' => '2016-02-16 17:57:51'
-            ],
-            [
-                'id' => '40',
-                'name' => '微信小程序',
-                'slug' => 'admin.setting.weapp',
-                'description' => '微信小程序配置',
-                'created_at' => '2018-02-16 17:57:51',
-                'updated_at' => '2018-02-16 17:57:51'
             ],
         ]);
 

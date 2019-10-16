@@ -25,7 +25,6 @@ class IndexController extends AdminController
         $totalAnswerNum = Answer::count();
         $userChart = $this->drawUserChart();
         $questionChart = $this->drawQuestionChart();
-        $paymentChart = $this->drawPaymentChart();
         $systemInfo = $this->getSystemInfo();
         return view("admin.index.index")->with(compact('totalUserNum','totalQuestionNum','totalArticleNum','totalAnswerNum','userChart','questionChart','systemInfo','paymentChart'));
     }
@@ -38,40 +37,6 @@ class IndexController extends AdminController
         return response()->json('ok')->withCookie($cookie);
     }
 
-    private function drawPaymentChart()
-    {
-        $labelTimes = $chartLabels = [];
-
-        for ($i = 0;$i < 7; $i++){
-            $labelTimes[$i] = Carbon::createFromTimestamp(Carbon::today()->timestamp - (6-$i) * 24 * 3600);
-            $chartLabels[$i] = '"'.$labelTimes[$i]->month.'月-'.$labelTimes[$i]->day.'日'.'"';
-        }
-        $nowTime = Carbon::now();
-        $payments = Payment::where('created_at','>',$labelTimes[0])->where('created_at', '<', $nowTime)->get();
-        $allRange = $paidRange = $beenPaidRange = [0,0,0,0,0,0,0];
-
-        for ($i = 0; $i < 7; $i++){
-            $startTime = $labelTimes[$i];
-            $endTime = $nowTime;
-            if (isset($labelTimes[$i + 1])){
-                $endTime = $labelTimes[$i + 1];
-            }
-            foreach ($payments as $payment){
-                if ($payment->created_at> $startTime && $payment->created_at< $endTime){
-                    if ($payment->pay_status== 1){
-                        $paidRange[$i] += $payment->money;
-                    }else{
-                        $beenPaidRange[$i] += $payment->money;
-                    }
-                    $allRange[$i] += $payment->money;
-                }
-            }
-        }
-        $paidRange =  array_map('format_money',$paidRange);
-        $beenPaidRange =  array_map('format_money',$beenPaidRange);
-        $allRange =  array_map('format_money',$allRange);
-        return ['labels' => $chartLabels, 'paidRange' => $paidRange, 'beenPaidRange' => $beenPaidRange, 'allRange' => $allRange];
-    }
 
     private function drawUserChart()
     {
