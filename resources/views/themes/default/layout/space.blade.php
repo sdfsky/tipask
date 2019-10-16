@@ -79,7 +79,6 @@
                     <li @if(request()->route()->getName() == 'auth.space.answers') class="active" @endif ><a href="{{ route('auth.space.answers',['user_id'=>$userInfo->id]) }}">我的回答</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.questions') class="active" @endif ><a href="{{ route('auth.space.questions',['user_id'=>$userInfo->id]) }}">我的提问</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.articles') class="active" @endif ><a href="{{ route('auth.space.articles',['user_id'=>$userInfo->id]) }}">我的文章</a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.courses') class="active" @endif ><a href="{{ route('auth.space.courses',['user_id'=>$userInfo->id]) }}">我的课程</a></li>
                     <li role="separator" class="divider"><a></a></li>
                     <li @if(request()->route()->getName() == 'auth.space.coins') class="active" @endif ><a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}">我的金币</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.credits') class="active" @endif ><a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}">我的经验</a></li>
@@ -91,7 +90,6 @@
                     <li @if(request()->route()->getName() == 'auth.space.answers') class="active" @endif ><a href="{{ route('auth.space.answers',['user_id'=>$userInfo->id]) }}">TA的回答</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.questions') class="active" @endif ><a href="{{ route('auth.space.questions',['user_id'=>$userInfo->id]) }}">TA的提问</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.articles') class="active" @endif ><a href="{{ route('auth.space.articles',['user_id'=>$userInfo->id]) }}">TA的文章</a></li>
-                    <li @if(request()->route()->getName() == 'auth.space.courses') class="active" @endif ><a href="{{ route('auth.space.courses',['user_id'=>$userInfo->id]) }}">TA的课程</a></li>
                     <li role="separator" class="divider"><a></a></li>
                     <li @if(request()->route()->getName() == 'auth.space.coins') class="active" @endif ><a href="{{ route('auth.space.coins',['user_id'=>$userInfo->id]) }}">TA的金币</a></li>
                     <li @if(request()->route()->getName() == 'auth.space.credits') class="active" @endif ><a href="{{ route('auth.space.credits',['user_id'=>$userInfo->id]) }}">TA的经验</a></li>

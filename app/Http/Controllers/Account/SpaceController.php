@@ -70,18 +70,6 @@ class SpaceController extends Controller
         return view('theme::space.articles')->with('articles',$articles);
     }
 
-    public function courses($user_id,$filter='involved')
-    {
-        if ($filter == 'started'){
-            $ids = $this->user->courses()->pluck("id");
-        }else{
-            $ids = $this->user->credits()->where("action","=","buy_video")->pluck('source_id');
-        }
-        $courses = Course::whereIn("id",$ids)->orderBy("created_at","desc")->paginate(10);
-        return view('theme::space.courses')->with(compact('courses','filter'));
-    }
-
-
     /*我的金币*/
     public function coins()
     {

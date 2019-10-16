@@ -11,7 +11,7 @@ return [
     'theme'   => env('WEBSITE_THEME','default'),
     'skin'    => env('WEBSITE_SKIN','default'),
     'admin_email' => env('WEBSITE_ADMIN_EMAIL',''),
-    'release' => 20191015,
+    'release' => 20191016,
     'user_cache_time' => 1, //用户数据缓存时间单位分钟
     'user_invite_limit' => 10,//用户邀请回答限制数
     'super_admin_id' => env('SUPER_ADMIN_ID',1),
@@ -36,12 +36,9 @@ return [
         'answer_adopted' => '回答被采纳',
         'create_article' => '发表了文章',
         'exchange' => '兑换商品',
-        'charge' => '金币充值',
         'reward_user' => '系统奖励',
         'punish_user' => '系统惩罚',
         'sign' => '签到',
-        'buy_video' => '购买讲座',
-        'sale_video' => '售出讲座'
     ],
     'notification_types' =>[
         'answer'  => '回答了问题',
@@ -54,7 +51,6 @@ return [
         'adopt_answer' => '采纳了您的回答',
         'create_article' => '发表了文章',
         'follow_user' => '关注了你',
-        'buy_video' => '购买了您的讲座',
         'remove_question' => '删除了问题',
         'remove_answer' => '删除了回答',
         'remove_article' => '删除了文章',
@@ -77,7 +73,6 @@ return [
     'category_types' => [
         'questions' => '问题',
         'articles' => '文章',
-        'courses' => '讲堂',
         'tags' => '话题',
         'experts' => '专家',
         'goods' => '商城',
