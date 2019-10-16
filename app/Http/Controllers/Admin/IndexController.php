@@ -26,7 +26,7 @@ class IndexController extends AdminController
         $userChart = $this->drawUserChart();
         $questionChart = $this->drawQuestionChart();
         $systemInfo = $this->getSystemInfo();
-        return view("admin.index.index")->with(compact('totalUserNum','totalQuestionNum','totalArticleNum','totalAnswerNum','userChart','questionChart','systemInfo','paymentChart'));
+        return view("admin.index.index")->with(compact('totalUserNum','totalQuestionNum','totalArticleNum','totalAnswerNum','userChart','questionChart','systemInfo'));
     }
 
 
