@@ -27,8 +27,7 @@ class UserData extends Model
         'last_login_ip',
         'registered_at',
         'mobile_status',
-        'last_visit',
-        'register_source_type'
+        'last_visit'
     ];
 
     /**
