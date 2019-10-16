@@ -249,46 +249,6 @@ Route::Group(['namespace'=>'Blog'],function(){
 
 });
 
-Route::Group(['namespace'=>'Mp','prefix'=>'mp'],function(){
-    /*文章查看*/
-    Route::get('article/{id}',['as'=>'mp.article.show','uses'=>'ArticleController@show'])->where(['id'=>'[0-9]+']);
-
-});
-
-/*视频课堂模块*/
-Route::Group(['namespace'=>'Live'],function(){
-    Route::get('/courses/{category_name?}/{filter?}',['as'=>'website.live','uses'=>'CourseController@index'])->where(['filter'=>'(recommended|newest|hottest)']);
-    // 课程详情
-    Route::get('course/{id}/{filter?}',['as'=>'live.course.show','uses'=>'CourseController@show'])->where(['id'=>'[0-9]+','filter'=>'(intro|chapters|comments)']);
-    Route::Group(['middleware'=>['auth','ban.ip']],function(){
-        Route::get('video/play/{id}',['as'=>'live.video.play','uses'=>'VideoController@play'])->where(['id'=>'[0-9]+']);
-        Route::get('course/{id}/buy',['as'=>'live.course.buy','uses'=>'CourseController@buy'])->where(['id'=>'[0-9]+']);
-        Route::get('course/{id}/study',['as'=>'live.course.study','uses'=>'CourseController@study'])->where(['id'=>'[0-9]+']);
-        Route::post('video/store',['middleware' =>'ban.user','as'=>'live.video.store','uses'=>'VideoController@store']);
-        Route::get('video/edit/{id}',['as'=>'live.video.edit','uses'=>'VideoController@edit'])->where(['id'=>'[0-9]+']);
-        Route::get('video/destroy/{id}',['as'=>'live.video.destroy','uses'=>'VideoController@destroy'])->where(['id'=>'[0-9]+']);
-        Route::post('video/update',['middleware' =>'ban.user','as'=>'live.video.update','uses'=>'VideoController@update']);
-        Route::get('video/showUpload/{id}',['as'=>'live.video.showUpload','uses'=>'VideoController@showUpload'])->where(['id'=>'[0-9]+']);
-        Route::post('video/upload/{id}',['as'=>'live.video.upload','uses'=>'VideoController@upload'])->where(['id'=>'[0-9]+']);
-
-        //课程
-        // 用户课程
-        Route::get('/course/manage',['as'=>'live.course.manage','uses'=>'CourseController@manage']);
-        Route::get('course/create',['as'=>'live.course.create','uses'=>'CourseController@create']);
-        Route::post('course/store',['middleware' =>'ban.user','as'=>'live.course.store','uses'=>'CourseController@store']);
-        //修改课程信息
-        Route::get('course/{course_id}/operate/{action}',['as'=>'live.course.operate','uses'=>'CourseController@operate'])->where(['course_id'=>'[0-9]+','action'=>'(putOn|putOff)']);
-        Route::post('course/update',['as'=>'live.course.update','uses'=>'CourseController@update']);
-        Route::get('course/{id}/edit',['as'=>'live.course.edit','uses'=>'CourseController@edit'])->where(['id'=>'[0-9]+']);
-        Route::get('course/{course_id}/manageChapters',['as'=>'live.course.chapters','uses'=>'ChapterController@index'])->where(['course_id'=>'[0-9]+']);
-
-        Route::post('chapter/store',['as'=>'live.chapter.store','uses'=>'ChapterController@store']);
-        Route::post('chapter/update',['as'=>'live.chapter.update','uses'=>'ChapterController@update']);
-    });
-
-});
-
-
 /*商城模块*/
 Route::Group(['namespace'=>'Shop'],function(){
 
@@ -348,9 +308,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*修改分类核*/
     Route::post('authentication/changeCategories',['as'=>'admin.authentication.changeCategories','uses'=>'AuthenticationController@changeCategories']);
     Route::resource('authentication', 'AuthenticationController',['as'=>'admin','except' => ['show','destroy']]);
-
-    /*讲师管理*/
-    Route::resource('lecturer', 'LecturerController',['as'=>'admin', 'except'=>['show']]);
 
     /*站点设置*/
     Route::any('setting/website',['as'=>'admin.setting.website','uses'=>'SettingController@website']);
@@ -415,25 +372,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*文章管理*/
     Route::resource('article', 'ArticleController',['as'=>'admin','only' => ['index','edit','update']]);
 
-    /*课程删除*/
-    Route::post('course/destroy',['as'=>'admin.course.destroy','uses'=>'CourseController@destroy']);
-    /*课程审核*/
-    Route::post('course/verify',['as'=>'admin.course.verify','uses'=>'CourseController@verify']);
-    /*课程分类*/
-    Route::post('course/changeCategories',['as'=>'admin.course.changeCategories','uses'=>'CourseController@changeCategories']);
-    /*课程管理*/
-    Route::resource('course', 'CourseController',['as'=>'admin','only' => ['index','edit','update']]);
-
-    /*视频删除*/
-    Route::post('video/destroy',['as'=>'admin.video.destroy','uses'=>'VideoController@destroy']);
-    /*视频审核*/
-    Route::post('video/verify',['as'=>'admin.video.verify','uses'=>'VideoController@verify']);
-    /*视频管理*/
-    Route::resource('video', 'VideoController',['as'=>'admin','only' => ['index','edit','update']]);
-
-
-
-
     /*评论删除*/
     Route::post('comment/destroy',['as'=>'admin.comment.destroy','uses'=>'CommentController@destroy']);
     /*评论审核*/
@@ -486,11 +424,6 @@ Route::Group(['prefix'=>'admin','namespace'=>'Admin','middleware' =>['auth','aut
     /*友情链接*/
     Route::post('friendshipLink/destroy',['as'=>'admin.friendshipLink.destroy','uses'=>'FriendshipLinkController@destroy']);
     Route::resource('friendshipLink', 'FriendshipLinkController',['as'=>'admin','except' => ['show','destroy']]);
-
-    /*菜单管理*/
-    Route::post('menu/destroy',['as'=>'admin.menu.destroy','uses'=>'MenuController@destroy']);
-    Route::resource('menu', 'MenuController',['as'=>'admin','except' => ['show','destroy']]);
-
 
     /*工具管理*/
     Route::match(['get','post'],'tool/clearCache',['as'=>'admin.tool.clearCache','uses'=>'ToolController@clearCache']);

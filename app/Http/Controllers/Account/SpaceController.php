@@ -18,15 +18,17 @@ class SpaceController extends Controller
     protected $user;
 
     public function __construct(Request $request){
-        $userId =  $request->route()->parameter('user_id');
+        if($request->route()){
+            $userId =  $request->route()->parameter('user_id',0);
+            $user  = User::with('userData')->find($userId);
 
-        $user  = User::with('userData')->find($userId);
-
-        if(!$user){
-            abort(404);
+            if(!$user){
+                abort(404);
+            }
+            $this->user = $user;
+            View::share("userInfo",$user);
         }
-        $this->user = $user;
-        View::share("userInfo",$user);
+
     }
 
     /**
