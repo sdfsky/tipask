@@ -7,7 +7,6 @@ use App\Models\Authentication;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\User;
-use App\Services\SmsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -175,14 +174,6 @@ class AuthenticationController extends AdminController
 
         if($result){
             Tag::multiSave($request->input('skill'),$request->user());
-            /*认证成功短信通知*/
-            if($authentication->status == 1 && $oldStatus == 0 ){
-                SmsService::sendSms($authentication->user->mobile,Setting()->get('sms_expert_success_template'),['real_name'=>$authentication->real_name]);
-            }
-            /*认证失败短信通知*/
-            if($authentication->status == 4 && $oldStatus == 0 ){
-                SmsService::sendSms($authentication->user->mobile,Setting()->get('sms_expert_fail_template'),['real_name'=>$authentication->real_name]);
-            }
         }
 
         return $this->success(route('admin.authentication.index'),'行家认证信息修改成功');

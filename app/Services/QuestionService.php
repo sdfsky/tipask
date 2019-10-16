@@ -89,12 +89,6 @@ class QuestionService
                 $emailContent = "您对于问题「".$answer->question_title."」的回答被采纳了！<br /> 点击此链接查看详情  →  ".route('ask.question.detail',['question_id'=>$answer->question_id]);
                 NotificationService::sendEmail($answer->user->email,$emailSubject,$emailContent);
             }
-
-            /*发送短信通知*/
-
-            if($answer->user){
-                SmsService::sendSms($answer->user->mobile,Setting()->get('sms_adopt_template'),['ask_user'=>$answer->question->user->name]);
-            }
             return true;
         }catch (\Exception $e) {
             Log::error("adopt_answer_error:".$e->getMessage());
