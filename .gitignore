@@ -1,5 +1,6 @@
 .idea/
 vendor/
 bootstrap/cache/
-storage/
+/storage/*.key
+/storage/installed
 .env
