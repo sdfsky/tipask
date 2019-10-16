@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Message;
 use App\Models\Notification;
-use App\Models\Payment;
 use App\Models\Question;
-use App\Models\QuestionInvitation;
 use App\Models\Tag;
 use App\Models\Taggable;
 use App\Models\User;
 use App\Models\UserTag;
 use App\Services\SmsService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AjaxController extends Controller
@@ -226,29 +223,5 @@ class AjaxController extends Controller
 
         return $this->ajaxError(10007,"请求错误");
     }
-
-
-    public function getPaymentStatus(Request $request){
-        $validateRules['order_no'] = 'required|min:10|max:32';
-        $validator = Validator::make($request->all(),$validateRules);
-        if($validator->fails()){
-            return $this->ajaxError(20007,'参数错误');
-        }
-        $orderNo = $request->input('order_no');
-
-        $payment = Payment::where("order_no","=",$orderNo)->first();
-
-        if($payment){
-            if($payment->pay_status == 1){
-                return  $this->ajaxSuccess('ok');
-            }
-        }
-
-        return $this->ajaxSuccess('fail');
-    }
-
-
-
-
 
 }

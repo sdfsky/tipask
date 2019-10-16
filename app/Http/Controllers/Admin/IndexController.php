@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Answer;
 use App\Models\Article;
-use App\Models\Payment;
 use App\Models\Question;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\DB;
 
 class IndexController extends AdminController
 {

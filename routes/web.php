@@ -523,7 +523,6 @@ Route::get('ajax/loadInviteUsers',['middleware' =>'auth','as'=>'website.ajax.loa
 /*加载未读私信数目*/
 Route::get('ajax/unreadMessages',['as'=>'website.ajax.unreadMessages','uses'=>'AjaxController@unreadMessages']);
 Route::post('ajax/sendSmsCode',['as'=>'website.ajax.sendSmsCode','uses'=>'AjaxController@sendSmsCode']);
-Route::post('ajax/getPaymentStatus',['as'=>'website.ajax.getPaymentStatus','uses'=>'AjaxController@getPaymentStatus']);
 
 
 Route::get('image/avatar/{avatar_name}',['as'=>'website.image.avatar','uses'=>'ImageController@avatar'])->where(['avatar_name'=>'[0-9]+_(small|middle|big|origin).jpg']);
