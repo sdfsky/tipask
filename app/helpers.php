@@ -302,68 +302,8 @@ if (!function_exists('trans_day_of_week')) {
     }
 
 }
-/*阿里云视频状态*/
-if (!function_exists('trans_aliyun_video_status')) {
 
-    function trans_aliyun_video_status($status)
-    {
-        $map = [
-            'Uploading' => '待上传',
-            'UploadSucc' => '上传成功',
-            'Transcoding' => '转码中',
-            'TranscodeFail' => '转码失败',
-            'Normal' => '可播放',
-            'Checking' => '审核中',
-            'Blocked' => '屏蔽'
-        ];
 
-        if ($status === 'all') {
-            return $map;
-        }
-
-        if (isset($map[$status])) {
-            return $map[$status];
-        }
-        return '未知';
-    }
-
-}
-
-if (!function_exists('trans_sale_status')) {
-    function trans_sale_status($status = 'all')
-    {
-        $map = [
-            0 => '未上架',
-            1 => '已上架'
-        ];
-
-        if ($status === 'all') {
-            return $map;
-        }
-        if (isset($map[$status])) {
-            return $map[$status];
-        }
-        return '';
-    }
-}
-
-if (!function_exists('trans_menu_type')) {
-    function trans_menu_type($type = 'all')
-    {
-        $map = [
-            1 => 'web版',
-            2 => '微信小程序'
-        ];
-
-        if ($type === 'all') {
-            return $map;
-        }
-        if (isset($map[$type])) {
-            return $map[$type];
-        }
-        return '';
-    }
-}
 
 
 if (!function_exists('trans_question_price')) {
@@ -492,7 +432,7 @@ if (!function_exists('parse_seo_template')) {
         $seo_template = str_replace("{wzmc}", Setting()->get('website_name'), $seo_template);
         $seo_template = str_replace("{wzkh}", Setting()->get('website_slogan'), $seo_template);
 
-        if (str_contains($type, ['question', 'article', 'video'])) {
+        if (str_contains($type, ['question', 'article'])) {
             if ($source->tags) {
                 $tagList = array_pluck($source->tags->toArray(), 'name');
                 $seo_template = str_replace("{htlb}", implode(",", $tagList), $seo_template);
@@ -510,12 +450,6 @@ if (!function_exists('parse_seo_template')) {
                 if (str_contains($type, 'topic')) {
                     $seo_template = str_replace("{htmc}", $source->name, $seo_template);
                     $seo_template = str_replace("{htjj}", str_limit($source->summary, 200), $seo_template);
-                } else {
-                    if (str_contains($type, 'video')) {
-                        $seo_template = str_replace("{ktbt}", strip_tags($source->title), $seo_template);
-                        $seo_template = str_replace("{ktms}", str_limit(strip_tags($source->description), 200),
-                            $seo_template);
-                    }
                 }
             }
         }

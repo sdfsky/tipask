@@ -151,8 +151,6 @@ abstract class Controller extends BaseController
             $types = ['comment_answer'];
         }else if($refer_type == 'user'){
             $types = ['follow_user'];
-        }else if($refer_type == 'course'){
-            $types = ['buy_video'];
         }
         $types[] = 'reply_comment';
         return Notification::where('to_user_id','=',Auth()->user()->id)->where('source_id','=',$source_id)->whereIn('type',$types)->where('is_read','=',0)->update(['is_read'=>1]);

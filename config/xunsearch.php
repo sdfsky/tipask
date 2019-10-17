@@ -100,22 +100,8 @@ return [
                     ],
                 ],
                 'primary_key' => 'id'
-            ],
-            \App\Models\Course::class => [
-                'fields' => [
-                    'title' => [
-                        'search_field' => 'subject',
-                    ],
-                    'description' => [
-                        'search_field' => 'content',
-                    ],
-                    'status' => [
-                        'search_field' => 'status',
-                    ],
-                ],
-                'primary_key' => 'id'
             ]
-        ],
+        ]
     ],
 
 ];

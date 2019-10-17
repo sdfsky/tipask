@@ -6,10 +6,8 @@ use App\Models\Answer;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Question;
-use App\Models\Video;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
@@ -50,12 +48,6 @@ class CommentController extends Controller
             $notify_subject = $source->title;
             $notify_type = 'comment_article';
             $notify_refer_type = 'article';
-            $notify_refer_id = 0;
-        }else if($source_type == 'video'){
-            $source = Video::find($source_id);
-            $notify_subject = $source->title;
-            $notify_type = 'comment_video';
-            $notify_refer_type = 'video';
             $notify_refer_id = 0;
         }
 
@@ -107,8 +99,6 @@ class CommentController extends Controller
             $source = Answer::find($source_id);
         }else if($source_type === 'article'){
             $source = Article::find($source_id);
-        }else if($source_type == 'video'){
-            $source = Video::find($source_id);
         }
 
         if(!$source){

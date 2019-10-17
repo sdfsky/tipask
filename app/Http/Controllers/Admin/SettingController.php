@@ -319,21 +319,6 @@ class SettingController extends AdminController
         return view('admin.setting.sms');
     }
 
-    public function video(Request $request){
-        if($request->isMethod('post')){
-            /*基础参数配置*/
-            if($request->has('video_open')){
-                $envParams['VIDEO_OPEN'] = $request->input('video_open',0);
-                $envParams['VIDEO_ACCESS_KEY'] = $request->input('video_access_key','');
-                $envParams['VIDEO_ACCESS_SECRET'] = $request->input('video_access_secret','');
-                Setting()->setEnvParams($envParams);
-                return $this->success(route('admin.setting.video'),'配置保存成功');
-            }
-        }
-        return view('admin.setting.video');
-    }
-
-
 
     public function geetest(Request $request){
         if($request->isMethod('post')){

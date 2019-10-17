@@ -40,7 +40,7 @@ class NotificationService
         }
 
         /*站内消息策略*/
-        if(!in_array($type,explode(",",$toUser->site_notifications.',buy_video'))){
+        if(!in_array($type,explode(",",$toUser->site_notifications))){
             return false;
         }
 

@@ -255,14 +255,6 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Article');
     }
-    /**
-     * 获取用户课程
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function courses()
-    {
-        return $this->hasMany('App\Models\Course');
-    }
 
     /*我发起的通知*/
     public function notifications(){

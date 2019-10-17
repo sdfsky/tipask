@@ -10,7 +10,6 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Article;
-use App\Models\Course;
 use App\Models\Question;
 use App\Models\Tag;
 use App\Models\User;

@@ -4,7 +4,6 @@
  */
 namespace App\Http\Controllers\Account;
 
-use App\Models\Course;
 use App\Models\Credit;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -133,7 +132,6 @@ class SpaceController extends Controller
         $sourceClassMap = [
             'questions' => 'App\Models\Question',
             'articles' => 'App\Models\Article',
-            'courses' => 'App\Models\Course'
         ];
 
         if(!isset($sourceClassMap[$source_type])){

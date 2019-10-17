@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Account;
 use App\Models\Article;
 use App\Models\Collection;
 use App\Models\Question;
-use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,11 +26,7 @@ class CollectionController extends Controller
         }else if($source_type == 'article'){
             $source  = Article::find($source_id);
             $subject = $source->title;
-        }else if($source_type == 'course'){
-            $source  = Course::find($source_id);
-            $subject = $source->title;
         }
-
         if(!$source){
             abort(404);
         }

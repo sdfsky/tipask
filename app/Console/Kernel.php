@@ -2,8 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\SyncAliVideo;
-use App\Console\Commands\VideoToCourse;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

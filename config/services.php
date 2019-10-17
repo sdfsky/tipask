@@ -39,9 +39,6 @@ return [
     'geetest_open' => env('GEETEST_OPEN',false), //极验证开关
     'oauth_open'   => env('OAUTH_OPEN',0),       //oauth登陆开关
     'sms_open'     => env('SMS_OPEN',0),
-    'video_open'          => env('VIDEO_OPEN',0),
-    'video_access_key'    => env('VIDEO_ACCESS_KEY',null),
-    'video_access_secret' => env('VIDEO_ACCESS_SECRET',null),
 
     /*oauth 登陆项目配置*/
     'qq' => [
