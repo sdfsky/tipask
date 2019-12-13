@@ -28,7 +28,7 @@ class QuestionController extends Controller
         'description' => 'sometimes|max:65535',
         'price' => 'sometimes|integer|min:0|max:1000',
         'tags' => 'sometimes|max:128',
-        'category_id' => 'sometimes|numeric'
+        'category_id' => 'required|numeric'
     ];
 
 
