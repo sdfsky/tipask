@@ -41,11 +41,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <div class="form-group">
+                        <div class="form-group @if($errors->has('category_id')) has-error @endif">
                             <select name="category_id" id="category_id" class="form-control">
                                 <option value="0">请选择分类</option>
                                 @include('admin.category.option',['type'=>'questions','select_id'=>old('category_id',$formData['category_id'])])
                             </select>
+                            @if($errors->has('category_id')) <p class="help-block">{{ $errors->first('category_id') }}</p> @endif
                         </div>
                     </div>
                     <div class="col-md-7">
