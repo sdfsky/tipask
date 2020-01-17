@@ -314,6 +314,9 @@ class QuestionController extends Controller
             if (!$question) {
                 continue;
             }
+            if($question->status == 0){
+                continue;
+            }
             $suggestList .= '<li>';
 
             if ($question->status === 2) {
