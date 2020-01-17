@@ -65,7 +65,7 @@ class Article extends Model
     /*获取相关文章*/
     public static function correlations($tagIds,$size=6)
     {
-        $questions = self::whereHas('tags', function($query) use ($tagIds) {
+        $questions = self::where("status",">",0)->whereHas('tags', function($query) use ($tagIds) {
             $query->whereIn('tag_id', $tagIds);
         })->orderBy('created_at','DESC')->take($size)->get();
         return $questions;
