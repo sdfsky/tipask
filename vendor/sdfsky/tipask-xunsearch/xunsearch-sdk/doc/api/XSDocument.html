@@ -1,0 +1,957 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSDocument</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSDocument</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS">XS</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>class XSDocument</td>
+</tr>
+<tr>
+  <th>实现接口</th>
+  <td>ArrayAccess, IteratorAggregate, Traversable</td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php">sdk/php/lib/XSDocument.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+文档用于描述检索/索引的基础对象, 包含一组字段及其值, 相当于常规SQL数据表中的一行记录.
+通过魔术方法, 每个字段名都是文档的虚拟属性, 可直接赋值或取值, 也支持数组方式访问文档字段.
+<pre>
+$doc = new XSDocument;
+$doc-&gt;name = 'value'; // 用对象属性方式进行赋值、取值
+$doc['name'] = 'value'; // 用数组下标方式进行赋值、取值
+$value = $doc-&gt;f('name'); // 用函数方式进行取值
+$doc-&gt;setField('name', 'value'); // 用函数方式进行赋值
+$doc-&gt;setFields(array('name' =&gt; 'value', 'name2' =&gt; 'value2')); // 用数组进行批量赋值
+
+// 迭代方式取所有字段值
+foreach($doc as $name =&gt; $value) 
+{
+    echo &quot;$name: $value\n&quot;;  
+} 
+</pre>
+如果有特殊需求, 可以自行扩展本类, 重写 beforeSubmit() 及 afterSubmit() 方法以定义在索引
+提交前后的行为</div>
+
+<a name="properties"></a>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="__call">
+  <td><a href="XSDocument.html#__call-detail">__call()</a></td>
+  <td>魔术方法 __call</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="__construct">
+  <td><a href="XSDocument.html#__construct-detail">__construct()</a></td>
+  <td>构造函数</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="__get">
+  <td><a href="XSDocument.html#__get-detail">__get()</a></td>
+  <td>魔术方法 __get</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="__set">
+  <td><a href="XSDocument.html#__set-detail">__set()</a></td>
+  <td>魔术方法 __set</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="addIndex">
+  <td><a href="XSDocument.html#addIndex-detail">addIndex()</a></td>
+  <td>给字段增加索引文本 (仅限索引文档)</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="addTerm">
+  <td><a href="XSDocument.html#addTerm-detail">addTerm()</a></td>
+  <td>给字段增加索引词 (仅限索引文档)</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="afterSubmit">
+  <td><a href="XSDocument.html#afterSubmit-detail">afterSubmit()</a></td>
+  <td>重写接口, 在文档成功提交到索引服务器后调用</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="beforeSubmit">
+  <td><a href="XSDocument.html#beforeSubmit-detail">beforeSubmit()</a></td>
+  <td>重写接口, 在文档提交到索引服务器前调用</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="f">
+  <td><a href="XSDocument.html#f-detail">f()</a></td>
+  <td>获取文档字段的值</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="getAddIndex">
+  <td><a href="XSDocument.html#getAddIndex-detail">getAddIndex()</a></td>
+  <td>获取字段的附加索引文本 (仅限索引文档)</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="getAddTerms">
+  <td><a href="XSDocument.html#getAddTerms-detail">getAddTerms()</a></td>
+  <td>获取字段的附加索引词列表 (仅限索引文档)</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="getCharset">
+  <td><a href="XSDocument.html#getCharset-detail">getCharset()</a></td>
+  <td>获取文档字符集</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="getFields">
+  <td><a href="XSDocument.html#getFields-detail">getFields()</a></td>
+  <td>获取字段值</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="getIterator">
+  <td><a href="XSDocument.html#getIterator-detail">getIterator()</a></td>
+  <td>IteratorAggregate 接口, 以支持 foreach 遍历访问字段列表</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="offsetExists">
+  <td><a href="XSDocument.html#offsetExists-detail">offsetExists()</a></td>
+  <td>ArrayAccess 接口, 判断字段是否存在, 勿直接调用</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="offsetGet">
+  <td><a href="XSDocument.html#offsetGet-detail">offsetGet()</a></td>
+  <td>ArrayAccess 接口, 取得字段值, 勿直接调用</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="offsetSet">
+  <td><a href="XSDocument.html#offsetSet-detail">offsetSet()</a></td>
+  <td>ArrayAccess 接口, 设置字段值, 勿直接调用</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="offsetUnset">
+  <td><a href="XSDocument.html#offsetUnset-detail">offsetUnset()</a></td>
+  <td>ArrayAccess 接口, 删除字段值, 勿直接调用</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="setCharset">
+  <td><a href="XSDocument.html#setCharset-detail">setCharset()</a></td>
+  <td>设置文档字符集</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="setField">
+  <td><a href="XSDocument.html#setField-detail">setField()</a></td>
+  <td>设置某个字段的值</td>
+  <td>XSDocument</td>
+</tr>
+<tr id="setFields">
+  <td><a href="XSDocument.html#setFields-detail">setFields()</a></td>
+  <td>批量设置字段值</td>
+  <td>XSDocument</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="__call-detail">
+__call()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__call</b>(string $name, array $args)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">方法名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$args</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">调用时的参数列表 (此处无用)</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L108">sdk/php/lib/XSDocument.class.php#L108</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__call</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$args</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Call&nbsp;to&nbsp;undefined&nbsp;method&nbsp;`'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">'::'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'()\''</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>魔术方法 __call
+实现以函数调用访问搜索结果元数据, 支持: docid, rank, percent, weight, ccount</p>
+
+
+<div class="detailHeader" id="__construct-detail">
+__construct()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__construct</b>(mixed $p=NULL, string $d=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$p</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">字符串表示索引文档的编码或搜索结果文档的 meta 数据, 数组则表示或索引文档的初始字段数据</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$d</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">可选参数, 当 $p 不为编码时, 本参数表示数据编码</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L56">sdk/php/lib/XSDocument.class.php#L56</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">$p&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$d&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$p</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;(</span><span style="color: #0000BB">is_string</span><span style="color: #007700">(</span><span style="color: #0000BB">$p</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$p</span><span style="color: #007700">)&nbsp;!==&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_resSize</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setCharset</span><span style="color: #007700">(</span><span style="color: #0000BB">$p</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">unpack</span><span style="color: #007700">(</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_resFormat</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$d&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">is_string</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setCharset</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>构造函数</p>
+
+
+<div class="detailHeader" id="__get-detail">
+__get()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public mixed <b>__get</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">字段值, 若不存在返回 null</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L79">sdk/php/lib/XSDocument.class.php#L79</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__get</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">autoConvert</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>魔术方法 __get
+实现以对象属性方式获取文档字段值</p>
+
+
+<div class="detailHeader" id="__set-detail">
+__set()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__set</b>(string $name, mixed $value)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$value</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">字段值</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L93">sdk/php/lib/XSDocument.class.php#L93</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__set</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Magick&nbsp;property&nbsp;of&nbsp;result&nbsp;document&nbsp;is&nbsp;read-only'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setField</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>魔术方法 __set
+实现以对象属性方式设置文档字段值</p>
+
+
+<div class="detailHeader" id="addIndex-detail">
+addIndex()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>addIndex</b>(string $field, string $text)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$field</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">文本所属的字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$text</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">文本内容</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L256">sdk/php/lib/XSDocument.class.php#L256</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">addIndex</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$field&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]&nbsp;.=&nbsp;</span><span style="color: #DD0000">"\n"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>给字段增加索引文本 (仅限索引文档)</p>
+
+
+<div class="detailHeader" id="addTerm-detail">
+addTerm()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>addTerm</b>(string $field, string $term, int $weight=1)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$field</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">词条所属字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$term</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">词条内容, 不超过 255字节</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$weight</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">词重, 默认为 1</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L236">sdk/php/lib/XSDocument.class.php#L236</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">addTerm</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$weight&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$field&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]&nbsp;=&nbsp;array(</span><span style="color: #0000BB">$term&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$weight</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;(!isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">][</span><span style="color: #0000BB">$term</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">][</span><span style="color: #0000BB">$term</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$weight</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">][</span><span style="color: #0000BB">$term</span><span style="color: #007700">]&nbsp;+=&nbsp;</span><span style="color: #0000BB">$weight</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>给字段增加索引词 (仅限索引文档)</p>
+
+
+<div class="detailHeader" id="afterSubmit-detail">
+afterSubmit()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>afterSubmit</b>(<a href="XSIndex.html">XSIndex</a> $index)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$index</td>
+  <td class="paramTypeCol"><a href="XSIndex.html">XSIndex</a></td>
+  <td class="paramDescCol">索引操作对象</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L344">sdk/php/lib/XSDocument.class.php#L344</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">afterSubmit</span><span style="color: #007700">(</span><span style="color: #0000BB">$index</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>重写接口, 在文档成功提交到索引服务器后调用
+继承此类进行重写该方法时, 强烈建议要调用 parent::afterSave($index) 以确保完整.</p>
+
+
+<div class="detailHeader" id="beforeSubmit-detail">
+beforeSubmit()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public bool <b>beforeSubmit</b>(<a href="XSIndex.html">XSIndex</a> $index)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$index</td>
+  <td class="paramTypeCol"><a href="XSIndex.html">XSIndex</a></td>
+  <td class="paramDescCol">索引操作对象</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">默认返回 true, 若返回 false 将阻止该文档提交到索引服务器</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L331">sdk/php/lib/XSDocument.class.php#L331</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">beforeSubmit</span><span style="color: #007700">(</span><span style="color: #0000BB">XSIndex&nbsp;$index</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$index</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getDefaultCharset</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>重写接口, 在文档提交到索引服务器前调用
+继承此类进行重写该方法时, 必须调用 parent::beforeSave($index) 以确保正确</p>
+
+
+<div class="detailHeader" id="f-detail">
+f()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public mixed <b>f</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">字段值, 若不存在则返回 null</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L192">sdk/php/lib/XSDocument.class.php#L192</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">__get</span><span style="color: #007700">(</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">));<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取文档字段的值</p>
+
+
+<div class="detailHeader" id="getAddIndex-detail">
+getAddIndex()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public string <b>getAddIndex</b>(string $field)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$field</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">文本内容, 若无则返回 null</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L221">sdk/php/lib/XSDocument.class.php#L221</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getAddIndex</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$field&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">||&nbsp;!isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">autoConvert</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取字段的附加索引文本 (仅限索引文档)</p>
+
+
+<div class="detailHeader" id="getAddTerms-detail">
+getAddTerms()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public array <b>getAddTerms</b>(string $field)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$field</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">索引词列表(词为键, 词重为值), 若无则返回 null</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L202">sdk/php/lib/XSDocument.class.php#L202</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getAddTerms</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$field&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">||&nbsp;!isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$field</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$term&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$weight</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">autoConvert</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$terms</span><span style="color: #007700">[</span><span style="color: #0000BB">$term</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$weight</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$terms</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取字段的附加索引词列表 (仅限索引文档)</p>
+
+
+<div class="detailHeader" id="getCharset-detail">
+getCharset()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public string <b>getCharset</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">当前设定的字符集(已大写), 若未曾设置则返回 null</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L123">sdk/php/lib/XSDocument.class.php#L123</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getCharset</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取文档字符集</p>
+
+
+<div class="detailHeader" id="getFields-detail">
+getFields()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public array <b>getFields</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">返回已设置的字段键值数组</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L144">sdk/php/lib/XSDocument.class.php#L144</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getFields</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取字段值</p>
+
+
+<div class="detailHeader" id="getIterator-detail">
+getIterator()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>getIterator</b>()</div>
+</td></tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L272">sdk/php/lib/XSDocument.class.php#L272</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getIterator</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$from&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$to&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #DD0000">'UTF-8'&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;</span><span style="color: #0000BB">ArrayIterator</span><span style="color: #007700">(</span><span style="color: #0000BB">XS</span><span style="color: #007700">::</span><span style="color: #0000BB">convert</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$to</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$from</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;</span><span style="color: #0000BB">ArrayIterator</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>IteratorAggregate 接口, 以支持 foreach 遍历访问字段列表</p>
+
+
+<div class="detailHeader" id="offsetExists-detail">
+offsetExists()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public bool <b>offsetExists</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">存在返回 true, 若不存在返回 false</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L287">sdk/php/lib/XSDocument.class.php#L287</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">offsetExists</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>ArrayAccess 接口, 判断字段是否存在, 勿直接调用</p>
+
+
+<div class="detailHeader" id="offsetGet-detail">
+offsetGet()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public mixed <b>offsetGet</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">字段值, 若不存在返回 null</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L298">sdk/php/lib/XSDocument.class.php#L298</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">offsetGet</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">__get</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>ArrayAccess 接口, 取得字段值, 勿直接调用</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSDocument.html#__get">__get</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="offsetSet-detail">
+offsetSet()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>offsetSet</b>(string $name, mixed $value)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$value</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">字段值</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L309">sdk/php/lib/XSDocument.class.php#L309</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">offsetSet</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_null</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">__set</span><span style="color: #007700">(</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>ArrayAccess 接口, 设置字段值, 勿直接调用</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSDocument.html#__set">__set</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="offsetUnset-detail">
+offsetUnset()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>offsetUnset</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L320">sdk/php/lib/XSDocument.class.php#L320</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">offsetUnset</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>ArrayAccess 接口, 删除字段值, 勿直接调用</p>
+
+
+<div class="detailHeader" id="setCharset-detail">
+setCharset()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>setCharset</b>(string $charset)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$charset</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">设置文档字符集</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L132">sdk/php/lib/XSDocument.class.php#L132</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setCharset</span><span style="color: #007700">(</span><span style="color: #0000BB">$charset</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strtoupper</span><span style="color: #007700">(</span><span style="color: #0000BB">$charset</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">'UTF8'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置文档字符集</p>
+
+
+<div class="detailHeader" id="setField-detail">
+setField()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>setField</b>(string $name, mixed $value, bool $isMeta=false)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字段名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$value</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">字段值</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$isMeta</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">是否为元数据字段</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L170">sdk/php/lib/XSDocument.class.php#L170</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setField</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$isMeta&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$value&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$isMeta</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$isMeta</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">[</span><span style="color: #0000BB">$name</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置某个字段的值</p>
+
+
+<div class="detailHeader" id="setFields-detail">
+setFields()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>setFields</b>(array $data)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$data</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">字段名及其值组成的数组</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSDocument.class.php#L154">sdk/php/lib/XSDocument.class.php#L154</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setFields</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_meta&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_terms&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_texts&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_merge</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_data</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$data</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>批量设置字段值
+这里是以合并方式赋值, 即不会清空已赋值并且不在参数中的字段.</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

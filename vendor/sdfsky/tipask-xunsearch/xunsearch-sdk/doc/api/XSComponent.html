@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSComponent</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSComponent</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS">XS</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>class XSComponent</td>
+</tr>
+<tr>
+  <th>子类</th>
+  <td><a href="XS.html">XS</a>, <a href="XSCommand.html">XSCommand</a>, <a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XS.class.php">sdk/php/lib/XS.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+XS 组件基类
+封装一些魔术方法, 以实现支持模拟属性
+<br/><br/>
+模拟属性通过定义读取函数, 写入函数来实现, 允许两者缺少其中一个
+这类属性可以跟正常定义的属性一样存取, 但是这类属性名称不区分大小写. 例:
+<pre>
+$a = $obj-&gt;text; // $a 值等于 $obj-&gt;getText() 的返回值
+$obj-&gt;text = $a; // 等同事调用 $obj-&gt;setText($a)
+</pre></div>
+
+<a name="properties"></a>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="__get">
+  <td><a href="XSComponent.html#__get-detail">__get()</a></td>
+  <td>魔术方法 __get</td>
+  <td>XSComponent</td>
+</tr>
+<tr id="__isset">
+  <td><a href="XSComponent.html#__isset-detail">__isset()</a></td>
+  <td>魔术方法 __isset</td>
+  <td>XSComponent</td>
+</tr>
+<tr id="__set">
+  <td><a href="XSComponent.html#__set-detail">__set()</a></td>
+  <td>魔术方法 __set</td>
+  <td>XSComponent</td>
+</tr>
+<tr id="__unset">
+  <td><a href="XSComponent.html#__unset-detail">__unset()</a></td>
+  <td>魔术方法 __unset</td>
+  <td>XSComponent</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="__get-detail">
+__get()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public mixed <b>__get</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">属性名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">属性值</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XS.class.php#L182">sdk/php/lib/XS.class.php#L182</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__get</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$getter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'get'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">method_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$getter</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">$getter</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;throw&nbsp;exception<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">method_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'set'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #DD0000">'Write-only'&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'Undefined'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">'&nbsp;property:&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">'::$'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #0000BB">$msg</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>魔术方法 __get
+取得模拟属性的值, 内部实际调用 getXxx 方法的返回值</p>
+
+
+<div class="detailHeader" id="__isset-detail">
+__isset()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public bool <b>__isset</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">属性名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">若存在为 true, 反之为 false</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XS.class.php#L221">sdk/php/lib/XS.class.php#L221</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__isset</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">method_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'get'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>魔术方法 __isset
+判断模拟属性是否存在并可读取</p>
+
+
+<div class="detailHeader" id="__set-detail">
+__set()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__set</b>(string $name, mixed $value)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">属性名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$value</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">属性值</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XS.class.php#L202">sdk/php/lib/XS.class.php#L202</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__set</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$setter&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'set'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">method_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$setter</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">$setter</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;throw&nbsp;exception<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">method_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'get'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #DD0000">'Read-only'&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'Undefined'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">'&nbsp;property:&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">'::$'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #0000BB">$msg</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>魔术方法 __set
+设置模拟属性的值, 内部实际是调用 setXxx 方法</p>
+
+
+<div class="detailHeader" id="__unset-detail">
+__unset()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__unset</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">属性名称</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XS.class.php#L231">sdk/php/lib/XS.class.php#L231</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__unset</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">__set</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>魔术方法 __unset
+删除、取消模拟属性, 相当于设置属性值为 null</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

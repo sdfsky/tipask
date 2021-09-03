@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSDataFilter</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSDataFilter</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS.util">XS.util</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>interface XSDataFilter</td>
+</tr>
+<tr>
+  <th>子类</th>
+  <td><a href="XSDebugFilter.html">XSDebugFilter</a></td>
+</tr>
+<tr>
+  <th>始于</th>
+  <td>1.1.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/util/XSDataSource.class.php">sdk/php/util/XSDataSource.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+数据过滤器的接口
+以便在提交到索引前有一个修改和调整数据的机会</div>
+
+<a name="properties"></a>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="process">
+  <td><a href="XSDataFilter.html#process-detail">process()</a></td>
+  <td>字段数据处理函数</td>
+  <td>XSDataFilter</td>
+</tr>
+<tr id="processDoc">
+  <td><a href="XSDataFilter.html#processDoc-detail">processDoc()</a></td>
+  <td>索引文档处理函数</td>
+  <td>XSDataFilter</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="process-detail">
+process()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+abstract public mixed <b>process</b>(array $data, mixed $cs=false)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$data</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">字段名和值组成的数据数组</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$cs</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">数据字符集, 默认 false 表示无法确定源字符集</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">返回处理后的数据数组, 返回 false 表示本条数据不加入索引</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/util/XSDataSource.class.php#L969">sdk/php/util/XSDataSource.class.php#L969</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">process</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$cs&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+</div>
+
+<p>字段数据处理函数</p>
+
+
+<div class="detailHeader" id="processDoc-detail">
+processDoc()
+<span class="detailHeaderTag">
+方法
+(自版本 v1.3.4 起可用)
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+abstract public void <b>processDoc</b>(<a href="XSDocument.html">XSDocument</a> $doc)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$doc</td>
+  <td class="paramTypeCol"><a href="XSDocument.html">XSDocument</a></td>
+  <td class="paramDescCol">索引文档</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/util/XSDataSource.class.php#L977">sdk/php/util/XSDataSource.class.php#L977</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">processDoc</span><span style="color: #007700">(</span><span style="color: #0000BB">$doc</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+</div>
+
+<p>索引文档处理函数
+在此通过 <a href="XSDocument.html#addIndex">XSDocument::addIndex</a> 或 <a href="XSDocument.html#addTerm">XSDocument::addTerm</a> 做索引相关调整</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

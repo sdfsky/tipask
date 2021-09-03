@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>编写第一个配置文件</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">Discuz 的论坛贴子 MySQL 表结构</a></li><li><a href="#ch1">搜索的设计与分析</a></li><li><a href="#ch2">字段设计与分析</a></li><li><a href="#ch3">配置文件结果</a></li></ol></div><h1 id="-">编写第一个配置文件</h1>
+
+<p><code>Xunsearch</code> 的配置文件是纯文本的 <code>INI</code> 格式，用任何文本编辑器均可编写，在 <code>Unix</code> 类型的系统下推荐
+用 <code>vi</code>，而 <code>Windows</code> 下可以用记事本或 <code>EditPlus</code> 进行编写。我们也正在计划不久的将来制作一个 <code>Web</code>
+界面的编辑工具，以便进行可视化的设计以及约束检测。</p>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 目前我们针对新手用户开发了一个 WEB 版本的在线配置文件编辑辅助工具，<a href="http://www.xunsearch.com/tools/iniconfig">点击试用</a>。</p>
+</blockquote>
+
+<p>如果您是从头阅读到这儿，应该对配置文件也有了基本的了解，下面我们以传统的 <code>discuz</code> 论坛贴子为例子，
+来学习编写配置文件。</p>
+
+<h2 id="ch0">1. Discuz 的论坛贴子 MySQL 表结构<a name="ch0" class="anchor">?</a></h2>
+
+<p>由于我们只是对贴子进行搜索，所以只需要关心它的贴子表即可，表结构如下：</p>
+
+<div class="hl-code"><div class="sql-hl-main"><pre><span class="sql-hl-comment">-- </span>
+<span class="sql-hl-comment">-- 表的结构 `cdb_posts`</span>
+<span class="sql-hl-comment">-- </span>
+<span class="sql-hl-reserved">CREATE</span> <span class="sql-hl-reserved">TABLE</span> <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">cdb_posts</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-brackets">(</span>
+  <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">pid</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-reserved">int</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">10</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-identifier">unsigned</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-identifier">auto_increment</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">fid</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-reserved">smallint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">6</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-identifier">unsigned</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">tid</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">mediumint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">8</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-identifier">unsigned</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">first</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">author</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-reserved">varchar</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">15</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">authorid</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">mediumint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">8</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-identifier">unsigned</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">subject</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-reserved">varchar</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">80</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">dateline</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-reserved">int</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">10</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-identifier">unsigned</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">message</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">mediumtext</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">useip</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-reserved">varchar</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">15</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">invisible</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">anonymous</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">usesig</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">htmlon</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">bbcodeoff</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">smileyoff</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">parseurloff</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">attachment</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">rate</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-reserved">smallint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">6</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">ratetimes</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">3</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-identifier">unsigned</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">status</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-identifier">tinyint</span><span class="sql-hl-brackets">(</span><span class="sql-hl-number">1</span><span class="sql-hl-brackets">)</span> <span class="sql-hl-reserved">NOT</span> <span class="sql-hl-reserved">NULL</span> <span class="sql-hl-reserved">default</span> <span class="sql-hl-quotes">'</span><span class="sql-hl-string">0</span><span class="sql-hl-quotes">'</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-reserved">PRIMARY</span> <span class="sql-hl-reserved">KEY</span>  <span class="sql-hl-brackets">(</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">pid</span><span class="sql-hl-quotes">`</span><span class="sql-hl-brackets">)</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-reserved">KEY</span> <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">fid</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-brackets">(</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">fid</span><span class="sql-hl-quotes">`</span><span class="sql-hl-brackets">)</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-reserved">KEY</span> <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">authorid</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-brackets">(</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">authorid</span><span class="sql-hl-quotes">`</span><span class="sql-hl-brackets">)</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-reserved">KEY</span> <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">dateline</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-brackets">(</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">dateline</span><span class="sql-hl-quotes">`</span><span class="sql-hl-brackets">)</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-reserved">KEY</span> <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">invisible</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-brackets">(</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">invisible</span><span class="sql-hl-quotes">`</span><span class="sql-hl-brackets">)</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-reserved">KEY</span> <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">displayorder</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-brackets">(</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">tid</span><span class="sql-hl-quotes">`</span><span class="sql-hl-code">,</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">invisible</span><span class="sql-hl-quotes">`</span><span class="sql-hl-code">,</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">dateline</span><span class="sql-hl-quotes">`</span><span class="sql-hl-brackets">)</span><span class="sql-hl-code">,
+  </span><span class="sql-hl-reserved">KEY</span> <span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">first</span><span class="sql-hl-quotes">`</span> <span class="sql-hl-brackets">(</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">tid</span><span class="sql-hl-quotes">`</span><span class="sql-hl-code">,</span><span class="sql-hl-quotes">`</span><span class="sql-hl-identifier">first</span><span class="sql-hl-quotes">`</span><span class="sql-hl-brackets">)</span>
+<span class="sql-hl-brackets">)</span> <span class="sql-hl-identifier">ENGINE</span><span class="sql-hl-code">=</span><span class="sql-hl-identifier">MyISAM</span>  <span class="sql-hl-reserved">DEFAULT</span> <span class="sql-hl-identifier">CHARSET</span><span class="sql-hl-code">=</span><span class="sql-hl-identifier">utf8</span><span class="sql-hl-code">;</span></pre></div></div>
+
+<h2 id="ch1">2. 搜索的设计与分析<a name="ch1" class="anchor">?</a></h2>
+
+<p>首先得搞明白我们要得到什么样的搜索效果，进行针对性的设计和分析才能确定需要哪些字段。在
+这个案例中我们的需求是要对所有的论坛贴子进行标题、内容、作者全文检索，并希望搜索结果能
+过滤回贴、按发表时间排序、能按版块过滤。明确了意图之后我们就只需要从数据表中提取必要的
+字段即可。</p>
+
+<ul>
+<li><code>pid</code> 主键，必须的</li>
+<li><code>fid</code> 按版块检索时需要用到</li>
+<li><code>tid</code> 搜索结果阅读链接都是按 tid 来的，必备</li>
+<li><code>first</code> 表示该贴子是否为楼主，过滤回贴时用到</li>
+<li><code>author</code>, <code>authorid</code> 按作者检索用得到</li>
+<li><code>subject</code> 标题</li>
+<li><code>message</code> 贴子内容</li>
+<li><code>dateline</code> 发表时间，要用到</li>
+</ul>
+
+<p>其它的有些字段，比如 <code>invisible</code>, <code>anonymous</code> 表面看上去跟搜索结果也是有关系的，但
+实际上这些可以在索引入库时进行处理和排除，完全没有必要放到搜索数据中去，所以不列入。</p>
+
+<h2 id="ch2">3. 字段设计与分析<a name="ch2" class="anchor">?</a></h2>
+
+<p>得到字段后，进一步分析各个字段的用途与写法。</p>
+
+<ul>
+<li><code>pid</code> 非常明显，它是主键，所以它的类型必须是 <code>id</code></li>
+<li><code>fid</code> 内容为数字的版块ID，但由于我们不需要对它进行排序或区间查找，所以用 <code>string</code> 类型即可，
+为了按版块检索，我们必须对它进行索引，而它也不需要分词，所以分词器用内置的 <code>full</code>。</li>
+<li><code>tid</code> 内容也是数字的主题ID，我们暂不考虑按主题搜索，所以不需要索引，也没有排序等要求，所以
+只要当作普通字段存储下来即可。</li>
+<li><code>first</code> 用 1/0 不同值来表示是否为楼主，考虑到回贴过滤需求，它也需要索引，整个字段转换成一个
+词即可，分词器当然选用 <code>full</code>。</li>
+<li><code>author</code> 作者名字检索，考虑中文名支持，所以建议这个字段保留使用默认内置的 <code>scws</code> 分词器。
+由于希望在默认不指明字段的情况下也能检索作者字段，所以它的过索引方式应为 <code>both</code>。</li>
+<li><code>authorid</code> 作者 ID，我们只用于搜索结果的作者链接，不需要索引。</li>
+<li><code>subject</code> 标题类型为 <code>title</code>。</li>
+<li><code>message</code> 主内容，类型为 <code>body</code>。</li>
+<li><code>dateline</code> 时间戳记，由于需要排序，所以该字段不能存为 <code>string</code>，必须用 <code>numeric</code>，但不需要
+进行任何索引。</li>
+</ul>
+
+<h2 id="ch3">4. 配置文件结果<a name="ch3" class="anchor">?</a></h2>
+
+<p>自此字段分析与设计已然明了，下面给出完整的配置文件内容，实际使用时可以将文件保存至
+<code>$prefix/sdk/php/app/discuz.ini</code>。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-identifier">project</span><span class="php-hl-code">.</span><span class="php-hl-identifier">name</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">discuz</span>
+<span class="php-hl-identifier">project</span><span class="php-hl-code">.</span><span class="php-hl-identifier">default_charset</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">GBK</span><span class="php-hl-code">
+;服务端用默认值
+;</span><span class="php-hl-identifier">server</span><span class="php-hl-code">.</span><span class="php-hl-identifier">index</span><span class="php-hl-code"> = </span><span class="php-hl-number">8383</span><span class="php-hl-code">
+;</span><span class="php-hl-identifier">server</span><span class="php-hl-code">.</span><span class="php-hl-identifier">search</span><span class="php-hl-code"> = </span><span class="php-hl-number">8384</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">pid</span><span class="php-hl-brackets">]</span>
+<span class="php-hl-identifier">type</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">id</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">fid</span><span class="php-hl-brackets">]</span>
+<span class="php-hl-identifier">index</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">self</span>
+<span class="php-hl-identifier">tokenizer</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">full</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">tid</span><span class="php-hl-brackets">]</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">first</span><span class="php-hl-brackets">]</span>
+<span class="php-hl-identifier">index</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">self</span>
+<span class="php-hl-identifier">tokenizer</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">full</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">author</span><span class="php-hl-brackets">]</span>
+<span class="php-hl-identifier">index</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">both</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">authorid</span><span class="php-hl-brackets">]</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">subject</span><span class="php-hl-brackets">]</span>
+<span class="php-hl-identifier">type</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">title</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">message</span><span class="php-hl-brackets">]</span>
+<span class="php-hl-identifier">type</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">body</span>
+ 
+<span class="php-hl-brackets">[</span><span class="php-hl-identifier">dateline</span><span class="php-hl-brackets">]</span>
+<span class="php-hl-identifier">type</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">numeric</span></pre></div></div>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="ini.tokenizer.html">&laquo; 自定义分词器</a></div>
+			<div class="next"><a href="index.overview.html">索引概述 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

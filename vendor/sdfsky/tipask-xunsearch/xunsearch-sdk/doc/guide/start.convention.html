@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>开发规范</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">目录设置</a></li><li><a href="#ch1">保留字</a></li><li><a href="#ch2">自定义分词</a></li><li><a href="#ch3">字段设计</a></li><li><a href="#ch4">异常处理</a></li></ol></div><h1 id="-">开发规范</h1>
+
+<p>在开始任何开发之前，有必要先强调一下开发规范。开发规范并不是强制性的要求，而只是
+为了使项目及代码更利于维护、阅读而制定的一些习惯行为公约。</p>
+
+<h2 id="ch0">1. 目录设置<a name="ch0" class="anchor">?</a></h2>
+
+<p>无论您是否将 <code>PHP-SDK</code> 的代码拷出单独使用，强烈建议保留现有的目录结构。</p>
+
+<p>开发的项目配置 ini 文件统一放入 <code>$prefix/sdk/php/app</code> 目录。</p>
+
+<p>自定义或扩展的类库请统一放入 <code>$prefix/sdk/php/lib</code> 以便 <code>XS</code> 进行 <code>autoload</code>。</p>
+
+<h2 id="ch1">2. 保留字<a name="ch1" class="anchor">?</a></h2>
+
+<p>所有 <code>Xunsearch PHP-SDK</code> 的系统类库定义时均以 <code>XS</code> 开头，为避免冲突，请自行编写
+代码和定义时不要也以 <code>XS</code> 开头。</p>
+
+<h2 id="ch2">3. 自定义分词<a name="ch2" class="anchor">?</a></h2>
+
+<p>Xunsearch 在项目配置时支持针对某些字段自定义分词。每个自定义分词功能单独使用一个
+文件名，命名为 <code>XSTokenizerXyz.class.php</code>，其中 <code>Xyz</code> 是您自己的分词名称，文件统一
+放入 <code>$prefix/sdk/php/lib</code> 目录，分词类名即为 <code>XSTokenizerXyz</code>，该类必须实现
+<a href="../api/XSTokenizer.html">XSTokenizer</a> 接口。</p>
+
+<h2 id="ch3">4. 字段设计<a name="ch3" class="anchor">?</a></h2>
+
+<p>多数搜索项目可能都是和相关的数据库联动的，出于开发方便，强烈建议让搜索项目的字段命名
+和实际数据库内的命名一致。在此基础下推荐以下命名规范：</p>
+
+<ul>
+<li>字段名都使用小写命名，您可以根据自己的偏好选择用单数或复数形式，但不要二者同时使用。</li>
+<li>名字中的单词应使用下划线分割 (例如 product_order)。</li>
+<li>只在搜索项目中设置搜索结果展示、搜索条件必须用到的字段，不要在搜索项目中保存无关字段。</li>
+</ul>
+
+<h2 id="ch4">5. 异常处理<a name="ch4" class="anchor">?</a></h2>
+
+<p>由于 <code>Xunsearch PHP-SDK</code> 全面采用面向对象技术，所有失败的操作均抛出类型为 <a href="../api/XSException.html">XSException</a>
+的异常，请在执行主线中捕捉它。具体参见 <a href="class.exception.html">XSException 异常</a> 章节的有关介绍。</p>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="start.demo.html">&laquo; 体验 demo 项目</a></div>
+			<div class="next"><a href="start.workflow.html">开发流程 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

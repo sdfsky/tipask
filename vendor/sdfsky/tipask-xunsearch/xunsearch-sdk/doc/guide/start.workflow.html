@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>开发流程</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="-">开发流程</h1>
+
+<p>我们现在讲解一下使用 <code>Xunsearch PHP-SDK</code> 开发搜索应用时的一般开发流程。
+此处的开发流程假设我们已经完成了对应用的需求分析和必要的设计分析、Xunsearch安装等操作。</p>
+
+<ol>
+<li><p>编写项目配置文件，请先阅读<a href="ini.first.html">编写第一个配置文件</a>然后进行手工编写，
+或使用在线<a href="http://www.xunsearch.com/tools/iniconfig">辅助工具</a>生成配置文件。</p></li>
+<li><p>决定索引更新方式，如果项目搜索的实时要求比较高、而且采用 <code>PHP</code> 开发，则建议修改项目代码，
+在数据变动时调用 <a href="../api/XSIndex.html">XSIndex</a> 的相关 <code>API</code> 进行索引同步；否则请另行编写索引管理工具，
+选用定时或不定时重建的方式。</p></li>
+<li><p>引入 <code>PHP-SDK</code> 的入口文件 <code>$prefix/sdk/php/lib/XS.php</code> 进行搜索功能和界面开发。</p></li>
+<li><p>最终调整与正式部署。</p></li>
+</ol>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 我们提供了一个默认的搜索功能生成工具，通过读取和分析配置文件智能生成搜索相关代码，
+  同时还包含了相应的搜索界面。强烈建议您先使用工具生成代码，然后在此基础上二次开发即可。
+  详情阅读 <a href="util.skel.html">SearchSkel 生成搜索骨架代码</a>。</p>
+  
+  <p>项目配置文件中的字段设置直接影响着索引数据库的数据。所以如果您修改了一个已有数据的
+  的项目字段配置，那么您必须进行<a href="index.clean.html">清空索引</a>或<a href="index.rebuild.html">平滑重建索引</a>，
+  否则可能会引起搜索结果不正确。</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="start.convention.html">&laquo; 开发规范</a></div>
+			<div class="next"><a href="class.overview.html">基础对象概述 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

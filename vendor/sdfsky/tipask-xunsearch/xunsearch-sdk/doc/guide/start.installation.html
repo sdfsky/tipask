@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>安装</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">安装、升级 Xunsearch</a></li><li><a href="#ch1">安装 PHP-SDK</a></li><li><a href="#ch2">检测 PHP-SDK 的运行条件</a></li><li><a href="#ch3">完全删除 Xunsearch</a></li><li><a href="#ch4">从 Git 源码仓库安装</a></li></ol></div><h1 id="-">安装</h1>
+
+<p>Xunsearch PHP-SDK 是与 <code>xunsearch</code> 后端服务协同工作的，所以后先必须先在您的服务器
+上安装服务端，服务器操作系统要求必须是 <code>Linux</code>、<code>BSD</code> 或其它类 <code>UNIX</code> 系统，同时安装了
+<code>gcc</code>、<code>make</code> 等基础编译环境。</p>
+
+<h2 id="ch0">1. 安装、升级 Xunsearch<a name="ch0" class="anchor">?</a></h2>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 即便您之前已经安装过 <code>xunsearch</code>，您也可以安装放心的使用该教程进行覆盖安装，会自动
+  完成升级操作，而<strong>不用担心</strong>会删除任何已存在的数据。我们制作的安装脚本包含了智能检测功能。</p>
+  
+  <p>此外 <code>xunsearch</code> 的安装和运行都不需要 <code>root</code> 权限，强烈推荐单独设置一个系统用户用于安装
+  执行相关指令。</p>
+</blockquote>
+
+<p>Xunsearch 全部开源，理论上也可以从官方提供的 <a href="https://github.com/hightman/xunsearch/" title="Xunsearch 在 github 上的代码仓库">git 仓库</a> 获取源码自行构建，但是
+这要求必须有较多的技术基础，在此不打算赘述，有这方面需求的技术人员可以到论坛去交流。
+为方便用户安装，我们提供了一个包含安装所需求的全部组件的完整安装包（含 <code>xapian/libevent/scws</code>），
+您只要下载并安装此完整安装包即可，具体操作步骤如下：</p>
+
+<ol>
+<li><p>运行下面指令<a href="http://www.xunsearch.com/download/xunsearch-full-latest.tar.gz" title="Xunsearch 最新的完整安装包">下载</a>、解压安装包</p>
+
+<pre>wget http://www.xunsearch.com/download/xunsearch-full-latest.tar.bz2
+tar -xjf xunsearch-full-latest.tar.bz2
+</pre></li>
+<li><p>执行安装脚本，根据提示进行操作，主要是输入 <code>xunsearch</code> 软件包的安装目录，强烈建议单独
+规划一个目录，而不是混到别的软件目录中。</p>
+
+<pre>cd xunsearch-full-1.3.0/
+sh setup.sh
+</pre>
+
+<p>第一次安装的话，过程可能会稍显漫长，请不必着急，您大可泡杯茶一边喝一边等待即可。</p></li>
+<li><p>待命令运行结束后，如果没有出错中断，则表示顺利安装完成，然后就可以启动/重新启动 <code>xunsearch</code>
+的后台服务，下面命令中的 <code>$prefix</code> 请务必替换为您的安装目录，而不是照抄。</p>
+
+<pre>cd $prefix ; bin/xs-ctl.sh restart
+</pre>
+
+<p>强烈建议您将此命令添加到开机启动脚本中，以便每次服务器重启后能自动启动搜索服务程序，
+在 <code>Linux</code> 系统中您可以将脚本指令写进 <code>/etc/rc.local</code> 即可。</p></li>
+<li><p>有必要指出的是，关于搜索项目的数据目录规划。搜索系统将所有数据保存在 <code>$prefix/data</code> 目录中。
+如果您希望数据目录另行安排或转移至其它分区，请将 <code>$prefix/data</code> 作为软链接指向真实目录。</p></li>
+</ol>
+
+<blockquote class="info">
+<p><strong>Info:</strong> 出于性能和多数需求考虑 <code>xunsearch</code> 服务端和 SDK API 通讯时没有加密和验证处理，
+  并且默认情况 <code>xs-ctl.sh</code> 启动的服务程序是绑定并监听在 <code>127.0.0.1</code> 上。</p>
+  
+  <p>如果您的 SDK 调用和 <code>xunsearch</code> 服务端不在同一服务器，请使用 -b inet 方式启动脚本，
+  并注意借助类似 <code>iptables</code> 的防火墙来控制 <code>xunsearch</code> 的 <code>8383/8384</code> 两个端口的访问权限。
+  启动脚本用法举例如下，以下均为合法使用方式：</p>
+
+<pre>bin/xs-ctl.sh -b local start    // 监听在本地回环地址 127.0.0.1 上
+bin/xs-ctl.sh -b inet start     // 监听在所有本地 IP 地址上
+bin/xs-ctl.sh -b a.b.c.d start  // 监听在指定 IP 上
+bin/xs-ctl.sh -b unix start     // 分别监听在 tmp/indexd.sock 和 tmp/searchd.sock
+</pre>
+</blockquote>
+
+<h2 id="ch1">2. 安装 PHP-SDK<a name="ch1" class="anchor">?</a></h2>
+
+<p>PHP-SDK 的代码不需要另行下载，已经包含在 <code>xunsearch</code> 的安装结果中了，在此假设您将 <code>xunsearch</code> 
+安装在 <code>$prefix</code> 目录，那么 <code>$prefix/sdk/php</code> 即是 PHP-SDK 的代码目录。目录结构及功能逻列如下：</p>
+
+<pre>_
+|- doc/                    离线 HTML 版相关文档
+|- app/                    用于存放搜索项目的 ini 文件
+|- lib/XS.php              入口文件，所有搜索功能必须且只需包含此文件    
+\- util/                   辅助工具程序目录
+    |- RequireCheck.php    用于检测您的 PHP 环境是否符合运行条件
+    |- IniWizzaard.php     用于帮助您编写 xunsearch 项目配置文件
+    |- Quest.php           搜索测试工具
+    \- Indexer.php         索引管理工具
+
+</pre>
+
+<p>如果您的搜索应用程序和 <code>xunsearch</code> 在同一台服务器，则无需复制任何代码，在开发的时候直接包含
+入口文件 <code>$prefix/sdk/php/lib/XS.php</code> 即可。代码如下：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">require_once</span> <span class="php-hl-quotes">'</span><span class="php-hl-string">$prefix/sdk/php/lib/XS.php</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;</span></pre></div></div>
+
+<p>如果您在其它服务器部署前端搜索代码，请将 SDK 代码整个目录复制到相应的服务器上，但并不要求放到
+web 可访问目录，考虑安全性也不推荐这么做。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 对于前端和后端分离的用户来说，当 <code>xunsearch</code> 升级安装后必须重新复制安装后的 SDK 代码
+  去覆盖，否则可能造成版本不匹配导致错误。</p>
+</blockquote>
+
+<h2 id="ch2">3. 检测 PHP-SDK 的运行条件<a name="ch2" class="anchor">?</a></h2>
+
+<p>从现在开始的文档及示范代码中我们都假定您将 <code>xunsearch</code> 安装在 <code>$prefix</code> 目录中，而不再另行说明。</p>
+
+<p>基础运行条件要求 PHP 最低版本为 5.2.0，随着功能需求的不同可能还会用到一些其它扩展，具体请在
+命令行环境里运行我们提供的检测脚本。如果您的 <code>php</code> 可执行文件不在默认搜索路径中，假设是安装在
+<code>/path/to/bin/php</code> 请使用第二种方式运行。运行方式如下：</p>
+
+<pre>1. $prefix/sdk/php/util/RequiredCheck.php
+2. /path/to/bin/php $prefix/sdk/php/util/RequiredCheck.php
+3. $prefix/sdk/php/util/RequiredCheck.php -c gbk
+</pre>
+
+<p>运行结果输出的中文编码默认为 <code>UTF-8</code> ，如果您使用 <code>GBK</code> 环境请在运行命令最后加上 <code>-c GBK</code> 。
+运行结果会给出一个可视化的表格说明检测结果，并在最终给出检测结论，告诉您是否符合运行的基础要求。</p>
+
+<p>至此，安装和准备工作已经完成了，您可以开始使用 <em>Xunsearch PHP-SDK</em> 开发自己的搜索应用了。</p>
+
+<h2 id="ch3">4. 完全删除 Xunsearch<a name="ch3" class="anchor">?</a></h2>
+
+<p>首先欢迎对 <code>xunsearch</code> 提出各种修改、改进建议，我们都会认真对待和处理。如果有一天您真的不再需要
+<code>xunsearch</code> 了，那么只要停止运行后端服务，然后完全删除它的安装目录 <code>$prefix</code> 即可，整个软件包
+所有涉及的文件均在该目录下。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 如果您的安装目录没有单独设置，而是使用公共目录（如：/usr/local），请勿直接删除整个目录。</p>
+</blockquote>
+
+<pre>$prefix/bin/xs-ctl.sh faststop
+rm -fr $prefix
+</pre>
+
+<h2 id="ch4">5. 从 Git 源码仓库安装<a name="ch4" class="anchor">?</a></h2>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 在开始安装前，无论如何请先安装一次最新发布的完整版本，以便将所有的运行依赖库安装到位。</p>
+</blockquote>
+
+<p>我们的源代码托管在 github 上。您可以直接<a href="https://github.com/hightman/xunsearch/" title="Xunsearch 在 github 上的代码仓库">浏览代码仓库</a>，也可以通过以下方式之一取得源代码：</p>
+
+<pre>git clone git://github.com/hightman/xunsearch.git
+git clone https://github.com/hightman/xunsearch.git
+</pre>
+
+<p>如果要编译安装这份源代码，您还必须在主机环境上安装相关的 autoconf, automake 工具，然后运行
+下面指令完成准备工作。</p>
+
+<pre>cd xunsearch/
+chmod +x acprep
+./acprep
+</pre>
+
+<p>在完成上述的准备工作后，接下来编译安装 xunsearch 就和常见的开源软件类似，假设您的安装目录为 
+<code>$prefix</code>，然后按以下步骤操作即可：</p>
+
+<pre>./configure --prefix=$prefix
+make
+make install
+</pre>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="start.about.html">&laquo; 关于 Xunsearch PHP-SDK</a></div>
+			<div class="next"><a href="start.demo.html">体验 demo 项目 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

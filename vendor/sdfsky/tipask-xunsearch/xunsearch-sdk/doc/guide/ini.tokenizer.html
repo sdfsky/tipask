@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>自定义分词器</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">编写自定义分词器</a></li><li><a href="#ch1">使用自定义分词器</a></li></ol></div><h1 id="-">自定义分词器</h1>
+
+<p><code>Xunsearch</code> 默认内置了功能强大的 <a href="http://www.xunsearch.com/scws/">SCWS</a> 分词系统，也附加提供了一些简单常见的分词规则，
+但考虑到用户的个性需求，特意提供了自定义分词器的功能。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 自定义分词器存在一个缺陷，它不支持存储位置信息，也就是不能按短语检索、以及 <code>NEAR</code> 之类的
+  语法检索。相当于该字段配置中的 <code>phrase</code> 值恒为 <code>no</code>，通常把自定义分词用于一些带有一定规则的简要
+  字段，而不是更多的考虑语义关系。</p>
+</blockquote>
+
+<h2 id="ch0">1. 编写自定义分词器<a name="ch0" class="anchor">?</a></h2>
+
+<p>自定义分词器必须实现 <a href="../api/XSTokenizer.html">XSTokenizer</a> 接口。假定您要编写一个名为 <code>xyz</code> 的分词器，则您要编写的代码
+文件为 <code>XSTokenizerXyz.class.php</code>，请将文件统一放入 <code>$prefix/sdk/php/lib</code> 目录。</p>
+
+<p>通常来讲，您只需要实现 <a href="../api/XSTokenizer.html#getTokens">XSTokenizer::getTokens</a> 即可。该函数接受 2个参数，分别为要分词的值以及
+当前的文档对象(可选)；返回值为分好的词汇组成的数组。下面以按 <code>-</code> 分割字段为例：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">class</span> <span class="php-hl-identifier">XSTokenizerXyz</span> <span class="php-hl-reserved">implements</span> <span class="php-hl-identifier">XSTokenizer</span>
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-reserved">public</span> <span class="php-hl-reserved">function</span> <span class="php-hl-identifier">getTokens</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$value</span><span class="php-hl-code">, </span><span class="php-hl-identifier">XSDocument</span> <span class="php-hl-var">$doc</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">null</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+        <span class="php-hl-var">$ret</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">array</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+        </span><span class="php-hl-reserved">if</span> <span class="php-hl-brackets">(</span><span class="php-hl-code">!</span><span class="php-hl-reserved">empty</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$value</span><span class="php-hl-brackets">)</span><span class="php-hl-brackets">)</span>
+            <span class="php-hl-var">$ret</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">explode</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">-</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-var">$value</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+        </span><span class="php-hl-reserved">return</span> <span class="php-hl-var">$ret</span><span class="php-hl-code">;
+    </span><span class="php-hl-brackets">}</span>
+<span class="php-hl-brackets">}</span></pre></div></div>
+
+<blockquote class="note">
+<p><strong>Note:</strong> <a href="../api/XSTokenizer.html#getTokens">XSTokenizer::getTokens</a> 的参数 <code>$value</code> 的编码始终为 UTF-8 。</p>
+</blockquote>
+
+<p>如果您需要编写带有参数支持的分词器，比如让用户传入按什么字符分割，请参照下面写法编写构造函数：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">class</span> <span class="php-hl-identifier">XSTokenizerXyz</span> <span class="php-hl-reserved">implements</span> <span class="php-hl-identifier">XSTokenizer</span>
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-reserved">private</span> <span class="php-hl-var">$delim</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">-</span><span class="php-hl-quotes">'</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 默认按 - 分割</span>
+ 
+    <span class="php-hl-reserved">public</span> <span class="php-hl-reserved">function</span> <span class="php-hl-identifier">__construct</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$arg</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">null</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+        <span class="php-hl-reserved">if</span> <span class="php-hl-brackets">(</span><span class="php-hl-var">$arg</span><span class="php-hl-code"> !== </span><span class="php-hl-reserved">null</span><span class="php-hl-code"> &amp;&amp; </span><span class="php-hl-var">$arg</span><span class="php-hl-code"> !== </span><span class="php-hl-quotes">'</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span>
+            <span class="php-hl-var">$this</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">delim</span><span class="php-hl-code"> = </span><span class="php-hl-var">$arg</span><span class="php-hl-code">;
+    </span><span class="php-hl-brackets">}</span>
+ 
+    <span class="php-hl-reserved">public</span> <span class="php-hl-reserved">function</span> <span class="php-hl-identifier">getTokens</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$value</span><span class="php-hl-code">, </span><span class="php-hl-identifier">XSDocument</span> <span class="php-hl-var">$doc</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+        <span class="php-hl-var">$ret</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">array</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+        </span><span class="php-hl-reserved">if</span> <span class="php-hl-brackets">(</span><span class="php-hl-code">!</span><span class="php-hl-reserved">empty</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$value</span><span class="php-hl-brackets">)</span><span class="php-hl-brackets">)</span>
+            <span class="php-hl-var">$ret</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">explode</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$this</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">delim</span><span class="php-hl-code">, </span><span class="php-hl-var">$value</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+        </span><span class="php-hl-reserved">return</span> <span class="php-hl-var">$ret</span><span class="php-hl-code">;
+    </span><span class="php-hl-brackets">}</span>
+<span class="php-hl-brackets">}</span></pre></div></div>
+
+<h2 id="ch1">2. 使用自定义分词器<a name="ch1" class="anchor">?</a></h2>
+
+<p>编写完了自定义分词器的代码后，您就可以在项目配置文件中使用它了，在需要用这个分词器的字段中
+指定 <code>tokenizer</code> 选项的值，例子中省略了字段的其它选项，实际编写时可能还包括其它选项。</p>
+
+<p>而在<a href="search.query.html">搜索语句</a>中，如果指明了字段搜索前缀 <code>field:XXX</code> 那么搜索引擎内部也会
+对这个搜索语句执行自定义分词。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-brackets">[</span><span class="php-hl-identifier">some_field</span><span class="php-hl-brackets">]</span><span class="php-hl-code">
+; 不带参数的用法
+</span><span class="php-hl-identifier">tokenizer</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">xyz</span><span class="php-hl-code">
+; 带参数的用法，表示把 </span><span class="php-hl-identifier">_</span><span class="php-hl-code"> 作为参数传递给构造函数
+</span><span class="php-hl-identifier">tokenizer</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">xyz</span><span class="php-hl-brackets">(</span><span class="php-hl-identifier">_</span><span class="php-hl-brackets">)</span></pre></div></div>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="ini.guide.html">&laquo; 项目配置详解</a></div>
+			<div class="next"><a href="ini.first.html">编写第一个配置文件 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

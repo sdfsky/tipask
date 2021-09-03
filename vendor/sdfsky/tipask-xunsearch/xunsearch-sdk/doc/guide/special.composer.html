@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>Xunsearch SDK for PHP</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="xunsearch-sdk-for-php">Xunsearch SDK for PHP</h1>
+
+<p>$Id$</p>
+
+<p>这是采用 PHP 语言编写的 xunsearch 开发包，在此基础上开发您自己的全文检索。</p>
+
+<p>在此简要介绍以下几个文件：</p>
+
+<pre>- lib/XS.php             入口文件，所有搜索功能必须包含此文件
+- lib/XS.class.php       未合并带注释的入口文件，会自动加载其它 .class.php 文件
+- util/RequireCheck.php  命令行运行，用于检测您的 PHP 环境是否符合运行条件
+- util/IniWizzaard.php   命令行运行，用于帮助您编写 xunsearch 项目配置文件
+- util/Quest.php         命令行运行，搜索测试工具
+- util/Indexer.php       命令行运行，索引管理工具
+- util/SearchSkel.php    命令行运行，根据配置文件生成搜索骨架代码
+- util/xs                命令行工具统一入口
+
+</pre>
+
+<p>在开始编写您的代码前强烈建议执行 util/RequireCheck.php 以检查环境。</p>
+
+<p>具体各项文档内容请参阅子目录： doc/ 
+强烈推荐在线阅读我们的文档：<a href="http://www.xunsearch.com/doc/">http://www.xunsearch.com/doc/</a></p>
+
+<p>最简单使用方法就是下载全部源码压缩包，然后引入入口文件即可。
+出现异常则抛出 \XSException 异常实例。</p>
+
+<h2 id="composer-">Composer 支持</h2>
+
+<p>自 v1.4.9 起，通过 subtree 功能将 xs-sdk-php 分离成为一个只读的子仓库，
+以支持通过 <a href="https://getcomposer.org">composer</a> 安装。我们的包名称为
+<code>hightman/xunsearch</code>，内含全部 PHP-SDK 的库文件，还包括支持 Yii 的扩展类。</p>
+
+<h3 id="-">安装</h3>
+
+<p>和绝大多数 composer 一样，你可以通过以下两种方法中的任意一种安装。</p>
+
+<p>可以直接运行</p>
+
+<p><code>composer require --prefer-dist hightman/xunsearch "*@beta"</code></p>
+
+<p>或者将以下内容添加到您的项目根目录 <code>composer.json</code> 中的 <code>require</code> 章节，
+然后运行 <code>composer install</code></p>
+
+<p><code>"hightman/xunsearch": "*@beta"</code></p>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 如果您打算用代码仓库中的最新版本，请将星号改为 dev-master。</p>
+</blockquote>
+
+<h3 id="-">命令行工具</h3>
+
+<p><code>vendor/bin/xs help</code></p>
+
+<h3 id="-">普通用法</h3>
+
+<p>这和 xunsearch 指南中的用法完全一致，只不过引入开始文件的方法略有不同。
+官方用法指南详见 <a href="http://www.xunsearch.com/doc/php">http://www.xunsearch.com/doc/php</a></p>
+
+<p>```php
+// 加载 vendor 的 autoload 文件
+require_once 'vendor/autoload.php';</p>
+
+<p>// 默认的 xunsearch 应用配置文件目录为 vendor/hightman/xunsearch/app
+// 如有必要，请通过常量 XS_APP_ROOT 定义
+define ('XS_APP_ROOT', '/path/to/ini')</p>
+
+<p>// 创建 XS 对象，关于项目配置文件请参见官网
+$xs = new \XS('demo');</p>
+
+<p>// 后面的代码就和官网上的指南一致了
+```</p>
+
+<h3 id="yii-1-x-">Yii-1.x 用法</h3>
+
+<p>这是对 xunsearch 的一个简单封装，使之更适合 yii-1.x 的用法习惯。首先，
+在应用入口文件最开头引入 composer 的 autoload 文件，通常是 index.php。</p>
+
+<p><code>php
+require_once 'vendor/autoload.php';
+// 如有必要请定义常量 XS_APP_ROOT 表示项目文件存放路径
+//define ('XS_APP_ROOT', dirname(__FILE__) . '/protected/data');</code></p>
+
+<p>在应用配置文件的 <code>compnents</code> 中添加以下代码，通常是 protected/config/main.php</p>
+
+<p><code>php
+    // application components
+    'components' =&gt; array(
+        // ... other components ... 
+        'search' =&gt; array(
+            'class' =&gt; 'EXunSearch',
+            'project' =&gt; 'demo', // 搜索项目名称或对应的 ini 文件路径
+            'charset' =&gt; 'utf-8', // 您当前使用的字符集（索引、搜索结果）
+        ),  
+    ),</code></p>
+
+<p>然后就可以通过 <code>Yii::app()-&gt;search</code> 来访问 <code>EXunSearch</code> 对象，进行索引管理或检索。</p>
+
+<p>添加、修改索引数据，使用方法参照 <a href="http://www.xunsearch.com/doc/php/api/XSIndex">XSIndex</a>。
+对于 ActiveRecord 对象来讲，建议在相关的 <code>afterSave</code> 和 <code>afterDelete</code> 中进行索引同步。</p>
+
+<p><code>php
+$data = array('pid' =&gt; 1234, 'subject' =&gt; '标题', 'message' =&gt; '内容');
+Yii::app()-&gt;search-&gt;add($data); // 添加文档
+Yii::app()-&gt;search-&gt;update($data);  // 更新文档
+Yii::app()-&gt;search-&gt;del('1234');    // 删除文档</code></p>
+
+<p>使用检索功能时，可以将 <code>Yii::app()-&gt;search</code> 当作 <a href="http://www.xunsearch.com/doc/php/api/XSSearch">XSSearch</a> 对象一样直接使用它的全部方法。</p>
+
+<p><code>php
+Yii::app()-&gt;search-&gt;setQuery('subject:标题');
+$docs = Yii::app()-&gt;search-&gt;setLimit(5, 10)-&gt;search();  // 取得搜索结果文档集</code></p>
+
+<h3 id="yii-2-x-">Yii-2.x 用法</h3>
+
+<p>在 yii2 中，除了提供类似 yii-1.x 的调用方式外，我们还支持 ActiveRecord 方式来操作。首先，
+请在应用配置文件的 <code>components</code> 中添加以下代码，通常是 <code>config/web.php</code></p>
+
+<p><code>php
+    // application components
+    'components =&gt; [
+        // ... other components ...
+        'xunsearch' =&gt; [
+            'class' =&gt; 'hightman\xunsearch\Connection', // 此行必须
+            'iniDirectory' =&gt; '@app/config',    // 搜索 ini 文件目录，默认：@vendor/hightman/xunsearch/app
+            'charset' =&gt; 'utf-8',   // 指定项目使用的默认编码，默认即时 utf-8，可不指定
+        ],
+    ],</code></p>
+
+<p>接下来，你可以通过以下代码获取到 <code>hightman\xunsearch\Database</code> 对象，该对像和 yii-1.x 的
+<code>EXunSearch</code> 用法很相似，通过魔术方法，能够依次检索以下对象的方法列表而直接调用：</p>
+
+<p><code>php
+$db = \Yii::$app-&gt;xunsearch-&gt;getDatabase('demo');
+$db = \Yii::$app-&gt;xunsearch('demo');
+$xs = $db-&gt;xs;
+$search = $db-&gt;getSearch();
+$index = $db-&gt;getIndex();</code></p>
+
+<ul>
+<li><a href="http://www.xunsearch.com/doc/php/api/XS">XS</a> 优先调用该对象方法，如有必要，可直接通过 <code>hightman\xunsearch\Database::$xs</code> 属性访问。</li>
+<li><a href="http://www.xunsearch.com/doc/php/api/XSIndex">XSIndex</a> 紧接着检查索引管理方法，如有必要，可直接通过 <code>hightman\xunsearch\Database::$index</code> 属性访问。</li>
+<li><a href="http://www.xunsearch.com/doc/php/api/XSSearch">XSSearch</a> 紧接着检查索引管理方法，如有必要，可直接通过 <code>hightman\xunsearch\Database::$search</code> 属性访问。</li>
+</ul>
+
+<p>具体用法不再赘述，下面重点讲讲如何通过 ActiveRecord 方法来检索和创建索引，由于遵循 yii2 的思想进行开发设计，
+使用起来非常方便和简单。</p>
+
+<h4 id="-ar-">创建 AR 对象</h4>
+
+<p>首先必须创建一个继承自 <code>hightman\xunsearch\ActiveRecord</code> 的模型类，默认情况下会以全小写的类名字作为
+ini 文件名。如需指定，请自行覆盖编写 <code>hightman\xunsearch\ActiveRecord::projectName()</code>。通常代码如下：</p>
+
+<p><code>php
+class Demo extends \hightman\xunsearch\ActiveRecord
+{
+    /*public static function projectName() {
+        return 'another_name';  // 这将使用 @app/config/another_name.ini 作为项目名
+    }*/
+}</code></p>
+
+<p>由此可见，如果命名规范模型类几乎不需要任何额外代码，上述代码会自动采用 <code>demo.ini</code> 并自动装载字段配置。</p>
+
+<h4 id="-">添加或更新索引</h4>
+
+<p>为避免数据重复，底层统一通过 <code>XSIndex::update()</code> 方法进行提交的。</p>
+
+<p>```php
+// 添加索引，也可以通过 $model->setAttributes([...]) 批量赋值
+$model = new Demo;
+$model->pid = 321;
+$model->subject = 'hello world';
+$model->message = 'just for testing...';
+$model->save();</p>
+
+<p>// 更新索引
+$model = Demo::findOne(321);
+$model->message .= ' + updated';
+$model->save();</p>
+
+<p>// 添加或更新索引还支持以方法添加索引词或文本
+// 这样做的目的是使得可以通过这些关键词检索到数据，但并非数据的字段值
+// 用法与 XSDocument::addTerm() 和 XSDocument::addIndex() 等同
+// 通常在 ActiveRecord::beforeSave() 中做这些操作
+$model->addTerm('subject', 'hi');
+$model->addIndex('subject', '你好，世界');</p>
+
+<p>// 如需删除数据则可直接
+$model->delete();</p>
+
+<p>```</p>
+
+<p>如需要做批量删除或更新，请参见以下代码文档：<code>ActiveRecord::updateAll()</code> 和 <code>ActiveRecord::deleteAll()</code>。</p>
+
+<h4 id="-">检索对象</h4>
+
+<p>重点先介绍一下 <code>ActiveQuery::where()</code> 系列搜索条件函数的用法，和 yii2 其它的 ActiveRecord 类似：</p>
+
+<p><code>php
+$query = Demo::find(); // 返回 ActiveQuery 对象
+$condition = 'hello world'; // 字符串原样保持，可包含 subject:xxx 这种形式
+$condition = ['WILD', 'key1', 'key2' ... ]; // 通过空格将多个查询条件连接
+$condition = ['AND', 'key1', 'key2' ... ]; // 通过 AND 连接，转换为：key1 AND key2
+$condition = ['OR', 'key1', 'key2' ... ]; // 通过 OR 连接
+$condition = ['XOR', 'key1', 'key2' ... ]; // 通过  XOR 连接
+$condition = ['NOT', 'key']; // 排除匹配 key 的结果
+$condition = ['pid' =&gt; '123', 'subject' =&gt; 'hello']; // 转换为：pid:123 subject:hello
+$condition = ['pid' =&gt; ['123', '456']]; // 相当于 IN，转换为：pid:123 OR pid:456
+$condition = ['IN', 'pid', ['123', '456']]; // 转换结果同上
+$condition = ['NOT IN', 'pid', ['123', '456']]; // 转换为：NOT (pid:123 OR pid:456)
+$condition = ['BETWEEN', 'chrono', 14918161631, 15918161631]; // 相当于 XSSearch::addRange(...)
+$condition = ['WEIGHT', 'subject', 'hello', 0.5]; // 相当于额外调用 XSSearch::addWeight('subject', 'hello', 0.5);
+$query-&gt;where($condition);</code></p>
+
+<p>对于 <code>hightman\xunsearch\ActiveQuery</code> 对象，主要支持以下几个方法获取和操作：</p>
+
+<ul>
+<li><strong>asArray()</strong>: 以数组形式返回数据</li>
+<li><strong>one()</strong>: 返回一行数据</li>
+<li><strong>all()</strong>: 返回全部数据</li>
+<li><strong>count()</strong>: 统计数据匹配数据，是估算的并不是完全准确</li>
+<li><strong>exists()</strong>: 判断查询条件是否存在数据</li>
+<li><strong>where()</strong>: 指定搜索条件</li>
+<li><strong>orderBy()</strong>: 指定排序方式，默认为相关性排序</li>
+<li><strong>limit()</strong>, <strong>offfset()</strong>: 指定获取数据量和偏移，用于分页检索</li>
+<li><strong>with()</strong>, <strong>indexBy</strong> ...</li>
+<li><strong>buildOther(function(\XSSearch $search){})</strong> 可通过此方法定制检索选项</li>
+</ul>
+
+<p>此外，ActiveQuery 还提供了一个名为 <code>beforeSearch</code> 的事件，可在执行搜索前再次对 <code>ActiveQuery::getSearch()</code>
+所返回的 <code>XSSearch</code> 对象进行调整。</p>
+
+<p>如果以 AR 对象获得数据，可通过以下几个方法获取搜索结果元数据，参照 <code>XSDocument</code> 相关用法。</p>
+
+<p><code>php
+$model = Demo::findOne(321);
+$model-&gt;docid(); //Xapian数据 ID
+$model-&gt;rank(); //序号
+$model-&gt;percent(); //匹配百分比
+$model-&gt;ccount(); //折叠数量，须在 XSSearch::setCollapse() 指定后才有效
+$model-&gt;matched(); //获得匹配词汇</code></p>
+
+<p>ActiveRecord 对象实现了绝大多数据接口，完全可以像使用普通数据库模型一样使用它。如果需要
+访问原始的 xunsearch 对象，请通过以下方式获取 <code>Database</code> 对象：</p>
+
+<p><code>php
+$db = Demo::getDb();
+$search = $db-&gt;getSearch();
+$index = $db-&gt;getIndex();
+// 如有必要，还可以获得 scws 分词对象
+$scws = $db-&gt;getScws();</code></p>
+
+<h4 id="-xunsearch-debugpanel">使用 xunsearch DebugPanel</h4>
+
+<p>为便于调试，还提供了一个 <code>hightman\xunsearch\DebugPanel</code> 对象，可以集成到 debug 模块中，
+可在调试工具条和面板中显示 <code>xunsearch</code> 有关的查询以及耗时情况。</p>
+
+<p>要想启用这个很容易，只要在主配置文件中加入以下代码：</p>
+
+<p><code>php
+    // ...
+    'bootstrap' =&gt; ['debug'],
+    'modules' =&gt; [
+        'debug' =&gt; [
+            'class' =&gt; 'yii\\debug\\Module',
+            'panels' =&gt; [
+                'xunsearch' =&gt; [
+                    'class' =&gt; 'hightman\\xunsearch\\DebugPanel',
+                ],
+            ],
+        ],
+    ],
+    // ...</code></p>
+
+<h4 id="-">其它用法</h4>
+
+<p>TBD. 如关联等，参见其它 AR 用法即可。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 相关的 AR 索引操作均非实时的，如需实时更新索引，请通过 <code>Database::getIndex()-&gt;flushIndex()</code> 刷新。
+  关于查询日志有关的功能，也建议通过原生的 <code>XSSearch</code> 和 <code>XSIndex</code> 对象来操作。</p>
+</blockquote>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="special.scws.html">&laquo; 在SDK中使用SCWS分词</a></div>
+			<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

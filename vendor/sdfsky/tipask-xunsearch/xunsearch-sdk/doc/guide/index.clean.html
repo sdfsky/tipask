@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>清空索引</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="-">清空索引</h1>
+
+<p>当您的索引数据库发生了重大改变时必须清空索引。比如搜索项目的字段配置修改了，
+或者是数据进行了大模迁移、导入或批量删除导致真实数据库和搜索数据库发生了较大的偏差。</p>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 在我们附带的<a href="util.indexer.html">Indexer 索引管理工具</a>中提供了 <code>--clean</code> 
+  选项用于清空项目的索引数据库，用起来更简洁。</p>
+</blockquote>
+
+<p>清空数据很简单，直接调用 <a href="../api/XSIndex.html#clean">XSIndex::clean</a> 即可，代码如下：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 执行清空操作</span>
+<span class="php-hl-var">$index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">clean</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 重新加入文档数据</span><span class="php-hl-code">
+...
+</span><span class="php-hl-var">$index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">add</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$doc</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+...
+</span><span class="php-hl-var">$index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">add</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$doc2</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+...</span></pre></div></div>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 清空索引是一个同步操作，一旦执行立即生效，并且不可恢复。如果采用这种
+  方式重建索引，由于原有索引被立即清空了，可能会有一小段时间无法搜索到数据。
+  因此，如果您对线上项目操作，建议参见下一章节中介绍的平滑方式重建索引。</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="index.del.html">&laquo; 删除文档</a></div>
+			<div class="next"><a href="index.rebuild.html">平滑重建索引 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

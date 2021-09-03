@@ -1,0 +1,1029 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSServer</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSServer</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#properties">属性</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS">XS</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>class XSServer &raquo;
+<a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr>
+  <th>子类</th>
+  <td><a href="XSIndex.html">XSIndex</a>, <a href="XSSearch.html">XSSearch</a></td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php">sdk/php/lib/XSServer.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+XSServer 服务器操作对象
+同时兼容于 indexd, searchd, 所有交互均采用 <a href="XSCommand.html">XSCommand</a> 对象</div>
+
+<a name="properties"></a>
+
+<div class="summary docProperty">
+<h2>Public 属性</h2>
+
+<p><a href="#" class="toggle">隐去继承来的属性</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-property" />
+	<col class="col-type" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>类型</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="connString">
+  <td><a href="XSServer.html#connString-detail">connString</a></td>
+  <td>string</td>
+  <td>连接字符串</td>
+  <td>XSServer</td>
+</tr>
+<tr id="project">
+  <td><a href="XSServer.html#project-detail">project</a></td>
+  <td>string</td>
+  <td>获取当前项目名称</td>
+  <td>XSServer</td>
+</tr>
+<tr id="respond">
+  <td><a href="XSServer.html#respond-detail">respond</a></td>
+  <td><a href="XSCommand.html">XSCommand</a></td>
+  <td>从服务器读取响应指令</td>
+  <td>XSServer</td>
+</tr>
+<tr id="socket">
+  <td><a href="XSServer.html#socket-detail">socket</a></td>
+  <td>mixed</td>
+  <td>获取连接资源描述符</td>
+  <td>XSServer</td>
+</tr>
+<tr id="xs">
+  <td><a href="XSServer.html#xs-detail">xs</a></td>
+  <td><a href="XS.html">XS</a></td>
+  <td>服务端关联的 XS 对象</td>
+  <td>XSServer</td>
+</tr>
+</table>
+</div>
+
+<div class="summary docProperty">
+<h2>Protected 属性</h2>
+
+<p><a href="#" class="toggle">隐去继承来的属性</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-property" />
+	<col class="col-type" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>类型</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="_conn">
+  <td><a href="XSServer.html#_conn-detail">_conn</a></td>
+  <td></td>
+  <td></td>
+  <td>XSServer</td>
+</tr>
+<tr id="_flag">
+  <td><a href="XSServer.html#_flag-detail">_flag</a></td>
+  <td></td>
+  <td></td>
+  <td>XSServer</td>
+</tr>
+<tr id="_project">
+  <td><a href="XSServer.html#_project-detail">_project</a></td>
+  <td></td>
+  <td></td>
+  <td>XSServer</td>
+</tr>
+<tr id="_sendBuffer">
+  <td><a href="XSServer.html#_sendBuffer-detail">_sendBuffer</a></td>
+  <td></td>
+  <td></td>
+  <td>XSServer</td>
+</tr>
+<tr id="_sock">
+  <td><a href="XSServer.html#_sock-detail">_sock</a></td>
+  <td></td>
+  <td></td>
+  <td>XSServer</td>
+</tr>
+</table>
+</div>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="__construct">
+  <td><a href="XSServer.html#__construct-detail">__construct()</a></td>
+  <td>构造函数, 打开连接</td>
+  <td>XSServer</td>
+</tr>
+<tr id="__destruct">
+  <td><a href="XSServer.html#__destruct-detail">__destruct()</a></td>
+  <td>析构函数, 关闭连接</td>
+  <td>XSServer</td>
+</tr>
+<tr class="inherited" id="__get">
+  <td><a href="XSComponent.html#__get-detail">__get()</a></td>
+  <td>魔术方法 __get</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__isset">
+  <td><a href="XSComponent.html#__isset-detail">__isset()</a></td>
+  <td>魔术方法 __isset</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__set">
+  <td><a href="XSComponent.html#__set-detail">__set()</a></td>
+  <td>魔术方法 __set</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__unset">
+  <td><a href="XSComponent.html#__unset-detail">__unset()</a></td>
+  <td>魔术方法 __unset</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr id="close">
+  <td><a href="XSServer.html#close-detail">close()</a></td>
+  <td>关闭连接</td>
+  <td>XSServer</td>
+</tr>
+<tr id="execCommand">
+  <td><a href="XSServer.html#execCommand-detail">execCommand()</a></td>
+  <td>执行服务端指令并获取返回值</td>
+  <td>XSServer</td>
+</tr>
+<tr id="getConnString">
+  <td><a href="XSServer.html#getConnString-detail">getConnString()</a></td>
+  <td>Returns 连接字符串</td>
+  <td>XSServer</td>
+</tr>
+<tr id="getProject">
+  <td><a href="XSServer.html#getProject-detail">getProject()</a></td>
+  <td>获取当前项目名称</td>
+  <td>XSServer</td>
+</tr>
+<tr id="getRespond">
+  <td><a href="XSServer.html#getRespond-detail">getRespond()</a></td>
+  <td>从服务器读取响应指令</td>
+  <td>XSServer</td>
+</tr>
+<tr id="getSocket">
+  <td><a href="XSServer.html#getSocket-detail">getSocket()</a></td>
+  <td>获取连接资源描述符</td>
+  <td>XSServer</td>
+</tr>
+<tr id="hasRespond">
+  <td><a href="XSServer.html#hasRespond-detail">hasRespond()</a></td>
+  <td>判断服务端是否有可读数据</td>
+  <td>XSServer</td>
+</tr>
+<tr id="open">
+  <td><a href="XSServer.html#open-detail">open()</a></td>
+  <td>打开服务端连接</td>
+  <td>XSServer</td>
+</tr>
+<tr id="reopen">
+  <td><a href="XSServer.html#reopen-detail">reopen()</a></td>
+  <td>重新打开连接</td>
+  <td>XSServer</td>
+</tr>
+<tr id="sendCommand">
+  <td><a href="XSServer.html#sendCommand-detail">sendCommand()</a></td>
+  <td>往服务器直接发送指令 (无缓存)</td>
+  <td>XSServer</td>
+</tr>
+<tr id="setProject">
+  <td><a href="XSServer.html#setProject-detail">setProject()</a></td>
+  <td>设置当前项目</td>
+  <td>XSServer</td>
+</tr>
+<tr id="setTimeout">
+  <td><a href="XSServer.html#setTimeout-detail">setTimeout()</a></td>
+  <td>设置服务端超时秒数</td>
+  <td>XSServer</td>
+</tr>
+</table>
+</div>
+
+<div class="summary docMethod">
+<h2>Protected 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="check">
+  <td><a href="XSServer.html#check-detail">check()</a></td>
+  <td>检测服务端的连接情况</td>
+  <td>XSServer</td>
+</tr>
+<tr id="connect">
+  <td><a href="XSServer.html#connect-detail">connect()</a></td>
+  <td>连接服务端</td>
+  <td>XSServer</td>
+</tr>
+<tr id="read">
+  <td><a href="XSServer.html#read-detail">read()</a></td>
+  <td>读取数据</td>
+  <td>XSServer</td>
+</tr>
+<tr id="write">
+  <td><a href="XSServer.html#write-detail">write()</a></td>
+  <td>写入数据</td>
+  <td>XSServer</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>属性明细</h2>
+<div class="detailHeader" id="_conn-detail">
+_conn<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+protected <b>$_conn</b>;</div>
+
+<p></p>
+
+
+<div class="detailHeader" id="_flag-detail">
+_flag<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+protected <b>$_flag</b>;</div>
+
+<p></p>
+
+
+<div class="detailHeader" id="_project-detail">
+_project<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+protected <b>$_project</b>;</div>
+
+<p></p>
+
+
+<div class="detailHeader" id="_sendBuffer-detail">
+_sendBuffer<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+protected <b>$_sendBuffer</b>;</div>
+
+<p></p>
+
+
+<div class="detailHeader" id="_sock-detail">
+_sock<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+protected <b>$_sock</b>;</div>
+
+<p></p>
+
+
+<div class="detailHeader" id="connString-detail">
+connString<span class="detailHeaderTag">
+属性
+ <em>只读</em> </span>
+</div>
+
+<div class="signature">
+public string <a href="XSServer.html#getConnString"><b>getConnString</b></a>()</div>
+
+<p>连接字符串</p>
+
+
+<div class="detailHeader" id="project-detail">
+project<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public string <a href="XSServer.html#getProject"><b>getProject</b></a>()<br/>public void <a href="XSServer.html#setProject"><b>setProject</b></a>(string $name, string $home='')</div>
+
+<p>获取当前项目名称</p>
+
+
+<div class="detailHeader" id="respond-detail">
+respond<span class="detailHeaderTag">
+属性
+ <em>只读</em> </span>
+</div>
+
+<div class="signature">
+public <a href="XSCommand.html">XSCommand</a> <a href="XSServer.html#getRespond"><b>getRespond</b></a>()</div>
+
+<p>从服务器读取响应指令</p>
+
+
+<div class="detailHeader" id="socket-detail">
+socket<span class="detailHeaderTag">
+属性
+ <em>只读</em> </span>
+</div>
+
+<div class="signature">
+public mixed <a href="XSServer.html#getSocket"><b>getSocket</b></a>()</div>
+
+<p>获取连接资源描述符</p>
+
+
+<div class="detailHeader" id="xs-detail">
+xs<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public <a href="XS.html">XS</a> <b>$xs</b>;</div>
+
+<p>服务端关联的 XS 对象</p>
+
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="__construct-detail">
+__construct()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__construct</b>(string $conn=NULL, <a href="XS.html">XS</a> $xs=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$conn</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">服务端连接参数</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$xs</td>
+  <td class="paramTypeCol"><a href="XS.html">XS</a></td>
+  <td class="paramDescCol">需要捆绑的 xs 对象</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L143">sdk/php/lib/XSServer.class.php#L143</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$xs&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$xs</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$conn&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">open</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>构造函数, 打开连接</p>
+
+
+<div class="detailHeader" id="__destruct-detail">
+__destruct()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__destruct</b>()</div>
+</td></tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L154">sdk/php/lib/XSServer.class.php#L154</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__destruct</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>析构函数, 关闭连接</p>
+
+
+<div class="detailHeader" id="check-detail">
+check()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+protected void <b>check</b>()</div>
+</td></tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L438">sdk/php/lib/XSServer.class.php#L438</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">protected&nbsp;function&nbsp;</span><span style="color: #0000BB">check</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'No&nbsp;server&nbsp;connection'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">&amp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">BROKEN</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Broken&nbsp;server&nbsp;connection'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>检测服务端的连接情况</p>
+
+
+<div class="detailHeader" id="close-detail">
+close()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>close</b>(bool $ioerr=false)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$ioerr</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">关闭调用是否由于 IO 错误引起的, 以免发送 quit 指令</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L198">sdk/php/lib/XSServer.class.php#L198</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">close</span><span style="color: #007700">(</span><span style="color: #0000BB">$ioerr&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;!(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">&amp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">BROKEN</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$ioerr&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sendBuffer&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">write</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sendBuffer</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sendBuffer&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$ioerr&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;!(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">&amp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">FILE</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_QUIT</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fwrite</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">|=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">BROKEN</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>关闭连接
+附带发送发送 quit 命令</p>
+
+
+<div class="detailHeader" id="connect-detail">
+connect()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+protected void <b>connect</b>()</div>
+</td></tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L452">sdk/php/lib/XSServer.class.php#L452</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">protected&nbsp;function&nbsp;</span><span style="color: #0000BB">connect</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;connect&nbsp;to&nbsp;server<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$conn&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_conn</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">is_int</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">)&nbsp;||&nbsp;</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$host&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$port&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;(!</span><span style="color: #0000BB">strncmp</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'file://'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">7</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;write-only&nbsp;for&nbsp;saving&nbsp;index&nbsp;exchangable&nbsp;data&nbsp;to&nbsp;file<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;NOTE:&nbsp;this&nbsp;will&nbsp;cause&nbsp;file&nbsp;content&nbsp;be&nbsp;turncated<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$conn&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">7</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((</span><span style="color: #0000BB">$sock&nbsp;</span><span style="color: #007700">=&nbsp;@</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'wb'</span><span style="color: #007700">))&nbsp;===&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Failed&nbsp;to&nbsp;open&nbsp;local&nbsp;file&nbsp;for&nbsp;writing:&nbsp;`'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$conn&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'\''</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">|=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">FILE</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$sock</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;((</span><span style="color: #0000BB">$pos&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">':'</span><span style="color: #007700">))&nbsp;!==&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$host&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$pos</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$port&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$pos&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$host&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'unix://'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$port&nbsp;</span><span style="color: #007700">=&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((</span><span style="color: #0000BB">$sock&nbsp;</span><span style="color: #007700">=&nbsp;@</span><span style="color: #0000BB">fsockopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$host</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$port</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$errno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$error</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">))&nbsp;===&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #0000BB">$error&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'(C#'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$errno&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">',&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$host&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">':'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$port&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">')'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;set&nbsp;socket&nbsp;options<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$timeout&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ini_get</span><span style="color: #007700">(</span><span style="color: #DD0000">'max_execution_time'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$timeout&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$timeout&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">?&nbsp;(</span><span style="color: #0000BB">$timeout&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">30</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">stream_set_blocking</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">stream_set_timeout</span><span style="color: #007700">(</span><span style="color: #0000BB">$sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$timeout</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$sock</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>连接服务端</p>
+
+
+<div class="detailHeader" id="execCommand-detail">
+execCommand()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public mixed <b>execCommand</b>(mixed $cmd, int $res_arg=0, int $res_cmd=128)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$cmd</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">要提交的指令, 若不是 XSCommand 实例则作为构造函数的第一参数创建对象</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$res_arg</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">要求的响应参数, 默认为 XS_CMD_NONE 即不检测, 若检测结果不符
+       则认为命令调用失败, 会返回 false 并设置相应的出错信息</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$res_cmd</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">要求的响应指令, 默认为 XS_CMD_OK 即要求结果必须正确.</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">若无需要检测结果则返回 true, 其它返回响应的 XSCommand 对象</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L279">sdk/php/lib/XSServer.class.php#L279</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_arg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">XS_CMD_NONE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_cmd&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">XS_CMD_OK</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;create&nbsp;command&nbsp;object<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(!</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">instanceof&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;just&nbsp;cache&nbsp;the&nbsp;cmd&nbsp;for&nbsp;those&nbsp;need&nbsp;not&nbsp;answer<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cmd&nbsp;</span><span style="color: #007700">&amp;&nbsp;</span><span style="color: #0000BB">0x80</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sendBuffer&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;send&nbsp;cmd&nbsp;to&nbsp;server<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sendBuffer&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sendBuffer&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">write</span><span style="color: #007700">(</span><span style="color: #0000BB">$buf</span><span style="color: #007700">);<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;return&nbsp;true&nbsp;directly&nbsp;for&nbsp;local&nbsp;file<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">&amp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">FILE</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;got&nbsp;the&nbsp;respond<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getRespond</span><span style="color: #007700">();<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;check&nbsp;respond<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cmd&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">XS_CMD_ERR&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$res_cmd&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">XS_CMD_ERR</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;got&nbsp;unexpected&nbsp;respond&nbsp;command<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cmd&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">$res_cmd&nbsp;</span><span style="color: #007700">||&nbsp;(</span><span style="color: #0000BB">$res_arg&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">XS_CMD_NONE&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">$res_arg</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Unexpected&nbsp;respond&nbsp;{CMD:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cmd&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">',&nbsp;ARG:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'}'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>执行服务端指令并获取返回值</p>
+
+
+<div class="detailHeader" id="getConnString-detail">
+getConnString()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public string <b>getConnString</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">连接字符串</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L217">sdk/php/lib/XSServer.class.php#L217</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getConnString</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_conn</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">is_int</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">)&nbsp;||&nbsp;</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'localhost:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;(</span><span style="color: #0000BB">strpos</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">':'</span><span style="color: #007700">)&nbsp;===&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'unix://'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$str</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p></p>
+
+
+<div class="detailHeader" id="getProject-detail">
+getProject()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public string <b>getProject</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">项目名称</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L241">sdk/php/lib/XSServer.class.php#L241</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getProject</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_project</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取当前项目名称</p>
+
+
+<div class="detailHeader" id="getRespond-detail">
+getRespond()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public <a href="XSCommand.html">XSCommand</a> <b>getRespond</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol"><a href="XSCommand.html">XSCommand</a></td>
+  <td class="paramDescCol">成功返回响应指令</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L334">sdk/php/lib/XSServer.class.php#L334</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getRespond</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;read&nbsp;data&nbsp;from&nbsp;server<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">read</span><span style="color: #007700">(</span><span style="color: #0000BB">8</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$hdr&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">unpack</span><span style="color: #007700">(</span><span style="color: #DD0000">'Ccmd/Carg1/Carg2/Cblen1/Iblen'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$buf</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$hdr</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">read</span><span style="color: #007700">(</span><span style="color: #0000BB">$hdr</span><span style="color: #007700">[</span><span style="color: #DD0000">'blen'</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">read</span><span style="color: #007700">(</span><span style="color: #0000BB">$hdr</span><span style="color: #007700">[</span><span style="color: #DD0000">'blen1'</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>从服务器读取响应指令</p>
+
+
+<div class="detailHeader" id="getSocket-detail">
+getSocket()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public mixed <b>getSocket</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">连接标识, 仅用于内部测试等目的</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L232">sdk/php/lib/XSServer.class.php#L232</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getSocket</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取连接资源描述符</p>
+
+
+<div class="detailHeader" id="hasRespond-detail">
+hasRespond()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public bool <b>hasRespond</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">如果有返回 true, 否则返回 false</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L350">sdk/php/lib/XSServer.class.php#L350</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">hasRespond</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;check&nbsp;socket<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">&amp;&nbsp;(</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">BROKEN&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">FILE</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wfds&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$xfds&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$rfds&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stream_select</span><span style="color: #007700">(</span><span style="color: #0000BB">$rfds</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wfds</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$xfds</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>判断服务端是否有可读数据
+用于某些特别情况在 <a href="XSServer.html#getRespond">getRespond</a> 前先调用和判断, 以免阻塞</p>
+
+
+<div class="detailHeader" id="open-detail">
+open()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>open</b>(mixed $conn)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$conn</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">服务端连接参数, 支持: &lt;端口号|host:port|本地套接字路径&gt;</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L165">sdk/php/lib/XSServer.class.php#L165</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">open</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_conn&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">BROKEN</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sendBuffer&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_project&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">connect</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">^=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">BROKEN</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs&nbsp;</span><span style="color: #007700">instanceof&nbsp;</span><span style="color: #0000BB">XS</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setProject</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getName</span><span style="color: #007700">());<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>打开服务端连接
+如果已关联 XS 对象, 则会同时切换至相应的项目名称</p>
+
+
+<div class="detailHeader" id="read-detail">
+read()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+protected string <b>read</b>(int $len)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$len</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">要读入的长度</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">成功时返回读到的字符串</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L404">sdk/php/lib/XSServer.class.php#L404</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">protected&nbsp;function&nbsp;</span><span style="color: #0000BB">read</span><span style="color: #007700">(</span><span style="color: #0000BB">$len</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;quick&nbsp;return&nbsp;for&nbsp;zero&nbsp;size<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$len&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;loop&nbsp;to&nbsp;send&nbsp;data<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">check</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$len</span><span style="color: #007700">;;)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fread</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$len</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$bytes</span><span style="color: #007700">)&nbsp;==&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$len&nbsp;</span><span style="color: #007700">-=&nbsp;</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$bytes</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$buf&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #0000BB">$bytes</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$len&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$buf</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;error&nbsp;occured<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$meta&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stream_get_meta_data</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reason&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$meta</span><span style="color: #007700">[</span><span style="color: #DD0000">'timed_out'</span><span style="color: #007700">]&nbsp;?&nbsp;</span><span style="color: #DD0000">'timeout'&nbsp;</span><span style="color: #007700">:&nbsp;(</span><span style="color: #0000BB">$meta</span><span style="color: #007700">[</span><span style="color: #DD0000">'eof'</span><span style="color: #007700">]&nbsp;?&nbsp;</span><span style="color: #DD0000">'closed'&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'unknown'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Failed&nbsp;to&nbsp;recv&nbsp;the&nbsp;data&nbsp;from&nbsp;server&nbsp;completely&nbsp;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">'(SIZE:'&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">$len</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">'/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">',&nbsp;REASON:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$reason&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">')'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #0000BB">$msg</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>读取数据</p>
+
+
+<div class="detailHeader" id="reopen-detail">
+reopen()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSServer <b>reopen</b>(bool $force=false)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$force</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">是否强制重新连接, 默认为否</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSServer</td>
+  <td class="paramDescCol">返回自己, 以便串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L185">sdk/php/lib/XSServer.class.php#L185</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">reopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$force&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_flag&nbsp;</span><span style="color: #007700">&amp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">BROKEN&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$force&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">open</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_conn</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>重新打开连接
+仅应用于曾经成功打开的连并且异常关闭了</p>
+
+
+<div class="detailHeader" id="sendCommand-detail">
+sendCommand()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>sendCommand</b>(mixed $cmd)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$cmd</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">要提交的指令, 支持 XSCommand 实例或 cmd 构造函数的第一参数</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L321">sdk/php/lib/XSServer.class.php#L321</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">sendCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">instanceof&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">write</span><span style="color: #007700">(</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">));<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>往服务器直接发送指令 (无缓存)</p>
+
+
+<div class="detailHeader" id="setProject-detail">
+setProject()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>setProject</b>(string $name, string $home='')</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">项目名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$home</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">项目在服务器上的目录路径, 可选参数(不得超过255字节).</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L251">sdk/php/lib/XSServer.class.php#L251</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setProject</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$home&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$name&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_project</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_USE</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'buf'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'buf1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$home</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_PROJECT</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_project&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置当前项目</p>
+
+
+<div class="detailHeader" id="setTimeout-detail">
+setTimeout()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>setTimeout</b>(int $sec)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$sec</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">秒数, 设为 0则永不超时直到客户端主动关闭</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L264">sdk/php/lib/XSServer.class.php#L264</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setTimeout</span><span style="color: #007700">(</span><span style="color: #0000BB">$sec</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_TIMEOUT</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$sec</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_TIMEOUT_SET</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置服务端超时秒数</p>
+
+
+<div class="detailHeader" id="write-detail">
+write()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+protected void <b>write</b>(string $buf, string $len=0)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$buf</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">要写入的字符串</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$len</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">要写入的长度, 默认为字符串长度</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L368">sdk/php/lib/XSServer.class.php#L368</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">protected&nbsp;function&nbsp;</span><span style="color: #0000BB">write</span><span style="color: #007700">(</span><span style="color: #0000BB">$buf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$len&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;quick&nbsp;return&nbsp;for&nbsp;empty&nbsp;buf<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$buf</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$len&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;(</span><span style="color: #0000BB">$len&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$buf</span><span style="color: #007700">))&nbsp;==&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;loop&nbsp;to&nbsp;send&nbsp;data<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">check</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">true</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fwrite</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$buf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$len</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">$len</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$len&nbsp;</span><span style="color: #007700">-=&nbsp;</span><span style="color: #0000BB">$bytes</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$buf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$bytes</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;error&nbsp;occured<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$bytes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$meta&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stream_get_meta_data</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_sock</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$reason&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$meta</span><span style="color: #007700">[</span><span style="color: #DD0000">'timed_out'</span><span style="color: #007700">]&nbsp;?&nbsp;</span><span style="color: #DD0000">'timeout'&nbsp;</span><span style="color: #007700">:&nbsp;(</span><span style="color: #0000BB">$meta</span><span style="color: #007700">[</span><span style="color: #DD0000">'eof'</span><span style="color: #007700">]&nbsp;?&nbsp;</span><span style="color: #DD0000">'closed'&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'unknown'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Failed&nbsp;to&nbsp;send&nbsp;the&nbsp;data&nbsp;to&nbsp;server&nbsp;completely&nbsp;'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$msg&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">'(SIZE:'&nbsp;</span><span style="color: #007700">.&nbsp;(</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">-&nbsp;</span><span style="color: #0000BB">$len</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">'/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">',&nbsp;REASON:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$reason&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">')'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #0000BB">$msg</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>写入数据</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

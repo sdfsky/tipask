@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSCommand</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSCommand</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#properties">属性</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS">XS</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>class XSCommand &raquo;
+<a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php">sdk/php/lib/XSServer.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+XSCommand 命令对象
+是与服务端交互的最基本单位, 命令对象可自动转换为通讯字符串,
+命令结构参见 C 代码中的 struct xs_cmd 定义, 头部长度为 8字节.</div>
+
+<a name="properties"></a>
+
+<div class="summary docProperty">
+<h2>Public 属性</h2>
+
+<p><a href="#" class="toggle">隐去继承来的属性</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-property" />
+	<col class="col-type" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>类型</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="arg">
+  <td><a href="XSCommand.html#arg-detail">arg</a></td>
+  <td>int</td>
+  <td>获取属性 arg 的值</td>
+  <td>XSCommand</td>
+</tr>
+<tr id="arg1">
+  <td><a href="XSCommand.html#arg1-detail">arg1</a></td>
+  <td>int</td>
+  <td>参数1
+取值范围 0~255, 具体含义根据不同的 CMD 而变化</td>
+  <td>XSCommand</td>
+</tr>
+<tr id="arg2">
+  <td><a href="XSCommand.html#arg2-detail">arg2</a></td>
+  <td>int</td>
+  <td>参数2
+取值范围 0~255, 常用于存储 value no, 具体参照不同 CMD 而确定</td>
+  <td>XSCommand</td>
+</tr>
+<tr id="buf">
+  <td><a href="XSCommand.html#buf-detail">buf</a></td>
+  <td>string</td>
+  <td>主数据内容, 最长 2GB</td>
+  <td>XSCommand</td>
+</tr>
+<tr id="buf1">
+  <td><a href="XSCommand.html#buf1-detail">buf1</a></td>
+  <td>string</td>
+  <td>辅数据内容, 最长 255字节</td>
+  <td>XSCommand</td>
+</tr>
+<tr id="cmd">
+  <td><a href="XSCommand.html#cmd-detail">cmd</a></td>
+  <td>int</td>
+  <td>命令代码
+通常是预定义常量 XS_CMD_xxx, 取值范围 0~255</td>
+  <td>XSCommand</td>
+</tr>
+</table>
+</div>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="__construct">
+  <td><a href="XSCommand.html#__construct-detail">__construct()</a></td>
+  <td>构造函数</td>
+  <td>XSCommand</td>
+</tr>
+<tr class="inherited" id="__get">
+  <td><a href="XSComponent.html#__get-detail">__get()</a></td>
+  <td>魔术方法 __get</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__isset">
+  <td><a href="XSComponent.html#__isset-detail">__isset()</a></td>
+  <td>魔术方法 __isset</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__set">
+  <td><a href="XSComponent.html#__set-detail">__set()</a></td>
+  <td>魔术方法 __set</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr id="__toString">
+  <td><a href="XSCommand.html#__toString-detail">__toString()</a></td>
+  <td>转换为封包字符串</td>
+  <td>XSCommand</td>
+</tr>
+<tr class="inherited" id="__unset">
+  <td><a href="XSComponent.html#__unset-detail">__unset()</a></td>
+  <td>魔术方法 __unset</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr id="getArg">
+  <td><a href="XSCommand.html#getArg-detail">getArg()</a></td>
+  <td>获取属性 arg 的值</td>
+  <td>XSCommand</td>
+</tr>
+<tr id="setArg">
+  <td><a href="XSCommand.html#setArg-detail">setArg()</a></td>
+  <td>设置属性 arg 的值</td>
+  <td>XSCommand</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>属性明细</h2>
+<div class="detailHeader" id="arg-detail">
+arg<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public int <a href="XSCommand.html#getArg"><b>getArg</b></a>()<br/>public void <a href="XSCommand.html#setArg"><b>setArg</b></a>(int $arg)</div>
+
+<p>获取属性 arg 的值</p>
+
+
+<div class="detailHeader" id="arg1-detail">
+arg1<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public int <b>$arg1</b>;</div>
+
+<p>参数1
+取值范围 0~255, 具体含义根据不同的 CMD 而变化</p>
+
+
+<div class="detailHeader" id="arg2-detail">
+arg2<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public int <b>$arg2</b>;</div>
+
+<p>参数2
+取值范围 0~255, 常用于存储 value no, 具体参照不同 CMD 而确定</p>
+
+
+<div class="detailHeader" id="buf-detail">
+buf<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public string <b>$buf</b>;</div>
+
+<p>主数据内容, 最长 2GB</p>
+
+
+<div class="detailHeader" id="buf1-detail">
+buf1<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public string <b>$buf1</b>;</div>
+
+<p>辅数据内容, 最长 255字节</p>
+
+
+<div class="detailHeader" id="cmd-detail">
+cmd<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public int <b>$cmd</b>;</div>
+
+<p>命令代码
+通常是预定义常量 XS_CMD_xxx, 取值范围 0~255</p>
+
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="__construct-detail">
+__construct()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__construct</b>(mixed $cmd, int $arg1=0, int $arg2=0, string $buf='', string $buf1='')</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$cmd</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">命令类型或命令数组
+       当类型为 int 表示命令代码, 范围是 1~255, 参见 xs_cmd.inc.php 里的定义
+       当类型为 array 时忽略其它参数, 可包含 cmd, arg1, arg2, buf, buf1 这些键值</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$arg1</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">参数1, 其值为 0~255, 具体含义视不同 CMD 而确定</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$arg2</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">参数2, 其值为 0~255, 具体含义视不同 CMD 而确定, 常用于存储 value no</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$buf</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字符串内容, 最大长度为 2GB</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$buf1</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">字符串内容1, 最大长度为 255字节</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L62">sdk/php/lib/XSServer.class.php#L62</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$arg1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$arg2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$buf1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #DD0000">'arg'&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">property_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$key</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cmd&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$arg1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$arg2</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$buf</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$buf1</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>构造函数</p>
+
+
+<div class="detailHeader" id="__toString-detail">
+__toString()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public string <b>__toString</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">用于服务端交互的字符串</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L83">sdk/php/lib/XSServer.class.php#L83</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__toString</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf1</span><span style="color: #007700">)&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">0xff</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0xff</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">pack</span><span style="color: #007700">(</span><span style="color: #DD0000">'CCCCI'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf1</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf1</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>转换为封包字符串</p>
+
+
+<div class="detailHeader" id="getArg-detail">
+getArg()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public int <b>getArg</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">参数值</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L95">sdk/php/lib/XSServer.class.php#L95</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getArg</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg2&nbsp;</span><span style="color: #007700">|&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg1&nbsp;</span><span style="color: #007700">&lt;&lt;&nbsp;</span><span style="color: #0000BB">8</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取属性 arg 的值</p>
+
+
+<div class="detailHeader" id="setArg-detail">
+setArg()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>setArg</b>(int $arg)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$arg</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">参数值</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSServer.class.php#L104">sdk/php/lib/XSServer.class.php#L104</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setArg</span><span style="color: #007700">(</span><span style="color: #0000BB">$arg</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg1&nbsp;</span><span style="color: #007700">=&nbsp;(</span><span style="color: #0000BB">$arg&nbsp;</span><span style="color: #007700">&gt;&gt;&nbsp;</span><span style="color: #0000BB">8</span><span style="color: #007700">)&nbsp;&amp;&nbsp;</span><span style="color: #0000BB">0xff</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$arg&nbsp;</span><span style="color: #007700">&amp;&nbsp;</span><span style="color: #0000BB">0xff</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置属性 arg 的值</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

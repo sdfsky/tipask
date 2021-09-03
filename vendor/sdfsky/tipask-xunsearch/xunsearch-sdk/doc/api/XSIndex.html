@@ -1,0 +1,1322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSIndex</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSIndex</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#properties">属性</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS">XS</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>class XSIndex &raquo;
+<a href="XSServer.html">XSServer</a> &raquo;
+<a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php">sdk/php/lib/XSIndex.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+XS 索引管理
+添加/删除/修改索引数据</div>
+
+<a name="properties"></a>
+
+<div class="summary docProperty">
+<h2>Public 属性</h2>
+
+<p><a href="#" class="toggle">隐去继承来的属性</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-property" />
+	<col class="col-type" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>类型</th><th>描述</th><th>定义于</th>
+</tr>
+<tr class="inherited" id="connString">
+  <td><a href="XSServer.html#connString-detail">connString</a></td>
+  <td>string</td>
+  <td>连接字符串</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="customDict">
+  <td><a href="XSIndex.html#customDict-detail">customDict</a></td>
+  <td>string</td>
+  <td>获取自定义词典内容</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="project">
+  <td><a href="XSServer.html#project-detail">project</a></td>
+  <td>string</td>
+  <td>获取当前项目名称</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="respond">
+  <td><a href="XSServer.html#respond-detail">respond</a></td>
+  <td><a href="XSCommand.html">XSCommand</a></td>
+  <td>从服务器读取响应指令</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="scwsMulti">
+  <td><a href="XSIndex.html#scwsMulti-detail">scwsMulti</a></td>
+  <td>int</td>
+  <td>获取当前索引库的分词复合等级</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="socket">
+  <td><a href="XSServer.html#socket-detail">socket</a></td>
+  <td>mixed</td>
+  <td>获取连接资源描述符</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="xs">
+  <td><a href="XSServer.html#xs-detail">xs</a></td>
+  <td><a href="XS.html">XS</a></td>
+  <td>服务端关联的 XS 对象</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+</table>
+</div>
+
+<div class="summary docProperty">
+<h2>Protected 属性</h2>
+
+<p><a href="#" class="toggle">隐去继承来的属性</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-property" />
+	<col class="col-type" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>类型</th><th>描述</th><th>定义于</th>
+</tr>
+<tr class="inherited" id="_conn">
+  <td><a href="XSServer.html#_conn-detail">_conn</a></td>
+  <td></td>
+  <td></td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="_flag">
+  <td><a href="XSServer.html#_flag-detail">_flag</a></td>
+  <td></td>
+  <td></td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="_project">
+  <td><a href="XSServer.html#_project-detail">_project</a></td>
+  <td></td>
+  <td></td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="_sendBuffer">
+  <td><a href="XSServer.html#_sendBuffer-detail">_sendBuffer</a></td>
+  <td></td>
+  <td></td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="_sock">
+  <td><a href="XSServer.html#_sock-detail">_sock</a></td>
+  <td></td>
+  <td></td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+</table>
+</div>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr class="inherited" id="__construct">
+  <td><a href="XSServer.html#__construct-detail">__construct()</a></td>
+  <td>构造函数, 打开连接</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="__destruct">
+  <td><a href="XSIndex.html#__destruct-detail">__destruct()</a></td>
+  <td>析构函数</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="__get">
+  <td><a href="XSComponent.html#__get-detail">__get()</a></td>
+  <td>魔术方法 __get</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__isset">
+  <td><a href="XSComponent.html#__isset-detail">__isset()</a></td>
+  <td>魔术方法 __isset</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__set">
+  <td><a href="XSComponent.html#__set-detail">__set()</a></td>
+  <td>魔术方法 __set</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr class="inherited" id="__unset">
+  <td><a href="XSComponent.html#__unset-detail">__unset()</a></td>
+  <td>魔术方法 __unset</td>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+</tr>
+<tr id="add">
+  <td><a href="XSIndex.html#add-detail">add()</a></td>
+  <td>添加文档到索引中</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="addExdata">
+  <td><a href="XSIndex.html#addExdata-detail">addExdata()</a></td>
+  <td>批量提交索引命令封包数据</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="addServer">
+  <td><a href="XSIndex.html#addServer-detail">addServer()</a></td>
+  <td>增加一个同步索引服务器</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="addSynonym">
+  <td><a href="XSIndex.html#addSynonym-detail">addSynonym()</a></td>
+  <td>添加同义词</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="beginRebuild">
+  <td><a href="XSIndex.html#beginRebuild-detail">beginRebuild()</a></td>
+  <td>开始重建索引</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="clean">
+  <td><a href="XSIndex.html#clean-detail">clean()</a></td>
+  <td>完全清空索引数据</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="close">
+  <td><a href="XSIndex.html#close-detail">close()</a></td>
+  <td>关闭索引服务端连接</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="closeBuffer">
+  <td><a href="XSIndex.html#closeBuffer-detail">closeBuffer()</a></td>
+  <td>提交所有指令并关闭缓冲区</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="del">
+  <td><a href="XSIndex.html#del-detail">del()</a></td>
+  <td>删除索引中的数据</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="delSynonym">
+  <td><a href="XSIndex.html#delSynonym-detail">delSynonym()</a></td>
+  <td>删除某个同义词</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="endRebuild">
+  <td><a href="XSIndex.html#endRebuild-detail">endRebuild()</a></td>
+  <td>完成并关闭重建索引</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="execCommand">
+  <td><a href="XSIndex.html#execCommand-detail">execCommand()</a></td>
+  <td>执行服务端指令并获取返回值</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="flushIndex">
+  <td><a href="XSIndex.html#flushIndex-detail">flushIndex()</a></td>
+  <td>强制刷新服务端的当前库的索引缓存</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="flushLogging">
+  <td><a href="XSIndex.html#flushLogging-detail">flushLogging()</a></td>
+  <td>强制刷新服务端当前项目的搜索日志</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="getConnString">
+  <td><a href="XSServer.html#getConnString-detail">getConnString()</a></td>
+  <td>Returns 连接字符串</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="getCustomDict">
+  <td><a href="XSIndex.html#getCustomDict-detail">getCustomDict()</a></td>
+  <td>获取自定义词典内容</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="getProject">
+  <td><a href="XSServer.html#getProject-detail">getProject()</a></td>
+  <td>获取当前项目名称</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="getRespond">
+  <td><a href="XSServer.html#getRespond-detail">getRespond()</a></td>
+  <td>从服务器读取响应指令</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="getScwsMulti">
+  <td><a href="XSIndex.html#getScwsMulti-detail">getScwsMulti()</a></td>
+  <td>获取当前索引库的分词复合等级</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="getSocket">
+  <td><a href="XSServer.html#getSocket-detail">getSocket()</a></td>
+  <td>获取连接资源描述符</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="hasRespond">
+  <td><a href="XSServer.html#hasRespond-detail">hasRespond()</a></td>
+  <td>判断服务端是否有可读数据</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="open">
+  <td><a href="XSServer.html#open-detail">open()</a></td>
+  <td>打开服务端连接</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="openBuffer">
+  <td><a href="XSIndex.html#openBuffer-detail">openBuffer()</a></td>
+  <td>开启索引命令提交缓冲区</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="reopen">
+  <td><a href="XSServer.html#reopen-detail">reopen()</a></td>
+  <td>重新打开连接</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="sendCommand">
+  <td><a href="XSServer.html#sendCommand-detail">sendCommand()</a></td>
+  <td>往服务器直接发送指令 (无缓存)</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="setCustomDict">
+  <td><a href="XSIndex.html#setCustomDict-detail">setCustomDict()</a></td>
+  <td>设置自定义词典内容</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="setDb">
+  <td><a href="XSIndex.html#setDb-detail">setDb()</a></td>
+  <td>更改存放索引数据的目录</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="setProject">
+  <td><a href="XSServer.html#setProject-detail">setProject()</a></td>
+  <td>设置当前项目</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="setScwsMulti">
+  <td><a href="XSIndex.html#setScwsMulti-detail">setScwsMulti()</a></td>
+  <td>设置当前索引库的分词复合等级</td>
+  <td>XSIndex</td>
+</tr>
+<tr class="inherited" id="setTimeout">
+  <td><a href="XSServer.html#setTimeout-detail">setTimeout()</a></td>
+  <td>设置服务端超时秒数</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr id="stopRebuild">
+  <td><a href="XSIndex.html#stopRebuild-detail">stopRebuild()</a></td>
+  <td>中止索引重建</td>
+  <td>XSIndex</td>
+</tr>
+<tr id="update">
+  <td><a href="XSIndex.html#update-detail">update()</a></td>
+  <td>更新索引文档</td>
+  <td>XSIndex</td>
+</tr>
+</table>
+</div>
+
+<div class="summary docMethod">
+<h2>Protected 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr class="inherited" id="check">
+  <td><a href="XSServer.html#check-detail">check()</a></td>
+  <td>检测服务端的连接情况</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="connect">
+  <td><a href="XSServer.html#connect-detail">connect()</a></td>
+  <td>连接服务端</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="read">
+  <td><a href="XSServer.html#read-detail">read()</a></td>
+  <td>读取数据</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+<tr class="inherited" id="write">
+  <td><a href="XSServer.html#write-detail">write()</a></td>
+  <td>写入数据</td>
+  <td><a href="XSServer.html">XSServer</a></td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>属性明细</h2>
+<div class="detailHeader" id="customDict-detail">
+customDict<span class="detailHeaderTag">
+属性
+</span>
+</div>
+
+<div class="signature">
+public string <a href="XSIndex.html#getCustomDict"><b>getCustomDict</b></a>()<br/>public void <a href="XSIndex.html#setCustomDict"><b>setCustomDict</b></a>(string $content)</div>
+
+<p>获取自定义词典内容</p>
+
+
+<div class="detailHeader" id="scwsMulti-detail">
+scwsMulti<span class="detailHeaderTag">
+属性
+ (自版本 v1.4.7 起可用)
+</span>
+</div>
+
+<div class="signature">
+public int <a href="XSIndex.html#getScwsMulti"><b>getScwsMulti</b></a>()<br/>public XSIndex <a href="XSIndex.html#setScwsMulti"><b>setScwsMulti</b></a>(int $level)</div>
+
+<p>获取当前索引库的分词复合等级</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#setScwsMulti">setScwsMulti</a></li>
+</ul>
+</div>
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="__destruct-detail">
+__destruct()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__destruct</b>()</div>
+</td></tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L528">sdk/php/lib/XSIndex.class.php#L528</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__destruct</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_rebuild&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">endRebuild</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(</span><span style="color: #0000BB">Exception&nbsp;$e</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_adds&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$srv</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$srv</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">close</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_adds&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">__destruct</span><span style="color: #007700">();<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>析构函数
+在此自动关闭开启的 rebuild</p>
+
+
+<div class="detailHeader" id="add-detail">
+add()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>add</b>(<a href="XSDocument.html">XSDocument</a> $doc)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$doc</td>
+  <td class="paramTypeCol"><a href="XSDocument.html">XSDocument</a></td>
+  <td class="paramDescCol"></td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L72">sdk/php/lib/XSIndex.class.php#L72</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">add</span><span style="color: #007700">(</span><span style="color: #0000BB">XSDocument&nbsp;$doc</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">update</span><span style="color: #007700">(</span><span style="color: #0000BB">$doc</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>添加文档到索引中
+特别要注意的是: 系统不会自动检测主键是否冲突, 即便已存在相同主键也会添加进去</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#update">update</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="addExdata-detail">
+addExdata()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>addExdata</b>(string $data, bool $check_file=true)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$data</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">要提交的命令封包数据, 或存储命令封包的文件路径, 编码必须已经是 UTF-8</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$check_file</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">是否检测参数为文件的情况</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L253">sdk/php/lib/XSIndex.class.php#L253</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">addExdata</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$check_file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">)&nbsp;&lt;&nbsp;</span><span style="color: #0000BB">255&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$check_file<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">file_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">)&nbsp;&amp;&amp;&nbsp;(</span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">))&nbsp;===&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Failed&nbsp;to&nbsp;read&nbsp;exdata&nbsp;from&nbsp;file'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;try&nbsp;to&nbsp;check&nbsp;allowed&nbsp;(BUG:&nbsp;check&nbsp;the&nbsp;first&nbsp;cmd&nbsp;only):<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;XS_CMD_IMPORT_HEADER,&nbsp;XS_CMD_INDEX_REQUEST,&nbsp;XS_CMD_INDEX_REMOVE,&nbsp;XS_CMD_INDEX_EXDATA<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ord</span><span style="color: #007700">(</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">XS_CMD_IMPORT_HEADER<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_REQUEST&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_SYNONYMS<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_REMOVE&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_EXDATA</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Invalid&nbsp;start&nbsp;command&nbsp;of&nbsp;exdata&nbsp;(CMD:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$first&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">')'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;create&nbsp;cmd&nbsp;&amp;&nbsp;execute&nbsp;it<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_EXDATA</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'buf'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$data</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_RQST_FINISHED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>批量提交索引命令封包数据
+把多个命令封包内容连续保存为文件或变量, 然后一次性提交以减少网络开销提升性能</p>
+
+
+<div class="detailHeader" id="addServer-detail">
+addServer()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public <a href="XSServer.html">XSServer</a> <b>addServer</b>(string $conn)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$conn</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">索引服务端连接参数</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol"><a href="XSServer.html">XSServer</a></td>
+  <td class="paramDescCol"></td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L33">sdk/php/lib/XSIndex.class.php#L33</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">addServer</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$srv&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSServer</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_adds</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$srv</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$srv</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>增加一个同步索引服务器</p>
+
+
+<div class="detailHeader" id="addSynonym-detail">
+addSynonym()
+<span class="detailHeaderTag">
+方法
+(自版本 v1.3.0 起可用)
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>addSynonym</b>(string $raw, string $synonym)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$raw</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">需要同义的原词, 英文词汇支持用空格分开多个单词并强制被转换为小写</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$synonym</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">同义词条, 最小语素, 勿带空格等分隔符</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L283">sdk/php/lib/XSIndex.class.php#L283</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">addSynonym</span><span style="color: #007700">(</span><span style="color: #0000BB">$raw</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$synonym</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$raw&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$raw</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$synonym&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$synonym</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$raw&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$synonym&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_SYNONYMS</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_SYNONYMS_ADD</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$raw</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$synonym</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_bufSize&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">appendBuffer</span><span style="color: #007700">(</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_RQST_FINISHED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>添加同义词</p>
+
+
+<div class="detailHeader" id="beginRebuild-detail">
+beginRebuild()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>beginRebuild</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L391">sdk/php/lib/XSIndex.class.php#L391</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">beginRebuild</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_REBUILD</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_DB_REBUILD</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_rebuild&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>开始重建索引
+此后所有的索引更新指令将写到临时库, 而不是当前搜索库, 重建完成后调用
+<a href="XSIndex.html#endRebuild">endRebuild</a> 实现平滑重建索引, 重建过程仍可搜索旧的索引库,
+如直接用 <a href="XSIndex.html#clean">clean</a> 清空数据, 则会导致重建过程搜索到不全的数据</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#endRebuild">endRebuild</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="clean-detail">
+clean()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>clean</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L59">sdk/php/lib/XSIndex.class.php#L59</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">clean</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_CLEAN_DB</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_DB_CLEAN</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>完全清空索引数据
+如果当前数据库处于重建过程中将禁止清空</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#beginRebuild">beginRebuild</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="close-detail">
+close()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>close</b>($ioerr=false)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$ioerr</td>
+  <td class="paramTypeCol"></td>
+  <td class="paramDescCol"></td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L504">sdk/php/lib/XSIndex.class.php#L504</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">close</span><span style="color: #007700">(</span><span style="color: #0000BB">$ioerr&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">closeBuffer</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">close</span><span style="color: #007700">(</span><span style="color: #0000BB">$ioerr</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>关闭索引服务端连接</p>
+
+
+<div class="detailHeader" id="closeBuffer-detail">
+closeBuffer()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>closeBuffer</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L378">sdk/php/lib/XSIndex.class.php#L378</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">closeBuffer</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">openBuffer</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>提交所有指令并关闭缓冲区
+若未曾打开缓冲区, 调用本方法是无意义的</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#openBuffer">openBuffer</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="del-detail">
+del()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>del</b>(mixed $term, string $field=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$term</td>
+  <td class="paramTypeCol">mixed</td>
+  <td class="paramDescCol">单个主键或指定字段的索引词, 或多个组成的数组, 编码与 <a href="XSIndex.html#xs">xs</a> 默认字符集一致</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$field</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">索引词所属的字段名称, 默认不指定则为主键字段 (类型为ID)</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L220">sdk/php/lib/XSIndex.class.php#L220</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">del</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;get&nbsp;field<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$field&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getFieldId</span><span style="color: #007700">()&nbsp;:&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getField</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">);<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;get&nbsp;commands<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">is_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #0000BB">array_unique</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;:&nbsp;array(</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">XS</span><span style="color: #007700">::</span><span style="color: #0000BB">convert</span><span style="color: #007700">(</span><span style="color: #0000BB">$terms</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getDefaultCharset</span><span style="color: #007700">());<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_REMOVE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;combine&nbsp;multi&nbsp;commands&nbsp;into&nbsp;exdata<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_bufSize&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">appendBuffer</span><span style="color: #007700">(</span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;elseif&nbsp;(</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">)&nbsp;==&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_RQST_FINISHED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_EXDATA</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'buf'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_RQST_FINISHED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>删除索引中的数据
+<pre>
+$index-&gt;del('123');	// 删除主键为 123 的记录
+$index-&gt;del(array('123', '789', '456')); // 删除主键为 123, 789, 456 的记录
+$index-&gt;del('abc', 'field'); // 删除字段 field 上带有索引词 abc 的所有记录
+$index-&gt;del(array('abc', 'def'), 'field'); // 删除字段 field 上带有索引词 abc 或 def 的所有记录
+</pre></p>
+
+
+<div class="detailHeader" id="delSynonym-detail">
+delSynonym()
+<span class="detailHeaderTag">
+方法
+(自版本 v1.3.0 起可用)
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>delSynonym</b>(string $raw, string $synonym=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$raw</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">需要同义的原词, 英文词汇支持用空格分开多个单词并强制被转换为小写</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$synonym</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">要删除的同义词条, 默认 null 表示删除原词下的所有同义词</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L306">sdk/php/lib/XSIndex.class.php#L306</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">delSynonym</span><span style="color: #007700">(</span><span style="color: #0000BB">$raw</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$synonym&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$raw&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$raw</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$synonym&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$synonym&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #DD0000">''&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$synonym</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$raw&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_SYNONYMS</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_SYNONYMS_DEL</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$raw</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$synonym</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_bufSize&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">appendBuffer</span><span style="color: #007700">(</span><span style="color: #0000BB">strval</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_RQST_FINISHED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>删除某个同义词</p>
+
+
+<div class="detailHeader" id="endRebuild-detail">
+endRebuild()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>endRebuild</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L404">sdk/php/lib/XSIndex.class.php#L404</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">endRebuild</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_rebuild&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_rebuild&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_REBUILD</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_DB_REBUILD</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>完成并关闭重建索引
+重建完成后调用, 用重建好的索引数据代替旧的索引数据</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#beginRebuild">beginRebuild</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="execCommand-detail">
+execCommand()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>execCommand</b>($cmd, $res_arg=0, $res_cmd=128)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$cmd</td>
+  <td class="paramTypeCol"></td>
+  <td class="paramDescCol"></td>
+</tr>
+<tr>
+  <td class="paramNameCol">$res_arg</td>
+  <td class="paramTypeCol"></td>
+  <td class="paramDescCol"></td>
+</tr>
+<tr>
+  <td class="paramNameCol">$res_cmd</td>
+  <td class="paramTypeCol"></td>
+  <td class="paramDescCol"></td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L44">sdk/php/lib/XSIndex.class.php#L44</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_arg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">XS_CMD_NONE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_cmd&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">XS_CMD_OK</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_arg</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_cmd</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_adds&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$srv</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$srv</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_arg</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res_cmd</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>执行服务端指令并获取返回值
+重写此方法是为了同步到额外增加的多个索引服务端</p>
+
+
+<div class="detailHeader" id="flushIndex-detail">
+flushIndex()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public bool <b>flushIndex</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">刷新成功返回 true, 失败则返回 false</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L466">sdk/php/lib/XSIndex.class.php#L466</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">flushIndex</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_COMMIT</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_DB_COMMITED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(</span><span style="color: #0000BB">XSException&nbsp;$e</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$e</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getCode</span><span style="color: #007700">()&nbsp;===&nbsp;</span><span style="color: #0000BB">XS_CMD_ERR_BUSY&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$e</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getCode</span><span style="color: #007700">()&nbsp;===&nbsp;</span><span style="color: #0000BB">XS_CMD_ERR_RUNNING</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;</span><span style="color: #0000BB">$e</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>强制刷新服务端的当前库的索引缓存</p>
+
+
+<div class="detailHeader" id="flushLogging-detail">
+flushLogging()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public bool <b>flushLogging</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">刷新成功返回 true, 失败则返回 false</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L449">sdk/php/lib/XSIndex.class.php#L449</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">flushLogging</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_FLUSH_LOGGING</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_LOG_FLUSHED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(</span><span style="color: #0000BB">XSException&nbsp;$e</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$e</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getCode</span><span style="color: #007700">()&nbsp;===&nbsp;</span><span style="color: #0000BB">XS_CMD_ERR_BUSY</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;</span><span style="color: #0000BB">$e</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>强制刷新服务端当前项目的搜索日志</p>
+
+
+<div class="detailHeader" id="getCustomDict-detail">
+getCustomDict()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public string <b>getCustomDict</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">自定义词库内容</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L484">sdk/php/lib/XSIndex.class.php#L484</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getCustomDict</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_USER_DICT</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_INFO</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取自定义词典内容</p>
+
+
+<div class="detailHeader" id="getScwsMulti-detail">
+getScwsMulti()
+<span class="detailHeaderTag">
+方法
+(自版本 v1.4.7 起可用)
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public int <b>getScwsMulti</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">返回当前库的分词复合等级</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L347">sdk/php/lib/XSIndex.class.php#L347</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getScwsMulti</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_GET</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_GET_MULTI</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_INFO</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取当前索引库的分词复合等级</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#setScwsMulti">setScwsMulti</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="openBuffer-detail">
+openBuffer()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>openBuffer</b>(int $size=4)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$size</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">缓冲区大小, 单位: MB 默认为 4MB</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L362">sdk/php/lib/XSIndex.class.php#L362</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">openBuffer</span><span style="color: #007700">(</span><span style="color: #0000BB">$size&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">4</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_buf&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">addExdata</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_buf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_bufSize&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">$size</span><span style="color: #007700">)&nbsp;&lt;&lt;&nbsp;</span><span style="color: #0000BB">20</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>开启索引命令提交缓冲区
+为优化网络性能, 有必要先将本地提交的 add/update/del 等索引变动指令缓存下来, 
+当总大小达到参数指定的 size 时或调用 <a href="XSIndex.html#closeBuffer">closeBuffer</a> 时再真正提交到服务器
+注意: 此举常用于需要大批量更新索引时, 此外重复调用本函数是无必要的</p>
+
+
+<div class="detailHeader" id="setCustomDict-detail">
+setCustomDict()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>setCustomDict</b>(string $content)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$content</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">新的词典内容</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L495">sdk/php/lib/XSIndex.class.php#L495</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setCustomDict</span><span style="color: #007700">(</span><span style="color: #0000BB">$content</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_USER_DICT</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'buf'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$content</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_DICT_SAVED</span><span style="color: #007700">);<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置自定义词典内容</p>
+
+
+<div class="detailHeader" id="setDb-detail">
+setDb()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>setDb</b>(string $name)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$name</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">数据库名称</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L439">sdk/php/lib/XSIndex.class.php#L439</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setDb</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_SET_DB</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'buf'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_DB_CHANGED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>更改存放索引数据的目录
+默认索引数据保存到服务器上的 db 目录, 通过此方法修改数据目录名</p>
+
+
+<div class="detailHeader" id="setScwsMulti-detail">
+setScwsMulti()
+<span class="detailHeaderTag">
+方法
+(自版本 v1.4.7 起可用)
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>setScwsMulti</b>(int $level)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$level</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">要设置的分词复合等级</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L331">sdk/php/lib/XSIndex.class.php#L331</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setScwsMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$level</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$level&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">$level</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$level&nbsp;</span><span style="color: #007700">&gt;=&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$level&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">16</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_SET</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_SET_MULTI</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg2'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$level</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置当前索引库的分词复合等级
+复合等级是 scws 分词粒度控制的一个重要参数, 是长词细分处理依据, 默认为 3, 值范围 0~15
+注意: 这个设置仅直对当前索引库有效, 多次调用设置值被覆盖仅最后那次设置有效,
+而且仅对设置之后提交的索引数据起作用, 如需对以前的索引数据生效请重建索引.</p>
+
+
+<div class="detailHeader" id="stopRebuild-detail">
+stopRebuild()
+<span class="detailHeaderTag">
+方法
+(自版本 v1.3.4 起可用)
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>stopRebuild</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L420">sdk/php/lib/XSIndex.class.php#L420</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">stopRebuild</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'cmd'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_REBUILD</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'arg1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_DB_REBUILD</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_rebuild&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(</span><span style="color: #0000BB">XSException&nbsp;$e</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$e</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getCode</span><span style="color: #007700">()&nbsp;!==&nbsp;</span><span style="color: #0000BB">XS_CMD_ERR_WRONGPLACE</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;</span><span style="color: #0000BB">$e</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>中止索引重建
+丢弃重建临时库的所有数据, 恢复成当前搜索库, 主要用于偶尔重建意外中止的情况</p>
+
+<div class="SeeAlso">
+<h4>参见</h4>
+<ul>
+	<li><a href="XSIndex.html#beginRebuild">beginRebuild</a></li>
+</ul>
+</div>
+
+<div class="detailHeader" id="update-detail">
+update()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSIndex <b>update</b>(<a href="XSDocument.html">XSDocument</a> $doc, bool $add=false)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$doc</td>
+  <td class="paramTypeCol"><a href="XSDocument.html">XSDocument</a></td>
+  <td class="paramDescCol"></td>
+</tr>
+<tr>
+  <td class="paramNameCol">$add</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">是否为新增文档, 已有数据中不存在同一主键的其它数据</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSIndex</td>
+  <td class="paramDescCol">返回自身对象以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSIndex.class.php#L85">sdk/php/lib/XSIndex.class.php#L85</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">update</span><span style="color: #007700">(</span><span style="color: #0000BB">XSDocument&nbsp;$doc</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$add&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;before&nbsp;submit<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$doc</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">beforeSubmit</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">)&nbsp;===&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;check&nbsp;primary&nbsp;key&nbsp;of&nbsp;document<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$fid&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getFieldId</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$doc</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">$fid</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$key&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'Missing&nbsp;value&nbsp;of&nbsp;primary&nbsp;key&nbsp;(FIELD:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$fid&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">')'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;request&nbsp;cmd<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_REQUEST</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_REQUEST_ADD</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$add&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_REQUEST_UPDATE</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">arg2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$fid</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$key</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">);<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;document&nbsp;cmds<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">foreach&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getAllFields</span><span style="color: #007700">()&nbsp;as&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">)&nbsp;</span><span style="color: #FF8000">/*&nbsp;@var&nbsp;$field&nbsp;XSFieldMeta&nbsp;*/&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;value<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;((</span><span style="color: #0000BB">$value&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$doc</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">f</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">))&nbsp;!==&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$varg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">isNumeric</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">XS_CMD_VALUE_FLAG_NUMERIC&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$value&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">val</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasCustomTokenizer</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;internal&nbsp;tokenizer<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">weight&nbsp;</span><span style="color: #007700">|&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">withPos</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_FLAG_WITHPOS&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasIndexMixed</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_INDEX</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wdf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XSFieldScheme</span><span style="color: #007700">::</span><span style="color: #0000BB">MIXED_VNO</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasIndexSelf</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf&nbsp;</span><span style="color: #007700">|=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">isNumeric</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_FLAG_SAVEVALUE</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_INDEX</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wdf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;add&nbsp;value<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(!</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasIndexSelf</span><span style="color: #007700">()&nbsp;||&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">isNumeric</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_VALUE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$varg</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;add&nbsp;index<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasIndex</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getCustomTokenizer</span><span style="color: #007700">()-&gt;</span><span style="color: #0000BB">getTokens</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$doc</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;self:&nbsp;[bool&nbsp;term,&nbsp;NOT&nbsp;weight,&nbsp;NOT&nbsp;stem,&nbsp;NOT&nbsp;pos]<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasIndexSelf</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">isBoolIndex</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">:&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">weight&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_FLAG_CHECKSTEM</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">200</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_TERM</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wdf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;mixed:&nbsp;[use&nbsp;default&nbsp;tokenizer]<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasIndexMixed</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$mtext&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">'&nbsp;'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$terms</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_INDEX</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">weight</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XSFieldScheme</span><span style="color: #007700">::</span><span style="color: #0000BB">MIXED_VNO</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mtext</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;add&nbsp;value<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_VALUE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$varg</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;process&nbsp;add&nbsp;terms<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;((</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$doc</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getAddTerms</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">))&nbsp;!==&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;ignore&nbsp;weight&nbsp;for&nbsp;bool&nbsp;index<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">isBoolIndex</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_FLAG_CHECKSTEM</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$term&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$wdf</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">200</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">isBoolIndex</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">$wdf&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">weight</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">$wdf2&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">XSFieldMeta</span><span style="color: #007700">::</span><span style="color: #0000BB">MAX_WDF</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_TERM</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wdf1&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">XSFieldMeta</span><span style="color: #007700">::</span><span style="color: #0000BB">MAX_WDF</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf2&nbsp;</span><span style="color: #007700">-=&nbsp;</span><span style="color: #0000BB">XSFieldMeta</span><span style="color: #007700">::</span><span style="color: #0000BB">MAX_WDF</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_TERM</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wdf1&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">$wdf2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;process&nbsp;add&nbsp;text<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;((</span><span style="color: #0000BB">$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$doc</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getAddIndex</span><span style="color: #007700">(</span><span style="color: #0000BB">$field</span><span style="color: #007700">))&nbsp;!==&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">hasCustomTokenizer</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">weight&nbsp;</span><span style="color: #007700">|&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">withPos</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_FLAG_WITHPOS&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_INDEX</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wdf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;NOT&nbsp;pos<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$wdf&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">isBoolIndex</span><span style="color: #007700">()&nbsp;?&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">:&nbsp;(</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">weight&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">XS_CMD_INDEX_FLAG_CHECKSTEM</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getCustomTokenizer</span><span style="color: #007700">()-&gt;</span><span style="color: #0000BB">getTokens</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$doc</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$terms&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">)&nbsp;&gt;&nbsp;</span><span style="color: #0000BB">200</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$term&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_DOC_TERM</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$wdf</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$field</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">vno</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$term</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;submit&nbsp;cmd<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_INDEX_SUBMIT</span><span style="color: #007700">);<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;execute&nbsp;cmd<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_bufSize&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">appendBuffer</span><span style="color: #007700">(</span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">)&nbsp;-&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[</span><span style="color: #0000BB">$i</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmds</span><span style="color: #007700">[</span><span style="color: #0000BB">$i</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_RQST_FINISHED</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;after&nbsp;submit<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$doc</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">afterSubmit</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>更新索引文档
+该方法相当于先根据主键删除已存在的旧文档, 然后添加该文档
+如果你能明确认定是新文档, 则建议使用 <a href="XSIndex.html#add">add</a></p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

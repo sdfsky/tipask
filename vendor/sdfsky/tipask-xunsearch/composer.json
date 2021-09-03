@@ -1,0 +1,26 @@
+{
+    "name": "sdfsky/tipask-xunsearch",
+    "description": "Laravel 5 package for full-text search over Eloquent models based on XunSearch.",
+    "keywords": ["laravel", "xunsearch", "tipask"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sdf_sky",
+            "email": "sky_php@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Sdfsky\\TipaskXunSearch\\": "src"
+        },
+        "files": ["xunsearch-sdk/lib/XS.php"]
+    },
+    "minimum-stability": "dev"
+}

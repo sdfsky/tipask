@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>关于 Xunsearch PHP-SDK</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">有哪些优势？</a></li><li><a href="#ch1">适合哪些应用领域？</a></li><li><a href="#ch2">运行环境与条件？</a></li></ol></div><h1 id="-xunsearch-php-sdk">关于 Xunsearch PHP-SDK</h1>
+
+<p>Xunsearch （中文名：迅搜）是一套免费开源的专业中文全文检索解决方案，简单易用而且
+功能强大、性能卓越能轻松处理海量数据的全文检索。它包含后端索引、搜索服务程序和前端
+脚本语言编写的开发工具包(称之为 SDK) 。</p>
+
+<p>Xunsearch 底层采用 C/C++ 编写，索引设计基于著名而悠久的 <a href="http://xapian.org" title="Xapian 官网">Xapian</a>，分词采用
+自主研发同样也是开源的 <a href="http://www.xunsearch.com/scws/" title="免费开源的中文分词系统">SCWS分词</a>，两者完美结合，理论上单个搜索库支持 40 亿条
+记录。可编译运行于 Linux/FreeBSD 等各种 UNIX 类型的系统。</p>
+
+<p><em>Xunsearch PHP-SDK</em> 是该项目的 PHP 语言开发工具包，面向普通开发者提供简要的
+API ，在此基础上快速构建自己的全文检索应用。</p>
+
+<h2 id="ch0">1. 有哪些优势？<a name="ch0" class="anchor">?</a></h2>
+
+<ul>
+<li><p><strong>开源免费</strong>
+Xunsearch 全面开源，并使用最流行的开源许可协议 GPL 发布。任何人均可以免费
+获取本项目的全部源代码，并在许可条件下修改和再分发。</p></li>
+<li><p><strong>分布式架构</strong>
+搜索程序的前端和后端可以分离部署在不同服务器中，对于大规模的搜索应用还可以
+对索引进行水平、垂直切割。</p></li>
+<li><p><strong>开发难度极低</strong>
+一般开发者只要在安装和设置完成后，通过提供的脚本 SDK 包，便可十分容易的进行
+二次开发，打造出自己的全文搜索引擎。</p></li>
+<li><p><strong>功能强大</strong>
+支持字段检索、结果高亮、字段排序、布尔语法、区间检索、聚合搜索、相关搜索、
+权重微调、<em>拼音搜索</em>、<em>搜索建议</em>等专业搜索引擎具备的各项功能。这也是本项目
+相对于其它开源搜索软件的重要优势。</p></li>
+</ul>
+
+<h2 id="ch1">2. 适合哪些应用领域？<a name="ch1" class="anchor">?</a></h2>
+
+<p>适合具备独立服务器（需要Unix 类操作系统）的初、中型规模的网站，作为完整全文检索技术
+解决方案。</p>
+
+<p>支持 MySQL 数据库全文检索、Web站内/论坛搜索、行业门户/垂直搜索、企业级的站内搜索、
+计算机文件搜索等，各种专业搜索引擎（如购物搜索，旅游搜索、游戏搜索）、文档/文献检索
+等各种领域。</p>
+
+<h2 id="ch2">3. 运行环境与条件？<a name="ch2" class="anchor">?</a></h2>
+
+<p>您必须有一台（或多台）Unix 类的主机（推荐用各种 Linux、BSD 操作系统）用于安装 Xunsearch 后端服务程序。</p>
+
+<p><em>Xunsearch PHP-SDK</em> 则可以运行在包含 Windows 在内的服务器系统中，只要求 PHP 的
+版本必须在 5.2.0 以上即可。具体运行时根据需求，PHP 还应包含一些扩展，参见本文档中的
+<a href="util.check.html">RequiredCheck 运行条件检测</a> 。</p>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="start.overview.html">&laquo; 概述</a></div>
+			<div class="next"><a href="start.installation.html">安装、升级 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

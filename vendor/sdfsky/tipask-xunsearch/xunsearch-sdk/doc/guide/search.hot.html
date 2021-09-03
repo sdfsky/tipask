@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>获取热门搜索词</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="-">获取热门搜索词</h1>
+
+<p>在您的搜索功能进行一段时间后，系统会记录并分析所有的搜索词汇，
+提供热门搜索词列表以辅助网站运营、引导用户搜索。</p>
+
+<p>热门搜索词使用 <a href="../api/XSSearch.html#getHotQuery">XSSearch::getHotQuery</a> 方法，返回值是以搜索词为键、
+搜索指数为值的关联数组。接受 2 个可选参数如下：</p>
+
+<ul>
+<li><code>$limit</code> 整数值，设置要返回的词数量上限，默认为 6，最大值为 50</li>
+<li><code>$type</code> 指定排序类型，默认为 <code>total</code>(总量)，可选值还有：<code>lastnum</code>(上周) 和 <code>currnum</code>(本周)</li>
+</ul>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$words</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getHotQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 获取前 6 个总热门搜索词</span>
+<span class="php-hl-var">$words</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getHotQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-number">10</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">lastnum</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 获取前 10 个上周热门词</span></pre></div></div>
+
+<h2 id="-">有关热门搜索的深度挖掘</h2>
+
+<p>搜索日志也是一个完整的索引库，可以进行更深入的分析。由于涉及的知识和基础较为复杂，
+这块内容这儿暂时略过。</p>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="search.count.html">&laquo; 获取搜索匹配数量</a></div>
+			<div class="next"><a href="search.rel.html">获取相关搜索词 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

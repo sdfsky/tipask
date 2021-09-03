@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>最新的主要变动</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">版本 1.4.9 (2015-04-02)</a></li><li><a href="#ch1">版本 1.4.8 (2013-12-11)</a></li><li><a href="#ch2">版本 1.4.7 (2013-7-30)</a></li><li><a href="#ch3">版本 1.4.6 (2013-3-27)</a></li><li><a href="#ch4">版本 1.4.5 (2013-3-25)</a></li><li><a href="#ch5">版本 1.4.4 (2013-3-22)</a></li><li><a href="#ch6">版本 1.4.1 (2013-2-21)</a></li><li><a href="#ch7">版本 1.4.0 (2013-1-22)</a></li><li><a href="#ch8">版本 1.3.3 (2012-11-21)</a></li><li><a href="#ch9">版本 1.3.2 (2012-7-2)</a></li><li><a href="#ch10">版本 1.3.1 (2012-4-6)</a></li><li><a href="#ch11">版本 1.3.0 (2012-1-13)</a></li><li><a href="#ch12">版本 1.2.0 (2011-12-12)</a></li><li><a href="#ch13">版本 1.1.0 (2011-10-25)</a></li></ol></div><h1 id="-">最新的主要变动</h1>
+
+<p>在这里，按版本号罗列了历次版本的主要变动记录，以及相关的文档链接，
+方便新老用户快速查看。完整的更新日志请查看 <a href="https://github.com/hightman/xunsearch/commits">git 提交日志</a>。</p>
+
+<h2 id="ch0">1. 版本 1.4.9 (2015-04-02)<a name="ch0" class="anchor">?</a></h2>
+
+<ul>
+<li>PHP-SDK 添加支持 yii2</li>
+<li>PHP-SDK 支持通过 composer 管理：hightman/xunsearch</li>
+<li>PHP-SDK 常量定义统一添加 XS_ 前缀</li>
+<li>升级整合最新的 xapian-1.2.20, scws-1.2.3-dev</li>
+<li>新增获取同义词接口 <a href="../api/XSSearch.html#getSynonyms">XSSearch::getSynonyms</a></li>
+<li>修正其它一些已知的小问题</li>
+</ul>
+
+<h2 id="ch1">2. 版本 1.4.8 (2013-12-11)<a name="ch1" class="anchor">?</a></h2>
+
+<ul>
+<li>改进优化代码兼容性</li>
+<li>增加用户案例文档：USERCASE</li>
+<li>改进自定义分词器 XSTokenizerScws 接受参数作为复合等级</li>
+<li>升级 libevent 到 2.x 版</li>
+<li>修正中文 stopwords 不生效的问题</li>
+<li>取消恼人的 NODB(S#506) 错误提示</li>
+<li>新增获取文档匹配词表的接口 <a href="../api/XSSearch.html#setRequireMatchedTerm">XSSearch::setRequireMatchedTerm</a></li>
+</ul>
+
+<h2 id="ch2">3. 版本 1.4.7 (2013-7-30)<a name="ch2" class="anchor">?</a></h2>
+
+<ul>
+<li>优化安装脚本，请使用 --help 查看</li>
+<li>采用 Yii2 的代码标准格式化 php-sdk 代码</li>
+<li>改进搜索结果排序支持更复杂排序，参见 <a href="../api/XSSearch.html#setSort">XSSearch::setSort</a></li>
+<li>util.Indexer 加入 PgSQL 数据源支持</li>
+<li>新增支持搜索按匹配百分比/权重剔除，参见 <a href="../api/XSSearch.html#setCutOff">XSSearch::setCutOff</a></li>
+<li>改善搜索同义词处理方案，支持复合同义词及权重微调</li>
+<li>各种小 BUG 修正和及整体稳定性改进</li>
+<li>升级整合最新的 xapian-1.2.15、scws-1.2.2</li>
+</ul>
+
+<h2 id="ch3">4. 版本 1.4.6 (2013-3-27)<a name="ch3" class="anchor">?</a></h2>
+
+<ul>
+<li>改进优化 yii-xunsearch 扩展，使之兼容性更好功能更强</li>
+<li>修改 XSTokenizerScws 以支持项目级自定义词典的</li>
+<li>自定义分词器的字段也能参与权重计算了，在 ini 指定 <code>non_bool = yes</code></li>
+</ul>
+
+<h2 id="ch4">5. 版本 1.4.5 (2013-3-25)<a name="ch4" class="anchor">?</a></h2>
+
+<ul>
+<li>再次订正改进内存 BUG，使之极其稳定</li>
+<li>升级整合最新的 xapian-1.2.14，更节省内存</li>
+<li>改善搜索进程终止的工作方式，更为柔和友好</li>
+</ul>
+
+<h2 id="ch5">6. 版本 1.4.4 (2013-3-22)<a name="ch5" class="anchor">?</a></h2>
+
+<ul>
+<li>加强 scws_fork 在多线程下的锁机制</li>
+<li>再度完善搜索线程池大压力下的死锁问题（感谢几位热心用户的配合反馈）</li>
+<li>美化 util.SearchSkel 生成的搜索骨架效果（采用 bootstrap）</li>
+<li>加入 Yii 扩展的包装代码，位于 <code>sdk/php/wrapper/yii-ext/</code></li>
+</ul>
+
+<h2 id="ch6">7. 版本 1.4.1 (2013-2-21)<a name="ch6" class="anchor">?</a></h2>
+
+<ul>
+<li>修正潜伏已久的 searchd 死锁故障，彻底解决进程卡死</li>
+<li>修正若干已知的小 BUG 并改进一些显示效果</li>
+<li>搜索日志记录时排除具有明显特征的搜索引擎爬虫</li>
+</ul>
+
+<h2 id="ch7">8. 版本 1.4.0 (2013-1-22)<a name="ch7" class="anchor">?</a></h2>
+
+<ul>
+<li>升级整合最新的 xapian-1.2.13、scws-1.2.1</li>
+<li>新增支持项目自定义词库，<a href="index.dict.html">参见文档</a></li>
+<li>改进网络 IO 读取，优化搜索内存运用等大幅提升性能和稳定性</li>
+<li>净化服务端日志使记录更有价值</li>
+<li>改进 util.Indexer 和 util.Quest 加入 --info 选项用于查看服务器简要情况</li>
+<li>改进 bin/xs-ctl.sh 启动脚本，加入 -L/-n/-p 新选项</li>
+</ul>
+
+<h2 id="ch8">9. 版本 1.3.3 (2012-11-21)<a name="ch8" class="anchor">?</a></h2>
+
+<ul>
+<li>修正已知的各种小问题</li>
+<li>同步发布独立的 SDK 下载，并提供测试服务器，<a href="http://bbs.xunsearch.com/showthread.php?tid=749&amp;pid=1556">点击了解</a>。 </li>
+</ul>
+
+<h2 id="ch9">10. 版本 1.3.2 (2012-7-2)<a name="ch9" class="anchor">?</a></h2>
+
+<ul>
+<li>升级整合最新的 xapian-core-1.2.12</li>
+<li>修正若干已知小 BUG</li>
+</ul>
+
+<h2 id="ch10">11. 版本 1.3.1 (2012-4-6)<a name="ch10" class="anchor">?</a></h2>
+
+<ul>
+<li>增加基于搜索服务端的 <a href="../api/XSTokenizerScws.html">XSTokenizerScws</a> 便于直接使用 <a href="http://www.xunsearch.com/scws/">SCWS</a> 的分词功能，
+而不再需要额外安装其 php 扩展，用法详见 <a href="special.scws.html">SCWS专题文档</a></li>
+<li>升级整合最新的 xapian-core-1.2.9、scws-1.2.0</li>
+<li>大量小优化和小 BUG 修正</li>
+</ul>
+
+<h2 id="ch11">12. 版本 1.3.0 (2012-1-13)<a name="ch11" class="anchor">?</a></h2>
+
+<ul>
+<li>内部优化中文复合词的查询分析器，升级整合最新的 xapian-1.2.8、scws-1.1.9</li>
+<li>新增自动同义词搜索功能，详见 <a href="special.synonym.html">同义词专题文档</a></li>
+<li>调优服务端参数，大幅度提升并发处理能力（3~5倍），精简服务端日志</li>
+<li>搜索服务端增加请求数、运行时间的监控，默认达到 10000 次请求或运行超过 3600 秒
+自杀重新生成搜索工作进程，避免内存泄露等不稳定因素。对进程发送 SIGTSTP 
+　信号可以在日志中看到当前的请求数和余下的生命周期。</li>
+<li>搜索语句的最大长度人 80 字节增加到 192 字节</li>
+</ul>
+
+<h2 id="ch12">13. 版本 1.2.0 (2011-12-12)<a name="ch12" class="anchor">?</a></h2>
+
+<ul>
+<li>新增搜索日志（用于热门统计、相关搜索等）管理工具 <a href="util.logger.html">util.Logger</a></li>
+<li><a href="../api/XSIndex.html">XSIndex</a> 对象的各个方法也直接返回对象本身，以支持串接操作。</li>
+<li><a href="util.quest.html">util.Quest</a> 增加了 <code>--show-query</code> 功能用于查看解析后的内部搜索语句。</li>
+<li><a href="util.indexer.html">util.Indexer</a> 增加了 <code>--filter</code> 指定数据过滤器，<a href="util.indexer#ch6">阅读文档</a></li>
+<li>新增自定义 SCWS 分词词典功能，原有索引须重建才能生效，<a href="index.dict.html">阅读文档</a></li>
+</ul>
+
+<h2 id="ch13">14. 版本 1.1.0 (2011-10-25)<a name="ch13" class="anchor">?</a></h2>
+
+<ul>
+<li>数据库智能分库、切割，提升大数据量下的索引速度；该项功能由系统后端自动完成。</li>
+<li>按字段值的分面搜索功能，常用于各种 WEB2.0、电子商务等相关的站内搜索，<a href="search.facet.html">阅读文档</a></li>
+<li>多字段联合排序功能，习惯了 SQL 的用户往往都会碰到多字段不同方式的联合排序需求，<a href="search.search#ch1">阅读文档</a></li>
+<li>该版本的完整修改日志，请查看 <a href="https://github.com/hightman/xunsearch/commits/1.1.0">git commits</a></li>
+</ul>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+			<div class="next"><a href="start.overview.html">概述 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

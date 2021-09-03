@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>删除文档</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">按主键删除</a></li><li><a href="#ch1">按特定字段上的索引词删除</a></li></ol></div><h1 id="-">删除文档</h1>
+
+<p>当某一条数据（文档）已经过期或失效，则必须将它从索引数据库中移除，才能从搜索结果中消失。
+在 <code>Xunsearch PHP-SDK</code> 中删除文档有下面两种方式。</p>
+
+<h2 id="ch0">1. 按主键删除<a name="ch0" class="anchor">?</a></h2>
+
+<p>主键是指项目中类型为 <code>id</code> 的字段，删除是调用的是 <a href="../api/XSIndex.html#del">XSIndex::del</a> 方法，传入参数必须是
+要删除的文档的<code>主键值</code>，或一系列主键值组成的<code>数组</code>。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">del</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">123</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;  </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 删除主键值为 123 的记录</span>
+<span class="php-hl-var">$index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">del</span><span class="php-hl-brackets">(</span><span class="php-hl-reserved">array</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">123</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">789</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">456</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 同时删除主键值为 123, 789, 456 的记录</span></pre></div></div>
+
+<h2 id="ch1">2. 按特定字段上的索引词删除<a name="ch1" class="anchor">?</a></h2>
+
+<p>在项目中，除了主键之外我们通常也会对其它字段进行索引。如果该字段的索引方式（即配置文件中 
+<code>index</code> 选项的值）为 <code>self</code> 或 <code>both</code>，那么也可以根据该字段上的<strong>索引词</strong>进行删除。</p>
+
+<p>特别注意是根据<strong>索引词</strong>删除而不是该字段的值，索引词是指该字段值经过分词器处理后得到的词汇。
+对于索引方式为 <code>mixed</code> 的，如需删除，请把字段名设为类型为 <code>body</code> 的字段的名称。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">del</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">abc</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">subject</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 删除字段 subject 上带有索引词 abc 的所有记录</span>
+<span class="php-hl-var">$index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">del</span><span class="php-hl-brackets">(</span><span class="php-hl-reserved">array</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">abc</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">def</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">subject</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 删除字段 subject 上带有索引词 abc 或 def 的所有记录</span></pre></div></div>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 如果您删除时指定的主键或字段索引词包含中文字符，则它的编码必须与整个项目的
+  默认字符集 <a href="../api/XS.html#defaultCharset">XS::defaultCharset</a> 一致。</p>
+  
+  <p>此外删除操作和<a href="index.add.html">添加文档</a>一样，也是一个异步行为。</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="index.update.html">&laquo; 更新、修改文档</a></div>
+			<div class="next"><a href="index.clean.html">清空索引 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>XSException 异常</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="xsexception-">XSException 异常</h1>
+
+<p>所有操作中出现的异常、错误均抛出此类型的异常，搜索代码中应该尝试捕捉该异常以确定操作是否成功。</p>
+
+<p>已通过重载魔术方法 <a href="../api/XSException.html#__toString">XSException::__toString</a> 对出错信息作了简要的美化和修饰，您可以直接输出该对象，
+如需要查看堆栈追踪，通过继承来的 <a href="../api/XSException.html#getTraceAsString">XSException::getTraceAsString</a> 即可。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 在系统内部将所有的错误处理也转换成为抛出 <a href="../api/XSErrorException.html">XSErrorException</a> 对象，而 <code>XSErrorException</code>
+  继承自 <a href="../api/XSException.html">XSException</a>，所以实际代码中只要统一捕捉 <code>XSException</code> 即可。</p>
+</blockquote>
+
+<p>一段典型的处理代码应类似下面的方式：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">require</span> <span class="php-hl-quotes">'</span><span class="php-hl-string">$prefix/sdk/php/lib/XS.php</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-reserved">try</span>
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-var">$xs</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XS</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">demo</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+    </span><span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$xs</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">hightman</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setLimit</span><span class="php-hl-brackets">(</span><span class="php-hl-number">5</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+    </span><span class="php-hl-reserved">foreach</span> <span class="php-hl-brackets">(</span><span class="php-hl-var">$docs</span> <span class="php-hl-reserved">as</span> <span class="php-hl-var">$doc</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+       <span class="php-hl-reserved">echo</span> <span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">rank</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code"> . </span><span class="php-hl-quotes">&quot;</span><span class="php-hl-string">. </span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code"> . </span><span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">subject</span><span class="php-hl-code"> . </span><span class="php-hl-quotes">&quot;</span><span class="php-hl-string"> [</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code"> . </span><span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">percent</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code"> . </span><span class="php-hl-quotes">&quot;</span><span class="php-hl-string">%]</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code">;
+       </span><span class="php-hl-reserved">echo</span> <span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">message</span><span class="php-hl-code"> . </span><span class="php-hl-quotes">&quot;</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code">;
+    </span><span class="php-hl-brackets">}</span>
+<span class="php-hl-brackets">}</span>
+<span class="php-hl-reserved">catch</span> <span class="php-hl-brackets">(</span><span class="php-hl-identifier">XSException</span> <span class="php-hl-var">$e</span><span class="php-hl-brackets">)</span>
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-reserved">echo</span> <span class="php-hl-var">$e</span><span class="php-hl-code">;               </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 直接输出异常描述</span>
+    <span class="php-hl-reserved">if</span> <span class="php-hl-brackets">(</span><span class="php-hl-identifier">defined</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">DEBUG</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-brackets">)</span>  <span class="php-hl-comment">//</span><span class="php-hl-comment"> 如果是 DEBUG 模式，则输出堆栈情况</span>
+        <span class="php-hl-reserved">echo</span> <span class="php-hl-quotes">&quot;</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code"> . </span><span class="php-hl-var">$e</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getTraceAsString</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code"> . </span><span class="php-hl-quotes">&quot;</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code">;
+</span><span class="php-hl-brackets">}</span></pre></div></div>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="class.xs.html">&laquo; XS 项目</a></div>
+			<div class="next"><a href="class.document.html">XSDocument 文档 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

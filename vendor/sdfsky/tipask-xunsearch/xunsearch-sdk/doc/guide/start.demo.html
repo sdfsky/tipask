@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>体验 DEMO 项目</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">查看项目配置文件</a></li><li><a href="#ch1">填充索引数据</a></li><li><a href="#ch2">测试搜索</a></li><li><a href="#ch3">总结</a></li></ol></div><h1 id="-demo-">体验 DEMO 项目</h1>
+
+<p>为了让您对 <code>xunsearch</code> 有一个初步的印象和了解，我们在这个章节，借助辅助工具
+带您体验一下搜索和索引的操作。这里可能有很多内容您尚不熟悉，请不必感到惶恐，
+只要跟着说明完成操作即可，后面还有大量章节对各项进行深入讲解。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 这些例子中的命令、代码均假定为默认的 UTF-8 环境，如果您使用的是 GBK
+  编码环境，请在运行所有 <code>php</code> 脚本时加入 <code>-c gbk</code> 参数。</p>
+</blockquote>
+
+<h2 id="ch0">1. 查看项目配置文件<a name="ch0" class="anchor">?</a></h2>
+
+<p>每一个 <code>xunsearch</code> 搜索项目都有一个独立的 INI 配置文件。DEMO 项目的配置文件
+位于 <code>$prefix/sdk/php/app/demo.ini</code> 使用以下指令便可直接查看配置文件内容。</p>
+
+<pre>cat $prefix/sdk/php/app/demo.ini
+</pre>
+
+<p>没错，配置文件很简单、清晰，它默认连接本地的 <code>8383、8384</code> 端口并使用 UTF-8 
+编码，包含四个字段：pid，subject，message，chrono 。</p>
+
+<h2 id="ch1">2. 填充索引数据<a name="ch1" class="anchor">?</a></h2>
+
+<p>出于测试方便，我们采用 <code>csv</code> 格式来写入索引数据，请先按以下方式操：</p>
+
+<pre>cd $prefix/sdk/php
+util/Indexer.php --source=csv --clean demo
+</pre>
+
+<p>然后脚本会给出如下提示：</p>
+
+<pre>初始化数据源 ... csv
+WARNING: input file not specified, read data from &lt;STDIN&gt;
+开始批量导入数据 ...
+</pre>
+
+<p>然后我们测试输入下面三条数据，最后一条数据打完后必须敲入回车，然后按 <code>Ctrl-D</code> 结束操作。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 在 Windows 的命令行下运行请使用 <code>Ctrl-Z</code> 来表示结束。</p>
+</blockquote>
+
+<pre>1,关于 xunsearch 的 DEMO 项目测试,项目测试是一个很有意思的行为！,1314336158
+2,测试第二篇,这里是第二篇文章的内容,1314336160
+3,项目测试第三篇,俗话说，无三不成礼，所以就有了第三篇,1314336168
+</pre>
+
+<p>这里屏幕会提示如下信息，表示完成数据提交：</p>
+
+<pre>INFO: reach end of file or error occured, total lines: 3
+完成索引导入：成功 3 条，失败 0 条
+刷新索引提交 ...
+</pre>
+
+<p>索引数据的提交是异步行为，所以录完数据并不是立刻就能检索到（当然，这个时间差也不会太大）。
+所以为稳定起见请稍等几秒再进行下一步的搜索测试。</p>
+
+<h2 id="ch2">3. 测试搜索<a name="ch2" class="anchor">?</a></h2>
+
+<p>首先，我们体验一下正常的搜索，分别以关键词 <em>项目</em>、<em>测试</em>、<em>项目测试</em>、<em>俗话说</em>、<em>莫须有</em> 进行检索：</p>
+
+<pre>cd $prefix/sdk/php
+util/Quest.php demo 项目
+util/Quest.php demo 测试
+util/Quest.php demo 项目测试
+util/Quest.php demo 俗话说
+util/Quest.php demo 莫须有
+</pre>
+
+<p>每个搜索后的关键词系统都会记录下来进行分析，并保存在日志中用于统计热门搜索、搜索建议、相关搜索等。
+默认情况系统会每 2 小时进行一次更新日志，由于我们在进行测试，所以请使用以下指令进行强制刷新。</p>
+
+<pre>util/Indexer.php --flush-log demo
+</pre>
+
+<p>接下来我们测试一下稍微复杂一点的字段、布尔搜索功能：</p>
+
+<pre>util/Quest.php demo subject:测试
+util/Quest.php demo pid:2
+util/Quest.php demo &quot;第三篇 OR pid:1&quot;
+</pre>
+
+<p>最后我们再测试一下日志相关的搜索情况，其中 --suggest 是搜索建议，当用户敲入少许汉字或字母时给出
+相应的关键词建议（常用于搜索输入框下拉自动提示），而 --related 表示相关搜索、--hot 表示热门搜索、
+--correct 表示搜索纠错。</p>
+
+<pre>util/Quest.php --hot demo
+util/Quest.php --related demo 项目
+util/Quest.php --correct demo yunsearch
+util/Quest.php --correct demo xmcs
+util/Quest.php --correct demo xianmu
+util/Quest.php --suggest demo x
+util/Quest.php --suggest demo xm
+util/Quest.php --suggest demo xia
+util/Quest.php --suggest demo xiangmuc
+util/Quest.php --suggest demo 项
+</pre>
+
+<h2 id="ch3">4. 总结<a name="ch3" class="anchor">?</a></h2>
+
+<p>现在应该对 xunsearch 所提供的功能有了初步的印象。您可能会发现在这个体验过程中并
+没有涉及到一行代码，因为我们目的只是先了解和接触一下 <code>xunsearch</code> 搜索，所以采用
+了附加提供的脚本工具来完成所有操作，关于脚本工具的详细使用请阅读后面的专题章节。</p>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="start.installation.html">&laquo; 安装、升级</a></div>
+			<div class="next"><a href="start.convention.html">开发规范 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

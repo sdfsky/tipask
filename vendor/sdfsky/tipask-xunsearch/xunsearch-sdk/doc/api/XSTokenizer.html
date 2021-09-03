@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSTokenizer</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSTokenizer</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS.tokenizer">XS.tokenizer</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>interface XSTokenizer</td>
+</tr>
+<tr>
+  <th>子类</th>
+  <td><a href="XSTokenizerFull.html">XSTokenizerFull</a>, <a href="XSTokenizerNone.html">XSTokenizerNone</a>, <a href="XSTokenizerScws.html">XSTokenizerScws</a>, <a href="XSTokenizerSplit.html">XSTokenizerSplit</a>, <a href="XSTokenizerXlen.html">XSTokenizerXlen</a>, <a href="XSTokenizerXstep.html">XSTokenizerXstep</a></td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php">sdk/php/lib/XSTokenizer.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+自定义字段词法分析器接口
+系统将按照 <a href="XSTokenizer.html#getTokens">getTokens</a> 返回的词汇列表对相应的字段建立索引</div>
+
+<a name="properties"></a>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="getTokens">
+  <td><a href="XSTokenizer.html#getTokens-detail">getTokens()</a></td>
+  <td>执行分词并返回词列表</td>
+  <td>XSTokenizer</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="getTokens-detail">
+getTokens()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+abstract public array <b>getTokens</b>(string $value, <a href="XSDocument.html">XSDocument</a> $doc=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$value</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">待分词的字段值(UTF-8编码)</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$doc</td>
+  <td class="paramTypeCol"><a href="XSDocument.html">XSDocument</a></td>
+  <td class="paramDescCol">当前相关的索引文档</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">切好的词组成的数组</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L33">sdk/php/lib/XSTokenizer.class.php#L33</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getTokens</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XSDocument&nbsp;$doc&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+</div>
+
+<p>执行分词并返回词列表</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

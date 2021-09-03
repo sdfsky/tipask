@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>按字段值分面搜索</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">适用情况</a></li><li><a href="#ch1">用法详细示范</a></li></ol></div><h1 id="-">按字段值分面搜索</h1>
+
+<p>分面搜索在英文中通常表述为 <code>Facets Search</code>，被检索的数据通具有多维度属性。
+例如一本书包含主题、作者、年代等，而分面搜索是指通过事物的这些属性不断筛选、
+过滤搜索结果的方法，可以将分面搜索看成搜索和浏览的结合。</p>
+
+<p>如果您还是不清楚它的概念，敬请参阅<a href="http://cdc.tencent.com/?p=1401">这篇文章</a>。</p>
+
+<h2 id="ch0">1. 适用情况<a name="ch0" class="anchor">?</a></h2>
+
+<p>在 <code>xunsearch</code> 中，分面搜索是按照字段的值来实现的，为了结合条件做筛选搜索，
+支持分面的字段需要进行索引，而它的分词方式最好必须是 <code>full</code> 即整值索引。</p>
+
+<h2 id="ch1">2. 用法详细示范<a name="ch1" class="anchor">?</a></h2>
+
+<p>以论坛文章搜索为例，每篇文章均属于不同版块（字段为 fid）、不同的发表年份
+（字段为 year），我们需要在搜索结果中按年份、版块显示匹配的文章数。</p>
+
+<p>那么在构建搜索语句时使用 <a href="../api/XSSearch.html#setFacets">XSSearch::setFacets</a> 方法来指定需要分面的字段，
+该方法接受两个参数，第一参数为要分面的字段名称（多个字段请用数组作参数），
+第二参数是可选的布尔类型，true 表示需要准确统计，默认 false 则为估算。</p>
+
+<p>执行搜索之后再调用 <a href="../api/XSSearch.html#getFacets">XSSearch::getFacets</a> 方法可取回分面搜索结果。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 在搜索时加入分面设置</span>
+<span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">关键词</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setFacets</span><span class="php-hl-brackets">(</span><span class="php-hl-reserved">array</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">fid</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">year</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 读取分面结果</span>
+<span class="php-hl-var">$fid_counts</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getFacets</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">fid</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 返回数组，以 fid 为键，匹配数量为值</span>
+<span class="php-hl-var">$year_counts</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getFacets</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">year</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 返回数组，以 year 为键，匹配数量为值</span>
+ 
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 遍历 $fid_counts, $year_counts 变量即可得到各自筛选条件下的匹配数量</span>
+<span class="php-hl-reserved">foreach</span> <span class="php-hl-brackets">(</span><span class="php-hl-var">$fid_counts</span> <span class="php-hl-reserved">as</span> <span class="php-hl-var">$fid</span><span class="php-hl-code"> =&gt; </span><span class="php-hl-var">$count</span><span class="php-hl-brackets">)</span>
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-reserved">echo</span> <span class="php-hl-quotes">&quot;</span><span class="php-hl-string">其中版块ID为 </span><span class="php-hl-var">$fid</span><span class="php-hl-string"> 的匹配数为: </span><span class="php-hl-var">$count</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code">;
+</span><span class="php-hl-brackets">}</span>
+ 
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> ...</span>
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 通常可以循环生成新的搜索链接，在搜索链接中加入字段搜索条件即可</span>
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> ...</span>
+ 
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 然后像往常一样使用 $docs 显示文档</span></pre></div></div>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 出于性能考虑，分面搜索返回的匹配数量默认是估算的，比实际数量可能会偏小。
+  如果您确实需要得到精确数字，请将 <a href="../api/XSSearch.html#setFacets">XSSearch::setFacets</a> 的第二参数设为 true 。</p>
+  
+  <p>此外，分面搜索仅针对字段值较短的情况，当字段值的长度超过 <strong>255</strong> 字节时会被忽略而不参与统计。</p>
+  
+  <p>每次搜索最多同时支持 <strong>8</strong> 个字段进行分面搜索，分面字段必须是“字符串”类型。</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="search.fix.html">&laquo; 搜索建议和纠错</a></div>
+			<div class="next"><a href="util.check.html">RequiredCheck 运行检测 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

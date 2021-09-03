@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>生成搜索骨架代码</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">主要参数和选项</a></li><li><a href="#ch1">经典用法示例</a></li><li><a href="#ch2">生成的代码介绍</a></li></ol></div><h1 id="-">生成搜索骨架代码</h1>
+
+<p>前面已经把 <code>Xunsearch PHP-SDK</code> 相关的基础文档全面讲了一通，您完全可以根据文档和
+自动生成的 <code>API</code> 文档进行搜索开发了。</p>
+
+<p>但根据我们研发 <a href="http://www.xungle.com">Xungle 项目</a> 的实践经验，绝大多数搜索项目的前端代码都类似，
+不同的均为细节显示、字段使用等。因此为了更快的加速用户开发速度，我们特地推出这个代码生成工具。</p>
+
+<p>这个工具读取并分析项目配置文件(<code>*.ini</code>)，生成通用的搜索骨架代码，即使您不做任何修改，也能使用它并看到
+基础的搜索效果、界面。强烈建议所有的搜索项目都在生成的骨架代码上进行二次开发，节省大量宝贵时间。</p>
+
+<p>运行脚本工具的 --help 选项可查看内置的帮助和说明，输出文字编码强制为 UTF-8。</p>
+
+<pre>$prefix/sdk/php/util/SearchSkel.php --help
+</pre>
+
+<h2 id="ch0">1. 主要参数和选项<a name="ch0" class="anchor">?</a></h2>
+
+<p>要使用本工具，必须先指定的项目名称或配置文件，它将根据该项目的情况生成代码，主要选项如下：</p>
+
+<ul>
+<li><p><em>-p|--project &lt;name|file></em> 指定项目名称或配置文件路径，参数名可以省略不写，
+如果仅指定项目名称，那么将使用 $prefix/sdk/php/app/<name>.ini 文件。</p></li>
+<li><p><em>-o|--output &lt;..dir..></em> 指定生成的代码目录的存放位置，默认放在当前目录中，
+生成的代码本身包含一层以项目名称命名的目录。建议直接将目录指定到 web 可访问目录。</p></li>
+</ul>
+
+<h2 id="ch1">2. 经典用法示例<a name="ch1" class="anchor">?</a></h2>
+
+<pre># 在当前目录下生成 demo 项目的搜索代码
+util/SearchSkel.php demo
+
+# 在指定的 /path/to/web 目录生成 demo 搜索代码，代码目录为：/path/to/web/demo
+util/SearchSkel.php demo /path/to/web
+
+# 使用选项指定方式
+util/SearchSkel.php -p demo -o /path/to/web
+</pre>
+
+<h2 id="ch2">3. 生成的代码介绍<a name="ch2" class="anchor">?</a></h2>
+
+<p>工具运行完毕后，立即生成以下三个文件于目录中，如果文件已经存在，则会把旧有文件保存为 
+<code>.bak</code> 文件用于备份。</p>
+
+<pre>[demo]
+  |- search.php     # 搜索功能入口
+  |- search.tpl     # 搜索结果输出模板文件
+  \- suggest.php    # 提取搜索输入框下拉建议，通过 autocomplete 组件自动调用
+</pre>
+
+<p>您可以直接通过浏览器访问：search.php 试用搜索。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 生成的代码中关于搜索建议的部分，采用 jQuery-UI 的 autocomplete 并且从 Google 提供的代码库
+  直接加载，如果您的不能连网将可能无法看到部分效果。您可以将相关的 js/css 下载到本地并替换模板代码。</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="util.quest.html">&laquo; Quest 搜索测试工具</a></div>
+			<div class="next"><a href="util.ini.html">IniWizzard 配置文件向导 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

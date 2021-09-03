@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="api/css/highlight.css" />
+<title>关于 xunsearch</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">应用领域</a></li><li><a href="#ch1">历史渊源</a></li><li><a href="#ch2">开发团队</a></li><li><a href="#ch3">致谢</a></li></ol></div><h1 id="-xunsearch">关于 xunsearch</h1>
+
+<p>Xunsearch 是一个高性能、全功能的全文检索解决方案。</p>
+
+<h4 id="xunsearch-">Xunsearch 旨在帮助一般开发者针对既有的海量数据，快速而方便地建立自己的全文搜索引擎。</h4>
+
+<p>Xunsearch 中文译名为“<strong>迅搜</strong>”，代码中的经常被缩写为 <strong>XS</strong>，既是英文名称的缩略也是中文声母缩写。
+这儿的“迅”是快速的意思，至少包含了两层涵义：其一代表了搜索结果的响应能力，其二则为二次开发难度、速度。</p>
+
+<p>Xunsearch 采用结构化分层设计，包含后端服务、前端开发包两大部分，层次清晰而不交叉。
+其中后端是采用 C/C++ 编写的守护进程，而前端采用最为流行的脚本语言 PHP ，对于 web 搜索项目更为方便。
+具体参见<a href="ARCHITECTURE">架构设计</a>。</p>
+
+<p>Xunsearch 极大程度降低的搜索开发的难度，除了常规的中文分词、字段检索、布尔语法等功能外，
+还比其它免费的解决方案提供了用户急需的相关搜索、拼音搜索、结果高亮、搜索建议等等。
+具体的清单请参见我们的<a href="FEATURE">功能列表</a>。</p>
+
+<p>Xunsearch 真正全面开源，并使用最流行的开源许可协议 GPL 发布。您可以免费获取本项目的全部源代码，
+自由的使用它，并在许可条件下修改和再分发，具体参见<a href="LICENSE">授权声明</a>文件。</p>
+
+<h2 id="ch0">1. 应用领域<a name="ch0" class="anchor">?</a></h2>
+
+<p>前提是要有一定的 PHP (或其它对应的 SDK 语言) 开发能力，并备有 Unix 类型操作系统的服务器至少一台。</p>
+
+<p>Xunsearch 可以帮助您建立各种行业门户/垂直搜索、BBS 论坛搜索、CMS/Web站内搜索、文档/文献资料检索，
+以及各种基于现有数据库系统的全文检索。</p>
+
+<h2 id="ch1">2. 历史渊源<a name="ch1" class="anchor">?</a></h2>
+
+<p>大约在 2006 年创始人 <a href="http://www.hightman.cn/">hightman</a> 开始了全文检索的相关探索，先是发布了纯 PHP 实现的中文分词代码，
+之后又推出了 MySQL/MyISAM 全文索引的中文分词补丁 <a href="http://www.hightman.cn/index.php?myft">MyFT</a>。经过一系列不断完善和改进后，于 2007
+年正式发布中文分词项目 <a href="http://www.xunsearch.com/scws/">scws</a> 并一直维护至今。</p>
+
+<p>起初开发分词的目的就是为了解决中文的全文检索，全文检索技术虽然已经趋于成熟，但多为商业产品。免费开源、
+并且要好用的还真难找了，于是萌动了自己开发全文检索的念头。2008 年推出了比较粗糙的搜索解决方案 <a href="http://www.ftphp.com/">FTPHP</a>，
+之后于 2010 年又开启了 <a href="http://www.xungle.com/">Xungle</a> 项目，直接免去各种技术需求，为用户提供包含软硬环境在内的搜索服务。</p>
+
+<p>在 Xungle 项目的运作过程中，我们发现还有大量的用户出于各种原因，不得不自行解决搜索技术。此外，
+我们发现了国外一个优秀的开源搜索引擎基础库 <a href="http://xapian.org/">Xapian</a>，它采用 C/C++ 开发，并且性能卓越，久经考验。
+但是并没有整合中文分词，并且开发难度、复杂度也较大。于是我们下决心整合 Xapian 和 Scws，并在此基础上
+提供更多、更常用的搜索功能。这就是 <code>Xunsearch</code> ，目前版本发布正在准备中，代码也已托管到 <a href="http://github.com/hightman/xunsearch/">github</a> 中。</p>
+
+<h2 id="ch2">3. 开发团队<a name="ch2" class="anchor">?</a></h2>
+
+<p>本项目由杭州云圣网络科技公司创立并维护，同时也是唯一就 Xunsearch 提供相应的商业技术服务、支持的公司。</p>
+
+<p><div class="image"><p>著作权登记证书</p><img src="http://www.xunsearch.com/img/shot/shot_right.jpg" alt="著作权登记证书" /></div></p>
+
+<h2 id="ch3">4. 致谢<a name="ch3" class="anchor">?</a></h2>
+
+<p>是大量 xungle 用户的提议促使我们开启 xunsearch 项目，Xunsearch 的往后发展将离不开广大用户的支持，
+还要特别感谢在此其间义务参与 xunsearch 内测的一些朋友。</p>
+
+<p>Xunsearch 底层采用 C/C++ 编写，其中用到了许多其它优秀项目，在线特别感谢它们的团队和作者。
+主要有以下几个：</p>
+
+<ul>
+<li><a href="http://xapian.org/">xapian-core</a> 这是 Xunsearch 的底层索引设计方案</li>
+<li><a href="http://www.xunsearch.com/scws/">scws</a> 默认内置的中文分词解决方案</li>
+<li><a href="http://monkey.org/~provos/libevent/">libevent</a> 后端服务器的事件处理模型</li>
+<li><a href="http://nginx.org/">nginx</a> 搜索服务器的设计借鉴了 nginx 的方式，采用多进程、多线程混合用于处理高并发请求</li>
+<li><a href="http://www.yiiframework.com/">Yii</a> 非常优秀的 PHP 开发框架，xunsearch 官网采用该框架，文档组织形式也参考自 Yii</li>
+</ul>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+			<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="api/css/info.gif" />
+	<img src="api/css/tip.gif" />
+	<img src="api/css/note.gif" />
+</div>
+
+</body>
+</html>

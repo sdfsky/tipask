@@ -1,0 +1,1372 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="xunserch http://www.xunsearch.com">
+</head>
+<body>
+<ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XS">
+		<param name="Local" value="XS.html">
+		</object>
+	<ul>
+					<li><object type="text/sitemap">
+			<param name="Name" value="allFields">
+			<param name="Local" value="XS.html#allFields">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="config">
+			<param name="Local" value="XS.html#config">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="defaultCharset">
+			<param name="Local" value="XS.html#defaultCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="fieldBody">
+			<param name="Local" value="XS.html#fieldBody">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="fieldId">
+			<param name="Local" value="XS.html#fieldId">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="fieldTitle">
+			<param name="Local" value="XS.html#fieldTitle">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="index">
+			<param name="Local" value="XS.html#index">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="name">
+			<param name="Local" value="XS.html#name">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="scheme">
+			<param name="Local" value="XS.html#scheme">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="scwsServer">
+			<param name="Local" value="XS.html#scwsServer">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="search">
+			<param name="Local" value="XS.html#search">
+			</object>
+									<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XS.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__destruct()">
+			<param name="Local" value="XS.html#__destruct">
+			</object>
+																			<li><object type="text/sitemap">
+			<param name="Name" value="autoload()">
+			<param name="Local" value="XS.html#autoload">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="convert()">
+			<param name="Local" value="XS.html#convert">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getAllFields()">
+			<param name="Local" value="XS.html#getAllFields">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getConfig()">
+			<param name="Local" value="XS.html#getConfig">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getDefaultCharset()">
+			<param name="Local" value="XS.html#getDefaultCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getField()">
+			<param name="Local" value="XS.html#getField">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFieldBody()">
+			<param name="Local" value="XS.html#getFieldBody">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFieldId()">
+			<param name="Local" value="XS.html#getFieldId">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFieldTitle()">
+			<param name="Local" value="XS.html#getFieldTitle">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getIndex()">
+			<param name="Local" value="XS.html#getIndex">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getLastXS()">
+			<param name="Local" value="XS.html#getLastXS">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getName()">
+			<param name="Local" value="XS.html#getName">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getScheme()">
+			<param name="Local" value="XS.html#getScheme">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getScwsServer()">
+			<param name="Local" value="XS.html#getScwsServer">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getSearch()">
+			<param name="Local" value="XS.html#getSearch">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="restoreScheme()">
+			<param name="Local" value="XS.html#restoreScheme">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setDefaultCharset()">
+			<param name="Local" value="XS.html#setDefaultCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setName()">
+			<param name="Local" value="XS.html#setName">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setScheme()">
+			<param name="Local" value="XS.html#setScheme">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSCommand">
+		<param name="Local" value="XSCommand.html">
+		</object>
+	<ul>
+					<li><object type="text/sitemap">
+			<param name="Name" value="arg">
+			<param name="Local" value="XSCommand.html#arg">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="arg1">
+			<param name="Local" value="XSCommand.html#arg1">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="arg2">
+			<param name="Local" value="XSCommand.html#arg2">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="buf">
+			<param name="Local" value="XSCommand.html#buf">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="buf1">
+			<param name="Local" value="XSCommand.html#buf1">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="cmd">
+			<param name="Local" value="XSCommand.html#cmd">
+			</object>
+									<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSCommand.html#__construct">
+			</object>
+																<li><object type="text/sitemap">
+			<param name="Name" value="__toString()">
+			<param name="Local" value="XSCommand.html#__toString">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="getArg()">
+			<param name="Local" value="XSCommand.html#getArg">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setArg()">
+			<param name="Local" value="XSCommand.html#setArg">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSComponent">
+		<param name="Local" value="XSComponent.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__get()">
+			<param name="Local" value="XSComponent.html#__get">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__isset()">
+			<param name="Local" value="XSComponent.html#__isset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__set()">
+			<param name="Local" value="XSComponent.html#__set">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__unset()">
+			<param name="Local" value="XSComponent.html#__unset">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSCsvDataSource">
+		<param name="Local" value="XSCsvDataSource.html">
+		</object>
+	<ul>
+											<li><object type="text/sitemap">
+			<param name="Name" value="invalidLines">
+			<param name="Local" value="XSCsvDataSource.html#invalidLines">
+			</object>
+															<li><object type="text/sitemap">
+			<param name="Name" value="deinit()">
+			<param name="Local" value="XSCsvDataSource.html#deinit">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="getDataList()">
+			<param name="Local" value="XSCsvDataSource.html#getDataList">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="init()">
+			<param name="Local" value="XSCsvDataSource.html#init">
+			</object>
+							</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDataFilter">
+		<param name="Local" value="XSDataFilter.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="process()">
+			<param name="Local" value="XSDataFilter.html#process">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="processDoc()">
+			<param name="Local" value="XSDataFilter.html#processDoc">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDataSource">
+		<param name="Local" value="XSDataSource.html">
+		</object>
+	<ul>
+					<li><object type="text/sitemap">
+			<param name="Name" value="arg">
+			<param name="Local" value="XSDataSource.html#arg">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="inCli">
+			<param name="Local" value="XSDataSource.html#inCli">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="type">
+			<param name="Local" value="XSDataSource.html#type">
+			</object>
+									<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSDataSource.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="deinit()">
+			<param name="Local" value="XSDataSource.html#deinit">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getCharset()">
+			<param name="Local" value="XSDataSource.html#getCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getData()">
+			<param name="Local" value="XSDataSource.html#getData">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getDataList()">
+			<param name="Local" value="XSDataSource.html#getDataList">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="init()">
+			<param name="Local" value="XSDataSource.html#init">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="instance()">
+			<param name="Local" value="XSDataSource.html#instance">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabase">
+		<param name="Local" value="XSDatabase.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSDatabase.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSDatabase.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query()">
+			<param name="Local" value="XSDatabase.html#query">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query1()">
+			<param name="Local" value="XSDatabase.html#query1">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setUtf8()">
+			<param name="Local" value="XSDatabase.html#setUtf8">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabaseDataSource">
+		<param name="Local" value="XSDatabaseDataSource.html">
+		</object>
+	<ul>
+																			<li><object type="text/sitemap">
+			<param name="Name" value="deinit()">
+			<param name="Local" value="XSDatabaseDataSource.html#deinit">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getCharset()">
+			<param name="Local" value="XSDatabaseDataSource.html#getCharset">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="getDataList()">
+			<param name="Local" value="XSDatabaseDataSource.html#getDataList">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="init()">
+			<param name="Local" value="XSDatabaseDataSource.html#init">
+			</object>
+							</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabaseMySQL">
+		<param name="Local" value="XSDatabaseMySQL.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSDatabaseMySQL.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSDatabaseMySQL.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query()">
+			<param name="Local" value="XSDatabaseMySQL.html#query">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="setUtf8()">
+			<param name="Local" value="XSDatabaseMySQL.html#setUtf8">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabaseMySQLI">
+		<param name="Local" value="XSDatabaseMySQLI.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSDatabaseMySQLI.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSDatabaseMySQLI.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query()">
+			<param name="Local" value="XSDatabaseMySQLI.html#query">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="setUtf8()">
+			<param name="Local" value="XSDatabaseMySQLI.html#setUtf8">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabasePDO">
+		<param name="Local" value="XSDatabasePDO.html">
+		</object>
+	<ul>
+					<li><object type="text/sitemap">
+			<param name="Name" value="obj">
+			<param name="Local" value="XSDatabasePDO.html#obj">
+			</object>
+									<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSDatabasePDO.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSDatabasePDO.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="makeDsn()">
+			<param name="Local" value="XSDatabasePDO.html#makeDsn">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query()">
+			<param name="Local" value="XSDatabasePDO.html#query">
+			</object>
+										</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabasePDO_MySQL">
+		<param name="Local" value="XSDatabasePDO_MySQL.html">
+		</object>
+	<ul>
+																<li><object type="text/sitemap">
+			<param name="Name" value="makeDsn()">
+			<param name="Local" value="XSDatabasePDO_MySQL.html#makeDsn">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="setUtf8()">
+			<param name="Local" value="XSDatabasePDO_MySQL.html#setUtf8">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabasePDO_PgSQL">
+		<param name="Local" value="XSDatabasePDO_PgSQL.html">
+		</object>
+	<ul>
+																<li><object type="text/sitemap">
+			<param name="Name" value="makeDsn()">
+			<param name="Local" value="XSDatabasePDO_PgSQL.html#makeDsn">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="setUtf8()">
+			<param name="Local" value="XSDatabasePDO_PgSQL.html#setUtf8">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabasePDO_SQLite">
+		<param name="Local" value="XSDatabasePDO_SQLite.html">
+		</object>
+	<ul>
+																<li><object type="text/sitemap">
+			<param name="Name" value="makeDsn()">
+			<param name="Local" value="XSDatabasePDO_SQLite.html#makeDsn">
+			</object>
+													</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabasePgSQL">
+		<param name="Local" value="XSDatabasePgSQL.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSDatabasePgSQL.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSDatabasePgSQL.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query()">
+			<param name="Local" value="XSDatabasePgSQL.html#query">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="setUtf8()">
+			<param name="Local" value="XSDatabasePgSQL.html#setUtf8">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabaseSQLite">
+		<param name="Local" value="XSDatabaseSQLite.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSDatabaseSQLite.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSDatabaseSQLite.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query()">
+			<param name="Local" value="XSDatabaseSQLite.html#query">
+			</object>
+										</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDatabaseSQLite3">
+		<param name="Local" value="XSDatabaseSQLite3.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSDatabaseSQLite3.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSDatabaseSQLite3.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="query()">
+			<param name="Local" value="XSDatabaseSQLite3.html#query">
+			</object>
+										</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDebugFilter">
+		<param name="Local" value="XSDebugFilter.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="process()">
+			<param name="Local" value="XSDebugFilter.html#process">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="processDoc()">
+			<param name="Local" value="XSDebugFilter.html#processDoc">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSDocument">
+		<param name="Local" value="XSDocument.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__call()">
+			<param name="Local" value="XSDocument.html#__call">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSDocument.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__get()">
+			<param name="Local" value="XSDocument.html#__get">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__set()">
+			<param name="Local" value="XSDocument.html#__set">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addIndex()">
+			<param name="Local" value="XSDocument.html#addIndex">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addTerm()">
+			<param name="Local" value="XSDocument.html#addTerm">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="afterSubmit()">
+			<param name="Local" value="XSDocument.html#afterSubmit">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="beforeSubmit()">
+			<param name="Local" value="XSDocument.html#beforeSubmit">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="f()">
+			<param name="Local" value="XSDocument.html#f">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getAddIndex()">
+			<param name="Local" value="XSDocument.html#getAddIndex">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getAddTerms()">
+			<param name="Local" value="XSDocument.html#getAddTerms">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getCharset()">
+			<param name="Local" value="XSDocument.html#getCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFields()">
+			<param name="Local" value="XSDocument.html#getFields">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getIterator()">
+			<param name="Local" value="XSDocument.html#getIterator">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="offsetExists()">
+			<param name="Local" value="XSDocument.html#offsetExists">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="offsetGet()">
+			<param name="Local" value="XSDocument.html#offsetGet">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="offsetSet()">
+			<param name="Local" value="XSDocument.html#offsetSet">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="offsetUnset()">
+			<param name="Local" value="XSDocument.html#offsetUnset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setCharset()">
+			<param name="Local" value="XSDocument.html#setCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setField()">
+			<param name="Local" value="XSDocument.html#setField">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setFields()">
+			<param name="Local" value="XSDocument.html#setFields">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSErrorException">
+		<param name="Local" value="XSErrorException.html">
+		</object>
+	<ul>
+																			<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSErrorException.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__toString()">
+			<param name="Local" value="XSErrorException.html#__toString">
+			</object>
+																												</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSException">
+		<param name="Local" value="XSException.html">
+		</object>
+	<ul>
+																						<li><object type="text/sitemap">
+			<param name="Name" value="__toString()">
+			<param name="Local" value="XSException.html#__toString">
+			</object>
+																						<li><object type="text/sitemap">
+			<param name="Name" value="getRelPath()">
+			<param name="Local" value="XSException.html#getRelPath">
+			</object>
+										</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSFieldMeta">
+		<param name="Local" value="XSFieldMeta.html">
+		</object>
+	<ul>
+					<li><object type="text/sitemap">
+			<param name="Name" value="cutlen">
+			<param name="Local" value="XSFieldMeta.html#cutlen">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="name">
+			<param name="Local" value="XSFieldMeta.html#name">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="type">
+			<param name="Local" value="XSFieldMeta.html#type">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="vno">
+			<param name="Local" value="XSFieldMeta.html#vno">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="weight">
+			<param name="Local" value="XSFieldMeta.html#weight">
+			</object>
+									<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSFieldMeta.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__toString()">
+			<param name="Local" value="XSFieldMeta.html#__toString">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="fromConfig()">
+			<param name="Local" value="XSFieldMeta.html#fromConfig">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getCustomTokenizer()">
+			<param name="Local" value="XSFieldMeta.html#getCustomTokenizer">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="hasCustomTokenizer()">
+			<param name="Local" value="XSFieldMeta.html#hasCustomTokenizer">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="hasIndex()">
+			<param name="Local" value="XSFieldMeta.html#hasIndex">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="hasIndexMixed()">
+			<param name="Local" value="XSFieldMeta.html#hasIndexMixed">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="hasIndexSelf()">
+			<param name="Local" value="XSFieldMeta.html#hasIndexSelf">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="isBoolIndex()">
+			<param name="Local" value="XSFieldMeta.html#isBoolIndex">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="isNumeric()">
+			<param name="Local" value="XSFieldMeta.html#isNumeric">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="isSpeical()">
+			<param name="Local" value="XSFieldMeta.html#isSpeical">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="toConfig()">
+			<param name="Local" value="XSFieldMeta.html#toConfig">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="val()">
+			<param name="Local" value="XSFieldMeta.html#val">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="withPos()">
+			<param name="Local" value="XSFieldMeta.html#withPos">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSFieldScheme">
+		<param name="Local" value="XSFieldScheme.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__toString()">
+			<param name="Local" value="XSFieldScheme.html#__toString">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addField()">
+			<param name="Local" value="XSFieldScheme.html#addField">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="checkValid()">
+			<param name="Local" value="XSFieldScheme.html#checkValid">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getAllFields()">
+			<param name="Local" value="XSFieldScheme.html#getAllFields">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getField()">
+			<param name="Local" value="XSFieldScheme.html#getField">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFieldBody()">
+			<param name="Local" value="XSFieldScheme.html#getFieldBody">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFieldId()">
+			<param name="Local" value="XSFieldScheme.html#getFieldId">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFieldTitle()">
+			<param name="Local" value="XSFieldScheme.html#getFieldTitle">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getIterator()">
+			<param name="Local" value="XSFieldScheme.html#getIterator">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getVnoMap()">
+			<param name="Local" value="XSFieldScheme.html#getVnoMap">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="logger()">
+			<param name="Local" value="XSFieldScheme.html#logger">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSIndex">
+		<param name="Local" value="XSIndex.html">
+		</object>
+	<ul>
+																							<li><object type="text/sitemap">
+			<param name="Name" value="customDict">
+			<param name="Local" value="XSIndex.html#customDict">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="scwsMulti">
+			<param name="Local" value="XSIndex.html#scwsMulti">
+			</object>
+																		<li><object type="text/sitemap">
+			<param name="Name" value="__destruct()">
+			<param name="Local" value="XSIndex.html#__destruct">
+			</object>
+																			<li><object type="text/sitemap">
+			<param name="Name" value="add()">
+			<param name="Local" value="XSIndex.html#add">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addExdata()">
+			<param name="Local" value="XSIndex.html#addExdata">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addServer()">
+			<param name="Local" value="XSIndex.html#addServer">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addSynonym()">
+			<param name="Local" value="XSIndex.html#addSynonym">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="beginRebuild()">
+			<param name="Local" value="XSIndex.html#beginRebuild">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="clean()">
+			<param name="Local" value="XSIndex.html#clean">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSIndex.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="closeBuffer()">
+			<param name="Local" value="XSIndex.html#closeBuffer">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="del()">
+			<param name="Local" value="XSIndex.html#del">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="delSynonym()">
+			<param name="Local" value="XSIndex.html#delSynonym">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="endRebuild()">
+			<param name="Local" value="XSIndex.html#endRebuild">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="execCommand()">
+			<param name="Local" value="XSIndex.html#execCommand">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="flushIndex()">
+			<param name="Local" value="XSIndex.html#flushIndex">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="flushLogging()">
+			<param name="Local" value="XSIndex.html#flushLogging">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="getCustomDict()">
+			<param name="Local" value="XSIndex.html#getCustomDict">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="getScwsMulti()">
+			<param name="Local" value="XSIndex.html#getScwsMulti">
+			</object>
+																<li><object type="text/sitemap">
+			<param name="Name" value="openBuffer()">
+			<param name="Local" value="XSIndex.html#openBuffer">
+			</object>
+																<li><object type="text/sitemap">
+			<param name="Name" value="setCustomDict()">
+			<param name="Local" value="XSIndex.html#setCustomDict">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setDb()">
+			<param name="Local" value="XSIndex.html#setDb">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="setScwsMulti()">
+			<param name="Local" value="XSIndex.html#setScwsMulti">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="stopRebuild()">
+			<param name="Local" value="XSIndex.html#stopRebuild">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="update()">
+			<param name="Local" value="XSIndex.html#update">
+			</object>
+							</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSJsonDataSource">
+		<param name="Local" value="XSJsonDataSource.html">
+		</object>
+	<ul>
+											<li><object type="text/sitemap">
+			<param name="Name" value="invalidLines">
+			<param name="Local" value="XSJsonDataSource.html#invalidLines">
+			</object>
+															<li><object type="text/sitemap">
+			<param name="Name" value="deinit()">
+			<param name="Local" value="XSJsonDataSource.html#deinit">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="getDataList()">
+			<param name="Local" value="XSJsonDataSource.html#getDataList">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="init()">
+			<param name="Local" value="XSJsonDataSource.html#init">
+			</object>
+							</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSSearch">
+		<param name="Local" value="XSSearch.html">
+		</object>
+	<ul>
+																				<li><object type="text/sitemap">
+			<param name="Name" value="allSynonyms">
+			<param name="Local" value="XSSearch.html#allSynonyms">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="correctedQuery">
+			<param name="Local" value="XSSearch.html#correctedQuery">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="dbTotal">
+			<param name="Local" value="XSSearch.html#dbTotal">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="facets">
+			<param name="Local" value="XSSearch.html#facets">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="hotQuery">
+			<param name="Local" value="XSSearch.html#hotQuery">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="lastCount">
+			<param name="Local" value="XSSearch.html#lastCount">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="query">
+			<param name="Local" value="XSSearch.html#query">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="relatedQuery">
+			<param name="Local" value="XSSearch.html#relatedQuery">
+			</object>
+																																				<li><object type="text/sitemap">
+			<param name="Name" value="addDb()">
+			<param name="Local" value="XSSearch.html#addDb">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addQueryString()">
+			<param name="Local" value="XSSearch.html#addQueryString">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addQueryTerm()">
+			<param name="Local" value="XSSearch.html#addQueryTerm">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addRange()">
+			<param name="Local" value="XSSearch.html#addRange">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addSearchLog()">
+			<param name="Local" value="XSSearch.html#addSearchLog">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addWeight()">
+			<param name="Local" value="XSSearch.html#addWeight">
+			</object>
+																<li><object type="text/sitemap">
+			<param name="Name" value="count()">
+			<param name="Local" value="XSSearch.html#count">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="getAllSynonyms()">
+			<param name="Local" value="XSSearch.html#getAllSynonyms">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="getCorrectedQuery()">
+			<param name="Local" value="XSSearch.html#getCorrectedQuery">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getDbTotal()">
+			<param name="Local" value="XSSearch.html#getDbTotal">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getExpandedQuery()">
+			<param name="Local" value="XSSearch.html#getExpandedQuery">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getFacets()">
+			<param name="Local" value="XSSearch.html#getFacets">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getHotQuery()">
+			<param name="Local" value="XSSearch.html#getHotQuery">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getLastCount()">
+			<param name="Local" value="XSSearch.html#getLastCount">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="getQuery()">
+			<param name="Local" value="XSSearch.html#getQuery">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getRelatedQuery()">
+			<param name="Local" value="XSSearch.html#getRelatedQuery">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="getSynonyms()">
+			<param name="Local" value="XSSearch.html#getSynonyms">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="highlight()">
+			<param name="Local" value="XSSearch.html#highlight">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="markResetScheme()">
+			<param name="Local" value="XSSearch.html#markResetScheme">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="open()">
+			<param name="Local" value="XSSearch.html#open">
+			</object>
+													<li><object type="text/sitemap">
+			<param name="Name" value="search()">
+			<param name="Local" value="XSSearch.html#search">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="setAutoSynonyms()">
+			<param name="Local" value="XSSearch.html#setAutoSynonyms">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setCharset()">
+			<param name="Local" value="XSSearch.html#setCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setCollapse()">
+			<param name="Local" value="XSSearch.html#setCollapse">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setCutOff()">
+			<param name="Local" value="XSSearch.html#setCutOff">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setDb()">
+			<param name="Local" value="XSSearch.html#setDb">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setDocOrder()">
+			<param name="Local" value="XSSearch.html#setDocOrder">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setFacets()">
+			<param name="Local" value="XSSearch.html#setFacets">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setFuzzy()">
+			<param name="Local" value="XSSearch.html#setFuzzy">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setLimit()">
+			<param name="Local" value="XSSearch.html#setLimit">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setMultiSort()">
+			<param name="Local" value="XSSearch.html#setMultiSort">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="setQuery()">
+			<param name="Local" value="XSSearch.html#setQuery">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setRequireMatchedTerm()">
+			<param name="Local" value="XSSearch.html#setRequireMatchedTerm">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setScwsMulti()">
+			<param name="Local" value="XSSearch.html#setScwsMulti">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setSort()">
+			<param name="Local" value="XSSearch.html#setSort">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setSynonymScale()">
+			<param name="Local" value="XSSearch.html#setSynonymScale">
+			</object>
+										<li><object type="text/sitemap">
+			<param name="Name" value="terms()">
+			<param name="Local" value="XSSearch.html#terms">
+			</object>
+							</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSServer">
+		<param name="Local" value="XSServer.html">
+		</object>
+	<ul>
+					<li><object type="text/sitemap">
+			<param name="Name" value="_conn">
+			<param name="Local" value="XSServer.html#_conn">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="_flag">
+			<param name="Local" value="XSServer.html#_flag">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="_project">
+			<param name="Local" value="XSServer.html#_project">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="_sendBuffer">
+			<param name="Local" value="XSServer.html#_sendBuffer">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="_sock">
+			<param name="Local" value="XSServer.html#_sock">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connString">
+			<param name="Local" value="XSServer.html#connString">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="project">
+			<param name="Local" value="XSServer.html#project">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="respond">
+			<param name="Local" value="XSServer.html#respond">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="socket">
+			<param name="Local" value="XSServer.html#socket">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="xs">
+			<param name="Local" value="XSServer.html#xs">
+			</object>
+									<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSServer.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__destruct()">
+			<param name="Local" value="XSServer.html#__destruct">
+			</object>
+																			<li><object type="text/sitemap">
+			<param name="Name" value="check()">
+			<param name="Local" value="XSServer.html#check">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="close()">
+			<param name="Local" value="XSServer.html#close">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="connect()">
+			<param name="Local" value="XSServer.html#connect">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="execCommand()">
+			<param name="Local" value="XSServer.html#execCommand">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getConnString()">
+			<param name="Local" value="XSServer.html#getConnString">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getProject()">
+			<param name="Local" value="XSServer.html#getProject">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getRespond()">
+			<param name="Local" value="XSServer.html#getRespond">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getSocket()">
+			<param name="Local" value="XSServer.html#getSocket">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="hasRespond()">
+			<param name="Local" value="XSServer.html#hasRespond">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="open()">
+			<param name="Local" value="XSServer.html#open">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="read()">
+			<param name="Local" value="XSServer.html#read">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="reopen()">
+			<param name="Local" value="XSServer.html#reopen">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="sendCommand()">
+			<param name="Local" value="XSServer.html#sendCommand">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setProject()">
+			<param name="Local" value="XSServer.html#setProject">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setTimeout()">
+			<param name="Local" value="XSServer.html#setTimeout">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="write()">
+			<param name="Local" value="XSServer.html#write">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSTokenizer">
+		<param name="Local" value="XSTokenizer.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTokens()">
+			<param name="Local" value="XSTokenizer.html#getTokens">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSTokenizerFull">
+		<param name="Local" value="XSTokenizerFull.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTokens()">
+			<param name="Local" value="XSTokenizerFull.html#getTokens">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSTokenizerNone">
+		<param name="Local" value="XSTokenizerNone.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTokens()">
+			<param name="Local" value="XSTokenizerNone.html#getTokens">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSTokenizerScws">
+		<param name="Local" value="XSTokenizerScws.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSTokenizerScws.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="addDict()">
+			<param name="Local" value="XSTokenizerScws.html#addDict">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getResult()">
+			<param name="Local" value="XSTokenizerScws.html#getResult">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTokens()">
+			<param name="Local" value="XSTokenizerScws.html#getTokens">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTops()">
+			<param name="Local" value="XSTokenizerScws.html#getTops">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getVersion()">
+			<param name="Local" value="XSTokenizerScws.html#getVersion">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="hasWord()">
+			<param name="Local" value="XSTokenizerScws.html#hasWord">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setCharset()">
+			<param name="Local" value="XSTokenizerScws.html#setCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setDict()">
+			<param name="Local" value="XSTokenizerScws.html#setDict">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setDuality()">
+			<param name="Local" value="XSTokenizerScws.html#setDuality">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setIgnore()">
+			<param name="Local" value="XSTokenizerScws.html#setIgnore">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setMulti()">
+			<param name="Local" value="XSTokenizerScws.html#setMulti">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSTokenizerSplit">
+		<param name="Local" value="XSTokenizerSplit.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSTokenizerSplit.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTokens()">
+			<param name="Local" value="XSTokenizerSplit.html#getTokens">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSTokenizerXlen">
+		<param name="Local" value="XSTokenizerXlen.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSTokenizerXlen.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTokens()">
+			<param name="Local" value="XSTokenizerXlen.html#getTokens">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSTokenizerXstep">
+		<param name="Local" value="XSTokenizerXstep.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="__construct()">
+			<param name="Local" value="XSTokenizerXstep.html#__construct">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getTokens()">
+			<param name="Local" value="XSTokenizerXstep.html#getTokens">
+			</object>
+				</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="XSUtil">
+		<param name="Local" value="XSUtil.html">
+		</object>
+	<ul>
+							<li><object type="text/sitemap">
+			<param name="Name" value="convertIn()">
+			<param name="Local" value="XSUtil.html#convertIn">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="convertOut()">
+			<param name="Local" value="XSUtil.html#convertOut">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="copyDir()">
+			<param name="Local" value="XSUtil.html#copyDir">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="fixWidth()">
+			<param name="Local" value="XSUtil.html#fixWidth">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="flush()">
+			<param name="Local" value="XSUtil.html#flush">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="getOpt()">
+			<param name="Local" value="XSUtil.html#getOpt">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="parseOpt()">
+			<param name="Local" value="XSUtil.html#parseOpt">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="setCharset()">
+			<param name="Local" value="XSUtil.html#setCharset">
+			</object>
+							<li><object type="text/sitemap">
+			<param name="Name" value="toProjectIni()">
+			<param name="Local" value="XSUtil.html#toProjectIni">
+			</object>
+				</ul>
+</ul>
+</body>
+</html>

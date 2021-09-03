@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSDatabasePDO_SQLite</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSDatabasePDO_SQLite</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#properties">属性</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS.util.db">XS.util.db</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>class XSDatabasePDO_SQLite &raquo;
+<a href="XSDatabasePDO.html">XSDatabasePDO</a> &raquo;
+<a href="XSDatabase.html">XSDatabase</a></td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/util/XSDataSource.class.php">sdk/php/util/XSDataSource.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+PDO.SQLite 实现</div>
+
+<a name="properties"></a>
+
+<div class="summary docProperty">
+<h2>Protected 属性</h2>
+
+<p><a href="#" class="toggle">隐去继承来的属性</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-property" />
+	<col class="col-type" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>类型</th><th>描述</th><th>定义于</th>
+</tr>
+<tr class="inherited" id="obj">
+  <td><a href="XSDatabasePDO.html#obj-detail">obj</a></td>
+  <td></td>
+  <td></td>
+  <td><a href="XSDatabasePDO.html">XSDatabasePDO</a></td>
+</tr>
+</table>
+</div>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr class="inherited" id="close">
+  <td><a href="XSDatabasePDO.html#close-detail">close()</a></td>
+  <td>关闭数据库</td>
+  <td><a href="XSDatabasePDO.html">XSDatabasePDO</a></td>
+</tr>
+<tr class="inherited" id="connect">
+  <td><a href="XSDatabasePDO.html#connect-detail">connect()</a></td>
+  <td>连接数据库</td>
+  <td><a href="XSDatabasePDO.html">XSDatabasePDO</a></td>
+</tr>
+<tr class="inherited" id="query">
+  <td><a href="XSDatabasePDO.html#query-detail">query()</a></td>
+  <td>执行 SQL 语句</td>
+  <td><a href="XSDatabasePDO.html">XSDatabasePDO</a></td>
+</tr>
+<tr class="inherited" id="query1">
+  <td><a href="XSDatabase.html#query1-detail">query1()</a></td>
+  <td>查询数据库首行</td>
+  <td><a href="XSDatabase.html">XSDatabase</a></td>
+</tr>
+<tr class="inherited" id="setUtf8">
+  <td><a href="XSDatabase.html#setUtf8-detail">setUtf8()</a></td>
+  <td>设置数据库字符集为 UTF-8</td>
+  <td><a href="XSDatabase.html">XSDatabase</a></td>
+</tr>
+</table>
+</div>
+
+<div class="summary docMethod">
+<h2>Protected 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="makeDsn">
+  <td><a href="XSDatabasePDO_SQLite.html#makeDsn-detail">makeDsn()</a></td>
+  <td>生成 SQLite DSN</td>
+  <td>XSDatabasePDO_SQLite</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="makeDsn-detail">
+makeDsn()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+protected string <b>makeDsn</b>(array $param)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$param</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">包含 path 为数据库路径</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol"></td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/util/XSDataSource.class.php#L945">sdk/php/util/XSDataSource.class.php#L945</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">protected&nbsp;function&nbsp;</span><span style="color: #0000BB">makeDsn</span><span style="color: #007700">(</span><span style="color: #0000BB">$param</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$dsn&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'sqlite:'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$param</span><span style="color: #007700">[</span><span style="color: #DD0000">'path'</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$dsn</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>生成 SQLite DSN</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

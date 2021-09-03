@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>基础对象概述</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="-">基础对象概述</h1>
+
+<p><code>Xunsearch PHP-SDK</code> 全面采用面向对象（<code>OOP</code>）的开发方式。
+本章节将简单介绍开发过程中要接触到的几个重要对象（类）。</p>
+
+<ul>
+<li><a href="../api/XS.html">XS</a> 搜索项目的总对象，所有操作均基于此对象或其属性。</li>
+<li><a href="../api/XSException.html">XSException</a> 所有操作中出现的异常、错误均抛出此类型的异常，搜索代码中应该尝试捕捉该异常以确定操作是否成功。</li>
+<li><a href="../api/XSDocument.html">XSDocument</a> 文档用于描述检索/索引的基础对象，包含一组字段及其值，相当于常规SQL数据表中的一行记录。</li>
+<li><a href="../api/XSIndex.html">XSIndex</a> 提供索引添加/删除/修改功能，通常以 <code>XS</code> 对象的属性方式出现，参见 <a href="../api/XS.html#index">XS::index</a>。</li>
+<li><a href="../api/XSSearch.html">XSSearch</a> 提供各种搜索功能，通常以 <code>XS</code> 对象的属性方式出现，参见 <a href="../api/XS.html#search">XS::search</a>。</li>
+<li><a href="../api/XSTokenizer.html">XSTokenizer</a> 自定义字段词法分析器接口。</li>
+</ul>
+
+<h2 id="-">类对象中的魔术属性</h2>
+
+<p>通过 PHP 对象中的 __get 和 __set 技巧，我们针对所有 <a href="../api/XSComponent.html">XSComponent</a> 的子类实现了对象的模拟属性。
+这类读取或写入属性值时实际上是隐含调用了相应的 getter/setter 方法，这类属性不区分大小写。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$a</span><span class="php-hl-code"> = </span><span class="php-hl-var">$obj</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">text</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> $a 值等于 $obj-&gt;getText() 的返回值</span>
+<span class="php-hl-var">$obj</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">text</span><span class="php-hl-code"> = </span><span class="php-hl-var">$a</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 等同事调用 $obj-&gt;setText($a)</span></pre></div></div>
+
+<p>支持这类属性的对象主要包括以下几个（不全，仅挑重要的列出）：</p>
+
+<ul>
+<li><a href="../api/XS.html#index">XS::index</a> 项目索引对象：$xs->index</li>
+<li><a href="../api/XS.html#search">XS::search</a> 项目搜索对象：$xs->search </li>
+<li><a href="../api/XS.html#defaultCharset">XS::defaultCharset</a> 项目默认字符集：$xs->defaultCharset</li>
+<li><a href="../api/XSSearch.html#dbTotal">XSSearch::dbTotal</a> 搜索数据库内的数据总量：$xs->search->dbTotal</li>
+<li><a href="../api/XSSearch.html#lastCount">XSSearch::lastCount</a> 最近一次搜索的结果匹配总数估算值：$xs->search->lastCount</li>
+<li><a href="../api/XSSearch.html#query">XSSearch::query</a> 搜索语句：$xs->search->query</li>
+</ul>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="start.workflow.html">&laquo; 开发流程</a></div>
+			<div class="next"><a href="class.xs.html">XS 项目 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

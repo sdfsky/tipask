@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>索引管理器</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">主要参数和选项</a></li><li><a href="#ch1">经典用法示例</a></li><li><a href="#ch2">导入 SQL 数据库</a></li><li><a href="#ch3">导入 CSV 数据</a></li><li><a href="#ch4">导入 JSON 数据</a></li><li><a href="#ch5">清空、重建索引</a></li><li><a href="#ch6">自定义数据过滤器</a></li><li><a href="#ch7">自定义数据源</a></li><li><a href="#ch8">同义词管理</a></li><li><a href="#ch9">存取项目自定义词库</a></li></ol></div><h1 id="-">索引管理器</h1>
+
+<p><code>Indexer</code> 作为索引管理工具，提供了批量索引导入、清空索引、刷新索引队列、日志等各项功能，
+导入索引支持数据源包括：<code>csv, json, mysql, sqlite</code> 等，也可以自定义数据源。</p>
+
+<p>运行脚本工具的 --help 选项可查看内置的帮助和说明，如乱码可在选项后加入 -c gbk 试试。</p>
+
+<pre>$prefix/sdk/php/util/Indexer.php --help
+</pre>
+
+<h2 id="ch0">1. 主要参数和选项<a name="ch0" class="anchor">?</a></h2>
+
+<p>要使用索引工具，必须先指定的项目名称或配置文件，所有的操作都将是作用于该项目，主要选项如下：</p>
+
+<ul>
+<li><p><em>-p|--project &lt;name|file></em> 指定项目名称或配置文件路径，参数名可以省略不写，
+如果仅指定项目名称，那么将使用 $prefix/sdk/php/app/<name>.ini 文件。</p></li>
+<li><p><em>-c|--charset &lt;gbk|utf-8></em> 指定当前环境、数据源的字符集，默认情况下，
+索引工具输出的字符集为 utf-8，并把数据源字符集视为项目的默认字符集。</p></li>
+<li><p><em>--source &lt;..source..></em> 用于指定数据源，数据源有以下 2 种情况。<br />
+凡是包含冒号的数据源均视为 SQL 数据源，自动将 <em>--sql</em> 选项的值作为参数传递给数据源；<br />
+其它情况则为文件数据源，自动将 <em>--file</em> 选项的值作为参数传递给数据源对象。</p></li>
+<li><p><em>--flush</em>、<em>--flush-log</em>、<em>--info</em> 是一些功能选项，与 <em>--source</em> 分开使用。</p></li>
+<li><p><em>-d|--db &lt;..name..></em> 指定要更新的索引数据库名称，默认是名为 db 的库。</p></li>
+<li><p><em>--filter</em> 指定数据过滤器，针对资深用户使用，在提交索引前可以处理一次数据。</p></li>
+<li><p><em>--add-synonym=&lt;raw1:synonym1[,raw2:synonym2]...></em> 添加同义词。</p></li>
+<li><p><em>--del-synonym=&lt;raw1[:synonym1[,raw2[:synonym2]]]...></em> 删除同义词。</p></li>
+<li><p><em>--stop-rebuild</em> 停止异常中断的重建任务。</p></li>
+</ul>
+
+<h2 id="ch1">2. 经典用法示例<a name="ch1" class="anchor">?</a></h2>
+
+<p>以下是一些经典用法举例：</p>
+
+<pre># 清空 demo 项目的索引数据 
+util/Indexer.php --clean demo
+
+# 导入 JSON 数据文件 file.json 到 demo 项目
+util/Indexer.php --source=json demo file.json
+
+# 导入 MySQL 数据库的 dbname.tbl_post 表到 demo 项目中，并且平滑重建
+util/Indexer.php --rebuild --source=mysql://root:pass@localhost/dbname --sql=&quot;SELECT * FROM tbl_post&quot; --project=demo
+
+# 查看 demo 项目在服务端的相关信息
+util/Indexer.php --info -p demo
+
+# 强制刷新 demo 项目的搜索日志
+util/Indexer.php --flush-log --project demo
+
+# 强制停止重建
+util/Indexer.php --stop-rebuild demo
+</pre>
+
+<h2 id="ch2">3. 导入 SQL 数据库<a name="ch2" class="anchor">?</a></h2>
+
+<p>要导入 SQL 类的数据库，必须使用 <code>--source</code> 指定数据源，视情况用 <code>--sql</code> 选项指定查询语句。
+其中数据源的格式如下：</p>
+
+<pre>dbtype://[user[:passwd]@]host/dbname[/table]
+dbtype://dbpath
+</pre>
+
+<p><code>dbtype</code> 就是相应的数据源名称，目前支持的有：mysql、sqlite、sqlite3、mysqli、pdo.mysql、pdo.sqlite 。
+如果您还需要更多的数据库类型，请参见后面的自定义数据源自行扩充，对于嵌入式的数据库，
+仅支持在数据源中设置路径。</p>
+
+<p>数据源仅仅指定了数据库连接的有关参数，您应当通过 <code>--sql</code> 选项指定查询语句，
+查询得到的每行数据就会被转换为关联数组，并作为一条完整的文档数据提交到索引库中。
+查询语句中允许使用表连接和 LIMIT, OFFSET 等行为，即便数据量很大，内部会作出相应优化。</p>
+
+<blockquote class="info">
+<p><strong>Info:</strong> 如果您在数据源中指定了 <code>table</code>，那么可以省略 <code>--sql</code> 选项，系统自动把该表的数据导入索引库。<br />
+  相当于指定了这样一条 SQL 语句：SELECT * FROM <em>table</em></p>
+  
+  <p>如果您的数据表过于庞大和复杂，强烈建建议您编写 SQL 语句，仅 SELECT 搜索相关的字段即可，
+  如果字段名称有变动，请用 AS 修改它。</p>
+</blockquote>
+
+<p>用法示例：</p>
+
+<pre># 导入 mysql 数据源
+util/Indexer.php --source=mysql://root@localhost/test --sql=&quot;select * from tbl_post&quot;
+
+# 导入 sqlite 数据源
+util/Indexer.php --source=sqlite:///tmp/test.db --sql=&quot;select * from tbl_post&quot;
+</pre>
+
+<h2 id="ch3">4. 导入 CSV 数据<a name="ch3" class="anchor">?</a></h2>
+
+<p>要导入 CSV 数据库文件，必须使用 <code>--source=csv</code> 来指定数据源，然后使用 <code>--file</code> 
+指定数据文件的路径，如果没有指定则自动从标准输入读取数据。</p>
+
+<p>对于 CSV 文件，要求必须每行一条数据，字段之间用半角的逗号分开。可以在首行指定字段名称列表，
+但要求所有字段均必须是项目中的有效字段；如果没有指定字段列表，则自动按照默认的所有字段顺序读取。
+这里所指的<strong>行</strong>是以 <code>\n (ASCII: 0x0a)</code> 换行符界定的。</p>
+
+<blockquote class="info">
+<p><strong>Info:</strong> 如果您的 CSV 文件字段分割符不是逗号，您可以使用 <code>--csv-delimiter</code> 
+  选项来指定分割符，制表符使用 <code>\t</code> 表示，而如果是 <code>|</code> 这种引起 shell 解析冲突的，
+  请使用引号将它包起来。</p>
+
+<pre>util/Indexer.php --source=csv --csv-delimiter=&quot;\t&quot; demo   # 使用 \t
+util/Indexer.php --source=csv --csv-delimiter=&quot;\\\\&quot; demo   # 使用 \ 分割
+</pre>
+</blockquote>
+
+<h2 id="ch4">5. 导入 JSON 数据<a name="ch4" class="anchor">?</a></h2>
+
+<p>要导入 JSON 数据库文件，必须使用 <code>--source=json</code> 来指定数据源，然后使用 <code>--file</code> 
+指定数据文件的路径，如果没有指定则自动从标准输入读取数据。</p>
+
+<p>对于 JSON 文件，要求必须每行一条数据完整的 JSON 数据记录，将自动被转换为文档添加到索引中。
+这里所指的<strong>行</strong>是以 <code>\n (ASCII: 0x0a)</code> 换行符界定的。</p>
+
+<h2 id="ch5">6. 清空、重建索引<a name="ch5" class="anchor">?</a></h2>
+
+<p>在批量导入各种数据源时，您可以加入 <code>--clean</code> 选项，该工具就会先清空现有索引数据库。</p>
+
+<blockquote class="info">
+<p><strong>Info:</strong> 清空数据库可以单独使用，不一定要搭配导入操作。</p>
+</blockquote>
+
+<p>由于清空立即生效会导致搜索中断或不可用一段时间，对于线上服务，建议使用 <code>--rebuild</code>
+选项实现平滑重建，在导入完成后再将新数据库替换为原数据库。</p>
+
+<h2 id="ch6">7. 自定义数据过滤器<a name="ch6" class="anchor">?</a></h2>
+
+<p>自从 1.1.1 版本起，在索引工具中引入了过滤器的概念，通过 <code>--filter</code> 选项来指定。
+这项功能以便于批量导入数据时，在数据提交到索引前有一次机会可以处理数据，常见的操作有
+格式化数据，清除无效的标记标签等。</p>
+
+<p>内置的过滤器只有一个，就是 <code>debug</code>，它相当于在数据提交前执行一次 print_r 函数，
+打印出数据的实际内容，可用于调试。</p>
+
+<p>我们要求所有自定义过滤器必须实现 <a href="../api/XSDataFilter.html">XSDataFilter</a> 这个接口，里面需要实现以下方法：</p>
+
+<ul>
+<li><a href="../api/XSDataFilter.html#process">XSDataFilter::process</a> 字段数据预处理，在此进行数据调整和过滤不相关的内容然后返回数据</li>
+<li><a href="../api/XSDataFilter.html#processDoc">XSDataFilter::processDoc</a> 索引文档处理，在好习惯进行索引相关调整（自 1.3.4 起有效）</li>
+</ul>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 当过滤器的 <code>process</code> 方法返回 false 时，索引工具不会将此条数据添加到索引库。</p>
+</blockquote>
+
+<p>编写好的过滤器必须单独以类名为文件名保存，比如您的过滤器对象名称为 XSXyzFilter，那么
+请将代码命名为 XSXyzFilter.php 保存，在索引工具中使用参数 <code>--filter=/paht/to/XSXyzFilter</code>
+来指定这个过滤器。</p>
+
+<p>典型过滤器写法如下，文件保存为 XSXyzFilter.php</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">class</span> <span class="php-hl-identifier">XSXyzFilter</span> <span class="php-hl-reserved">implements</span> <span class="php-hl-identifier">XSDataFilter</span>
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-reserved">public</span> <span class="php-hl-reserved">function</span> <span class="php-hl-identifier">process</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$data</span><span class="php-hl-code">, </span><span class="php-hl-var">$cs</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+        <span class="php-hl-identifier">print_r</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$data</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+        </span><span class="php-hl-reserved">return</span> <span class="php-hl-var">$data</span><span class="php-hl-code">;
+    </span><span class="php-hl-brackets">}</span>
+    <span class="php-hl-reserved">public</span> <span class="php-hl-reserved">function</span> <span class="php-hl-identifier">processDoc</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$doc</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+        <span class="php-hl-comment">//</span><span class="php-hl-comment"> $doc-&gt;addTerm('subject', '特殊词');</span>
+    <span class="php-hl-brackets">}</span>
+<span class="php-hl-brackets">}</span></pre></div></div>
+
+<h2 id="ch7">8. 自定义数据源<a name="ch7" class="anchor">?</a></h2>
+
+<p>目前数据源有两种类型，一种是文件数据源（如 JSON、CSV），另一种是 SQL 数据库源（如 MySQL，SQLite）。</p>
+
+<p>自定义数据源均要求必须是抽象类 <a href="../api/XSDataSource.html">XSDataSource</a> 的子类，建议单独编写相应的类定义文件并放入 
+<code>$prefix/sdk/php/lib</code> 目录，以便脚本在使用时自动加载。</p>
+
+<p>数据源对象中包含两个 <code>protected</code> 属性，可以在初始化时使用它们：</p>
+
+<ul>
+<li><a href="../api/XSDataSource.html#type">XSDataSource::type</a> 对应命令行中 <em>--source</em> 选项的值</li>
+<li><a href="../api/XSDataSource.html#arg">XSDataSource::arg</a> 则为相应的 <em>--sql</em> 或 <em>--file</em> 选项的值。</li>
+</ul>
+
+<h4 id="-">文件数据源</h4>
+
+<p>对于文件数据源，请直接扩展 <a href="../api/XSDataSource.html">XSDataSource</a>，对于名称为 <code>Xyz</code> 的数据源，请命名为 
+<code>XSXyzDataSource</code> 并重载以下方法：</p>
+
+<ul>
+<li>protected <a href="../api/XSDataSource.html#init">XSDataSource::init</a> 开始读取数据时调用，用于初始化数据源的相关资源。</li>
+<li>protected <a href="../api/XSDataSource.html#deinit">XSDataSource::deinit</a> 读取数据结束时调用，释放相关资源。</li>
+<li>protected <a href="../api/XSDataSource.html#getDataList">XSDataSource::getDataList</a> 读取一批数据，可以是一条或若干条，组成数组返回，没有更多数据时返回 false 。</li>
+<li>public <a href="../api/XSDataSource.html#getCharset">XSDataSource::getCharset</a> 返回精准的数据源字符集，如果不能确定请返回 false 或不重载。</li>
+</ul>
+
+<h4 id="-">数据库数据源</h4>
+
+<p>对于数据库数据源，请直接扩展 <a href="../api/XSDatabase.html">XSDatabase</a>，对于名称为 <code>Xyz</code> 的数据源，请命名为 
+<code>XSDatabaseXyz</code> 并重载以下方法：</p>
+
+<ul>
+<li>protected <a href="../api/XSDatabase.html#connect">XSDatabase::connect</a> 连接数据库，参数是一个数组，包含连接相关的参数(host,user,pass,dbname,table)、数据库路径(path)</li>
+<li>protected <a href="../api/XSDatabase.html#close">XSDatabase::close</a> 关闭数据库连接</li>
+<li>protected <a href="../api/XSDatabase.html#query">XSDatabase::query</a> 执行数据库查询，对于 SELECT 类的操作请将搜索结果以数组方式返回，其它请直接返回 true/false 代表成功/失败</li>
+<li>protected <a href="../api/XSDatabase.html#setUtf8">XSDatabase::setUtf8</a> 尝试将数据库输出字符集强制设为  UTF-8 ，如数据库不支持此功能请返回 false 或不重载。</li>
+</ul>
+
+<h4 id="pdo-">PDO 数据库数据源</h4>
+
+<p>对于 PDO 扩展的数据源，请直接扩展 <a href="../api/XSDatabasePDO.html">XSDatabasePDO</a>，对于名称为 <code>Xyz</code> 的数据源，请命名为 
+<code>XSDatabasePDO_Xyz</code> 并重载以下方法：</p>
+
+<ul>
+<li>protected <a href="../api/XSDatabasePDO.html#makeDsn">XSDatabasePDO::makeDsn</a> 生成 PDO 连接字符串，参数和 <a href="../api/XSDatabase.html#connect">XSDatabase::connect</a> 一样。</li>
+<li>protected <a href="../api/XSDatabase.html#setUtf8">XSDatabase::setUtf8</a> 尝试将数据库输出字符集强制设为  UTF-8 ，如数据库不支持此功能请返回 false 或不重载。</li>
+</ul>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 由于我们使用 <a href="http://php.net/manual/en/function.parse-url.php">parse_url</a> 解析 SQL 数据源连接参数，它并不支持用下划线作 scheme 。
+  如果要直接使用 PDO 数据源，请把 dbtype 设为 pdo.xxx 而不是 pdo_xxx 。</p>
+</blockquote>
+
+<h2 id="ch8">9. 同义词管理<a name="ch8" class="anchor">?</a></h2>
+
+<p>通常每条记录包含“原词(标准词)“和”同义词”两个元素，同义词记录是和当前索引库绑定的，并非和项目绑定。
+如果您通过 <a href="../api/XSIndex.html#setDb">XSIndex::setDb</a> 修改了当前索引库名，那么您所进行的同义词变动将作用到该库上。</p>
+
+<h4 id="-">添加同义词</h4>
+
+<p>通过带参数的选项 <code>--add-synonym</code> 来实现，参数值为单条或多条同义词记录，每条记录之间用冒号(:)
+分隔原词和同义词，多条记录之间用逗号分割。您可以对同一个“原词”增加多个不同的“同义词”，
+如果库内已存在完全一致的记录，则指令不起作用也不会报错。用法如下：</p>
+
+<pre># 给 search 增加同义词 find
+util/Indexer.php demo --add-synonym search:find
+
+# 再给 search 增加另一个同义词 seek
+util/Indexer.php demo --add-synonym search:seek
+
+# 给 &quot;搜索&quot; 增加 &quot;检索&quot; &quot;查找&quot; 两个同义词
+util/Indexer.php demo -add-synonym 搜索:检索,搜索:查找
+
+# 给 &quot;Hello world&quot; 增加同义词 &quot;你好&quot;，参数含空格请用引号包围
+util/Indexer.php demo --add-synonym &quot;Hello world:你好&quot;
+</pre>
+
+<h4 id="-">删除同义词</h4>
+
+<p>删除同义词作法和添加同义词很相似，只不过采用选项 <code>--del-synonym</code>，同时参数中的同义词可以
+省略表示删除该“原词”的所有同义词记录。用法如下：</p>
+
+<pre># 删除 search 的全部同义词、同时删除 &quot;搜索&quot; 的同义词 &quot;检索&quot;
+util/Indexer.php demo --del-synonym search,搜索:检索
+</pre>
+
+<h4 id="-">浏览全部同义词</h4>
+
+<p>查看同义词列表的功能请参见 <a href="util.Quest#ch2">Quest 搜索工具</a></p>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 同义词功能是 <em>1.3.0</em> 版本引入的新功能，详情参见<a href="special.synonym.html">同义词专题文档</a>。<br />
+  通常<strong>原词(标准词)</strong>和<strong>同义词</strong>都必须是独立的词汇，也就是最小的索引单位。但对于纯英文字母<strong>原词</strong>，
+  允许用空格连接多个单词，英文字母都会统一转换为<strong>小写</strong>。</p>
+  
+  <p>单个英文原词会同时保存词根同义词记录。如：设置 <code>find</code> 是 <em>search</em> 的同义词，那么检索 <em>searching</em>
+  也会匹配包含 <code>finding</code> 或 <code>finds</code> 等同根词的结果。</p>
+</blockquote>
+
+<h2 id="ch9">10. 存取项目自定义词库<a name="ch9" class="anchor">?</a></h2>
+
+<p>您也可以通过命令行查看和修改项目的自定义词库，具体用法如下：</p>
+
+<pre># 查看 demo 项目的自定义词库
+util/Indexer.php demo --custom-dict
+
+# 将已有自定义词库文件 d.txt 设置为 demo 项目的自定义词库，结合 --file 选项
+util/Indexer.php demo --custom-dict --file /path/to/d.txt
+
+# 清空/删除自定义词库，用 /dev/null
+util/Indexer.php demo --custom-dict --file /dev/null
+</pre>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 项目自定义词库是 <em>1.3.4</em> 引入的新功能</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="util.check.html">&laquo; RequiredCheck 运行检测</a></div>
+			<div class="next"><a href="util.quest.html">Quest 搜索测试工具 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

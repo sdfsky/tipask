@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>XSDocument 文档</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">搜索结果文档</a></li><li><a href="#ch1">索引文档</a></li></ol></div><h1 id="xsdocument-">XSDocument 文档</h1>
+
+<p><a href="../api/XSDocument.html">XSDocument</a> 是用于描述检索/索引的基础对象，包含一组字段及其值。相当于常规 <code>SQL</code> 数据表中的一行记录。
+通过魔术方法，每个字段名都是文档的虚拟属性，可直接赋值或取值，也支持数组下标方式访问文档字段。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$doc</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XSDocument</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">name</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">value</span><span class="php-hl-quotes">'</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 用对象属性方式进行赋值、取值</span>
+<span class="php-hl-var">$doc</span><span class="php-hl-brackets">[</span><span class="php-hl-quotes">'</span><span class="php-hl-string">name</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">]</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">value</span><span class="php-hl-quotes">'</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 用数组下标方式进行赋值、取值</span>
+<span class="php-hl-var">$value</span><span class="php-hl-code"> = </span><span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">f</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">name</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 用函数方式进行取值</span>
+<span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setField</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">name</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">value</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 用函数方式进行赋值</span>
+<span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setFields</span><span class="php-hl-brackets">(</span><span class="php-hl-reserved">array</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">name</span><span class="php-hl-quotes">'</span><span class="php-hl-code"> =&gt; </span><span class="php-hl-quotes">'</span><span class="php-hl-string">value</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">name2</span><span class="php-hl-quotes">'</span><span class="php-hl-code"> =&gt; </span><span class="php-hl-quotes">'</span><span class="php-hl-string">value2</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 用数组进行批量赋值</span>
+ 
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 迭代方式取所有字段值</span>
+<span class="php-hl-reserved">foreach</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$doc</span> <span class="php-hl-reserved">as</span> <span class="php-hl-var">$name</span><span class="php-hl-code"> =&gt; </span><span class="php-hl-var">$value</span><span class="php-hl-brackets">)</span> 
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-reserved">echo</span> <span class="php-hl-quotes">&quot;</span><span class="php-hl-var">$name</span><span class="php-hl-string">: </span><span class="php-hl-var">$value</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code">;  
+</span><span class="php-hl-brackets">}</span></pre></div></div>
+
+<p>用于索引更新的文档对象和搜索结果返回中略有不同，下面分开讲解。</p>
+
+<h2 id="ch0">1. 搜索结果文档<a name="ch0" class="anchor">?</a></h2>
+
+<p>搜索结果文档是指 <a href="../api/XSSearch.html#search">XSSearch::search</a> 返回值包含的文档，它由 <code>PHP-SDK</code> 内部代码创建。
+除了普通文档的功能外，还支持以下魔术方法来访问搜索结果的元数据：</p>
+
+<ul>
+<li><code>docid()</code> 取得搜索结果文档的 docid 值 (实际数据库内的 id，一般用不到)</li>
+<li><code>rank()</code> 取得搜索结果文档的序号值 (第X条结果)</li>
+<li><code>percent()</code> 取得搜索结果文档的匹配百分比 (结果匹配度, 1~100)</li>
+<li><code>weight()</code> 取得搜索结果文档的权重值 (浮点数)</li>
+<li><code>ccount()</code> 取得搜索结果折叠的数量 (按字段折叠搜索时才有效)</li>
+</ul>
+
+<p>访问结果文档的字符集默认是与 <a href="../api/XSSearch.html#setCharset">XSSearch::setCharset</a> 所指定的字符集一致的，如未指定过则为 <a href="../api/XS.html#defaultCharset">XS::defaultCharset</a>。
+虽然您可以通过 <a href="../api/XSDocument.html#setCharset">XSDocument::setCharset</a> 来强制修改文档的字符集，但不推荐这样做，也没必要这样做。</p>
+
+<h2 id="ch1">2. 索引文档<a name="ch1" class="anchor">?</a></h2>
+
+<p>索引文档是指由用户创建，并用于提交更新到索引库中的文档，创建文档时允许传入字符集作为构造函数的参数，
+如未传入，则自动视为项目的默认字符集 <a href="../api/XS.html#defaultCharset">XS::defaultCharset</a>，如果字符集不是 <code>UTF-8</code> 的系统内部会
+自动进行转换，但要求 <code>PHP</code> 带有中文转码扩展 (<a href="http://php.net/manual/en/book.iconv.php">iconv</a> 或 <a href="http://php.net/manual/en/book.mbstring.php">mbstring</a>)</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$doc</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XSDocument</span><span class="php-hl-code">;  </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 使用默认字符集</span>
+<span class="php-hl-var">$doc</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XSDocument</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">gbk</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 指定文档为 GBK 编码</span>
+<span class="php-hl-var">$doc</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XSDocument</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$data</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 数组 $data 为初始字段数据, 编码则为默认编码</span>
+<span class="php-hl-var">$doc</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XSDocument</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$data</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">gbk</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 数组 $data 为字段数据, 编码为 GBK</span>
+ 
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 然后进行一系列赋值操作</span>
+ 
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 提交到索引中</span>
+<span class="php-hl-var">$xs</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">add</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$doc</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<p>如果您希望在 <code>XSDocument</code> 提交到索引前、后进行一系列必要的操作，您可以对 <code>XSDocument</code> 进行扩展，
+重写 <a href="../api/XSDocument.html#beforeSubmit">XSDocument::beforeSubmit</a> 和 <a href="../api/XSDocument.html#afterSubmit">XSDocument::afterSubmit</a> 方法来实现，比如扩展代码为
+<code>$prefix/sdk/php/lib/MyDocument.class.php</code>。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">class</span> <span class="php-hl-identifier">MyDocument</span> <span class="php-hl-reserved">extends</span> <span class="php-hl-identifier">XSDocument</span>
+<span class="php-hl-brackets">{</span>
+    <span class="php-hl-reserved">public</span> <span class="php-hl-reserved">function</span> <span class="php-hl-identifier">beforeSubmit</span><span class="php-hl-brackets">(</span><span class="php-hl-identifier">XSIndex</span> <span class="php-hl-var">$index</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+        <span class="php-hl-comment">//</span><span class="php-hl-comment"> 在此编写您的代码，如需要中断添加请提前返回 false</span>
+        <span class="php-hl-comment">//</span><span class="php-hl-comment"> ...</span>
+        <span class="php-hl-reserved">return</span> <span class="php-hl-identifier">parent</span><span class="php-hl-code">::</span><span class="php-hl-identifier">beforeSubmit</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$index</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+    </span><span class="php-hl-brackets">}</span>
+ 
+    <span class="php-hl-reserved">public</span> <span class="php-hl-reserved">function</span> <span class="php-hl-identifier">afterSubmit</span><span class="php-hl-brackets">(</span><span class="php-hl-identifier">XSIndex</span> <span class="php-hl-var">$index</span><span class="php-hl-brackets">)</span>
+    <span class="php-hl-brackets">{</span>
+        <span class="php-hl-comment">//</span><span class="php-hl-comment"> 在此编写您的代码，只有加入索引成功后才会执行</span>
+        <span class="php-hl-comment">//</span><span class="php-hl-comment"> ...</span>
+    <span class="php-hl-brackets">}</span>    
+<span class="php-hl-brackets">}</span>
+ 
+<span class="php-hl-var">$doc</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">MyDocument</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">gbk</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">pid</span><span class="php-hl-code"> = </span><span class="php-hl-number">123</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">subject</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">Hello, 测试</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$doc</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">message</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">测试的内容在此</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$xs</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">add</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$doc</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="class.exception.html">&laquo; XSException 异常</a></div>
+			<div class="next"><a href="class.index.html">XSIndex 索引管理 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

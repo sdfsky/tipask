@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>获取搜索匹配数量</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">索引库内的数据总数</a></li><li><a href="#ch1">最近一次搜索的匹配数</a></li><li><a href="#ch2">直接获取搜索匹配数</a></li></ol></div><h1 id="-">获取搜索匹配数量</h1>
+
+<p>出于性能考虑，搜索结果的匹配数量均被设计为估算值，并非准确值。</p>
+
+<h2 id="ch0">1. 索引库内的数据总数<a name="ch0" class="anchor">?</a></h2>
+
+<p>这个数量是真实准确的，并非估算，获取总量有以下两种做法，至于喜欢用哪种您自己决定。</p>
+
+<ul>
+<li>调用方法 <a href="../api/XSSearch.html#getDbTotal">XSSearch::getDbTotal</a></li>
+<li>读取魔术属性 <a href="../api/XSSearch.html#dbTotal">XSSearch::dbTotal</a>，内部也是调用上述方法 </li>
+</ul>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$total</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">dbTotal</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$total</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getDbTotal</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<h2 id="ch1">2. 最近一次搜索的匹配数<a name="ch1" class="anchor">?</a></h2>
+
+<p>通过 <a href="../api/XSSearch.html#getLastCount">XSSearch::getLastCount</a> 或 <a href="../api/XSSearch.html#lastCount">XSSearch::lastCount</a> 可以快速获取到最近一次调用
+<a href="../api/XSSearch.html#search">XSSearch::search</a> 进行搜索时得到的匹配数量。</p>
+
+<p>除非您对搜索结果完全不关心，否则强烈建议用这种方法获取匹配数目以减少系统开销。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 假设曾经有一次 search 调用</span>
+<span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">测试</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setLimit</span><span class="php-hl-brackets">(</span><span class="php-hl-number">5</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 必须在 search() 之后调用</span>
+<span class="php-hl-var">$count</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">lastCount</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$count</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getLastCount</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<h2 id="ch2">3. 直接获取搜索匹配数<a name="ch2" class="anchor">?</a></h2>
+
+<p>通过 <a href="../api/XSSearch.html#count">XSSearch::count</a> 调用可以直接获取搜索的匹配数量，该方法和 <a href="../api/XSSearch.html#search">XSSearch::search</a> 
+类似，在调用前可以做一系列的搜索查询语句构建，也可以直接接受查询语句做参数。</p>
+
+<p>返回值是一个整型数字，是估算值。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 先设置 Query 再获取数量</span>
+<span class="php-hl-var">$count</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">神雕侠侣 -电视剧</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">count</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 直接把 Query 语句传入</span>
+<span class="php-hl-var">$count</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">count</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 对于不带参数的 <code>count</code> 调用建议放在 <code>search</code> 之后，内部会进行优化，减少一次查询。</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="search.search.html">&laquo; 获取搜索匹配结果</a></div>
+			<div class="next"><a href="search.hot.html">获取热门搜索词 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

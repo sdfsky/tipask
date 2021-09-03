@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>构建搜索语句</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">典型搜索语句</a></li><li><a href="#ch1">布尔搜索</a></li><li><a href="#ch2">精确搜索</a></li><li><a href="#ch3">其它搜索语句修饰</a></li><li><a href="#ch4">查看搜索语句的分析结果</a></li></ol></div><h1 id="-">构建搜索语句</h1>
+
+<p>搜索查询力争做到简单明了，和目前最流行的搜索引擎做法极为相似，并不需要过多额外的修饰或语法。</p>
+
+<p>您只要把您打算搜索的短语或关键词列出来即可，建议用空格连接多个词；在此基础上还支持字段搜索、
+布尔搜索、精确搜索、相邻位置搜索等。</p>
+
+<h2 id="ch0">1. 典型搜索语句<a name="ch0" class="anchor">?</a></h2>
+
+<p>正如上面所讲，仅仅用空格把搜索词、名子连接起来的方式最为常用。内部默认采用 <code>AND</code> 规则，
+也就是说要求列出来的关键词（分词之后）全部匹配，如果您通过 <a href="../api/XSSearch.html#setFuzzy">XSSearch::setFuzzy</a> 
+开启了模糊匹配，那么相当于采用 <code>OR</code> 规则，只要其中一个关键词匹配即可。</p>
+
+<p>刚刚说的这种搜索的是索引数据库的“混合区”，即类型为 <code>body</code> 的字段以及索引方式为 <code>mixed</code> 
+或 <code>both</code> 的字段。如果某个字段的索引方式为 <code>self</code> 或 <code>both</code>，那么还可以指定为字段检索，
+也就是要求这个字段匹配指定的关键词，用法为格式为 “<em>字段名</em>:<em>关键词</em>”。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 搜索语句最大支持长度为 80 字节（每一个汉字占 3 字节），此规则同时适用于
+  <a href="../api/XSSearch.html#search">XSSearch::search</a> 和 <a href="../api/XSSearch.html#count">XSSearch::count</a> 的 <code>$query</code> 参数。</p>
+</blockquote>
+
+<p>搜索语句举例如下：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">上海人民公园</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 检索 body 型字段及混合区</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">上海 人民公园</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 用空格连接 2 个关键词, 这种情况比上面的用法更明确</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">subject:上海 人民公园</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 特别要求 subject 字段包含 &quot;上海&quot;</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setFuzzy</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">上海公园</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 开启模糊搜索，搜索 &quot;上海&quot; 或 &quot;公园&quot;</span></pre></div></div>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 从 1.3.0 版本起，允许使用空搜索条件进行搜索了，其含义相当于全部匹配</p>
+</blockquote>
+
+<h2 id="ch1">2. 布尔搜索<a name="ch1" class="anchor">?</a></h2>
+
+<p>出于高级搜索的需求，我们的搜索语句还全面支持布尔操作，并且像数学运算一样支持括号操作以明确关系。</p>
+
+<h4 id="-">多个词语之间的“并且”、“或者”、“异或”关系</h4>
+
+<p>默认情况，系统采用“并且”关系，即您输入的多个词语（空格分开或系统自动切分以后）必须全部包含。
+您也可以通过 <code>AND</code> 将这些关键词显式的强制要求全部出现。相应的，如果您需要只包括其中一个词即可，
+那么用 <code>OR</code> 将它们连接起来。更有趣的是，如果有些情况您只想要其中的一个词，并且不要两者同时出现，
+那么就用 <code>XOR</code> 连接。参看下面的例子：</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 表达布尔关系的关键字必须全部大写，即：XOR, OR, AND</p>
+</blockquote>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 AND 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 这两者效果是相同的</span>
+ 
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setFuzzy</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 OR 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;  </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 这两者效果相同，都是只要求匹配其中一个</span>
+ 
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 XOR 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 表示必须包含其中一个词，并且不允许同时包含这两个词。</span></pre></div></div>
+
+<h4 id="-">要求搜索结果中不含特定关键词</h4>
+
+<p>如果您发现搜索结果中，有某一类信息是您不希望看见的，而且这些信息都包含特定的关键词，那么请用减号或 
+<code>NOT</code> 语法，就可以去除所有这些含有特定关键词的网页。例如，搜索 “神雕侠侣”，希望是关于武侠小说方面
+的内容，却发现很多关于电视剧方面的网页。这时希望排除所有包含“电视剧”的搜索结果。</p>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 前一个关键词和减号之间必须有空格分开，否则会被当连字符处理，减号和后一个关键词之间不能有空格。</p>
+</blockquote>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">神雕侠侣 -电视剧</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 正确用法1</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">神雕侠侣 NOT 电视剧</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 正确用法2</span>
+ 
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">神雕侠侣-电视剧</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 不符合预期目的</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">神雕侠侣 - 电视剧</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 不符合预期目的</span></pre></div></div>
+
+<h4 id="-">组合关系的括号表达式</h4>
+
+<p>就像数学表达式中，括号具有显式的优先级，如果您需要非常复杂的搜索条件，就采用括号表达式来组合上述的条件。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 要求结果包含 “杭州+西湖” 或 “杭州 + 西溪湿地”，并且不能包含 “汽车 火车”</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">((杭州 AND 西湖) OR (杭州 AND 西溪湿地)) NOT (汽车 火车)</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 在组合关键中允许嵌入字段搜索的语法。如：<code>subject:上海 OR subject:公园</code></p>
+</blockquote>
+
+<h2 id="ch2">3. 精确搜索<a name="ch2" class="anchor">?</a></h2>
+
+<p>在项目字段设计中有一个选项 <code>phrase</code> 如果设为 <code>yes</code> 将在索引数据库中保存关键词的位置信息，
+因而我们可以在搜索时利用这些位置信息实现精确搜索。</p>
+
+<blockquote class="info">
+<p><strong>Info:</strong> 项目中类型为 <code>title</code>、<code>body</code> 的字段默认已开启此项，此外这个选项也仅针对使用内置分词器的字段有效。
+  对于 <code>phrase</code> 设为 <code>no</code> 或用其它分词器的字段来说这项功能无效。</p>
+</blockquote>
+
+<h4 id="-">使用双引号进行精确匹配</h4>
+
+<p>如果输入的查询词较长，在经过系统词法分析后，给出的搜索结果中的查询词，可能是拆分的。
+如果您对这种情况不满意，可以尝试给查询短句加上双引号，搜索结果就会要求词按顺序匹配。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">上海科技大学</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 这时内部把搜索语句切割为：上海+科技+大学，要求搜索结果同时包含这三个词即可，</span>
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 但不要求它们的出现顺序，有可能先出现”科技“再出现”上海“，也有可能这三个词离得很远。</span>
+ 
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">&quot;上海科技大学&quot;</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 加上引号后，要求搜索结果必须依次出现”上海+科技+大学“，要显得精准很多。</span></pre></div></div>
+
+<h4 id="-">索引词之间的距离查询</h4>
+
+<p>如果您希望输入的多个关键词之间的在匹配结果中的位置距离不要太远，那么可以使用 <code>NEAR</code> 
+语法来进行搜索，默认要求它们的距离不超过 <code>10</code>。您还可以在 <code>NEAR</code> 后加上 <code>/n</code> 表示
+具体的距离要求，<code>n</code> 是整数，这儿的距离指的是分词后的<strong>序号距离</strong>。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 NEAR 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 要求结果中出现 &quot;杭州&quot; 和 &quot;西湖&quot;，并且距离不超过 10 个词</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 NEAR/5 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 要求它们距离不超过 5个词</span></pre></div></div>
+
+<p>如果您还希望检索结果中词汇出现的顺序与您的输入顺序一致，只要将 <code>NEAR</code> 换成 <code>ADJ</code> 即可，
+注意这些语法词和布尔搜索一样，均必须全部大写。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 ADJ 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 要求结果中先出现 &quot;杭州&quot; 再出现 &quot;西湖&quot;，并且距离不超过 10 个词</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 ADJ/3 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 要求它们距离不超过 3个词</span></pre></div></div>
+
+<h2 id="ch3">4. 其它搜索语句修饰<a name="ch3" class="anchor">?</a></h2>
+
+<p>前面还有提到一些附加的搜索语句修饰，这些操作不能直接写进 <code>Query</code> 语句，只能过过相应的 <code>API</code> 来完成。</p>
+
+<h4 id="-">字段值区间搜索</h4>
+
+<p>通过 <a href="../api/XSSearch.html#addRange">XSSearch::addRange</a> 我们可以在搜索中，针对某个字段的值增加区间条件过滤。该方法接受三个参数，
+第一参数 <code>$field</code> 为字段名称，后面两个参数依次是 <code>$from</code> 起始值，<code>$to</code> 结束值。假设该字段的值为 
+<code>$value</code>，那么要求 <code>$value &gt; $from &amp;&amp; $value &lt;= $to</code> 才符合条件，其中如果有一个设为 <code>null</code>，
+则会自动将区间转换为单向比较。</p>
+
+<p>以前面提到的 <code>demo</code> 项目中的 <code>chrono</code> 字段为例，参看下面代码及注释：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$from</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">strtotime</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-string">2011-1-1</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 起始时间 2011年1月1日</span>
+<span class="php-hl-var">$to</span><span class="php-hl-code"> = </span><span class="php-hl-identifier">strtotime</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-string">2011-9-1</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 结束时间 2011年9月1日</span>
+ 
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 1. &lt;= $to: 要求结果的时间必须在 2011-9-1 之前，并且包含 2011-9-1</span>
+<span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">addRange</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">chrono</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-reserved">null</span><span class="php-hl-code">, </span><span class="php-hl-var">$to</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 2. &gt;= $from: 要求结果的时间必须在 2011-1-1 之后，并且包含 2011-1-1</span>
+<span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">addRange</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">chrono</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-var">$from</span><span class="php-hl-code">, </span><span class="php-hl-reserved">null</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 3. &gt; $from &amp;&amp; &lt;= $to: 要求结果的时间必须在 2011-1-1 之后 并且 2011-9-1 之前</span>
+<span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">addRange</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">chrono</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-var">$from</span><span class="php-hl-code">, </span><span class="php-hl-var">$to</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<h4 id="-">按字段索引词加权</h4>
+
+<p>通过 <a href="../api/XSSearch.html#addWeight">XSSearch::addWeight</a> 我们可以针对某个字段添加权重索引词。该字段是否包含这个词
+都不影响搜索匹配结果，但如果包含会参与计算结果权重，使结果的相关度更高。常用于针对某一类
+数据提升搜索结果排序位置。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 搜索包含 &quot;杭州&quot; 的结果，并且提升 subject 字段包含 &quot;西湖&quot; 的数据的排序</span>
+<span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">addWeight</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">subject</span><span class="php-hl-quotes">'</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 这些修饰不能应用到快捷搜索中，也就是说不能直接把 <code>Query</code> 语句传递给 <a href="../api/XSSearch.html#search">XSSearch::search</a>。
+  您必须用 <a href="../api/XSSearch.html#setQuery">XSSearch::setQuery</a> 设置搜索语句，再用不带参数的调用 <code>search</code> 或 <code>count</code> 方法。</p>
+  
+  <p>区间搜索默认用的是字节序比较，如果您希望将字段值以数字方式比较大小，请将字段的类型设置为 <code>numeric</code>。</p>
+</blockquote>
+
+<h2 id="ch4">5. 查看搜索语句的分析结果<a name="ch4" class="anchor">?</a></h2>
+
+<p>通过 <a href="../api/XSSearch.html#setQuery">XSSearch::setQuery</a> 设置了搜索语句后，您可以调用 <a href="../api/XSSearch.html#getQuery">XSSearch::getQuery</a> 查看您的搜索语句
+在内部的分析结果，常用于 <code>DEBUG</code>。此外这两个方法也可以通过魔术属性 <a href="../api/XSSearch.html#query">XSSearch::query</a> 来访问。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 设置搜索语句方法1:</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">神雕侠侣 -电视剧</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 设置搜索语句方法2:</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">query</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">神雕侠侣 -电视剧</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 查看搜索语句解析结果方法1:</span>
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 不带参数，输出：Xapian::Query((神雕侠侣:(pos=1) AND_NOT 电视剧:(pos=2)))</span>
+<span class="php-hl-reserved">echo</span> <span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 带参数，则解析新语句，输出：Xapian::Query((杭州:(pos=1) AND 西湖:(pos=2)))</span>
+<span class="php-hl-reserved">echo</span> <span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">杭州 西湖</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; 
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 查看搜索语句解析结果方法2:</span>
+<span class="php-hl-comment">//</span><span class="php-hl-comment"> 相当于不带参数的调用 getQuery()</span>
+<span class="php-hl-reserved">echo</span> <span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">query</span><span class="php-hl-code">;</span></pre></div></div>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="search.overview.html">&laquo; 搜索概述</a></div>
+			<div class="next"><a href="search.search.html">获取搜索匹配结果 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

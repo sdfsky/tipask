@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>搜索建议和纠错</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">拼写纠错</a></li><li><a href="#ch1">搜索建议</a></li></ol></div><h1 id="-">搜索建议和纠错</h1>
+
+<p>这项功能也是建立在搜索日志的基础上。</p>
+
+<h2 id="ch0">1. 拼写纠错<a name="ch0" class="anchor">?</a></h2>
+
+<p>对于英文，由于打字速度过快或各种原因都很容易造成一两个字母出错。对于中文来说，古代就动不动
+出现同音”通假字“，绝大多数现代人也使用拼音输入法，加上方言口音，乱用同音字现象非常普遍。</p>
+
+<p>所以系统在综合分析索引库内的词汇、用户搜索日志基础上建立了一个庞大的纠错体系，支持英文拼写
+纠错、中文同音字纠错、拼音转换等。</p>
+
+<p>使用这些功能都非常简单，直接调用 <a href="../api/XSSearch.html#getCorrectedQuery">XSSearch::getCorrectedQuery</a> 即可，该方法接受搜索语句
+作为参数，如省略参数则直接使用最近一次 <code>setQuery</code> 的语句，返回值是修正词汇组成的数组，若
+没有更合适的修正方案则返回空数组。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">//</span><span class="php-hl-comment"> 假设在本意是在 demo 项目中搜索 &quot;测试&quot;，但不小心打成了 &quot;侧试&quot;</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">侧试</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;  
+ 
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 由于拼写错误，这种情况返回的数据量可能极少甚至没有，因此调用下面方法试图进行修正</span>
+<span class="php-hl-var">$corrected</span><span class="php-hl-code"> = </span><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getCorrectedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-reserved">if</span> <span class="php-hl-brackets">(</span><span class="php-hl-identifier">count</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$corrected</span><span class="php-hl-brackets">)</span><span class="php-hl-code"> !== </span><span class="php-hl-number">0</span><span class="php-hl-brackets">)</span>
+<span class="php-hl-brackets">{</span>
+   <span class="php-hl-comment">//</span><span class="php-hl-comment"> 有纠错建议，列出来看看；此情况就会得到 &quot;测试&quot; 这一建议</span>
+   <span class="php-hl-reserved">echo</span> <span class="php-hl-quotes">&quot;</span><span class="php-hl-string">您是不是要找：</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code">;
+   </span><span class="php-hl-reserved">foreach</span> <span class="php-hl-brackets">(</span><span class="php-hl-var">$corrected</span> <span class="php-hl-reserved">as</span> <span class="php-hl-var">$word</span><span class="php-hl-brackets">)</span>
+   <span class="php-hl-brackets">{</span>
+      <span class="php-hl-reserved">echo</span> <span class="php-hl-var">$word</span><span class="php-hl-code"> . </span><span class="php-hl-quotes">&quot;</span><span class="php-hl-special">\n</span><span class="php-hl-quotes">&quot;</span><span class="php-hl-code">;
+   </span><span class="php-hl-brackets">}</span>
+<span class="php-hl-brackets">}</span>
+ 
+<span class="php-hl-comment">/*</span><span class="php-hl-comment">* 
+ * 以下拼写示例则简化，并直接传入 Query 语句进行测试 
+ * 您也可以例句用 `util/Quest.php demo --correct &lt;word&gt;` 进行测试
+ </span><span class="php-hl-comment">*/</span>
+ 
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getCorrectedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">cs</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;  </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 通过声母缩写得到建议: &quot;测试&quot;</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getCorrectedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">ceshi</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;  </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 通过全拼缩写得到建议: &quot;测试&quot;</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getCorrectedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">yunsearch</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 通过拼写纠错得到: xunsearch</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getCorrectedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">xunseach 侧试</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 混合纠错得到: xunsearch测试</span></pre></div></div>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 建议在搜索结果数量过少或没有时再尝试进行拼写纠错，而不是每次搜索都进行。</p>
+</blockquote>
+
+<h2 id="ch1">2. 搜索建议<a name="ch1" class="anchor">?</a></h2>
+
+<p>搜索建议是指类似百度那样，当用户在搜索框输入少量的字、拼音、声母时提示用户一些相关的
+热门关键词列表下拉框供用户选择。</p>
+
+<p>这样做非常有利于节省用户的打字时间、提升用户体验。</p>
+
+<p>我们通过 <a href="../api/XSSearch.html#getExpandedQuery">XSSearch::getExpandedQuery</a> 来读取展开的搜索词，该方法返回展开的搜索词组成的
+数组，如果没有任何可用词则返回空数组。接受 2 个参数：</p>
+
+<ul>
+<li><code>$query</code> 要展开的搜索词，返回结果是以这个搜索词为前缀、拼音前缀展开，此为必要参数</li>
+<li><code>$limit</code> 整数值，设置要返回的词数量上限，默认为 10，最大值为 20</li>
+</ul>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-comment">/*</span><span class="php-hl-comment">*
+ * 以下例子也可以用 `util/Quest.php demo --suggest &lt;word&gt;` 进行测试
+ </span><span class="php-hl-comment">*/</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getExpandedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">x</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 返回：项目, xunsearch, 行为, 项目测试</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getExpandedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">xm</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 返回：项目, 项目测试</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getExpandedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">项</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 返回：项目, 项目测试</span>
+<span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getExpandedQuery</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">项目</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 返回：项目测试</span></pre></div></div>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 实际使用过程中，搜索建议通常单独设计一个入口脚本，再在主搜索界面的搜索框中通过
+  <code>ajax、AutoComplete</code> 等 <code>JavaScript</code> 技术来根据用户的输入动态载入建议词列表。</p>
+</blockquote>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="search.rel.html">&laquo; 获取相关搜索词</a></div>
+			<div class="next"><a href="search.facet.html">按字段值分面搜索 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

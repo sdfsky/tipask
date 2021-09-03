@@ -1,0 +1,427 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="xunsearch http://www.xunsearch.com">
+</head>
+<body>
+<object type="text/site properties">
+<param name="Window Styles" value="0x800025">
+<param name="FrameName" value="right">
+<param name="ImageType" value="Folder">
+<param name="comment" value="title:Online Help">
+<param name="comment" value="base:index.html">
+</object>
+<ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="权威指南">
+		<param name="Local" value="guide/toc.html">
+		</object>
+		<ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="新手上路">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="最新主要变动">
+						<param name="Local" value="guide/start.changelog.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="概述">
+						<param name="Local" value="guide/start.overview.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="关于 Xunsearch PHP-SDK">
+						<param name="Local" value="guide/start.about.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="安装、升级">
+						<param name="Local" value="guide/start.installation.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="体验 demo 项目">
+						<param name="Local" value="guide/start.demo.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="开发规范">
+						<param name="Local" value="guide/start.convention.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="开发流程">
+						<param name="Local" value="guide/start.workflow.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="了解基础对象">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="基础对象概述">
+						<param name="Local" value="guide/class.overview.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XS 项目">
+						<param name="Local" value="guide/class.xs.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSException 异常">
+						<param name="Local" value="guide/class.exception.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDocument 文档">
+						<param name="Local" value="guide/class.document.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSIndex 索引管理">
+						<param name="Local" value="guide/class.index.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSSearch 搜索">
+						<param name="Local" value="guide/class.search.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizer 分词接口">
+						<param name="Local" value="guide/class.tokenizer.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="编写项目配置文件">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="项目配置详解">
+						<param name="Local" value="guide/ini.guide.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="自定义分词器">
+						<param name="Local" value="guide/ini.tokenizer.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="编写第一个配置文件">
+						<param name="Local" value="guide/ini.first.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="管理索引">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="索引概述">
+						<param name="Local" value="guide/index.overview.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="添加文档">
+						<param name="Local" value="guide/index.add.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="更新、修改文档">
+						<param name="Local" value="guide/index.update.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="删除文档">
+						<param name="Local" value="guide/index.del.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="清空索引">
+						<param name="Local" value="guide/index.clean.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="平滑重建索引">
+						<param name="Local" value="guide/index.rebuild.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="使用索引缓冲区">
+						<param name="Local" value="guide/index.buffer.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="自定义SCWS词库">
+						<param name="Local" value="guide/index.dict.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="使用搜索">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="搜索概述">
+						<param name="Local" value="guide/search.overview.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="构建搜索语句">
+						<param name="Local" value="guide/search.query.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="获取搜索匹配结果">
+						<param name="Local" value="guide/search.search.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="获取搜索匹配数量">
+						<param name="Local" value="guide/search.count.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="获取热门搜索词">
+						<param name="Local" value="guide/search.hot.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="获取相关搜索词">
+						<param name="Local" value="guide/search.rel.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="搜索建议和纠错">
+						<param name="Local" value="guide/search.fix.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="按字段值分面搜索">
+						<param name="Local" value="guide/search.facet.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="使用辅助工具">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="RequiredCheck 运行检测">
+						<param name="Local" value="guide/util.check.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="Indexer 索引管理器">
+						<param name="Local" value="guide/util.indexer.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="Quest 搜索测试工具">
+						<param name="Local" value="guide/util.quest.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="SearchSkel 生成搜索代码">
+						<param name="Local" value="guide/util.skel.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="IniWizzard 配置文件向导">
+						<param name="Local" value="guide/util.ini.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="Logger 搜索日志管理">
+						<param name="Local" value="guide/util.logger.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="专题">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="同义词搜索功能">
+						<param name="Local" value="guide/special.synonym.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="在SDK中使用SCWS分词">
+						<param name="Local" value="guide/special.scws.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="通过Composer使用">
+						<param name="Local" value="guide/special.composer.html">
+						</object>
+				</ul>
+		</ul>
+	</li>
+	<li><object type="text/sitemap">
+		<param name="Name" value="API 指南">
+		<param name="Local" value="api/index.html">
+		</object>
+		<ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="XS">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XS">
+						<param name="Local" value="api/XS.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSCommand">
+						<param name="Local" value="api/XSCommand.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSComponent">
+						<param name="Local" value="api/XSComponent.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDocument">
+						<param name="Local" value="api/XSDocument.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSErrorException">
+						<param name="Local" value="api/XSErrorException.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSException">
+						<param name="Local" value="api/XSException.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSFieldMeta">
+						<param name="Local" value="api/XSFieldMeta.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSFieldScheme">
+						<param name="Local" value="api/XSFieldScheme.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSIndex">
+						<param name="Local" value="api/XSIndex.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSSearch">
+						<param name="Local" value="api/XSSearch.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSServer">
+						<param name="Local" value="api/XSServer.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="XS.tokenizer">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizer">
+						<param name="Local" value="api/XSTokenizer.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizerFull">
+						<param name="Local" value="api/XSTokenizerFull.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizerNone">
+						<param name="Local" value="api/XSTokenizerNone.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizerScws">
+						<param name="Local" value="api/XSTokenizerScws.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizerSplit">
+						<param name="Local" value="api/XSTokenizerSplit.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizerXlen">
+						<param name="Local" value="api/XSTokenizerXlen.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSTokenizerXstep">
+						<param name="Local" value="api/XSTokenizerXstep.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="XS.util">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSCsvDataSource">
+						<param name="Local" value="api/XSCsvDataSource.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDataFilter">
+						<param name="Local" value="api/XSDataFilter.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabaseDataSource">
+						<param name="Local" value="api/XSDatabaseDataSource.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDebugFilter">
+						<param name="Local" value="api/XSDebugFilter.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSJsonDataSource">
+						<param name="Local" value="api/XSJsonDataSource.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSUtil">
+						<param name="Local" value="api/XSUtil.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="XS.util.db">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabase">
+						<param name="Local" value="api/XSDatabase.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabaseMySQL">
+						<param name="Local" value="api/XSDatabaseMySQL.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabaseMySQLI">
+						<param name="Local" value="api/XSDatabaseMySQLI.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabasePDO">
+						<param name="Local" value="api/XSDatabasePDO.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabasePDO_MySQL">
+						<param name="Local" value="api/XSDatabasePDO_MySQL.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabasePDO_PgSQL">
+						<param name="Local" value="api/XSDatabasePDO_PgSQL.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabasePDO_SQLite">
+						<param name="Local" value="api/XSDatabasePDO_SQLite.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabasePgSQL">
+						<param name="Local" value="api/XSDatabasePgSQL.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabaseSQLite">
+						<param name="Local" value="api/XSDatabaseSQLite.html">
+						</object>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDatabaseSQLite3">
+						<param name="Local" value="api/XSDatabaseSQLite3.html">
+						</object>
+				</ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="XS.utilf">
+				</object>
+				<ul>
+					<li><object type="text/sitemap">
+						<param name="Name" value="XSDataSource">
+						<param name="Local" value="api/XSDataSource.html">
+						</object>
+				</ul>
+		</ul>
+	<li><object type="text/sitemap">
+		<param name="Name" value="其它文档">
+		</object>
+		<ul>
+			<li><object type="text/sitemap">
+				<param name="Name" value="关于 xunsearch">
+				<param name="Local" value="ABOUT.html">
+				</object>
+			<li><object type="text/sitemap">
+				<param name="Name" value="特色和优势">
+				<param name="Local" value="FEATURE.html">
+				</object>
+			<li><object type="text/sitemap">
+				<param name="Name" value="Xunsearch 架构简图">
+				<param name="Local" value="ARCHITECTURE.html">
+				</object>
+			<li><object type="text/sitemap">
+				<param name="Name" value="下载 Xunsearch">
+				<param name="Local" value="DOWNLOAD.html">
+				</object>
+			<li><object type="text/sitemap">
+				<param name="Name" value="商业服务与支持">
+				<param name="Local" value="SUPPORT.html">
+				</object>
+			<li><object type="text/sitemap">
+				<param name="Name" value="XunSearch 授权许可证">
+				<param name="Local" value="LICENSE.html">
+				</object>
+		</ul>
+</ul>
+</body>
+</html>

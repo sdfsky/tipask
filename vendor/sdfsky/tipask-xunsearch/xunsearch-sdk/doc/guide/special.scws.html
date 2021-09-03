@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>在 Xunsearch 使用 SCWS</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">用法简单说明</a></li><li><a href="#ch1">使用注意事项</a></li></ol></div><h1 id="-xunsearch-scws">在 Xunsearch 使用 SCWS</h1>
+
+<p>为了便于用户在安装完 <code>Xunsearch</code> 后可以通过服务端内置的 scws<a href="http://www.xunsearch.com/scws/">1</a> 实现分词，
+而不需要另外再安装 scws 的 php 扩展。从 <code>1.3.1</code> 版本起，<code>Xunsearch</code> 
+的 PHP-SDK 中加入 <a href="../api/XSTokenizerScws.html">XSTokenizerScws</a> 类，可通过搜索服务端执行分词功能。</p>
+
+<h2 id="ch0">1. 用法简单说明<a name="ch0" class="anchor">?</a></h2>
+
+<p>这儿只做简单介绍和示范，更多详细的用法请点击阅读类参考手册 <a href="../api/XSTokenizerScws.html">XSTokenizerScws</a>。</p>
+
+<h4 id="-">创建分词对象</h4>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$xs</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XS</span><span class="php-hl-brackets">(</span><span class="php-hl-code">...</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;  </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 必须先创建一个 xs 实例，否则会抛出异常</span>
+<span class="php-hl-var">$tokenizer</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XSTokenizerScws</span><span class="php-hl-code">;   </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 直接创建实例</span></pre></div></div>
+
+<h3 id="-">获取分词结果</h3>
+
+<p>调用 <a href="../api/XSTokenizerScws.html#getResult">XSTokenizerScws::getResult</a> 对参数指定的文本字符串执行分词，
+并返回词汇数组，每个词汇包含 3 个元素，其中：</p>
+
+<ul>
+<li><em>off</em> 表示这个词汇在源参数文本 <em>$text</em> 中的起始偏移位置</li>
+<li><em>attr</em> 这个词汇的词性，使用北大标注</li>
+<li><em>word</em> 分好的词条</li>
+</ul>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$text</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">迅搜(xunsearch)是优秀的开源全文检索解决方案</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$words</span><span class="php-hl-code"> = </span><span class="php-hl-var">$tokenizer</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getResult</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$text</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-identifier">print_r</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$words</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<h3 id="-">提取重要词汇</h3>
+
+<p>调用 <a href="../api/XSToenizerScws.html#getTops">XSToenizerScws::getTops</a> 可以简单提取重要词汇，它支持三个参数，
+返回的词汇数组元素和分词结果类似，只是把 <em>off</em> 替换为 <em>times</em> 
+表示这个词在文本中出现的总次数。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$text</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">迅搜(xunsearch)是优秀的开源全文检索解决方案</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 提取前 5 个重要词，要求词性必须是 n 或v 或 vn</span>
+<span class="php-hl-var">$tops</span><span class="php-hl-code"> = </span><span class="php-hl-var">$tokenizer</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">getTops</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$text</span><span class="php-hl-code">, </span><span class="php-hl-number">5</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">n,v,vn</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-identifier">print_r</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$tops</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<h3 id="-">判断是否包含指定词性的词汇</h3>
+
+<p>这项功能通过 <a href="../api/XSTokenizerScws.html#hasWord">XSTokenizerScws::hasWord</a> 完成，主要目的是用于类似黑词判断。
+您可以自制一个词典，并将黑词统一设置为一个独特的属性，比如 "@"，
+那么就可以用该功能判断一段文本是否包含黑词。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$text</span><span class="php-hl-code"> = </span><span class="php-hl-quotes">'</span><span class="php-hl-string">...</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-reserved">if</span> <span class="php-hl-brackets">(</span><span class="php-hl-var">$tokenizer</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">hasWord</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$text</span><span class="php-hl-code">, </span><span class="php-hl-quotes">'</span><span class="php-hl-string">@</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-brackets">)</span> <span class="php-hl-brackets">{</span>
+    <span class="php-hl-comment">//</span><span class="php-hl-comment"> 包含词性为 '@' 的词</span>
+<span class="php-hl-brackets">}</span>
+<span class="php-hl-reserved">else</span> <span class="php-hl-brackets">{</span>
+    <span class="php-hl-comment">//</span><span class="php-hl-comment"> 为包含词性为 '@' 的词</span>
+<span class="php-hl-brackets">}</span></pre></div></div>
+
+<h2 id="ch1">2. 使用注意事项<a name="ch1" class="anchor">?</a></h2>
+
+<ul>
+<li><p>这个分词类底层实现是与搜索服务端通讯完成的，因此在使用前必须先初始化一个 <a href="../api/XS.html">XS</a> 对象</p></li>
+<li><p>这个分词器虽然实现了 <a href="../api/XSTokenizer.html#getTokens">XSTokenizer::getTokens</a>，但不推荐直接指定到配置文件的
+tokenizer 选项中，因为这样做只会让性能更低。</p></li>
+</ul>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="special.synonym.html">&laquo; 同义词搜索功能</a></div>
+			<div class="next"><a href="special.composer.html">通过Composer使用 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

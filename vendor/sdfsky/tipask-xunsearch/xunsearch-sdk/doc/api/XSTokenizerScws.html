@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>XSTokenizerScws</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>XSTokenizerScws</h1>
+<div id="nav">
+<a href="index.html">All Packages</a>
+| <a href="#methods">方法(函数)</a>
+</div>
+
+<table class="summaryTable docClass">
+<colgroup>
+	<col class="col-name" />
+	<col class="col-value" />
+</colgroup>
+<tr>
+  <th>包</th>
+  <td><a href="index.html#XS.tokenizer">XS.tokenizer</a></td>
+</tr>
+<tr>
+  <th>继承关系</th>
+  <td>class XSTokenizerScws</td>
+</tr>
+<tr>
+  <th>实现接口</th>
+  <td><a href="XSTokenizer.html">XSTokenizer</a></td>
+</tr>
+<tr>
+  <th>始于</th>
+  <td>1.3.1</td>
+</tr>
+<tr>
+  <th>版本</th>
+  <td>1.0.0</td>
+</tr>
+<tr>
+  <th>源代码</th>
+  <td><a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php">sdk/php/lib/XSTokenizer.class.php</a></td>
+</tr>
+</table>
+
+<div id="classDescription">
+SCWS - 分词器(与搜索服务端通讯)</div>
+
+<a name="properties"></a>
+
+<a name="methods"></a>
+
+<div class="summary docMethod">
+<h2>Public 方法</h2>
+
+<p><a href="#" class="toggle">隐去继承来的方法</a></p>
+
+<table class="summaryTable">
+<colgroup>
+	<col class="col-method" />
+	<col class="col-description" />
+	<col class="col-defined" />
+</colgroup>
+<tr>
+  <th>名称</th><th>描述</th><th>定义于</th>
+</tr>
+<tr id="__construct">
+  <td><a href="XSTokenizerScws.html#__construct-detail">__construct()</a></td>
+  <td>构造函数</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="addDict">
+  <td><a href="XSTokenizerScws.html#addDict-detail">addDict()</a></td>
+  <td>添加分词词典, 支持 TXT/XDB 格式</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="getResult">
+  <td><a href="XSTokenizerScws.html#getResult-detail">getResult()</a></td>
+  <td>获取分词结果</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="getTokens">
+  <td><a href="XSTokenizerScws.html#getTokens-detail">getTokens()</a></td>
+  <td>XSTokenizer 接口</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="getTops">
+  <td><a href="XSTokenizerScws.html#getTops-detail">getTops()</a></td>
+  <td>获取重要词统计结果</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="getVersion">
+  <td><a href="XSTokenizerScws.html#getVersion-detail">getVersion()</a></td>
+  <td>获取 scws 版本号</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="hasWord">
+  <td><a href="XSTokenizerScws.html#hasWord-detail">hasWord()</a></td>
+  <td>判断是否包含指定词性的词</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="setCharset">
+  <td><a href="XSTokenizerScws.html#setCharset-detail">setCharset()</a></td>
+  <td>设置字符集</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="setDict">
+  <td><a href="XSTokenizerScws.html#setDict-detail">setDict()</a></td>
+  <td>设置分词词典, 支持 TXT/XDB 格式</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="setDuality">
+  <td><a href="XSTokenizerScws.html#setDuality-detail">setDuality()</a></td>
+  <td>设置散字二元组合</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="setIgnore">
+  <td><a href="XSTokenizerScws.html#setIgnore-detail">setIgnore()</a></td>
+  <td>设置忽略标点符号</td>
+  <td>XSTokenizerScws</td>
+</tr>
+<tr id="setMulti">
+  <td><a href="XSTokenizerScws.html#setMulti-detail">setMulti()</a></td>
+  <td>设置复合分词选项</td>
+  <td>XSTokenizerScws</td>
+</tr>
+</table>
+</div>
+
+<a name="events"></a>
+
+<h2>方法明细</h2>
+
+<div class="detailHeader" id="__construct-detail">
+__construct()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>__construct</b>(string $arg=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$arg</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">复合等级参数，默认不指定</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L188">sdk/php/lib/XSTokenizer.class.php#L188</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">$arg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$xs&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">XS</span><span style="color: #007700">::</span><span style="color: #0000BB">getLastXS</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$xs&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;</span><span style="color: #0000BB">XSException</span><span style="color: #007700">(</span><span style="color: #DD0000">'An&nbsp;XS&nbsp;instance&nbsp;should&nbsp;be&nbsp;created&nbsp;before&nbsp;using&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">__CLASS__</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getScwsServer</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setTimeout</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$xs</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getDefaultCharset</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;constants<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(!</span><span style="color: #0000BB">defined</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_MULTI_NONE'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_MULTI_NONE'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_MULTI_SHORT'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_MULTI_DUALITY'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_MULTI_ZMAIN'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">4</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_MULTI_ZALL'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">8</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">defined</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_XDICT_XDB'</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_XDICT_XDB'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_XDICT_MEM'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">define</span><span style="color: #007700">(</span><span style="color: #DD0000">'SCWS_XDICT_TXT'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">4</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$arg&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #0000BB">null&nbsp;</span><span style="color: #007700">&amp;&amp;&nbsp;</span><span style="color: #0000BB">$arg&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$arg</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>构造函数
+初始化用于分词的搜索服务端</p>
+
+
+<div class="detailHeader" id="addDict-detail">
+addDict()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSTokenizerScws <b>addDict</b>(string $fpath, int $mode=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$fpath</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">服务端的词典路径</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$mode</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">词典类型, 常量: SCWS_XDICT_XDB|SCWS_XDICT_TXT|SCWS_XDICT_MEM</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSTokenizerScws</td>
+  <td class="paramDescCol">返回对象本身以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L299">sdk/php/lib/XSTokenizer.class.php#L299</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">addDict</span><span style="color: #007700">(</span><span style="color: #0000BB">$fpath</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_int</span><span style="color: #007700">(</span><span style="color: #0000BB">$mode</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stripos</span><span style="color: #007700">(</span><span style="color: #0000BB">$fpath</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'.txt'</span><span style="color: #007700">)&nbsp;!==&nbsp;</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">SCWS_XDICT_TXT&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">SCWS_XDICT_XDB</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'add_dict'</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'add_dict'</span><span style="color: #007700">]&nbsp;=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'add_dict'</span><span style="color: #007700">][]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_SET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_ADD_DICT</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mode</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$fpath</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>添加分词词典, 支持 TXT/XDB 格式</p>
+
+
+<div class="detailHeader" id="getResult-detail">
+getResult()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public array <b>getResult</b>(string $text)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$text</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">待分词的文本</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">返回词汇数组, 每个词汇是包含 [off:词在文本中的位置,attr:词性,word:词]</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L339">sdk/php/lib/XSTokenizer.class.php#L339</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getResult</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$words&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">applySetting</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_GET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_GET_RESULT</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_SCWS_RESULT</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">unpack</span><span style="color: #007700">(</span><span style="color: #DD0000">'Ioff/a4attr/a*word'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">[</span><span style="color: #DD0000">'word'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">XS</span><span style="color: #007700">::</span><span style="color: #0000BB">convert</span><span style="color: #007700">(</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">[</span><span style="color: #DD0000">'word'</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$words</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getRespond</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$words</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取分词结果</p>
+
+
+<div class="detailHeader" id="getTokens-detail">
+getTokens()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public void <b>getTokens</b>($value, $doc=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$value</td>
+  <td class="paramTypeCol"></td>
+  <td class="paramDescCol"></td>
+</tr>
+<tr>
+  <td class="paramNameCol">$doc</td>
+  <td class="paramTypeCol"></td>
+  <td class="paramDescCol"></td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L220">sdk/php/lib/XSTokenizer.class.php#L220</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getTokens</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XSDocument&nbsp;$doc&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tokens&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setIgnore</span><span style="color: #007700">(</span><span style="color: #0000BB">true</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;save&nbsp;charset,&nbsp;force&nbsp;to&nbsp;use&nbsp;UTF-8<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$words&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getResult</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$words&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$word</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tokens</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$word</span><span style="color: #007700">[</span><span style="color: #DD0000">'word'</span><span style="color: #007700">];<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;restore&nbsp;charset<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$_charset</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$tokens</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>XSTokenizer 接口</p>
+
+
+<div class="detailHeader" id="getTops-detail">
+getTops()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public array <b>getTops</b>(string $text, string $limit=10, $xattr='')</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$text</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">待分词的文本</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$limit</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">在返回结果的词性过滤, 多个词性之间用逗号分隔, 以~开头取反
+ 如: 设为 n,v 表示只返回名词和动词; 设为 ~n,v 则表示返回名词和动词以外的其它词</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$xattr</td>
+  <td class="paramTypeCol"></td>
+  <td class="paramDescCol"></td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">array</td>
+  <td class="paramDescCol">返回词汇数组, 每个词汇是包含 [times:次数,attr:词性,word:词]</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L361">sdk/php/lib/XSTokenizer.class.php#L361</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getTops</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$limit&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">10</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$xattr&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$words&nbsp;</span><span style="color: #007700">=&nbsp;array();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">applySetting</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_GET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_GET_TOPS</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$limit</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$xattr</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_SCWS_TOPS</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf&nbsp;</span><span style="color: #007700">!==&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">unpack</span><span style="color: #007700">(</span><span style="color: #DD0000">'Itimes/a4attr/a*word'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">[</span><span style="color: #DD0000">'word'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">XS</span><span style="color: #007700">::</span><span style="color: #0000BB">convert</span><span style="color: #007700">(</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">[</span><span style="color: #DD0000">'word'</span><span style="color: #007700">],&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$words</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$tmp</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getRespond</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$words</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取重要词统计结果</p>
+
+
+<div class="detailHeader" id="getVersion-detail">
+getVersion()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public string <b>getVersion</b>()</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">版本号</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L327">sdk/php/lib/XSTokenizer.class.php#L327</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">getVersion</span><span style="color: #007700">()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_GET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_GET_VERSION</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_INFO</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>获取 scws 版本号</p>
+
+
+<div class="detailHeader" id="hasWord-detail">
+hasWord()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public bool <b>hasWord</b>(string $text, string $xattr)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$text</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">要判断的文本</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$xattr</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">要判断的词性, 参见 <a href="XSTokenizerScws.html#getTops">getTops</a> 的说明</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">文本中是否包含指定词性的词汇</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L382">sdk/php/lib/XSTokenizer.class.php#L382</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">hasWord</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$xattr</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">applySetting</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$cmd&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_GET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_HAS_WORD</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$xattr</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_server</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">execCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">$cmd</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_OK_INFO</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$res</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">buf&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #DD0000">'OK'</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>判断是否包含指定词性的词</p>
+
+
+<div class="detailHeader" id="setCharset-detail">
+setCharset()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSTokenizerScws <b>setCharset</b>(string $charset)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$charset</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol"></td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSTokenizerScws</td>
+  <td class="paramDescCol">返回对象本身以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L242">sdk/php/lib/XSTokenizer.class.php#L242</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setCharset</span><span style="color: #007700">(</span><span style="color: #0000BB">$charset</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">strtoupper</span><span style="color: #007700">(</span><span style="color: #0000BB">$charset</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #DD0000">'UTF8'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">$_charset&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置字符集
+默认字符集是 UTF-8, 这是指 <a href="XSTokenizerScws.html#getResult">getResult</a> 系列函数的 $text 参数的字符集</p>
+
+
+<div class="detailHeader" id="setDict-detail">
+setDict()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSTokenizerScws <b>setDict</b>(string $fpath, int $mode=NULL)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$fpath</td>
+  <td class="paramTypeCol">string</td>
+  <td class="paramDescCol">服务端的词典路径</td>
+</tr>
+<tr>
+  <td class="paramNameCol">$mode</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">词典类型, 常量: SCWS_XDICT_XDB|SCWS_XDICT_TXT|SCWS_XDICT_MEM</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSTokenizerScws</td>
+  <td class="paramDescCol">返回对象本身以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L283">sdk/php/lib/XSTokenizer.class.php#L283</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setDict</span><span style="color: #007700">(</span><span style="color: #0000BB">$fpath</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!</span><span style="color: #0000BB">is_int</span><span style="color: #007700">(</span><span style="color: #0000BB">$mode</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stripos</span><span style="color: #007700">(</span><span style="color: #0000BB">$fpath</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'.txt'</span><span style="color: #007700">)&nbsp;!==&nbsp;</span><span style="color: #0000BB">false&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">SCWS_XDICT_TXT&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">SCWS_XDICT_XDB</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'set_dict'</span><span style="color: #007700">]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_SET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_SET_DICT</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mode</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$fpath</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;unset(</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'add_dict'</span><span style="color: #007700">]);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置分词词典, 支持 TXT/XDB 格式</p>
+
+
+<div class="detailHeader" id="setDuality-detail">
+setDuality()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSTokenizerScws <b>setDuality</b>(bool $yes=true)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$yes</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">是否开启散字自动二分组合功能</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSTokenizerScws</td>
+  <td class="paramDescCol">返回对象本身以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L316">sdk/php/lib/XSTokenizer.class.php#L316</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setDuality</span><span style="color: #007700">(</span><span style="color: #0000BB">$yes&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'duality'</span><span style="color: #007700">]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_SET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_SET_DUALITY</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$yes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">false<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置散字二元组合</p>
+
+
+<div class="detailHeader" id="setIgnore-detail">
+setIgnore()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSTokenizerScws <b>setIgnore</b>(bool $yes=true)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$yes</td>
+  <td class="paramTypeCol">bool</td>
+  <td class="paramDescCol">是否忽略</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSTokenizerScws</td>
+  <td class="paramDescCol">返回对象本身以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L256">sdk/php/lib/XSTokenizer.class.php#L256</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setIgnore</span><span style="color: #007700">(</span><span style="color: #0000BB">$yes&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'ignore'</span><span style="color: #007700">]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_SET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_SET_IGNORE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$yes&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">false<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">?&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置忽略标点符号</p>
+
+
+<div class="detailHeader" id="setMulti-detail">
+setMulti()
+<span class="detailHeaderTag">
+方法
+</span>
+</div>
+
+<table class="summaryTable">
+<tr><td colspan="3">
+<div class="signature2">
+public XSTokenizerScws <b>setMulti</b>(int $mode=3)</div>
+</td></tr>
+<tr>
+  <td class="paramNameCol">$mode</td>
+  <td class="paramTypeCol">int</td>
+  <td class="paramDescCol">复合选项, 值范围 0~15
+ 默认为值为 3, 可使用常量组合: 
+ SCWS_MULTI_SHORT|SCWS_MULTI_DUALITY|SCWS_MULTI_ZMAIN|SCWS_MULTI_ZALL</td>
+</tr>
+<tr>
+  <td class="paramNameCol">{return}</td>
+  <td class="paramTypeCol">XSTokenizerScws</td>
+  <td class="paramDescCol">返回对象本身以支持串接操作</td>
+</tr>
+</table>
+
+<div class="sourceCode">
+<b>源码:</b> <a class="sourceLink" href="https://github.com/hightman/xunsearch/blob/master/sdk/php/lib/XSTokenizer.class.php#L270">sdk/php/lib/XSTokenizer.class.php#L270</a> (<b><a href="#" class="show">显示</a></b>)
+<div class="code"><code><span style="color: #000000">
+<span style="color: #0000BB"></span><span style="color: #007700">public&nbsp;function&nbsp;</span><span style="color: #0000BB">setMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$mode&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">intval</span><span style="color: #007700">(</span><span style="color: #0000BB">$mode</span><span style="color: #007700">)&nbsp;&amp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">MULTI_MASK</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">_setting</span><span style="color: #007700">[</span><span style="color: #DD0000">'multi'</span><span style="color: #007700">]&nbsp;=&nbsp;new&nbsp;</span><span style="color: #0000BB">XSCommand</span><span style="color: #007700">(</span><span style="color: #0000BB">XS_CMD_SEARCH_SCWS_SET</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XS_CMD_SCWS_SET_MULTI</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$mode</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+</div>
+
+<p>设置复合分词选项</p>
+
+
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

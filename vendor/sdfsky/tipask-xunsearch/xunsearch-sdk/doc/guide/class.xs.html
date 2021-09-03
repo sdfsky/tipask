@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>XS 项目</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<div class="toc"><ol><li><a href="#ch0">创建 XS 对象</a></li><li><a href="#ch1">重要属性</a></li></ol></div><h1 id="xs-">XS 项目</h1>
+
+<p><a href="../api/XS.html">XS</a> 是搜索项目的总对象，所有操作均基于此对象或其属性，在此我们只挑最常用的一些属性、方法进行介绍。</p>
+
+<h2 id="ch0">1. 创建 XS 对象<a name="ch0" class="anchor">?</a></h2>
+
+<p>创建 XS 对象的唯一参数是项目配置文件的可访问路径，或者项目名，也可以是项目配置文件的内容。如果给出
+的参数是项目名则自动使用 <code>$prefix/sdk/php/app/项目名.ini</code>，例子代码如下：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">require_once</span> <span class="php-hl-quotes">'</span><span class="php-hl-string">$prefix/sdk/php/lib/XS.php</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$xs</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XS</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">demo</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;   </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 自动使用 $prefix/sdk/php/app/demo.ini 作项目配置文件</span>
+<span class="php-hl-var">$xs</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XS</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">/path/to/demo.ini</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;  </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 使用 /path/to/demo.ini</span></pre></div></div>
+
+<blockquote class="note">
+<p><strong>Note:</strong> 自 v1.4.9 起，可以通过定义常量 XS_APP_ROOT 或设置这个环境变量来改变默认项目配置目录。</p>
+</blockquote>
+
+<h2 id="ch1">2. 重要属性<a name="ch1" class="anchor">?</a></h2>
+
+<ul>
+<li><p><a href="../api/XS.html#defaultCharset">XS::defaultCharset</a> <strong>项目默认字符集</strong>
+影响范围包括使用时的输入数据以及搜索结果的输出数据，该属性默认由配置文件中的
+<code>project.default_charset</code> 指定，如有必要可以自行修改，但要确保在使用索引、搜索对象之前。</p></li>
+<li><p><a href="../api/XS.html#index">XS::index</a> <strong>索引管理对象</strong>
+类型为 <a href="../api/XSIndex.html">XSIndex</a>，比如用下面代码可以清空项目索引内容：</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$xs</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">index</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">clean</span><span class="php-hl-brackets">(</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div></li>
+<li><p><a href="../api/XS.html#search">XS::search</a> <strong>搜索对象</strong>
+类型为 <a href="../api/XSSearch.html">XSSearch</a>，比如用下面代码可以快速检索包含 <code>hightman</code> 的结果</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$docs</span><span class="php-hl-code"> = </span><span class="php-hl-var">$xs</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">hightman</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-identifier">print_r</span><span class="php-hl-brackets">(</span><span class="php-hl-var">$docs</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div></li>
+</ul>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="class.overview.html">&laquo; 基础对象概述</a></div>
+			<div class="next"><a href="class.exception.html">XSException 异常 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

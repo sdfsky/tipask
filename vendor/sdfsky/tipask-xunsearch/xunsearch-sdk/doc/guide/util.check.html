@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>运行条件检测</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="-">运行条件检测</h1>
+
+<p>这里的运行条件是指 <code>Xunsearch PHP-SDK</code> 对于 PHP 及其扩展模块的基础要求。</p>
+
+<p>该工具程序路径为如下，请直接运行或调用 <code>php</code> 运行它。</p>
+
+<pre>$prefix/sdk/php/util/RequiredCheck.php
+</pre>
+
+<p>典型运行结果如下，表格式说明各项的情况，最底下还给出最终裁定意见。</p>
+
+<blockquote class="tip">
+<p><strong>Tip:</strong> 默认输出的字符集为 <code>UTF-8</code>，如果您的运行结果乱码，
+  请尝试在运行命令末尾加上 <code>-c gbk</code> 。</p>
+</blockquote>
+
+<pre>Xunsearch PHP-SDK 运行需求检查
+==============================
+
+检查内容
+--------
+
+本程序用于确认您的服务器配置是否能满足运行 Xunsearch PHP-SDK 的要求。
+它将检查服务器所运行的 PHP 版本，查看是否安装了合适的PHP扩展模块，以及
+确认 php.ini 文件是否正确设置。
+
++------------+------------+--------------------------+--------------------------------+
+| 项目       | 结果       | 用于                     | 备注                           |
++------------+------------+--------------------------+--------------------------------+
+| PHP 版本   | 5.3.6      | XS(core)                 | PHP 5.2.0 或更高版本是必须的。 |
+| SPL 扩展   | OK         | XS(core)                 | SPL 扩展用于自动加载和对象戏法 |
+| PCRE 扩展  | OK         | XSDocument, XSSearch     | 用于字符串切割、判断           |
+| 编码转换   | mbstring   | XSDocument, XSSearch     | 用于支持非 UTF-8 字符集        |
+| 缓存模块   | apc        | XS                       | 用于缓存项目配置文件的解析结果 |
+| JSON 扩展  | OK         | util.Quest, util.Indexer | 用于读取或输出 JSON 格式的数据 |
+| XML 扩展   | OK         | util.Indexer             | 用于读取导入 XML 格式的数据    |
+| MySQL 扩展 | mysql      | util.Indexer             | 用于读取导入 MySQL 的数据库    |
+| SQLite 扩  | sqlite     | util.Indexer             | 用于读取导入 SQLite 的数据库   |
++------------+------------+--------------------------+--------------------------------+
+
+检查结果
+--------
+
+共计 9 项通过，0 项警告，0 项错误。
+
+您的服务器配置符合 Xunsearch/PHP-SDK 的最低要求。
+</pre>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="search.facet.html">&laquo; 按字段值分面搜索</a></div>
+			<div class="next"><a href="util.indexer.html">Indexer 索引管理器 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>

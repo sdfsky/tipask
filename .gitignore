@@ -1,5 +1,4 @@
 .idea/
-vendor/
 bootstrap/cache/
 /storage/*.key
 /storage/installed

@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/api.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<title>Xunsearch PHP-SDK API 文档</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 API 参考文档
+</div><!-- end of header -->
+
+<div id="content" class="api-index">
+<h1>API 参考文档</h1>
+
+<table class="summaryTable docIndex">
+<colgroup>
+	<col class="col-package" />
+	<col class="col-class" />
+	<col class="col-description" />
+</colgroup>
+<tr>
+  <th>包</th><th>类对象</th><th>描述</th>
+</tr>
+<tr>
+  <td rowspan="11"><a name="XS"></a>XS</td>
+  <td><a href="XS.html">XS</a></td>
+  <td>XS 搜索项目主类</td>
+</tr>
+<tr>
+  <td><a href="XSCommand.html">XSCommand</a></td>
+  <td>XSCommand 命令对象</td>
+</tr>
+<tr>
+  <td><a href="XSComponent.html">XSComponent</a></td>
+  <td>XS 组件基类</td>
+</tr>
+<tr>
+  <td><a href="XSDocument.html">XSDocument</a></td>
+  <td>文档用于描述检索/索引的基础对象, 包含一组字段及其值, 相当于常规SQL数据表中的一行记录.</td>
+</tr>
+<tr>
+  <td><a href="XSErrorException.html">XSErrorException</a></td>
+  <td>XS 错误异常类定义, XS 所有操作过程发生错误均抛出该实例</td>
+</tr>
+<tr>
+  <td><a href="XSException.html">XSException</a></td>
+  <td>XS 异常类定义, XS 所有操作过程发生异常均抛出该实例</td>
+</tr>
+<tr>
+  <td><a href="XSFieldMeta.html">XSFieldMeta</a></td>
+  <td>数据字段结构元数据</td>
+</tr>
+<tr>
+  <td><a href="XSFieldScheme.html">XSFieldScheme</a></td>
+  <td>XS 数据字段方案</td>
+</tr>
+<tr>
+  <td><a href="XSIndex.html">XSIndex</a></td>
+  <td>XS 索引管理</td>
+</tr>
+<tr>
+  <td><a href="XSSearch.html">XSSearch</a></td>
+  <td>XS 搜索类, 执行搜索功能</td>
+</tr>
+<tr>
+  <td><a href="XSServer.html">XSServer</a></td>
+  <td>XSServer 服务器操作对象</td>
+</tr>
+<tr>
+  <td rowspan="7"><a name="XS.tokenizer"></a>XS.tokenizer</td>
+  <td><a href="XSTokenizer.html">XSTokenizer</a></td>
+  <td>自定义字段词法分析器接口</td>
+</tr>
+<tr>
+  <td><a href="XSTokenizerFull.html">XSTokenizerFull</a></td>
+  <td>内置整值分词器</td>
+</tr>
+<tr>
+  <td><a href="XSTokenizerNone.html">XSTokenizerNone</a></td>
+  <td>内置空分词器</td>
+</tr>
+<tr>
+  <td><a href="XSTokenizerScws.html">XSTokenizerScws</a></td>
+  <td>SCWS - 分词器(与搜索服务端通讯)</td>
+</tr>
+<tr>
+  <td><a href="XSTokenizerSplit.html">XSTokenizerSplit</a></td>
+  <td>内置的分割分词器</td>
+</tr>
+<tr>
+  <td><a href="XSTokenizerXlen.html">XSTokenizerXlen</a></td>
+  <td>内置的定长分词器</td>
+</tr>
+<tr>
+  <td><a href="XSTokenizerXstep.html">XSTokenizerXstep</a></td>
+  <td>内置的步长分词器</td>
+</tr>
+<tr>
+  <td rowspan="6"><a name="XS.util"></a>XS.util</td>
+  <td><a href="XSCsvDataSource.html">XSCsvDataSource</a></td>
+  <td>CSV 数据源</td>
+</tr>
+<tr>
+  <td><a href="XSDataFilter.html">XSDataFilter</a></td>
+  <td>数据过滤器的接口</td>
+</tr>
+<tr>
+  <td><a href="XSDatabaseDataSource.html">XSDatabaseDataSource</a></td>
+  <td>SQL 数据库源</td>
+</tr>
+<tr>
+  <td><a href="XSDebugFilter.html">XSDebugFilter</a></td>
+  <td>内置调试过滤器, 直接打印数据内容</td>
+</tr>
+<tr>
+  <td><a href="XSJsonDataSource.html">XSJsonDataSource</a></td>
+  <td>JSON 数据源</td>
+</tr>
+<tr>
+  <td><a href="XSUtil.html">XSUtil</a></td>
+  <td>XSUtil 工具程序通用代码</td>
+</tr>
+<tr>
+  <td rowspan="10"><a name="XS.util.db"></a>XS.util.db</td>
+  <td><a href="XSDatabase.html">XSDatabase</a></td>
+  <td>数据库操作基类</td>
+</tr>
+<tr>
+  <td><a href="XSDatabaseMySQL.html">XSDatabaseMySQL</a></td>
+  <td>使用传统 MySQL 扩展</td>
+</tr>
+<tr>
+  <td><a href="XSDatabaseMySQLI.html">XSDatabaseMySQLI</a></td>
+  <td>面向对象的 MySQLI 扩展</td>
+</tr>
+<tr>
+  <td><a href="XSDatabasePDO.html">XSDatabasePDO</a></td>
+  <td>面向对象的 PDO 扩展基类</td>
+</tr>
+<tr>
+  <td><a href="XSDatabasePDO_MySQL.html">XSDatabasePDO_MySQL</a></td>
+  <td>PDO.MySQL 实现</td>
+</tr>
+<tr>
+  <td><a href="XSDatabasePDO_PgSQL.html">XSDatabasePDO_PgSQL</a></td>
+  <td>PDO.Pgsql 实现</td>
+</tr>
+<tr>
+  <td><a href="XSDatabasePDO_SQLite.html">XSDatabasePDO_SQLite</a></td>
+  <td>PDO.SQLite 实现</td>
+</tr>
+<tr>
+  <td><a href="XSDatabasePgSQL.html">XSDatabasePgSQL</a></td>
+  <td>面向对象的 PostgreSQL 扩展</td>
+</tr>
+<tr>
+  <td><a href="XSDatabaseSQLite.html">XSDatabaseSQLite</a></td>
+  <td>使用传统的 SQLite 扩展</td>
+</tr>
+<tr>
+  <td><a href="XSDatabaseSQLite3.html">XSDatabaseSQLite3</a></td>
+  <td>面向对象的 SQLite3 扩展</td>
+</tr>
+<tr>
+  <td rowspan="1"><a name="XS.utilf"></a>XS.utilf</td>
+  <td><a href="XSDataSource.html">XSDataSource</a></td>
+  <td>索引数据源抽象基类</td>
+</tr>
+</table>
+</div><!-- end of content -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+<script type="text/javascript">
+/*<![CDATA[*/
+$("a.toggle").toggle(function(){
+	$(this).text($(this).text().replace(/Hide/,'Show'));
+	$(this).parents(".summary").find(".inherited").hide();
+},function(){
+	$(this).text($(this).text().replace(/Show/,'Hide'));
+	$(this).parents(".summary").find(".inherited").show();
+});
+$(".sourceCode a.show").toggle(function(){
+	$(this).text($(this).text().replace(/show/,'hide'));
+	$(this).parents(".sourceCode").find("div.code").show();
+},function(){
+	$(this).text($(this).text().replace(/hide/,'show'));
+	$(this).parents(".sourceCode").find("div.code").hide();
+});
+$("a.sourceLink").click(function(){
+	$(this).attr('target','_blank');
+});
+/*]]>*/
+</script>
+
+</div><!-- end of page -->
+</body>
+</html>

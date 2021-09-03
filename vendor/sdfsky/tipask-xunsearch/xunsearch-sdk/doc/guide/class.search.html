@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="language" content="zh-cn" />
+<link rel="stylesheet" type="text/css" href="../api/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/guide.css" />
+<link rel="stylesheet" type="text/css" href="../api/css/highlight.css" />
+<title>XSSearch 搜索对象</title>
+</head>
+
+<body>
+<div id="apiPage">
+
+<div id="apiHeader">
+<a href="http://www.xunsearch.com" target="_blank">Xunsearch PHP-SDK</a> v1.4.9 权威指南
+</div><!-- end of header -->
+
+<div id="content" class="markdown">
+	<h1 id="xssearch-">XSSearch 搜索对象</h1>
+
+<p>通过 <a href="../api/XSSearch.html">XSSearch</a> 对象实现各种搜索相关操作。实现使用过程中并不需要自行创建该对象，
+而是直接访问 <a href="../api/XS.html#search">XS::search</a> 即可。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-reserved">require</span> <span class="php-hl-quotes">'</span><span class="php-hl-string">$prefix/sdk/php/lib/XS.php</span><span class="php-hl-quotes">'</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$xs</span><span class="php-hl-code"> = </span><span class="php-hl-reserved">new</span> <span class="php-hl-identifier">XS</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">demo</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;
+</span><span class="php-hl-var">$search</span><span class="php-hl-code"> = </span><span class="php-hl-var">$xs</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">search</span><span class="php-hl-code">; </span><span class="php-hl-comment">//</span><span class="php-hl-comment"> 搜索对象来自 XS 的属性</span></pre></div></div>
+
+<p>默认情况，搜索对象操作时对于用户输入的参数、搜索结果的输出编码视为默认编码，即 <a href="../api/XS.html#defaultCharset">XS::defaultCharset</a>。
+如果您需要指定不同编码，请调用 <a href="../api/XSSearch.html#setCharset">XSSearch::setCharset</a> 进行设置。</p>
+
+<div class="hl-code"><div class="php-hl-main"><pre><span class="php-hl-var">$search</span><span class="php-hl-code">-&gt;</span><span class="php-hl-identifier">setCharset</span><span class="php-hl-brackets">(</span><span class="php-hl-quotes">'</span><span class="php-hl-string">gbk</span><span class="php-hl-quotes">'</span><span class="php-hl-brackets">)</span><span class="php-hl-code">;</span></pre></div></div>
+
+<p>关于搜索对象的详细用法剖析请阅读后面的专题。</p>
+
+<div class="revision">$Id$</div>
+	<div class="clear"></div>
+</div><!-- end of content -->
+<div id="guideNav">
+		<div class="prev"><a href="class.index.html">&laquo; XSIndex 索引管理</a></div>
+			<div class="next"><a href="class.tokenizer.html">XSTokenizer 分词接口 &raquo;</a></div>
+		<div class="clear"></div>
+</div><!-- end of nav -->
+
+<div id="apiFooter">
+Copyright &copy; 2008-2011 by <a href="http://www.xunsearch.com" target="_blank">杭州云圣网络科技有限公司</a><br/>
+All Rights Reserved.<br/>
+</div><!-- end of footer -->
+
+</div><!-- end of page -->
+
+<div style="display:none;">
+	<img src="../api/css/info.gif" />
+	<img src="../api/css/tip.gif" />
+	<img src="../api/css/note.gif" />
+</div>
+
+</body>
+</html>
