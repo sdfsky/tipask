@@ -29,7 +29,7 @@ class AdminAuthenticate
             return $next($request);
         }
         /*加入权限检测逻辑*/
-        if(!str_contains($routeName,['admin.setting'])){
+        if(!str_contains($routeName,'admin.setting')){
             $routeName = substr($routeName,0,strripos($routeName,".")) . '.index';
         }
         if(!$request->user()->hasPermission($routeName)){

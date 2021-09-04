@@ -432,7 +432,7 @@ if (!function_exists('parse_seo_template')) {
         $seo_template = str_replace("{wzmc}", Setting()->get('website_name'), $seo_template);
         $seo_template = str_replace("{wzkh}", Setting()->get('website_slogan'), $seo_template);
 
-        if (str_contains($type, ['question', 'article'])) {
+        if (in_array($type, ['question', 'article'])) {
             if ($source->tags) {
                 $tagList = array_pluck($source->tags->toArray(), 'name');
                 $seo_template = str_replace("{htlb}", implode(",", $tagList), $seo_template);
