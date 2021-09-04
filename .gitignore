@@ -3,3 +3,4 @@ bootstrap/cache/
 /storage/*.key
 /storage/installed
 .env
+/vendor/
