@@ -39,7 +39,8 @@ class AttachController extends Controller
 
 
     public function download($name){
-        $attachFile = storage_path('app/'.str_replace("-","/",$name));
+        $fileName = str_replace("..","",$name);
+        $attachFile = storage_path('app/'.str_replace("-","/",$fileName));
         if(!is_file($attachFile)){
             abort(404);
         }

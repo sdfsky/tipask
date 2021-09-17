@@ -20,7 +20,9 @@ class ImageController extends Controller
      */
     public function avatar($avatar_name)
     {
-        list($user_id,$size) = explode('_',str_replace(".jpg",'',$avatar_name));
+        $fileName = str_replace("..","",$avatar_name);
+
+        list($user_id,$size) = explode('_',str_replace(".jpg",'',$fileName));
         $avatarFile = storage_path('app/'.User::getAvatarPath($user_id,$size));
         if(!is_file($avatarFile)){
             $avatarFile = public_path('static/images/default_avatar.jpg');
@@ -38,7 +40,9 @@ class ImageController extends Controller
 
     public function show($image_name)
     {
-        $imageFile = storage_path('app/'.str_replace("-","/",$image_name));
+        $fileName = str_replace("..","",$image_name);
+
+        $imageFile = storage_path('app/'.str_replace("-","/",$fileName));
         if(!is_file($imageFile)){
             abort(404);
         }
@@ -46,7 +50,7 @@ class ImageController extends Controller
 
         $image =   Image::make($imageFile);
 
-        if(config('tipask.upload.open_watermark') && $image_name != config('tipask.upload.watermark_image') && str_contains($image_name,'attachments')){
+        if(config('tipask.upload.open_watermark') && $fileName != config('tipask.upload.watermark_image') && str_contains($fileName,'attachments')){
             $watermarkImage = storage_path('app/'.str_replace("-","/",config('tipask.upload.watermark_image')));
             $image->insert($watermarkImage, 'bottom-right', 15, 10);
         }
