@@ -96,7 +96,9 @@ class SearchController extends Controller
 
 
     private function _highlight($word,$subject){
-        return str_ireplace("$word","<em>$word</em>",$subject);
+        $subject = e($subject);
+        $word = e($word);
+        return str_ireplace($word,"<em>".$word."</em>",$subject);
     }
 
 
